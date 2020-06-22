@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->middleware('enabled');

@@ -56,4 +56,16 @@ class AuthUserTest extends TestCase
 
         $this->assertDatabaseHas('users', $user);
     }
+
+    public function testUserDisabledindex()
+    {
+        $user = factory(User::class)->create([
+            'password' => bcrypt($password = 'secret'),
+            'is_active' => false
+        ]);
+
+        $response = $this->actingAs($user)->get('/');
+
+        $response->assertRedirect('/disabled-user');
+    }
 }
