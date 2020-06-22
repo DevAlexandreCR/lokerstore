@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
