@@ -20,16 +20,16 @@ class AuthUserTest extends TestCase
     public function testLoginNoActive()
     {
         $user = factory(User::class)->create([
-            'password' => bcrypt($password = 'i-love-laravel'),
-        ]);
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => $password,
+            'password' => bcrypt($password = 'secret'),
             'is_active' => false
         ]);
 
-        $response->assertSessionHasErrors('email');
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => $password
+        ]);
+
+        $this->assertGuest();
     }
 
     /**
@@ -49,12 +49,8 @@ class AuthUserTest extends TestCase
             'password_confirmation' => '12345678'
           ];
       
-        $response = $this->post('/register', $user);
-    
-        $response
-            ->assertRedirect('login') 
-            ->assertSessionHas('info');
-    
+        $this->post('/register', $user);
+   
         //quitamos password y password_confirmation del array
         array_splice($user,4, 2);
 

@@ -77,34 +77,4 @@ class RegisterController extends Controller
             'address' => $data['address']
         ]);
     }
-
-
-    /**
-     * Sobreescribimos las dos funciones del Trait RegistersUsers para
-     * manejar la respuesta y que no loguee al usuario despues del registro
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function register(Request $request)
-    {
-        // dd($request->all());
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        if ($response = $this->registered($request, $user)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-                    ? new Response('', 201)
-                    : redirect($this->redirectPath());
-    }
-
-    protected function registered(Request $request, $user)
-    {
-        
-        return redirect('login')->with('info', "Te hemos enviado un link de activación al correo $user->email");
-    }
 }
