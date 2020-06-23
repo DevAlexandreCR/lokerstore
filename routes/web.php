@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'IndexController@index')->middleware('enabled');
+Route::get('/', 'IndexController@index')->middleware('enabled'); // los usuarios inhabilitados no pueden acceder al index
 
-Route::get('disabled-user', 'DisabledUserController@index')->middleware('auth');
+Route::get('disabled-user', 'DisabledUserController@index');
