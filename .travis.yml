@@ -40,6 +40,6 @@ deploy:
         HOEgckJa+H5FYxUFKIz90r0S5g53THsWrQtVzOOMr3GEozHc1mJmato3yvWev9H3ghOwDfCzuTIaK3XaD8Q1tYbDMA4ZIBkAsA7bo8C21/9bFbyOEHhYqBm/cO0wd6Tv553ITwr+Zmkc/fxHV0psHgLIJtcDHrtx2v2qX9DOFr
         VViSAfd/XIurDoPBfRckmCHE/n9Z/lEswR+wTRCpdgxO9lOngy5gL8z/C6aCcn3ACNVCIkoruHd++o6UK4uQBP7YA3POUKhsGYGPaN+Jwyn1ZoXUVHgC6Bkj9sU46G+5VN4rJFvetANGMd9MoZH7cxhRn27BoFxYJt9/2kYPYl
         aVp7nl1SQ61B1cY="
-    app: platzi-store-backend-dev
+    app: lokerstore
     on:
-        repo:  DevAlexandreCR/platzi-store-backend
+        repo:  DevAlexandreCR/lokerstore
