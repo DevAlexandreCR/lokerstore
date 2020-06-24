@@ -6,6 +6,8 @@ cache:
         - node_modules
         - ~/.npm
         - vendor
+php:
+    - '7.4'
 env:
     -DB_CONNECTION=pgsql
 git:
