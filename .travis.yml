@@ -10,9 +10,11 @@ env:
     -DB_CONNECTION=pgsql
 git:
     depth: 3
-script:
-    - composer install
+before_script:
+    - composer self-update
+    - php artisan key:generate
     - php artisan migrate
+script:
     - vendor/bin/phpunit
 notifications:
     email:
