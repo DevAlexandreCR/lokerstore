@@ -6,10 +6,13 @@ cache:
         - vendor
 php:
     - '7'
+env:
+    -DB_CONNECTION=pgsql
 git:
     depth: 3
 script:
     - composer install
+    - php artisan migrate
     - vendor/bin/phpunit
 notifications:
     email:
