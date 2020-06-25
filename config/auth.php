@@ -43,8 +43,12 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'admins', // modificamos de users a admins ya que seran los encargados del api
             'hash' => false,
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -68,9 +72,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\models\User::class, //modificamos la ruta ya que agregamos User a Models
+            'model' => App\Models\User::class, //modificamos la ruta ya que agregamos User a Models
         ],
-
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admins\Admin::class, //modificamos la ruta ya que agregamos User a Models
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
