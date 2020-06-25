@@ -37,6 +37,7 @@ deploy:
         qZzRTDSoW9n8ZgyE00bSkq4NsDG2PKLz3RN3LiPCXqEGL+TOpewwLQc4gijn+zr65MeJ0rWd/XzTAhOM7PedPu30saFrx108VlWkq7qvd1VZDRpULMoxuB983RrdNv+OMO/DuhiKxihql4yb
         T0kBGTKq7c7TzuEmTfEIbGLzVWEoOw7P8PARMxR1DcnNhOUZAkE0HHvXhiCJOwR1RUX0KEhv6GT2/gkqnzNmrA06K1JLVA1XaDLBffgrpM4543wgEqi71i9vzzYeMWPPeht0tNeWpxsQRXBM
         2mJSZfm2usKFJaY+rSulzdI1KNmyoyJ7uzw1bUGNL88uRlX97CWQXftSyJDAxS/VJulbRhtJJPkpPdhHB5jB3o2fPAOUcnfO4u5IwPQvo04JEt1xufhZ48="
+    strategy: git
     app: lokerstore
     on:
         repo:  DevAlexandreCR/lokerstore
