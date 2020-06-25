@@ -13,6 +13,7 @@ git:
 before_script:
     - composer self-update
     - composer install --no-dev --quiet --prefer-dist --optimize-autoloader --no-scripts
+    - conposer require --dev phpunit/phpunit
     - composer dump-autoload
 script:
     - composer dump-autoload 
