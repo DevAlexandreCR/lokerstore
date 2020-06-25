@@ -17,8 +17,7 @@ before_script:
 script:
     - composer dump-autoload 
     - php artisan migrate --force
-    - php artisan cache:clear
-    - ./vendor/bin/phpunit
+    - vendor/bin/phpunit
 notifications:
     email:
         recipients:
