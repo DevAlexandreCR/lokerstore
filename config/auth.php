@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\models\User::class, //modificamos la ruta ya que agregamos User a Models
+            'model' => App\Models\User::class, //modificamos la ruta ya que agregamos User a Models
         ],
 
         // 'users' => [
