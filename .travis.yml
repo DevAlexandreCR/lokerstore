@@ -12,7 +12,7 @@ git:
     depth: 3
 before_script:
     - composer self-update
-    - composer install --no-dev --quiet --prefer-dist --optimize-autoloader
+    - composer install --no-dev --quiet --prefer-dist --optimize-autoloader --no-scripts
     - composer dump-autoload
 script:
     - composer dump-autoload 
