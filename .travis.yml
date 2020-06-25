@@ -25,21 +25,20 @@ notifications:
         on_success: always
         on_failure: always
     slack: 
-        secure: "bbayagVtILz8lx3p2Psd0W2qmUYPz3vfd4iKhCI81NAbF/hGCl3VWQqTvGNABGtapg0L2YV8QqBTPbQ08iIO3hZnfCnwUZFAKuIy2MchlWvhtQQ3b5qPU00lKZEWjQs5rrQRn
-        EeitGwRaoGU9pdVNsivc1MEg/MUXssk7yXAFjH9p0blk2xHGf8E1oXZuCD2+RogFTBKtO36qCRpJFBTnT+ztXuIOsxzrrzmoUYoOAf5yrCIPsv0vikHhDmq59/9gZGEym/gGWpuBjioQFns3
-        HkKUc19lZkjlVgyXIRIrTtPJGwT23/nsm6rOL8kYk6vCL+FUnrJCI9zVJC1k81R0aosa/4qEQXkFbS2IXGrbX81CgPDwaLaHIAq7xO8dL4duFq0HnLfYLHIf+rewACmTy08K7CZHUbjl2Gti
-        G+YhnRNg3QI+XglrgmGw2zDOYTUW83VCZolWMVGQmJOLMrM97xDqRfxeFlrRAedGh+uW5UpyaUqy8fTA9DfWPUs0cKtEZ9K7TrHtB8227xtFrINW9+45/2rqVKZjbYyKimg05DRgExRAwZks
-        KyCZTl01VmGKGZRrNcwYVc+DHXJxGwrzEpmW2BWv2EFXhddqBZZLfR2QQAng1VhCnj7tzA0yNBYjrEQ2IT3Qp+Ay3+GGqTOwiY7uYx27vTHqzBu9kthMkQ="
+        secure: "Y2QGoSzOvPPJtcS9LjKSFGKTjZgEufhhJRc47xmp0q1Wf6BRXVIfsRTEet5BajH7vFbA1cXnh8e8mrcULAXjghLT5CSksPlW/oVg7UFN49mcnEFz6zwD1pQMOAJKyHfu13X5T7A06H1Gz8jsQl7ud5PSMRru6jmQqXu
+        QN9xXD/TMoFrOGM1xT3SsPVT3WsQVJR0WXqhJTvoJCe77JvxF3odCmnzhhmvtgw1QAeW0tdtOx/1NPZ25L8iVrmjdW1Vkt/wPkH2HHNnMexBfJRuUjWPaBR9he2Uyc/XJRyj5Uu0DrsQTZQZ5p90/UY9V56EPgi7WfsDLwJ2rYJLGr
+        bhHAAdWKXOh+Lpb8SaHx9tyCt002FhfYjQa/sSutkVN4CinGdDd5nXnAVLHNf7Bv58dSQ+29RFcgBMNNTF+03BULopY+Bt8s7R9ajEUTwihdYl9GUNqBtawj0/cFtRiiYAQEPyune/tfuz9Z4AU9X/HFuPeoqo618El8sLlI20lKZ+
+        6UBXQFlwaE3SblPQQmB/eVisS6DsBN+rmQdpSK8YaiteBS/fwOS9hweMGOhFTZBQXRbK/P4coKeBBJkm2DAPv14Bfr1tXEfsvvmDUM3QwDUxmG8F770XeSa2T3+17LKKItEoldNTQQtg/3GPsAhipJJZxxja7NBw78cjZ5WymrvQ="
 deploy:
     provider: heroku
     skip_cleanup: true
     keep_history: true
     api_key: 
-        secure: "g+fHbiqVnqGerrkL9o3DgQ79H3LBNdHBC/BJ1h5V1wQIUl1wxrqTYKJ/oQAMMGXrR3A7oGwc3YNlkYbBqItkkVV6vg6W2d/ZKPw3pqIbhPiYdswpVUFnNvAL1ra3k9lMlsNEpIBWYJYOSA6mmkY4es6+/ZNCEr
-        c7BVcw2F8ACw/ZiPfMm/AexV+nSxrzacWlJOdkIvDef7E8SoFnwZd6RATXMN6Ogjcln9cTPvK2R3Kk6FR0s6xxtijJHqhw3B3F2gGNhbG0elWNUzG8TQEmTi4R7IZnqXLmzWUJhDDRJrcIU7aQJLp8pfG8rcXDkOu0LGlUQUIP
-        HOEgckJa+H5FYxUFKIz90r0S5g53THsWrQtVzOOMr3GEozHc1mJmato3yvWev9H3ghOwDfCzuTIaK3XaD8Q1tYbDMA4ZIBkAsA7bo8C21/9bFbyOEHhYqBm/cO0wd6Tv553ITwr+Zmkc/fxHV0psHgLIJtcDHrtx2v2qX9DOFr
-        VViSAfd/XIurDoPBfRckmCHE/n9Z/lEswR+wTRCpdgxO9lOngy5gL8z/C6aCcn3ACNVCIkoruHd++o6UK4uQBP7YA3POUKhsGYGPaN+Jwyn1ZoXUVHgC6Bkj9sU46G+5VN4rJFvetANGMd9MoZH7cxhRn27BoFxYJt9/2kYPYl
-        aVp7nl1SQ61B1cY="
+        secure: "eCfnTcI+r8sijr0E50OfAPbUsF6OyEy2kW3+Dz2/oJ1WexxXaDCq8moSYOGBBhjGVazPFwSwW+d8pNWvJVBjdixsQIVtzzyHRWfTLR91gT9EqMk/c5Zu/+8cJPEPaipmmekv/
+        +YfSto7XUfqb2qb8rTn/hgrimPMDHiGMzC5H4kv3RRi4yBCrat61qlH+VO2wR0waYo5GdLtEWXTD3xwkM7ZbVPEFIP4vT/MgP56sRgFwmGJOcT+47tpQ2hj/SOThQ6huEWGqrnzh74pjF3iu
+        qZzRTDSoW9n8ZgyE00bSkq4NsDG2PKLz3RN3LiPCXqEGL+TOpewwLQc4gijn+zr65MeJ0rWd/XzTAhOM7PedPu30saFrx108VlWkq7qvd1VZDRpULMoxuB983RrdNv+OMO/DuhiKxihql4yb
+        T0kBGTKq7c7TzuEmTfEIbGLzVWEoOw7P8PARMxR1DcnNhOUZAkE0HHvXhiCJOwR1RUX0KEhv6GT2/gkqnzNmrA06K1JLVA1XaDLBffgrpM4543wgEqi71i9vzzYeMWPPeht0tNeWpxsQRXBM
+        2mJSZfm2usKFJaY+rSulzdI1KNmyoyJ7uzw1bUGNL88uRlX97CWQXftSyJDAxS/VJulbRhtJJPkpPdhHB5jB3o2fPAOUcnfO4u5IwPQvo04JEt1xufhZ48="
     app: lokerstore
     on:
         repo:  DevAlexandreCR/lokerstore
