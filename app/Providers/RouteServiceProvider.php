@@ -24,6 +24,13 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/'; //cambie la ruta de redireccion a index ya que esa es nuestra ruta de inicio
 
     /**
+     * The path to the "home admins" route 
+     * 
+     * @var string
+     */
+    public const ADMIN_HOME = '/admin/';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
