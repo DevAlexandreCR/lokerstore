@@ -13,8 +13,11 @@ git:
 before_script:
     - composer self-update
     - composer install --prefer-dist --no-progress --no-suggest
+    - composer dump-autoload
 script:
+    - composer dump-autoload 
     - php artisan migrate
+    - php artisan cache:clear
     - vendor/bin/phpunit
 notifications:
     email:
