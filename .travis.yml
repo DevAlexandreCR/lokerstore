@@ -32,7 +32,7 @@ notifications:
         KyCZTl01VmGKGZRrNcwYVc+DHXJxGwrzEpmW2BWv2EFXhddqBZZLfR2QQAng1VhCnj7tzA0yNBYjrEQ2IT3Qp+Ay3+GGqTOwiY7uYx27vTHqzBu9kthMkQ="
 deploy:
     provider: heroku
-    cleanup: true
+    skip_cleanup: true
     keep_history: true
     api_key: 
         secure: "g+fHbiqVnqGerrkL9o3DgQ79H3LBNdHBC/BJ1h5V1wQIUl1wxrqTYKJ/oQAMMGXrR3A7oGwc3YNlkYbBqItkkVV6vg6W2d/ZKPw3pqIbhPiYdswpVUFnNvAL1ra3k9lMlsNEpIBWYJYOSA6mmkY4es6+/ZNCEr
