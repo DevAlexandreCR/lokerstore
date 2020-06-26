@@ -26,3 +26,8 @@ Route::get('admin/password/reset', 'Auth\ForgotPasswordController@showLinkReques
 Route::post('admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 Route::get('admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
 Route::post('admin/password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.update');
+
+// Routes user management
+Route::resource('admin/users', 'UserController')
+            ->except(['create', 'store'])
+            ->middleware('auth:admin');

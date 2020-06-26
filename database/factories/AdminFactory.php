@@ -12,6 +12,7 @@ $factory->define(Admin::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => Hash::make(Str::random(10)),
+        'is_active' => true,
         'remember_token' => Str::random(10),
     ];
 });

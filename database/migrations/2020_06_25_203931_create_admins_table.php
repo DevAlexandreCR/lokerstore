@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->boolean('is_active')->default(true);
             $table->rememberToken(); // para evitar secuestro de cockies
+            $table->softDeletes();
             $table->timestamps();
         });
     }

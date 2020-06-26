@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class PasswordTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function testSendLinkResetPassword() 
     {
         // $this->withoutExceptionHandling();

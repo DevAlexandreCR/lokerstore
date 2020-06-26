@@ -10,6 +10,8 @@ use Tests\TestCase;
 
 class AuthUserTest extends TestCase
 {
+    use RefreshDatabase;
+    
     /**
      * Prueba para verificar que el Login NO permita
      * acceso a usuarios inhabilitados
