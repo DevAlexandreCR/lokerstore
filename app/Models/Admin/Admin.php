@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Admin; 
+namespace App\Models\Admin;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -35,4 +36,23 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+        /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $passwordSend = new ResetPassword($token);
+        $passwordSend->createUrlUsing(function ($notifiable, $token) {
+            return url(route('admin.password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+        });
+
+        $this->notify($passwordSend);
+    }
 }

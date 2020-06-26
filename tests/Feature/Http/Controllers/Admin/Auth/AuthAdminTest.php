@@ -11,6 +11,7 @@ class AuthAdminTest extends TestCase
 {
     public function testLoginAdmin() 
     {
+        // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create([
             'password' => bcrypt($password = 'secret'),
             'is_active' => true
@@ -22,22 +23,14 @@ class AuthAdminTest extends TestCase
         ]);
 
         $response->assertRedirect('admin/');
-        $this->isAuthenticated();
+        $response->assertSessionHasNoErrors();
     }
 
-    // public function testLoginAdminUserAuthenticated() 
-    // {
-    //     // $admin = factory(Admin::class)->create([
-    //     //     'password' => bcrypt($password = 'secret'),
-    //     //     'is_active' => true
-    //     // ]);
+    public function testHomeAdminNotAuthenticated() 
+    {
+        $response = $this->get('admin/');
 
-    //     // $response = $this->post('admin/login', [
-    //     //     'email' => $admin->email,
-    //     //     'password' => $password
-    //     // ]);
-
-    //     // $response->assertRedirect('admin/');
-    //     // $this->isAuthenticated();
-    // }
+        $response->assertRedirect('admin/login');
+        $this->assertGuest();
+    }
 }

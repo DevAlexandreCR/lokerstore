@@ -76,7 +76,7 @@ return [
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admins\Admin::class, //modificamos la ruta ya que agregamos User a Models
+            'model' => App\Models\Admin\Admin::class, //modificamos la ruta ya que agregamos Admin a Models
         ],
         // 'users' => [
         //     'driver' => 'database',
