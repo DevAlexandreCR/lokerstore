@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class AuthUserTest extends TestCase
 {
-   
     /**
      * Prueba para verificar que el Login NO permita
      * acceso a usuarios inhabilitados
