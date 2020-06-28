@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12 col-md-2 p-0">
             <div class="list-group">
-            <a class="btn btn-primary" href="{{ route('users.index') }}">{{__('Users')}}</a>
+            <a class="btn" href="{{ route('users.index') }}">{{__('Users')}}</a>
             </div>
         </div>
         <div class="col">

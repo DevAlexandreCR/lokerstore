@@ -14,23 +14,23 @@
     </div>
   </div>
   <div class="row py-3">
+    <table class="table table-striped table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>{{__('Id')}}</th>
+          <th>{{__('Name')}}</th>
+          <th>{{__('Lastname')}}</th>
+          <th>{{__('E-Mail Address')}}</th>
+          <th>{{__('Phone')}}</th>
+          <th>{{__('View')}}</th>
+        </tr>
+        </thead>
+        <tbody>
       @foreach ($users as $user)
-      <table class="table table-striped table-sm">
-        <thead class="thead-light">
-          <tr>
-            <th>{{__('Id')}}</th>
-            <th>{{__('Name')}}</th>
-            <th>{{__('Last name')}}</th>
-            <th>{{__('E-Mail Address')}}</th>
-            <th>{{__('Phone')}}</th>
-            <th>{{__('View')}}</th>
-          </tr>
-          </thead>
-          <tbody>
             <tr>
             <td scope="row">{{ $user->id }}</td>
               <td>{{ $user->name }}</td>
-              <td>{{ $user->name }}</td>
+              <td>{{ $user->lastname }}</td>
               <td>{{ $user->email }}</td>
               <td>{{ $user->phone }}</td>
               <td>
@@ -42,9 +42,9 @@
                 </div>
               </td>
             </tr>
-          </tbody>
-      </table>
       @endforeach
+    </tbody>
+    </table>
   </div>
 </div>
 @endsection
