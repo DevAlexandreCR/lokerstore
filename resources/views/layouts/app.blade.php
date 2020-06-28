@@ -21,11 +21,17 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light  shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                @if (Auth::guard('admin')->check())
+                <a class="navbar-brand" href="{{ url('/admin') }}">
                     {{ config('app.name') }}
                 </a>
+                @else
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name') }}
+                </a> 
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -71,10 +77,12 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+ 
+        <main class="py-0">
             @yield('content')
         </main>
     </div>
+
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
 </html>
