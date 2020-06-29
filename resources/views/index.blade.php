@@ -2,7 +2,7 @@
 
 @section('content')
 @if ( session('verify_email'))
-<div class="container">
+<div class="container py-2">
     <div class="alert alert-dismissible alert-warning fade show" role="alert">
         <strong>{{ session('verify_email') }}</strong>
         <form class="d-inline" method="GET" action="{{ route('verification.notice') }}">

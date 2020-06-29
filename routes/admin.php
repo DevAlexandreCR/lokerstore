@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('admin', 'HomeController@index')->middleware('auth:admin');
+Route::get('admin', 'HomeController@index')->middleware('auth:admin')->name('admin.home');
 
 // Login routes
 Route::get('admin/login', 'Auth\LoginController@showLoginForm');
@@ -26,3 +26,11 @@ Route::get('admin/password/reset', 'Auth\ForgotPasswordController@showLinkReques
 Route::post('admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 Route::get('admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
 Route::post('admin/password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.update');
+
+// Routes user management
+Route::resource('admin/users', 'UserController')
+            ->except(['create', 'store'])
+            ->middleware('auth:admin');
+            
+/** Ruta para busqueda de usuarios */
+Route::post('admin/users/', 'UserController@index')->name('users.index')->middleware('auth:admin');

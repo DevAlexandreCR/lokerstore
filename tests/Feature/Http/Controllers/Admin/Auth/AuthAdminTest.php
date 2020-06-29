@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class AuthAdminTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function testLoginAdmin() 
     {
         // $this->withoutExceptionHandling();
