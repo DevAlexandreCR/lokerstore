@@ -19,7 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column" 
+    style="background: #fff4db;
+    background: radial-gradient( #f3f3f3, #f5fdcb); display: flex;
+    flex-direction: column;">
     <div id="app">
         <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark  shadow-sm">
             <div class="container">
@@ -87,9 +90,10 @@
             </div>
         </nav>
  
-        <main class="py-0">
+        <main class="py-0" style="flex: 1; min-height: 100vh">
             @yield('content')
         </main>
+        @yield('footer', View::make('footer'))
     </div>
 
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
