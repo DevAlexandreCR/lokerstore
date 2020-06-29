@@ -31,3 +31,6 @@ Route::post('admin/password/reset', 'Auth\ResetPasswordController@reset')->name(
 Route::resource('admin/users', 'UserController')
             ->except(['create', 'store'])
             ->middleware('auth:admin');
+            
+/** Ruta para busqueda de usuarios */
+Route::post('admin/users/', 'UserController@index')->name('users.index')->middleware('auth:admin');

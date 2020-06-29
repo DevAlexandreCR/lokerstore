@@ -47,8 +47,9 @@
                         <!-- Authentication Links -->
                         @auth
                             @if (Route::is('users.index'))
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="{{__('Search')}}" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="POST" action="{{route('users.index')}}">
+                            @csrf
+                                <input class="form-control mr-sm-2" type="search" name="query" placeholder="{{__('Search')}}" aria-label="Search" required>
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{__('Search')}}</button>
                             </form>
                             @endif
@@ -65,7 +66,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->full_name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

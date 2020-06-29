@@ -19,6 +19,7 @@ class UserControllerTest extends TestCase
      */
     public function testIndex()
     {
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         // dd($admin->toArray());
         $response = $this->actingAs($admin, 'admin')->get('admin/users');
@@ -91,7 +92,7 @@ class UserControllerTest extends TestCase
      *
      * @return void
      */
-    public function testdeleteUser()
+    public function testDeleteUser()
     {
         // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
@@ -102,5 +103,58 @@ class UserControllerTest extends TestCase
         $response->assertRedirect('admin/users')
             ->assertSessionHas('deleted')
             ->assertStatus(302); 
+    }
+
+    /**
+     * prueba de busqueda correcta en users por nombre-email-telefono
+     *
+     * @return void
+     */
+    public function testSearchUser()
+    {
+        // $this->withoutExceptionHandling();
+        $admin = factory(Admin::class)->create();
+        factory(User::class)->create([
+            'name' => 'jose',
+            'email' => 'jose@gmail.com'
+        ]);
+        factory(User::class)->create([
+            'name' => 'jose manuel',
+            'email' => 'josefina@gmail.com'
+        ]);
+
+        $query = 'jos';
+        $response = $this->actingAs($admin, 'admin')->post( route('users.index', ['query' => $query]));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewIs('admin.users.index')
+            ->assertViewHas('user_found')
+            ->assertViewHas('users');
+    }
+
+    /**
+     * prueba para busqueda fallida de users
+     *
+     * @return void
+     */
+    public function testSearchUserNotFound()
+    {
+        // $this->withoutExceptionHandling();
+        $admin = factory(Admin::class)->create();
+        factory(User::class)->create([
+            'name' => 'jose',
+            'email' => 'jose@gmail.com'
+        ]);
+        factory(User::class)->create([
+            'name' => 'jose manuel',
+            'email' => 'josefina@gmail.com'
+        ]);
+
+        $query = 'martha';
+        $response = $this->actingAs($admin, 'admin')->post( route('users.index', ['query' => $query]));
+
+        $response
+            ->assertViewHas('user_not_found');
     }
 }

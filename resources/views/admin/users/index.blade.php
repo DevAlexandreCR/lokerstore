@@ -3,15 +3,21 @@
 @section('main')
 <div class="container py-4" style="max-width: 80%;">
   <div class="row">
-    <div class="col">
-      
-    </div>
     {{-- <div class="col-xs-4">
       <div class="input-group form-inline">
         <input class="form-control mr-sm-2" type="search" placeholder="{{__('Search')}}" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{__('Search')}}</button>
       </div>
-    </div> --}}
+    </div>  --}}
+    @if (!empty($user_not_found))
+    <div class="container" role="alert">
+    <strong>{{ $user_not_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{__('See all')}}</a>
+    </div>
+    @elseif(!empty($user_found))
+    <div class="container" role="alert">
+      <strong>{{ $user_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{__('See all')}}</a>
+      </div>
+    @endif
   </div>
   <div class="row py-3">
     <div class="container table-responsive">
@@ -35,7 +41,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->phone }}</td>
                 <td>
-                  <div class="btn-group btn-block btn-group-sm" role="group" aria-label="Basic example">
+                  <div class="btn-group btn-block btn-group-sm" role="group">
                     <a type="button" class="btn btn" data-toggle="tooltip" data-placement="top" title="{{__('View')}}"
                     href="{{route('users.show', ['user' => $user])}}">
                       <ion-icon name="eye" style="width: 20px; height:20px;"></ion-icon>
