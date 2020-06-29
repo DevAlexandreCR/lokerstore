@@ -32,7 +32,7 @@ class UserController extends Controller
             return $this->searchUser($query);
         } else {
             return view('admin.users.index', [
-                'users' => $this->user->paginate(9)
+                'users' => $this->user->paginate(12)
             ]);
         }
     }
