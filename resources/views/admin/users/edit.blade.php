@@ -51,7 +51,7 @@
               @case('phone')
                   <div class="form-group">
                     <label for="phone">{{__('Phone')}}</label>
-                  <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" required placeholder="{{$user->phone}}"
+                  <input type="number" class="form-control @error('phone') is-invalid @enderror" id="phone" required placeholder="{{$user->phone}}"
                     name="phone" aria-describedby="phoneHelp" value="{{ old('phone') }}">
                     @error('phone')
                     <span class="invalid-feedback" role="alert">

@@ -28,7 +28,7 @@
           <h6 class="card-title"> {{__('Name and lastname')}} </h6>
         </div>
         <div class="col">
-        <p class="card-text">{{ $user->name }} {{$user->lastname}}</p>
+        <p class="card-text">{{ $user->full_name}}</p>
         </div>
         <div class="col-sm-1">
         <a href="{{ route('users.edit', ['user' => $user, 'p' => 'name'])}}"><ion-icon name="chevron-forward-outline"></ion-icon></a>
