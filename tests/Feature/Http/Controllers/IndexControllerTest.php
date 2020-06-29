@@ -22,7 +22,18 @@ class IndexControllerTest extends TestCase
         // $this->withoutExceptionHandling();
 
         /** creamos categorias para luego poder crear productos */
-        factory(Category::class, 4)->create();
+        factory(Category::class)->create([
+            'name' => 'Camisetas'
+        ]);
+        factory(Category::class)->create([
+            'name' => 'Pantalones'
+        ]);
+        factory(Category::class)->create([
+            'name' => 'Busos'
+        ]);
+        factory(Category::class)->create([
+            'name' => 'Accesorios'
+        ]);
         factory(Product::class, 10)->create();
         $response = $this->get('/');
 
