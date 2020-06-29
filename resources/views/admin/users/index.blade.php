@@ -6,12 +6,12 @@
     <div class="col">
       
     </div>
-    <div class="col-xs-4">
+    {{-- <div class="col-xs-4">
       <div class="input-group form-inline">
         <input class="form-control mr-sm-2" type="search" placeholder="{{__('Search')}}" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{__('Search')}}</button>
       </div>
-    </div>
+    </div> --}}
   </div>
   <div class="row py-3">
     <div class="container table-responsive">

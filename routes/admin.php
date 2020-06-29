@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('admin', 'HomeController@index')->middleware('auth:admin');
+Route::get('admin', 'HomeController@index')->middleware('auth:admin')->name('admin.home');
 
 // Login routes
 Route::get('admin/login', 'Auth\LoginController@showLoginForm');

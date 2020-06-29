@@ -1,43 +1,22 @@
 @extends('admin.home')
 
 @section('sidebar')
-<div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
+<div class="nav flex-column bg-dark" aria-orientation="vertical" 
+    style="position: fixed;
+    width: 16%;
+    height: 100vh;">
+    <nav id="sidebar" class="nav flex-column">
+        <div class="card-header" >
+        <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admin.home') ?: 'active'}}" 
+        href="{{ route('admin.home') }}"
+        style="color: white"
+        >{{__('Home')}}</a>
         </div>
-
-        <ul class="list-unstyled components">
-            <p>Dummy Heading</p>
-            <li class="active">
-                <a class="btn" href="{{ route('users.index') }}">{{__('Users')}}</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#">Page 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Portfolio</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-        </ul>
+        <br>
+        <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admin.home') ?: 'active'}}"
+         href="{{ route('users.index') }}"
+         style="color: white"
+         >{{__('Users')}}</a>
     </nav>
-
 </div>    
 @endSection
