@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
@@ -26,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.index', [
-            'users' => $this->user->paginate()
+            'users' => $this->user->paginate(9)
         ]);
     }
 
@@ -49,10 +51,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
-    {
+    public function edit(Request $request, User $user)
+    {    
+        $p = '0';  
+        if ( $request->has('p')){
+            $p = $request->input('p');
+        }
         return view('admin.users.edit', [
-            'user' => $user
+            'user' => $user,
+            'p' => $p
         ]);
     }
 
