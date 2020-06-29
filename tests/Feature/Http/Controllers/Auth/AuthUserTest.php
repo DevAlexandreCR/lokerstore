@@ -42,13 +42,17 @@ class AuthUserTest extends TestCase
      */
     public function testResgister()
     {
+        $this->withoutExceptionHandling();
         $user = [
-            'name' => 'root',
+            'name' => 'user',
+            'lastname' => 'client',
             'email' => 'mail@lokerstore.com',
             'phone' => '0000000000',
             'address' => 'fake address',
+            'is_active' => true,
             'password' => '12345678',
-            'password_confirmation' => '12345678'
+            'password_confirmation' => '12345678',
+            "remember_token" => null,
           ];
       
         $response = $this->post('register', $user);
@@ -58,7 +62,7 @@ class AuthUserTest extends TestCase
         //quitamos password y password_confirmation del array
         array_splice($user,4, 2);
 
-        $this->assertDatabaseHas('users', $user);
+        $this->assertDatabaseHas('users', ['email' => $user['email']]);
     }
 
     /**
