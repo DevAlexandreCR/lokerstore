@@ -1,7 +1,9 @@
-<footer id="sticky-footer" class="py-4 bg-dark text-white-50" 
+<footer id="sticky-footer" class="py-4 text-white-50" 
     style="background-position: center center;
     background-repeat: no-repeat;
-    width: 100%;">
+    width: 100%;
+    z-index: 10;
+    background: linear-gradient(to right top, #222222,#000000);">
     <div class="container text-center">
       <small>Copyright &copy; lokerstore.com</small>
       <div class="row">

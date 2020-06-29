@@ -20,11 +20,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="d-flex flex-column" 
-    style="background: #fff4db;
-    background: radial-gradient( #f3f3f3, #f5fdcb); display: flex;
+    style="background: #ffffff;
+    background: linear-gradient(to right top, #ffffff,#c5c4c4); display: flex;
     flex-direction: column;">
     <div id="app">
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark  shadow-sm">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" style="background: linear-gradient(to right top, #2b2a2a,#000000);">
             <div class="container">
                 @if (Auth::guard('admin')->check())
                 <a class="navbar-brand" href="{{ url('/admin') }}">
@@ -93,9 +93,11 @@
         <main class="py-0" style="flex: 1; min-height: 100vh">
             @yield('content')
         </main>
-        @yield('footer', View::make('footer'))
     </div>
 
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
+<footer style="z-index: 100">
+    @yield('footer', View::make('footer'))
+</footer>
 </html>

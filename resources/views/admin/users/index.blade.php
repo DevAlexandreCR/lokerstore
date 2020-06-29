@@ -29,7 +29,7 @@
             <th>{{__('Lastname')}}</th>
             <th>{{__('E-Mail Address')}}</th>
             <th>{{__('Phone')}}</th>
-            <th>{{__('View')}}</th>
+            <th style="text-align: center">{{__('View')}}</th>
           </tr>
           </thead>
           <tbody>
@@ -41,10 +41,15 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->phone }}</td>
                 <td>
-                  <div class="btn-group btn-block btn-group-sm" role="group">
-                    <a type="button" class="btn btn" data-toggle="tooltip" data-placement="top" title="{{__('View')}}"
+                  <div class="btn-group btn-block btn-group-sm text-center" 
+                  role="group"
+                  style="border-left: groove">
+                    <a type="button" class="btn btn" 
+                    data-toggle="tooltip" 
+                    data-placement="top" 
+                    title="{{__('View')}}"
                     href="{{route('users.show', ['user' => $user])}}">
-                      <ion-icon name="eye" style="width: 20px; height:20px;"></ion-icon>
+                    <ion-icon name="eye"></ion-icon>
                     </a>
                   </div>
                 </td>
@@ -55,7 +60,15 @@
     </table>
   </div>
   <div class="container">
-    {{ $users->links() }}
+    <div class="row">
+      <div class="col-8">{{ $users->links() }}</div>
+      <div class="col-4">
+        <div class="row" style="float: right">
+          <div class="col"><strong>{{__('Users')}}</strong></div>
+          <div class="col">{{ \App\Models\User::count()}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 @endsection
