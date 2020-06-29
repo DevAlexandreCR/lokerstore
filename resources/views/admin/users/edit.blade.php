@@ -114,19 +114,19 @@
                 <a href="{{ route('users.show' , ['user' => $user]) }}" type="button" class="btn btn-secondary btn-sm" style="float: right">{{__('Back')}}</a>
                 </div>
                 <div class="row">
-                <div class="col-8 justify-content-center">
+                <div class="col">
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" required>
-                      <label class="form-check-label" for="disabledFieldsetCheck">
+                      <label class="form-check-label danger" for="disabledFieldsetCheck">
                         {{__('Are you sure to continue ?, check here')}}
                       </label>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                   <input type="hidden" name="is_active" value="1">
-                  <button type="submit" class="btn btn-primary btn-sm">{{__('Remove')}}</button>
+                  <button type="submit" class="btn btn-danger btn-block btn-sm">{{__('Remove')}}</button>
                 </div>
                 </div>
               </form>
