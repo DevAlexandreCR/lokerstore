@@ -19,11 +19,23 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
+    /**
+     * Muestra la vista login
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showLoginForm()
     {
         return view('admin.login');
     }
 
+    /**
+     * Esta funcion devuelve las credecniales necesarias para hacer el login
+     * ademas el atributo is_active debe ser true para poder loguearse
+     *
+     * @param Request $request
+     * @return Array
+     */
     protected function credentials(Request $request)
     {
         $credenctials = $request->only($this->username(), 'password');
