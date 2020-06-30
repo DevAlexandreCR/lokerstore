@@ -19,7 +19,7 @@ class IndexController extends Controller
     {
         if (Auth::check() && Auth::user()->email_verified_at == null) {
             /**
-             * si el usuario no ha verificado su email se carga la variable de sesion 
+             * si el usuario no ha verificado su email se carga la variable de sesion
              */
             session(['verify_email' => 'Por favor verifica tu correo para completar el registro']);
         }

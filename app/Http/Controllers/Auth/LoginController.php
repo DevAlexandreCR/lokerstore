@@ -43,7 +43,7 @@ class LoginController extends Controller
     {
         $credenctials = $request->only($this->username(), 'password');
 
-        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion 
+        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion
 
         return $credenctials;
     }

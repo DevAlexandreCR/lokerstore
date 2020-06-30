@@ -28,7 +28,7 @@ class LoginController extends Controller
     {
         $credenctials = $request->only($this->username(), 'password');
 
-        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion 
+        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion
 
         return $credenctials;
     }
@@ -59,7 +59,7 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-        /**
+    /**
      * Attempt to log the user into the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -68,11 +68,12 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
+            $this->credentials($request),
+            $request->filled('remember')
         );
     }
 
-        /**
+    /**
      * Get the guard to be used during authentication.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
@@ -82,7 +83,7 @@ class LoginController extends Controller
         return Auth::guard('admin');
     }
 
-        /**
+    /**
      * The user has been authenticated.
      *
      * @param  \Illuminate\Http\Request  $request

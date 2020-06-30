@@ -45,7 +45,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show( $product)
+    public function show($product)
     {
         //
     }

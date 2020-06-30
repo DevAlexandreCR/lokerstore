@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
-
     protected $user;
 
 
@@ -57,9 +56,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(UserRequest $request, User $user)
-    {    
-        $p = '0';  
-        if ( $request->has('p')){
+    {
+        $p = '0';
+        if ($request->has('p')) {
             $p = $request->input('p');
         }
         return view('admin.users.edit', [
@@ -108,7 +107,7 @@ class UserController extends Controller
         $user = User::where(function ($q) use ($query) {
             $q
             ->where('name', 'like', '%' . $query . '%')
-            ->orWhere('lastname', 'like','%' . $query . '%')
+            ->orWhere('lastname', 'like', '%' . $query . '%')
             ->orWhere('email', 'like', '%' . $query . '%')
             ->orWhere('phone', 'like', '%' . $query . '%');
         });
