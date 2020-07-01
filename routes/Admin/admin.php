@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 |Toda la configuracion de la ruta se encuantra en RouteServiceProvider 
 |
 */
-Route::get('/', 'HomeController@index')->name('admin.home');
+Route::get('/', 'HomeController@index')->name('admin.home')->middleware('auth:admin');
 
 // Login routes
 Route::get('login', 'Auth\LoginController@showLoginForm');

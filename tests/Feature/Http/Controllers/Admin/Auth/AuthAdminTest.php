@@ -13,7 +13,6 @@ class AuthAdminTest extends TestCase
     
     public function testLoginAdmin() 
     {
-        // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create([
             'password' => bcrypt($password = 'secret'),
             'is_active' => true
