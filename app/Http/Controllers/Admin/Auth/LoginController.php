@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -96,14 +97,25 @@ class LoginController extends Controller
     }
 
     /**
-     * The user has been authenticated.
+     * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
-    protected function authenticated(Request $request, $user)
+    public function logout(Request $request)
     {
-        Auth::logoutOtherDevices($user->password);
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect('/admin');
     }
 }

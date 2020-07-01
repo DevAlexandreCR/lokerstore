@@ -47,7 +47,7 @@ class AuthUserTest extends TestCase
             'name' => 'user',
             'lastname' => 'client',
             'email' => 'mail@lokerstore.com',
-            'phone' => '0000000000',
+            'phone' => '3000000000',
             'address' => 'fake address',
             'is_active' => true,
             'password' => '12345678',
@@ -73,7 +73,6 @@ class AuthUserTest extends TestCase
     public function testUserDisabledindex()
     {
         $user = factory(User::class)->create([
-            'password' => bcrypt($password = 'secret'),
             'is_active' => false
         ]);
 
