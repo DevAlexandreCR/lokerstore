@@ -24,15 +24,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        //$this->user->
         if ($request->has('query')) {
             $query = $request->input('query');
-            $user = User::FindUserByNameEmailOrPhone($query);
-            return view('admin.users.index', [
-                'users' => $user->paginate(9),
-                'user_found' => "Mostrando resultados para: $query"
-            ]);
-            
+            return $this->searchUser($query);
         } else {
             return view('admin.users.index', [
                 'users' => $this->user->paginate(12)
@@ -108,14 +102,7 @@ class UserController extends Controller
      */
     private function searchUser(string $query)
     {
-        $user = User::where(function ($q) use ($query) {
-            $q
-            ->where('name', 'like', '%' . $query . '%')
-            ->orWhere('lastname', 'like', '%' . $query . '%')
-            ->orWhere('email', 'like', '%' . $query . '%')
-            ->orWhere('phone', 'like', '%' . $query . '%');
-        });
-
+        $user = User::FindUserByNameEmailOrPhone($query);
         if ($user->count() > 0) {
             return view('admin.users.index', [
                 'users' => $user->paginate(9),
