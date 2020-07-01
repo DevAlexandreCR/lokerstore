@@ -28,4 +28,4 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin
 Route::resource('users', 'UserController')->except(['create', 'store']);
             
 /** Ruta para busqueda de usuarios */
-Route::post('users/', 'UserController@index')->name('users.index');
+Route::post('users/', 'UserController@index')->name('users.search');
