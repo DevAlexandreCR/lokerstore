@@ -111,6 +111,7 @@ class UserControllerTest extends TestCase
      */
     public function testSearchUser()
     {
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         factory(User::class)->create([
             'name' => 'jose',

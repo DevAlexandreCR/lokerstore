@@ -64,4 +64,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return "{$this->name} {$this->lastname}";
     }
+
+    public function scopeFindUserByNameEmailOrPhone($query, $search)
+    {
+        return $query
+                ->where('name', 'like', '%' . $search . '%')
+                ->orWhere('lastname', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('phone', 'like', '%' . $search . '%');
+    }
 }

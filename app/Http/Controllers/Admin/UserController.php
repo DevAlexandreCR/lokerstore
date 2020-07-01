@@ -24,9 +24,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        //$this->user->
         if ($request->has('query')) {
             $query = $request->input('query');
-            return $this->searchUser($query);
+            $user = User::FindUserByNameEmailOrPhone($query);
+            return view('admin.users.index', [
+                'users' => $user->paginate(9),
+                'user_found' => "Mostrando resultados para: $query"
+            ]);
+            
         } else {
             return view('admin.users.index', [
                 'users' => $this->user->paginate(12)
