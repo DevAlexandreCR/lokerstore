@@ -3,12 +3,19 @@
 @section('main')
 <div class="container py-4" style="max-width: 80%;">
   <div class="row">
-    {{-- <div class="col-xs-4">
-      <div class="input-group form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="{{__('Search')}}" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{__('Search')}}</button>
+    @if ( session('user-deleted'))
+    
+    <div class="container py-2">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <strong>{{__('Success!')}}</strong> {{ session('user-deleted') }}
       </div>
-    </div>  --}}
+    </div>
+    
+    @endif
     @if (!empty($user_not_found))
     <div class="container" role="alert">
     <strong>{{ $user_not_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{__('See all')}}</a>

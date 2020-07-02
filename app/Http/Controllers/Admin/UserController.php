@@ -76,7 +76,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return redirect("admin/users/$user->id")->with('updated', 'El usuario ha sido actualizado correctamente');
+        return redirect("admin/users/$user->id")->with('user-updated', 'User has been updated success');
     }
 
     /**
@@ -90,7 +90,7 @@ class UserController extends Controller
         $email = $user->email;
         $user->delete();
 
-        return redirect("admin/users")->with('deleted', "El usuario $email ha sido eliminado correctamente");
+        return redirect("admin/users")->with('user-deleted', "User has been deleted success");
     }
 
     /**
