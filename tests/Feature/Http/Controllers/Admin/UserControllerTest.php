@@ -21,7 +21,7 @@ class UserControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
-        // dd($admin->toArray());
+
         $response = $this->actingAs($admin, 'admin')->get('admin/users');
 
         $response
@@ -39,7 +39,7 @@ class UserControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
-        // dd($admin->toArray());
+
         $response = $this->actingAs($admin, 'admin')->get("admin/users/$user->id");
 
         $response
@@ -57,7 +57,7 @@ class UserControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
-        // dd($admin->toArray());
+
         $response = $this->actingAs($admin, 'admin')->get("admin/users/$user->id/edit");
 
         $response
@@ -94,7 +94,6 @@ class UserControllerTest extends TestCase
      */
     public function testDeleteUser()
     {
-        // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
 
@@ -112,7 +111,7 @@ class UserControllerTest extends TestCase
      */
     public function testSearchUser()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         factory(User::class)->create([
             'name' => 'jose',
@@ -140,7 +139,6 @@ class UserControllerTest extends TestCase
      */
     public function testSearchUserNotFound()
     {
-        // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         factory(User::class)->create([
             'name' => 'jose',

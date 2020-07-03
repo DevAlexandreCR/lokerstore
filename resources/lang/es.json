@@ -10,7 +10,7 @@
     "Status": "Estado",
     "Enabled": "Habilitado", 
     "Disabled": "Inhabilitado",
-    "Update success!": "Hecho!",
+    "Success!": "Hecho!",
     "This action will delete the user": "Ésta acción eliminará al usuario ",
     "Are you sure to continue ?, check here": "¿Está seguro de continuar?, marque aquí",
     "This action will disable the user": "Ésta acción inhabilitará al usuario y no podrá iniciar sessión", 
@@ -58,5 +58,9 @@
     "All rights reserved.":  "Todos los derechos reservados.",
     "Login Only Admins": "Acceso para administradores",
     "Oops! You're lost?": "Ups! ¿Estás perdido?",
-    "Featured": "Destacados"
+    "Featured": "Destacados",
+    "You must log out of the user before logging in as administrator": "Debes cerrar session de usuario antes de iniciar sesión como administrador",
+    "Login only supports": "Acceso solo para colaboradores",
+    "User has been updated success": "El usuario ha sido actualizado con éxito",
+    "User has been deleted success": "El usuario ha sido eliminado con éxito"
 }

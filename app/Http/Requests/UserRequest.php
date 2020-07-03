@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'lastname' => ['string', 'max:100', 'min:3'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
             'password' => ['string', 'min:8', 'confirmed'],
-            'phone' => ['string', 'regex:/(3)[0-9]{9}/', 'unique:users','numeric'],
+            'phone' => ['string', 'regex:/(3)[0-9]{9}/','numeric'],
             'address' => ['string', 'min:10'],
             'is_active' => ['boolean']
         ];

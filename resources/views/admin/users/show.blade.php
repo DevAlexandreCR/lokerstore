@@ -1,7 +1,7 @@
 @extends('admin.home')
 
 @section('main')
-@if ( session('updated'))
+@if ( session('user-updated'))
     
 <div class="container py-2">
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -9,11 +9,12 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <strong>{{__('Update success!')}}</strong> {{ session('updated') }}
+    <strong>{{__('Success!')}}</strong> {{ __(session('user-updated')) }}
   </div>
 </div>
 
 @endif
+
 <div class="container py-3" style="max-width: 80%">
   <div class="card shadow">
     <div class="modal-header bg-light">

@@ -3,9 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
-class EnabledUser
+class CheckBeforeLoginAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,13 +18,11 @@ class EnabledUser
      */
     public function handle($request, Closure $next)
     {
-        /**
-         * si el usuario esta inhabilitado lo redirecciona a la vista correspondiente
-         */
-        if ($request->user() && ! $request->user()->is_active) {
-            return  redirect('/disabled-user');
+        if (auth()->user()) {
+            return Redirect::back()->withErrors(['logout-web' => __('You must log out of the user before logging in as administrator')]);
+        } else {
+            return $next($request);
         }
         
-        return $next($request);
     }
 }

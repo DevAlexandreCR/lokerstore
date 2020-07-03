@@ -2,10 +2,19 @@
 
 @section('content')
 <div class="container py-4">
+    @error ('logout-web')
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong><ion-icon name="warning"></ion-icon></strong> {{$message}}
+        </div>
+    @enderror
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login only admins') }}</div>
+                <div class="card-header">{{ __('Login only supports') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.login') }}">
                         @csrf

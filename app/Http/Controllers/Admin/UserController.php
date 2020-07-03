@@ -6,12 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
-
     protected $user;
 
 
@@ -23,7 +20,7 @@ class UserController extends Controller
     /**
      * Display a listing of the users.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
     {
@@ -40,8 +37,8 @@ class UserController extends Controller
     /**
      * Display the specified user.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user)
     {
@@ -53,13 +50,13 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(UserRequest $request, User $user)
-    {    
-        $p = '0';  
-        if ( $request->has('p')){
+    {
+        $p = '0';
+        if ($request->has('p')) {
             $p = $request->input('p');
         }
         return view('admin.users.edit', [
@@ -71,21 +68,21 @@ class UserController extends Controller
     /**
      * Update the specified user in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Request\UserRequest  $request
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, User $user)
     {
         $user->update($request->all());
 
-        return redirect("admin/users/$user->id")->with('updated', 'El usuario ha sido actualizado correctamente');
+        return redirect("admin/users/$user->id")->with('user-updated', 'User has been updated success');
     }
 
     /**
      * Remove the specified user from storage.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -93,7 +90,7 @@ class UserController extends Controller
         $email = $user->email;
         $user->delete();
 
-        return redirect("admin/users")->with('deleted', "El usuario $email ha sido eliminado correctamente");
+        return redirect("admin/users")->with('user-deleted', "User has been deleted success");
     }
 
     /**
@@ -101,18 +98,11 @@ class UserController extends Controller
      * y busca coincidencias en los campos name, lastname, email y phone
      *
      * @param string $query texto a buscar
-     * @return View Retorna una vista con los resultados de la busqueda cargados
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View Retorna una vista con los resultados de la busqueda cargados
      */
     private function searchUser(string $query)
     {
-        $user = User::where(function ($q) use ($query) {
-            $q
-            ->where('name', 'like', '%' . $query . '%')
-            ->orWhere('lastname', 'like','%' . $query . '%')
-            ->orWhere('email', 'like', '%' . $query . '%')
-            ->orWhere('phone', 'like', '%' . $query . '%');
-        });
-
+        $user = User::FindUserByNameEmailOrPhone($query);
         if ($user->count() > 0) {
             return view('admin.users.index', [
                 'users' => $user->paginate(9),

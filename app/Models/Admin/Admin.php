@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable 
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -40,7 +40,7 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-        /**
+    /**
      * Send the password reset notification.
      *
      * @param  string  $token
