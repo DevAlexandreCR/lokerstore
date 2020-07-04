@@ -62,5 +62,6 @@
     "You must log out of the user before logging in as administrator": "Debes cerrar session de usuario antes de iniciar sesión como administrador",
     "Login only supports": "Acceso solo para colaboradores",
     "User has been updated success": "El usuario ha sido actualizado con éxito",
-    "User has been deleted success": "El usuario ha sido eliminado con éxito"
+    "User has been deleted success": "El usuario ha sido eliminado con éxito",
+    "Please check your email to complete registration": "Por favor verifica tu correo para completar el registro"
 }

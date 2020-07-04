@@ -16,6 +16,7 @@ class EnabledUser
      */
     public function handle($request, Closure $next)
     {
+        
         /**
          * si el usuario esta inhabilitado lo redirecciona a la vista correspondiente
          */
