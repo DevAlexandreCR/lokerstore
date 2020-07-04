@@ -33,7 +33,7 @@ class IndexControllerTest extends TestCase
             'name' => 'Accesorios'
         ]);
         factory(Product::class, 10)->create();
-        $response = $this->get('/');
+        $response = $this->get( route('home') );
 
         $response->assertViewIs('index')  
             ->assertViewHas('products') /** probamos que la viste cargue los productos */    
@@ -48,13 +48,12 @@ class IndexControllerTest extends TestCase
      */
     public function testIndexNoVerified()
     {
-        // $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get('/');
+        $response = $this->actingAs($user, 'web')->get( route('home') );
 
-        $response->assertViewIs('index')  
-            ->assertSessionHas('verify_email') /** probamos que la vista cargue el mensaje de solicitud de verificacion delcorreo electronico */    
+        $response
+            ->assertViewHas('products') /** probamos que la viste cargue los productos */    
             ->assertStatus(200);
     }
 }
