@@ -20,7 +20,7 @@ class IndexController extends Controller
             /**
              * si el usuario no ha verificado su email se carga la variable de sesion
              */
-            session(['verify_email' => 'Por favor verifica tu correo para completar el registro']);
+            session(['verify_email' => __('Please check your email to complete registration')]);
         }
 
         return view('index', [

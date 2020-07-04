@@ -48,9 +48,11 @@ class IndexControllerTest extends TestCase
      */
     public function testIndexNoVerified()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'is_active' => true
+        ]);
 
-        $response = $this->actingAs($user, 'web')->get( route('home') );
+        $response = $this->actingAs($user)->get( route('home') );
 
         $response
             ->assertViewHas('products') /** probamos que la viste cargue los productos */    
