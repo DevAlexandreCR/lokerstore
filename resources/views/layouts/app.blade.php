@@ -11,6 +11,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        window.App = {}
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -111,7 +114,6 @@
             @yield('content')
         </main>
     </div>
-
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
 <footer style="z-index: 100">

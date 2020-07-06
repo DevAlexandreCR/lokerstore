@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Admin\Admin;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class IndexControllerTest extends TestCase
+class HomeControllerTest extends TestCase
 {
     use RefreshDatabase;
     
@@ -22,11 +23,9 @@ class IndexControllerTest extends TestCase
         /** creamos categorias para luego poder crear productos */
         // factory(Category::class, 4)->create();
         // factory(Product::class, 10)->create();
-        $response = $this->get( route('home') );
+        $response = $this->get( route('index') );
 
-        $response->assertViewIs('index')  
-            // ->assertViewHas('products') /** probamos que la viste cargue los productos */    
-            ->assertStatus(200);
+        $response->assertRedirect( route('home'));
     }
 
     /**
@@ -44,7 +43,24 @@ class IndexControllerTest extends TestCase
         $response = $this->actingAs($user)->get( route('home') );
 
         $response
-            ->assertViewHas('products') /** probamos que la viste cargue los productos */    
             ->assertStatus(200);
+    }
+
+    public function testRedirectIfAuthenticatedUser()
+    {        
+        $user = factory(User::class)->create([
+            'is_active' => true
+        ]);
+        $response = $this->actingAs($user)->get( route('index') );
+
+        $response->assertRedirect( route('home'));
+    }
+
+    public function testRedirectIfAuthenticatedAdmin()
+    {        
+        $admin = factory(Admin::class)->create();
+        $response = $this->actingAs($admin, 'admin')->get( route('index') );
+
+        $response->assertRedirect( route('admin.home'));
     }
 }

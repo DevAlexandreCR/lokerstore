@@ -76,7 +76,7 @@ class AuthUserTest extends TestCase
             'is_active' => false
         ]);
 
-        $response = $this->actingAs($user)->get('/');
+        $response = $this->actingAs($user)->get( route('index'));
 
         $response->assertRedirect('/disabled-user');
     }
