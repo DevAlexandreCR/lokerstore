@@ -17,7 +17,6 @@
 </div>    
 @endif
 <div class="container" id="app">
-  hola home
   <router-view></router-view>
 </div>
 @endsection

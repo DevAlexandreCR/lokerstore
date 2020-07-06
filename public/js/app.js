@@ -1943,6 +1943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api.js */ "./resources/js/api.js");
 //
 //
 //
@@ -1960,10 +1961,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'home',
+  data: function data() {
+    return {
+      products: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    _api_js__WEBPACK_IMPORTED_MODULE_0__["default"].getProducts().then(function (products) {
+      console.log(products);
+      _this.products = products;
+    });
+  },
   mounted: function mounted() {
-    console.log('Component mounted. home');
+    console.log('Component mounted home');
   }
 });
 
@@ -52780,6 +52795,31 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/api.js":
+/*!*****************************!*\
+  !*** ./resources/js/api.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var url = "".concat("http://localhost", "/api/");
+
+var getProducts = function getProducts() {
+  return fetch("".concat(url, "products")).then(function (res) {
+    return res.json();
+  }).then(function (res) {
+    return res.data;
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getProducts: getProducts
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -52795,7 +52835,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-new Vue({
+var app = new Vue({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]
 });

@@ -16,10 +16,24 @@
 </template>
 
 <script>
+
+    import api from '../api.js'
     export default {
         name: 'home',
+        data() {
+            return {
+                products: []
+            }
+        },
+        created() {
+            api.getProducts().then(products => {
+                console.log(products);
+                
+                this.products = products
+            })
+        },
         mounted() {
-            console.log('Component mounted. home')
+            console.log('Component mounted home')
         }
     }
 </script>

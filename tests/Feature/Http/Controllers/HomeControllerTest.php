@@ -43,7 +43,6 @@ class HomeControllerTest extends TestCase
         $response = $this->actingAs($user)->get( route('home') );
 
         $response
-            ->assertViewHas('products') /** probamos que la viste cargue los productos */    
             ->assertStatus(200);
     }
 

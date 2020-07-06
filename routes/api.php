@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('/products', 'Api\ProductController')->except('edit', 'create')->middleware('auth:api');
+Route::get('/products', 'Api\ProductController@index')->name('api.index');
+Route::get('/products/{product}', 'Api\ProductController@show')->name('api.show');

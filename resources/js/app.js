@@ -3,7 +3,7 @@ import router from './router'
 
 window.Vue = require('vue');
 
-new Vue({
+const app = new Vue({
     el: '#app',
     router
 });
