@@ -37,7 +37,7 @@ class ProductControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-                'id', 'name', 'created_at', 'updated_at'
+            'data' => ['id', 'name', 'created_at', 'updated_at']
         ]);
     }
 }

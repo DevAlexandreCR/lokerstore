@@ -28,7 +28,6 @@
         created() {
             api.getProducts().then(products => {
                 console.log(products);
-                
                 this.products = products
             })
         },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -20,8 +21,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return response()->json( $this->product->paginate() );
+    {   
+        return ProductResource::collection($this->product->all());
     }
 
     /**
@@ -43,7 +44,7 @@ class ProductController extends Controller
      */
     public function show( Product $product)
     {
-        return response()->json( $product );
+        return new ProductResource($product);
     }
 
     /**
