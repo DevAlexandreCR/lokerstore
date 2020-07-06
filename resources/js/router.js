@@ -1,5 +1,6 @@
 import Router from 'vue-router'
-import Home from './components/Home'
+import Vue from 'vue'
+import Home from './views/Home'
 import ExampleComponent from './components/ExampleComponent'
 
 
@@ -12,12 +13,12 @@ export default new Router({
         {
             path:'/home',
             name: 'home',
-            components: Home
+            component: Home
         },
         {
-            path:'/ej',
+            path:'/home/ej',
             name: 'ej',
-            components: ExampleComponent 
+            component: ExampleComponent 
         }
     ]
 })
