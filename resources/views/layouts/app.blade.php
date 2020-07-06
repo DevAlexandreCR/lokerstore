@@ -23,7 +23,7 @@
     style="background: #ffffff;
     background: linear-gradient(to right top, #ffffff,#c5c4c4); display: flex;
     flex-direction: column;">
-    <div id="app">
+    <div >
         <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" style="background: linear-gradient(to right top, #2b2a2a,#000000);">
             <div class="container">
                 @if (Auth::guard('admin')->check())
@@ -111,7 +111,6 @@
             @yield('content')
         </main>
     </div>
-
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
 <footer style="z-index: 100">
