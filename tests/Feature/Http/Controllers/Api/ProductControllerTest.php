@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class ProductControllerTest extends TestCase
 {
+    use RefreshDatabase;
+    use WithFaker;
     /**
      * A basic feature test example.
      *
@@ -29,10 +31,22 @@ class ProductControllerTest extends TestCase
 
     public function testShow()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
+
         /** creamos categorias para luego poder crear productos */
-        factory(Category::class, 4)->create();
+        $categories = ['Ropa', 'Zapatos', 'Deportes', 'Accesorios'];
+
+        foreach ($categories as $cat) {
+            factory(Category::class)->create([
+                'name' => $cat,
+                'id_parent' => null
+            ]); 
+        }
+
+        factory(Category::class, 10)->create();
         factory(Product::class, 10)->create();
+        
         $response = $this->actingAs($user)->json('GET', 'api/products/1');
 
         $response->assertStatus(200);

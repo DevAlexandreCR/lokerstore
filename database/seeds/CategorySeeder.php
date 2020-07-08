@@ -12,6 +12,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class,4)->create();
+        $primaries_categories = ['Ropa', 'Zapatos', 'Deportes', 'Accesorios'];
+
+        foreach ($primaries_categories as $category) {
+            factory(Category::class)->create([
+                'name' => $category,
+                'id_parent' => null
+            ]);
+        }
+        factory(Category::class, 10)->create();
     }
 }
