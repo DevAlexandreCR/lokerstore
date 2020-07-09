@@ -16,7 +16,7 @@
     </div>
 </div>    
 @endif
-<div class="container" id="app">
+<div id="app">
   <router-view></router-view>
 </div>
 @endsection

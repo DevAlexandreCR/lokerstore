@@ -22,12 +22,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="d-flex flex-column" 
-    style="background: #ffffff;
-    background: linear-gradient(to right top, #ffffff,#c5c4c4); display: flex;
-    flex-direction: column;">
+<body>
     <div id="app">
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" style="background: linear-gradient(to right top, #2b2a2a,#000000);">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" id="nav-app">
             <div class="container">
                 @if (Auth::guard('admin')->check())
                 <a class="navbar-brand" href="{{ url('/admin') }}">
@@ -110,7 +107,7 @@
             </div>
         </nav>
  
-        <main class="py-0" style="flex: 1; min-height: 100vh">
+        <main class="py-0" >
             @yield('content')
         </main>
     </div>

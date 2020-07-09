@@ -1,0 +1,17 @@
+#navbar-category {
+    height: 3em;
+    // width: 80%;
+    border-bottom:0.5px solid $primary-end;
+    background: $transparent;
+}
+
+#nav-app {
+    background: linear-gradient(to right top, $primary-end, $black);
+    visibility: visible;
+}
+
+@media (max-width: $breakpoint-phone) {
+    #nav-app {
+        visibility: hidden;
+    }
+}
