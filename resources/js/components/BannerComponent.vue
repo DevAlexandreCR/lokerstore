@@ -8,13 +8,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="https://cdn.pixabay.com/photo/2015/04/14/16/07/facebook-722283_960_720.jpg" class="img-carousel" alt="">
+                <img src="images/layer1.jpg" class="img-carousel" alt="">
                 </div>
                 <div class="carousel-item">
-                <img src="https://cdn.pixabay.com/photo/2016/10/15/09/28/fractal-1742109_960_720.jpg" class="img-carousel" alt="">
+                <img src="images/layer2.jpg" class="img-carousel" alt="">
                 </div>
                 <div class="carousel-item">
-                <img src="https://cdn.pixabay.com/photo/2013/07/12/13/22/chain-146909_960_720.png" class="img-carousel" alt="">
+                <img src="images/layer3.jpg" class="img-carousel" alt="">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselhome" role="button" data-slide="prev">

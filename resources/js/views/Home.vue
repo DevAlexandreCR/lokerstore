@@ -2,38 +2,34 @@
     <div class="container-fluid">
          <banner-component></banner-component>
         <div class="container">
-            <nav class="navbar navbar-expand-lg" id="navbar-category">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Mujer <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Hombre <span class="sr-only"></span></a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre, categoria, marca, etc..." aria-label="Search">
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+            <div class="row my-1" id="navbar-category">
+                <div class="col-sm-2 d-none d-lg-block">
+                    <a class="nav-link" href="#">Mujer <span class="sr-only"></span></a>
+                </div>
+                <div class="col-sm-2 d-none d-lg-block">
+                    <a class="nav-link" href="#">Hombre <span class="sr-only"></span></a>
+                </div>
+                <div class="col">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..." aria-label="Search" aria-describedby="btn-search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit" id="btn-search">Buscar</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
-            </nav>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Home viewdddddd</div>
-
-                    <div class="card-body">
-                        I'm an Home
-                        <router-link to="/home/ej"><a>url to example</a></router-link>
-                    </div>
-                </div>
             </div>
+        </div>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <gender-component :gender="'Mujer'"></gender-component>
+            </div>
+            <div class="col">
+                <gender-component :gender="'Hombre'"></gender-component>
+            </div>
+        </div>
         </div>
     </div>
 </template>
@@ -42,17 +38,20 @@
 
     import api from '../api.js'
     import BannerComponent from '../components/BannerComponent'
+    import GenderComponent from '../components/GenderComponent'
 
     export default {
         name: 'home',
         data() {
             return {
-                products: []
+                products: [],
+                categories: []
             }
         },
         components: 
         {
-            BannerComponent
+            BannerComponent,
+            GenderComponent
         },
         created() {
             api.getProducts().then(products => {
