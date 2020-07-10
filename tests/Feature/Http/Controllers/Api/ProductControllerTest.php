@@ -31,7 +31,6 @@ class ProductControllerTest extends TestCase
 
     public function testShow()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         /** creamos categorias para luego poder crear productos */
