@@ -1,0 +1,9 @@
+.img-carousel {
+    width: 80% !important;
+}
+
+@media (max-width: $breakpoint-phone) {
+    .img-carousel {
+        width: 100% !important;
+    }
+}

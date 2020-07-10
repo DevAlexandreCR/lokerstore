@@ -1,0 +1,25 @@
+.card-gender {
+    min-height: 65vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    #see-more {
+        bottom: 0;
+        margin-bottom: 10px;
+        position: absolute;
+    }
+
+    h1 {
+        font-family: fantasy;
+        font-size: 50px;
+        color: black;
+    }
+}
+
+.bg-gender-m {
+    background-image: url('../../../storage/app/public/images/man.jpg');
+}
+
+.bg-gender-w {
+    background-image: url('../../../storage/app/public/images/woman.jpg');
+}
