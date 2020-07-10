@@ -3,7 +3,9 @@
         <div class="card-body">
             <div id="see-more" class="container">
             <h1 class="card-title">{{gender}}</h1>
-            <a  href="#" class="btn btn-secondary">Ver mas</a>
+            <router-link class="btn btn-secondary"
+            :to="{name: 'categories', params: { gender: gender }}"
+            >ver mas</router-link>
             </div>
         </div>
     </div>
@@ -14,7 +16,8 @@
         name: 'gender',
 
         data() {
-
+           return{
+           } 
         },
 
         props: {
@@ -25,7 +28,7 @@
         },
 
         mounted() {
-            console.log(`Component mounted. gender ${gender}`)
+            console.log(`Component mounted. gender `)
         }
     }
 </script>

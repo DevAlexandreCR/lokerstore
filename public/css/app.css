@@ -11030,6 +11030,13 @@ a.text-dark:focus {
   background: white;
 }
 
+.router-link-exact-active {
+  background: #2b2a2a;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 body {
   background: #0f0f0f;
   background: linear-gradient(to right top, #ffffff, #c5c4c4);
@@ -11040,5 +11047,17 @@ body {
 main {
   flex: 1;
   min-height: 100vh;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 
