@@ -2051,6 +2051,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'categories',
+  props: {
+    categories: {
+      type: function type() {
+        return Array;
+      },
+      "default": []
+    }
+  },
   mounted: function mounted() {
     console.log('View categories ...');
   }
@@ -2070,8 +2078,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api.js */ "./resources/js/api.js");
 /* harmony import */ var _components_BannerComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerComponent */ "./resources/js/components/BannerComponent.vue");
 /* harmony import */ var _components_GenderComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/GenderComponent */ "./resources/js/components/GenderComponent.vue");
-//
-//
 //
 //
 //
@@ -2144,6 +2150,10 @@ __webpack_require__.r(__webpack_exports__);
 
     _api_js__WEBPACK_IMPORTED_MODULE_0__["default"].getProducts().then(function (products) {
       _this.products = products;
+    });
+    _api_js__WEBPACK_IMPORTED_MODULE_0__["default"].getCategories().then(function (categories) {
+      _this.categories = categories;
+      console.log(categories);
     });
   },
   mounted: function mounted() {
@@ -38032,19 +38042,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container" },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade", mode: "out-in" } },
-            [_c("router-view")],
-            1
-          )
-        ],
-        1
-      ),
+      _c("div", { staticClass: "container" }, [_c("router-view")], 1),
       _vm._v(" "),
       _c(
         "div",
@@ -53330,8 +53328,17 @@ var getProducts = function getProducts() {
   });
 };
 
+var getCategories = function getCategories() {
+  return fetch("".concat(url, "categories")).then(function (res) {
+    return res.json();
+  }).then(function (res) {
+    return res.data;
+  });
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  getProducts: getProducts
+  getProducts: getProducts,
+  getCategories: getCategories
 });
 
 /***/ }),

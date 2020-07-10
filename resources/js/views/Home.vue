@@ -30,9 +30,7 @@
             </div>
         </div>
         <div class="container">
-            <transition name="fade" mode="out-in">
-                <router-view></router-view>
-            </transition>
+            <router-view></router-view>
         </div>
         <div class="container" v-show="isNotHomeRoute()">
         <div class="row justify-content-center">
@@ -75,6 +73,12 @@
         created() {
             api.getProducts().then(products => {
                 this.products = products
+            })
+
+            api.getCategories().then(categories => {
+                this.categories = categories
+                console.log(categories);
+                
             })
         },
         mounted() {           

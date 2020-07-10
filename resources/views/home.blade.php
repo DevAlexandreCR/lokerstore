@@ -17,6 +17,8 @@
 </div>    
 @endif
 <div id="app">
-  <router-view></router-view>
+    <transition name="slide">
+      <router-view></router-view>
+    </transition>
 </div>
 @endsection

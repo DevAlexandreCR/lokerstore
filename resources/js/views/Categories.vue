@@ -18,6 +18,14 @@
 <script>
     export default {
         name: 'categories',
+
+        props: {
+            categories: {
+                type: () => Array,
+                default: []
+            }
+        },
+
         mounted() {
             console.log('View categories ...')
         }
