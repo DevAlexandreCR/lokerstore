@@ -11025,11 +11025,12 @@ a.text-dark:focus {
 }
 
 .hover-edit:hover {
-  -webkit-text-decoration-line: underline;
-          text-decoration-line: underline;
-  text-underline-position: under;
-  text-shadow: 1px 1px 2px yellowgreen, 0 0 1em black, 0 0 0.2em blue;
-  cursor: text;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.unborder {
+  border: 0;
 }
 
 .row-nav {

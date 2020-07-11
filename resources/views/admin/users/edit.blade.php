@@ -115,14 +115,6 @@
                 </div>
                 <div class="row">
                 <div class="col">
-                  <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" required>
-                      <label class="form-check-label danger" for="disabledFieldsetCheck">
-                        {{__('Are you sure to continue ?, check here')}}
-                      </label>
-                    </div>
-                  </div>
                 </div>
                 <div class="col-sm-2">
                   <input type="hidden" name="is_active" value="1">
