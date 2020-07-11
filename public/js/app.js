@@ -1899,6 +1899,199 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/EditUserComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/EditUserComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'edit-user-component',
+  data: function data() {
+    return {
+      editingName: false,
+      editingEmail: false,
+      editingPhone: false,
+      editingAddress: false
+    };
+  },
+  props: {
+    user: {
+      "default": {
+        name: 'yosito'
+      }
+    }
+  },
+  methods: {
+    startEditing: function startEditing(inputName) {
+      return inputName = !inputName;
+    }
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BannerComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BannerComponent.vue?vue&type=script&lang=js& ***!
@@ -37691,6 +37884,590 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/EditUserComponent.vue?vue&type=template&id=e35e8a2a&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/EditUserComponent.vue?vue&type=template&id=e35e8a2a& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card shadow" }, [
+      _c("div", { staticClass: "modal-header bg-light" }, [
+        _c("h5", { staticClass: "modal-title" }, [
+          _vm._v("Informacion de usuario")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
+          _c(
+            "a",
+            { attrs: { href: "/admin/users" } },
+            [_c("ion-icon", { attrs: { name: "return-up-back-outline" } })],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            !_vm.editingName
+              ? _c(
+                  "p",
+                  {
+                    staticClass: "card-text hover-edit",
+                    on: {
+                      click: function($event) {
+                        _vm.editingName = _vm.startEditing(_vm.editingName)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.user.name + " " + _vm.user.lastname))]
+                )
+              : _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "col-md-6 mb-3" }, [
+                    _c("label", { attrs: { for: "validationTooltip01" } }, [
+                      _vm._v("First name")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", required: "", autofocus: "" },
+                      domProps: { value: _vm.user.name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6 mb-3" }, [
+                    _c("label", { attrs: { for: "validationTooltip02" } }, [
+                      _vm._v("Last name")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", required: "" },
+                      domProps: { value: _vm.user.lastname }
+                    })
+                  ])
+                ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2 d-flex align-items-center" }, [
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingName,
+                    expression: "editingName"
+                  }
+                ],
+                staticClass: "btn btn-primary"
+              },
+              [_c("ion-icon", { attrs: { name: "save-outline" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingName,
+                    expression: "editingName"
+                  }
+                ],
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    _vm.editingName = _vm.startEditing(_vm.editingName)
+                  }
+                }
+              },
+              [_c("ion-icon", { attrs: { name: "close-outline" } })],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            !_vm.editingEmail
+              ? _c(
+                  "p",
+                  {
+                    staticClass: "card-text hover-edit",
+                    on: {
+                      click: function($event) {
+                        _vm.editingEmail = _vm.startEditing(_vm.editingEmail)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.user.email))]
+                )
+              : _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    name: "email",
+                    autofocus: "",
+                    required: ""
+                  },
+                  domProps: { value: _vm.user.email }
+                })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2 d-flex align-items-center" }, [
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingEmail,
+                    expression: "editingEmail"
+                  }
+                ],
+                staticClass: "btn btn-primary",
+                attrs: { type: "submit" }
+              },
+              [_c("ion-icon", { attrs: { name: "save-outline" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingEmail,
+                    expression: "editingEmail"
+                  }
+                ],
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    _vm.editingEmail = _vm.startEditing(_vm.editingEmail)
+                  }
+                }
+              },
+              [_c("ion-icon", { attrs: { name: "close-outline" } })],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            !_vm.editingPhone
+              ? _c(
+                  "p",
+                  {
+                    staticClass: "card-text hover-edit",
+                    on: {
+                      click: function($event) {
+                        _vm.editingPhone = _vm.startEditing(_vm.editingPhone)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.user.phone))]
+                )
+              : _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "tel",
+                    name: "phone",
+                    autofocus: "",
+                    required: ""
+                  },
+                  domProps: { value: _vm.user.phone }
+                })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2 d-flex align-items-center" }, [
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingPhone,
+                    expression: "editingPhone"
+                  }
+                ],
+                staticClass: "btn btn-primary"
+              },
+              [_c("ion-icon", { attrs: { name: "save-outline" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingPhone,
+                    expression: "editingPhone"
+                  }
+                ],
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    _vm.editingPhone = _vm.startEditing(_vm.editingPhone)
+                  }
+                }
+              },
+              [_c("ion-icon", { attrs: { name: "close-outline" } })],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            !_vm.editingAddress
+              ? _c(
+                  "p",
+                  {
+                    staticClass: "card-text hover-edit",
+                    on: {
+                      click: function($event) {
+                        _vm.editingAddress = _vm.startEditing(
+                          _vm.editingAddress
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.user.address))]
+                )
+              : _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "address",
+                    autofocus: "",
+                    required: ""
+                  },
+                  domProps: { value: _vm.user.address }
+                })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2 d-flex align-items-center" }, [
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingAddress,
+                    expression: "editingAddress"
+                  }
+                ],
+                staticClass: "btn btn-primary"
+              },
+              [_c("ion-icon", { attrs: { name: "save-outline" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.editingAddress,
+                    expression: "editingAddress"
+                  }
+                ],
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    _vm.editingAddress = _vm.startEditing(_vm.editingAddress)
+                  }
+                }
+              },
+              [_c("ion-icon", { attrs: { name: "close-outline" } })],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(_vm.user.created_at))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-link" },
+              [_c("ion-icon", { attrs: { name: "lock-closed-outline" } })],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _vm.user.is_active
+              ? _c("p", { staticClass: "card-text" }, [_vm._v("Habilitado")])
+              : _c("p", { staticClass: "card-text" }, [_vm._v("Inhabilitado")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2" }, [
+            _c(
+              "div",
+              {
+                staticClass: "btn-group  btn-group-sm ",
+                attrs: { role: "group" }
+              },
+              [
+                _c(
+                  "form",
+                  { attrs: { action: _vm.user.id + "/edit", method: "get" } },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "p", value: "is_active" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-link",
+                        attrs: { type: "submit" }
+                      },
+                      [_c("ion-icon", { attrs: { name: "create-outline" } })],
+                      1
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _vm.user.email_verified_at === null
+              ? _c("p", { staticClass: "card-text" }, [_vm._v("No")])
+              : _c("p", { staticClass: "card-text" }, [_vm._v("Si")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-link" },
+              [_c("ion-icon", { attrs: { name: "lock-closed-outline" } })],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isEditing,
+                expression: "isEditing"
+              }
+            ],
+            staticClass: "row"
+          },
+          [
+            _c("div", { staticClass: "col" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "btn-group  btn-group-sm ",
+                  attrs: { role: "group" }
+                },
+                [
+                  _c(
+                    "form",
+                    { attrs: { action: _vm.user.id + "/edit", method: "get" } },
+                    [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "p", value: "delete" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-block shadow",
+                          attrs: { type: "submit" }
+                        },
+                        [
+                          _vm._v("Guardar\n                    "),
+                          _c("ion-icon", { attrs: { name: "save-outline" } })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "div",
+              {
+                staticClass: "btn-group  btn-group-sm ",
+                staticStyle: { float: "right", "margin-bottom": "-50%" },
+                attrs: { role: "group" }
+              },
+              [
+                _c(
+                  "form",
+                  { attrs: { action: _vm.user.id + "/edit", method: "get" } },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "p", value: "delete" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger rounded-circle shadow",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _c("ion-icon", {
+                          staticStyle: { width: "30px", height: "30px" },
+                          attrs: { name: "trash" }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Nombre y apellido ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Correo electronico ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Telefono ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Direccion ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Fecha de registro ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Estado ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h6", { staticClass: "card-title" }, [_vm._v(" Usuario verificado ")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BannerComponent.vue?vue&type=template&id=19491b16&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BannerComponent.vue?vue&type=template&id=19491b16& ***!
@@ -53309,6 +54086,75 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin-components/EditUserComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/admin-components/EditUserComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditUserComponent_vue_vue_type_template_id_e35e8a2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditUserComponent.vue?vue&type=template&id=e35e8a2a& */ "./resources/js/admin-components/EditUserComponent.vue?vue&type=template&id=e35e8a2a&");
+/* harmony import */ var _EditUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditUserComponent.vue?vue&type=script&lang=js& */ "./resources/js/admin-components/EditUserComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditUserComponent_vue_vue_type_template_id_e35e8a2a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditUserComponent_vue_vue_type_template_id_e35e8a2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin-components/EditUserComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/EditUserComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/admin-components/EditUserComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditUserComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/EditUserComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditUserComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/EditUserComponent.vue?vue&type=template&id=e35e8a2a&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/admin-components/EditUserComponent.vue?vue&type=template&id=e35e8a2a& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditUserComponent_vue_vue_type_template_id_e35e8a2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditUserComponent.vue?vue&type=template&id=e35e8a2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/EditUserComponent.vue?vue&type=template&id=e35e8a2a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditUserComponent_vue_vue_type_template_id_e35e8a2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditUserComponent_vue_vue_type_template_id_e35e8a2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/api.js":
 /*!*****************************!*\
   !*** ./resources/js/api.js ***!
@@ -53358,6 +54204,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.component('edit-user-component', __webpack_require__(/*! ./admin-components/EditUserComponent.vue */ "./resources/js/admin-components/EditUserComponent.vue")["default"]);
+Vue.component('banner-component', __webpack_require__(/*! ./components/BannerComponent.vue */ "./resources/js/components/BannerComponent.vue")["default"]);
 var app = new Vue({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]

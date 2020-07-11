@@ -23,7 +23,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div>
+    <div id="app">
         <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" id="nav-app">
             <div class="container">
                 @if (Auth::guard('admin')->check())

@@ -11024,6 +11024,14 @@ a.text-dark:focus {
   background-image: url(/images/woman.jpg?ac3efaca6e76f5b038ec3561ecf4342d);
 }
 
+.hover-edit:hover {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+  text-underline-position: under;
+  text-shadow: 1px 1px 2px yellowgreen, 0 0 1em black, 0 0 0.2em blue;
+  cursor: text;
+}
+
 .row-nav {
   text-align: center;
   justify-content: center;

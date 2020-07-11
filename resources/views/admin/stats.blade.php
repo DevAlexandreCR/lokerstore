@@ -1,6 +1,7 @@
 @extends('admin.home')
 
 @section('main')
+<banner-component/>
 <div class="content py-4">
     <div class="row">
         <div class="col">
