@@ -124,7 +124,7 @@
             @endif
           </div>
           <div class="col-sm-2">
-            <a href="{{ route('users.edit', ['user' => $user, 'p' => 'is_active'])}}"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+            <a href="{{ route('users.edit', ['user' => $user, 'input_name' => 'is_active'])}}"><ion-icon name="chevron-forward-outline"></ion-icon></a>
           </div>
         </div>
         <hr>
@@ -159,7 +159,7 @@
              role="group" 
              style="float: right; margin-bottom: -50%;">
               <a class="btn btn-danger rounded-circle shadow" 
-              href="{{route('users.edit', ['user' => $user, 'p' => 'delete'])}}">
+              href="{{route('users.edit', ['user' => $user, 'input_name' => 'delete'])}}">
                 <ion-icon name="trash" style="width: 30px; height: 30px;"></ion-icon>
               </a>
             </div>

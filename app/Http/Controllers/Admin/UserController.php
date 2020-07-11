@@ -55,13 +55,13 @@ class UserController extends Controller
      */
     public function edit(UserRequest $request, User $user)
     {
-        $p = '0';
-        if ($request->has('p')) {
-            $p = $request->input('p');
+        $inputName = ''; // variable que le dice a la vista cual input mostrar
+        if ($request->has('input_name')) {
+            $inputName = $request->input('input-name');
         }
         return view('admin.users.edit', [
             'user' => $user,
-            'p' => $p
+            'input_name' => $inputName
         ]);
     }
 
