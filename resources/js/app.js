@@ -3,8 +3,9 @@ import router from './router'
 
 window.Vue = require('vue');
 
-Vue.component('edit-user-component', require('./admin-components/EditUserComponent.vue').default)
 Vue.component('banner-component', require('./components/BannerComponent.vue').default)
+
+Vue.config.ignoredElements = [/^ion-/]
 
 const app = new Vue({
     el: '#app',

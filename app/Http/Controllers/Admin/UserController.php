@@ -76,7 +76,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return redirect("admin/users/$user->id")->with('user-updated', 'User has been updated success');
+        return redirect( route('users.show', ['user' => $user->id]))->with('user-updated', 'User has been updated success');
     }
 
     /**

@@ -17,16 +17,22 @@
                     <div v-else class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="validationTooltip01">First name</label>
-                            <input type="text" class="form-control" :value="user.name" required autofocus>
+                            <input type="text" class="form-control" v-model="updateUser.name" required autofocus>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationTooltip02">Last name</label>
-                            <input type="text" class="form-control" :value="user.lastname" required>
+                            <input type="text" class="form-control" v-model="updateUser.lastname" required>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-2 d-flex align-items-center">
-                    <button v-show="editingName" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    <div class="btn-group  btn-group-sm " 
+                        role="group" 
+                        >
+                    <form @submit.prevent="submit">
+                        <button type="submit" v-show="editingName" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    </form>
+                    </div>
                     <button @click="editingName = startEditing(editingName)" v-show="editingName" class="btn btn-danger" ><ion-icon name="close-outline"></ion-icon></button>
                 </div>
             </div>
@@ -37,10 +43,12 @@
                 </div>
                 <div class="col">
                     <p @click="editingEmail = startEditing(editingEmail)" v-if="!editingEmail" class="card-text hover-edit">{{ user.email }}</p>
-                    <input v-else type="email" name="email" class="form-control" :value="user.email" autofocus required>
+                    <input v-else type="email" name="email" class="form-control" v-model="updateUser.email" autofocus required>
                 </div>
                 <div class="col-sm-2 d-flex align-items-center">
-                    <button v-show="editingEmail" class="btn btn-primary" type="submit" ><ion-icon name="save-outline"></ion-icon></button>
+                    <form @submit.prevent="submit">
+                        <button type="submit" v-show="editingEmail" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    </form>
                     <button @click="editingEmail = startEditing(editingEmail)" v-show="editingEmail" class="btn btn-danger" ><ion-icon name="close-outline"></ion-icon></button>
                 </div>
             </div>
@@ -51,10 +59,12 @@
                 </div>
                 <div class="col">
                     <p @click="editingPhone = startEditing(editingPhone)" v-if="!editingPhone" class="card-text hover-edit">{{ user.phone }}</p>
-                    <input v-else type="tel" name="phone" class="form-control" :value="user.phone" autofocus required>
+                    <input v-else type="tel" name="phone" class="form-control" v-model="updateUser.phone" autofocus required>
                 </div>
                 <div class="col-sm-2 d-flex align-items-center">
-                    <button v-show="editingPhone" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    <form @submit.prevent="submit">
+                        <button type="submit" v-show="editingPhone" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    </form>
                     <button @click="editingPhone = startEditing(editingPhone)" v-show="editingPhone" class="btn btn-danger" ><ion-icon name="close-outline"></ion-icon></button>
                 </div>
             </div>
@@ -65,10 +75,12 @@
                 </div>
                 <div class="col">
                     <p @click="editingAddress = startEditing(editingAddress)" v-if="!editingAddress" class="card-text hover-edit">{{ user.address }}</p>
-                    <input v-else type="text" name="address" class="form-control" :value="user.address" autofocus required>
+                    <input v-else type="text" name="address" class="form-control" v-model="updateUser.address" autofocus required>
                 </div>
                 <div class="col-sm-2 d-flex align-items-center">
-                    <button v-show="editingAddress" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    <form @submit.prevent="submit">
+                        <button type="submit" v-show="editingAddress" class="btn btn-primary" ><ion-icon name="save-outline"></ion-icon></button>
+                    </form>
                     <button @click="editingAddress = startEditing(editingAddress)" v-show="editingAddress" class="btn btn-danger" ><ion-icon name="close-outline"></ion-icon></button>
                 </div>
             </div>
@@ -100,7 +112,7 @@
                     <form :action="user.id + '/edit'" method="get">
                         <input type="hidden" name="p" value="is_active">
                         <button class="btn btn-link" type="submit">
-                        <ion-icon name="create-outline"></ion-icon>
+                        <ion-icon name="create-outline" class="bold"></ion-icon>
                         </button>
                     </form>
                     </div>
@@ -117,21 +129,6 @@
                 </div>
                 <div class="col-sm-2">
                     <button class="btn btn-link"><ion-icon name="lock-closed-outline"></ion-icon></button>
-                </div>
-            </div>
-            <hr>
-            <div v-show="isEditing" class="row">
-                <div class="col">
-                    <div class="btn-group  btn-group-sm " 
-                        role="group" 
-                        >
-                    <form :action="user.id + '/edit'" method="get">
-                        <input type="hidden" name="p" value="delete">
-                        <button class="btn btn-success btn-block shadow" type="submit">Guardar
-                        <ion-icon name="save-outline"></ion-icon>
-                        </button>
-                    </form>
-                </div>
                 </div>
             </div>
             <div class="row">
@@ -162,7 +159,14 @@
                 editingName: false,
                 editingEmail: false,
                 editingPhone: false,
-                editingAddress: false
+                editingAddress: false,
+                updateUser: {
+                    'name': this.user.name,
+                    'lastname': this.user.lastname, 
+                    'email': this.user.email, 
+                    'phone': this.user.phone, 
+                    'address': this.user.address
+                }
             }
         },
 
@@ -175,6 +179,27 @@
         methods: {
             startEditing(inputName) {
                return inputName = !inputName
+            },
+
+            submit() {
+                console.log(this.updateUser);
+                axios.put(this.user.id, {user: {
+                    'name': this.updateUser.name,
+                    'lastname': this.updateUser.lastname,
+                    'email': this.updateUser.email,
+                    'phone': this.updateUser.phone,
+                    'address': this.updateUser.address,
+                    }})
+                .then(res =>{
+                    console.log(res.data);
+                    this.editingName = false,
+                    this.editingEmail = false,
+                    this.editingPhone = false,
+                    this.editingAddress = false
+                })
+                .catch(e => {
+                console.log(e);
+            })
             }
         }, 
 
