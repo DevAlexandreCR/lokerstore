@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
-use App\Models\Product;
+use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
-    protected $product;
+    protected $category;
 
-    public function __construct(Product $product)
+    public function __construct(Category $category)
     {
-        $this->product = $product;
+        $this->category = $category;
     }
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        return ProductResource::collection($this->product->all());
+    {
+        return CategoryResource::collection($this->category->all());
     }
 
     /**
@@ -42,9 +42,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Category $category)
     {
-        return new ProductResource($product);
+        return new CategoryResource($category);
     }
 
     /**

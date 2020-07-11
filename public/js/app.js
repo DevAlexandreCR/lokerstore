@@ -53358,6 +53358,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.component('banner-component', __webpack_require__(/*! ./components/BannerComponent.vue */ "./resources/js/components/BannerComponent.vue")["default"]);
+Vue.config.ignoredElements = [/^ion-/];
 var app = new Vue({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]

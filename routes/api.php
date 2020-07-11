@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/products', 'Api\ProductController')->except('edit', 'create')->middleware('auth:api');
-Route::get('/products', 'Api\ProductController@index')->name('api.index');
-Route::get('/products/{product}', 'Api\ProductController@show')->name('api.show');
+Route::apiResource('/products', 'ProductController')->middleware('auth:api');
+Route::get('/products', 'ProductController@index')->name('api.index');
+Route::get('/products/{product}', 'ProductController@show')->name('api.show');
+
+Route::apiResource('/categories', 'CategoryController')->middleware('auth:api');
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');

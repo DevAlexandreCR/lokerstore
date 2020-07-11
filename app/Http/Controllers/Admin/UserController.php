@@ -55,13 +55,9 @@ class UserController extends Controller
      */
     public function edit(UserRequest $request, User $user)
     {
-        $p = '0';
-        if ($request->has('p')) {
-            $p = $request->input('p');
-        }
         return view('admin.users.edit', [
             'user' => $user,
-            'p' => $p
+            'input_name' => $request->input('input_name') // variable que le dice a la vista cual input mostrar
         ]);
     }
 
@@ -76,7 +72,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return redirect("admin/users/$user->id")->with('user-updated', 'User has been updated success');
+        return redirect( route('users.show', ['user' => $user->id]))->with('user-updated', 'User has been updated success');
     }
 
     /**

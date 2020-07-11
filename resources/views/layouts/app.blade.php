@@ -14,6 +14,7 @@
     <script>
         window.App = {}
     </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div>
+    <div id="app">
         <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" id="nav-app">
             <div class="container">
                 @if (Auth::guard('admin')->check())
@@ -117,7 +118,6 @@
             @yield('content')
         </main>
     </div>
-<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
 <footer style="z-index: 100">
     @yield('footer', View::make('footer'))

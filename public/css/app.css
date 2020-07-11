@@ -17,6 +17,10 @@
   min-width: 100% !important;
 }
 
+.bg-danger {
+  background: white;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -11022,6 +11026,15 @@ a.text-dark:focus {
 
 .bg-gender-w {
   background-image: url(/images/woman.jpg?ac3efaca6e76f5b038ec3561ecf4342d);
+}
+
+.hover-edit:hover {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.unborder {
+  border: 0;
 }
 
 .row-nav {
