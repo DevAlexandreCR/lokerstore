@@ -124,7 +124,9 @@
             @endif
           </div>
           <div class="col-sm-2">
-            <a href="{{ route('users.edit', ['user' => $user, 'input_name' => 'is_active'])}}"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+            <a href="{{ route('users.edit', ['user' => $user, 'input_name' => 'is_active'])}}">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </a>
           </div>
         </div>
         <hr>

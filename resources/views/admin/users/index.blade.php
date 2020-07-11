@@ -27,8 +27,8 @@
     @endif
   </div>
   <div class="row py-3">
-    <div class="container table-responsive">
-      <table class="table table-sm table-striped table-condensed">
+    <div class="container">
+      <table class="table table-sm table-striped table-condensed table-hover">
         <thead>
           <tr>
             <th>{{__('Id')}}</th>
@@ -36,27 +36,47 @@
             <th>{{__('Lastname')}}</th>
             <th>{{__('E-Mail Address')}}</th>
             <th>{{__('Phone')}}</th>
+            <th>{{__('Status')}}</th>
             <th style="text-align: center">{{__('View')}}</th>
           </tr>
           </thead>
           <tbody>
         @foreach ($users as $user)
-              <tr class="">
+              <tr class="@if(!$user->is_active) bg-danger @endif">
               <td scope="row">{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->phone }}</td>
+                @if ($user->is_active)
+                <td>{{ __('Enabled') }}</td>
+                @else
+                <td>{{ __('Disabled') }}</td>
+                @endif
                 <td>
                   <div class="btn-group btn-block btn-group-sm text-center" 
                   role="group"
                   style="border-left: groove">
-                    <a type="button" class="btn btn" 
+                    <a type="button" class="btn btn-link" 
                     data-toggle="tooltip" 
                     data-placement="top" 
                     title="{{__('View')}}"
                     href="{{route('users.show', ['user' => $user])}}">
                     <ion-icon name="eye"></ion-icon>
+                    </a>
+                    <a type="button" class="btn btn-link" 
+                    data-toggle="tooltip" 
+                    data-placement="top" 
+                    title="@if($user->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
+                    href="{{ route('users.edit', ['user' => $user, 'input_name' => 'is_active'])}}">
+                    <ion-icon name="power"></ion-icon>
+                    </a>
+                    <a type="button" class="btn btn-link" 
+                    data-toggle="tooltip" 
+                    data-placement="top" 
+                    title="{{__('Remove')}}"
+                    href="{{route('users.edit', ['user' => $user, 'input_name' => 'delete'])}}">
+                    <ion-icon name="trash"></ion-icon>
                     </a>
                   </div>
                 </td>
