@@ -14,7 +14,6 @@ class RemoveConstrainUniqueInCategory extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('name')->change();
             $table->dropUnique(['name']);
         });
     }
@@ -27,7 +26,7 @@ class RemoveConstrainUniqueInCategory extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn('name');
+            $table->string('name')->unique();
         });
     }
 }
