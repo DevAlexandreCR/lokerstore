@@ -27,8 +27,8 @@ class AddColumnIdParentToCategories extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
+            $table->dropForeign(['id_parent']);
             $table->dropColumn('id_parent');
-            $table->dropForeign('id_parent');
         });
     }
 }
