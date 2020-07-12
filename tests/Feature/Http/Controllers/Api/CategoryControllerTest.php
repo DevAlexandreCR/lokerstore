@@ -64,8 +64,8 @@ class CategoryControllerTest extends TestCase
         $response = $this->json('GET', route('categories.show', 1));
 
         $response->assertStatus(200);
-        $response->assertJson([
-            'data' => ['id' => 1, 'name' => 'Zapatos', 'id_parent' => null]
+        $response->assertJsonStructure([
+            'data' => ['id', 'name', 'id_parent']
         ]);
     }
 
