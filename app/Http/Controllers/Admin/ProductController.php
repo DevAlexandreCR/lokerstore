@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $product;
+
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.products.index', [
+            'products' => $this->product->paginate(20)
+        ]);
     }
 
     /**
@@ -45,9 +53,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($product)
+    public function show(Product $product)
     {
-        //
+        return view('admin.products.show', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -58,7 +68,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.products.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -70,7 +82,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+
+        return redirect( route('products.show', ['product' => $product->id]))->with('product-updated', 'Product has been updated success');
     }
 
     /**
@@ -81,6 +95,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect(route('products.index'))->with('product-deleted', "Product has been deleted success");
     }
 }
