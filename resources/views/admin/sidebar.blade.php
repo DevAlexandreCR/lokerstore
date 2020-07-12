@@ -8,17 +8,17 @@
     height: 100vh;">
     <nav id="sidebar" class="nav flex-column">
         <div class="card-header" >
-        <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admin.home') ?: 'active'}}" 
+        <a class="flex-sm-fill text-sm-center nav-link  {{ ! Route::is('admin.home') ?: 'font-weight-bolder'}}" 
         href="{{ route('admin.home') }}"
         style="color: black"
         >{{__('Home')}}</a>
         </div>
         <br>
-        <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admin.home') ?: 'active'}}"
+        <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('users.index') ?: 'font-weight-bolder'}}"
          href="{{ route('users.index') }}"
          style="color: black"
          >{{__('Users')}}</a>
-         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admin.home') ?: 'active'}}"
+         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('products.index') ?: 'font-weight-bolder'}}"
          href="{{ route('products.index') }}"
          style="color: black"
          >{{__('Products')}}</a>

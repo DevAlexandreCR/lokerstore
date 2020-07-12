@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemoveConstrainUniqueInCategory extends Migration
+class AddColumnIsActiveInProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class RemoveConstrainUniqueInCategory extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('name')->change();
-            $table->dropUnique(['name']);
+        Schema::table('products', function (Blueprint $table) {
+            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -26,8 +25,8 @@ class RemoveConstrainUniqueInCategory extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn('name');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('is_active');
         });
     }
 }
