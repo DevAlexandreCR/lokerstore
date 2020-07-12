@@ -84,7 +84,8 @@ class ProductController extends Controller
     {
         $product->update($request->all());
 
-        return redirect( route('products.show', ['product' => $product->id]))->with('product-updated', 'Product has been updated success');
+        return redirect( route('products.show', ['product' => $product->id]))
+            ->with('product-updated', 'Product has been updated success');
     }
 
     /**
@@ -97,6 +98,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect(route('products.index'))->with('product-deleted', "Product has been deleted success");
+        return redirect( route('products.index'))
+            ->with('product-deleted', "Product has been deleted success");
     }
 }

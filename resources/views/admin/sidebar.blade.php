@@ -18,6 +18,10 @@
          href="{{ route('users.index') }}"
          style="color: black"
          >{{__('Users')}}</a>
+         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admin.home') ?: 'active'}}"
+         href="{{ route('products.index') }}"
+         style="color: black"
+         >{{__('Products')}}</a>
     </nav>
 </div>    
 @endSection

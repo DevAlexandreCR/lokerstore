@@ -1,5 +1,5 @@
 @extends('admin.home')
 
 @section('main')
-    $product
+    {{$product}}
 @endsection

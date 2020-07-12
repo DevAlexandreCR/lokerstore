@@ -42,16 +42,20 @@
           </thead>
           <tbody>
         @foreach ($users as $user)
-              <tr class="@if(!$user->is_active) bg-danger @endif">
+              <tr>
               <td scope="row">{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->phone }}</td>
                 @if ($user->is_active)
-                <td>{{ __('Enabled') }}</td>
+                <td> 
+                  <span class="badge badge-info"> {{ __('Enabled') }}</span>
+                </td>
                 @else
-                <td>{{ __('Disabled') }}</td>
+                <td> 
+                  <span class="badge badge-danger"> {{ __('Disabled') }}</span>
+                </td>
                 @endif
                 <td>
                   <div class="btn-group btn-block btn-group-sm text-center" 
