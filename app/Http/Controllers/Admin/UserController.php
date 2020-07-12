@@ -83,7 +83,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $email = $user->email;
         $user->delete();
 
         return redirect("admin/users")->with('user-deleted', "User has been deleted success");

@@ -28,7 +28,7 @@
   </div>
   <div class="row py-3">
     <div class="container">
-      <table class="table table-sm table-striped table-condensed table-hover">
+      <table id="table_id" class="table table-sm table-striped table-condensed table-hover table-secondary">
         <thead>
           <tr>
             <th>{{__('Id')}}</th>
@@ -42,16 +42,20 @@
           </thead>
           <tbody>
         @foreach ($users as $user)
-              <tr class="@if(!$user->is_active) bg-danger @endif">
+              <tr class="@if(!$user->is_active) text-muted @endif">
               <td scope="row">{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->phone }}</td>
                 @if ($user->is_active)
-                <td>{{ __('Enabled') }}</td>
+                <td> 
+                  <span class="badge badge-info"> {{ __('Enabled') }}</span>
+                </td>
                 @else
-                <td>{{ __('Disabled') }}</td>
+                <td class="text-muted"> 
+                  <span class="badge badge-danger"> {{ __('Disabled') }}</span>
+                </td>
                 @endif
                 <td>
                   <div class="btn-group btn-block btn-group-sm text-center" 
@@ -82,9 +86,9 @@
                 </td>
               </tr>
         @endforeach
-      </tbody>
-    </div>
-    </table>
+        </tbody>
+      </div>
+      </table>
   </div>
   <div class="container">
     <div class="row">

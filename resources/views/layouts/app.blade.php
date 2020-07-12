@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" id="nav-app">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow" id="nav-app">
             <div class="container">
                 @if (Auth::guard('admin')->check())
                 <a class="navbar-brand" href="{{ url('/admin') }}">
