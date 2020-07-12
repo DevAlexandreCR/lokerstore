@@ -55,7 +55,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testShow()
     {
-
         factory(Category::class)->create([
             'name' => 'Zapatos',
             'id_parent' => null
