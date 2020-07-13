@@ -19,10 +19,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $category = $request->get('category');
+        $tags = $request->get('tags');
+        $search = $request->get('search');
+
         return view('admin.products.index', [
-            'products' => $this->product->paginate(10)
+            'products' => $this->product
+                ->orderBy('created_at', 'DESC')
+                ->byCategory($category)
+                ->withTags($tags)
+                ->search($search)
+                ->paginate(10)
         ]);
     }
 

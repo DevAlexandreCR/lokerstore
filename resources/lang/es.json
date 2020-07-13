@@ -71,5 +71,8 @@
     "Price": "Precio",
     "Tags": "Etiquetas",
     "Stock": "Cantidad",
-    "Products": "Productos"
+    "Products": "Productos",
+    "name": "Nombre",
+    "description": "descripcion",
+    "No results found": "No se encontraron resultados"
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -22,16 +24,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request) : View
     {
-        if ($request->has('query')) {
-            $query = $request->input('query');
-            return $this->searchUser($query);
-        } else {
-            return view('admin.users.index', [
-                'users' => $this->user->paginate(12)
-            ]);
-        }
+        $search =  $request->get('search');
+
+        return $this->searchUser($search);
+    
     }
 
     /**
@@ -40,7 +38,7 @@ class UserController extends Controller
      * @param  User  $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(User $user)
+    public function show(User $user) : View
     {
         return view('admin.users.show', [
             'user' => $user
@@ -53,7 +51,7 @@ class UserController extends Controller
      * @param  User  $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(UserRequest $request, User $user)
+    public function edit(UserRequest $request, User $user) : View
     {
         return view('admin.users.edit', [
             'user' => $user,
@@ -66,9 +64,9 @@ class UserController extends Controller
      *
      * @param  \App\Http\Request\UserRequest  $request
      * @param  User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirecResponse
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $user) : RedirectResponse
     {
         $user->update($request->all());
 
@@ -79,9 +77,9 @@ class UserController extends Controller
      * Remove the specified user from storage.
      *
      * @param  User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirecResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user) : RedirectResponse
     {
         $user->delete();
 
@@ -95,18 +93,17 @@ class UserController extends Controller
      * @param string $query texto a buscar
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View Retorna una vista con los resultados de la busqueda cargados
      */
-    private function searchUser(string $query)
+    private function searchUser(?string $search) : View
     {
-        $user = User::FindUserByNameEmailOrPhone($query);
-        if ($user->count() > 0) {
+        if ($this->user->search($search)->count() > 0) {
             return view('admin.users.index', [
-                'users' => $user->paginate(9),
-                'user_found' => "Mostrando resultados para: $query"
+                'users' => $this->user->search($search)->paginate(10),
+                'user_found' => "Mostrando resultados para: $search"
             ]);
         } else {
             return view('admin.users.index', [
-                'users' => $user->paginate(9),
-                'user_not_found' => "No se encontraron resultados para $query"
+                'users' => $this->user->search($search)->paginate(10),
+                'user_not_found' => "No se encontraron resultados para $search"
             ]);
         }
     }

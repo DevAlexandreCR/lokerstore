@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,8 +66,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return "{$this->name} {$this->lastname}";
     }
 
-    public function scopeFindUserByNameEmailOrPhone($query, $search)
+    public function scopeSearch($query, $search)
     {
+        if(empty($search)) return;
         return $query
                 ->where('name', 'like', '%' . $search . '%')
                 ->orWhere('lastname', 'like', '%' . $search . '%')

@@ -26,8 +26,5 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin
 
 // Routes user management
 Route::resource('users', 'UserController')->except(['create', 'store']);
-            
-/** Ruta para busqueda de usuarios */
-Route::post('users/', 'UserController@index')->name('users.search');
 
 Route::resource('products', 'ProductController');

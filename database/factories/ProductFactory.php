@@ -12,6 +12,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'description' => $faker->sentence(10),
         'stock' => rand(1, 20),
         'price' => $faker->randomFloat(2, 20000, 200000),
-        'id_category' => Category::all()->random()->id
+        'id_category' => Category::all()->random()->id,
+        'created_at' => $faker->dateTimeBetween('-30 days', 'now')
     ];
 });
