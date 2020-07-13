@@ -7,14 +7,14 @@
             <div class="col-sm-3">
             <div class="btn-group btn-group-sm" role="group">
                 <a class="btn btn-link" href="#" role="button"><ion-icon name="options-outline"></ion-icon></a>
-                <a class="btn btn-link text-decoration-none">{{__('Filter and ordering')}}</a>
+                <a class="btn btn-link text-decoration-none">{{__('Filter and sort')}}</a>
             </div>
             </div>
             <div class="col"></div>
             <div class="col-4">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="{{__('Search')}}" aria-label="Search">
+                <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">{{__('Search')}}</button>
                 </form>
             </div>
         </div>
@@ -46,7 +46,20 @@
                             <td>{{ $product->description }}</td>
                             <td>{{ $product->stock }}</td>
                             <td>{{ $product->price }}</td>
-                            <td>{{ $product->tags[0]->name }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-link btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="badge badge-info">{{$product->tags[0]->name}}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <ul class="list-group">
+                                            @foreach ($product->tags as $tag)
+                                                <li class="list-group-item">{{$tag->name}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    </div>
+                            </td>
                             @if ($product->is_active)
                             <td> 
                             <span class="badge badge-info"> {{ __('Enabled') }}</span>
@@ -100,4 +113,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

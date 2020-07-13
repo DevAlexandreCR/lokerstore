@@ -63,5 +63,13 @@
     "Login only supports": "Acceso solo para colaboradores",
     "User has been updated success": "El usuario ha sido actualizado con éxito",
     "User has been deleted success": "El usuario ha sido eliminado con éxito",
-    "Please check your email to complete registration": "Por favor verifica tu correo para completar el registro"
+    "Please check your email to complete registration": "Por favor verifica tu correo para completar el registro",
+    "Filter and sort": "Filtrar y ordenar",
+    "Category": "Categoría",
+    "Description": "Descripción",
+    "Created at": "Creado el",
+    "Price": "Precio",
+    "Tags": "Etiquetas",
+    "Stock": "Cantidad",
+    "Products": "Productos"
 }
