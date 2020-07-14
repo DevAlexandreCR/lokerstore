@@ -10,7 +10,12 @@
                 <a class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#sortModal">{{__('Filter and sort')}}</a>
             </div>
             </div>
-            <div class="col"></div>
+            <div class="col">
+                @if ($filters)
+                {{$filters['category']}}
+                @endif
+                
+            </div>
             <div class="col-4">
                 <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="{{ route('products.index') }}">
                     <input class="form-control form-control-sm mr-sm-2" name="search" type="search" placeholder="{{__('Search')}}" aria-label="Search">
@@ -123,67 +128,74 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="sortModal">
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">{{__('Filter and sort')}}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                        <p class="text-bold">{{__('Sort at')}}</p>
-                        </div>
-                        <div class="col">
-                            <select id="inputState" class="form-control" name="orderBy">
-                                <option selected>{{__('Sort at')}}</option>
-                                <option>{{__('Most recent')}}</option>
-                                <option>{{__('Less recent')}}</option>
-                              </select>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                <p class="text-bold">{{__('Category')}}</p>
-                                </div>
-                                <div class="col">
-                                        <select class="form-control" id="exampleFormControlSelect2">
-                                            @foreach (\App\Models\Category::all() as $category)
-                                            <option>{{$category->name}}</option>
-                                            @endforeach
-                                      </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                <p class="text-bold">{{__('Tags')}}</p>
-                                </div>
-                                <div class="col">
-                                        <select class="form-control" id="exampleFormControlSelect2">
-                                            @foreach (\App\Models\Tag::all() as $tag)
-                                            <option>{{$tag->name}}</option>
-                                            @endforeach
-                                      </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
+            <form action="{{ route('products.index') }}" method="GET">
+                <div class="modal-header">
+                <h5 class="modal-title">{{__('Filter and sort')}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                            <p class="text-bold">{{__('Order by')}}</p>
+                            </div>
+                            <div class="col">
+                                <select id="inputState" class="form-control" name="orderBy">
+                                    <option>{{__('Most recent')}}</option>
+                                    <option>{{__('Less recent')}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                    <p class="text-bold">{{__('Category')}}</p>
+                                    </div>
+                                    <div class="col">
+                                            <select class="form-control" id="exampleFormControlSelect2" name="category">
+                                                <option>{{__('Choose category')}}</option>
+                                                @foreach (\App\Models\Category::all() as $category)
+                                                <option>{{$category->name}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    <p class="text-bold">{{__('Tags')}}</p>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            @foreach (\App\Models\Tag::all() as $tag)
+                                            <div class="card m-2">
+                                                <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
+                                                <input type="checkbox" class="custom-control-input" name="tags[{{$tag->name}}]" id="{{$tag->name}}">
+                                                <label class="custom-control-label" for="{{$tag->name}}">{{$tag->name}}</label>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">{{__('Clear filters')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('Apply')}}</button>
+                </div>
+            </form>
           </div>
         </div>
       </div>

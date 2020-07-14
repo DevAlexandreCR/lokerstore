@@ -27,11 +27,11 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function scopeByCategory($query, $name){
-        if (empty($name)) return;
+    public function scopeByCategory($query, $category){
+        if (empty($category)) return;
 
-        return $query->whereHas('category', function($query) use ($name) {
-            return $query->where('name', $name);
+        return $query->whereHas('category', function($query) use ($category) {
+            return $query->where('name', $category);
         });
     }
 
@@ -39,8 +39,8 @@ class Product extends Model
         if (empty($tags)) return;
 
         return $query->whereHas('tags', function($query) use ($tags) {
-            foreach ($tags as $tag) {
-                $query->where('name', $tag);
+            foreach ($tags as $key => $value) {
+                $query->where('name', $key);
             }
         });
     }

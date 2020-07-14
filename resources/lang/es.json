@@ -74,5 +74,11 @@
     "Products": "Productos",
     "name": "Nombre",
     "description": "descripcion",
-    "No results found": "No se encontraron resultados"
+    "No results found": "No se encontraron resultados",
+    "Apply": "Aplicar",
+    "Clear filters": "Limpiar filtros",
+    "Order by": "Ordenar por",
+    "Most recent": "Más recientes",
+    "Less recent": "Menos recientes",
+    "Choose category": "Escoger categoría"
 }

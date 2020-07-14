@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\IndexRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,19 +20,28 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(IndexRequest $request)
     {
-        $category = $request->get('category');
-        $tags = $request->get('tags');
-        $search = $request->get('search');
+        // dd($request->validationData());
+        $category = $request->validationData()['category'];
+        $tags = $request->validationData()['tags'];
+        $search = $request->validationData()['search'];
+        $orderBy = $request->validationData()['orderBy'];
 
+        
         return view('admin.products.index', [
             'products' => $this->product
-                ->orderBy('created_at', 'DESC')
+                ->orderBy('created_at', $orderBy)
                 ->byCategory($category)
                 ->withTags($tags)
                 ->search($search)
-                ->paginate(10)
+                ->paginate(10),
+            'filters' => [
+                'category' => $category,
+                'tags' => $tags,
+                'search' => $search,
+                'orderBy' => $orderBy
+            ]
         ]);
     }
 
