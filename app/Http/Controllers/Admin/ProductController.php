@@ -22,7 +22,6 @@ class ProductController extends Controller
      */
     public function index(IndexRequest $request)
     {
-        // dd($request->validationData());
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
