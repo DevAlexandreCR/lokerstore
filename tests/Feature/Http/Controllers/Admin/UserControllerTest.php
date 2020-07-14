@@ -123,7 +123,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $query = 'jos';
-        $response = $this->actingAs($admin, 'admin')->post( route('users.index', ['query' => $query]));
+        $response = $this->actingAs($admin, 'admin')->get( route('users.index', ['search' => $query]));
 
         $response
             ->assertStatus(200)
@@ -150,7 +150,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $query = 'martha';
-        $response = $this->actingAs($admin, 'admin')->post( route('users.index', ['query' => $query]));
+        $response = $this->actingAs($admin, 'admin')->get( route('users.index', ['search' => $query]));
 
         $response
             ->assertViewHas('user_not_found');

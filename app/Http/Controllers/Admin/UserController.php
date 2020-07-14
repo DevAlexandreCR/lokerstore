@@ -86,12 +86,13 @@ class UserController extends Controller
         return redirect("admin/users")->with('user-deleted', "User has been deleted success");
     }
 
+
     /**
      * Funcion busca un usuario en la tabla users
      * y busca coincidencias en los campos name, lastname, email y phone
      *
-     * @param string $query texto a buscar
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View Retorna una vista con los resultados de la busqueda cargados
+     * @param string|null $search
+     * @return View
      */
     private function searchUser(?string $search) : View
     {
