@@ -24,12 +24,14 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string', 'max:100', 'min:3', 'required'],
-            'description' => ['string', 'min:50', 'max:300'],
-            'stock' => ['integer'],
-            'price' => ['string', 'required|regex:/^\d*(\.\d{1.2})?$/'],
-            'id_category' => ['integer'],
-            'is_active' => ['boolean']
+            'name'          => ['string', 'max:100', 'min:3', 'required'],
+            'description'   => ['string', 'min:50', 'max:300'],
+            'stock'         => ['integer'],
+            'price'         => ['string', 'required|regex:/^\d*(\.\d{1.2})?$/'],
+            'id_category'   => ['integer'],
+            'tags'          => ['required', 'array'],
+            'photos'        => ['required', 'array'],
+            'is_active'     => ['boolean']
         ];
     }
 }

@@ -58,15 +58,15 @@
             <h6 class="card-title"> {{__('Description')}} </h6>
           </div>
           <div class="col">
-          <div class="form-group">
-          <textarea type="textarea" class="form-control  @error('description') is-invalid @enderror" id="description" required placeholder="{{__('Add product description...')}}"
-            name="description" aria-describedby="descriptionHelp" value="{{ old('') }}"></textarea>
-            @error('description')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-          </div>
+            <div class="form-group">
+            <textarea type="textarea" class="form-control  @error('description') is-invalid @enderror" id="description" required placeholder="{{__('Add product description...')}}"
+              name="description" aria-describedby="descriptionHelp" value="{{ old('') }}"></textarea>
+              @error('description')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
           </div>
         </div>
         <div class="row">
@@ -101,7 +101,34 @@
             @enderror
           </div>
         </div>
+        <hr>
+        <div class="row">
+          <div class="container text-center">
+            <h6>{{__('Add Tags')}}</h6>
+          </div>
+          <div class="container">
+            <div class="row">
+              @foreach (\App\Models\Tag::all() as $tag)
+                <div class="card m-2">
+                    <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
+                    <input type="checkbox" class="custom-control-input" value="{{$tag->id}}"  name="tags[]" id="{{$tag->name}}">
+                    <label class="custom-control-label" for="{{$tag->name}}">{{$tag->name}}</label>
+                    </div>
+                </div>
+              @endforeach
+            </div>
+            @error('tags')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
+        </div>
+        <hr>
         <div class="row" id="imgContainer">
+          <div class="container text-center">
+            <h6>{{__('Add images')}}</h6>
+          </div>
           <div class="col-4 increment">
             <div class="card m-3" style="width: 18rem;" id="card-img">
               <img class="img-thumbnail">
