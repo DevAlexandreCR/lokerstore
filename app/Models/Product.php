@@ -27,6 +27,11 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function photos()
+    {
+        return $this->belongsToMany(Photo::class);
+    }
+
     public function scopeByCategory($query, $category){
         if (empty($category)) return;
 
