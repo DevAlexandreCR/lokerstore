@@ -148,6 +148,11 @@
 </div>
 @endsection
 <script>
+  /** 
+  * Esta funcion agrega la imagen seleccionada a la vista previa
+  * @argument input que posee la imagen
+  * @argument div card donde se va a agregar la imagen
+  */
   var multiImgPreview = (input, div) => {
     if (input.files) {
         var filesAmount = input.files.length;
@@ -164,6 +169,9 @@
     }
   }
 
+  /** 
+  * Esta funcion agrega la vista para una nueva imagen
+  */
   const addPhoto = () => {
     var divToClone = document.getElementById("clone").cloneNode(true)
     divToClone.classList.remove("d-none")
@@ -174,10 +182,15 @@
         })
   }
 
+  /** 
+  * Esta funcion borra la vista de una nueva imagen
+  */
   const removePhoto = (button) => {
     button.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
   }
-
+  /** 
+  * Esta funcion agrega el listener del input de la primer imagen al iniciarse el DOM
+  */
   document.addEventListener("DOMContentLoaded", () => {
     var input = document.getElementById("imgContainer")
             .getElementsByTagName("input")[0]
