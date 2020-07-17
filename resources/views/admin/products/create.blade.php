@@ -104,7 +104,7 @@
         <hr>
         <div class="row">
           <div class="container text-center">
-            <h6>{{__('Add Tags')}}</h6>
+            <h6>{{__('Add tags')}}</h6>
           </div>
           <div class="container">
             <div class="row">
@@ -131,7 +131,7 @@
           </div>
           <div class="col-4 increment">
             <div class="card m-3" style="width: 18rem;" id="card-img">
-              <img class="img-thumbnail">
+              <img>
               <div class="card-body">
                 <div class="input-group mb-3" >
                   <div class="custom-file">
@@ -147,7 +147,7 @@
           </div> 
           <div class="col-4 d-none" id="clone">
             <div class="card m-3" style="width: 18rem;">
-              <img class="img-thumbnail">
+              <img>
               <div class="card-body">
                 <div class="input-group mb-3" >
                   <div class="custom-file">
@@ -189,6 +189,7 @@
 
             reader.onload = function(event) { 
               var img = div.getElementsByTagName('img')[0]
+              img.classList.add('img-thumbnail')
               img.src = event.target.result  
               }          
             reader.readAsDataURL(input.files[i]);

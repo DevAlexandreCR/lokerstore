@@ -156,16 +156,19 @@
             <strong>{{ __('No results found') }}</strong> <a class="btn btn-sm btn-link" href="{{route('products.index')}}">{{__('See all')}}</a>
             </div>
             @endif
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-8">{{ $products->links() }}</div>
                     <div class="col-4">
                     <div class="row" style="float: right">
-                        <div class="col"><strong>{{__('Users')}}</strong></div>
+                        <div class="col"><strong>{{__('Products')}}</strong></div>
                         <div class="col">{{ \App\Models\Product::count()}}</div>
                     </div>
                     </div>
                 </div>
+            </div>
+            <div class="container text-right">
+                <a href="{{route('products.create')}}" class="btn btn-secondary fab"><ion-icon name="add" size="large" class="add"></ion-icon></a>
             </div>
         </div>
     </div>
