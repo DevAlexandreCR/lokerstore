@@ -8,6 +8,7 @@ use App\Http\Requests\Products\StoreRequest;
 use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class ProductController extends Controller
@@ -64,18 +65,22 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request, Product $product)
     {
-        $new_product_id = $product->create($request->all())->id;
+        $new_product = $product->create($request->all());
+
+        foreach ($request->get('tags') as $tag) {
+            $new_product->tags()->attach($tag);
+        }
 
         foreach ($request->file('photos') as $photo) {
             $name = time() . '_' . $photo->getClientOriginalName();
-            $file_path = public_path('images/');
-            $img = Image::make($photo);
-            $img->fit(500, 500)->save($file_path . $name);
+            $file_path = 'photos/';
+            $img = Image::make($photo)->fit(530, 470)->encode('jpg', 75);
+            Storage::disk('public')->put($file_path . $name, $img);
 
             $photoModel = new Photo;
-            $photoModel->product_id = $new_product_id; 
+            $photoModel->product_id = $new_product->id; 
             $photoModel->name = $name;
-            $photoModel->file_path = $file_path;  
+            $photoModel->file_path = storage_path('app/public/photos') . '/' . $name;  
             
             $photoModel->save();
         }
