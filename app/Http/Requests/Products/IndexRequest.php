@@ -25,11 +25,10 @@ class IndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string', 'max:100', 'min:3'],
-            'description' => ['string', 'max:250', 'min:10'],
-            'stock' => ['integer'],
-            'price' => ['float'],
-            'is_active' => ['boolean']
+            'category'      => ['nullable', 'string'],
+            'tags'          => ['nullable', 'array'],
+            'search'        => ['nullable', 'string'],
+            'orderBy'       => ['nullable', 'string']   
         ];
     }
 

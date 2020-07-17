@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Products\StoreRequest;
+use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Image;
 
 class ProductController extends Controller
 {
@@ -26,8 +29,7 @@ class ProductController extends Controller
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
-
-        
+   
         return view('admin.products.index', [
             'products' => $this->product
                 ->orderBy('created_at', $orderBy)
@@ -60,9 +62,25 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request, Product $product)
     {
-        dd($request->all());
+        $new_product_id = $product->create($request->all())->id;
+
+        foreach ($request->file('photos') as $photo) {
+            $name = time() . '_' . $photo->getClientOriginalName();
+            $file_path = public_path('images/');
+            $img = Image::make($photo);
+            $img->fit(500, 500)->save($file_path . $name);
+
+            $photoModel = new Photo;
+            $photoModel->product_id = $new_product_id; 
+            $photoModel->name = $name;
+            $photoModel->file_path = $file_path;  
+            
+            $photoModel->save();
+        }
+
+        return back()->with('success', __('Your product has been save successfully'));
     }
 
     /**

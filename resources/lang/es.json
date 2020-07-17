@@ -84,5 +84,6 @@
     "Add new product": "Agregar nuevo producto",
     "Add product description...": "Agregar descripcion del producto...",
     "Save Changes": "Guardar cambios",
-    "Discard": "Cancelar"
+    "Discard": "Cancelar",
+    "Your product has been save successfully": "Su producto ha sido guardado con éxito"
 }
