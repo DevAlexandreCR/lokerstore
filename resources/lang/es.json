@@ -87,5 +87,7 @@
     "Discard": "Cancelar",
     "Your product has been save successfully": "Su producto ha sido guardado con éxito",
     "Add images": "Agregar imagenes",
-    "Add tags": "Agregar Etiquetas"
+    "Add tags": "Agregar Etiquetas",
+    "You must add at least one tag": "Debes agregar al menos una etiqueta",
+    "Product has been updated success": "Su producto ha sido actualizado con éxito"
 }

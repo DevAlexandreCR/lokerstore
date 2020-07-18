@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\ActiveRequest;
 use App\Http\Requests\Products\IndexRequest;
 use App\Http\Requests\Products\StoreRequest;
+use App\Http\Requests\Products\UpdateRequest;
+use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Image;
@@ -39,10 +43,10 @@ class ProductController extends Controller
                 ->search($search)
                 ->paginate(10),
             'filters' => [
-                'category' => $category,
-                'tags' => $tags,
-                'search' => $search,
-                'orderBy' => $orderBy
+                'category'  => $category,
+                'tags'      => $tags,
+                'search'    => $search,
+                'orderBy'   => $orderBy
             ]
         ]);
     }
@@ -54,7 +58,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.products.create', [
+            'categories' => $categories,
+            'tags'       => $tags
+        ]);
     }
 
     /**
@@ -73,14 +82,12 @@ class ProductController extends Controller
 
         foreach ($request->file('photos') as $photo) {
             $name = time() . '_' . $photo->getClientOriginalName();
-            $file_path = 'photos/';
-            $img = Image::make($photo)->fit(530, 470)->encode('jpg', 75);
-            Storage::disk('public')->put($file_path . $name, $img);
+            $img = Image::make($photo)->fit(540, 480)->encode('jpg', 75);
+            Storage::disk('public_photos')->put($name, $img);
 
             $photoModel = new Photo;
             $photoModel->product_id = $new_product->id; 
             $photoModel->name = $name;
-            $photoModel->file_path = storage_path('app/public/photos') . '/' . $name;  
             
             $photoModel->save();
         }
@@ -89,15 +96,16 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for enable disable or delete the specified product.
      *
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function active(Request $request, Product $product)
     {
-        return view('admin.products.show', [
-            'product' => $product
+        return view('admin.products.active', [
+            'product'   => $product,
+            'input_name'=> $request->get('input_name')
         ]);
     }
 
@@ -109,8 +117,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('admin.products.edit', [
-            'product' => $product
+            'product'   => $product,
+            'categories'=> $categories,
+            'tags'      => $tags
         ]);
     }
 
@@ -121,12 +133,45 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateRequest $request, Product $product)
+    {
+        $product->tags()->sync($request->get('tags'));
+
+        if ($request->get('delete_photo')){
+            foreach ($request->get('delete_photo') as $photo_id) {
+                $photo = Photo::findOrFail($photo_id);
+                $name = $photo->name;
+                $photo->delete();
+                Storage::disk('public')->delete('photos/' . $name);
+            }
+        }
+
+        if ($request->file('photos')){
+            foreach ($request->file('photos') as $photo) {
+                $name = time() . '_' . $photo->getClientOriginalName();
+                $img = Image::make($photo)->fit(540, 480)->encode('jpg', 75);
+                Storage::disk('public_photos')->put($name, $img);
+    
+                $photoModel = new Photo;
+                $photoModel->product_id = $product->id; 
+                $photoModel->name = $name;
+                
+                $photoModel->save();
+            }
+        }
+
+        $product->update($request->all());
+
+        return redirect( route('products.edit', ['product' => $product]))
+            ->with('product-updated', 'Product has been updated success');
+    }
+
+    public function setActive(ActiveRequest $request, Product $product)
     {
         $product->update($request->all());
 
-        return redirect( route('products.show', ['product' => $product->id]))
-            ->with('product-updated', 'Product has been updated success');
+        return redirect( route('products.index'))
+                    ->with('product-updated', __('Your product has been update successfully'));
     }
 
     /**

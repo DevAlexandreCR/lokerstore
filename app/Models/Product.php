@@ -6,6 +6,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -14,7 +15,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'stock', 'description', 'price', 'id_category'
+        'name', 'stock', 'description', 'price', 'id_category', 'is_active'
     ];
 
     public function category()
@@ -29,7 +30,7 @@ class Product extends Model
 
     public function photos()
     {
-        return $this->belongsToMany(Photo::class);
+        return $this->hasMany(Photo::class);
     }
 
     public function scopeByCategory($query, $category){
@@ -56,5 +57,20 @@ class Product extends Model
         return $query
                 ->where('name', 'like', '%' . $search . '%')
                 ->orWhere('description', 'like', '%' . $search . '%');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($product) { 
+            $photos = $product->photos();
+
+            foreach ($photos as $photo) {
+                $name = $photo->name;
+                $photo->delete();
+                Storage::disk('public_photos')->delete($name);
+            }
+        });
     }
 }

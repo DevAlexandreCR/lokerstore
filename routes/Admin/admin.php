@@ -28,3 +28,5 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin
 Route::resource('users', 'UserController')->except(['create', 'store']);
 
 Route::resource('products', 'ProductController');
+Route::get('products/active/{product}', 'ProductController@active')->name('products.active');
+Route::put('products/active/{product}', 'ProductController@setActive')->name('products.set_active');

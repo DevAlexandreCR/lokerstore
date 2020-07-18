@@ -45,7 +45,7 @@
           </div>
           <div class="col-4">
                 <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock" required placeholder="0"
-                name="stock" aria-describedby="lastnameHelp" value="{{ old('') }}">
+                name="stock" aria-describedby="lastnameHelp" value="{{ old('stock') }}">
                 @error('stock')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
           <div class="col">
             <div class="form-group">
             <textarea type="textarea" class="form-control  @error('description') is-invalid @enderror" id="description" required placeholder="{{__('Add product description...')}}"
-              name="description" aria-describedby="descriptionHelp" value="{{ old('') }}"></textarea>
+              name="description" aria-describedby="descriptionHelp">{{ old('description') }}</textarea>
               @error('description')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -76,7 +76,7 @@
           <div class="col-4">
             <div class="form-group">
             <input type="number" class="form-control  @error('price') is-invalid @enderror" id="price" required placeholder="0"
-              name="price" aria-describedby="priceHelp" value="{{ old('') }}">
+              name="price" aria-describedby="priceHelp" value="{{ old('price') }}">
               @error('price')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -88,9 +88,9 @@
             <h6 class="card-title"> {{__('Category')}} </h6>
           </div>
           <div class="col">
-            <select id="category" class="form-control" name="id_category">
-                <option value="{{null}}">{{__('Choose category')}}</option>
-                @foreach (\App\Models\Category::all() as $category)
+            <select id="category" class="form-control" name="id_category" required>
+                <option value="{{ null }}">{{__('Choose category')}}</option>
+                @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </select>
@@ -107,8 +107,16 @@
             <h6>{{__('Add tags')}}</h6>
           </div>
           <div class="container">
-            <div class="row">
-              @foreach (\App\Models\Tag::all() as $tag)
+            @error('tags') 
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one tag')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @enderror
+            <div class="row @error('tags') alert alert-danger @enderror">
+              @foreach ($tags as $tag)
                 <div class="card m-2">
                     <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
                     <input type="checkbox" class="custom-control-input" value="{{$tag->id}}"  name="tags[]" id="{{$tag->name}}">
@@ -117,11 +125,6 @@
                 </div>
               @endforeach
             </div>
-            @error('tags')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
           </div>
         </div>
         <hr>
@@ -152,7 +155,8 @@
                 <div class="input-group mb-3" >
                   <div class="custom-file">
                     <label for="images" class="custom-file-label"></label>
-                    <input type="file" name="photos[]" class="custom-file-input" id="images" accept="image/*" aria-describedby="inputGroupFileAddon03">
+                    <input type="file" name="photos[]" class="custom-file-input" id="images" accept="image/*"
+                     aria-describedby="inputGroupFileAddon03">
                   </div>
                   <div class="input-group-append">
                     <button class="btn btn-danger" onclick="removePhoto(this)" type="button"><ion-icon name="trash-outline"></ion-icon></button>

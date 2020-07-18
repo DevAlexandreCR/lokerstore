@@ -1,7 +1,6 @@
 @extends('admin.home')
 
 @section('main')
-
     <div class="container-fluid my-2 p-4 shadow-sm bg-secondary round">
         <form name="search"  method="GET" action="{{ route('products.index') }}">
             <div class="row">
@@ -70,6 +69,32 @@
             </div>
         </form>
     </div>
+    @if ( session('product-deleted'))
+        
+        <div class="container py-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+                </button>
+                <strong>{{__('Success!')}}</strong> {{ session('product-deleted') }}
+            </div>
+        </div>
+
+    @endif
+    @if ( session('product-updated'))
+        
+        <div class="container py-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+                </button>
+                <strong>{{__('Success!')}}</strong> {{ session('product-updated') }}
+            </div>
+        </div>
+
+    @endif
     <div class="container-fluid bg-secondary shadow-sm my-2">
         <div class="row">
             <table class="table table-sm table-striped table-condensed table-hover table-secondary">
@@ -128,21 +153,21 @@
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="{{__('View')}}"
-                                href="{{route('users.show', ['user' => $product])}}">
+                                href="{{route('products.show', ['product' => $product])}}">
                                 <ion-icon name="eye"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link" 
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="@if($product->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
-                                href="{{ route('users.edit', ['user' => $product, 'input_name' => 'is_active'])}}">
+                                href="{{ route('products.active', ['product' => $product, 'input_name' => 'is_active'])}}">
                                 <ion-icon name="power"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link" 
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="{{__('Remove')}}"
-                                href="{{route('users.edit', ['user' => $product, 'input_name' => 'delete'])}}">
+                                href="{{route('products.active', ['product' => $product, 'input_name' => 'delete'])}}">
                                 <ion-icon name="trash"></ion-icon>
                                 </a>
                             </div>

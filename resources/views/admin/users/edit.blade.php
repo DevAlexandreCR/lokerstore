@@ -101,7 +101,7 @@
                   </div>
                   @break
               @case('delete')
-              <form action="{{route('users.update', ['user' => $user])}}" method="POST">
+              <form action="{{route('users.destroy', ['user' => $user])}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="alert alert-danger" role="alert">
