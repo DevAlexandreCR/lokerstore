@@ -59,8 +59,27 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">{{$product->photos->count()}}</button>
+                <a type="button" class="btn btn-primary" 
+                data-toggle="tooltip" 
+                data-placement="top" 
+                title="{{__('Edit')}}"
+                href="{{ route('products.edit', ['product' => $product])}}">
+                <ion-icon name="create-outline"></ion-icon>
+                </a>
+                <a type="button" class="btn btn-warning" 
+                data-toggle="tooltip" 
+                data-placement="top" 
+                title="@if($product->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
+                href="{{ route('products.active', ['product' => $product, 'input_name' => 'is_active'])}}">
+                <ion-icon name="power"></ion-icon>
+                </a>
+                <a type="button" class="btn btn-danger" 
+                data-toggle="tooltip" 
+                data-placement="top" 
+                title="{{__('Remove')}}"
+                href="{{route('products.active', ['product' => $product, 'input_name' => 'delete'])}}">
+                <ion-icon name="trash"></ion-icon>
+                </a>
             </div>
         </div>
     </div>

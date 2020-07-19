@@ -169,7 +169,8 @@ class ProductController extends Controller
     {
         $product->update($request->all());
 
-        return back()->with('product-updated', __('Your product has been update successfully'));
+        return redirect( route('products.index'))
+                ->with('product-updated', __('Your product has been update successfully'));
     }
 
     /**
@@ -182,6 +183,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return back()->with('product-deleted', "Product has been deleted success");
+        return redirect( route('products.index'))
+                ->with('product-deleted', "Product has been deleted success");
     }
 }
