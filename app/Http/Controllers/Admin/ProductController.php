@@ -60,10 +60,9 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.products.create', [
-            'categories' => $categories,
-            'tags'       => $tags
-        ]);
+        return view('admin.products.create', 
+                    compact('categories', 'tags')
+                );
     }
 
     /**
@@ -120,10 +119,10 @@ class ProductController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.products.edit', [
-            'product'   => $product,
-            'categories'=> $categories,
-            'tags'      => $tags
-        ]);
+            'product'   => $product
+            ],
+            compact('categories', 'tags')
+        );
     }
 
     /**
@@ -170,8 +169,7 @@ class ProductController extends Controller
     {
         $product->update($request->all());
 
-        return redirect( route('products.index'))
-                    ->with('product-updated', __('Your product has been update successfully'));
+        return back()->with('product-updated', __('Your product has been update successfully'));
     }
 
     /**
@@ -184,7 +182,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect( route('products.index'))
-            ->with('product-deleted', "Product has been deleted success");
+        return back()->with('product-deleted', "Product has been deleted success");
     }
 }

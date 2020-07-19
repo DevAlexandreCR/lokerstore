@@ -69,32 +69,6 @@
             </div>
         </form>
     </div>
-    @if ( session('product-deleted'))
-        
-        <div class="container py-2">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-                </button>
-                <strong>{{__('Success!')}}</strong> {{ session('product-deleted') }}
-            </div>
-        </div>
-
-    @endif
-    @if ( session('product-updated'))
-        
-        <div class="container py-2">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-                </button>
-                <strong>{{__('Success!')}}</strong> {{ session('product-updated') }}
-            </div>
-        </div>
-
-    @endif
     <div class="container-fluid bg-secondary shadow-sm my-2">
         <div class="row">
             <table class="table table-sm table-striped table-condensed table-hover table-secondary">
@@ -119,7 +93,7 @@
                             <td>{{ $product->created_at->format('d-m-yy') }}</td>
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->description }}</td>
+                            <td>{{ $product->getDescription()}}...</td>
                             <td>{{ $product->stock }}</td>
                             <td>{{ $product->price }}</td>
                             <td>
@@ -149,12 +123,21 @@
                             <div class="btn-group btn-block btn-group-sm text-center" 
                             role="group"
                             style="border-left: groove">
+                                @include('admin.products.detail', ['product' => $product])
+                                <a type="button" class="btn btn-link" 
+                                data-placement="top" 
+                                title="{{__('View')}}"
+                                data-toggle="modal"
+                                data-target="#modalDetail{{$product->id}}"
+                                >
+                                <ion-icon name="eye"></ion-icon>
+                                </a>
                                 <a type="button" class="btn btn-link" 
                                 data-toggle="tooltip" 
                                 data-placement="top" 
-                                title="{{__('View')}}"
-                                href="{{route('products.show', ['product' => $product])}}">
-                                <ion-icon name="eye"></ion-icon>
+                                title="{{__('Edit')}}"
+                                href="{{ route('products.edit', ['product' => $product])}}">
+                                <ion-icon name="create-outline"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link" 
                                 data-toggle="tooltip" 
@@ -279,7 +262,7 @@
             </form>
           </div>
         </div>
-      </div>
+    </div>
 @endsection
 
 <script>

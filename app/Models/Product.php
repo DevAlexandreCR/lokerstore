@@ -59,6 +59,25 @@ class Product extends Model
                 ->orWhere('description', 'like', '%' . $search . '%');
     }
 
+    public function getStatus() : string 
+    {
+        if ($this->is_active){
+            return __('Enabled');
+        } else {
+            return __('Disabled');
+        }
+    }
+
+    public function getPrice() : string 
+    {
+       return '$' . round($this->price, 0,  PHP_ROUND_HALF_UP);
+    }
+
+    public function getDescription()
+    {
+        return substr($this->description, 0 , 30);
+    }
+
     public static function boot()
     {
         parent::boot();
