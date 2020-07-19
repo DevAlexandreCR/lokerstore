@@ -1,7 +1,7 @@
 @extends('admin.home')
 
 @section('main')
-@if ( session('product-updated'))
+@if ( session('success'))
     
 <div class="container py-2">
   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -9,20 +9,21 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <strong>{{__('Success!')}}</strong> {{ __(session('product-updated')) }}
+    <strong>{{__('Success!')}}</strong> {{ __(session('success')) }}
   </div>
 </div>
 
 @endif
+
 <div class="container py-3">
   <div class="card shadow">
     <div class="modal-header bg-light">
       <h5 class="modal-title">{{ __('Add new product') }}</h5>
       <a href="{{ route('products.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
     </div>
-    <form action="{{route('products.update', ['product' => $product])}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
       @csrf
-      @method('PUT')
+      @method('POST')
       <div class="card-body">
         <div class="row">
           <div class="col-2">
@@ -31,7 +32,7 @@
           <div class="col-4">
             <div class="form-group">
               <input type="name" class="form-control  @error('name') is-invalid @enderror" id="name" required placeholder="{{__('Name')}}"
-                name="name" aria-describedby="nameHelp" value="{{ $product->name}}">
+                name="name" aria-describedby="nameHelp" value="{{ old('name')}}">
                 @error('name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -44,7 +45,7 @@
           </div>
           <div class="col-4">
                 <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock" required placeholder="0"
-                name="stock" aria-describedby="lastnameHelp" value="{{ $product->stock }}">
+                name="stock" aria-describedby="lastnameHelp" value="{{ old('stock') }}">
                 @error('stock')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -59,7 +60,7 @@
           <div class="col">
             <div class="form-group">
             <textarea type="textarea" class="form-control  @error('description') is-invalid @enderror" id="description" required placeholder="{{__('Add product description...')}}"
-              name="description" aria-describedby="descriptionHelp">{{ $product->description }}</textarea>
+              name="description" aria-describedby="descriptionHelp">{{ old('description') }}</textarea>
               @error('description')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -75,7 +76,7 @@
           <div class="col-4">
             <div class="form-group">
             <input type="number" class="form-control  @error('price') is-invalid @enderror" id="price" required placeholder="0"
-              name="price" aria-describedby="priceHelp" value="{{ $product->price }}">
+              name="price" aria-describedby="priceHelp" value="{{ old('price') }}">
               @error('price')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -87,13 +88,13 @@
             <h6 class="card-title"> {{__('Category')}} </h6>
           </div>
           <div class="col">
-            <select id="category" class="form-control" name="id_category">
-                <option value="{{$product->id_category}}">{{$product->category->name}}</option>
+            <select id="category" class="form-control" name="id_category" required>
+                <option value="{{ null }}">{{__('Choose category')}}</option>
                 @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </select>
-            @error('category')
+            @error('lastname')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -138,8 +139,7 @@
                 <div class="input-group mb-3" >
                   <div class="custom-file">
                     <label for="images" class="custom-file-label"></label>
-                    <input type="file" name="photos[]"  class="custom-file-input" id="images"   
-                    accept="image/*" aria-describedby="inputGroupFileAddon03">
+                    <input type="file" name="photos[]" class="custom-file-input" id="images" accept="image/*" aria-describedby="inputGroupFileAddon03" required>
                   </div>
                   <div class="input-group-append">
                     <button class="btn btn-primary" onclick="addPhoto()" type="button"><ion-icon class="bold" name="add-outline"></ion-icon></button>
@@ -155,7 +155,8 @@
                 <div class="input-group mb-3" >
                   <div class="custom-file">
                     <label for="images" class="custom-file-label"></label>
-                    <input type="file" name="photos[]" class="custom-file-input" id="images" accept="image/*" aria-describedby="inputGroupFileAddon03">
+                    <input type="file" name="photos[]" class="custom-file-input" id="images" accept="image/*"
+                     aria-describedby="inputGroupFileAddon03">
                   </div>
                   <div class="input-group-append">
                     <button class="btn btn-danger" onclick="removePhoto(this)" type="button"><ion-icon name="trash-outline"></ion-icon></button>
@@ -178,104 +179,56 @@
 </div>
 @endsection
 <script>
-    /** esta funcion hace check en los tags devueltos por el servidor
-    *@argument tags array 
-    */ 
-    const selectedTags = (tags) => {
-        tags.forEach(tag => {
-            document.getElementById(tag.name).checked = true
-        });
-    }
-    /** 
-     * Esta funcion agrega la imagen seleccionada a la vista previa
-     * @argument input que posee la imagen
-     * @argument div card donde se va a agregar la imagen
-     */
-    var multiImgPreview = (input, div) => {
-        if (input.files) {
-            var filesAmount = input.files.length;
+  /** 
+  * Esta funcion agrega la imagen seleccionada a la vista previa
+  * @argument input que posee la imagen
+  * @argument div card donde se va a agregar la imagen
+  */
+  var multiImgPreview = (input, div) => {
+    if (input.files) {
+        var filesAmount = input.files.length;
 
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+        for (i = 0; i < filesAmount; i++) {
+            var reader = new FileReader();
 
-                reader.onload = function(event) { 
-                var img = div.getElementsByTagName('img')[0]
-                img.classList.add('img-thumbnail')
-                img.src = event.target.result  
-                }          
-                reader.readAsDataURL(input.files[i]);
-            }
+            reader.onload = function(event) { 
+              var img = div.getElementsByTagName('img')[0]
+              img.classList.add('img-thumbnail')
+              img.src = event.target.result  
+              }          
+            reader.readAsDataURL(input.files[i]);
         }
     }
+  }
 
-    /** 
-     * Esta funcion agrega la vista para una nueva imagen
-     */
-    const addPhoto = (photo = null) => {
-        var divToClone = document.getElementById("clone").cloneNode(true)
-        divToClone.classList.remove("d-none")
-        document.getElementById("imgContainer").appendChild(divToClone)
-        var input = divToClone.getElementsByTagName("input")[0]
-        if (photo) {
-            var img = divToClone.getElementsByTagName('img')[0]
-            img.classList.add('img-thumbnail')
-            img.src = '../../../public/storage/photos/' + photo.name
-            img.id = photo.id
-        }
-        input.addEventListener('change', function() {
-                multiImgPreview(input, divToClone);
-            })
-    }
-
-    /** 
-     * Esta funcion borra la vista de una nueva imagen
-     */
-    const removePhoto = (button) => {
-        var div = button.parentNode.parentNode.parentNode.parentNode.parentNode
-        var img = div.getElementsByTagName('img')[0]
-        const photo_id = img.id
-        if(photo_id){
-            var input = document.createElement('input')
-            input.name = 'delete_photo[]'
-            input.type = 'number'
-            input.value = photo_id
-            input.hidden = true
-            document.getElementById('imgContainer').appendChild(input)
-        }
-        div.remove()        
-    }
-    /** 
-     * Esta funcion agrega el listener del input de la primer imagen al iniciarse el DOM
-     */
-    document.addEventListener("DOMContentLoaded", () => {
-        var input = document.getElementById("imgContainer")
-                .getElementsByTagName("input")[0] 
-        var div = document.getElementById("card-img")
-        input.addEventListener('change', () => {
-        multiImgPreview(input, div)
+  /** 
+  * Esta funcion agrega la vista para una nueva imagen
+  */
+  const addPhoto = () => {
+    var divToClone = document.getElementById("clone").cloneNode(true)
+    divToClone.classList.remove("d-none")
+    document.getElementById("imgContainer").appendChild(divToClone)
+    var input = divToClone.getElementsByTagName("input")[0]
+    input.addEventListener('change', function() {
+            multiImgPreview(input, divToClone);
         })
-        var tags = getTags()
-        selectedTags(tags)
+  }
 
-        var photos = getPhotos()
-        var img = div.getElementsByTagName('img')[0]
-        img.classList.add('img-thumbnail')
-        img.src ='../../../public/storage/photos/' + photos[0].name
-        img.id = photos[0].id
-
-        if(photos.length > 1) {
-            photos.shift()
-            photos.forEach(photo => {
-                addPhoto(photo)
-            })
-        }
+  /** 
+  * Esta funcion borra la vista de una nueva imagen
+  */
+  const removePhoto = (button) => {
+    button.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+  }
+  /** 
+  * Esta funcion agrega el listener del input de la primer imagen al iniciarse el DOM
+  */
+  document.addEventListener("DOMContentLoaded", () => {
+    var input = document.getElementById("imgContainer")
+            .getElementsByTagName("input")[0]
+    input.addEventListener('change', () => {
+      var div = document.getElementById("card-img")
+      multiImgPreview(input, div)
     })
-
-    const getTags = () => {
-        return <?php echo json_encode($product->tags) ?>;
-    }
-
-    const getPhotos = () => {
-        return <?php echo json_encode($product->photos) ?>;
-    }
+  });
 </script>

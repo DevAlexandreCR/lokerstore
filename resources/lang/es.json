@@ -80,5 +80,14 @@
     "Order by": "Ordenar por",
     "Most recent": "Más recientes",
     "Less recent": "Menos recientes",
-    "Choose category": "Escoger categoría"
+    "Choose category": "Escoger categoría",
+    "Add new product": "Agregar nuevo producto",
+    "Add product description...": "Agregar descripcion del producto...",
+    "Save Changes": "Guardar cambios",
+    "Discard": "Cancelar",
+    "Your product has been save successfully": "Su producto ha sido guardado con éxito",
+    "Add images": "Agregar imagenes",
+    "Add tags": "Agregar Etiquetas",
+    "You must add at least one tag": "Debes agregar al menos una etiqueta",
+    "Product has been updated success": "Su producto ha sido actualizado con éxito"
 }

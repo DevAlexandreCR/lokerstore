@@ -10953,6 +10953,13 @@ a.text-dark:focus {
   width: 80% !important;
 }
 
+.img-thumbnail {
+  min-width: 100%;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 @media (max-width: 414px) {
   .img-carousel {
     width: 100% !important;
@@ -11002,6 +11009,18 @@ a.text-dark:focus {
   border-top-right-radius: 5px;
 }
 
+.fab {
+  background: #2b2a2a;
+  color: white;
+  border-radius: 50%;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-bottom: -25px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .card-gender {
   min-height: 65vh;
   background-repeat: no-repeat;
@@ -11035,6 +11054,14 @@ a.text-dark:focus {
 
 .unborder {
   border: 0;
+}
+
+.add {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
 }
 
 .row-nav {

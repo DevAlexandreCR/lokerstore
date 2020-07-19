@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,9 @@ class ProductSeeder extends Seeder
             $product->tags()->attach(
                 $tags->random(rand(1, 5))->pluck('id')->toArray()
             );
+            factory(Photo::class, rand(1, 5))->create([
+                'product_id' => $product->id
+            ]);
         });
     }
 }
