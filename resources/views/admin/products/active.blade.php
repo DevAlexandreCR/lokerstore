@@ -31,7 +31,7 @@
     <div class="card shadow">
       <div class="modal-header bg-light">
         <h5 class="modal-title">{{ __('Edit product') }}</h5>
-        <a href="{{ route('products.index' , ['product' => $product]) }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
+        <a href="{{ url()->previous() }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
       </div>
       <div class="card-body">
           @switch($input_name)
