@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Route;
 |Toda la configuracion de la ruta se encuantra en RouteServiceProvider 
 |
 */
-Route::get('/', 'HomeController@index')->name('admin.home')->middleware('auth:admin');
-
 // Login routes
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.getlogin')->middleware('guest');
 Route::post('login', 'Auth\LoginController@login')->name('admin.login')->middleware('before-login-admin');
@@ -24,9 +22,14 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.update');
 
-// Routes user management
-Route::resource('users', 'UserController')->except(['create', 'store']);
+// Routes admin management
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/', 'HomeController@index')->name('admin.home');
+    Route::resource('users', 'UserController')->except(['create', 'store']);
 
-Route::resource('products', 'ProductController');
-Route::get('products/active/{product}', 'ProductController@active')->name('products.active');
-Route::put('products/active/{product}', 'ProductController@setActive')->name('products.set_active');
+    Route::resource('products', 'ProductController');
+    Route::get('products/active/{product}', 'ProductController@active')->name('products.active');
+    Route::put('products/active/{product}', 'ProductController@setActive')->name('products.set_active');
+});
+
+
