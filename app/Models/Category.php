@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $table = 'categories';
 
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['name', 'id_parent'];
 
     public function products()
     {
@@ -23,5 +23,10 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'id_parent');
+    }
+
+    public static function primaries()
+    {
+        return Category::all()->where('id_parent', '==', null);
     }
 }

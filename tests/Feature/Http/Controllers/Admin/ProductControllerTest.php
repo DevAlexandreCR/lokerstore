@@ -33,27 +33,6 @@ class ProductControllerTest extends TestCase
             ->assertViewHas('products');
     }
 
-    // /**
-    //  * prueba ruta admin/products/$product->id
-    //  *
-    //  * @return void
-    //  */
-    // public function testShowProduct()
-    // {
-    //     $admin = factory(Admin::class)->create();
-    //     factory(Category::class, 2)->create();
-    //     $product = factory(Product::class)->create();
-
-    //     $response = $this->actingAs($admin, 'admin')->get(route('products.show', [
-    //         'product' => $product->id
-    //     ]));
-
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertViewIs('admin.products.show')
-    //         ->assertViewHas('product');
-    // }
-
     /**
      * test route admin/products/$product->id/edit
      *

@@ -58,7 +58,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::primaries();
         $tags = Tag::all();
         return view('admin.products.create', 
                     compact('categories', 'tags')
