@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="col">
                         <p><strong>{{__('Category')}}</strong></p>
-                        <p>{{$product->category->name}}</p>
+                        <p>{{$product->category->getFullCategory()}}</p>
                     </div>
                     <div class="col">
                         <p><strong>{{__('Tags')}}</strong></p>

@@ -72,7 +72,7 @@
           <div class="col-2">
             <h6 class="card-title"> {{__('Price')}} </h6>
           </div>
-          <div class="col-4">
+          <div class="col-2">
             <div class="form-group">
             <input type="number" class="form-control  @error('price') is-invalid @enderror" id="price" required placeholder="0"
               name="price" aria-describedby="priceHelp" value="{{ $product->price }}">
@@ -87,12 +87,47 @@
             <h6 class="card-title"> {{__('Category')}} </h6>
           </div>
           <div class="col">
-            <select id="category" class="form-control" name="id_category">
-                <option value="{{$product->id_category}}">{{$product->category->name}}</option>
-                @foreach ($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-                @endforeach
-            </select>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                    <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                      @foreach ($categories as $key => $category)
+                      <a class="nav-link d-none {{$key == 0 ? 'active' : '' }}" id="{{$category->id}}" data-toggle="tab" href="#{{$category->name}}"
+                        role="tab" aria-controls="{{$category->name}}" aria-selected="{{$key == 0 ? 'true' : 'false' }}"></a>
+                      @endforeach
+                      <select class="form-control" onchange="document.getElementById(this.value).click()">
+                        @foreach ($categories as $key => $category)
+                          <option value="{{$category->id}}" 
+                            @if ($category->id == $product->category->id_parent)     
+                            selected                      
+                            @endif>{{$category->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                </div>
+                <div class="col">
+                  <div class="tab-content" id="v-pills-tabContent">
+                    @foreach ($categories as $key => $category)
+                    <div class="tab-pane fade {{$category->id == $product->category->id_parent ? 'show active' : '' }}" id="{{$category->name}}" role="tabpanel" aria-labelledby="{{$category->id}}">
+                      <select class="form-control" name="id_category" required>
+                        @foreach ($category->children as $sub)
+                        <option value="{{$sub->id}}" 
+                          @if ($sub->id == $product->id_category)     
+                            selected                      
+                            @endif>{{$sub->name}}</option>
+                        @endforeach
+                    </select>
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+              </div>
+              @error('lastname')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
             @error('category')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

@@ -39,14 +39,14 @@ class CategorySeeder extends Seeder
             ]);
         }
 
-        foreach ($sub_categories_accesorios as $category) {
+        foreach ($sub_categories_deportes as $category) {
             factory(Category::class)->create([
                 'name' => $category,
                 'id_parent' => 3
             ]);
         }
 
-        foreach ($sub_categories_deportes as $category) {
+        foreach ($sub_categories_accesorios as $category) {
             factory(Category::class)->create([
                 'name' => $category,
                 'id_parent' => 4

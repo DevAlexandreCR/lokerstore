@@ -29,4 +29,14 @@ class Category extends Model
     {
         return Category::all()->where('id_parent', '==', null);
     }
+
+    public static function subCategories()
+    {
+        return Category::all()->where('id_parent', '!=', null);
+    }
+
+    public function getFullCategory()
+    {
+        return $this->parent->name . ' - ' . $this->name;
+    }
 }

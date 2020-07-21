@@ -116,7 +116,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::all();
+        $categories = Category::primaries();
         $tags = Tag::all();
         return view('admin.products.edit', [
             'product'   => $product
