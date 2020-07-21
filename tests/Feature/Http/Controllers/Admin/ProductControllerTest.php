@@ -22,10 +22,34 @@ class ProductControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
 
         $response = $this->actingAs($admin, 'admin')->get(route('products.index'));
+
+        $response
+            ->assertStatus(200)
+            ->assertViewIs('admin.products.index')
+            ->assertViewHas('products');
+    }
+
+    public function testIndexWithQuery()
+    {
+        $admin = factory(Admin::class)->create();
+        $tag = factory(Tag::class)->create();
+        factory(Category::class, 2)->create();
+        $product = factory(Product::class)->create([
+            'name' => 'new product'
+        ]);
+        $product->tags()->attach($tag->id);
+        
+        $response = $this
+                        ->actingAs($admin, 'admin')
+                        ->get(route('products.index'), [
+                                'category' => 1,
+                                'orderBy' => __('Less recent'),
+                                'search' => 'new',
+                                'tags' => null
+                        ]);
 
         $response
             ->assertStatus(200)

@@ -73,6 +73,7 @@ class UserControllerTest extends TestCase
      */
     public function testUpdateUser()
     {
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
 

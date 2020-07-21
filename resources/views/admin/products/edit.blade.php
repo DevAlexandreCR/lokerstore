@@ -271,7 +271,7 @@
         const photo_id = img.id
         if(photo_id){
             var input = document.createElement('input')
-            input.name = 'delete_photo[]'
+            input.name = 'delete_photos[]'
             input.type = 'number'
             input.value = photo_id
             input.hidden = true
