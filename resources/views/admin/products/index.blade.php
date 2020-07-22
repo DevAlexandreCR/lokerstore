@@ -150,7 +150,7 @@
                             role="group"
                             style="border-left: groove">
                                 @include('admin.products.detail', ['product' => $product])
-                                <a type="button" class="btn btn-link" 
+                                <a type="button" class="btn btn-link btn-sm" 
                                 data-placement="top" 
                                 title="{{__('View')}}"
                                 data-toggle="modal"
@@ -158,21 +158,21 @@
                                 >
                                 <ion-icon name="eye"></ion-icon>
                                 </a>
-                                <a type="button" class="btn btn-link" 
+                                <a type="button" class="btn btn-link btn-sm" 
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="{{__('Edit')}}"
                                 href="{{ route('products.edit', ['product' => $product])}}">
                                 <ion-icon name="create-outline"></ion-icon>
                                 </a>
-                                <a type="button" class="btn btn-link" 
+                                <a type="button" class="btn btn-link btn-sm" 
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="@if($product->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
                                 href="{{ route('products.active', ['product' => $product, 'input_name' => 'is_active'])}}">
                                 <ion-icon name="power"></ion-icon>
                                 </a>
-                                <a type="button" class="btn btn-link" 
+                                <a type="button" class="btn btn-link btn-sm" 
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="{{__('Remove')}}"

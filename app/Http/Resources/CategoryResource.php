@@ -15,6 +15,7 @@ class CategoryResource extends JsonResource
     public function toArray($request)
     {
         $request['parent'] = $this->resource->parent;
+        $request['products'] = $this->resource->products;
         return parent::toArray($request);
     }
 }

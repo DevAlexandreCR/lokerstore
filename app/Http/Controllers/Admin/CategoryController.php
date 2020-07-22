@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function index() : View
     {
         return view('admin.category.index', [
-            'categories' => $this->category
+            'categories' => $this->category->primaries()
         ]);
     }
 
