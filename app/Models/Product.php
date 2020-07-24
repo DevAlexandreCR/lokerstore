@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use Doctrine\DBAL\Query\QueryBuilder;
-use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -34,7 +31,7 @@ class Product extends Model
     public function scopeByCategory($query, $category){
         if (empty($category)) return;
 
-        return $query->whereHas('category', function($query) use ($category) {
+        $query->whereHas('category', function($query) use ($category) {
             return $query->where('name', $category);
         });
     }
