@@ -58,7 +58,7 @@
           </div>
           <div class="col">
             <div class="form-group">
-            <textarea type="textarea" class="form-control  @error('description') is-invalid @enderror" id="description" required placeholder="{{__('Add product description...')}}"
+            <textarea type="textarea" class="form-control user-select-all  @error('description') is-invalid @enderror" id="description" required placeholder="{{__('Add product description...')}}"
               name="description" aria-describedby="descriptionHelp">{{ $product->description }}</textarea>
               @error('description')
               <span class="invalid-feedback" role="alert">
@@ -122,11 +122,6 @@
                   </div>
                 </div>
               </div>
-              @error('lastname')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-              @enderror
             </div>
             @error('category')
             <span class="invalid-feedback" role="alert">

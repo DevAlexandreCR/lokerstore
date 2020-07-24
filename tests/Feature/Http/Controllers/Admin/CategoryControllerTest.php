@@ -10,34 +10,39 @@ use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testIndex()
-    {
-        $admin = factory(Admin::class)->create();
-        $response = $this->actingAs($admin, 'admin')->get(route('category.index'));
+    use RefreshDatabase;
 
-        $response
-            ->assertStatus(200)
-            ->assertViewIs('admin.category.index')
-            ->assertViewHas('categories');
-    }
 
     public function testStore()
     {
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         $response = $this->actingAs($admin, 'admin')
-                            ->post(route('category.store', [
+                            ->post(route('category.store'), [
                                 'name' => 'new category',
                                 'id_parent' => null
-                            ]));
+                            ]);
         $response
             ->assertStatus(302)
             ->assertSessionHas('success');
         $this->assertDatabaseHas('categories', ['name' => 'new category']);
+    }
+
+    public function testStoreCanNotUniqueName()
+    {
+        $admin = factory(Admin::class)->create();
+
+        factory(Category::class)->create([
+            'name' => 'category'
+        ]);
+        $response = $this->actingAs($admin, 'admin')
+                            ->post(route('category.store'), [
+                                'name' => 'category',
+                                'id_parent' => null
+                            ]);
+        $response
+            ->assertStatus(302)
+            ->assertSessionHasErrors('name');
     }
 
     public function testUpdate()

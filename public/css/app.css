@@ -10988,6 +10988,18 @@ a.text-dark:focus {
   color: #000000;
 }
 
+.btn-blue {
+  background-color: dodgerblue;
+  color: whitesmoke;
+  top: 50%;
+  bottom: 50%;
+}
+
+.btn-blue:hover {
+  background: #ebebeb;
+  color: dodgerblue;
+}
+
 .btn-secondary {
   background: #ebebeb;
   color: black;
@@ -11010,8 +11022,6 @@ a.text-dark:focus {
 }
 
 .fab {
-  background: #2b2a2a;
-  color: white;
   border-radius: 50%;
   position: relative;
   width: 50px;
@@ -11040,11 +11050,11 @@ a.text-dark:focus {
 }
 
 .bg-gender-m {
-  background-image: url(/images/man.jpg?14c55dc323375ae65a562ffa6388c43e);
+  background-image: url("/storage/images/woman.jpg");
 }
 
 .bg-gender-w {
-  background-image: url(/images/woman.jpg?ac3efaca6e76f5b038ec3561ecf4342d);
+  background-image: url("/storage/images/man.jpg");
 }
 
 .hover-edit:hover {

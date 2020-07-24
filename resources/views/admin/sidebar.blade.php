@@ -22,6 +22,10 @@
          href="{{ route('products.index') }}"
          style="color: black"
          >{{__('Products')}}</a>
+         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('category.index') ?: 'font-weight-bolder'}}"
+         href="{{ route('category.index') }}"
+         style="color: black"
+         >{{__('Categories')}}</a>
     </nav>
 </div>    
 @endSection

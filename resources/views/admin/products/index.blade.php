@@ -202,7 +202,7 @@
                 </div>
             </div>
             <div class="container text-right">
-                <a href="{{route('products.create')}}" class="btn btn-secondary fab"><ion-icon name="add" size="large" class="add"></ion-icon></a>
+                <a href="{{route('products.create')}}" class="btn btn-primary fab"><ion-icon name="add" size="large" class="add"></ion-icon></a>
             </div>
         </div>
     </div>
