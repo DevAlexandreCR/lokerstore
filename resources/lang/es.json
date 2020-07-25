@@ -17,6 +17,7 @@
     "Are you sure to continue ?, check here": "¿Está seguro de continuar?, marque aquí",
     "This action will disable the user": "Ésta acción inhabilitará al usuario y no podrá iniciar sessión", 
     "This action will disable the product": "Ésta acción inhabilitará al producto", 
+    "This action will remove the tag": "Ésta acción eliminará la etiqueta", 
     "Enable": "Habilitar",
     "User verified": "Usuario verificado",
     "Search": "Buscar",
@@ -96,8 +97,12 @@
     "Add tags": "Agregar Etiquetas",
     "You must add at least one tag": "Debes agregar al menos una etiqueta",
     "Product has been updated success": "Su producto ha sido actualizado con éxito",
+    "Tag has been updated success": "Su etiqueta ha sido actualizada con éxito",
+    "Tag has been remove success": "Su etiqueta ha sido eliminada con éxito",
+    "Tag has been created success": "Su etiqueta ha sido creada con éxito",
     "Add category": "Agregar categoría",
     "Categories": "Categorías",
     "Name sub-category": "Nombre sub-categoría",
-    "The name must be unique": "El nombre debe ser único"
+    "The name must be unique": "El nombre debe ser único",
+    "Name tag": "Nombre etiqueta"
 }

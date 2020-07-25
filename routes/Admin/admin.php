@@ -31,7 +31,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('products/active/{product}', 'ProductController@active')->name('products.active');
     Route::put('products/active/{product}', 'ProductController@setActive')->name('products.set_active');
 
-    Route::resource('category', 'CategoryController');
+    Route::resource('category', 'CategoryController')->except(['show', 'create', 'edit']);
+    Route::resource('tags', 'TagController')->except(['show', 'create', 'edit']);
 });
 
 

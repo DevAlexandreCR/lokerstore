@@ -26,6 +26,10 @@
          href="{{ route('category.index') }}"
          style="color: black"
          >{{__('Categories')}}</a>
+         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('tags.index') ?: 'font-weight-bolder'}}"
+         href="{{ route('tags.index') }}"
+         style="color: black"
+         >{{__('Tags')}}</a>
     </nav>
 </div>    
 @endSection

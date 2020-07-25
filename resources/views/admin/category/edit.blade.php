@@ -29,8 +29,8 @@
                     @endif
                     <div class="col">
                         <div class="form-group">
-                            <label for="InputEmail1">{{__('Name sub-category')}}</label>
-                            <input type="text" class="form-control" id="inputName" name="name" aria-describedby="namelHelp" value="{{ $category->name }}">
+                            <label for="inputName{{$category->id}}">{{__('Name sub-category')}}</label>
+                            <input type="text" class="form-control" id="inputName{{$category->id}}" name="name" aria-describedby="namelHelp" value="{{ $category->name }}">
                             <small id="nameHelp" class="form-text text-muted">{{__('The name must be unique')}}</small>
                         </div>
                     </div>
