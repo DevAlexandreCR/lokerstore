@@ -7,7 +7,7 @@
                 <div class="col-sm-3">
                 <div class="btn-group btn-group-sm" role="group">
                 <a class="btn btn-link" data-toggle="modal" data-target="#sortModal" onclick="modal({{json_encode($filters)}}, true)" role="button"><ion-icon name="options-outline"></ion-icon></a>
-                    <a class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#sortModal">{{__('Filter and sort')}}</a>
+                    <a class="btn btn-link text-decoration-none" data-toggle="modal" onclick="modal({{json_encode($filters)}}, true)" data-target="#sortModal">{{__('Filter and sort')}}</a>
                 </div>
                 </div>
                 <div class="col">
@@ -207,88 +207,81 @@
         </div>
     </div>
 
-    {{-- Modal to add sort --}}
-    <div class="modal fade" tabindex="-1" role="dialog" id="sortModal">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <form action="{{ route('products.index') }}" method="GET" name="modalForm">
-                <div class="modal-header">
-                <h5 class="modal-title">{{__('Filter and sort')}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                            <p class="text-bold">{{__('Order by')}}</p>
-                            </div>
-                            <div class="col">
-                                <select id="orderBy" class="form-control" name="orderBy">
-                                    <option>{{__('Most recent')}}</option>
-                                    @if ($filters['orderBy'] === 'asc')
-                                    <option selected>{{__('Less recent')}}</option>
-                                    @else 
-                                    <option>{{__('Less recent')}}</option>
-                                    @endif 
-                                </select>
-                            </div>
+{{-- Modal to add sort --}}
+<div class="modal fade" tabindex="-1" role="dialog" id="sortModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+        <form action="{{ route('products.index') }}" method="GET" name="modalForm">
+            <div class="modal-header">
+            <h5 class="modal-title">{{__('Filter and sort')}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                        <p class="text-bold">{{__('Order by')}}</p>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                    <p class="text-bold">{{__('Category')}}</p>
-                                    </div>
-                                    <div class="col">
-                                            <select id="category" class="form-control" id="exampleFormControlSelect2" name="category">
-                                                <option>{{__('Choose category')}}</option>
-                                                @if ($filters['category'])
-                                                <option selected>{{$filters['category']}}</option>                                                
-                                                @endif
-                                                @foreach (\App\Models\Category::all() as $category)
-                                                <option>{{$category->name}}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col">
+                            <select id="orderBy" class="form-control" name="orderBy">
+                                <option>{{__('Most recent')}}</option>
+                                @if ($filters['orderBy'] === 'asc')
+                                <option selected>{{__('Less recent')}}</option>
+                                @else 
+                                <option>{{__('Less recent')}}</option>
+                                @endif 
+                            </select>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                    <p class="text-bold">{{__('Tags')}}</p>
-                                    </div>
-                                    <div class="col">
-                                        <div class="row">
-                                            @foreach (\App\Models\Tag::all() as $tag)
-                                                <div class="card m-2">
-                                                    <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
-                                                    <input type="checkbox" class="custom-control-input"  name="tags[{{$tag->name}}]" id="{{$tag->name}}">
-                                                    <label class="custom-control-label" for="{{$tag->name}}">{{$tag->name}}</label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-3">
+                        <p class="text-bold">{{__('Category')}}</p>
+                        </div>
+                        <div class="col">
+                            <select id="category" class="form-control" id="exampleFormControlSelect2" name="category">
+                                <option>{{__('Choose category')}}</option>
+                                @if ($filters['category'])
+                                <option selected>{{$filters['category']}}</option>                                                
+                                @endif
+                                @foreach ($categories as $category)
+                                <option>{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-2">
+                        <p class="text-bold">{{__('Tags')}}</p>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                @foreach (\App\Models\Tag::all() as $tag)
+                                    <div class="card m-2">
+                                        <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
+                                        <input type="checkbox" class="custom-control-input"  name="tags[{{$tag->name}}]" id="{{$tag->name}}">
+                                        <label class="custom-control-label" for="{{$tag->name}}">{{$tag->name}}</label>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        <hr>
                     </div>
+                    <hr>
                 </div>
-                <div class="modal-footer">
-                <button type="button" onclick="clearFilters({{json_encode($filters)}})" class="btn btn-info" data-dismiss="modal">{{__('Clear filters')}}</button>
-                <button type="submit" class="btn btn-primary">{{__('Apply')}}</button>
-                </div>
-            </form>
-          </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" onclick="clearFilters({{json_encode($filters)}})" class="btn btn-info" data-dismiss="modal">{{__('Clear filters')}}</button>
+            <button type="submit" class="btn btn-primary">{{__('Apply')}}</button>
+            </div>
+        </form>
         </div>
     </div>
+</div>
+
 @endsection
 
 <script>
@@ -297,6 +290,7 @@
     *@argument checked Boolean
     */ 
     const modal = (filter, checked) => {
+        console.log(filter);
         if (filter.tags) {
             for (const key in filter.tags) {
                 if (filter.tags.hasOwnProperty(key)) {

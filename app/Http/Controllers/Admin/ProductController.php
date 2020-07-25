@@ -37,6 +37,8 @@ class ProductController extends Controller
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
+
+        $categories = Category::subCategories();
    
         return view('admin.products.index', [
             'products' => $this->product
@@ -50,7 +52,8 @@ class ProductController extends Controller
                 'tags'      => $tags,
                 'search'    => $search,
                 'orderBy'   => $orderBy
-            ]
+            ],
+            'categories' => $categories
         ]);
     }
 

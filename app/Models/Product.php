@@ -28,15 +28,21 @@ class Product extends Model
         return $this->hasMany(Photo::class);
     }
 
-    public function scopeByCategory($query, $category){
+    public function scopeByCategory($query, $category)
+    {
         if (empty($category)) return;
 
+        // $cat = Category::find()
+
         $query->whereHas('category', function($query) use ($category) {
-            return $query->where('name', $category);
-        });
+               $categoryModel = $query->where('name', $category)->getModel();
+               $cat = $categoryModel->with('children')->where('name', $category);
+               return $cat->with('products')->get();
+            });
     }
 
-    public function scopeWithTags($query, $tags){
+    public function scopeWithTags($query, $tags)
+    {
         if (empty($tags)) return;
 
         return $query->whereHas('tags', function($query) use ($tags) {
@@ -46,7 +52,8 @@ class Product extends Model
         });
     }
 
-    public function scopeSearch($query, $search) {
+    public function scopeSearch($query, $search) 
+    {
         if (empty($search)) return;
 
         return $query
