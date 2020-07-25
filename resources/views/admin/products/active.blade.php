@@ -15,7 +15,7 @@
                 @method('PUT')
               @if ($product->is_active)
               <div class="alert alert-danger" role="alert">
-                <strong>{{__('This action will disable the product')}}</strong>
+                <strong>{{__('This action will remove the product')}}</strong>
               <a href="{{ route('products.index') }}" type="button" class="btn btn-secondary btn-sm" style="float: right">{{__('Back')}}</a>
               </div>
               @endif
@@ -47,7 +47,7 @@
                 @csrf
                 @method('DELETE')
                 <div class="alert alert-danger" role="alert">
-                  <strong>{{__('This action will delete the product')}} 
+                  <strong>{{__('This action will remove the product')}} 
                     <ion-icon name="skull-outline"></ion-icon>
                     <ion-icon name="alert-circle-outline"></ion-icon>
                     <ion-icon name="hand-left-outline"></ion-icon></strong>
@@ -57,7 +57,6 @@
                 <div class="col">
                 </div>
                 <div class="col-sm-2">
-                  <input type="hidden" name="is_active" value="1">
                   <button type="submit" class="btn btn-danger btn-block btn-sm">{{__('Remove')}}</button>
                 </div>
                 </div>

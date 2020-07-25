@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Products;
 
-use App\Adapters\Products\DataRequestAdapter;
+use App\Helpers\Products\ProductRequestHelper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
@@ -34,6 +34,6 @@ class IndexRequest extends FormRequest
 
     public function validationData()
     {
-        return DataRequestAdapter::transform($this->all());
+        return ProductRequestHelper::transform($this->all());
     }
 }

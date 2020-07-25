@@ -22,7 +22,6 @@ class ProductControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
 
         $response = $this->actingAs($admin, 'admin')->get(route('products.index'));
@@ -33,26 +32,40 @@ class ProductControllerTest extends TestCase
             ->assertViewHas('products');
     }
 
-    // /**
-    //  * prueba ruta admin/products/$product->id
-    //  *
-    //  * @return void
-    //  */
-    // public function testShowProduct()
-    // {
-    //     $admin = factory(Admin::class)->create();
-    //     factory(Category::class, 2)->create();
-    //     $product = factory(Product::class)->create();
+    public function testIndexWithQuery()
+    {
+        $admin = factory(Admin::class)->create();
+        $tag = factory(Tag::class)->create();
+        $categories = [
+            'Ropa','Zapatos','Deportes','Accesorios'
+        ];
+        
+        foreach ($categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
+        factory(Category::class, 2)->create();
+        $product = factory(Product::class)->create([
+            'name' => 'new product'
+        ]);
+        $product->tags()->attach($tag->id);
+        
+        $response = $this
+                        ->actingAs($admin, 'admin')
+                        ->get(route('products.index'), [
+                                'category' => 1,
+                                'orderBy' => __('Less recent'),
+                                'search' => 'new',
+                                'tags' => null
+                        ]);
 
-    //     $response = $this->actingAs($admin, 'admin')->get(route('products.show', [
-    //         'product' => $product->id
-    //     ]));
-
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertViewIs('admin.products.show')
-    //         ->assertViewHas('product');
-    // }
+        $response
+            ->assertStatus(200)
+            ->assertViewIs('admin.products.index')
+            ->assertViewHas('products');
+    }
 
     /**
      * test route admin/products/$product->id/edit
@@ -62,6 +75,16 @@ class ProductControllerTest extends TestCase
     public function testEditProduct()
     {
         $admin = factory(Admin::class)->create();
+        $categories = [
+            'Ropa','Zapatos','Deportes','Accesorios'
+        ];
+        
+        foreach ($categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
         factory(Category::class, 2)->create();
         $product = factory(Product::class)->create();
 
@@ -83,6 +106,16 @@ class ProductControllerTest extends TestCase
     public function testUpdateProduct()
     {
         $admin = factory(Admin::class)->create();
+        $categories = [
+            'Ropa','Zapatos','Deportes','Accesorios'
+        ];
+        
+        foreach ($categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
         factory(Category::class, 2)->create();
         $tag = factory(Tag::class)->create();
         $product = factory(Product::class)->create();
@@ -117,6 +150,16 @@ class ProductControllerTest extends TestCase
     public function testDeleteProduct()
     {
         $admin = factory(Admin::class)->create();
+        $categories = [
+            'Ropa','Zapatos','Deportes','Accesorios'
+        ];
+        
+        foreach ($categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
         factory(Category::class, 2)->create();
         $tag = factory(Tag::class)->create();
         $product = factory(Product::class)->create();

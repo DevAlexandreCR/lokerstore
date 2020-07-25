@@ -8,13 +8,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="../../../public/images/layer1.jpg" class="img-carousel" alt="">
+                <img src="/storage/images/layer1.jpg" class="img-carousel" alt="">
                 </div>
                 <div class="carousel-item">
-                <img src="../../../public/images/layer1.jpg" class="img-carousel" alt="">
+                <img src="/storage/images/layer2.jpg" class="img-carousel" alt="">
                 </div>
                 <div class="carousel-item">
-                <img src="../../../public/images/layer1.jpg" class="img-carousel" alt="">
+                <img src="/storage/images/layer3.jpg" class="img-carousel" alt="">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselhome" role="button" data-slide="prev">

@@ -12,8 +12,11 @@
     "Disabled": "Inhabilitado",
     "Success!": "Hecho!",
     "This action will delete the user": "Ésta acción eliminará al usuario ",
+    "This action will remove the category and its products": "Ésta acción eliminará la categoría y sus productos",
+    "This action will remove the product": "Ésta acción eliminará el producto",
     "Are you sure to continue ?, check here": "¿Está seguro de continuar?, marque aquí",
     "This action will disable the user": "Ésta acción inhabilitará al usuario y no podrá iniciar sessión", 
+    "This action will disable the product": "Ésta acción inhabilitará al producto", 
     "Enable": "Habilitar",
     "User verified": "Usuario verificado",
     "Search": "Buscar",
@@ -62,7 +65,10 @@
     "You must log out of the user before logging in as administrator": "Debes cerrar session de usuario antes de iniciar sesión como administrador",
     "Login only supports": "Acceso solo para colaboradores",
     "User has been updated success": "El usuario ha sido actualizado con éxito",
+    "Category has been updated success": "La categoría ha sido actualizada con éxito",
+    "Category has been created success": "La categoría ha sido creada con éxito",
     "User has been deleted success": "El usuario ha sido eliminado con éxito",
+    "Category has been deleted success": "La categoría ha sido eliminada con éxito",
     "Please check your email to complete registration": "Por favor verifica tu correo para completar el registro",
     "Filter and sort": "Filtrar y ordenar",
     "Category": "Categoría",
@@ -89,5 +95,9 @@
     "Add images": "Agregar imagenes",
     "Add tags": "Agregar Etiquetas",
     "You must add at least one tag": "Debes agregar al menos una etiqueta",
-    "Product has been updated success": "Su producto ha sido actualizado con éxito"
+    "Product has been updated success": "Su producto ha sido actualizado con éxito",
+    "Add category": "Agregar categoría",
+    "Categories": "Categorías",
+    "Name sub-category": "Nombre sub-categoría",
+    "The name must be unique": "El nombre debe ser único"
 }

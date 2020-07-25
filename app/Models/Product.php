@@ -2,16 +2,11 @@
 
 namespace App\Models;
 
-use Doctrine\DBAL\Query\QueryBuilder;
-use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
-{
-    use SoftDeletes;
-
+{   
     protected $table = 'products';
 
     protected $fillable = [
@@ -33,15 +28,21 @@ class Product extends Model
         return $this->hasMany(Photo::class);
     }
 
-    public function scopeByCategory($query, $category){
+    public function scopeByCategory($query, $category)
+    {
         if (empty($category)) return;
 
-        return $query->whereHas('category', function($query) use ($category) {
-            return $query->where('name', $category);
-        });
+        // $cat = Category::find()
+
+        $query->whereHas('category', function($query) use ($category) {
+               $categoryModel = $query->where('name', $category)->getModel();
+               $cat = $categoryModel->with('children')->where('name', $category);
+               return $cat->with('products')->get();
+            });
     }
 
-    public function scopeWithTags($query, $tags){
+    public function scopeWithTags($query, $tags)
+    {
         if (empty($tags)) return;
 
         return $query->whereHas('tags', function($query) use ($tags) {
@@ -51,7 +52,8 @@ class Product extends Model
         });
     }
 
-    public function scopeSearch($query, $search) {
+    public function scopeSearch($query, $search) 
+    {
         if (empty($search)) return;
 
         return $query

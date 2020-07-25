@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Photos\DeletePhotoAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\ActiveRequest;
 use App\Http\Requests\Products\IndexRequest;
 use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
 use App\Models\Category;
-use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Image;
+use App\Actions\Photos\SavePhotoAction;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -23,17 +24,21 @@ class ProductController extends Controller
     {
         $this->product = $product;
     }
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of Products
      *
-     * @return \Illuminate\Http\Response
+     * @param IndexRequest $request
+     * @return View
      */
-    public function index(IndexRequest $request)
+    public function index(IndexRequest $request) : View
     {
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
+
+        $categories = Category::subCategories();
    
         return view('admin.products.index', [
             'products' => $this->product
@@ -47,18 +52,19 @@ class ProductController extends Controller
                 'tags'      => $tags,
                 'search'    => $search,
                 'orderBy'   => $orderBy
-            ]
+            ],
+            'categories' => $categories
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create() : View
     {
-        $categories = Category::all();
+        $categories = Category::primaries();
         $tags = Tag::all();
         return view('admin.products.create', 
                     compact('categories', 'tags')
@@ -66,12 +72,14 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreRequest $request
+     * @param Product $product
+     * @param SavePhotoAction $savePhotoAction
+     * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Product $product)
+    public function store(StoreRequest $request, Product $product, SavePhotoAction $savePhotoAction) : RedirectResponse
     {
         $new_product = $product->create($request->all());
 
@@ -79,17 +87,7 @@ class ProductController extends Controller
             $new_product->tags()->attach($tag);
         }
 
-        foreach ($request->file('photos') as $photo) {
-            $name = time() . '_' . $photo->getClientOriginalName();
-            $img = Image::make($photo)->fit(540, 480)->encode('jpg', 75);
-            Storage::disk('public_photos')->put($name, $img);
-
-            $photoModel = new Photo;
-            $photoModel->product_id = $new_product->id; 
-            $photoModel->name = $name;
-            
-            $photoModel->save();
-        }
+        $savePhotoAction->execute($new_product->id, $request->file('photos'));
 
         return back()->with('success', __('Your product has been save successfully'));
     }
@@ -97,10 +95,11 @@ class ProductController extends Controller
     /**
      * Show the form for enable disable or delete the specified product.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Product $product
+     * @return View
      */
-    public function active(Request $request, Product $product)
+    public function active(Request $request, Product $product) : View
     {
         return view('admin.products.active', [
             'product'   => $product,
@@ -109,14 +108,14 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product) : View
     {
-        $categories = Category::all();
+        $categories = Category::primaries();
         $tags = Tag::all();
         return view('admin.products.edit', [
             'product'   => $product
@@ -126,38 +125,21 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update product
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param Product $product
+     * @param DeletePhotoAction $deletePhotoAction
+     * @param SavePhotoAction $savePhotoAction
+     * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Product $product)
+    public function update(UpdateRequest $request, Product $product, DeletePhotoAction $deletePhotoAction, SavePhotoAction $savePhotoAction) : RedirectResponse
     {
         $product->tags()->sync($request->get('tags'));
 
-        if ($request->get('delete_photo')){
-            foreach ($request->get('delete_photo') as $photo_id) {
-                $photo = Photo::findOrFail($photo_id);
-                $name = $photo->name;
-                $photo->delete();
-                Storage::disk('public')->delete('photos/' . $name);
-            }
-        }
+        $savePhotoAction->execute($product->id, $request->file('photos'));
 
-        if ($request->file('photos')){
-            foreach ($request->file('photos') as $photo) {
-                $name = time() . '_' . $photo->getClientOriginalName();
-                $img = Image::make($photo)->fit(540, 480)->encode('jpg', 75);
-                Storage::disk('public_photos')->put($name, $img);
-    
-                $photoModel = new Photo;
-                $photoModel->product_id = $product->id; 
-                $photoModel->name = $name;
-                
-                $photoModel->save();
-            }
-        }
+        $deletePhotoAction->execute($request->get('delete_photos'));
 
         $product->update($request->all());
 
@@ -165,7 +147,14 @@ class ProductController extends Controller
             ->with('product-updated', 'Product has been updated success');
     }
 
-    public function setActive(ActiveRequest $request, Product $product)
+    /**
+     * Enable or disable product
+     *
+     * @param ActiveRequest $request
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function setActive(ActiveRequest $request, Product $product) : RedirectResponse
     {
         $product->update($request->all());
 
@@ -174,12 +163,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete product
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product) : RedirectResponse
     {
         $product->delete();
 

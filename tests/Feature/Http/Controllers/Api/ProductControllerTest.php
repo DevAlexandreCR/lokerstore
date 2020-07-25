@@ -20,7 +20,19 @@ class ProductControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $response = $this->json('GET', 'api/products');
+        $categories = [
+            'Ropa','Zapatos','Deportes','Accesorios'
+        ];
+        
+        foreach ($categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
+        factory(Category::class, 2)->create();
+        factory(Product::class, 10)->create();
+        $response = $this->json('GET', route('api.index'));
 
         $response->assertJsonStructure([
             'data' => [
@@ -43,14 +55,16 @@ class ProductControllerTest extends TestCase
             ]); 
         }
 
-        factory(Category::class, 10)->create();
-        factory(Product::class, 10)->create();
+        factory(Category::class, 2)->create();
+        $product = factory(Product::class)->create();
         
-        $response = $this->actingAs($user)->json('GET', 'api/products/1');
+        $response = $this->actingAs($user)->json('GET', route('api.show', [
+            'product' => $product->id
+        ]));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            'data' => ['id', 'name', 'created_at', 'updated_at']
+            'data' => ['name', 'created_at', 'updated_at']
         ]);
     }
 }

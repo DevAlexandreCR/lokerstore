@@ -10,8 +10,9 @@ $factory->define(Category::class, function (Faker $faker) {
         'Camisas','Camisetas','Pantalones','Sudaderas','Chaquetas', 'Busos', 'Jeans',
         'Tennis', 'Faldas', 'Vestidos', 'Relojes', 'Gafas'
     ];
+
     return [
-        'name' => $faker->randomElement($subcategories),
-        'id_parent' => Category::inRandomOrder()->value('id') ?: null
+        'name' => $faker->unique()->name(),
+        'id_parent' =>  Category::inRandomOrder()->value('id') ?: null
     ];
 });

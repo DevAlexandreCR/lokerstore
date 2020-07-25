@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Adapters\Products;
+namespace App\Helpers\Products;
 
-Class DataRequestAdapter {
+Class ProductRequestHelper {
     
     public static function transform(array $data) 
     {

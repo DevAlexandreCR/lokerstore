@@ -55,12 +55,12 @@ class CategoryControllerTest extends TestCase
      */
     public function testShow()
     {
-        factory(Category::class)->create([
+        $category = factory(Category::class)->create([
             'name' => 'Zapatos',
             'id_parent' => null
         ]); 
         
-        $response = $this->json('GET', route('categories.show', 1));
+        $response = $this->json('GET', route('categories.show',['category' => $category->id]));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([

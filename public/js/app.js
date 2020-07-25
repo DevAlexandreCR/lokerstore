@@ -37739,30 +37739,21 @@ var staticRenderFns = [
             _c("div", { staticClass: "carousel-item active" }, [
               _c("img", {
                 staticClass: "img-carousel",
-                attrs: {
-                  src: __webpack_require__(/*! ../../../public/images/layer1.jpg */ "./public/images/layer1.jpg"),
-                  alt: ""
-                }
+                attrs: { src: "/storage/images/layer1.jpg", alt: "" }
               })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "carousel-item" }, [
               _c("img", {
                 staticClass: "img-carousel",
-                attrs: {
-                  src: __webpack_require__(/*! ../../../public/images/layer1.jpg */ "./public/images/layer1.jpg"),
-                  alt: ""
-                }
+                attrs: { src: "/storage/images/layer2.jpg", alt: "" }
               })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "carousel-item" }, [
               _c("img", {
                 staticClass: "img-carousel",
-                attrs: {
-                  src: __webpack_require__(/*! ../../../public/images/layer1.jpg */ "./public/images/layer1.jpg"),
-                  alt: ""
-                }
+                attrs: { src: "/storage/images/layer3.jpg", alt: "" }
               })
             ])
           ]),
@@ -53315,17 +53306,6 @@ module.exports = function(module) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ "./public/images/layer1.jpg":
-/*!**********************************!*\
-  !*** ./public/images/layer1.jpg ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/layer1.jpg?7903f4218e155762b0e097d302f86e72";
 
 /***/ }),
 
