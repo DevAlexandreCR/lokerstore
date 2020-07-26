@@ -1,4 +1,6 @@
 language: php
+services:
+    - mysql
 cache:
     directories:
         - node_modules
@@ -7,7 +9,14 @@ cache:
 php:
     - '7.4'
 env:
-    -DB_CONNECTION=pgsql
+    testing:
+        - DB_CONNECTION=testing
+        - DB_CONNECTION=mysql
+        - DB_HOST=120.0.0.1
+        - DB_PORT=3306
+        - DB_DATABASE=testing
+        - DB_USERNAME=root
+        - DB_PASSWORD=root
 git:
     depth: 3
 before_script:
