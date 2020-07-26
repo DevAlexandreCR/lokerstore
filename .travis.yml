@@ -6,11 +6,11 @@ cache:
         - vendor
 php:
     - '7.4'
-env:
-    -DB_CONNECTION=mysql
 git:
     depth: 3
 before_script:
+    - cp .env.testing .env
+    - mysql -e 'create database testing;'
     - composer self-update
     - composer install --quiet --prefer-dist --optimize-autoloader 
     - composer dump-autoload
