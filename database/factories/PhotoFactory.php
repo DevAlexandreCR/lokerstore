@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Photo::class, function (Faker $faker) {
     return [
-        'name' => $faker->image('public/storage/photos', 640, 480, null , false)
+        'name' => $faker->image(storage_path('app/public/photos'), 640, 480, null , false)
     ];
 });
