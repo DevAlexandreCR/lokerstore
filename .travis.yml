@@ -14,7 +14,6 @@ git:
     depth: 3
 before_script:
     - cp .env.testing .env
-    - mysql -u root --password=""
     - mysql -e 'create database testing;'
     - mkdir storage/app/public/photos
     - composer self-update
