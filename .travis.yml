@@ -1,6 +1,4 @@
 language: php
-services:
-    - mysql
 cache:
     directories:
         - node_modules
@@ -13,8 +11,6 @@ env:
 git:
     depth: 3
 before_script:
-    - cp .env.testing .env
-    - mysql -e 'create database testing;'
     - mkdir storage/app/public/photos
     - composer self-update
     - composer install --quiet --prefer-dist --optimize-autoloader 
