@@ -15,6 +15,10 @@ class ProductControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    private $categories = [
+        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
+    ];
+
     /**
      * test view products
      *
@@ -36,11 +40,8 @@ class ProductControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
         $tag = factory(Tag::class)->create();
-        $categories = [
-            'Ropa','Zapatos','Deportes','Accesorios'
-        ];
         
-        foreach ($categories as $name) {
+        foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
                 'id_parent' => null
@@ -75,11 +76,8 @@ class ProductControllerTest extends TestCase
     public function testEditProduct()
     {
         $admin = factory(Admin::class)->create();
-        $categories = [
-            'Ropa','Zapatos','Deportes','Accesorios'
-        ];
         
-        foreach ($categories as $name) {
+        foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
                 'id_parent' => null
@@ -106,11 +104,8 @@ class ProductControllerTest extends TestCase
     public function testUpdateProduct()
     {
         $admin = factory(Admin::class)->create();
-        $categories = [
-            'Ropa','Zapatos','Deportes','Accesorios'
-        ];
         
-        foreach ($categories as $name) {
+        foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
                 'id_parent' => null
@@ -150,11 +145,8 @@ class ProductControllerTest extends TestCase
     public function testDeleteProduct()
     {
         $admin = factory(Admin::class)->create();
-        $categories = [
-            'Ropa','Zapatos','Deportes','Accesorios'
-        ];
         
-        foreach ($categories as $name) {
+        foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
                 'id_parent' => null
