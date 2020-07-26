@@ -9,17 +9,13 @@ cache:
 php:
     - '7.4'
 env:
-    testing:
-        - DB_CONNECTION=testing
-        - DB_CONNECTION=mysql
-        - DB_HOST=120.0.0.1
-        - DB_PORT=3306
-        - DB_DATABASE=testing
-        - DB_USERNAME=root
-        - DB_PASSWORD=root
+    -DB_CONNECTION=pgsql
 git:
     depth: 3
 before_script:
+    - cp .env.testing .env
+    - mysql -u root --password="root"
+    - mysql -e 'create database testing;'
     - mkdir storage/app/public/photos
     - composer self-update
     - composer install --quiet --prefer-dist --optimize-autoloader 
