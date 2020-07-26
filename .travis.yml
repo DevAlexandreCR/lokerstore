@@ -16,7 +16,7 @@ before_script:
     - composer dump-autoload
 script:
     - composer dump-autoload 
-    - php artisan migrate --seed --force 
+    - php artisan migrate --force 
     - vendor/bin/phpunit
 notifications:
     email:
