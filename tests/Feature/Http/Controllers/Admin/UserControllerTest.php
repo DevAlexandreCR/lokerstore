@@ -77,12 +77,12 @@ class UserControllerTest extends TestCase
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin, 'admin')->put("admin/users/$user->id", [
+        $response = $this->actingAs($admin, 'admin')->put(route('users.update', $user), [
             'email' => 'elnuevoemail@nada.com'
         ]);
 
         $response
-            ->assertRedirect("admin/users/$user->id")
+            ->assertRedirect(route('users.show', $user))
             ->assertSessionHas('user-updated')
             ->assertStatus(302);
         $this->assertDatabaseHas('users', ['email' => 'elnuevoemail@nada.com']);
@@ -98,7 +98,7 @@ class UserControllerTest extends TestCase
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin, 'admin')->delete("admin/users/$user->id");
+        $response = $this->actingAs($admin, 'admin')->delete(route('users.destroy', $user));
 
         $response->assertRedirect('admin/users')
             ->assertSessionHas('user-deleted')
