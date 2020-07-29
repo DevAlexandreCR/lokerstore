@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection($this->category->all());
+        return response()->json(CategoryResource::collection($this->category->primaries()));
     }
 
     /**

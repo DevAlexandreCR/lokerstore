@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {   
-        return ProductResource::collection($this->product->all());
+        return response()->json(ProductResource::collection($this->product->all()));
     }
 
     /**

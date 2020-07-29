@@ -14,14 +14,14 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 30)->create();
+        factory(Product::class, 100)->create();
         $tags = Tag::all();
 
         Product::inRandomOrder()->each(function ($product) use ($tags) {
             $product->tags()->attach(
                 $tags->random(rand(1, 5))->pluck('id')->toArray()
             );
-            factory(Photo::class, rand(1, 5))->create([
+            factory(Photo::class, rand(1, 2))->create([
                 'product_id' => $product->id
             ]);
         });

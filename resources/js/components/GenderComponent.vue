@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:class="[ 'card', 'text-center', 'card-gender', 'shadow-sm', (gender == 'Mujer') ? 'bg-gender-w' : 'bg-gender-m']">
+    <div v-bind:class="[ 'card', 'text-center', 'traslate-up', 'card-gender', 'shadow-sm', (gender == 'Mujer') ? 'bg-gender-w' : 'bg-gender-m']">
         <div class="card-body">
             <div id="see-more" class="container">
             <h1 class="card-title">{{gender}}</h1>

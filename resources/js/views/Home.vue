@@ -3,14 +3,14 @@
          <banner-component v-show="isNotHomeRoute()"></banner-component>
         <div class="container">
             <div class="row my-1" id="navbar-category">
-                <div class="col-sm-2 d-none d-lg-block">
+                <div class="col-sm-2 d-none d-sm-block">
                     <router-link 
                     class="nav-link" 
                     exact
                     :to="{name: 'categories', params: { gender: 'Mujer' }}"
                     >Mujer</router-link>
                 </div>
-                <div class="col-sm-2 d-none d-lg-block">
+                <div class="col-sm-2 d-none d-sm-block">
                     <router-link 
                     class="nav-link" 
                     exact
@@ -34,13 +34,21 @@
         </div>
         <div class="container" v-show="isNotHomeRoute()">
         <div class="row justify-content-center">
-            <div class="col">
+            <div class="col-sm-6 first">
                 <gender-component :gender="'Mujer'"></gender-component>
             </div>
-            <div class="col">
+            <div class="col-sm-6">
                 <gender-component :gender="'Hombre'"></gender-component>
             </div>
         </div>
+        <br>
+        <section>
+            <promotions-component></promotions-component>
+        </section>
+        <br>
+        <section v-for="category in categories" :key="category.id">
+            <category-component :category="category" :products="products"></category-component>
+        </section>
         </div>
     </div>
 </template>
@@ -50,19 +58,29 @@
     import api from '../api.js'
     import BannerComponent from '../components/BannerComponent'
     import GenderComponent from '../components/GenderComponent'
+    import CategoryComponent from './sections/CategoryComponent'
+    import PromotionsComponent from './sections/PromotionsComponent'
 
     export default {
         name: 'home',
         data() {
             return {
-                products: [],
-                categories: []
+                categories: {
+                    type: Array,
+                    default: () => []
+                },
+                products: {
+                    type: Array,
+                    default: () => []
+                }
             }
         },
         components: 
         {
             BannerComponent,
-            GenderComponent
+            GenderComponent,
+            CategoryComponent,
+            PromotionsComponent
         },
 
         methods: {
@@ -71,18 +89,19 @@
             }
         },
         created() {
+            this.products = []
             api.getProducts().then(products => {
-                this.products = products
+                products.forEach(product => {
+                    this.products.push(product)
+                });
             })
 
             api.getCategories().then(categories => {
-                this.categories = categories
-                console.log(categories);
-                
+                this.categories = categories              
             })
         },
         mounted() {           
-            console.log('Component mounted homeeeee')
+            console.log('Component mounted home')
         }
     }
 </script>

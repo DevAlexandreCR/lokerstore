@@ -18,7 +18,16 @@
 }
 
 .bg-danger {
-  background: white;
+  background: red;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
 }
 
 /*!
@@ -10960,6 +10969,39 @@ a.text-dark:focus {
      object-fit: cover;
 }
 
+.img-category {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100% !important;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.img-category:hover {
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
+  transform: scale(1.01);
+}
+
+.ofert-title {
+  position: absolute;
+  text-align: center;
+  width: 40%;
+  background: repeating-linear-gradient(90deg, transparent, #0f0f0f, transparent);
+  color: white;
+  bottom: 12%;
+  z-index: 100;
+  right: 0rem;
+  font-family: fantasy;
+  font-weight: bold;
+  font-size: large;
+  transform: rotate(-45deg);
+}
+
 @media (max-width: 414px) {
   .img-carousel {
     width: 100% !important;
@@ -11049,12 +11091,40 @@ a.text-dark:focus {
   color: black;
 }
 
+.card-hover {
+  min-height: 100%;
+  transition: box-shadow 0.3s;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.card-hover:hover {
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
+  transform: scale(1.02);
+}
+
 .bg-gender-m {
-  background-image: url("/storage/images/woman.jpg");
+  background-image: url("/storage/images/man.jpg");
 }
 
 .bg-gender-w {
-  background-image: url("/storage/images/man.jpg");
+  background-image: url("/storage/images/woman.jpg");
+}
+
+.traslate-up {
+  transition: box-shadow 0.3s;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.traslate-up:hover {
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
+  transform: translate(0px, -10px);
 }
 
 .hover-edit:hover {
