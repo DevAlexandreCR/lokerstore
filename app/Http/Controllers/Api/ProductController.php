@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\IndexRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -15,14 +18,26 @@ class ProductController extends Controller
     {
         $this->product = $product;
     }
+
     /**
-     * Display a listing of the resource.
+     * Response at Json whit products resource
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(IndexRequest $request) : JsonResponse
     {   
-        return response()->json(ProductResource::collection($this->product->all()));
+        $category = $request->validationData()['category'];
+        $tags = $request->validationData()['tags'];
+        $search = $request->validationData()['search'];
+        Log::info($request->all());
+        return response()->json(ProductResource::collection(
+            $this->product
+                ->byCategory($category)
+                ->withTags($tags)
+                ->search($search)
+                ->get()
+        ));
     }
 
     /**

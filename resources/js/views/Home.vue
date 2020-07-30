@@ -7,14 +7,14 @@
                     <router-link 
                     class="nav-link" 
                     exact
-                    :to="{name: 'categories', params: { gender: 'Mujer' }}"
+                    :to="{name: 'showcase', query: { tags: ['Mujer'] }}"
                     >Mujer</router-link>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <router-link 
                     class="nav-link" 
                     exact
-                    :to="{name: 'categories', params: { gender: 'Hombre' }}"
+                    :to="{name: 'showcase', query: { tags: ['Hombre'] }}"
                     >Hombre</router-link>
                 </div>
                 <div class="col">
@@ -35,10 +35,10 @@
         <div class="container" v-show="isNotHomeRoute()">
         <div class="row justify-content-center">
             <div class="col-sm-6 first">
-                <gender-component :gender="'Mujer'"></gender-component>
+                <gender-component :filter="'Mujer'"></gender-component>
             </div>
             <div class="col-sm-6">
-                <gender-component :gender="'Hombre'"></gender-component>
+                <gender-component :filter="'Hombre'"></gender-component>
             </div>
         </div>
         <br>
@@ -90,6 +90,7 @@
         },
         created() {
             this.products = []
+
             api.getProducts().then(products => {
                 products.forEach(product => {
                     this.products.push(product)
@@ -99,6 +100,7 @@
             api.getCategories().then(categories => {
                 this.categories = categories              
             })
+
         },
         mounted() {           
             console.log('Component mounted home')

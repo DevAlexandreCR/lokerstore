@@ -11,14 +11,15 @@
                 <hr>
             </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="selectedRandomProducts.length > 0">
             <div v-bind:class="[ 'col-md-6', (category.id%2 == 0) ? '' : 'order-12']">
                 <img class="img-fluid img-category" :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
                 <div class="ofert-title">Hasta 50% Off</div>
             </div>
             <div class="col-md-6" >
                 <div class="row">
-                    <div class="col-sm-6 d-none d-sm-block my-1" v-for="(product, index) in selectedRandomProducts" :key="product.id">
+                    <div class="col-sm-6 d-none d-sm-block my-1" v-on:click="goToShowcase(category.name)"
+                    v-for="(product, index) in selectedRandomProducts" :key="product.id">
                         <card-category-component v-if="index < 4" :product="product"></card-category-component>
                     </div>
                 </div>
@@ -51,6 +52,12 @@
                     type: Array,
                     default: () => []
                 }
+        },
+
+        methods: {
+            goToShowcase(filter) {
+                this.$router.push({name: 'showcase', query: { category: filter}})
+            }
         },
 
         computed: {

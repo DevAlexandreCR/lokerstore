@@ -2,9 +2,11 @@ import Axios from "axios"
 
 const url = `${process.env.MIX_APP_URL}/api/` 
 
-const getProducts = () => {
+const getProducts = (query = null) => {
    
-    return axios.get(`${url}products`)
+    return axios.get(`${url}products`, {
+            params: query
+        })
         .then(res => res.data)
 }
 
