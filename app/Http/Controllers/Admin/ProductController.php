@@ -38,7 +38,7 @@ class ProductController extends Controller
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
 
-        $categories = Category::subCategories();
+        $categories = Category::all();
    
         return view('admin.products.index', [
             'products' => $this->product

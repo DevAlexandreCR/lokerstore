@@ -72,8 +72,7 @@
 
         created() {
             var query = this.getQuery(this.$route.query) 
-            // query =   this.$route.query
-            console.log(query);         
+      
             api.getProducts(query).then(products => {
                 this.products = products
                 console.log(products);

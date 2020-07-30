@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -32,13 +33,13 @@ class Product extends Model
     {
         if (empty($category)) return;
 
-        // $cat = Category::find()
-
-        $query->whereHas('category', function($query) use ($category) {
-               $categoryModel = $query->where('name', $category)->getModel();
-               $cat = $categoryModel->with('children')->where('name', $category);
-               return $cat->with('products')->get();
-            });
+        $id = $this->getIdCategory($category);
+        
+        return $query->whereHas('category', function($query) use ($category, $id) {
+            $query
+                ->where('name', $category)
+                ->orWhere('id_parent', $id);
+        });;
     }
 
     public function scopeWithTags($query, $tags)
@@ -47,7 +48,7 @@ class Product extends Model
 
         return $query->whereHas('tags', function($query) use ($tags) {
             foreach ($tags as $key => $value) {
-                $query->where('name', $key);
+                $query->orWhere('name', $key);
             }
         });
     }
@@ -94,4 +95,20 @@ class Product extends Model
             }
         });
     }
+
+    /**
+     * Search category and return 0 if not exist
+     *
+     * @param string $category
+     * @return integer
+     */
+    private function getIdCategory(string $category) : int
+    {
+        (Category::where('name', $category)->exists()) 
+        ? $id = Category::where('name', $category)->first()->id 
+        : $id = 0;
+
+        return $id;
+    }
+
 }

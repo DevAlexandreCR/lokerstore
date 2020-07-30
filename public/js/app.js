@@ -2264,9 +2264,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   created: function created() {
     var _this = this;
 
-    var query = this.getQuery(this.$route.query); // query =   this.$route.query
-
-    console.log(query);
+    var query = this.getQuery(this.$route.query);
     _api_js__WEBPACK_IMPORTED_MODULE_0__["default"].getProducts(query).then(function (products) {
       _this.products = products;
       console.log(products);

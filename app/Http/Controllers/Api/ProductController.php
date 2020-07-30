@@ -30,7 +30,7 @@ class ProductController extends Controller
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
-        Log::info($request->all());
+
         return response()->json(ProductResource::collection(
             $this->product
                 ->byCategory($category)
