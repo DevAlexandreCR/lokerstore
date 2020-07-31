@@ -33,6 +33,7 @@ class ProductController extends Controller
 
         return response()->json(ProductResource::collection(
             $this->product
+                ->active()
                 ->byCategory($category)
                 ->withTags($tags)
                 ->search($search)

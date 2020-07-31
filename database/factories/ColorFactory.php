@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Color::class, function (Faker $faker) {
     return [
-        //
+        'name' => $faker->colorName,
+        'code' => $faker->hexColor
     ];
 });

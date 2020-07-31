@@ -13,6 +13,8 @@ use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Actions\Photos\SavePhotoAction;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -43,6 +45,7 @@ class ProductController extends Controller
         return view('admin.products.index', [
             'products' => $this->product
                 ->orderBy('created_at', $orderBy)
+                ->active()
                 ->byCategory($category)
                 ->withTags($tags)
                 ->search($search)
@@ -66,8 +69,10 @@ class ProductController extends Controller
     {
         $categories = Category::primaries();
         $tags = Tag::all();
+        $colors = Color::all();
+        $sizes = Size::all();
         return view('admin.products.create', 
-                    compact('categories', 'tags')
+                    compact('categories', 'tags', 'sizes', 'colors')
                 );
     }
 

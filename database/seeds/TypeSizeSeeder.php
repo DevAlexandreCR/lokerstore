@@ -12,7 +12,7 @@ class TypeSizeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Zapatos', 'Prendas-Superiores', 'Prendas-Inferiores'];
+        $types = ['Zapatos', 'Prendas-Superiores', 'Prendas-Inferiores', 'Especial'];
 
         foreach ($types as $type) {
             factory(TypeSize::class)->create([

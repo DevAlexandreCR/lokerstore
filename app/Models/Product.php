@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -11,7 +10,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'stock', 'description', 'price', 'id_category', 'is_active'
+        'name', 'description', 'price', 'id_category', 'is_active'
     ];
 
     public function category()
@@ -24,14 +23,9 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function colors()
+    public function stocks()
     {
-        return $this->belongsToMany(Color::class);
-    }
-
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class);
+        return $this->hasMany(Stock::class);
     }
 
     public function photos()
@@ -50,6 +44,11 @@ class Product extends Model
                 ->where('name', $category)
                 ->orWhere('id_parent', $id);
         });;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 
     public function scopeWithTags($query, $tags)

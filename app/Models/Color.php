@@ -10,8 +10,8 @@ class Color extends Model
 
     protected $table = 'colors';
 
-    public function products()
+    public function stocks()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(Stock::class);
     }
 }

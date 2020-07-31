@@ -154,6 +154,51 @@
           </div>
         </div>
         <hr>
+        <div class="row">
+          <div class="container text-center">
+            <h6>{{__('Add tags')}}</h6>
+          </div>
+          <div class="col">
+            @error('sizes') 
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one size')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @enderror
+            <div class="row @error('tags') alert alert-danger @enderror">
+              @foreach ($sizes as $size)
+                <div class="card m-2">
+                    <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
+                    <input type="checkbox" class="custom-control-input" value="{{$size->id}}"  name="sizes[]" id="{{$size->name}}">
+                    <label class="custom-control-label" for="{{$size->name}}">{{$size->name}}</label>
+                    </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="col">
+            @error('colors') 
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one color')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @enderror
+            <div class="row @error('colors') alert alert-danger @enderror">
+              @foreach ($colors as $color)
+                <div class="card m-2">
+                    <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
+                    <input type="checkbox" class="custom-control-input" value="{{$color->id}}"  name="colors[]" id="{{$color->name}}">
+                    <label class="custom-control-label" for="{{$color->name}}">{{$color->name}}</label>
+                    </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
         <div class="row" id="imgContainer">
           <div class="container text-center">
             <h6>{{__('Add images')}}</h6>
