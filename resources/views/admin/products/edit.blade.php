@@ -43,7 +43,7 @@
             <h6 class="card-title"> {{__('Stock')}} </h6>
           </div>
           <div class="col-4">
-                <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock" required placeholder="0"
+                <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock" disabled placeholder="0"
                 name="stock" aria-describedby="lastnameHelp" value="{{ $product->stock }}">
                 @error('stock')
                 <span class="invalid-feedback" role="alert">

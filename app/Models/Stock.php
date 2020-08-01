@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Events\OnStockCreatedOrUpdatedEvent;
 use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
-    protected $fillable = ['product_id', 'color_id', 'size_id'];
+    protected $fillable = ['product_id', 'color_id', 'size_id', 'quantity'];
 
     public function size()
     {

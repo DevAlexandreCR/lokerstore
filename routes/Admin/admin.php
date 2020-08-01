@@ -33,6 +33,7 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::resource('category', 'CategoryController')->except(['show', 'create', 'edit']);
     Route::resource('tags', 'TagController')->except(['show', 'create', 'edit']);
+    Route::resource('stocks', 'StockController')->except(['show', 'create', 'edit']);
 });
 
 
