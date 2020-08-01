@@ -30,7 +30,7 @@ class StockController extends Controller
     {
         $stock = $this->stock->create($request->all());
 
-        return response();
+        return;
     }
 
     /**
@@ -44,7 +44,7 @@ class StockController extends Controller
     {
         $stock->update($request->all());
 
-        return response();
+        return;
     }
 
     /**
@@ -56,5 +56,7 @@ class StockController extends Controller
     public function destroy(Stock $stock)
     {
         $stock->delete();
+
+        return;
     }
 }
