@@ -109,7 +109,7 @@
                   <div class="tab-content" id="v-pills-tabContent">
                     @foreach ($categories as $key => $category)
                     <div class="tab-pane fade {{$category->id == $product->category->id_parent ? 'show active' : '' }}" id="{{$category->name}}" role="tabpanel" aria-labelledby="{{$category->id}}">
-                      <select class="form-control" name="id_category" required>
+                      <select class="form-control" onchange="setCategory(this.value, 'edit_id_category')">
                         @foreach ($category->children as $sub)
                         <option value="{{$sub->id}}" 
                           @if ($sub->id == $product->id_category)     
@@ -120,6 +120,7 @@
                     </div>
                     @endforeach
                   </div>
+                  <input type="number"  id="edit_id_category" class="form-control" name="id_category" hidden value="{{$product->id_category}}">
                 </div>
               </div>
             </div>
@@ -236,6 +237,14 @@
                 reader.readAsDataURL(input.files[i]);
             }
         }
+    }
+
+    /** 
+    * Esta funcion agrega el valor del option a la category_id input
+    * @argument value valor del option seleccionado
+    */
+    var setCategory = (value, id) => {
+          document.getElementById(id).value = value
     }
 
     /** 

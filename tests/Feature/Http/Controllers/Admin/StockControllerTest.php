@@ -27,7 +27,7 @@ class StockControllerTest extends TestCase
      *
      * @return void
      */
-    public function testCreate()
+    public function testStore()
     {
         $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();

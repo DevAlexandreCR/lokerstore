@@ -45,7 +45,6 @@ class ProductController extends Controller
         return view('admin.products.index', [
             'products' => $this->product
                 ->orderBy('created_at', $orderBy)
-                ->active()
                 ->byCategory($category)
                 ->withTags($tags)
                 ->search($search)

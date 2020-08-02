@@ -121,7 +121,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->getDescription()}}...</td>
                             <td>
-                                <span class="badge badge-link badge-pill">{{ $product->stock }}</span>
+                                <a  href="{{route('stocks.create', $product)}}"><span class="badge badge-link badge-pill"><ion-icon name="navigate-circle-outline"></ion-icon>{{ $product->stock }}</span></a>
                             </td>
                             <td>{{ $product->price }}</td>
                             <td>
@@ -136,7 +136,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    </div>
+                                </div>
                             </td>
                             @if ($product->is_active)
                             <td> 

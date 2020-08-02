@@ -34,7 +34,7 @@ class StockController extends Controller
     {
         $stock = $this->stock->create($request->all());
 
-        return back()->with('success', __('Your product has updated save successfully'));
+        return back()->with('success', __('Your product has been update successfully'));
     }
 
     /**
@@ -48,7 +48,7 @@ class StockController extends Controller
         $colors = Color::all(['id', 'name']);
         $type_sizes = TypeSize::all(['id', 'name']);
 
-        return view('admin.stocks.create', [
+        return view('admin.stocks.index', [
             'product' => $product,
             'colors' => $colors,
             'type_sizes' => $type_sizes
@@ -66,7 +66,7 @@ class StockController extends Controller
     {
         $stock->update($request->all());
 
-        return;
+        return back()->with('success', __('Your product has been update successfully'));
     }
 
     /**
@@ -79,6 +79,6 @@ class StockController extends Controller
     {
         $stock->delete();
 
-        return;
+        return back()->with('success', __('Your product has been update successfully'));
     }
 }

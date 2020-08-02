@@ -110,7 +110,7 @@
                 <div class="tab-content" id="v-pills-tabContent">
                   @foreach ($categories as $key => $category)
                   <div class="tab-pane fade {{$key == 0 ? 'show active' : '' }}" id="{{$category->name}}" role="tabpanel" aria-labelledby="{{$category->id}}">
-                    <select class="form-control" onchange="setCategory(this.value)">
+                    <select class="form-control" onchange="setCategory(this.value, 'id_category')">
                       @foreach ($category->children as $sub)
                       <option value="{{$sub->id}}">{{$sub->name}}</option>
                       @endforeach
@@ -232,8 +232,8 @@
   * Esta funcion agrega el valor del option a la category_id input
   * @argument value valor del option seleccionado
   */
-  var setCategory = (value) => {
-        document.getElementById('id_category').value = value
+  var setCategory = (value, id) => {
+        document.getElementById(id).value = value
     }
 
   /** 
