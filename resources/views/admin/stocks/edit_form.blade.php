@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group ml-2">
                                 <label for="inputquantity" class="sr-only">{{__('Stock')}}</label>
-                                <input type="number" class="form-control" name="quantity" id="inputquantity" placeholder="{{__('Stock')}}" value="{{$stock->quantity}}">
+                                <input type="number" class="form-control" name="quantity" id="inputquantity" placeholder="{{__('Stock')}}" value="{{$stock->quantity}}" required>
                                 <input type="number"  id="size_edit" class="form-control" name="size_id" hidden value="{{$stock->size->id}}">
                             </div>
                         </div>

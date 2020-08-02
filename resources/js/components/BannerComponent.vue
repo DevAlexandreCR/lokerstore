@@ -33,7 +33,7 @@
     export default {
         name: 'banner',
         mounted() {
-            console.log('Component mounted. banner')
+
         }
     }
 </script>

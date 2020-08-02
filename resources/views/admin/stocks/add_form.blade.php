@@ -6,10 +6,10 @@
         <div class="container form-inline increment">
             <div class="form-group mb-2">
                 <label for="selectColor"><span id="color_badge" class="badge"><ion-icon size="small" name="color-fill-outline"></ion-icon></span></label>
-                <select name="color_id"  class="custom-select ml-2 text-lowercase" id="selectColor" onchange="serColorBackgorundBadge('color_badge', this.value)">
-                    <option selected>{{__('Choose color')}}</option>
+                <select name="color_id"  class="custom-select ml-2 text-lowercase" id="selectColor">
+                    <option value="{{null}}" selected>{{__('Choose color')}}</option>
                     @foreach ($colors as $color)
-                        <option value="{{$color->name}}">{{__($color->name)}}</option>
+                        <option value="{{$color->id}}">{{__($color->name)}}</option>
                     @endforeach
                   </select>
             </div>
@@ -32,7 +32,7 @@
                 <div class="tab-content ml-3">
                     @foreach ($type_sizes as $key => $type)
                     <div class="tab-pane fade {{$key == 0 ? 'show active' : ''}}" id="{{$type->name}}" role="tabpanel" aria-labelledby="{{$type->id}}">                               
-                        <select class="form-control" required>
+                        <select class="form-control" required onchange="setSize(this.value, 'size')">
                             <option value="null" selected>{{__('Choose size')}}</option>
                             @foreach ($type->sizes as $size)
                                 <option value="{{$size->id}}">{{$size->name}}</option>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group mx-sm-3">
                     <label for="inputquantity" class="sr-only">{{__('Stock')}}</label>
-                    <input type="number" class="form-control" name="quantity" id="inputquantity" placeholder="{{__('Stock')}}">
+                    <input type="number" class="form-control" name="quantity" id="inputquantity" placeholder="{{__('Stock')}}" required>
                     <input type="number" class="form-control" name="product_id" hidden value="{{$product->id}}">
                     <input type="number"  id="size" class="form-control" name="size_id" hidden >
                 </div>

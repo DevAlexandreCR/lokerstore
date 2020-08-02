@@ -56,7 +56,7 @@ class StockControllerTest extends TestCase
         ]);
 
         $response
-                ->assertStatus(200);
+                ->assertStatus(302);
         $this->assertDatabaseHas('stocks', 
         [
             'product_id' => $product->id,
@@ -99,7 +99,7 @@ class StockControllerTest extends TestCase
         ]);
 
         $response
-                ->assertStatus(200);
+                ->assertStatus(302);
         $this->assertDatabaseHas('stocks', 
         [
             'product_id' => $product->id,
@@ -141,7 +141,7 @@ class StockControllerTest extends TestCase
         $response = $this->actingAs($admin, 'admin')->delete( route('stocks.destroy', $stock));
 
         $response
-                ->assertStatus(200);
+                ->assertStatus(302);
         $this->assertDatabaseMissing('stocks', 
         [
             'id' => $stock->id,

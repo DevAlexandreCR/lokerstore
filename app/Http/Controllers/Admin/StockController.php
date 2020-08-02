@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\OnProductUpdateEvent;
-use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Stocks\StoreOrUpdateRequest;
+use App\Http\Requests\Stocks\StoreRequest;
+use App\Http\Requests\Stocks\UpdateRequest;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\Size;
 use App\Models\Stock;
 use App\Models\TypeSize;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -30,9 +29,9 @@ class StockController extends Controller
      * @param Request $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $stock = $this->stock->create($request->all());
+        $this->stock->create($request->all());
 
         return back()->with('success', __('Your product has been update successfully'));
     }
@@ -62,7 +61,7 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stock $stock)
+    public function update(UpdateRequest $request, Stock $stock)
     {
         $stock->update($request->all());
 

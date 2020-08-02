@@ -85,7 +85,6 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request, Product $products, SavePhotoAction $savePhotoAction) : RedirectResponse
     {
-        dd($request->all());
         $product = $products->create($request->all());
 
         foreach ($request->get('tags') as $tag) {

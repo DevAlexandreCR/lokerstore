@@ -11174,6 +11174,10 @@ a.text-dark:focus {
   color: black;
 }
 
+.card-filter {
+  max-height: 20rem;
+}
+
 .card-hover {
   min-height: 100%;
   transition: box-shadow 0.3s;
@@ -11225,6 +11229,16 @@ a.text-dark:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
+}
+
+#showcase {
+  max-width: 90%;
+}
+
+@media (max-width: 414px) {
+  #showcase {
+    min-width: 100% !important;
+  }
 }
 
 .row-nav {

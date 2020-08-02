@@ -15,7 +15,7 @@
             }
         },
         mounted() {           
-            console.log('Component mounted promos')
+
         }
     }
 </script>

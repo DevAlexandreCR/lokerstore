@@ -15,6 +15,22 @@
 </div>
 
 @endif
+
+    @if ( $errors->any() )
+    
+        @foreach ($errors->all() as $error)
+            <div class="container align-self-start col-4 py-2">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>{{__('Error!')}}</strong> {{ $error }}
+                </div>
+            </div>   
+        @endforeach
+
+    @endif
     <div class="container my-4">
         <form action="{{route('stocks.store')}}" method="POST">
             @csrf

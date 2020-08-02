@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <router-view></router-view>
         </div>
         <div class="container" v-show="isNotHomeRoute()">
@@ -103,7 +103,7 @@
 
         },
         mounted() {           
-            console.log('Component mounted home')
+
         }
     }
 </script>

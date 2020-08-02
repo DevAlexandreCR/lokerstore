@@ -11,12 +11,23 @@ const getProducts = (query = null) => {
 }
 
 const getCategories = () => {
-   
     return axios.get(`${url}categories`)
         .then(res => res.data)
 }
 
+const getColors = () => {
+    return axios.get(`${url}colors`)
+    .then(res => res.data)
+}
+
+const getSizes = () => {
+    return axios.get(`${url}type_sizes`)
+    .then(res => res.data)
+}
+
 export default {
     getProducts,
-    getCategories
+    getCategories,
+    getColors,
+    getSizes
 }

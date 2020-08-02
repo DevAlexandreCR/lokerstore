@@ -28,7 +28,7 @@
         },
 
         mounted() {
-            console.log(`Component mounted. gender `)
+            
         }
     }
 </script>

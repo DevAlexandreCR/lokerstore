@@ -16,7 +16,7 @@
                 <img class="img-fluid img-category" :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
                 <div class="ofert-title">Hasta 50% Off</div>
             </div>
-            <div class="col-md-6" >
+            <div class="col-md-6" v-if="products.length > 0">
                 <div class="row">
                     <div class="col-sm-6 d-none d-sm-block my-1" v-on:click="goToShowcase(category.name)"
                     v-for="(product, index) in selectedRandomProducts" :key="product.id">

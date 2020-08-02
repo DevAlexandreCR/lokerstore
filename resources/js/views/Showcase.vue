@@ -1,15 +1,11 @@
 <template>
-    <div class="container">
+    <div class="container-fluid" id="showcase">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Categories view</div>
-                    {{products}}
-                    <div class="card-body">
-                        I'm an example component.
-                        <router-link to="/home"><a>return</a></router-link>
-                    </div>
-                </div>
+            <div class="col-3">
+                <filters-component :query="query"></filters-component>
+            </div>
+            <div class="col-9">
+                <products-grid-component :products="products"></products-grid-component>
             </div>
         </div>
     </div>
@@ -17,15 +13,26 @@
 
 <script>
     import api from '../api.js'
+    import FiltersComponent from '../components/FiltersComponent'
+    import ProductsGridComponent from '../components/ProductsGridComponent'
 
     export default {
         name: 'showcase',
+
+        components: {
+            FiltersComponent,
+            ProductsGridComponent
+        },
 
         data () {
             return {
                 products: {
                     type: Array,
                     default: () => []
+                },
+                query: {
+                    type: Object,
+                    default: {}
                 }
             }
         },
@@ -35,7 +42,7 @@
         },
 
         methods: {
-            getQuery(data) {
+            buildQuery(data) {
                 var query = {}
                 for (const key in data) {
                     if (data.hasOwnProperty(key)) {
@@ -67,21 +74,22 @@
                 }
 
                 return query
+            },
+
+            getProducts(query) {
+                api.getProducts(query).then(products => {
+                                this.products = products
+                            })
             }
         },
 
         created() {
-            var query = this.getQuery(this.$route.query) 
-      
-            api.getProducts(query).then(products => {
-                this.products = products
-                console.log(products);
-            })
+            this.query = this.buildQuery(this.$route.query) 
+            this.getProducts(this.query)            
         },
 
         mounted() {
-            console.log('View showcase ...')
-            var query = this.$route.query
+
         }
     }
 </script>
