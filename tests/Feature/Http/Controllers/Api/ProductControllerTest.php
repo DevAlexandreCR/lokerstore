@@ -32,14 +32,10 @@ class ProductControllerTest extends TestCase
             ]);
         }
         factory(Category::class, 2)->create();
-        factory(Product::class, 10)->create();
+        $products = factory(Product::class, 10)->create();
         $response = $this->json('GET', route('api.index'));
 
-        $response->assertJsonStructure([
-            'data' => [
-                '*' => ['id', 'name', 'created_at', 'updated_at']
-            ]
-        ]);
+        $response->assertJson($products->toArray());
     }
 
     public function testShow()

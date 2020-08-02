@@ -110,17 +110,18 @@
                 <div class="tab-content" id="v-pills-tabContent">
                   @foreach ($categories as $key => $category)
                   <div class="tab-pane fade {{$key == 0 ? 'show active' : '' }}" id="{{$category->name}}" role="tabpanel" aria-labelledby="{{$category->id}}">
-                    <select class="form-control" name="id_category" required>
+                    <select class="form-control" onchange="setCategory(this.value)">
                       @foreach ($category->children as $sub)
                       <option value="{{$sub->id}}">{{$sub->name}}</option>
                       @endforeach
-                  </select>
+                    </select>
                   </div>
                   @endforeach
                 </div>
+                <input type="number"  id="id_category" class="form-control" name="id_category" hidden >
               </div>
             </div>
-            @error('lastname')
+            @error('category')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -226,6 +227,14 @@
         }
     }
   }
+
+  /** 
+  * Esta funcion agrega el valor del option a la category_id input
+  * @argument value valor del option seleccionado
+  */
+  var setCategory = (value) => {
+        document.getElementById('id_category').value = value
+    }
 
   /** 
   * Esta funcion agrega la vista para una nueva imagen

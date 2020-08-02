@@ -18,7 +18,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Undocumented function
+     * retun list of categories primaries
      *
      * @return JsonResponse
      */

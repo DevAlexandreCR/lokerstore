@@ -14,6 +14,7 @@ use Tests\TestCase;
 class ProductControllerTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     private $categories = [
         'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
@@ -68,11 +69,6 @@ class ProductControllerTest extends TestCase
             ->assertViewHas('products');
     }
 
-    /**
-     * test route admin/products/$product->id/edit
-     *
-     * @return void
-     */
     public function testEditProduct()
     {
         $admin = factory(Admin::class)->create();
@@ -94,6 +90,49 @@ class ProductControllerTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('admin.products.edit')
             ->assertViewHas('product');
+    }
+
+    /**
+     * test route admin/products/$product->id/edit
+     *
+     * @return void
+     */
+    public function testStore()
+    {
+        $this->withoutExceptionHandling();
+        $admin = factory(Admin::class)->create();
+        
+        foreach ($this->categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
+        $category = factory(Category::class)->create();
+        $tag = factory(Tag::class)->create();
+
+        $response = $this->actingAs($admin, 'admin')->post(route('products.store'),
+        [  
+            'name'          =>  'new product',
+            'description'   =>  'new description at product incoming',
+            'stock'         =>  0,
+            'price'         =>  2000,
+            'id_category'   => $category->id,
+            'tags'          => [$tag->id],
+            'photos'        => [$this->faker->file('public/photos')]
+        ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('stocks.create', Product::first()));
+        
+        $this->assertDatabaseHas('products', [
+            'name'          =>  'new product',
+            'description'   =>  'new description at product incoming',
+            'stock'         =>  '0',
+            'price'         =>  2000,
+            'id_category'   => $category->id,
+        ]);
     }
 
     /**

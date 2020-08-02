@@ -84,17 +84,19 @@ class ProductController extends Controller
      * @param SavePhotoAction $savePhotoAction
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Product $product, SavePhotoAction $savePhotoAction) : RedirectResponse
+    public function store(StoreRequest $request, Product $products, SavePhotoAction $savePhotoAction) : RedirectResponse
     {
-        $new_product = $product->create($request->all());
+        dd($request->all());
+        $product = $products->create($request->all());
 
         foreach ($request->get('tags') as $tag) {
-            $new_product->tags()->attach($tag);
+            $product->tags()->attach($tag);
         }
 
-        $savePhotoAction->execute($new_product->id, $request->file('photos'));
+        $savePhotoAction->execute($product->id, $request->file('photos'));
 
-        return back()->with('success', __('Your product has been save successfully'));
+        return redirect(route('stocks.create', $product)
+        )->with('success', __('Your product has been save successfully'));
     }
 
     /**

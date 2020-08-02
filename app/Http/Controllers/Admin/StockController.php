@@ -5,32 +5,54 @@ namespace App\Http\Controllers\Admin;
 use App\Events\OnProductUpdateEvent;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Color;
+use App\Models\Product;
+use App\Models\Size;
 use App\Models\Stock;
+use App\Models\TypeSize;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class StockController extends Controller
 {
     protected $stock;
-
+    
     public function __construct(Stock $stock)
     {
         $this->stock = $stock;
-
-        return response();
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * Store a new Stock
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
     public function store(Request $request)
     {
         $stock = $this->stock->create($request->all());
 
-        return;
+        return back()->with('success', __('Your product has updated save successfully'));
+    }
+
+    /**
+     * Return view for create a new stock
+     *
+     * @param Product $product
+     * @return View
+     */
+    public function create(Product $product) : View
+    {
+        $colors = Color::all(['id', 'name']);
+        $type_sizes = TypeSize::all(['id', 'name']);
+
+        return view('admin.stocks.create', [
+            'product' => $product,
+            'colors' => $colors,
+            'type_sizes' => $type_sizes
+        ]);
     }
 
     /**
