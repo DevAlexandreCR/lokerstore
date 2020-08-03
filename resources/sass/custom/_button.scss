@@ -1,0 +1,49 @@
+.btn-primary {
+    background: $primary;
+
+    &:hover {
+        background: $secondary;
+        color: $black;
+    }
+}
+
+.btn-blue {
+    background-color: dodgerblue;
+    color: whitesmoke;
+    top: 50%;
+    bottom: 50%;
+    &:hover {
+        background: $white;
+        color: dodgerblue;
+    }
+}
+
+.btn-secondary {
+    background: $white;
+    color: black;
+
+    &:hover {
+        background: $primary;
+        color: white;
+    }
+}
+
+.nav-link{
+    text-align: center;
+    &:hover {
+        background: $primary-end;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+}
+
+.fab {
+    border-radius: 50%;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-bottom: -25px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

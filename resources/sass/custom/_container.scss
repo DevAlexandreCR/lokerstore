@@ -1,0 +1,11 @@
+#showcase{
+    max-width: 90%;
+}
+
+
+
+@media (max-width: $breakpoint-phone) {
+    #showcase {
+        min-width: 100% !important;
+    }
+}

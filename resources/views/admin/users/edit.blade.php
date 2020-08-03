@@ -5,15 +5,13 @@
     <div class="card shadow">
       <div class="modal-header bg-light">
         <h5 class="modal-title">{{ __('Edit user') }}</h5>
-        <button class="btn" type="button">
-          <a href="{{ route('users.show' , ['user' => $user]) }}"><ion-icon name="return-up-back-outline"></ion-icon></a>
-        </button>
+        <a href="{{ route('users.show' , ['user' => $user]) }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
       </div>
       <div class="card-body">
         <form action="{{route('users.update', ['user' => $user])}}" method="POST">
           @csrf
           @method('PUT')
-          @switch($p)
+          @switch($input_name)
               @case('name')
                   <div class="form-group">
                     <label for="name">{{__('Name')}}</label>
@@ -103,7 +101,7 @@
                   </div>
                   @break
               @case('delete')
-              <form action="{{route('users.update', ['user' => $user])}}" method="POST">
+              <form action="{{route('users.destroy', ['user' => $user])}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="alert alert-danger" role="alert">
@@ -115,14 +113,6 @@
                 </div>
                 <div class="row">
                 <div class="col">
-                  <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" required>
-                      <label class="form-check-label danger" for="disabledFieldsetCheck">
-                        {{__('Are you sure to continue ?, check here')}}
-                      </label>
-                    </div>
-                  </div>
                 </div>
                 <div class="col-sm-2">
                   <input type="hidden" name="is_active" value="1">
@@ -135,13 +125,13 @@
                   <div class="form-group">
                     <div class="alert alert-info" role="alert">
                       <strong>{{__('Oops! You\'re lost?')}}</strong>
-                        <?php $p = 'lost' ?>;
+                        <?php $input_name = 'lost' ?>;
                     </div>
                   </div>  
           @endswitch
-          @if ($p === 'lost')
+          @if ($input_name === 'lost')
                 <a href="{{route('users.index')}}" class="btn btn-primary">{{__('Back')}}</a>
-          @elseif ($p === 'is_active' || $p === 'delete')
+          @elseif ($input_name === 'is_active' || $input_name === 'delete')
                 <br>
           @else
                 <button type="submit" class="btn btn-primary">{{__('Save')}}</button>

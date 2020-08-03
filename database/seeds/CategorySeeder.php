@@ -12,6 +12,45 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class,4)->create();
+        $primaries_categories = ['Ropa', 'Zapatos', 'Deportes', 'Accesorios'];
+        $sub_categories_ropa = ['Camisas', 'Blusas', 'Busos', 'Faldas', 'Vestidos', 'Shorts', 'Chaquetas', 'Pantalones', 'Jeans', 'Ropa interior'];
+        $sub_categories_zapatos = ['Tennis', 'Sandalias'];
+        $sub_categories_accesorios = ['Relojes', 'Gafas'];
+        $sub_categories_deportes = ['Tennis Deportivos', 'Camisetas Deportivas', 'Sudaderas'];
+
+        foreach ($primaries_categories as $category) {
+            factory(Category::class)->create([
+                'name' => $category,
+                'id_parent' => null
+            ]);
+        }
+
+        foreach ($sub_categories_ropa as $category) {
+            factory(Category::class)->create([
+                'name' => $category,
+                'id_parent' => 1
+            ]);
+        }
+
+        foreach ($sub_categories_zapatos as $category) {
+            factory(Category::class)->create([
+                'name' => $category,
+                'id_parent' => 2
+            ]);
+        }
+
+        foreach ($sub_categories_deportes as $category) {
+            factory(Category::class)->create([
+                'name' => $category,
+                'id_parent' => 3
+            ]);
+        }
+
+        foreach ($sub_categories_accesorios as $category) {
+            factory(Category::class)->create([
+                'name' => $category,
+                'id_parent' => 4
+            ]);
+        }
     }
 }

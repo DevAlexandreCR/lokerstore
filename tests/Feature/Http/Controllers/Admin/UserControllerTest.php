@@ -21,7 +21,7 @@ class UserControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
-        // dd($admin->toArray());
+
         $response = $this->actingAs($admin, 'admin')->get('admin/users');
 
         $response
@@ -39,7 +39,7 @@ class UserControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
-        // dd($admin->toArray());
+
         $response = $this->actingAs($admin, 'admin')->get("admin/users/$user->id");
 
         $response
@@ -57,7 +57,7 @@ class UserControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
-        // dd($admin->toArray());
+
         $response = $this->actingAs($admin, 'admin')->get("admin/users/$user->id/edit");
 
         $response
@@ -73,16 +73,17 @@ class UserControllerTest extends TestCase
      */
     public function testUpdateUser()
     {
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin, 'admin')->put("admin/users/$user->id", [
+        $response = $this->actingAs($admin, 'admin')->put(route('users.update', $user), [
             'email' => 'elnuevoemail@nada.com'
         ]);
 
         $response
-            ->assertRedirect("admin/users/$user->id")
-            ->assertSessionHas('updated')
+            ->assertRedirect(route('users.show', $user))
+            ->assertSessionHas('user-updated')
             ->assertStatus(302);
         $this->assertDatabaseHas('users', ['email' => 'elnuevoemail@nada.com']);
     }
@@ -94,14 +95,13 @@ class UserControllerTest extends TestCase
      */
     public function testDeleteUser()
     {
-        // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($admin, 'admin')->delete("admin/users/$user->id");
+        $response = $this->actingAs($admin, 'admin')->delete(route('users.destroy', $user));
 
         $response->assertRedirect('admin/users')
-            ->assertSessionHas('deleted')
+            ->assertSessionHas('user-deleted')
             ->assertStatus(302); 
     }
 
@@ -112,7 +112,7 @@ class UserControllerTest extends TestCase
      */
     public function testSearchUser()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         factory(User::class)->create([
             'name' => 'jose',
@@ -124,7 +124,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $query = 'jos';
-        $response = $this->actingAs($admin, 'admin')->post( route('users.index', ['query' => $query]));
+        $response = $this->actingAs($admin, 'admin')->get( route('users.index', ['search' => $query]));
 
         $response
             ->assertStatus(200)
@@ -140,7 +140,6 @@ class UserControllerTest extends TestCase
      */
     public function testSearchUserNotFound()
     {
-        // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         factory(User::class)->create([
             'name' => 'jose',
@@ -152,7 +151,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $query = 'martha';
-        $response = $this->actingAs($admin, 'admin')->post( route('users.index', ['query' => $query]));
+        $response = $this->actingAs($admin, 'admin')->get( route('users.index', ['search' => $query]));
 
         $response
             ->assertViewHas('user_not_found');

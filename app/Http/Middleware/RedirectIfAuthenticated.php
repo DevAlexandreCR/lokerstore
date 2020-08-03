@@ -20,14 +20,20 @@ class RedirectIfAuthenticated
     {
         switch ($guard) {
             case 'admin':
-                    if (Auth::guard($guard)->check()) {
-                    return redirect(RouteServiceProvider::ADMIN_HOME);
-                 }
+                    if (Auth::guard('admin')->check()) {
+                        return redirect(RouteServiceProvider::ADMIN_HOME);
+                    }
                     break;
        
             default:
-                    if (Auth::guard($guard)->check()) {
-                     return redirect(RouteServiceProvider::HOME);
+                    if (Auth::check()) {
+                        if (Auth::user()->email_verified_at == null) {
+                            /**
+                             * si el usuario no ha verificado su email se carga la variable de sesion
+                             */
+                            session(['verify_email' => __('Please check your email to complete registration')]);
+                        }
+                        return redirect(RouteServiceProvider::HOME);
                     }
                     break;
                  }

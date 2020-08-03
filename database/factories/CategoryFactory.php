@@ -6,7 +6,9 @@ use App\Models\Category;
 use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
+
     return [
-        'name' => $faker->unique()->randomElement(['Camisas','Camisetas','Pantalones','Sudaderas','Chaquetas', 'Busos', 'Accesorios'])
+        'name' => $faker->unique()->name(),
+        'id_parent' =>  Category::inRandomOrder()->value('id') ?: null
     ];
 });

@@ -1,0 +1,12 @@
+.row-nav {
+    text-align: center;
+    justify-content: center;
+    background: white;
+}
+
+.router-link-exact-active {
+    background: $primary-end;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}

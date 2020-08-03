@@ -4,6 +4,26 @@
 // Variables
 @import 'variables';
 
+//utilities
+@import './utilities/utilities';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//custom components
+@import './custom/images';
+@import './custom/carousel';
+@import './custom/navbar';
+@import './custom/button';
+@import './custom/card';
+@import './custom/input';
+@import './custom/icons';
+@import './custom/container';
+@import './custom/badge';
+@import './custom/paginate';
+
+
+// views
+@import './views/home';
+@import './views/body';
 

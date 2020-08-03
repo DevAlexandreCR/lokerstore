@@ -15,7 +15,7 @@ class ResetPasswordController extends Controller
 
     protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
-        /**
+    /**
      * Display the password reset view for the given token.
      *
      * If no token is present, display the link request form.
@@ -31,7 +31,7 @@ class ResetPasswordController extends Controller
         );
     }
 
-        /**
+    /**
      * Get the broker to be used during password reset.
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
@@ -41,7 +41,7 @@ class ResetPasswordController extends Controller
         return Password::broker('admins');
     }
 
-        /**
+    /**
      * Get the guard to be used during password reset.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard

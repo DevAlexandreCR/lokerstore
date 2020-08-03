@@ -16,13 +16,12 @@ class EnabledUser
      */
     public function handle($request, Closure $next)
     {
+        
         /**
          * si el usuario esta inhabilitado lo redirecciona a la vista correspondiente
          */
         if ($request->user() && ! $request->user()->is_active) {
-
             return  redirect('/disabled-user');
-
         }
         
         return $next($request);

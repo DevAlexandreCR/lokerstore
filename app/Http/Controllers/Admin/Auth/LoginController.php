@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -19,16 +20,28 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
+    /**
+     * Muestra la vista login
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showLoginForm()
     {
         return view('admin.login');
     }
 
+    /**
+     * Esta funcion devuelve las credecniales necesarias para hacer el login
+     * ademas el atributo is_active debe ser true para poder loguearse
+     *
+     * @param Request $request
+     * @return Array
+     */
     protected function credentials(Request $request)
     {
         $credenctials = $request->only($this->username(), 'password');
 
-        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion 
+        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion
 
         return $credenctials;
     }
@@ -59,7 +72,7 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-        /**
+    /**
      * Attempt to log the user into the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -68,11 +81,12 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
+            $this->credentials($request),
+            $request->filled('remember')
         );
     }
 
-        /**
+    /**
      * Get the guard to be used during authentication.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
@@ -82,15 +96,26 @@ class LoginController extends Controller
         return Auth::guard('admin');
     }
 
-        /**
-     * The user has been authenticated.
+    /**
+     * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
-    protected function authenticated(Request $request, $user)
+    public function logout(Request $request)
     {
-        Auth::logoutOtherDevices($user->password);
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect('/admin');
     }
 }

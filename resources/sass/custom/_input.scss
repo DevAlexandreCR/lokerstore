@@ -1,0 +1,14 @@
+.hover-edit {
+    &:hover {
+        border: none;
+        border-bottom: 1px solid black;
+    }
+}
+
+.unborder {
+    border: 0;
+  }
+
+.font-mini {
+    font-size: smaller;
+}

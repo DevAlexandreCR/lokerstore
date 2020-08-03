@@ -11,6 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        window.App = {}
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,12 +23,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="d-flex flex-column" 
-    style="background: #ffffff;
-    background: linear-gradient(to right top, #ffffff,#c5c4c4); display: flex;
-    flex-direction: column;">
+<body>
     <div id="app">
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow-sm" style="background: linear-gradient(to right top, #2b2a2a,#000000);">
+        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow" id="nav-app">
             <div class="container">
                 @if (Auth::guard('admin')->check())
                 <a class="navbar-brand" href="{{ url('/admin') }}">
@@ -48,18 +49,33 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @auth
-                            @if (Route::is('users.index'))
-                        <form class="form-inline my-2 my-lg-0" method="POST" action="{{route('users.index')}}">
-                            @csrf
-                                <input class="form-control mr-sm-2" type="search" name="query" placeholder="{{__('Search')}}" aria-label="Search" required>
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{__('Search')}}</button>
-                            </form>
-                            @endif
-                        @endauth
+                        @auth('admin')
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @else 
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="#">Mujer</a>
+                            </li>
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="#">Hombre</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -71,11 +87,10 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -85,17 +100,17 @@
                                 </div>
                             </li>
                         @endguest
+                        @endauth
+
                     </ul>
                 </div>
             </div>
         </nav>
  
-        <main class="py-0" style="flex: 1; min-height: 100vh">
+        <main class="py-0" >
             @yield('content')
         </main>
     </div>
-
-<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </body>
 <footer style="z-index: 100">
     @yield('footer', View::make('footer'))

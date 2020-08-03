@@ -21,11 +21,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/'; //cambie la ruta de redireccion a index ya que esa es nuestra ruta de inicio
+    public const HOME = '/home'; //cambie la ruta de redireccion a index ya que esa es nuestra ruta de inicio
 
     /**
-     * The path to the "home admins" route 
-     * 
+     * The path to the "home admins" route
+     *
      * @var string
      */
     public const ADMIN_HOME = '/admin';
@@ -81,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
     }
 
@@ -94,8 +94,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapAdminRoutes()
     {
-        Route::middleware('admin')
+        Route::middleware('auth:admin')
+            ->middleware('admin')
+            ->prefix('admin')
             ->namespace($this->namespace . '\Admin')
-            ->group(base_path('routes/admin.php'));
+            ->group(base_path('routes/Admin/admin.php'));
     }
 }

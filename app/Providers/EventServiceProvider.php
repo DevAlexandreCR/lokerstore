@@ -2,6 +2,15 @@
 
 namespace App\Providers;
 
+use App\Events\OnProductUpdateEvent;
+use App\Events\OnStockCreatedOrUpdatedEvent;
+use App\Listeners\DisableProductIfStockIsEmpty;
+use App\Listeners\EnableOrDisableProductIfStockEmpty;
+use App\Listeners\SetStockProduct;
+use App\Models\Product;
+use App\Models\Stock;
+use App\Observers\ProductObserver;
+use App\Observers\StockObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +27,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        OnStockCreatedOrUpdatedEvent::class => [
+            SetStockProduct::class
+        ],
+        OnProductUpdateEvent::class => [
+            DisableProductIfStockIsEmpty::class
+        ]
     ];
 
     /**
@@ -29,6 +44,7 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Product::observe(ProductObserver::class);
+        Stock::observe(StockObserver::class);
     }
 }

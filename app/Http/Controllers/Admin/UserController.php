@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
-
     protected $user;
 
 
@@ -23,27 +22,23 @@ class UserController extends Controller
     /**
      * Display a listing of the users.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request) : View
     {
-        if ($request->has('query')) {
-            $query = $request->input('query');
-            return $this->searchUser($query);
-        } else {
-            return view('admin.users.index', [
-                'users' => $this->user->paginate(12)
-            ]);
-        }
+        $search =  $request->get('search');
+
+        return $this->searchUser($search);
+    
     }
 
     /**
      * Display the specified user.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(User $user)
+    public function show(User $user) : View
     {
         return view('admin.users.show', [
             'user' => $user
@@ -53,75 +48,63 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(UserRequest $request, User $user)
-    {    
-        $p = '0';  
-        if ( $request->has('p')){
-            $p = $request->input('p');
-        }
+    public function edit(UserRequest $request, User $user) : View
+    {
         return view('admin.users.edit', [
             'user' => $user,
-            'p' => $p
+            'input_name' => $request->input('input_name') // variable que le dice a la vista cual input mostrar
         ]);
     }
 
     /**
      * Update the specified user in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Request\UserRequest  $request
+     * @param  User  $user
+     * @return \Illuminate\Http\RedirecResponse
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $user) : RedirectResponse
     {
         $user->update($request->all());
 
-        return redirect("admin/users/$user->id")->with('updated', 'El usuario ha sido actualizado correctamente');
+        return redirect( route('users.show', ['user' => $user->id]))->with('user-updated', 'User has been updated success');
     }
 
     /**
      * Remove the specified user from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return \Illuminate\Http\RedirecResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user) : RedirectResponse
     {
-        $email = $user->email;
         $user->delete();
 
-        return redirect("admin/users")->with('deleted', "El usuario $email ha sido eliminado correctamente");
+        return redirect("admin/users")->with('user-deleted', "User has been deleted success");
     }
+
 
     /**
      * Funcion busca un usuario en la tabla users
      * y busca coincidencias en los campos name, lastname, email y phone
      *
-     * @param string $query texto a buscar
-     * @return View Retorna una vista con los resultados de la busqueda cargados
+     * @param string|null $search
+     * @return View
      */
-    private function searchUser(string $query)
+    private function searchUser(?string $search) : View
     {
-        $user = User::where(function ($q) use ($query) {
-            $q
-            ->where('name', 'like', '%' . $query . '%')
-            ->orWhere('lastname', 'like','%' . $query . '%')
-            ->orWhere('email', 'like', '%' . $query . '%')
-            ->orWhere('phone', 'like', '%' . $query . '%');
-        });
-
-        if ($user->count() > 0) {
+        if ($this->user->search($search)->count() > 0) {
             return view('admin.users.index', [
-                'users' => $user->paginate(9),
-                'user_found' => "Mostrando resultados para: $query"
+                'users' => $this->user->search($search)->paginate(10),
+                'user_found' => "Mostrando resultados para: $search"
             ]);
         } else {
             return view('admin.users.index', [
-                'users' => $user->paginate(9),
-                'user_not_found' => "No se encontraron resultados para $query"
+                'users' => $this->user->search($search)->paginate(10),
+                'user_not_found' => "No se encontraron resultados para $search"
             ]);
         }
     }

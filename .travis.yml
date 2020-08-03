@@ -1,23 +1,27 @@
 language: php
+sudo: required
+dist: trusty
+services:
+    -mysql
 cache:
     directories:
         - node_modules
         - ~/.npm
         - vendor
 php:
-    - '7.4'
-env:
-    -DB_CONNECTION=pgsql
+    - '7.2'
 git:
     depth: 3
+before_install:
+    - mysql -e 'create database testing;'
 before_script:
+    - cp .env.testing.example .env.testing
     - composer self-update
     - composer install --quiet --prefer-dist --optimize-autoloader 
     - composer dump-autoload
 script:
-    - composer dump-autoload 
-    - php artisan migrate --force #:refresh --seed --force <-- hice este cambio para que no renueve la bd en prod
-    - vendor/bin/phpunit
+    - php artisan migrate:refresh --force
+    - php artisan test
 notifications:
     email:
         recipients:
