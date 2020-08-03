@@ -4,6 +4,9 @@ namespace App\Models;
 
 use App\Events\OnProductUpdateEvent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -47,6 +50,26 @@ class Product extends Model
         });;
     }
 
+    public function scopePrice($query, $price)
+    {
+        if (empty($price)) return;
+        return $query
+                    ->where('price', '>', $price[0])
+                    ->where('price', '<', $price[1]);
+    }
+
+    public function scopeColor($query, $colors)
+    {
+        if (empty($colors)) return;
+
+        return $query->whereHas('stocks', function ($query) use ($colors) {
+            foreach ($colors as $key => $color) {
+                $query->where('color_id', $color);
+            }
+            
+        });
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -57,6 +80,7 @@ class Product extends Model
         if (empty($tags)) return;
 
         return $query->whereHas('tags', function($query) use ($tags) {
+            
             foreach ($tags as $key => $value) {
                 $query->orWhere('name', $key);
             }

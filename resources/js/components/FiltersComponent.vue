@@ -11,7 +11,7 @@
                     aria-expanded="true" :aria-controls="category.name" >{{category.name}}</a>
                     <div class="list-group collapse" :id="category.name" v-for="sub in category.children" :key="sub.id"
                     :aria-labelledby="'heading' + category.name" data-parent="#accordion">
-                        <a v-on:click="selectCategory(sub.id)" class="btn list-group-item list-group-item-action">{{sub.name}}</a>
+                        <a v-on:click="selectCategory(sub.name)" class="btn list-group-item list-group-item-action">{{sub.name}}</a>
                     </div>
                 </li>
             </ul>
@@ -26,19 +26,19 @@
                   <div class="col p-1">
                         <div class="form-group">
                             <label for="inputMin" class="sr-only">Min</label>
-                            <input v-model="priceRange.min" type="number" class="form-control input-sm font-mini" id="inputMin" placeholder="min">
+                            <input v-model="priceRange[0]" min="0" type="number" class="form-control input-sm font-mini" id="inputMin" placeholder="min">
                         </div>
                   </div>
                   <div class="col p-1">
                         <div class="form-group">
                             <label for="inputMax" class="sr-only">Max</label>
-                            <input v-model="priceRange.max" type="number" class="form-control input-sm font-mini" id="inputMax" placeholder="max">
+                            <input v-model="priceRange[1]" min="0" type="number" class="form-control input-sm font-mini" id="inputMax" placeholder="max">
                         </div>
                   </div>
               </div>
           </div>
           <div class="card-footer text-center">
-              <button type="button" class="btn btn-secondary btn-sm" @click="sendQuery()">Aplicar</button>
+              <button type="button" class="btn btn-primary btn-sm" @click="sendQuery()">Aplicar</button>
           </div>
         </div>
         <div class="card border-primary m-2">
@@ -65,7 +65,7 @@
             </ul>
           </div>
           <div class="card-footer text-center">
-              <button type="button" class="btn btn-secondary btn-sm" v-on:click="sendQuery()">Aplicar</button>
+              <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">Aplicar</button>
           </div>
         </div>
         <div class="card border-primary m-2">
@@ -110,27 +110,17 @@ export default {
                 default: []
             },
             colorsSelected: [],
-            categorySelected: {
-                type: Number,
-                default: null
-            },
-            sizeSelected: {
-                type: Number,
-                default: null
-            },
-            priceRange: {
-                min: 0,
-                max: 0
-            }
+            categorySelected: null,
+            sizeSelected: null,
+            priceRange: [],
+            min: 0,
+            max: 0
 
         }
     },
 
     props: {
-        query: {
-            type: Object,
-            default: () => {}
-        } 
+        query: {} 
     },
 
     methods: {
@@ -150,8 +140,8 @@ export default {
             })
         },
 
-        selectCategory(id) {
-            this.categorySelected = id
+        selectCategory(name) {
+            this.categorySelected = name
             this.sendQuery()
         },
 
@@ -161,20 +151,19 @@ export default {
         },
 
         getQuerySelecteds(query) {
-            query.colors ? this.colorsSelected = query.colors : null
-            query.category ? this.categorySelected = query.category : null
+            query.colors ? this.colorsSelected = query.colors : this.colorsSelected = []
+            query.category ? this.categorySelected = query.category : this.categorySelected = null
             if (query.price) {
-                this.priceRange.min = query.price.min
-                this.priceRange.max = query.price.max
+                this.priceRange = query.price
             }
         },
 
         sendQuery() {
-            this.query.size = this.sizeSelected
-            this.query.colors = this.colorsSelected
-            this.query.category = this.selectCategory
-            this.query.price = this.priceRange
-            this.$emit('getProducts', this.query)
+            this.sizeSelected ? this.query.size = this.sizeSelected : this.query.size = null
+            this.colorsSelected ? this.query.colors = this.colorsSelected : this.query.colors = null
+            this.categorySelected ? this.query.category = this.categorySelected : this.query.category = null
+            this.priceRange ? this.query.price = this.priceRange : this.query.price = null
+            this.$emit('sendQuery', this.query)
         }
     },
 

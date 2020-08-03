@@ -23,8 +23,7 @@
                         <card-category-component v-if="index < 4" :product="product"></card-category-component>
                     </div>
                 </div>
-            </div>
-            
+            </div>  
         </div>
     </div>
 </template>

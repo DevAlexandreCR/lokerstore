@@ -29,12 +29,16 @@ class ProductController extends Controller
     {   
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
+        $colors = $request->validationData()['colors'];
+        $size = $request->validationData()['size'];
+        $price = $request->validationData()['price'];
         $search = $request->validationData()['search'];
-
         return response()->json(ProductResource::collection(
             $this->product
                 ->active()
                 ->byCategory($category)
+                ->price($price)
+                ->color($colors)
                 ->withTags($tags)
                 ->search($search)
                 ->get()

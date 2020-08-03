@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
-         <banner-component v-show="isNotHomeRoute()"></banner-component>
-        <div class="container">
+         <banner-component ></banner-component>
+        <div class="container" v-if="isNotHomeRoute()">
             <div class="row my-1" id="navbar-category">
                 <div class="col-sm-2 d-none d-sm-block">
                     <router-link 
@@ -18,14 +18,13 @@
                     >Hombre</router-link>
                 </div>
                 <div class="col">
-                    <form>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..." aria-label="Search" aria-describedby="btn-search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" id="btn-search">Buscar</button>
-                            </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..." 
+                        aria-label="Search" aria-describedby="btn-search" v-model="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" @click="getProducts(search)" type="button" id="btn-search">Buscar</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +71,8 @@
                 products: {
                     type: Array,
                     default: () => []
-                }
+                },
+                search: null
             }
         },
         components: 
@@ -86,16 +86,28 @@
         methods: {
             isNotHomeRoute () {
                 return this.$router.history.current['path'] === '/home'
+            },
+
+            getProducts(search = null) {
+                this.products = []
+                var query = {}
+
+                if (search) {
+                    query = {
+                        search: search
+                    }
+                    this.$router.push({name: 'showcase', query: query}).catch((e)=>{console.log(e);})
+                }
+                
             }
         },
         created() {
-            this.products = []
-
+            this.getProducts()
             api.getProducts().then(products => {
                 products.forEach(product => {
-                    this.products.push(product)
-                });
-            })
+                        this.products.push(product)
+                    });
+                })
 
             api.getCategories().then(categories => {
                 this.categories = categories              

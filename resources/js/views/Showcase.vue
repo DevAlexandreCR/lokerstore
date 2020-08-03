@@ -1,10 +1,35 @@
 <template>
     <div class="container-fluid" id="showcase">
-        <div class="row justify-content-center">
-            <div class="col-3">
-                <filters-component @getProducts="getProducts" :query="query"></filters-component>
+        <div class="container">
+            <div class="row my-1" id="navbar-category">
+                <div class="col-sm-2 d-none d-sm-block">
+                    <div 
+                    class="nav nav-link" 
+                    @click="setTag('Mujer')"
+                    >Mujer</div>
+                </div>
+                <div class="col-sm-2 d-none d-sm-block">
+                    <div
+                    class="nav nav-link active" 
+                    @click="setTag('Hombre')"
+                    >Hombre</div>
+                </div>
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..." 
+                        aria-label="Search" aria-describedby="btn-search" v-model="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" @click="setSearch(search)" type="button" id="btn-search">Buscar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-9">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-3">
+                <filters-component @sendQuery="sendQuery" :query="query"></filters-component>
+            </div>
+            <div class="col-sm-7">
                 <products-grid-component :products="products"></products-grid-component>
             </div>
         </div>
@@ -26,19 +51,15 @@
 
         data () {
             return {
-                products: {
-                    type: Array,
-                    default: () => []
-                },
+                products: [],
+                search: null,
                 query: {
-                    type: Object,
-                    default: {
-                        tags: [],
-                        category: null,
-                        colors: [],
-                        price: {},
-                        search: null,
-                    }
+                    tags: [],
+                    category: null,
+                    colors: [],
+                    price: [],
+                    size: null,
+                    search: null
                 }
             }
         },
@@ -49,7 +70,6 @@
 
         methods: {
             buildQuery(data) {
-                var query = {}
                 for (const key in data) {
                     if (data.hasOwnProperty(key)) {
                         switch (key) {
@@ -64,19 +84,21 @@
                                 array.forEach(tag => {
                                     tags.push(tag)
                                 });
-                                query['tags'] = tags
+                                this.query['tags'] = tags
                                 break;
                             case 'category':
-                                query['category'] = data[key]
+                                this.query['category'] = data[key]
                                 break
                             case 'search':
-                                query['search'] = data[key]
+                                this.query['search'] = data[key]
+                                this.search = data[key]
                                 break
                             case 'colors':
-                                query['colors'] = data[key]
+                                this.query['colors'] = data[key]
                                 break
                             case 'price':
-                                query['price'] = data[key]
+                                console.log(data[key]);
+                                this.query['price'] = data[key]
                                 break
                             default:
                                 break;
@@ -84,20 +106,41 @@
                         
                     }
                 }
+            },
 
-                return query
+            setTag(tag) {
+                this.query.tags = [tag]
+                this.sendQuery(this.query)
+            },
+
+            setSearch(search) {
+                this.query = {
+                    tags: [],
+                    category: null,
+                    colors: [],
+                    price: [],
+                    size: null,
+                    search: search
+                }
+
+            this.sendQuery(this.query)
+            },
+
+            sendQuery(query) {
+                this.$router.push({name: 'showcase', query: query}).catch(()=>{})
+                this.getProducts(query)
             },
 
             getProducts(query) {
-                console.log(query);
+                this.products = []
                 api.getProducts(query).then(products => {
-                                this.products = products
-                            })
+                        this.products = products
+                    })
             }
         },
 
         created() {
-            this.query = this.buildQuery(this.$route.query) 
+            this.buildQuery(this.$route.query) 
             this.getProducts(this.query)            
         },
 
