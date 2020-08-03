@@ -18,6 +18,6 @@ class TagController extends Controller
 
     public function index() : JsonResponse
     {
-        return response()->json($this->tags->toArray());
+        return response()->json($this->tags->all()->toArray());
     }
 }

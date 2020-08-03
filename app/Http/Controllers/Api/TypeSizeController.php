@@ -19,6 +19,6 @@ class TypeSizeController extends Controller
 
     public function index() : JsonResponse
     {
-        return response()->json($this->typeSizes->toJson());
+        return response()->json($this->typeSizes->with('sizes')->get());
     }
 }

@@ -11223,6 +11223,10 @@ a.text-dark:focus {
   border: 0;
 }
 
+.font-mini {
+  font-size: smaller;
+}
+
 .add {
   position: absolute;
   top: 50%;
@@ -11239,6 +11243,76 @@ a.text-dark:focus {
   #showcase {
     min-width: 100% !important;
   }
+}
+
+.badge-color-green {
+  background: green;
+  color: green;
+}
+
+.badge-color-white {
+  background: white;
+  color: white;
+}
+
+.badge-color-silver {
+  background: silver;
+  color: silver;
+}
+
+.badge-color-gray {
+  background: gray;
+  color: gray;
+}
+
+.badge-color-black {
+  background: black;
+  color: black;
+}
+
+.badge-color-red {
+  background: red;
+  color: red;
+}
+
+.badge-color-maroon {
+  background: maroon;
+  color: maroon;
+}
+
+.badge-color-yellow {
+  background: yellow;
+  color: yellow;
+}
+
+.badge-color-lime {
+  background: lime;
+  color: lime;
+}
+
+.badge-color-aqua {
+  background: aqua;
+  color: aqua;
+}
+
+.badge-color-blue {
+  background: blue;
+  color: blue;
+}
+
+.badge-color-fuchsia {
+  background: fuchsia;
+  color: fuchsia;
+}
+
+.badge-color-purple {
+  background: purple;
+  color: purple;
+}
+
+.badge-color-pink {
+  background: pink;
+  color: pink;
 }
 
 .row-nav {

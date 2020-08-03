@@ -2,7 +2,7 @@
     <div class="container-fluid" id="showcase">
         <div class="row justify-content-center">
             <div class="col-3">
-                <filters-component :query="query"></filters-component>
+                <filters-component @getProducts="getProducts" :query="query"></filters-component>
             </div>
             <div class="col-9">
                 <products-grid-component :products="products"></products-grid-component>
@@ -32,7 +32,13 @@
                 },
                 query: {
                     type: Object,
-                    default: {}
+                    default: {
+                        tags: [],
+                        category: null,
+                        colors: [],
+                        price: {},
+                        search: null,
+                    }
                 }
             }
         },
@@ -66,6 +72,12 @@
                             case 'search':
                                 query['search'] = data[key]
                                 break
+                            case 'colors':
+                                query['colors'] = data[key]
+                                break
+                            case 'price':
+                                query['price'] = data[key]
+                                break
                             default:
                                 break;
                         }
@@ -77,6 +89,7 @@
             },
 
             getProducts(query) {
+                console.log(query);
                 api.getProducts(query).then(products => {
                                 this.products = products
                             })
