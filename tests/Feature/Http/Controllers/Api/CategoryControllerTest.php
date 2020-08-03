@@ -17,7 +17,7 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndex() : void
     {
         $this->withoutExceptionHandling();
         /** creamos categorias para luego poder crear productos */
@@ -36,24 +36,15 @@ class CategoryControllerTest extends TestCase
         $response = $this->json('GET', route('categories.index'));
 
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                '*' => ['id', 'name', 'created_at', 'updated_at', 'id_parent']
-            ]
-        ]);
+        $response->assertJson(Category::primaries()->toArray());
     }
-
-    // public function testStore()
-    // {
-    //     //
-    // }
 
     /**
      * test get a categoy especific
      *
      * @return void
      */
-    public function testShow()
+    public function testShow() : void
     {
         $category = factory(Category::class)->create([
             'name' => 'Zapatos',
@@ -68,13 +59,4 @@ class CategoryControllerTest extends TestCase
         ]);
     }
 
-    // public function testUpdate()
-    // {
-    //     //
-    // }
-
-    // public function testDestroy()
-    // {
-    //     //
-    // }
 }

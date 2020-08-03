@@ -1,7 +1,7 @@
 import Router from 'vue-router'
 import Vue from 'vue'
 import Home from './views/Home'
-import Categories from './views/Categories'
+import Showcase from './views/Showcase'
 import ExampleComponent from './components/ExampleComponent'
 
 
@@ -17,9 +17,9 @@ export default new Router({
             component: Home,
             children: [
                 {
-                    path:':gender/categories',
-                    name: 'categories',
-                    component: Categories 
+                    path:'/home/show',
+                    name: 'showcase',
+                    component: Showcase 
                 }
             ]
         },

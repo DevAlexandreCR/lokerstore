@@ -1,0 +1,32 @@
+.paginate-list {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+    li {
+      display: inline-block;
+      &:before {
+        content: '⚬ ';
+        font-weight: bold;
+        color: slategray;
+      }
+    }
+  }
+  
+  .paginate-links.items {
+    user-select: none;
+    a {
+      cursor: pointer;
+    }
+    li.active a {
+      font-weight: bold;
+    }
+    li.next:before {
+      content: ' | ';
+      margin-right: 13px;
+      color: #ddd;
+    }
+    li.disabled a {
+      color: #ccc;
+      cursor: no-drop;
+    }
+  }

@@ -1,10 +1,10 @@
 <template>
-    <div v-bind:class="[ 'card', 'text-center', 'card-gender', 'shadow-sm', (gender == 'Mujer') ? 'bg-gender-w' : 'bg-gender-m']">
+    <div v-bind:class="[ 'card', 'text-center', 'traslate-up', 'card-gender', 'shadow-sm', (filter == 'Mujer') ? 'bg-gender-w' : 'bg-gender-m']">
         <div class="card-body">
             <div id="see-more" class="container">
-            <h1 class="card-title">{{gender}}</h1>
+            <h1 class="card-title">{{filter}}</h1>
             <router-link class="btn btn-secondary"
-            :to="{name: 'categories', params: { gender: gender }}"
+            :to="{name: 'showcase', query: { tags: [filter] }}"
             >ver mas</router-link>
             </div>
         </div>
@@ -21,14 +21,14 @@
         },
 
         props: {
-            gender: {
+            filter: {
                 type: String,
                 default: 'Mujer'
             }
         },
 
         mounted() {
-            console.log(`Component mounted. gender `)
+            
         }
     }
 </script>

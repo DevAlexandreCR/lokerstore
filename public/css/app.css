@@ -18,7 +18,93 @@
 }
 
 .bg-danger {
+  background: red;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+}
+
+.bg-green {
+  background: green;
+  font: icon;
+  color: whitesmoke;
+}
+
+.bg-white {
   background: white;
+  font: icon;
+}
+
+.bg-silver {
+  background: silver;
+  font: icon;
+}
+
+.bg-gray {
+  background: gray;
+  font: icon;
+}
+
+.bg-black {
+  background: black;
+  font: icon;
+  color: whitesmoke;
+}
+
+.bg-red {
+  background: red;
+  font: icon;
+  color: whitesmoke;
+}
+
+.bg-maroon {
+  background: maroon;
+  font: icon;
+  color: whitesmoke;
+}
+
+.bg-yellow {
+  background: yellow;
+  font: icon;
+}
+
+.bg-lime {
+  background: lime;
+  font: icon;
+}
+
+.bg-aqua {
+  background: aqua;
+  font: icon;
+}
+
+.bg-blue {
+  background: blue;
+  font: icon;
+  color: whitesmoke;
+}
+
+.bg-fuchsia {
+  background: fuchsia;
+  color: whitesmoke;
+  font: icon;
+}
+
+.bg-purple {
+  background: purple;
+  font: icon;
+  color: whitesmoke;
+}
+
+.bg-pink {
+  background: pink;
+  font: icon;
 }
 
 /*!
@@ -10960,6 +11046,45 @@ a.text-dark:focus {
      object-fit: cover;
 }
 
+.img-category {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100% !important;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.img-category:hover {
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
+  transform: scale(1.01);
+}
+
+.img-detail-admin {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.ofert-title {
+  position: absolute;
+  text-align: center;
+  width: 40%;
+  background: repeating-linear-gradient(90deg, transparent, #0f0f0f, transparent);
+  color: white;
+  bottom: 12%;
+  z-index: 100;
+  right: 0rem;
+  font-family: fantasy;
+  font-weight: bold;
+  font-size: large;
+  transform: rotate(-45deg);
+}
+
 @media (max-width: 414px) {
   .img-carousel {
     width: 100% !important;
@@ -11049,12 +11174,44 @@ a.text-dark:focus {
   color: black;
 }
 
+.card-filter {
+  max-height: 20rem;
+}
+
+.card-hover {
+  min-height: 100%;
+  transition: box-shadow 0.3s;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.card-hover:hover {
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
+  transform: scale(1.02);
+}
+
 .bg-gender-m {
-  background-image: url("/storage/images/woman.jpg");
+  background-image: url("/storage/images/man.jpg");
 }
 
 .bg-gender-w {
-  background-image: url("/storage/images/man.jpg");
+  background-image: url("/storage/images/woman.jpg");
+}
+
+.traslate-up {
+  transition: box-shadow 0.3s;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.traslate-up:hover {
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
+  transform: translate(0px, -10px);
 }
 
 .hover-edit:hover {
@@ -11066,12 +11223,138 @@ a.text-dark:focus {
   border: 0;
 }
 
+.font-mini {
+  font-size: smaller;
+}
+
 .add {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
+}
+
+#showcase {
+  max-width: 90%;
+}
+
+@media (max-width: 414px) {
+  #showcase {
+    min-width: 100% !important;
+  }
+}
+
+.badge-color-green {
+  background: green;
+  color: green;
+}
+
+.badge-color-white {
+  background: white;
+  color: white;
+}
+
+.badge-color-silver {
+  background: silver;
+  color: silver;
+}
+
+.badge-color-gray {
+  background: gray;
+  color: gray;
+}
+
+.badge-color-black {
+  background: black;
+  color: black;
+}
+
+.badge-color-red {
+  background: red;
+  color: red;
+}
+
+.badge-color-maroon {
+  background: maroon;
+  color: maroon;
+}
+
+.badge-color-yellow {
+  background: yellow;
+  color: yellow;
+}
+
+.badge-color-lime {
+  background: lime;
+  color: lime;
+}
+
+.badge-color-aqua {
+  background: aqua;
+  color: aqua;
+}
+
+.badge-color-blue {
+  background: blue;
+  color: blue;
+}
+
+.badge-color-fuchsia {
+  background: fuchsia;
+  color: fuchsia;
+}
+
+.badge-color-purple {
+  background: purple;
+  color: purple;
+}
+
+.badge-color-pink {
+  background: pink;
+  color: pink;
+}
+
+.paginate-list {
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.paginate-list li {
+  display: inline-block;
+}
+
+.paginate-list li:before {
+  content: "\26AC   ";
+  font-weight: bold;
+  color: slategray;
+}
+
+.paginate-links.items {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.paginate-links.items a {
+  cursor: pointer;
+}
+
+.paginate-links.items li.active a {
+  font-weight: bold;
+}
+
+.paginate-links.items li.next:before {
+  content: " | ";
+  margin-right: 13px;
+  color: #ddd;
+}
+
+.paginate-links.items li.disabled a {
+  color: #ccc;
+  cursor: no-drop;
 }
 
 .row-nav {

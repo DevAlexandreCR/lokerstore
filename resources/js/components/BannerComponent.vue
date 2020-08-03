@@ -1,7 +1,7 @@
 <template>
     <div class="contaner-fluid">
-        <div id="carouselhome" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
+        <div id="carouselhome" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators d-none">
                 <li data-target="#carouselhome" data-slide-to="0"></li>
                 <li data-target="#carouselhome" data-slide-to="1"></li>
                 <li data-target="#carouselhome" data-slide-to="2"></li>
@@ -33,7 +33,7 @@
     export default {
         name: 'banner',
         mounted() {
-            console.log('Component mounted. banner')
+
         }
     }
 </script>

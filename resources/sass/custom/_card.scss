@@ -16,10 +16,42 @@
     }
 }
 
+.card-filter {
+    max-height: 20rem;
+}
+
+
+.card-hover{
+    min-height: 100%;
+    // border: 1px solid #ccc;
+    transition: box-shadow .3s;
+    transition: transform .2s;
+    border-radius:10px;
+    &:hover {
+        position: relative;
+        cursor: pointer;
+        z-index: 1;
+        box-shadow: 0 0 21px rgba(33,33,33,.2);
+        transform: scale(1.02);
+    } 
+}
+
 .bg-gender-m {
-    background-image: url('/storage/images/woman.jpg');
+    background-image: url('/storage/images/man.jpg');
 }
 
 .bg-gender-w {
-    background-image: url('/storage/images/man.jpg');
+    background-image: url('/storage/images/woman.jpg');
+}
+
+.traslate-up {
+    transition: box-shadow .3s;
+    transition: transform .2s;
+    border-radius:10px;
+    &:hover {
+        position: relative;
+        z-index: 100;
+        box-shadow: 0 0 21px rgba(33,33,33,.2);
+        transform: translate(0px, -10px);
+    } 
 }

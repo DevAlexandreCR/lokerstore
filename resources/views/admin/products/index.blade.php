@@ -97,7 +97,7 @@
   @endif
     <div class="container-fluid bg-secondary shadow-sm my-2">
         <div class="row">
-            <table class="table table-sm table-striped table-condensed table-hover table-secondary">
+            <table class="table table-sm table-striped table-condensed table-hover table-secondary ">
                 <thead>
                     <tr>
                         <th>{{__('Id')}}</th>
@@ -120,7 +120,9 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->getDescription()}}...</td>
-                            <td>{{ $product->stock }}</td>
+                            <td>
+                                <a  href="{{route('stocks.create', $product)}}"><span class="badge badge-link badge-pill"><ion-icon name="navigate-circle-outline"></ion-icon>{{ $product->stock }}</span></a>
+                            </td>
                             <td>{{ $product->price }}</td>
                             <td>
                                 <div class="btn-group">
@@ -134,7 +136,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    </div>
+                                </div>
                             </td>
                             @if ($product->is_active)
                             <td> 

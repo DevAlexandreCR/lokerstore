@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Events\OnProductUpdateEvent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -10,7 +14,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'stock', 'description', 'price', 'id_category', 'is_active'
+        'name', 'description', 'price', 'stock', 'id_category', 'is_active'
     ];
 
     public function category()
@@ -23,6 +27,11 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
     public function photos()
     {
         return $this->hasMany(Photo::class);
@@ -32,13 +41,38 @@ class Product extends Model
     {
         if (empty($category)) return;
 
-        // $cat = Category::find()
+        $id = $this->getIdCategory($category);
+        
+        return $query->whereHas('category', function($query) use ($category, $id) {
+            $query
+                ->where('name', $category)
+                ->orWhere('id_parent', $id);
+        });;
+    }
 
-        $query->whereHas('category', function($query) use ($category) {
-               $categoryModel = $query->where('name', $category)->getModel();
-               $cat = $categoryModel->with('children')->where('name', $category);
-               return $cat->with('products')->get();
-            });
+    public function scopePrice($query, $price)
+    {
+        if (empty($price)) return;
+        return $query
+                    ->where('price', '>', $price[0])
+                    ->where('price', '<', $price[1]);
+    }
+
+    public function scopeColor($query, $colors)
+    {
+        if (empty($colors)) return;
+
+        return $query->whereHas('stocks', function ($query) use ($colors) {
+            foreach ($colors as $key => $color) {
+                $query->where('color_id', $color);
+            }
+            
+        });
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 
     public function scopeWithTags($query, $tags)
@@ -46,8 +80,9 @@ class Product extends Model
         if (empty($tags)) return;
 
         return $query->whereHas('tags', function($query) use ($tags) {
+            
             foreach ($tags as $key => $value) {
-                $query->where('name', $key);
+                $query->orWhere('name', $key);
             }
         });
     }
@@ -94,4 +129,20 @@ class Product extends Model
             }
         });
     }
+
+    /**
+     * Search category and return 0 if not exist
+     *
+     * @param string $category
+     * @return integer
+     */
+    private function getIdCategory(string $category) : int
+    {
+        (Category::where('name', $category)->exists()) 
+        ? $id = Category::where('name', $category)->first()->id 
+        : $id = 0;
+
+        return $id;
+    }
+
 }

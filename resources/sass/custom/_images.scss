@@ -8,6 +8,42 @@
     object-fit: cover;
 }
 
+.img-category{
+    object-fit: cover;
+    height: 100% !important;
+    border: 1px solid #ccc;
+    transition: box-shadow .3s;
+    transition: transform .2s;
+    border-radius:10px;
+    &:hover {
+        position: relative;
+        cursor: pointer;
+        z-index: 1;
+        box-shadow: 0 0 21px rgba(33,33,33,.2);
+        transform: scale(1.01);
+    } 
+}
+
+.img-detail-admin {
+    height: 100%;
+    object-fit: cover;
+}
+
+.ofert-title {
+    position: absolute; 
+    text-align: center;
+    width: 40%;
+    background: repeating-linear-gradient(90deg,$transparent,$primary,$transparent );
+    color: white;
+    bottom: 12%;  
+    z-index: 100;          
+    right: 0rem;
+    font-family: fantasy;
+    font-weight: bold;
+    font-size: large;
+    transform: rotate(-45deg);
+}
+
 @media (max-width: $breakpoint-phone) {
     .img-carousel {
         width: 100% !important;
