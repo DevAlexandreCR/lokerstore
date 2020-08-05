@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
@@ -23,9 +25,9 @@ class LoginController extends Controller
     /**
      * Muestra la vista login
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function showLoginForm()
+    public function showLoginForm(): View
     {
         return view('admin.login');
     }
@@ -37,7 +39,7 @@ class LoginController extends Controller
      * @param Request $request
      * @return Array
      */
-    protected function credentials(Request $request)
+    protected function credentials(Request $request): array
     {
         $credenctials = $request->only($this->username(), 'password');
 
@@ -53,8 +55,10 @@ class LoginController extends Controller
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
@@ -75,10 +79,10 @@ class LoginController extends Controller
     /**
      * Attempt to log the user into the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return bool
      */
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin(Request $request): bool
     {
         return $this->guard()->attempt(
             $this->credentials($request),
@@ -89,9 +93,9 @@ class LoginController extends Controller
     /**
      * Get the guard to be used during authentication.
      *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * @return StatefulGuard
      */
-    protected function guard()
+    protected function guard(): StatefulGuard
     {
         return Auth::guard('admin');
     }
@@ -99,10 +103,10 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return Response
      */
-    public function logout(Request $request)
+    public function logout(Request $request): Response
     {
         $this->guard()->logout();
 

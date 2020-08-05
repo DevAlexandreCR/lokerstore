@@ -21,12 +21,11 @@ class ProductController extends Controller
 
     /**
      * Response at Json whit products resource
-     *
-     * @param Request $request
+     * @param IndexRequest $request
      * @return JsonResponse
      */
     public function index(IndexRequest $request) : JsonResponse
-    {   
+    {
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
         $colors = $request->validationData()['colors'];
@@ -46,47 +45,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return ProductResource
      */
     public function show(Product $product)
     {
         return new ProductResource($product);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

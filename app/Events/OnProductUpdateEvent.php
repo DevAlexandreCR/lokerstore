@@ -21,7 +21,7 @@ class OnProductUpdateEvent
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct(Product $product): void
     {
         $this->product = $product;
     }

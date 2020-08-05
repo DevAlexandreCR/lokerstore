@@ -4,83 +4,72 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Admin;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public $admin;
+
+    public function __construct(Admin $admin)
     {
-        //
+        $this->admin = $admin;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index(Request $request): Collection
     {
-        //
+        return $this->admin->all();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $this->admin->create($request->all());
+
+        return redirect()->back()->with('success', __('Admin has been created success'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin\Admin  $admin
-     * @return \Illuminate\Http\Response
+     * @param  Admin  $admin
+     * @return Admin
      */
-    public function show(Admin $admin)
+    public function show(Admin $admin): Admin
     {
-        //
+        return $admin;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update current admin
      *
-     * @param  \App\Models\Admin\Admin  $admin
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Admin $admin
+     * @return RedirectResponse
      */
-    public function edit(Admin $admin)
+    public function update(Request $request, Admin $admin): RedirectResponse
     {
-        //
-    }
+        $admin->update($request->all());
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Admin $admin)
-    {
-        //
+        return redirect()->back()->with('success', __('Admin has been updated success'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin\Admin  $admin
-     * @return \Illuminate\Http\Response
+     * @param Admin $admin
+     * @return RedirectResponse
      */
-    public function destroy(Admin $admin)
+    public function destroy(Admin $admin): RedirectResponse
     {
-        //
+        $admin->delete();
+
+        return redirect()->back()->with('success', __('Admin has been remove success'));
     }
 }

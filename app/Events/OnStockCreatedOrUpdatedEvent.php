@@ -21,7 +21,7 @@ class OnStockCreatedOrUpdatedEvent
      *
      * @return void
      */
-    public function __construct(Stock $stock)
+    public function __construct(Stock $stock): void
     {
         $this->stock = $stock;
     }

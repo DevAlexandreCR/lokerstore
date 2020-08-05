@@ -4,35 +4,38 @@ namespace App\Models;
 
 use App\Events\OnProductUpdateEvent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
-{   
+{
     protected $table = 'products';
 
     protected $fillable = [
         'name', 'description', 'price', 'stock', 'id_category', 'is_active'
     ];
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'id_category');
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function stocks()
+    public function stocks(): HasMany
     {
         return $this->hasMany(Stock::class);
     }
 
-    public function photos()
+    public function photos(): HasMany
     {
         return $this->hasMany(Photo::class);
     }
@@ -42,12 +45,12 @@ class Product extends Model
         if (empty($category)) return;
 
         $id = $this->getIdCategory($category);
-        
+
         return $query->whereHas('category', function($query) use ($category, $id) {
             $query
                 ->where('name', $category)
                 ->orWhere('id_parent', $id);
-        });;
+        });
     }
 
     public function scopePrice($query, $price)
@@ -66,7 +69,7 @@ class Product extends Model
             foreach ($colors as $key => $color) {
                 $query->where('color_id', $color);
             }
-            
+
         });
     }
 
@@ -80,14 +83,14 @@ class Product extends Model
         if (empty($tags)) return;
 
         return $query->whereHas('tags', function($query) use ($tags) {
-            
+
             foreach ($tags as $key => $value) {
                 $query->orWhere('name', $key);
             }
         });
     }
 
-    public function scopeSearch($query, $search) 
+    public function scopeSearch($query, $search)
     {
         if (empty($search)) return;
 
@@ -96,7 +99,7 @@ class Product extends Model
                 ->orWhere('description', 'like', '%' . $search . '%');
     }
 
-    public function getStatus() : string 
+    public function getStatus() : string
     {
         if ($this->is_active){
             return __('Enabled');
@@ -105,7 +108,7 @@ class Product extends Model
         }
     }
 
-    public function getPrice() : string 
+    public function getPrice() : string
     {
        return '$' . round($this->price, 0,  PHP_ROUND_HALF_UP);
     }
@@ -119,7 +122,7 @@ class Product extends Model
     {
         parent::boot();
 
-        static::deleting(function($product) { 
+        static::deleting(function($product) {
             $photos = $product->photos();
 
             foreach ($photos as $photo) {
@@ -138,8 +141,8 @@ class Product extends Model
      */
     private function getIdCategory(string $category) : int
     {
-        (Category::where('name', $category)->exists()) 
-        ? $id = Category::where('name', $category)->first()->id 
+        (Category::where('name', $category)->exists())
+        ? $id = Category::where('name', $category)->first()->id
         : $id = 0;
 
         return $id;

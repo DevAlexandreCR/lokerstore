@@ -2,9 +2,10 @@
 
 namespace App\Helpers\Products;
 
-Class ProductRequestHelper {
-    
-    public static function transform(array $data) 
+class ProductRequestHelper
+{
+
+    public static function transform(array $data)
     {
         $newDataArray = $data;
         (array_key_exists('category', $data)) ? '' : $newDataArray['category'] = null;
@@ -19,13 +20,13 @@ Class ProductRequestHelper {
         return $newDataArray;
     }
 
-    private static function getObjectPrice(array $price) : array
+    private static function getObjectPrice(array $price): array
     {
         $newArray = [];
 
         if ($price[0] == 0 && $price[1] == 0) {
             $newArray[0] =  0;
-            $newArray[1] =  10000000;
+            $newArray[1] =  config('max_price');
         } else {
             $newArray[0] =  $price[0];
             $newArray[1] =  $price[1];
@@ -34,18 +35,15 @@ Class ProductRequestHelper {
         return $newArray;
     }
 
-    private static function getArrayTags(array $dataTags) : array
+    private static function getArrayTags(array $dataTags): array
     {
         $newArray = [];
 
         foreach ($dataTags as $key => $tag) {
-            if (gettype($key) === 'string')
-            {
+            if (gettype($key) === 'string') {
                 $newArray = $dataTags;
-            break;
-            }
-            else 
-            {
+                break;
+            } else {
                 $newArray[$tag] = $tag;
             }
         }
@@ -53,6 +51,3 @@ Class ProductRequestHelper {
         return $newArray;
     }
 }
-
-
-    

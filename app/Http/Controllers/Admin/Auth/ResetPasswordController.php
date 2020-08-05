@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Passwords\PasswordBroker;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Illuminate\View\View;
 
 class ResetPasswordController extends Controller
 {
@@ -20,11 +23,11 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  string|null  $token
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function showResetForm(Request $request, $token = null)
+    public function showResetForm(Request $request, $token = null): View
     {
         return view('admin.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
@@ -34,9 +37,9 @@ class ResetPasswordController extends Controller
     /**
      * Get the broker to be used during password reset.
      *
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     * @return PasswordBroker
      */
-    public function broker()
+    public function broker(): PasswordBroker
     {
         return Password::broker('admins');
     }
@@ -44,9 +47,9 @@ class ResetPasswordController extends Controller
     /**
      * Get the guard to be used during password reset.
      *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * @return StatefulGuard
      */
-    protected function guard()
+    protected function guard(): StatefulGuard
     {
         return Auth::guard('admin');
     }

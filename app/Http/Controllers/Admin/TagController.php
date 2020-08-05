@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Tags\IndexRequest;
 use App\Http\Requests\Tags\StoreAndUpdateRequest;
 use App\Models\Tag;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class TagController extends Controller
 {
@@ -15,12 +17,13 @@ class TagController extends Controller
     {
         $this->tag = $tag;
     }
+
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param IndexRequest $request
+     * @return View
      */
-    public function index(IndexRequest $request)
+    public function index(IndexRequest $request) : View
     {
         $search = $request->get('search', null);
         return view('admin.tags.index', [
@@ -30,11 +33,10 @@ class TagController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreAndUpdateRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreAndUpdateRequest $request)
+    public function store(StoreAndUpdateRequest $request) : RedirectResponse
     {
         $this->tag->create($request->all());
 
@@ -45,12 +47,11 @@ class TagController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreAndUpdateRequest $request
+     * @param Tag $tag
+     * @return RedirectResponse
      */
-    public function update(StoreAndUpdateRequest $request, Tag $tag)
+    public function update(StoreAndUpdateRequest $request, Tag $tag) : RedirectResponse
     {
         $tag->update($request->all());
 
@@ -61,11 +62,11 @@ class TagController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Tag $tag
+     * @return RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Tag $tag)
+    public function destroy(Tag $tag) : RedirectResponse
     {
         $tag->delete();
 
