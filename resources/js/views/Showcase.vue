@@ -3,20 +3,20 @@
         <div class="container">
             <div class="row my-1" id="navbar-category">
                 <div class="col-sm-2 d-none d-sm-block">
-                    <div 
-                    class="nav nav-link" 
+                    <div
+                    class="nav nav-link"
                     @click="setTag('Mujer')"
                     >Mujer</div>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
-                    class="nav nav-link active" 
+                    class="nav nav-link active"
                     @click="setTag('Hombre')"
                     >Hombre</div>
                 </div>
                 <div class="col">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..." 
+                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..."
                         aria-label="Search" aria-describedby="btn-search" v-model="search">
                         <div class="input-group-append">
                             <button class="btn btn-primary" @click="setSearch(search)" type="button" id="btn-search">Buscar</button>
@@ -30,7 +30,7 @@
                 <filters-component @sendQuery="sendQuery" :query="query"></filters-component>
             </div>
             <div class="col-sm-7">
-                <products-grid-component :products="products"></products-grid-component>
+                <products-grid-component @sendQuery="sendQuery" :products="products"></products-grid-component>
             </div>
         </div>
     </div>
@@ -51,7 +51,10 @@
 
         data () {
             return {
-                products: [],
+                products: {
+                    type: Array,
+                    default: () => []
+                },
                 search: null,
                 query: {
                     tags: [],
@@ -74,8 +77,8 @@
                     if (data.hasOwnProperty(key)) {
                         switch (key) {
                             case 'tags':
-                                var tags = [];
-                                var array = []
+                                let tags = [];
+                                let array = []
                                 if(typeof data.tags === 'object') {
                                     array = data.tags
                                 } else {
@@ -97,19 +100,18 @@
                                 this.query['colors'] = data[key]
                                 break
                             case 'price':
-                                console.log(data[key]);
                                 this.query['price'] = data[key]
                                 break
                             default:
                                 break;
                         }
-                        
                     }
                 }
             },
 
             setTag(tag) {
-                this.query.tags = [tag]
+                this.query.tags = []
+                this.query.tags.push(tag)
                 this.sendQuery(this.query)
             },
 
@@ -134,14 +136,16 @@
             getProducts(query) {
                 this.products = []
                 api.getProducts(query).then(products => {
-                        this.products = products
+                    products.forEach(products => {
+                        this.products.push(products)
                     })
+                })
             }
         },
 
         created() {
-            this.buildQuery(this.$route.query) 
-            this.getProducts(this.query)            
+            this.buildQuery(this.$route.query)
+            this.getProducts(this.query)
         },
 
         mounted() {

@@ -13,7 +13,7 @@
         </div>
         <div class="row" v-if="selectedRandomProducts.length > 0">
             <div v-bind:class="[ 'col-md-6', (category.id%2 == 0) ? '' : 'order-12']">
-                <img class="img-fluid img-category" :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
+                <img v-if="selectedRandomProducts[4]" class="img-fluid img-category" :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
                 <div class="ofert-title">Hasta 50% Off</div>
             </div>
             <div class="col-md-6" v-if="products.length > 0">
@@ -23,17 +23,17 @@
                         <card-category-component v-if="index < 4" :product="product"></card-category-component>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </template>
 
-<script>    
+<script>
 
     import CardCategoryComponent from '../../components/CardCategoryComponent'
 
     export default {
-        
+
         name: 'category',
 
         components: {
@@ -63,18 +63,18 @@
             selectedRandomProducts: function()  {
                 var selectedRandomProducts = [] // selected random products
                 var max_selected = 0 // count max selected 4 products
-                var count = 0 // count iterations 
-                while (max_selected < 5 && this.products.length > 0 && count < this.products.length) {   
+                var count = 0 // count iterations
+                while (max_selected < 5 && this.products.length > 0 && count < this.products.length) {
                     count++
                     var random = Math.floor(Math.random() * this.products.length);
                     var product = this.products[random]
                     if (product.category.id_parent == this.category.id) {
                         if (! selectedRandomProducts.includes(product)) {
                             selectedRandomProducts.push(product)
-                            max_selected++                     
-                        }  
-                    }   
-                } 
+                            max_selected++
+                        }
+                    }
+                }
 
                 return selectedRandomProducts
             }
@@ -85,7 +85,7 @@
         },
 
         mounted() {
-            
+
         }
     }
 </script>

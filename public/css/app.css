@@ -11318,41 +11318,34 @@ a.text-dark:focus {
 .paginate-list {
   width: 100%;
   margin: 0 auto;
-  text-align: left;
-}
-
-.paginate-list li {
-  display: inline-block;
+  text-align: center;
 }
 
 .paginate-list li:before {
-  content: "\26AC   ";
   font-weight: bold;
   color: slategray;
 }
 
-.paginate-links.items {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.paginate-links.items a {
+.paginate-links.products a {
   cursor: pointer;
 }
 
-.paginate-links.items li.active a {
+.paginate-links.products a:hover {
+  background: #2b2a2a;
+  color: white;
+}
+
+.paginate-links.products li.active a {
   font-weight: bold;
 }
 
-.paginate-links.items li.next:before {
+.paginate-links.products li.next:before {
   content: " | ";
   margin-right: 13px;
   color: #ddd;
 }
 
-.paginate-links.items li.disabled a {
+.paginate-links.products li.disabled a {
   color: #ccc;
   cursor: no-drop;
 }

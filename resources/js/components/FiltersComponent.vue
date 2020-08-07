@@ -1,5 +1,46 @@
 <template>
     <div class="container-fluid" id="accordion">
+        <div class="card border-primary m-2" v-show="hasFiltersActive">
+            <div class="card-header">
+                <h6>Filtros</h6>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-list">
+                    <li class="nav-item my-1" v-if="categorySelected">
+                        <span class="badge badge-pill badge-info shadow-sm p-0 ml-2 pl-2">{{categorySelected}}
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_category)">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </a>
+                        </span>
+                    </li>
+                    <li class="nav-item my-1" v-if="sizesSelected.length > 0">
+                        <span v-for="size in sizesSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">{{size}}
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_sizes)">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </a>
+                        </span>
+                    </li>
+                    <li class="nav-item my-1" v-if="colorsSelected.length > 0">
+                        <span v-for="color in colorsSelected" class="badge badge-pill badge-danger shadow-sm p-0 ml-2 pl-2">{{color}}
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_color)">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </a>
+                        </span>
+                    </li>
+                    <li class="nav-item my-1" v-if="priceRange">
+                        <span class="badge badge-pill badge-dark shadow-sm p-0 ml-2 pl-2">
+                            <small v-for="price in priceRange">{{price}}</small>
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_price)">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-primary btn-sm" @click="resetFilters()">Limpiar filtros</button>
+            </div>
+        </div>
         <div class="card border-primary m-2">
           <div class="card-header">
               <h6>Categorias</h6>
@@ -7,7 +48,7 @@
           <div class="card-body" v-if="categories">
             <ul class="nav nav-list" v-for="category in categories" :key="category.id">
                 <li class="nav-header w-100" :id="'heading' + category.name">
-                    <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#' + category.name" 
+                    <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#' + category.name"
                     aria-expanded="true" :aria-controls="category.name" >{{category.name}}</a>
                     <div class="list-group collapse" :id="category.name" v-for="sub in category.children" :key="sub.id"
                     :aria-labelledby="'heading' + category.name" data-parent="#accordion">
@@ -21,18 +62,18 @@
           <div class="card-header">
               <h6>Precio</h6>
           </div>
-          <div class="card-body  card-filter" v-if="colors">
+          <div class="card-body card-filter">
               <div class="row rows-2">
                   <div class="col p-1">
                         <div class="form-group">
                             <label for="inputMin" class="sr-only">Min</label>
-                            <input v-model="priceRange[0]" min="0" type="number" class="form-control input-sm font-mini" id="inputMin" placeholder="min">
+                            <input v-model="min" :min="0" type="number" class="form-control input-sm font-mini" id="inputMin" placeholder="min">
                         </div>
                   </div>
                   <div class="col p-1">
                         <div class="form-group">
                             <label for="inputMax" class="sr-only">Max</label>
-                            <input v-model="priceRange[1]" min="0" type="number" class="form-control input-sm font-mini" id="inputMax" placeholder="max">
+                            <input v-model="max" :min="0" type="number" class="form-control input-sm font-mini" id="inputMax" placeholder="max">
                         </div>
                   </div>
               </div>
@@ -75,15 +116,32 @@
           <div class="card-body" v-if="type_sizes">
             <ul class="nav nav-list" v-for="type in type_sizes" :key="type.id">
                 <li class="nav-header w-100" :id="'heading' + type.name">
-                    <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#' + type.name" 
+                    <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#' + type.name"
                     aria-expanded="true" :aria-controls="type.name" >{{type.name}}</a>
-                    <div class="list-group collapse" :id="type.name" v-for="size in type.sizes" :key="size.id"
-                    :aria-labelledby="'heading' + type.name" data-parent="#accordion">
-                        <a @click="selectSize(size.id)" class="btn list-group-item list-group-item-action">{{size.name}}</a>
-                    </div>
+                    <ul class="list-group collapse" :id="type.name" v-for="size in type.sizes" :key="size.id"
+                        :aria-labelledby="'heading' + type.name" data-parent="#accordion">
+                        <li class="list-group-item text-lowercase p-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" :value="size.id" v-model="sizesSelected">
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control text-lowercase" disabled :value="size.name">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <span v-if="size.name" :class="['badge', 'badge-success']"><ion-icon name="resize-outline"></ion-icon></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
             </ul>
           </div>
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">Aplicar</button>
+            </div>
         </div>
     </div>
 </template>
@@ -91,12 +149,19 @@
 <script>
 
 import api from '../api'
+import Constants from "../Constants/constants";
 
 export default {
     name: 'filters',
 
     data() {
         return {
+            constants: {
+                filter_color: Constants.FILTER_COLORS,
+                filter_category: Constants.FILTER_CATEGORY,
+                filter_price: Constants.FILTER_PRICE,
+                filter_sizes: Constants.FILTER_SIZES,
+            },
             colors: {
                 type: Array,
                 default: []
@@ -109,18 +174,28 @@ export default {
                 type: Array,
                 default: []
             },
+            hasFiltersActive: false,
+            tags: [],
             colorsSelected: [],
             categorySelected: null,
-            sizeSelected: null,
-            priceRange: [],
-            min: 0,
-            max: 0
-
+            sizesSelected: [],
+            priceRange: null,
+            min: process.env.MIX_MIN_PRICE_FILTER,
+            max: process.env.MIX_MAX_PRICE_FILTER
         }
     },
 
     props: {
-        query: {} 
+        query: {}
+    },
+
+    watch: {
+        min: function (val) {
+            this.priceRange = `${val}-${this.max}`
+        },
+        max: function (val) {
+            this.priceRange = `${this.min}-${val}`
+        }
     },
 
     methods: {
@@ -145,25 +220,77 @@ export default {
             this.sendQuery()
         },
 
-        selectSize(id) {
+        selectSizes(id) {
             this.sizeSelected = id
             this.sendQuery()
         },
 
+        resetFilters() {
+            this.colorsSelected = []
+            this.categorySelected = null
+            this.sizesSelected = []
+            this.priceRange = null
+            this.tags = []
+            this.min = process.env.MIX_MIN_PRICE_FILTER
+            this.max = process.env.MIX_MAX_PRICE_FILTER
+            this.hasFiltersActive = false
+            this.sendQuery()
+        },
+
         getQuerySelecteds(query) {
-            query.colors ? this.colorsSelected = query.colors : this.colorsSelected = []
-            query.category ? this.categorySelected = query.category : this.categorySelected = null
-            if (query.price) {
-                this.priceRange = query.price
-            }
+            this.query = query
+            this.query.colors ? this.colorsSelected = query.colors : this.colorsSelected = []
+            this.query.sizes ? this.sizesSelected = query.sizes : this.sizesSelected = []
+            this.query.category ? this.categorySelected = query.category : this.categorySelected = null
+            this.query.tags ? this.tags = query.tags : this.tags = []
+            this.query.price ? this.getPriceFromQuery(query.price) : null
+
+            this.hasFiltersActive = this.hasFilters()
+        },
+
+        getPriceFromQuery(data) {
+            let array = data.split('-')
+            this.min = array[0]
+            this.max = array[1]
         },
 
         sendQuery() {
-            this.sizeSelected ? this.query.size = this.sizeSelected : this.query.size = null
+            this.sizesSelected ? this.query.sizes = this.sizesSelected : this.query.sizes = null
             this.colorsSelected ? this.query.colors = this.colorsSelected : this.query.colors = null
             this.categorySelected ? this.query.category = this.categorySelected : this.query.category = null
             this.priceRange ? this.query.price = this.priceRange : this.query.price = null
+            this.hasFiltersActive = this.hasFilters()
             this.$emit('sendQuery', this.query)
+        },
+
+        hasFilters() {
+            if (this.colorsSelected.length > 0) return true
+            else if (this.sizesSelected.length > 0) return true
+            else if (this.categorySelected) return true
+            else if (this.min > process.env.MIX_MIN_PRICE_FILTER) return true
+            else return this.max < process.env.MIX_MAX_PRICE_FILTER;
+        },
+
+        removeFilter(key, id = null) {
+            switch (key) {
+                case Constants.FILTER_CATEGORY:
+                    this.categorySelected = null
+                    break
+                case Constants.FILTER_COLORS:
+                    this.colorsSelected = []
+                    break
+                case Constants.FILTER_PRICE:
+                    console.log(key)
+                    this.min = process.env.MIX_MIN_PRICE_FILTER
+                    this.max = process.env.MIX_MAX_PRICE_FILTER
+                    this.priceRange = null
+                    break
+                case Constants.FILTER_SIZES:
+                    this.sizesSelected = []
+                    break
+            }
+
+            this.sendQuery()
         }
     },
 
@@ -171,11 +298,7 @@ export default {
         this.getCategories()
         this.getColors()
         this.getSizes()
-        this.getQuerySelecteds(this.query)
-    },
-
-    mounted() {
-        
-    },
+        this.getQuerySelecteds(this.$route.query)
+    }
 }
 </script>

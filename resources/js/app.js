@@ -1,10 +1,10 @@
 import './bootstrap'
 import router from './router'
+import VuePaginate from 'vue-paginate';
 
 window.Vue = require('vue');
 
 Vue.component('banner-component', require('./components/BannerComponent.vue').default)
-import VuePaginate from 'vue-paginate';
 
 Vue.use(VuePaginate);
 

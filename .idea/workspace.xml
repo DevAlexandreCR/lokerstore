@@ -1,37 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Actions/Photos/DeletePhotoAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Actions/Photos/DeletePhotoAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Actions/Photos/SavePhotoAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Actions/Photos/SavePhotoAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Actions/Products/EnableOrDisableProductAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Actions/Products/EnableOrDisableProductAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Actions/Products/UpdateStockProductAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Actions/Products/UpdateStockProductAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Actions/Stocks/CreateOrUpdateStockAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Actions/Stocks/CreateOrUpdateStockAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/OnProductUpdateEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/OnProductUpdateEvent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/OnStockCreatedOrUpdatedEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/OnStockCreatedOrUpdatedEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/ConfirmPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/ConfirmPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/ForgotPasswordController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/StockController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/StockController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TagController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TagController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Products/ActiveRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Products/ActiveRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/CategoryResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/CategoryResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ProductResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/TypeSizesResourse.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/TypeSizesResourse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Products/IndexRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Products/IndexRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observers/ProductObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observers/ProductObserver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observers/StockObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observers/StockObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/FiltersComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/FiltersComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/Showcase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Showcase.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/custom/_paginate.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/custom/_paginate.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,6 +195,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1ff1i4I2miLBcorFhhWrJwbe0Vz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -178,6 +206,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -195,17 +225,41 @@
       <updated>1596594457221</updated>
       <workItem from="1596594459063" duration="299000" />
       <workItem from="1596595350325" duration="2628000" />
-      <workItem from="1596650674765" duration="604000" />
+      <workItem from="1596650674765" duration="11293000" />
+      <workItem from="1596726082394" duration="31309000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="666" y="326" key="#Log_Highlighting_(ideolog)" timestamp="1596738396267">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="666" y="326" key="#Log_Highlighting_(ideolog)/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596738396267" />
     <state x="92" y="122" width="1736" height="866" key="DiffContextDialog" timestamp="1596597125450">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="92" y="122" width="1736" height="866" key="DiffContextDialog/0.30.1920.1050/-3286.343.1366.738/-1920.39.1920.1050@0.30.1920.1050" timestamp="1596597125450" />
+    <state x="461" y="200" key="SettingsEditor" timestamp="1596667627136">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="461" y="200" key="SettingsEditor/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596667627136" />
+    <state x="616" y="258" key="run.anything.popup" timestamp="1596761977452">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="616" y="258" key="run.anything.popup/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596761977452" />
   </component>
 </project>

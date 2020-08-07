@@ -2,7 +2,7 @@
 
 @section('main')
 @if ( session('product-updated'))
-    
+
 <div class="container py-2">
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -97,9 +97,9 @@
                       @endforeach
                       <select class="form-control" onchange="document.getElementById(this.value).click()">
                         @foreach ($categories as $key => $category)
-                          <option value="{{$category->id}}" 
-                            @if ($category->id == $product->category->id_parent)     
-                            selected                      
+                          <option value="{{$category->id}}"
+                            @if ($category->id == $product->category->id_parent)
+                            selected
                             @endif>{{$category->name}}</option>
                         @endforeach
                       </select>
@@ -111,9 +111,9 @@
                     <div class="tab-pane fade {{$category->id == $product->category->id_parent ? 'show active' : '' }}" id="{{$category->name}}" role="tabpanel" aria-labelledby="{{$category->id}}">
                       <select class="form-control" onchange="setCategory(this.value, 'edit_id_category')">
                         @foreach ($category->children as $sub)
-                        <option value="{{$sub->id}}" 
-                          @if ($sub->id == $product->id_category)     
-                            selected                      
+                        <option value="{{$sub->id}}"
+                          @if ($sub->id == $product->id_category)
+                            selected
                             @endif>{{$sub->name}}</option>
                         @endforeach
                     </select>
@@ -137,7 +137,7 @@
             <h6>{{__('Add tags')}}</h6>
           </div>
           <div class="container">
-            @error('tags') 
+            @error('tags')
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one tag')}}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -169,7 +169,7 @@
                 <div class="input-group mb-3" >
                   <div class="custom-file">
                     <label for="images" class="custom-file-label"></label>
-                    <input type="file" name="photos[]"  class="custom-file-input" id="images"   
+                    <input type="file" name="photos[]"  class="custom-file-input" id="images"
                     accept="image/*" aria-describedby="inputGroupFileAddon03">
                   </div>
                   <div class="input-group-append">
@@ -177,8 +177,8 @@
                  </div>
                 </div>
               </div>
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div class="col-4 d-none" id="clone">
             <div class="card m-3" style="width: 18rem;">
               <img>
@@ -193,8 +193,8 @@
                  </div>
                 </div>
               </div>
-            </div> 
-          </div> 
+            </div>
+          </div>
         </div>
         <hr>
         <div class="row " id="save">
@@ -210,14 +210,14 @@
 @endsection
 <script>
     /** esta funcion hace check en los tags devueltos por el servidor
-    *@argument tags array 
-    */ 
+    *@argument tags array
+    */
     const selectedTags = (tags) => {
         tags.forEach(tag => {
             document.getElementById(tag.name).checked = true
         });
     }
-    /** 
+    /**
      * Esta funcion agrega la imagen seleccionada a la vista previa
      * @argument input que posee la imagen
      * @argument div card donde se va a agregar la imagen
@@ -229,17 +229,17 @@
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
 
-                reader.onload = function(event) { 
+                reader.onload = function(event) {
                 var img = div.getElementsByTagName('img')[0]
                 img.classList.add('img-thumbnail')
-                img.src = event.target.result  
-                }          
+                img.src = event.target.result
+                }
                 reader.readAsDataURL(input.files[i]);
             }
         }
     }
 
-    /** 
+    /**
     * Esta funcion agrega el valor del option a la category_id input
     * @argument value valor del option seleccionado
     */
@@ -247,7 +247,7 @@
           document.getElementById(id).value = value
     }
 
-    /** 
+    /**
      * Esta funcion agrega la vista para una nueva imagen
      */
     const addPhoto = (photo = null) => {
@@ -258,7 +258,7 @@
         if (photo) {
             var img = divToClone.getElementsByTagName('img')[0]
             img.classList.add('img-thumbnail')
-            img.src = '../../../public/storage/photos/' + photo.name
+            img.src = '/storage/photos/' + photo.name
             img.id = photo.id
         }
         input.addEventListener('change', function() {
@@ -266,7 +266,7 @@
             })
     }
 
-    /** 
+    /**
      * Esta funcion borra la vista de una nueva imagen
      */
     const removePhoto = (button) => {
@@ -281,14 +281,14 @@
             input.hidden = true
             document.getElementById('imgContainer').appendChild(input)
         }
-        div.remove()        
+        div.remove()
     }
-    /** 
+    /**
      * Esta funcion agrega el listener del input de la primer imagen al iniciarse el DOM
      */
     document.addEventListener("DOMContentLoaded", () => {
         var input = document.getElementById("imgContainer")
-                .getElementsByTagName("input")[0] 
+                .getElementsByTagName("input")[0]
         var div = document.getElementById("card-img")
         input.addEventListener('change', () => {
         multiImgPreview(input, div)
