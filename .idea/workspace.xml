@@ -39,24 +39,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Products/IndexRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Products/IndexRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Constants/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Constants/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/FiltersComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/FiltersComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/Showcase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Showcase.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/custom/_paginate.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/custom/_paginate.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/utilities/_text.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/utilities/_text.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +197,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -226,7 +216,8 @@
       <workItem from="1596594459063" duration="299000" />
       <workItem from="1596595350325" duration="2628000" />
       <workItem from="1596650674765" duration="11293000" />
-      <workItem from="1596726082394" duration="31309000" />
+      <workItem from="1596726082394" duration="35260000" />
+      <workItem from="1596816307561" duration="18985000" />
     </task>
     <servers />
   </component>
@@ -243,20 +234,25 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="666" y="326" key="#Log_Highlighting_(ideolog)" timestamp="1596738396267">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="666" y="326" key="#Log_Highlighting_(ideolog)/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596738396267" />
+    <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596846943711">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596846943711" />
     <state x="92" y="122" width="1736" height="866" key="DiffContextDialog" timestamp="1596597125450">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="92" y="122" width="1736" height="866" key="DiffContextDialog/0.30.1920.1050/-3286.343.1366.738/-1920.39.1920.1050@0.30.1920.1050" timestamp="1596597125450" />
-    <state x="461" y="200" key="SettingsEditor" timestamp="1596667627136">
+    <state x="461" y="200" key="SettingsEditor" timestamp="1596834990090">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="461" y="200" key="SettingsEditor/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596667627136" />
+    <state x="461" y="200" key="SettingsEditor/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596834990090" />
     <state x="616" y="258" key="run.anything.popup" timestamp="1596761977452">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>

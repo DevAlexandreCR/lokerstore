@@ -1,3 +1,28 @@
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
+
+.text-name {
+    color: red;
+    font-weight: bold;
+    text-align: left;
+}
+
+.text-price {
+    font-weight: bold;
+    text-align: right;
+    font-size: small;
+}
+
+.text-old-price {
+    text-align: right;
+    font-weight: lighter;
+    color: $primary;
+    font-size: smaller;
+    text-decoration: line-through;
+}
+
+.text-small {
+    font-size: smaller;
+}
+

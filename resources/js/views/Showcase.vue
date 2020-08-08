@@ -27,7 +27,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-sm-3">
-                <filters-component @sendQuery="sendQuery" :query="query"></filters-component>
+                <filters-component @sendQuery="sendQuery" :query="query" @setSearch="setSearch" :search="search"></filters-component>
             </div>
             <div class="col-sm-7">
                 <products-grid-component @sendQuery="sendQuery" :products="products"></products-grid-component>
@@ -65,10 +65,6 @@
                     search: null
                 }
             }
-        },
-
-        computed: {
-
         },
 
         methods: {
@@ -130,7 +126,7 @@
 
             sendQuery(query) {
                 this.$router.push({name: 'showcase', query: query}).catch(()=>{})
-                this.getProducts(query)
+                location.reload()
             },
 
             getProducts(query) {

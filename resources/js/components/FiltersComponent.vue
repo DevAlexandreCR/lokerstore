@@ -6,29 +6,44 @@
             </div>
             <div class="card-body">
                 <ul class="nav nav-list">
-                    <li class="nav-item my-1" v-if="categorySelected">
-                        <span class="badge badge-pill badge-info shadow-sm p-0 ml-2 pl-2">{{categorySelected}}
+                    <li class="nav-item my-1 w-100" v-if="query.search">
+                        <div class="container text-center text-price">Busqueda</div>
+                        <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">{{query.search}}
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_search)">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </a>
+                        </span>
+                    </li>
+                    <li class="nav-item my-1 w-100" v-if="categorySelected">
+                        <div class="container text-center text-price">Categoria</div>
+                        <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">{{categorySelected}}
                             <a class="btn btn-link" @click="removeFilter(constants.filter_category)">
                                 <ion-icon name="close-outline"></ion-icon>
                             </a>
                         </span>
                     </li>
-                    <li class="nav-item my-1" v-if="sizesSelected.length > 0">
-                        <span v-for="size in sizesSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">{{size}}
-                            <a class="btn btn-link" @click="removeFilter(constants.filter_sizes)">
+                    <li class="nav-item my-1 w-100" v-if="sizesSelected.length > 0">
+                        <div class="container text-center text-price">Tallas</div>
+                        <span v-for="size in sizesSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
+                            {{getSizeName(size)}}
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_sizes, size)">
                                 <ion-icon name="close-outline"></ion-icon>
                             </a>
                         </span>
                     </li>
-                    <li class="nav-item my-1" v-if="colorsSelected.length > 0">
-                        <span v-for="color in colorsSelected" class="badge badge-pill badge-danger shadow-sm p-0 ml-2 pl-2">{{color}}
-                            <a class="btn btn-link" @click="removeFilter(constants.filter_color)">
+                    <li class="nav-item my-1 w-100" v-if="colorsSelected.length > 0">
+                        <div class="container text-center text-price">Colores</div>
+                        <span v-for="color in colorsSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
+                            <span v-if="getColorName(color)" :class="['badge', 'badge-color-' + getColorName(color).toLowerCase()]">
+                                .</span> {{getColorName(color)}}
+                            <a class="btn btn-link" @click="removeFilter(constants.filter_color, color)">
                                 <ion-icon name="close-outline"></ion-icon>
                             </a>
                         </span>
                     </li>
-                    <li class="nav-item my-1" v-if="priceRange">
-                        <span class="badge badge-pill badge-dark shadow-sm p-0 ml-2 pl-2">
+                    <li class="nav-item my-1 w-100" v-if="priceRange">
+                        <div class="container text-center text-price">Precio</div>
+                        <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
                             <small v-for="price in priceRange">{{price}}</small>
                             <a class="btn btn-link" @click="removeFilter(constants.filter_price)">
                                 <ion-icon name="close-outline"></ion-icon>
@@ -50,7 +65,7 @@
                 <li class="nav-header w-100" :id="'heading' + category.name">
                     <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#' + category.name"
                     aria-expanded="true" :aria-controls="category.name" >{{category.name}}</a>
-                    <div class="list-group collapse" :id="category.name" v-for="sub in category.children" :key="sub.id"
+                    <div class="list-group collapse" :id="category.name" v-for="sub in category.children" :key="sub.name"
                     :aria-labelledby="'heading' + category.name" data-parent="#accordion">
                         <a v-on:click="selectCategory(sub.name)" class="btn list-group-item list-group-item-action">{{sub.name}}</a>
                     </div>
@@ -87,7 +102,7 @@
               <h6>Colores</h6>
           </div>
           <div class="card-body  card-filter overflow-auto" v-if="colors">
-            <ul class="list-group w-100" v-for="color in colors" :key="color.id">
+            <ul class="list-group w-100" v-for="color in colors" :key="color.name">
                 <li class="list-group-item text-lowercase p-0">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -114,11 +129,11 @@
               <h6>Tallas</h6>
           </div>
           <div class="card-body" v-if="type_sizes">
-            <ul class="nav nav-list" v-for="type in type_sizes" :key="type.id">
+            <ul class="nav nav-list" v-for="type in type_sizes" :key="type.name">
                 <li class="nav-header w-100" :id="'heading' + type.name">
-                    <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#' + type.name"
+                    <a class="btn btn-link btn-block" data-toggle="collapse" :data-target="'#sizes' + type.name"
                     aria-expanded="true" :aria-controls="type.name" >{{type.name}}</a>
-                    <ul class="list-group collapse" :id="type.name" v-for="size in type.sizes" :key="size.id"
+                    <ul class="list-group collapse" :id="'sizes' + type.name" v-for="size in type.sizes" :key="size.name"
                         :aria-labelledby="'heading' + type.name" data-parent="#accordion">
                         <li class="list-group-item text-lowercase p-0">
                             <div class="input-group">
@@ -161,6 +176,7 @@ export default {
                 filter_category: Constants.FILTER_CATEGORY,
                 filter_price: Constants.FILTER_PRICE,
                 filter_sizes: Constants.FILTER_SIZES,
+                filter_search: Constants.FILTER_SEARCH,
             },
             colors: {
                 type: Array,
@@ -186,6 +202,7 @@ export default {
     },
 
     props: {
+        search: null,
         query: {}
     },
 
@@ -209,10 +226,32 @@ export default {
                 this.colors = colors
             })
         },
+
+        getColorName(id) {
+            if (this.colors.length > 0) {
+                let color = this.colors.find(color => color.id === parseInt(id))
+                return color.name.toLowerCase()
+            }
+        },
+
         getSizes() {
             api.getSizes().then(sizes =>  {
                 this.type_sizes = sizes
             })
+        },
+
+        getSizeName(id) {
+            let name
+            if (this.type_sizes.length > 0){
+                this.type_sizes.forEach(type => {
+                    type.sizes.forEach(size => {
+                        if (size.id ===  parseInt(id)) {
+                            name = size.name
+                        }
+                    })
+                })
+            }
+            return name
         },
 
         selectCategory(name) {
@@ -234,6 +273,7 @@ export default {
             this.min = process.env.MIX_MIN_PRICE_FILTER
             this.max = process.env.MIX_MAX_PRICE_FILTER
             this.hasFiltersActive = false
+            this.query.search = null
             this.sendQuery()
         },
 
@@ -267,6 +307,7 @@ export default {
             if (this.colorsSelected.length > 0) return true
             else if (this.sizesSelected.length > 0) return true
             else if (this.categorySelected) return true
+            else if (this.query.search) return true
             else if (this.min > process.env.MIX_MIN_PRICE_FILTER) return true
             else return this.max < process.env.MIX_MAX_PRICE_FILTER;
         },
@@ -277,20 +318,32 @@ export default {
                     this.categorySelected = null
                     break
                 case Constants.FILTER_COLORS:
-                    this.colorsSelected = []
+                    this.removeItemFromArr(this.colorsSelected, id)
                     break
                 case Constants.FILTER_PRICE:
-                    console.log(key)
                     this.min = process.env.MIX_MIN_PRICE_FILTER
                     this.max = process.env.MIX_MAX_PRICE_FILTER
                     this.priceRange = null
                     break
                 case Constants.FILTER_SIZES:
-                    this.sizesSelected = []
+                    this.removeItemFromArr(this.sizesSelected, id)
+                    break
+                case Constants.FILTER_SEARCH:
+                    this.query.search = null
+                    this.$emit('setSearch', null)
+                    location.reload()
                     break
             }
 
             this.sendQuery()
+        },
+
+        removeItemFromArr( arr, item ) {
+            let i = arr.indexOf( item );
+
+            if ( i !== -1 ) {
+                arr.splice( i, 1 );
+            }
         }
     },
 
