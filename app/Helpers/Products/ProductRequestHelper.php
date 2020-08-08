@@ -9,18 +9,18 @@ class ProductRequestHelper
         $newDataArray = $data;
         (array_key_exists('category', $data)) ? $newDataArray['category'] = $data['category'] :
             $newDataArray['category'] = null;
-        ($newDataArray['category'] === __("Choose category")) ?: $newDataArray['category'];
+        (!$newDataArray['category'] === __("Choose category")) ?: $newDataArray['category'] = null;
         (array_key_exists('orderBy', $data) && $data['orderBy'] === __("Less recent")) ?
             $newDataArray['orderBy'] = 'asc' : $newDataArray['orderBy'] = 'desc';
         (array_key_exists('search', $data)) ? $newDataArray['search'] = $data['search'] :
             $newDataArray['search'] = null;
-        (array_key_exists('tags', $data)) ? $newDataArray['tags'] = self::getArrayTags($data['tags']) :
+        (array_key_exists('tags', $data)) ? $newDataArray['tags'] = self::getArrayTags(self::getArrayData($data['tags'])) :
             $newDataArray['tags'] = null;
         (array_key_exists('colors', $data)) ? $newDataArray['colors'] = self::getArrayData($data['colors']) :
             $newDataArray['colors'] = null;
-        (array_key_exists('sizes', $data)) ? $newDataArray['sizes'] = $data['sizes'] :
+        (array_key_exists('sizes', $data)) ? $newDataArray['sizes'] = self::getArrayData($data['sizes']) :
             $newDataArray['sizes'] = null;
-        (array_key_exists('price', $data)) ? $newDataArray['price'] = self::getArrayData($data['price']) :
+        (array_key_exists('price', $data)) ? $newDataArray['price'] = $data['price'] :
             $newDataArray['price'] = null;
 
         return $newDataArray;
@@ -51,7 +51,7 @@ class ProductRequestHelper
         $newArray = [];
 
         if (gettype($data) === 'string'){
-            $newArray[] = $data;
+            $newArray[0] = $data;
         } else {
             $newArray = $data;
         }

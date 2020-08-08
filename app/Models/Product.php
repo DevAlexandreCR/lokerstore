@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -93,10 +94,7 @@ class Product extends Model
         if (empty($tags)) return null;
 
         return $query->whereHas('tags', function($query) use ($tags) {
-
-            foreach ($tags as $key => $value) {
-                $query->orWhere('name', $key);
-            }
+            $query->whereIn('name', $tags);
         });
     }
 

@@ -68,8 +68,7 @@ export default {
 
     methods: {
         viewAll() {
-              this.$emit('sendQuery', null)
-              location.reload()
+              this.$emit('sendQuery', null, true)
         },
 
         orderBy(event) {

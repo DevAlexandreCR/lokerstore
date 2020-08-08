@@ -273,8 +273,18 @@ export default {
             this.min = process.env.MIX_MIN_PRICE_FILTER
             this.max = process.env.MIX_MAX_PRICE_FILTER
             this.hasFiltersActive = false
-            this.query.search = null
-            this.sendQuery()
+            let reload = false
+            console.log(this.query.search)
+            if (this.query.search != null) {
+                reload = true
+                this.search = null
+                this.query.search = null
+                this.$emit('sendQuery', null, true)
+            } else {
+                this.sendQuery()
+            }
+
+
         },
 
         getQuerySelecteds(query) {
@@ -282,7 +292,7 @@ export default {
             this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = []
             this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = []
             this.query.category ? this.categorySelected = query.category : this.categorySelected = null
-            this.query.tags ? this.tags = query.tags : this.tags = []
+            this.query.tags ? this.tags = this.getArrayFilter(query.tags) : this.tags = []
             this.query.price ? this.getPriceFromQuery(query.price) : null
 
             this.hasFiltersActive = this.hasFilters()
@@ -337,8 +347,7 @@ export default {
                     break
                 case Constants.FILTER_SEARCH:
                     this.query.search = null
-                    this.$emit('setSearch', null)
-                    location.reload()
+                    this.$emit('setSearch', null, true)
                     break
             }
 

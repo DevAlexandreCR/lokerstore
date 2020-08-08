@@ -121,12 +121,13 @@
                     search: search
                 }
 
-            this.sendQuery(this.query)
+            this.sendQuery(this.query, true)
             },
 
-            sendQuery(query) {
+            sendQuery(query, reload = false) {
                 this.$router.push({name: 'showcase', query: query}).catch(()=>{})
-                location.reload()
+                if (reload) location.reload()
+                else this.getProducts(query)
             },
 
             getProducts(query) {

@@ -2297,15 +2297,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       this.min = "10000";
       this.max = "500000";
       this.hasFiltersActive = false;
-      this.query.search = null;
-      this.sendQuery();
+      var reload = false;
+      console.log(this.query.search);
+
+      if (this.query.search != null) {
+        reload = true;
+        this.search = null;
+        this.query.search = null;
+        this.$emit('sendQuery', null, true);
+      } else {
+        this.sendQuery();
+      }
     },
     getQuerySelecteds: function getQuerySelecteds(query) {
       this.query = query;
       this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = [];
       this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = [];
       this.query.category ? this.categorySelected = query.category : this.categorySelected = null;
-      this.query.tags ? this.tags = query.tags : this.tags = [];
+      this.query.tags ? this.tags = this.getArrayFilter(query.tags) : this.tags = [];
       this.query.price ? this.getPriceFromQuery(query.price) : null;
       this.hasFiltersActive = this.hasFilters();
     },
@@ -2354,8 +2363,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         case _Constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].FILTER_SEARCH:
           this.query.search = null;
-          this.$emit('setSearch', null);
-          location.reload();
+          this.$emit('setSearch', null, true);
           break;
       }
 
@@ -2553,8 +2561,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     viewAll: function viewAll() {
-      this.$emit('sendQuery', null);
-      location.reload();
+      this.$emit('sendQuery', null, true);
     },
     orderBy: function orderBy(event) {
       var value = event.target.value;
@@ -2891,14 +2898,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         size: null,
         search: search
       };
-      this.sendQuery(this.query);
+      this.sendQuery(this.query, true);
     },
     sendQuery: function sendQuery(query) {
+      var reload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       this.$router.push({
         name: 'showcase',
         query: query
       })["catch"](function () {});
-      location.reload();
+      if (reload) location.reload();else this.getProducts(query);
     },
     getProducts: function getProducts(query) {
       var _this2 = this;
