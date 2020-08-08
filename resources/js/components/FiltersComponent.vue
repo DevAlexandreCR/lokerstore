@@ -279,13 +279,20 @@ export default {
 
         getQuerySelecteds(query) {
             this.query = query
-            this.query.colors ? this.colorsSelected = query.colors : this.colorsSelected = []
-            this.query.sizes ? this.sizesSelected = query.sizes : this.sizesSelected = []
+            this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = []
+            this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = []
             this.query.category ? this.categorySelected = query.category : this.categorySelected = null
             this.query.tags ? this.tags = query.tags : this.tags = []
             this.query.price ? this.getPriceFromQuery(query.price) : null
 
             this.hasFiltersActive = this.hasFilters()
+        },
+
+        getArrayFilter(data) {
+            let array = []
+            if (typeof data === 'object') array = data
+            else array.push(data)
+            return array
         },
 
         getPriceFromQuery(data) {
@@ -339,10 +346,10 @@ export default {
         },
 
         removeItemFromArr( arr, item ) {
-            let i = arr.indexOf( item );
+            let i = arr.indexOf(item);
 
-            if ( i !== -1 ) {
-                arr.splice( i, 1 );
+            if (i !== -1) {
+                arr.splice(i, 1);
             }
         }
     },

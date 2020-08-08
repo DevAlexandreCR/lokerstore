@@ -2023,6 +2023,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
 /* harmony import */ var _Constants_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Constants/constants */ "./resources/js/Constants/constants.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -2300,12 +2302,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     getQuerySelecteds: function getQuerySelecteds(query) {
       this.query = query;
-      this.query.colors ? this.colorsSelected = query.colors : this.colorsSelected = [];
-      this.query.sizes ? this.sizesSelected = query.sizes : this.sizesSelected = [];
+      this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = [];
+      this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = [];
       this.query.category ? this.categorySelected = query.category : this.categorySelected = null;
       this.query.tags ? this.tags = query.tags : this.tags = [];
       this.query.price ? this.getPriceFromQuery(query.price) : null;
       this.hasFiltersActive = this.hasFilters();
+    },
+    getArrayFilter: function getArrayFilter(data) {
+      var array = [];
+      if (_typeof(data) === 'object') array = data;else array.push(data);
+      return array;
     },
     getPriceFromQuery: function getPriceFromQuery(data) {
       var array = data.split('-');

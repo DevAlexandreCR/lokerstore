@@ -4,7 +4,6 @@ namespace App\Helpers\Products;
 
 class ProductRequestHelper
 {
-
     public static function transform(array $data)
     {
         $newDataArray = $data;
@@ -17,11 +16,11 @@ class ProductRequestHelper
             $newDataArray['search'] = null;
         (array_key_exists('tags', $data)) ? $newDataArray['tags'] = self::getArrayTags($data['tags']) :
             $newDataArray['tags'] = null;
-        (array_key_exists('colors', $data)) ? $newDataArray['colors'] = $data['colors'] :
+        (array_key_exists('colors', $data)) ? $newDataArray['colors'] = self::getArrayData($data['colors']) :
             $newDataArray['colors'] = null;
         (array_key_exists('sizes', $data)) ? $newDataArray['sizes'] = $data['sizes'] :
             $newDataArray['sizes'] = null;
-        (array_key_exists('price', $data)) ? $newDataArray['price'] = $data['price'] :
+        (array_key_exists('price', $data)) ? $newDataArray['price'] = self::getArrayData($data['price']) :
             $newDataArray['price'] = null;
 
         return $newDataArray;
@@ -38,6 +37,23 @@ class ProductRequestHelper
             } else {
                 $newArray[$tag] = $tag;
             }
+        }
+
+        return $newArray;
+    }
+
+    /**
+     * @param mixed $data
+     * @return array
+     */
+    private static function getArrayData($data): array
+    {
+        $newArray = [];
+
+        if (gettype($data) === 'string'){
+            $newArray[] = $data;
+        } else {
+            $newArray = $data;
         }
 
         return $newArray;
