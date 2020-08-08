@@ -4,15 +4,24 @@
             <div class="row my-1" id="navbar-category">
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
-                    class="nav nav-link"
-                    @click="setTag('Mujer')"
-                    >Mujer</div>
+                        type="button"
+                        :class="['nav-link', { 'router-link-exact-active' : query.tags.includes('Mujer')}]"
+                        @click="setTag('Mujer')"
+                        >Mujer</div>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
-                    class="nav nav-link active"
-                    @click="setTag('Hombre')"
-                    >Hombre</div>
+                        type="button"
+                        :class="['nav-link', { 'router-link-exact-active' : query.tags.includes('Hombre')}]"
+                        @click="setTag('Hombre')"
+                        >Hombre</div>
+                </div>
+                <div class="col-sm-2 d-none d-sm-block">
+                    <div
+                        type="button"
+                        :class="['nav-link', { 'router-link-exact-active' : query.tags.length === 0}]"
+                        @click="setTag(null)"
+                    >Todos</div>
                 </div>
                 <div class="col">
                     <div class="input-group">
@@ -107,7 +116,7 @@
 
             setTag(tag) {
                 this.query.tags = []
-                this.query.tags.push(tag)
+                if (tag) this.query.tags.push(tag)
                 this.sendQuery(this.query)
             },
 

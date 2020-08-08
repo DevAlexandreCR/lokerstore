@@ -2808,6 +2808,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2886,7 +2895,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     },
     setTag: function setTag(tag) {
       this.query.tags = [];
-      this.query.tags.push(tag);
+      if (tag) this.query.tags.push(tag);
       this.sendQuery(this.query);
     },
     setSearch: function setSearch(search) {
@@ -2938,6 +2947,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CardCategoryComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/CardCategoryComponent */ "./resources/js/components/CardCategoryComponent.vue");
+//
+//
 //
 //
 //
@@ -40098,7 +40109,15 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "nav nav-link",
+                  class: [
+                    "nav-link",
+                    {
+                      "router-link-exact-active": _vm.query.tags.includes(
+                        "Mujer"
+                      )
+                    }
+                  ],
+                  attrs: { type: "button" },
                   on: {
                     click: function($event) {
                       return _vm.setTag("Mujer")
@@ -40113,7 +40132,15 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "nav nav-link active",
+                  class: [
+                    "nav-link",
+                    {
+                      "router-link-exact-active": _vm.query.tags.includes(
+                        "Hombre"
+                      )
+                    }
+                  ],
+                  attrs: { type: "button" },
                   on: {
                     click: function($event) {
                       return _vm.setTag("Hombre")
@@ -40121,6 +40148,25 @@ var render = function() {
                   }
                 },
                 [_vm._v("Hombre")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2 d-none d-sm-block" }, [
+              _c(
+                "div",
+                {
+                  class: [
+                    "nav-link",
+                    { "router-link-exact-active": _vm.query.tags.length === 0 }
+                  ],
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.setTag(null)
+                    }
+                  }
+                },
+                [_vm._v("Todos")]
               )
             ]),
             _vm._v(" "),
@@ -40239,7 +40285,14 @@ var render = function() {
       ? _c("div", { staticClass: "row" }, [
           _c(
             "div",
-            { class: ["col-md-6", _vm.category.id % 2 == 0 ? "" : "order-12"] },
+            {
+              class: ["col-md-6", _vm.category.id % 2 == 0 ? "" : "order-12"],
+              on: {
+                click: function($event) {
+                  return _vm.goToShowcase(_vm.category.name)
+                }
+              }
+            },
             [
               _vm.selectedRandomProducts[4]
                 ? _c("img", {

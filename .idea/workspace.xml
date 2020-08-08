@@ -41,13 +41,9 @@
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Products/IndexRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Products/IndexRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/FiltersComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/FiltersComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/Showcase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Showcase.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +215,7 @@
       <workItem from="1596650674765" duration="11293000" />
       <workItem from="1596726082394" duration="35260000" />
       <workItem from="1596816307561" duration="19975000" />
-      <workItem from="1596895972889" duration="8786000" />
+      <workItem from="1596895972889" duration="11721000" />
     </task>
     <servers />
   </component>
