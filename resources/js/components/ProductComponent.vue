@@ -1,5 +1,5 @@
 <template>
-    <div class="card card-hover" v-if="product">
+    <div class="card card-hover img-hover-zoom" @click="showProduct(product.id)" v-if="product">
         <img :src="'/storage/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
         <div class="card-body">
             <div class="row">
@@ -32,6 +32,12 @@ export default {
             type: Object,
             default: {}
         }
+    },
+
+    methods: {
+        showProduct(id) {
+            window.location.assign(`/products/${id}`)
+        },
     },
 
     filters: {
