@@ -11070,6 +11070,59 @@ a.text-dark:focus {
      object-fit: cover;
 }
 
+.img-hover-zoom {
+  overflow: hidden;
+  /* Removing this will break the effects */
+}
+
+.img-hover-zoom--point-zoom img {
+  transform-origin: 65% 75%;
+  transition: transform 1s, -webkit-filter 0.5s ease-out;
+  transition: transform 1s, filter 0.5s ease-out;
+  transition: transform 1s, filter 0.5s ease-out, -webkit-filter 0.5s ease-out;
+}
+
+.img-hover-zoom--point-zoom:hover img {
+  transform: scale(2);
+}
+
+.img-hover-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.5);
+}
+
+.img-hover-zoom--blur img {
+  transition: transform 1s, -webkit-filter 2s ease-in-out;
+  transition: transform 1s, filter 2s ease-in-out;
+  transition: transform 1s, filter 2s ease-in-out, -webkit-filter 2s ease-in-out;
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+  transform: scale(1.2);
+}
+
+.img-hover-zoom--blur:hover img {
+  -webkit-filter: blur(0);
+          filter: blur(0);
+  transform: scale(1);
+}
+
+.img-hover-zoom--colorize img {
+  transition: transform 0.5s, -webkit-filter 1.5s ease-in-out;
+  transition: transform 0.5s, filter 1.5s ease-in-out;
+  transition: transform 0.5s, filter 1.5s ease-in-out, -webkit-filter 1.5s ease-in-out;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+}
+
+.img-hover-zoom--colorize:hover img {
+  -webkit-filter: grayscale(0);
+          filter: grayscale(0);
+  transform: scale(1.1);
+}
+
 .img-category {
   -o-object-fit: cover;
      object-fit: cover;
@@ -11086,6 +11139,10 @@ a.text-dark:focus {
   z-index: 1;
   box-shadow: 0 0 21px rgba(33, 33, 33, 0.2);
   transform: scale(1.01);
+}
+
+.img-item-list {
+  width: 100%;
 }
 
 .img-detail-admin {

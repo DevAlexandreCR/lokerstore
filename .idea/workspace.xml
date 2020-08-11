@@ -40,10 +40,20 @@
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Products/ProductRequestHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/Showcase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Showcase.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/sections/CategoryComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/DisableProductIfStockIsEmpty.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/DisableProductIfStockIsEmpty.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Color.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Color.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Size.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Size.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Observers/StockObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observers/StockObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/StockFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/StockFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/StockSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/StockSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/stocks/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stocks/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/web/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/web/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/photos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/StockControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/StockControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/TagControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/TagControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +206,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Devs\ProyectoLokerStore\lokerstore\resources\views\web" />
+      <recent name="D:\Devs\ProyectoLokerStore\lokerstore\resources\views\layouts" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -215,7 +231,10 @@
       <workItem from="1596650674765" duration="11293000" />
       <workItem from="1596726082394" duration="35260000" />
       <workItem from="1596816307561" duration="19975000" />
-      <workItem from="1596895972889" duration="11721000" />
+      <workItem from="1596895972889" duration="22470000" />
+      <workItem from="1597013475037" duration="2704000" />
+      <workItem from="1597080662469" duration="23461000" />
+      <workItem from="1597154122892" duration="7285000" />
     </task>
     <servers />
   </component>
@@ -259,9 +278,9 @@
       <screen x="-3286" y="343" width="1366" height="738" />
     </state>
     <state x="-3286" y="343" width="1382" height="825" key="dock-window-1/0.30.1920.1050/-3286.343.1366.738/-1920.39.1920.1050@0.30.1920.1050" timestamp="1596903602652" />
-    <state x="616" y="258" key="run.anything.popup" timestamp="1596761977452">
+    <state x="616" y="258" key="run.anything.popup" timestamp="1597107631252">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="616" y="258" key="run.anything.popup/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596761977452" />
+    <state x="616" y="258" key="run.anything.popup/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1597107631252" />
   </component>
 </project>

@@ -16,14 +16,11 @@ class StockSeeder extends Seeder
     public function run()
     {
         $products = Product::all();
-        
+
         foreach ($products as $key => $product) {
             factory(Stock::class, rand(1,5))->create([
-                'product_id' => $product->id,
-                'size_id'    => Size::all()->random()->id,
-                'color_id'    => Color::all()->random()->id,
-                'quantity'    => rand(1,20)
+                'product_id' => $product->id
             ]);
-        }        
+        }
     }
 }

@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row" v-if="selectedRandomProducts.length > 0">
-            <div v-bind:class="[ 'col-md-6', (category.id%2 == 0) ? '' : 'order-12']"
+            <div v-bind:class="[ 'col-md-6', (category.id%2 === 0) ? '' : 'order-12']"
                  v-on:click="goToShowcase(category.name)">
                 <img v-if="selectedRandomProducts[4]" class="img-fluid img-category"
                      :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
@@ -70,7 +70,7 @@
                     count++
                     var random = Math.floor(Math.random() * this.products.length);
                     var product = this.products[random]
-                    if (product.category.id_parent == this.category.id) {
+                    if (product.category.id_parent === this.category.id) {
                         if (! selectedRandomProducts.includes(product)) {
                             selectedRandomProducts.push(product)
                             max_selected++

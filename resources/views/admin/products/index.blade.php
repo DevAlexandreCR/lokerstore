@@ -113,9 +113,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($products as $key => $product)
                         <tr class="@if(!$product->is_active) text-muted @endif">
-                            <td scope="row">{{ $product->id }}</td>
+                            <td scope="row">{{ $key }}</td>
                             <td>{{ $product->created_at->format('d-m-yy') }}</td>
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->name }}</td>

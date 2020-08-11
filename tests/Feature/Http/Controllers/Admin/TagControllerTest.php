@@ -34,7 +34,7 @@ class TagControllerTest extends TestCase
 
         $tag = factory(Tag::class)->create();
 
-        $response = $this->actingAs($admin, 'admin')->put(route('tags.update', $tag), 
+        $response = $this->actingAs($admin, 'admin')->put(route('tags.update', $tag),
                             [
                                 'name' => 'new name'
                             ]);
@@ -42,8 +42,8 @@ class TagControllerTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertSessionHas('success');
-        
-        $this->assertDatabaseHas('tags', 
+
+        $this->assertDatabaseHas('tags',
         [
             'name' => 'new name'
         ]);
@@ -53,7 +53,7 @@ class TagControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
 
-        $response = $this->actingAs($admin, 'admin')->post(route('tags.store'), 
+        $response = $this->actingAs($admin, 'admin')->post(route('tags.store'),
                             [
                                 'name' => 'new tag'
                             ]);
@@ -61,8 +61,8 @@ class TagControllerTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertSessionHas('success');
-        
-        $this->assertDatabaseHas('tags', 
+
+        $this->assertDatabaseHas('tags',
         [
             'name' => 'new tag'
         ]);
@@ -79,8 +79,8 @@ class TagControllerTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertSessionHas('success');
-        
-        $this->assertDatabaseMissing('tags', 
+
+        $this->assertDatabaseMissing('tags',
         [
             'id' => $tag->id
         ]);

@@ -17,7 +17,16 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 // los usuarios inhabilitados no pueden acceder al index
-Route::get('/', 'HomeController@index')->middleware('enabled')->middleware('guest:admin')->middleware('guest')->name('index'); 
-Route::get('home/{any?}', 'HomeController@home')->middleware('enabled')->name('home')->where('any', '.*');
+Route::get('/', 'HomeController@index')
+    ->middleware('enabled')
+    ->middleware('guest:admin')
+    ->middleware('guest')
+    ->name('index');
+
+Route::get('home/{any?}', 'HomeController@home')
+    ->middleware('enabled')->name('home')
+    ->where('any', '.*');
 
 Route::get('disabled-user', 'DisabledUserController@index');
+
+Route::get('products/{product}', 'ProductController@show')->name('web.products.show');

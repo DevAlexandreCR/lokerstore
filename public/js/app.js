@@ -2463,6 +2463,11 @@ __webpack_require__.r(__webpack_exports__);
       "default": {}
     }
   },
+  methods: {
+    showProduct: function showProduct(id) {
+      window.location.assign("/products/".concat(id));
+    }
+  },
   filters: {
     price: function price(value) {
       return Math.round(value);
@@ -3020,7 +3025,7 @@ __webpack_require__.r(__webpack_exports__);
         var random = Math.floor(Math.random() * this.products.length);
         var product = this.products[random];
 
-        if (product.category.id_parent == this.category.id) {
+        if (product.category.id_parent === this.category.id) {
           if (!selectedRandomProducts.includes(product)) {
             selectedRandomProducts.push(product);
             max_selected++;
@@ -39694,41 +39699,52 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.product
-    ? _c("div", { staticClass: "card card-hover" }, [
-        _c("img", {
-          staticClass: "card-img-top",
-          attrs: {
-            src: "/storage/photos/" + _vm.product.photos[0].name,
-            alt: _vm.product.name
+    ? _c(
+        "div",
+        {
+          staticClass: "card card-hover img-hover-zoom",
+          on: {
+            click: function($event) {
+              return _vm.showProduct(_vm.product.id)
+            }
           }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-sm-5 text-name" }, [
-              _vm._v(_vm._s(_vm.product.name))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-7" }, [
-              _c("p", { staticClass: "text-price" }, [
-                _c("span", { staticClass: "text-old-price" }, [
-                  _vm._v("$" + _vm._s(_vm._f("oldPrice")(_vm.product.price)))
-                ]),
-                _vm._v(" "),
-                _c("strong", [
-                  _vm._v("$" + _vm._s(_vm._f("price")(_vm.product.price)))
+        },
+        [
+          _c("img", {
+            staticClass: "card-img-top",
+            attrs: {
+              src: "/storage/photos/" + _vm.product.photos[0].name,
+              alt: _vm.product.name
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-5 text-name" }, [
+                _vm._v(_vm._s(_vm.product.name))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7" }, [
+                _c("p", { staticClass: "text-price" }, [
+                  _c("span", { staticClass: "text-old-price" }, [
+                    _vm._v("$" + _vm._s(_vm._f("oldPrice")(_vm.product.price)))
+                  ]),
+                  _vm._v(" "),
+                  _c("strong", [
+                    _vm._v("$" + _vm._s(_vm._f("price")(_vm.product.price)))
+                  ])
                 ])
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row container" }, [
-            _c("div", { staticClass: "text-left" }, [
-              _vm._v(_vm._s(_vm._f("truncate")(_vm.product.description)))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row container" }, [
+              _c("div", { staticClass: "text-left" }, [
+                _vm._v(_vm._s(_vm._f("truncate")(_vm.product.description)))
+              ])
             ])
           ])
-        ])
-      ])
+        ]
+      )
     : _vm._e()
 }
 var staticRenderFns = []
@@ -40286,7 +40302,7 @@ var render = function() {
           _c(
             "div",
             {
-              class: ["col-md-6", _vm.category.id % 2 == 0 ? "" : "order-12"],
+              class: ["col-md-6", _vm.category.id % 2 === 0 ? "" : "order-12"],
               on: {
                 click: function($event) {
                   return _vm.goToShowcase(_vm.category.name)

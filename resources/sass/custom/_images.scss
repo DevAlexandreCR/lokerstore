@@ -8,6 +8,48 @@
     object-fit: cover;
 }
 
+.img-hover-zoom {
+    overflow: hidden; /* Removing this will break the effects */
+}
+
+.img-hover-zoom--point-zoom img {
+    transform-origin: 65% 75%;
+    transition: transform 1s, filter .5s ease-out;
+}
+
+.img-hover-zoom--point-zoom:hover img {
+    transform: scale(2);
+}
+
+.img-hover-zoom img {
+    transition: transform .5s ease;
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.5);
+}
+
+.img-hover-zoom--blur img {
+    transition: transform 1s, filter 2s ease-in-out;
+    filter: blur(2px);
+    transform: scale(1.2);
+}
+
+.img-hover-zoom--blur:hover img {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+.img-hover-zoom--colorize img {
+    transition: transform .5s, filter 1.5s ease-in-out;
+    filter: grayscale(100%);
+}
+
+.img-hover-zoom--colorize:hover img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
 .img-category{
     object-fit: cover;
     height: 100% !important;
@@ -21,7 +63,11 @@
         z-index: 1;
         box-shadow: 0 0 21px rgba(33,33,33,.2);
         transform: scale(1.01);
-    } 
+    }
+}
+
+.img-item-list {
+    width: 100%;
 }
 
 .img-detail-admin {
@@ -30,13 +76,13 @@
 }
 
 .ofert-title {
-    position: absolute; 
+    position: absolute;
     text-align: center;
     width: 40%;
     background: repeating-linear-gradient(90deg,$transparent,$primary,$transparent );
     color: white;
-    bottom: 12%;  
-    z-index: 100;          
+    bottom: 12%;
+    z-index: 100;
     right: 0rem;
     font-family: fantasy;
     font-weight: bold;
