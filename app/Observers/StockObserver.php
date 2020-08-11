@@ -7,6 +7,20 @@ use App\Models\Stock;
 
 class StockObserver
 {
+    public function creating(Stock $stock)
+    {
+        $stockExist = Stock::where('product_id', $stock->product_id)
+                ->where('color_id', $stock->color_id)
+                ->where('size_id', $stock->size_id)->first();
+
+        if ($stockExist !== null) {
+            $stockExist->quantity += $stock->quantity;
+            $stockExist->save();
+            return false;
+        }
+
+        return true;
+    }
     /**
      * Handle the stock "created" event.
      * @param Stock $stock

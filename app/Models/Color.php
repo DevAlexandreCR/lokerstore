@@ -14,4 +14,9 @@ class Color extends Model
     {
         return $this->belongsToMany(Stock::class);
     }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'stocks');
+    }
 }

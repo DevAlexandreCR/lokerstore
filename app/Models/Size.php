@@ -18,6 +18,20 @@ class Size extends Model
         return $this->belongsToMany(Stock::class);
     }
 
+    public function products() : BelongsToMany
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
+
+    public function colors(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Color::class, 'stocks')
+            ->withPivot('quantity');
+    }
+
+
     public function type() : BelongsTo
     {
         return $this->belongsTo(TypeSize::class, 'type_sizes_id');

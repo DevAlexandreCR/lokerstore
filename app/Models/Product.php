@@ -29,12 +29,22 @@ class Product extends Model
 
     public function stocks(): HasMany
     {
-        return $this->hasMany(Stock::class);
+        return $this->hasMany(Stock::class)
+                    ->orderBy('color_id');
     }
 
     public function photos(): HasMany
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public function sizes(): BelongsToMany
+    {
+        return $this
+                    ->belongsToMany(Size::class, 'stocks')
+                    ->with(['colors' => function($query) {
+                        $query->wherePivot('product_id', $this->id);
+                    }]);
     }
 
     public function scopeByCategory($query, $category)
@@ -81,6 +91,17 @@ class Product extends Model
 
         return $query->whereHas('stocks', function ($query) use ($sizes) {
             $query->whereIn('size_id', $sizes);
+        });
+    }
+
+    public function scopeSizesByProduct($query, $product_id)
+    {
+        if (empty($sizes)) return null;
+
+        return $query->whereHas('stocks', function ($query) use ($product_id) {
+            $query
+                ->where('product_id', $product_id)
+                ;
         });
     }
 

@@ -21,31 +21,50 @@
                     <div class="card-header">
                         <h3 class="card-title">{{$product->name}}</h3>
                     </div>
-                    <div class="card-body">
-                        <p>{{$product->description}}</p>
-                        <p class="text-monospace">{{$product->getPrice()}}</p>
-                        <hr>
-                        <select class="form-control" name="size">
-                            <option>{{__('Choose size')}}</option>
-                        </select>
-                        <hr>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="color" id="color">
-                            <label class="form-check-label" for="exampleRadios1">
-                                Rojo ejemplo
-                            </label>
+                    <form >
+                        @csrf
+                        <div class="card-body">
+                            <p>{{$product->description}}</p>
+                            <p class="text-monospace">{{$product->getPrice()}}</p>
+                            <hr>
+                            <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link d-none active" id="shownone" data-toggle="tab" href="#shownoneid"
+                                   role="tab" aria-controls="shownone" aria-selected="true"></a>
+                                @foreach ($sizes as $key => $size)
+                                    <a class="nav-link d-none " id="show{{$size->id}}" data-toggle="tab" href="#show{{str_replace('/', '', $size->name)}}"
+                                       role="tab" aria-controls="show{{$size->name}}" aria-selected="false"></a>
+                                @endforeach
+                                <select class="form-control" name="size_id"
+                                        onchange="document.getElementById(`show${this.value.replace('/', '')}`).click()">
+                                    <option value="none">{{__('Choose size')}}</option>
+                                    @foreach ($sizes as $key => $size)
+                                        <option value="{{$size->id}}">{{$size->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <hr>
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="shownoneid" role="tabpanel" aria-labelledby="shownone">
+                                </div>
+                                @foreach ($sizes as $key => $size)
+                                    <div class="tab-pane fade" id="show{{str_replace('/', '', $size->name)}}" role="tabpanel" aria-labelledby="show{{$size->id}}">
+                                            @foreach ($size->colors as $color)
+                                            <div class="form-check d-inline-block">
+                                                <input class="form-check-input" type="radio" name="color_id" id="color">
+                                                <label class="form-check-label mt-1" for="exampleRadios1">
+                                                    <span class="badge bg-{{strtolower($color->name)}}">{{strtolower(__($color->name))}}</span>
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="color" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
-                                otro color de ejemplo
-                            </label>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-block">{{__('Add to cart')}}</button>
+                            <button class="btn btn-light btn-block" type="button" onclick="goBack()">{{__('Back')}}</button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-block">Agregar al carrito</button>
-                        <button class="btn btn-light btn-block" type="button" onclick="goBack()">volver</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
