@@ -34,7 +34,7 @@
                 @else
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name') }}
-                </a> 
+                </a>
                 @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -66,7 +66,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @else 
+                        @else
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -84,10 +84,13 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                                <button id="navbarDropdown" class="nav-link btn  btn-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <ion-icon size="small" name="person-circle-outline"></ion-icon>
+                                </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item btn">
+                                        {{ Auth::user()->name }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -99,6 +102,13 @@
                                     </form>
                                 </div>
                             </li>
+                            <form action="{{route('user.cart.index', auth()->id())}}" method="GET">
+                                <button type="submit" class="nav-link btn btn-link">
+                                    <span class="badge">
+                                        <ion-icon size="small" name="cart-outline"></ion-icon>
+                                    </span>
+                                </button>
+                            </form>
                         @endguest
                         @endauth
 
@@ -106,7 +116,7 @@
                 </div>
             </div>
         </nav>
- 
+
         <main class="py-0" >
             @yield('content')
         </main>

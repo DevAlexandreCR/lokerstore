@@ -30,3 +30,7 @@ Route::get('home/{any?}', 'HomeController@home')
 Route::get('disabled-user', 'DisabledUserController@index');
 
 Route::get('products/{product}', 'ProductController@show')->name('web.products.show');
+
+Route::resource('user.cart', 'CartController')
+    ->names('user.cart')
+    ->middleware('verified');
