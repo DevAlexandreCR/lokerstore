@@ -48,7 +48,7 @@ class ProductController extends Controller
                 ->byCategory($category)
                 ->withTags($tags)
                 ->search($search)
-                ->paginate(10),
+                ->paginate(15),
             'filters' => [
                 'category'  => $category,
                 'tags'      => $tags,

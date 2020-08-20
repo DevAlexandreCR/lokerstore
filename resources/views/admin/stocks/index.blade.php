@@ -46,7 +46,7 @@
         <div class="card">
             <div class="modal-header">
                 <h5>{{__('Inventario')}}</h5>
-                <a href="{{ url()->previous() }}" class="btn btn-link"><ion-icon
+                <a href="{{ route('products.index') }}" class="btn btn-link"><ion-icon
                         name="return-up-back-outline"></ion-icon></a>
             </div>
             <div class="card-body">

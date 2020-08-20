@@ -16,7 +16,7 @@ before_install:
     - mysql -e 'create database testing;'
 before_script:
     - composer self-update
-    - composer install --quiet --prefer-dist --optimize-autoloader
+    - composer install
     - composer dump-autoload
     - npm install
     - npm run prod

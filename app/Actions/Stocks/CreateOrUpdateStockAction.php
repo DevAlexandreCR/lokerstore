@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Actions\Products;
+namespace App\Actions\Stocks;
 
 use App\Models\Stock;
 
-class UpdateStockProductAction
+class CreateOrUpdateStockAction
 {
     public function execute(array $data): void
     {
