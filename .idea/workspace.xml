@@ -40,20 +40,17 @@
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/DisableProductIfStockIsEmpty.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/DisableProductIfStockIsEmpty.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Color.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Color.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Size.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Size.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observers/StockObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observers/StockObserver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/StockFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/StockFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/StockSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/StockSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/stocks/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stocks/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/web/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/web/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/public/photos/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/StockControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/StockControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/TagControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/TagControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/NotFoundProductsComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/NotFoundProductsComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ProductsGridComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/Showcase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Showcase.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/web/cart/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/web/cart/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,6 +186,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/vendor/cweagans/composer-patches" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ff1i4I2miLBcorFhhWrJwbe0Vz" />
@@ -208,15 +207,26 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Devs\ProyectoLokerStore\lokerstore\storage\app\public" />
+      <recent name="D:\Devs\ProyectoLokerStore\lokerstore\public" />
       <recent name="D:\Devs\ProyectoLokerStore\lokerstore\resources\views\web" />
       <recent name="D:\Devs\ProyectoLokerStore\lokerstore\resources\views\layouts" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.CartControllerTest.testAnuserCanRemoveitemToCart">
+    <configuration name="CartControllerTest.testAnuserCanRemoveitemToCart" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\Http\Controllers\Web\CartControllerTest" file="$PROJECT_DIR$/tests/Feature/Http/Controllers/Web/CartControllerTest.php" method="testAnuserCanRemoveitemToCart" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.CartControllerTest.testAnuserCanRemoveitemToCart" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -235,6 +245,15 @@
       <workItem from="1597013475037" duration="2704000" />
       <workItem from="1597080662469" duration="23461000" />
       <workItem from="1597154122892" duration="7285000" />
+      <workItem from="1597418284566" duration="15478000" />
+      <workItem from="1597504630106" duration="6113000" />
+      <workItem from="1597526386363" duration="7078000" />
+      <workItem from="1597596978187" duration="15497000" />
+      <workItem from="1597678516803" duration="9360000" />
+      <workItem from="1597769365444" duration="8457000" />
+      <workItem from="1597801116514" duration="4347000" />
+      <workItem from="1597885844761" duration="556000" />
+      <workItem from="1597937056827" duration="11285000" />
     </task>
     <servers />
   </component>
@@ -262,6 +281,14 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596846943711" />
+    <state x="690" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597788321926">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="690" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1597788321926" />
+    <state x="690" y="310" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597425270587">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="690" y="310" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1597425270587" />
     <state x="92" y="122" width="1736" height="866" key="DiffContextDialog" timestamp="1596597125450">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>

@@ -16,33 +16,40 @@
                 </div>
             </div>
             <div class="col-sm-4 pt-4">
-                <paginate-links v-if="products.length > 0"
-                                for="products"
-                                :classes="{
-                    'ul': ['pagination', 'pagination-sm', 'justify-content-end'],
-                    'li': 'page-item',
-                    'a' : 'page-link'
-                }"
-                :show-step-links="true">
-                </paginate-links>
+                <transition-group name="flip-list" tag="ul">
+                    <paginate-links v-if="products.length > 0"
+                                    for="products"
+                                    :classes="{
+                        'ul': ['pagination', 'pagination-sm', 'justify-content-end'],
+                        'li': 'page-item',
+                        'a' : 'page-link'
+                    }"
+                    :show-step-links="true">
+                    </paginate-links>
+                </transition-group>
             </div>
         </div>
-        <paginate v-if="products.length > 0" name="products" :list="products" :per="18" class="paginate-list">
+        <paginate v-if="products.length > 0" name="products" :list="products" :per="15" class="paginate-list">
             <div class="row row-cols-3" >
-                <div class="col-sm-4 my-2" v-for="product in paginated('products')" :key="product.id">
+                <div class="col-sm-4 my-2" v-for="product in paginated('products')" :key="product.name">
                     <product-component :product="product"></product-component>
                 </div>
             </div>
 
         </paginate>
 
-        <div class="col-sm-4 my-2" v-else-if="paginate" @click="viewAll()">
-                <div class="card card-hover">
-                    <div class="card-body">
-                        <p class="card-text"><strong>no se encontraron resultados</strong></p>
-                        <h5>Ver Todos</h5>
-                    </div>
+        <div v-else>
+            <transition name="fade">
+                <div class="my-2 btn" v-show="loading">
+                    <searching-component></searching-component>
                 </div>
+            </transition>
+
+            <transition name="fade">
+                <div class="my-2 btn" v-show="loading === false" @click="viewAll()">
+                    <not-found-products-component></not-found-products-component>
+                </div>
+            </transition>
         </div>
 </div>
 
@@ -50,9 +57,15 @@
 
 <script>
 import ProductComponent from "./ProductComponent";
+import NotFoundProductsComponent from "./NotFoundProductsComponent";
+import SearchingComponent from "./searchingComponent";
 export default {
     name: 'products-grid',
-    components: {ProductComponent},
+    components: {
+        SearchingComponent,
+        ProductComponent,
+        NotFoundProductsComponent
+    },
     data() {
         return {
             paginate:['products']
@@ -62,8 +75,15 @@ export default {
     props: {
         products: {
             type: Array,
+            required: true,
             default: () => []
         },
+
+        loading: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
     },
 
     methods: {

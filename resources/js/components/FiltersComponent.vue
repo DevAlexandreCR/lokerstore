@@ -164,7 +164,7 @@
 <script>
 
 import api from '../api'
-import Constants from "../Constants/constants";
+import Constants from "../constants/constants";
 
 export default {
     name: 'filters',
