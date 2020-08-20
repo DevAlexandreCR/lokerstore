@@ -36,13 +36,8 @@
 
         </paginate>
 
-        <div class="col-sm-4 my-2" v-else-if="paginate" @click="viewAll()">
-                <div class="card card-hover">
-                    <div class="card-body">
-                        <p class="card-text"><strong>no se encontraron resultados</strong></p>
-                        <h5>Ver Todos</h5>
-                    </div>
-                </div>
+        <div class="my-2 card-hover" v-else-if="paginate" @click="viewAll()">
+            <not-found-products-component></not-found-products-component>
         </div>
 </div>
 
@@ -50,9 +45,13 @@
 
 <script>
 import ProductComponent from "./ProductComponent";
+import NotFoundProductsComponent from "./NotFoundProductsComponent";
 export default {
     name: 'products-grid',
-    components: {ProductComponent},
+    components: {
+        ProductComponent,
+        NotFoundProductsComponent
+    },
     data() {
         return {
             paginate:['products']

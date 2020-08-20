@@ -4,22 +4,22 @@
         <div class="container" v-if="isNotHomeRoute()">
             <div class="row my-1" id="navbar-category">
                 <div class="col-sm-2 d-none d-sm-block">
-                    <router-link 
-                    class="nav-link" 
+                    <router-link
+                    class="nav-link"
                     exact
                     :to="{name: 'showcase', query: { tags: ['Mujer'] }}"
                     >Mujer</router-link>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
-                    <router-link 
-                    class="nav-link" 
+                    <router-link
+                    class="nav-link"
                     exact
                     :to="{name: 'showcase', query: { tags: ['Hombre'] }}"
                     >Hombre</router-link>
                 </div>
                 <div class="col">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..." 
+                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..."
                         aria-label="Search" aria-describedby="btn-search" v-model="search">
                         <div class="input-group-append">
                             <button class="btn btn-primary" @click="getProducts(search)" type="button" id="btn-search">Buscar</button>
@@ -62,6 +62,7 @@
 
     export default {
         name: 'home',
+
         data() {
             return {
                 categories: {
@@ -75,7 +76,7 @@
                 search: null
             }
         },
-        components: 
+        components:
         {
             BannerComponent,
             GenderComponent,
@@ -98,7 +99,7 @@
                     }
                     this.$router.push({name: 'showcase', query: query}).catch((e)=>{console.log(e);})
                 }
-                
+
             }
         },
         created() {
@@ -110,11 +111,11 @@
                 })
 
             api.getCategories().then(categories => {
-                this.categories = categories              
+                this.categories = categories
             })
 
         },
-        mounted() {           
+        mounted() {
 
         }
     }

@@ -31,6 +31,10 @@ Route::get('disabled-user', 'DisabledUserController@index');
 
 Route::get('products/{product}', 'ProductController@show')->name('web.products.show');
 
-Route::resource('user.cart', 'CartController')
-    ->names('user.cart')
-    ->middleware('verified');
+Route::middleware('verified')
+    ->group(function () {
+        Route::get('user/{user}/cart', 'CartController@show')->name('cart.show');
+        Route::post('user/{user}/cart/', 'CartController@add')->name('cart.add');
+        Route::put('user/{user}/cart/', 'CartController@update')->name('cart.update');
+        Route::delete('user/{user}/cart/{stock}', 'CartController@remove')->name('cart.remove');
+    });

@@ -102,11 +102,12 @@
                                     </form>
                                 </div>
                             </li>
-                            <form action="{{route('user.cart.index', auth()->id())}}" method="GET">
+                            <form action="{{route('cart.show', auth()->id())}}" method="GET">
                                 <button type="submit" class="nav-link btn btn-link">
-                                    <span class="badge">
-                                        <ion-icon size="small" name="cart-outline"></ion-icon>
-                                    </span>
+                                    <ion-icon size="small" name="cart-outline"></ion-icon>
+                                    @if(Auth::user()->cart->countProducts() > 0)
+                                        <span class="badge bg-red">{{Auth::user()->cart->countProducts()}}</span>
+                                    @endif
                                 </button>
                             </form>
                         @endguest

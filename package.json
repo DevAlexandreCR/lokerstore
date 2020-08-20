@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "lottie-vuejs": "^0.3.7",
         "vue-paginate": "^3.6.0"
     },
     "babel": {

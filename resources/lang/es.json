@@ -92,6 +92,7 @@
     "Choose color": "Escoger color",
     "Choose size": "Escoger talla",
     "Add new product": "Agregar nuevo producto",
+    "Remove product": "Eliminar producto",
     "Add stock for": "Agregar stock para",
     "Add product description...": "Agregar descripcion del producto...",
     "Add stock": "Agregar stock",
@@ -125,5 +126,15 @@
     "BLUE"    : "AZUL",
     "FUCHSIA" : "FUCSIA",
     "PURPLE"  : "MORADO",
-    "PINK"    : "ROSA"
+    "PINK"    : "ROSA",
+    "Product Added to cart": "Producto agregado al carrito!",
+    "Add to cart": "Agregar al carrito",
+    "Show cart": "Ver carrito",
+    "Product": "Producto",
+    "Order summary": "Resumen del pedido",
+    "Shopping cart": "Carrito de compras",
+    "Proceed to payment": "Proceder al pago",
+    "Continue shopping": "Continuar comprando",
+    "Product removed to cart": "Producto eliminado del carrito!",
+    "Login to add products to cart": "Inicia sessión para agregar productos al carrito"
 }
