@@ -42,18 +42,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/lokerstore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lokerstore.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Actions/Stocks/CreateOrUpdateStockAction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Actions/Stocks/CreateOrUpdateStockAction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/stocks/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stocks/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/HomeControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Http/Controllers/HomeControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Web/OrderControllerTest.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +244,7 @@
       <workItem from="1597769365444" duration="8457000" />
       <workItem from="1597801116514" duration="4347000" />
       <workItem from="1597885844761" duration="556000" />
-      <workItem from="1597937056827" duration="14751000" />
+      <workItem from="1597937056827" duration="14952000" />
     </task>
     <servers />
   </component>
