@@ -39,7 +39,7 @@
                 <filters-component @sendQuery="sendQuery" :query="query" @setSearch="setSearch" :search="search"></filters-component>
             </div>
             <div class="col-sm-7">
-                <products-grid-component @sendQuery="sendQuery" :products="products"></products-grid-component>
+                <products-grid-component @sendQuery="sendQuery" :loading="loading" :products="products"></products-grid-component>
             </div>
         </div>
     </div>
@@ -72,7 +72,9 @@
                     price: [],
                     size: null,
                     search: null
-                }
+                },
+
+                loading: true
             }
         },
 
@@ -135,6 +137,7 @@
 
             sendQuery(query, reload = false) {
                 this.$router.push({name: 'showcase', query: query}).catch(()=>{})
+                this.loading = true
                 if (reload) location.reload()
                 else this.getProducts(query)
             },
@@ -142,6 +145,7 @@
             getProducts(query) {
                 this.products = []
                 api.getProducts(query).then(products => {
+                    this.loading = false
                     products.forEach(products => {
                         this.products.push(products)
                     })

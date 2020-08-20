@@ -29,7 +29,9 @@
             </div>
         </div>
         <div class="container-fluid">
-            <router-view></router-view>
+            <transition name="fade">
+                <router-view></router-view>
+            </transition>
         </div>
         <div class="container" v-show="isNotHomeRoute()">
         <div class="row justify-content-center">

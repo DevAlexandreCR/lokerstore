@@ -24,7 +24,7 @@
     @endif
 @endauth
 <div>
-    <transition name="slide">
+    <transition appear>
       <router-view></router-view>
     </transition>
 </div>

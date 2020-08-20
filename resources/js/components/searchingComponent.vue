@@ -1,12 +1,10 @@
 <template>
     <div class="container">
-        <div class="container text-center">
-            <p class="text-primary d-inline-block">No encontramos lo que buscas</p>
-            <button class="btn btn-link btn-sm font-weight-bold">Volver</button>
-        </div>
         <div class="container w-75">
+            <span class="spinner-border spinner-border-sm" ></span>
+            Cargando...
             <lottie-animation class="container"
-                              path="storage/assets/lottie/404-page1.json"
+                              path="storage/assets/lottie/loading.json"
             />
         </div>
     </div>

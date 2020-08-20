@@ -3,6 +3,9 @@
 @section('content')
     <div class="container py-4">
         <h3>{{__('Shopping cart')}}</h3>
+        @if($cart->stocks->count() === 0)
+            <empty-cart-component></empty-cart-component>
+        @endif
         <div class="row py-4">
             <div class="col-sm-8 order-first font-mini">
                 <div class="list-group" id="list-cart">
