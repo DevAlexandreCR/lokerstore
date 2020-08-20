@@ -21,8 +21,8 @@ before_script:
     - npm install
     - npm run prod
 script:
-    - php artisan migrate --force --seed
-#    - php artisan test
+    - php artisan migrate --force
+    - php artisan test
 notifications:
     email:
         recipients:

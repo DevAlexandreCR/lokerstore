@@ -44,6 +44,11 @@
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_20_002229_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_20_002229_create_categories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_07_142659_add_column_id_parent_to_categories.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_22_221834_add_constrain_name_unique_to_category_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_23_151837_update_foreinkey_id_parent_on_categories_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_14_152245_create_table_cart_stock.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_14_152245_create_table_cart_stock.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +257,7 @@
       <workItem from="1597769365444" duration="8457000" />
       <workItem from="1597801116514" duration="4347000" />
       <workItem from="1597885844761" duration="556000" />
-      <workItem from="1597937056827" duration="17666000" />
+      <workItem from="1597937056827" duration="19217000" />
     </task>
     <servers />
   </component>

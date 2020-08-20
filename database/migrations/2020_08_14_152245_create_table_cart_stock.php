@@ -20,8 +20,14 @@ class CreateTableCartStock extends Migration
             $table->integer('quantity')->unsigned()->nullable(false);
             $table->timestamps();
 
-            $table->foreign('cart_id')->references('id')->on('carts');
-            $table->foreign('stock_id')->references('id')->on('stocks');
+            $table->foreign('cart_id')
+                ->references('id')
+                ->on('carts')
+                ->onDelete('cascade');
+            $table->foreign('stock_id')
+                ->references('id')
+                ->on('stocks')
+                ->onDelete('cascade');
         });
     }
 
@@ -32,6 +38,6 @@ class CreateTableCartStock extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_cart_stock');
+        Schema::dropIfExists('cart_stock');
     }
 }
