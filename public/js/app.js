@@ -72487,29 +72487,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./resources/js/constants/constants.js ***!
   \*********************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var Constants = function Constants() {
-  _classCallCheck(this, Constants);
-};
-
-_defineProperty(Constants, "FILTER_PRICE", 'filter_price');
-
-_defineProperty(Constants, "FILTER_CATEGORY", 'filter_category');
-
-_defineProperty(Constants, "FILTER_COLORS", 'filter_colors');
-
-_defineProperty(Constants, "FILTER_SIZES", 'filter_sizes');
-
-_defineProperty(Constants, "FILTER_SEARCH", 'filter_search');
-
-/* harmony default export */ __webpack_exports__["default"] = (Constants);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/var/www/resources/js/constants/constants.js'");
 
 /***/ }),
 
