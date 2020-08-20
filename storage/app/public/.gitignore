@@ -1,5 +1,5 @@
 *
-!images/*
-!photos/*
-!assets/*
+!/images/
+!/photos/
+!/assets/
 !.gitignore
