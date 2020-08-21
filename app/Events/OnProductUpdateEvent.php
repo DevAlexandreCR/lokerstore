@@ -16,10 +16,10 @@ class OnProductUpdateEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $product;
+
     /**
-     * Create a new event instance.
-     *
-     * @return void
+     * OnProductUpdateEvent constructor.
+     * @param Product $product
      */
     public function __construct(Product $product)
     {
@@ -27,9 +27,7 @@ class OnProductUpdateEvent
     }
 
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return PrivateChannel
      */
     public function broadcastOn()
     {

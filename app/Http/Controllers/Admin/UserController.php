@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +14,6 @@ class UserController extends Controller
 {
     protected $user;
 
-
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -21,22 +21,21 @@ class UserController extends Controller
 
     /**
      * Display a listing of the users.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @param Request $request
+     * @return View
      */
     public function index(Request $request) : View
     {
         $search =  $request->get('search');
 
         return $this->searchUser($search);
-    
     }
 
     /**
      * Display the specified user.
      *
      * @param  User  $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
     public function show(User $user) : View
     {
@@ -47,9 +46,9 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified user.
-     *
-     * @param  User  $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param UserRequest $request
+     * @param User $user
+     * @return View
      */
     public function edit(UserRequest $request, User $user) : View
     {
@@ -61,23 +60,22 @@ class UserController extends Controller
 
     /**
      * Update the specified user in storage.
-     *
-     * @param  \App\Http\Request\UserRequest  $request
-     * @param  User  $user
-     * @return \Illuminate\Http\RedirecResponse
+     * @param UserRequest $request
+     * @param User $user
+     * @return RedirectResponse
      */
     public function update(UserRequest $request, User $user) : RedirectResponse
     {
         $user->update($request->all());
 
-        return redirect( route('users.show', ['user' => $user->id]))->with('user-updated', 'User has been updated success');
+        return redirect( route('users.show', ['user' => $user]))->with('user-updated', 'User has been updated success');
     }
 
     /**
      * Remove the specified user from storage.
-     *
-     * @param  User  $user
-     * @return \Illuminate\Http\RedirecResponse
+     * @param User $user
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(User $user) : RedirectResponse
     {

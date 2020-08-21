@@ -1,21 +1,22 @@
 .paginate-list {
     width: 100%;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
     li {
-      display: inline-block;
-      &:before {
-        content: '⚬ ';
+        &:before {
         font-weight: bold;
         color: slategray;
-      }
+        }
     }
   }
-  
-  .paginate-links.items {
-    user-select: none;
+
+  .paginate-links.products {
     a {
-      cursor: pointer;
+        cursor: pointer;
+        &:hover {
+            background: $primary-end;
+            color: white;
+        }
     }
     li.active a {
       font-weight: bold;

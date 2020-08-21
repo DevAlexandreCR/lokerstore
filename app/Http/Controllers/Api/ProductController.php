@@ -21,16 +21,15 @@ class ProductController extends Controller
 
     /**
      * Response at Json whit products resource
-     *
-     * @param Request $request
+     * @param IndexRequest $request
      * @return JsonResponse
      */
     public function index(IndexRequest $request) : JsonResponse
-    {   
+    {
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
         $colors = $request->validationData()['colors'];
-        $size = $request->validationData()['size'];
+        $sizes = $request->validationData()['sizes'];
         $price = $request->validationData()['price'];
         $search = $request->validationData()['search'];
         return response()->json(ProductResource::collection(
@@ -38,7 +37,8 @@ class ProductController extends Controller
                 ->active()
                 ->byCategory($category)
                 ->price($price)
-                ->color($colors)
+                ->colors($colors)
+                ->sizes($sizes)
                 ->withTags($tags)
                 ->search($search)
                 ->get()
@@ -46,47 +46,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return ProductResource
      */
     public function show(Product $product)
     {
         return new ProductResource($product);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

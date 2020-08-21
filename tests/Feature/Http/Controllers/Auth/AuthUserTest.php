@@ -11,7 +11,7 @@ use Tests\TestCase;
 class AuthUserTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /**
      * Prueba para verificar que el Login NO permita
      * acceso a usuarios inhabilitados
@@ -54,11 +54,11 @@ class AuthUserTest extends TestCase
             'password_confirmation' => '12345678',
             "remember_token" => null,
           ];
-      
+
         $response = $this->post('register', $user);
 
         $response->assertRedirect('email/verify');
-   
+
         //quitamos password y password_confirmation del array
         array_splice($user,4, 2);
 
@@ -70,7 +70,7 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testUserDisabledindex()
+    public function testUserDisabledIndex()
     {
         $user = factory(User::class)->create([
             'is_active' => false

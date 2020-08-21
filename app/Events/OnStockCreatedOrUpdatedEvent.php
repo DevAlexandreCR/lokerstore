@@ -16,10 +16,10 @@ class OnStockCreatedOrUpdatedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $stock;
+
     /**
-     * Create the event created.
-     *
-     * @return void
+     * OnStockCreatedOrUpdatedEvent constructor.
+     * @param Stock $stock
      */
     public function __construct(Stock $stock)
     {
@@ -27,9 +27,7 @@ class OnStockCreatedOrUpdatedEvent
     }
 
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return PrivateChannel
      */
     public function broadcastOn()
     {

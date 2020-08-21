@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\Products;
+namespace App\Actions\Stocks;
 
 use App\Models\Stock;
 
-class UpdateStockProductAction
+class CreateOrUpdateStockAction
 {
-    public function execute(array $data)
+    public function execute(array $data): void
     {
         $stock = new Stock();
         $stock->product_id  = $data['product_id'];
