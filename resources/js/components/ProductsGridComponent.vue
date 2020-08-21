@@ -16,17 +16,15 @@
                 </div>
             </div>
             <div class="col-sm-4 pt-4">
-                <transition-group name="flip-list" tag="ul">
-                    <paginate-links v-if="products.length > 0"
-                                    for="products"
-                                    :classes="{
-                        'ul': ['pagination', 'pagination-sm', 'justify-content-end'],
-                        'li': 'page-item',
-                        'a' : 'page-link'
-                    }"
-                    :show-step-links="true">
-                    </paginate-links>
-                </transition-group>
+                <paginate-links v-if="products.length > 0"
+                                for="products"
+                                :classes="{
+                    'ul': ['pagination', 'pagination-sm', 'justify-content-end'],
+                    'li': 'page-item',
+                    'a' : 'page-link'
+                }"
+                :show-step-links="true">
+                </paginate-links>
             </div>
         </div>
         <paginate v-if="products.length > 0" name="products" :list="products" :per="15" class="paginate-list">

@@ -2659,8 +2659,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -55112,30 +55110,23 @@ var render = function() {
           "div",
           { staticClass: "col-sm-4 pt-4" },
           [
-            _c(
-              "transition-group",
-              { attrs: { name: "flip-list", tag: "ul" } },
-              [
-                _vm.products.length > 0
-                  ? _c("paginate-links", {
-                      attrs: {
-                        for: "products",
-                        classes: {
-                          ul: [
-                            "pagination",
-                            "pagination-sm",
-                            "justify-content-end"
-                          ],
-                          li: "page-item",
-                          a: "page-link"
-                        },
-                        "show-step-links": true
-                      }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
+            _vm.products.length > 0
+              ? _c("paginate-links", {
+                  attrs: {
+                    for: "products",
+                    classes: {
+                      ul: [
+                        "pagination",
+                        "pagination-sm",
+                        "justify-content-end"
+                      ],
+                      li: "page-item",
+                      a: "page-link"
+                    },
+                    "show-step-links": true
+                  }
+                })
+              : _vm._e()
           ],
           1
         )

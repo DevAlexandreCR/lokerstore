@@ -18,7 +18,7 @@ before_script:
     - composer self-update
     - composer install --prefer-dist --optimize-autoloader
     - npm install
-    - npm run prod
+    - npm run production
     - php artisan storage:link
 script:
     - php artisan migrate --force
@@ -27,7 +27,7 @@ notifications:
     email:
         recipients:
             - devalexandrecr@gmail.com
-        on_success: always
+        on_success: never
         on_failure: always
     slack:
         secure: "Y2QGoSzOvPPJtcS9LjKSFGKTjZgEufhhJRc47xmp0q1Wf6BRXVIfsRTEet5BajH7vFbA1cXnh8e8mrcULAXjghLT5CSksPlW/oVg7UFN49mcnEFz6zwD1pQMOAJKyHfu13X5T7A06H1Gz8jsQl7ud5PSMRru6jmQqXu
