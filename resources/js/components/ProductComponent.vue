@@ -1,6 +1,6 @@
 <template>
     <div class="card card-hover img-hover-zoom" @click="showProduct(product.id)" v-if="product">
-        <img :src="'/storage/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
+        <img :src="'/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-5 text-name">{{product.name}}</div>

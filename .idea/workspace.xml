@@ -42,9 +42,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/BannerComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/BannerComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/CardCategoryComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/CardCategoryComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ProductComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ProductComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +260,7 @@
       <workItem from="1597885844761" duration="556000" />
       <workItem from="1597937056827" duration="19792000" />
       <workItem from="1597968595280" duration="19000" />
-      <workItem from="1598027586771" duration="378000" />
+      <workItem from="1598027586771" duration="2508000" />
     </task>
     <servers />
   </component>
@@ -279,10 +284,10 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="666" y="326" key="#Log_Highlighting_(ideolog)/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596738396267" />
-    <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596846943711">
+    <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598030582394">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1596846943711" />
+    <state x="696" y="357" key="#com.intellij.fileTypes.FileTypeChooser/-3286.343.1366.738/-1920.39.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1598030582394" />
     <state x="690" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597788321926">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>

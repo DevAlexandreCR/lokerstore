@@ -53756,21 +53756,21 @@ var staticRenderFns = [
             _c("div", { staticClass: "carousel-item active" }, [
               _c("img", {
                 staticClass: "img-carousel",
-                attrs: { src: "/storage/images/layer1.jpg", alt: "" }
+                attrs: { src: "/images/layer1.jpg", alt: "" }
               })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "carousel-item" }, [
               _c("img", {
                 staticClass: "img-carousel",
-                attrs: { src: "/storage/images/layer2.jpg", alt: "" }
+                attrs: { src: "/images/layer2.jpg", alt: "" }
               })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "carousel-item" }, [
               _c("img", {
                 staticClass: "img-carousel",
-                attrs: { src: "/storage/images/layer3.jpg", alt: "" }
+                attrs: { src: "/images/layer3.jpg", alt: "" }
               })
             ])
           ]),
@@ -53845,7 +53845,7 @@ var render = function() {
         _c("img", {
           staticClass: "card-img-top",
           attrs: {
-            src: "/storage/photos/" + _vm.product.photos[0].name,
+            src: "/photos/" + _vm.product.photos[0].name,
             alt: _vm.product.name
           }
         }),
@@ -54989,7 +54989,7 @@ var render = function() {
           _c("img", {
             staticClass: "card-img-top",
             attrs: {
-              src: "/storage/photos/" + _vm.product.photos[0].name,
+              src: "/photos/" + _vm.product.photos[0].name,
               alt: _vm.product.name
             }
           }),
