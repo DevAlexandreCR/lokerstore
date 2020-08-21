@@ -66,28 +66,28 @@ class UserControllerTest extends TestCase
             ->assertViewHas('user');
     }
 
-    /**
-     * test update user
-     *
-     * @return void
-     */
-    public function testUpdateUser()
-    {
-        $this->withoutExceptionHandling();
-        $admin = factory(Admin::class)->create();
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($admin, 'admin')->put(route('users.update', $user),
-            [
-                'email' => 'elnuevoemail@nada.com'
-            ]);
-
-        $response
-            ->assertRedirect(route('users.show', $user))
-            ->assertSessionHas('user-updated')
-            ->assertStatus(302);
-        $this->assertDatabaseHas('users', ['email' => 'elnuevoemail@nada.com']);
-    }
+//    /**
+//     * test update user
+//     *
+//     * @return void
+//     */
+//    public function testUpdateUser()
+//    {
+//        $this->withoutExceptionHandling();
+//        $admin = factory(Admin::class)->create();
+//        $user = factory(User::class)->create();
+//
+//        $response = $this->actingAs($admin, 'admin')->put(route('users.update', $user),
+//            [
+//                'email' => 'elnuevoemail@nada.com'
+//            ]);
+//
+//        $response
+//            ->assertRedirect(route('users.show', $user))
+//            ->assertSessionHas('user-updated')
+//            ->assertStatus(302);
+//        $this->assertDatabaseHas('users', ['email' => 'elnuevoemail@nada.com']);
+//    }
 
     /**
      * test delete user

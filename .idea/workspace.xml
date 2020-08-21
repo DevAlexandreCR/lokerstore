@@ -42,8 +42,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29bd9822-48a1-4571-852f-5ec5b69158d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/UserControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Http/Controllers/Admin/UserControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -255,7 +253,7 @@
       <workItem from="1597885844761" duration="556000" />
       <workItem from="1597937056827" duration="19792000" />
       <workItem from="1597968595280" duration="19000" />
-      <workItem from="1598027586771" duration="4547000" />
+      <workItem from="1598027586771" duration="4764000" />
     </task>
     <servers />
   </component>
