@@ -2,7 +2,7 @@
     <div class="container">
         <div class="container text-center py-5 w-75">
             <div class="container">
-                <img @click="back()" class="img-fluid" src="/storage/assets/gifs/empty-cart.gif">
+                <img @click="back()" class="img-fluid" src="/assets/gifs/empty-cart.gif">
                 <div class="card-footer">
                     <button class="btn btn-block" @click="back()">Carrito vacío... <strong>ir de compras</strong></button>
                 </div>
