@@ -2,7 +2,7 @@
 
 @section('main')
 @if ( session('success'))
-    
+
 <div class="container py-2">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -21,9 +21,8 @@
       <h5 class="modal-title">{{ __('Add new product') }}</h5>
       <a href="{{ route('products.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
     </div>
-    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
       @csrf
-      @method('POST')
       <div class="card-body">
         <div class="row">
           <div class="col-2">
@@ -134,7 +133,7 @@
             <h6>{{__('Add tags')}}</h6>
           </div>
           <div class="container">
-            @error('tags') 
+            @error('tags')
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one tag')}}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -173,8 +172,8 @@
                  </div>
                 </div>
               </div>
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div class="col-4 d-none" id="clone">
             <div class="card m-3" style="width: 18rem;">
               <img>
@@ -190,8 +189,8 @@
                  </div>
                 </div>
               </div>
-            </div> 
-          </div> 
+            </div>
+          </div>
         </div>
         <hr>
         <div class="row " id="save">
@@ -206,7 +205,7 @@
 </div>
 @endsection
 <script>
-  /** 
+  /**
   * Esta funcion agrega la imagen seleccionada a la vista previa
   * @argument input que posee la imagen
   * @argument div card donde se va a agregar la imagen
@@ -218,17 +217,17 @@
         for (i = 0; i < filesAmount; i++) {
             var reader = new FileReader();
 
-            reader.onload = function(event) { 
+            reader.onload = function(event) {
               var img = div.getElementsByTagName('img')[0]
               img.classList.add('img-thumbnail')
-              img.src = event.target.result  
-              }          
+              img.src = event.target.result
+              }
             reader.readAsDataURL(input.files[i]);
         }
     }
   }
 
-  /** 
+  /**
   * Esta funcion agrega el valor del option a la category_id input
   * @argument value valor del option seleccionado
   */
@@ -236,7 +235,7 @@
         document.getElementById(id).value = value
     }
 
-  /** 
+  /**
   * Esta funcion agrega la vista para una nueva imagen
   */
   const addPhoto = () => {
@@ -249,13 +248,13 @@
         })
   }
 
-  /** 
+  /**
   * Esta funcion borra la vista de una nueva imagen
   */
   const removePhoto = (button) => {
     button.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
   }
-  /** 
+  /**
   * Esta funcion agrega el listener del input de la primer imagen al iniciarse el DOM
   */
   document.addEventListener("DOMContentLoaded", () => {
