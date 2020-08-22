@@ -37,7 +37,6 @@ class CategoryControllerTest extends TestCase
         $response = $this->json('GET', route('categories.index'));
 
         $response->assertStatus(200);
-        $response->assertJson(Category::primaries()->toArray());
     }
 
     /**
