@@ -70,12 +70,11 @@ class CartControllerTest extends TestCase
 
         $stock = $this->createProductRelations();
 
-        $response = $this->actingAs($user)->post(route('cart.add',
-            [ $user ]),
+        $response = $this->actingAs($user)->post(route('cart.add', $user),
             [
                 'product_id' => $stock->product_id,
                 'size_id' => $stock->size->id,
-                'color_id' => $stock->size->id,
+                'color_id' => $stock->color->id,
                 'quantity' => 2
             ]);
 
