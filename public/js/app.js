@@ -53883,7 +53883,7 @@ var render = function() {
       _c("div", { staticClass: "container" }, [
         _c("img", {
           staticClass: "img-fluid",
-          attrs: { src: "/storage/assets/gifs/empty-cart.gif" },
+          attrs: { src: "/assets/gifs/empty-cart.gif" },
           on: {
             click: function($event) {
               return _vm.back()
@@ -53942,7 +53942,7 @@ var render = function() {
       _vm._v(" "),
       _c("lottie-animation", {
         staticClass: "container",
-        attrs: { path: "storage/assets/lottie/404-page.json" }
+        attrs: { path: "/assets/lottie/404-page.json" }
       })
     ],
     1
@@ -55238,7 +55238,7 @@ var render = function() {
         _vm._v("\n        Cargando...\n        "),
         _c("lottie-animation", {
           staticClass: "container",
-          attrs: { path: "storage/assets/lottie/loading.json" }
+          attrs: { path: "/assets/lottie/loading.json" }
         })
       ],
       1

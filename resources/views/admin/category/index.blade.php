@@ -39,15 +39,13 @@
 
         <div class="col-3 @if($key > 0) align-top @endif d-felx flex-wrap col-sm-4">
             @include('admin.category.category', ['category' => $category])
-        </div>         
-
-        @include('admin.category.category_modal')
+        </div>
         @include('admin.category.sub_category_modal', [
             'category' => $category,
             'categories' => $categories
             ])
     @endforeach
 </div>
-    
+@include('admin.category.category_modal')
 @endsection
 
