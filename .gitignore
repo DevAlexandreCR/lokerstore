@@ -5,6 +5,7 @@
 /storage/*.key
 /vendor
 /vendor/**/.git
+.idea/
 .env
 .env.testing
 .env.backup
