@@ -13,6 +13,10 @@ class ProductControllerTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
+
+    private $categories = [
+        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
+    ];
     /**
      * A basic feature test example.
      *
@@ -21,11 +25,8 @@ class ProductControllerTest extends TestCase
     public function testIndex()
     {
         $this->withoutExceptionHandling();
-        $categories = [
-            'Ropa','Zapatos','Deportes','Accesorios'
-        ];
-        
-        foreach ($categories as $name) {
+
+        foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
                 'id_parent' => null
@@ -42,19 +43,16 @@ class ProductControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        /** creamos categorias para luego poder crear productos */
-        $categories = ['Ropa', 'Zapatos', 'Deportes', 'Accesorios'];
-
-        foreach ($categories as $cat) {
+        foreach ($this->categories as $cat) {
             factory(Category::class)->create([
                 'name' => $cat,
                 'id_parent' => null
-            ]); 
+            ]);
         }
 
         factory(Category::class, 2)->create();
         $product = factory(Product::class)->create();
-        
+
         $response = $this->actingAs($user)->json('GET', route('api.show', [
             'product' => $product->id
         ]));
