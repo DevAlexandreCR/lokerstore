@@ -9,9 +9,9 @@ use Image;
 class DeletePhotoAction
 {
 
-    public function execute(? array $idsPhotos) : void
+    public function execute(?array $idsPhotos): void
     {
-        if(empty($idsPhotos)) return;
+        if (empty($idsPhotos)) return;
 
         foreach ($idsPhotos as $id) {
 
@@ -27,7 +27,7 @@ class DeletePhotoAction
      * @param string $name
      * @return void
      */
-    private function deleteImage(string $name) : void
+    private function deleteImage(string $name): void
     {
         Storage::disk('public')->delete('photos/' . $name);
     }
@@ -38,7 +38,7 @@ class DeletePhotoAction
      * @param integer $photo_id
      * @return string
      */
-    private function deletePhoto(int $photo_id) : string
+    private function deletePhoto(int $photo_id): string
     {
         $photo = Photo::findOrFail($photo_id);
         $name = $photo->name;

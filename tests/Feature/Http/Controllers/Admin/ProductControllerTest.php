@@ -41,7 +41,7 @@ class ProductControllerTest extends TestCase
     {
         $admin = factory(Admin::class)->create();
         $tag = factory(Tag::class)->create();
-        
+
         foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
@@ -53,7 +53,7 @@ class ProductControllerTest extends TestCase
             'name' => 'new product'
         ]);
         $product->tags()->attach($tag->id);
-        
+
         $response = $this
                         ->actingAs($admin, 'admin')
                         ->get(route('products.index'), [
@@ -72,7 +72,7 @@ class ProductControllerTest extends TestCase
     public function testEditProduct()
     {
         $admin = factory(Admin::class)->create();
-        
+
         foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
@@ -101,7 +101,7 @@ class ProductControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
-        
+
         foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
@@ -112,20 +112,20 @@ class ProductControllerTest extends TestCase
         $tag = factory(Tag::class)->create();
 
         $response = $this->actingAs($admin, 'admin')->post(route('products.store'),
-        [  
+        [
             'name'          =>  'new product',
             'description'   =>  'new description at product incoming',
             'stock'         =>  0,
             'price'         =>  2000,
             'id_category'   => $category->id,
             'tags'          => [$tag->id],
-            'photos'        => [$this->faker->file('public/photos')]
+            'photos'        => [$this->faker->file(storage_path('app/public/photos'))]
         ]);
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('stocks.create', Product::first()));
-        
+
         $this->assertDatabaseHas('products', [
             'name'          =>  'new product',
             'description'   =>  'new description at product incoming',
@@ -136,14 +136,14 @@ class ProductControllerTest extends TestCase
     }
 
     /**
-     * test update product 
+     * test update product
      *
      * @return void
      */
     public function testUpdateProduct()
     {
         $admin = factory(Admin::class)->create();
-        
+
         foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
@@ -184,7 +184,7 @@ class ProductControllerTest extends TestCase
     public function testDeleteProduct()
     {
         $admin = factory(Admin::class)->create();
-        
+
         foreach ($this->categories as $name) {
             factory(Category::class)->create([
                 'name' => $name,
@@ -205,6 +205,6 @@ class ProductControllerTest extends TestCase
 
         $response->assertRedirect(route('products.index'))
             ->assertSessionHas('product-deleted')
-            ->assertStatus(302); 
+            ->assertStatus(302);
     }
 }

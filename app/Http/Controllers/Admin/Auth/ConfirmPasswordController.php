@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Illuminate\View\View;
 
 class ConfirmPasswordController extends Controller
 {
@@ -41,9 +42,9 @@ class ConfirmPasswordController extends Controller
     /**
      * Display the password confirmation view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function showConfirmForm()
+    public function showConfirmForm(): View
     {
         return view('admin.passwords.confirm');
     }

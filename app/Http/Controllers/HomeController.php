@@ -16,7 +16,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return redirect('/home');
+        return redirect(route('home'));
     }
 
     public function home() {

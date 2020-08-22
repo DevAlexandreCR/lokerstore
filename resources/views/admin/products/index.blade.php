@@ -21,7 +21,7 @@
                                             <a class="btn btn-link" onclick="removeFilter('{{$value}}')">
                                                 <ion-icon name="close-outline"></ion-icon>
                                             </a>
-                                        </span>                                    
+                                        </span>
                                     @endif
                                     @break
                                 @case('tags')
@@ -32,8 +32,8 @@
                                                 <a class="btn btn-link" onclick="removeFilter('{{$key}}')">
                                                     <ion-icon name="close-outline"></ion-icon>
                                                 </a>
-                                            </span>   
-                                        @endforeach                                 
+                                            </span>
+                                        @endforeach
                                     @endif
                                     @break
                                 @case('orderBy')
@@ -43,7 +43,7 @@
                                             <a class="btn btn-link" onclick="removeFilter('{{$value}}')">
                                                 <ion-icon name="close-outline"></ion-icon>
                                             </a>
-                                        </span>                                    
+                                        </span>
                                     @endif
                                 @break
                                 @case('search')
@@ -53,11 +53,11 @@
                                             <a class="btn btn-link" onclick="removeFilter('{{$value}}')">
                                                 <ion-icon name="close-outline"></ion-icon>
                                             </a>
-                                        </span>                                    
+                                        </span>
                                     @endif
                                     @break
                                 @default
-                                    
+
                             @endswitch
                         @endforeach
                     </div>
@@ -70,7 +70,7 @@
         </form>
     </div>
     @if ( session('product-deleted'))
-        
+
     <div class="container py-2">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -80,10 +80,10 @@
             <strong>{{__('Success!')}}</strong> {{ session('product-deleted') }}
         </div>
     </div>
-  
+
   @endif
   @if ( session('product-updated'))
-    
+
     <div class="container py-2">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -93,7 +93,7 @@
             <strong>{{__('Success!')}}</strong> {{ session('product-updated') }}
         </div>
     </div>
-  
+
   @endif
     <div class="container-fluid bg-secondary shadow-sm my-2">
         <div class="row">
@@ -113,9 +113,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($products as $key => $product)
                         <tr class="@if(!$product->is_active) text-muted @endif">
-                            <td scope="row">{{ $product->id }}</td>
+                            <td scope="row">{{ $key }}</td>
                             <td>{{ $product->created_at->format('d-m-yy') }}</td>
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->name }}</td>
@@ -139,44 +139,44 @@
                                 </div>
                             </td>
                             @if ($product->is_active)
-                            <td> 
+                            <td>
                             <span class="badge badge-info"> {{ __('Enabled') }}</span>
                             </td>
                             @else
-                            <td class="text-muted"> 
+                            <td class="text-muted">
                             <span class="badge badge-danger"> {{ __('Disabled') }}</span>
                             </td>
                             @endif
                             <td>
-                            <div class="btn-group btn-block btn-group-sm text-center" 
+                            <div class="btn-group btn-block btn-group-sm text-center"
                             role="group"
                             style="border-left: groove">
                                 @include('admin.products.detail', ['product' => $product])
-                                <a type="button" class="btn btn-link btn-sm" 
-                                data-placement="top" 
+                                <a type="button" class="btn btn-link btn-sm"
+                                data-placement="top"
                                 title="{{__('View')}}"
                                 data-toggle="modal"
                                 data-target="#modalDetail{{$product->id}}"
                                 >
                                 <ion-icon name="eye"></ion-icon>
                                 </a>
-                                <a type="button" class="btn btn-link btn-sm" 
-                                data-toggle="tooltip" 
-                                data-placement="top" 
+                                <a type="button" class="btn btn-link btn-sm"
+                                data-toggle="tooltip"
+                                data-placement="top"
                                 title="{{__('Edit')}}"
                                 href="{{ route('products.edit', ['product' => $product])}}">
                                 <ion-icon name="create-outline"></ion-icon>
                                 </a>
-                                <a type="button" class="btn btn-link btn-sm" 
-                                data-toggle="tooltip" 
-                                data-placement="top" 
+                                <a type="button" class="btn btn-link btn-sm"
+                                data-toggle="tooltip"
+                                data-placement="top"
                                 title="@if($product->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
                                 href="{{ route('products.active', ['product' => $product, 'input_name' => 'is_active'])}}">
                                 <ion-icon name="power"></ion-icon>
                                 </a>
-                                <a type="button" class="btn btn-link btn-sm" 
-                                data-toggle="tooltip" 
-                                data-placement="top" 
+                                <a type="button" class="btn btn-link btn-sm"
+                                data-toggle="tooltip"
+                                data-placement="top"
                                 title="{{__('Remove')}}"
                                 href="{{route('products.active', ['product' => $product, 'input_name' => 'delete'])}}">
                                 <ion-icon name="trash"></ion-icon>
@@ -231,9 +231,9 @@
                                 <option>{{__('Most recent')}}</option>
                                 @if ($filters['orderBy'] === 'asc')
                                 <option selected>{{__('Less recent')}}</option>
-                                @else 
+                                @else
                                 <option>{{__('Less recent')}}</option>
-                                @endif 
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                             <select id="category" class="form-control" id="exampleFormControlSelect2" name="category">
                                 <option>{{__('Choose category')}}</option>
                                 @if ($filters['category'])
-                                <option selected>{{$filters['category']}}</option>                                                
+                                <option selected>{{$filters['category']}}</option>
                                 @endif
                                 @foreach ($categories as $category)
                                 <option>{{$category->name}}</option>
@@ -264,7 +264,8 @@
                                 @foreach (\App\Models\Tag::all() as $tag)
                                     <div class="card m-2">
                                         <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
-                                        <input type="checkbox" class="custom-control-input"  name="tags[{{$tag->name}}]" id="{{$tag->name}}">
+                                        <input type="checkbox" class="custom-control-input"
+                                               name="tags[{{$tag->name}}]" id="{{$tag->name}}" value="{{$tag->name}}">
                                         <label class="custom-control-label" for="{{$tag->name}}">{{$tag->name}}</label>
                                         </div>
                                     </div>
@@ -290,7 +291,7 @@
     /** esta funcion hace check en los tags devueltos por el servidor
     *@argument filter Json
     *@argument checked Boolean
-    */ 
+    */
     const modal = (filter, checked) => {
         console.log(filter);
         if (filter.tags) {
@@ -303,7 +304,7 @@
     }
     /** esta funcion limpia todos los filtros y hace submit para traer todos los productos
     *@argument filter Json
-    */ 
+    */
     const clearFilters = (filter) => {
         modal(filter, false)
         document.getElementById('orderBy').selectedIndex  = 0
@@ -314,7 +315,7 @@
     }
     /** esta funcion elimina el filtro seleccionado de la busqueda
     *@argument id id del tsg a eliminar
-    */ 
+    */
     const removeFilter = (id) => {
         document.getElementById(id + 'tag').remove()
         document.search.submit()

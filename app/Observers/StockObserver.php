@@ -2,64 +2,49 @@
 
 namespace App\Observers;
 
-use App\Events\OnProductUpdateEvent;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Models\Stock;
 
 class StockObserver
 {
+    public function creating(Stock $stock)
+    {
+        $stockExist = Stock::where('product_id', $stock->product_id)
+                ->where('color_id', $stock->color_id)
+                ->where('size_id', $stock->size_id)->first();
+
+        if ($stockExist !== null) {
+            $stockExist->quantity += $stock->quantity;
+            $stockExist->save();
+            return false;
+        }
+
+        return true;
+    }
     /**
      * Handle the stock "created" event.
-     *
-     * @param  \App\Stock  $stock
-     * @return void
+     * @param Stock $stock
      */
-    public function created(Stock $stock)
+    public function created(Stock $stock): void
     {
         event(new OnStockCreatedOrUpdatedEvent($stock));
     }
 
     /**
      * Handle the stock "updated" event.
-     *
-     * @param  \App\Stock  $stock
-     * @return void
+     * @param Stock $stock
      */
-    public function updated(Stock $stock)
+    public function updated(Stock $stock): void
     {
         event(new OnStockCreatedOrUpdatedEvent($stock));
     }
 
     /**
      * Handle the stock "deleted" event.
-     *
-     * @param  \App\Stock  $stock
-     * @return void
+     * @param Stock $stock
      */
-    public function deleted(Stock $stock)
+    public function deleted(Stock $stock): void
     {
         event(new OnStockCreatedOrUpdatedEvent($stock));
-    }
-
-    /**
-     * Handle the stock "restored" event.
-     *
-     * @param  \App\Stock  $stock
-     * @return void
-     */
-    public function restored(Stock $stock)
-    {
-        //
-    }
-
-    /**
-     * Handle the stock "force deleted" event.
-     *
-     * @param  \App\Stock  $stock
-     * @return void
-     */
-    public function forceDeleted(Stock $stock)
-    {
-        //
     }
 }

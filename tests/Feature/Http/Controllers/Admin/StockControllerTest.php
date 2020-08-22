@@ -57,14 +57,14 @@ class StockControllerTest extends TestCase
 
         $response
                 ->assertStatus(302);
-        $this->assertDatabaseHas('stocks', 
+        $this->assertDatabaseHas('stocks',
         [
             'product_id' => $product->id,
             'color_id' => $color->id,
             'size_id' => $size->id
         ]);
 
-        $this->assertDatabaseHas('products', 
+        $this->assertDatabaseHas('products',
         [
             'stock' => 3
         ]);
@@ -100,13 +100,13 @@ class StockControllerTest extends TestCase
 
         $response
                 ->assertStatus(302);
-        $this->assertDatabaseHas('stocks', 
+        $this->assertDatabaseHas('stocks',
         [
             'product_id' => $product->id,
             'quantity' => 0
         ]);
 
-        $this->assertDatabaseHas('products', 
+        $this->assertDatabaseHas('products',
         [
             'id' => $product->id,
             'stock' => 0,
@@ -142,18 +142,70 @@ class StockControllerTest extends TestCase
 
         $response
                 ->assertStatus(302);
-        $this->assertDatabaseMissing('stocks', 
+        $this->assertDatabaseMissing('stocks',
         [
             'id' => $stock->id,
             'product_id' => $product->id,
             'quantity' => 5
         ]);
 
-        $this->assertDatabaseHas('products', 
+        $this->assertDatabaseHas('products',
         [
             'id' => $product->id,
             'stock' => 0,
             'is_active' => 0
         ]);
+    }
+
+    public function testAddStocksRepeated()
+    {
+        $this->withoutExceptionHandling();
+        $admin = factory(Admin::class)->create();
+        foreach ($this->categories as $name) {
+            factory(Category::class)->create([
+                'name' => $name,
+                'id_parent' => null
+            ]);
+        }
+        factory(Category::class, 2)->create();
+        $tag = factory(Tag::class)->create();
+        $product = factory(Product::class)->create();
+        $product->tags()->attach($tag->id);
+        factory(Photo::class, rand(1, 5))->create([
+            'product_id' => $product->id
+        ]);
+        factory(TypeSize::class)->create();
+        $size = factory(Size::class)->create();
+        $color = factory(Color::class)->create();
+        factory(Stock::class)->create(
+            [
+                'product_id' => $product->id,
+                'color_id' => $color->id,
+                'size_id' => $size->id,
+                'quantity' => 3
+            ]
+        );
+
+        $response = $this->actingAs($admin, 'admin')->post( route('stocks.store') , [
+            'product_id' => $product->id,
+            'color_id' => $color->id,
+            'size_id' => $size->id,
+            'quantity' => 3
+        ]);
+
+        $response
+            ->assertStatus(302);
+        $this->assertDatabaseHas('stocks',
+            [
+                'product_id' => $product->id,
+                'color_id' => $color->id,
+                'size_id' => $size->id,
+                'quantity' => 6
+            ]);
+
+        $this->assertDatabaseHas('products',
+            [
+                'stock' => 6
+            ]);
     }
 }

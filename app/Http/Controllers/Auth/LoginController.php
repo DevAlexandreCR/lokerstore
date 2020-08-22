@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
@@ -51,11 +53,9 @@ class LoginController extends Controller
         return $credenctials;
     }
 
-        /**
-     * Log the user out of the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response|mixed
      */
     public function logout(Request $request)
     {
@@ -75,20 +75,16 @@ class LoginController extends Controller
     }
 
     /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * @return Guard
      */
     protected function guard()
     {
         return Auth::guard();
     }
 
-        /**
-     * Send the response after the user was authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response|mixed
      */
     protected function sendLoginResponse(Request $request)
     {
@@ -104,4 +100,5 @@ class LoginController extends Controller
                     ? new Response('', 204)
                     : redirect(RouteServiceProvider::HOME);
     }
+
 }

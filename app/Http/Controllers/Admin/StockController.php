@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Stocks\StoreOrUpdateRequest;
 use App\Http\Requests\Stocks\StoreRequest;
 use App\Http\Requests\Stocks\UpdateRequest;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\TypeSize;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class StockController extends Controller
 {
     protected $stock;
-    
     public function __construct(Stock $stock)
     {
         $this->stock = $stock;
@@ -24,12 +23,10 @@ class StockController extends Controller
 
 
     /**
-     * Store a new Stock
-     *
-     * @param Request $request
-     * @return void
+     * @param StoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request) : RedirectResponse
     {
         $this->stock->create($request->all());
 
@@ -56,10 +53,9 @@ class StockController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param Stock $stock
+     * @return RedirectResponse
      */
     public function update(UpdateRequest $request, Stock $stock)
     {
@@ -70,9 +66,9 @@ class StockController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Stock $stock
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Stock $stock)
     {

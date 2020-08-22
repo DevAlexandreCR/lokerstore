@@ -3,7 +3,7 @@
 @section('main')
 
 @if ( session('success'))
-    
+
 <div class="container py-2">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -17,7 +17,7 @@
 @endif
 
     @if ( $errors->any() )
-    
+
         @foreach ($errors->all() as $error)
             <div class="container align-self-start col-4 py-2">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -27,14 +27,14 @@
                 </button>
                 <strong>{{__('Error!')}}</strong> {{ $error }}
                 </div>
-            </div>   
+            </div>
         @endforeach
 
     @endif
     <div class="container my-4">
         <form action="{{route('stocks.store')}}" method="POST">
             @csrf
-            @include('admin.stocks.add_form', 
+            @include('admin.stocks.add_form',
             [
                 'product'    => $product,
                 'colors'     => $colors,
@@ -44,7 +44,11 @@
     </div>
     <div class="container my-2">
         <div class="card">
-            <div class="card-header"><h5>{{__('Inventario')}}</h5></div>
+            <div class="modal-header">
+                <h5>{{__('Inventario')}}</h5>
+                <a href="{{ route('products.index') }}" class="btn btn-link"><ion-icon
+                        name="return-up-back-outline"></ion-icon></a>
+            </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -67,26 +71,26 @@
                             <td>{{$stock->quantity}}</td>
                             <td>
                                 <div class="btn-group  btn-group-sm text-center">
-                                    <button type="button" class="btn btn-sm btn-blue" 
-                                        data-placement="top" 
+                                    <button type="button" class="btn btn-sm btn-blue"
+                                        data-placement="top"
                                         title="{{__('Edit')}}"
                                         data-toggle="modal"
                                         data-target="#stockEdit{{$stock->id}}"
                                         >
                                         <ion-icon name="create"></ion-icon>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-danger" 
-                                        data-placement="top" 
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                        data-placement="top"
                                         title="{{__('Remove')}}"
                                         data-toggle="modal"
                                         data-target="#stockDelete{{$stock->id}}"
                                         >
                                         <ion-icon name="trash"></ion-icon>
                                     </button>
-                                    @include('admin.stocks.delete', ['stock' => $stock])                          
+                                    @include('admin.stocks.delete', ['stock' => $stock])
                                     @include('admin.stocks.edit_form', [
                                         'stock' => $stock
-                                        ])  
+                                        ])
                                 </div>
                             </td>
                         </tr>
@@ -102,7 +106,7 @@
 @endsection
 
 <script>
-    /** 
+    /**
     * Esta funcion agrega el valor del option a la size_id input
     * @argument value valor del option seleccionado
     */

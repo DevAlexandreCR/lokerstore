@@ -41,14 +41,14 @@ class ProductController extends Controller
         $orderBy = $request->validationData()['orderBy'];
 
         $categories = Category::all();
-   
+
         return view('admin.products.index', [
             'products' => $this->product
                 ->orderBy('created_at', $orderBy)
                 ->byCategory($category)
                 ->withTags($tags)
                 ->search($search)
-                ->paginate(10),
+                ->paginate(15),
             'filters' => [
                 'category'  => $category,
                 'tags'      => $tags,
@@ -70,7 +70,7 @@ class ProductController extends Controller
         $tags = Tag::all();
         $colors = Color::all();
         $sizes = Size::all();
-        return view('admin.products.create', 
+        return view('admin.products.create',
                     compact('categories', 'tags', 'sizes', 'colors')
                 );
     }
@@ -79,13 +79,12 @@ class ProductController extends Controller
      * Store a newly created product in storage.
      *
      * @param StoreRequest $request
-     * @param Product $product
      * @param SavePhotoAction $savePhotoAction
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Product $products, SavePhotoAction $savePhotoAction) : RedirectResponse
+    public function store(StoreRequest $request, SavePhotoAction $savePhotoAction) : RedirectResponse
     {
-        $product = $products->create($request->all());
+        $product = $this->product->create($request->all());
 
         foreach ($request->get('tags') as $tag) {
             $product->tags()->attach($tag);
@@ -138,7 +137,8 @@ class ProductController extends Controller
      * @param SavePhotoAction $savePhotoAction
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Product $product, DeletePhotoAction $deletePhotoAction, SavePhotoAction $savePhotoAction) : RedirectResponse
+    public function update(UpdateRequest $request, Product $product, DeletePhotoAction $deletePhotoAction,
+                           SavePhotoAction $savePhotoAction) : RedirectResponse
     {
         $product->tags()->sync($request->get('tags'));
 
@@ -168,10 +168,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Delete product
-     *
      * @param Product $product
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Product $product) : RedirectResponse
     {

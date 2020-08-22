@@ -1,39 +1,69 @@
 <template>
-    <div class="container-fluid">
-        
-            <!-- <div class="col-sm-4 my-2" v-for="(product, index) in products" :key="index">
-                <div class="card card-hover" v-if="product">
-                    <img :src="'/storage/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
-                    <div class="card-body">
-                        <p class="card-text"><strong>${{product.price}}</strong></p>
+    <div class="container-fluid mt-1">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="container">
+                    <div class="form-inline pt-4 pl-4">
+                        <label class="text-small" for="exampleFormControlSelect1">Ordenar por: </label>
+                        <select class="form-control ml-2 mr-2" id="exampleFormControlSelect1" v-on:change="orderBy($event)">
+                            <option selected value="0">Ordenar por </option>
+                            <option value="1">Menor Precio</option>
+                            <option value="2">Mayor Precio</option>
+                            <option value="3">Nombre</option>
+                        </select>
+                        <label class="text-small" for="exampleFormControlSelect1"> Encontrados {{products.length}} productos </label>
                     </div>
                 </div>
-            </div> -->
-            <paginate v-if="products.length > 0" name="products" :list="products" :per="20" class="paginate-list">
-                <div class="row row-cols-3" >
-                    <div class="col-sm-4 my-2" v-for="product in paginated('products')" :key="product.id">
-                        <div class="card card-hover" v-if="product">
-                            <img :src="'/storage/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
-                            <div class="card-body">
-                                <p class="card-text"><strong>${{product.price}}</strong></p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-sm-4 pt-4">
+                <paginate-links v-if="products.length > 0"
+                                for="products"
+                                :classes="{
+                    'ul': ['pagination', 'pagination-sm', 'justify-content-end'],
+                    'li': 'page-item',
+                    'a' : 'page-link'
+                }"
+                :show-step-links="true">
+                </paginate-links>
+            </div>
+        </div>
+        <paginate v-if="products.length > 0" name="products" :list="products" :per="15" class="paginate-list">
+            <div class="row row-cols-3" >
+                <div class="col-sm-4 my-2" v-for="product in paginated('products')" :key="product.name">
+                    <product-component :product="product"></product-component>
                 </div>
-                
-            </paginate>
-            <paginate-links v-if="products.length > 0" for="products" :simple="{
-                    next: 'Next »',
-                    prev: '« Back'
-            }"></paginate-links>
+            </div>
+
+        </paginate>
+
+        <div v-else>
+            <transition name="fade">
+                <div class="my-2 btn" v-show="loading">
+                    <searching-component></searching-component>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div class="my-2 btn" v-show="loading === false" @click="viewAll()">
+                    <not-found-products-component></not-found-products-component>
+                </div>
+            </transition>
+        </div>
 </div>
-    
+
 </template>
 
 <script>
+import ProductComponent from "./ProductComponent";
+import NotFoundProductsComponent from "./NotFoundProductsComponent";
+import SearchingComponent from "./searchingComponent";
 export default {
     name: 'products-grid',
-
+    components: {
+        SearchingComponent,
+        ProductComponent,
+        NotFoundProductsComponent
+    },
     data() {
         return {
             paginate:['products']
@@ -41,11 +71,66 @@ export default {
     },
 
     props: {
-        products : []
+        products: {
+            type: Array,
+            required: true,
+            default: () => []
+        },
+
+        loading: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
     },
 
-    mounted() {
-        
+    methods: {
+        viewAll() {
+              this.$emit('sendQuery', null, true)
+        },
+
+        orderBy(event) {
+            let value = event.target.value
+            switch (value) {
+                case '1':
+                    this.products.sort(function (a, b) {
+
+                        if (parseFloat(a.price) > parseFloat(b.price)) {
+                            return 1;
+                        }
+                        if (parseFloat(a.price) < parseFloat(b.price)) {
+                            return -1;
+                        }
+                        // a must be equal to b
+                        return 0;
+                    });
+                    break
+                case '2':
+                    this.products.sort(function (a, b) {
+                        if (parseFloat(a.price) < parseFloat(b.price)) {
+                            return 1;
+                        }
+                        if (parseFloat(a.price) > parseFloat(b.price)) {
+                            return -1;
+                        }
+                        // a must be equal to b
+                        return 0;
+                    });
+                    break
+                case '3':
+                    this.products.sort(function (a, b) {
+                        if (a.name > b.name) {
+                            return 1;
+                        }
+                        if (a.name < b.name) {
+                            return -1;
+                        }
+                        // a must be equal to b
+                        return 0;
+                    });
+                    break
+            }
+        }
     },
 }
 </script>

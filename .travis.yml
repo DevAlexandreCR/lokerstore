@@ -2,33 +2,34 @@ language: php
 sudo: required
 dist: trusty
 services:
-    -mysql
+    - mysql
 cache:
     directories:
         - node_modules
         - ~/.npm
         - vendor
 php:
-    - '7.2'
+    - '7.4'
 git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
 before_script:
-    - cp .env.testing.example .env.testing
     - composer self-update
-    - composer install --quiet --prefer-dist --optimize-autoloader 
-    - composer dump-autoload
+    - composer install --prefer-dist --optimize-autoloader
+    - npm install
+    - npm run production
+    - php artisan storage:link
 script:
-    - php artisan migrate:refresh --force
+    - php artisan migrate --force
     - php artisan test
 notifications:
     email:
         recipients:
             - devalexandrecr@gmail.com
-        on_success: always
+        on_success: never
         on_failure: always
-    slack: 
+    slack:
         secure: "Y2QGoSzOvPPJtcS9LjKSFGKTjZgEufhhJRc47xmp0q1Wf6BRXVIfsRTEet5BajH7vFbA1cXnh8e8mrcULAXjghLT5CSksPlW/oVg7UFN49mcnEFz6zwD1pQMOAJKyHfu13X5T7A06H1Gz8jsQl7ud5PSMRru6jmQqXu
         QN9xXD/TMoFrOGM1xT3SsPVT3WsQVJR0WXqhJTvoJCe77JvxF3odCmnzhhmvtgw1QAeW0tdtOx/1NPZ25L8iVrmjdW1Vkt/wPkH2HHNnMexBfJRuUjWPaBR9he2Uyc/XJRyj5Uu0DrsQTZQZ5p90/UY9V56EPgi7WfsDLwJ2rYJLGr
         bhHAAdWKXOh+Lpb8SaHx9tyCt002FhfYjQa/sSutkVN4CinGdDd5nXnAVLHNf7Bv58dSQ+29RFcgBMNNTF+03BULopY+Bt8s7R9ajEUTwihdYl9GUNqBtawj0/cFtRiiYAQEPyune/tfuz9Z4AU9X/HFuPeoqo618El8sLlI20lKZ+
@@ -37,7 +38,7 @@ deploy:
     provider: heroku
     skip_cleanup: true
     keep_history: true
-    api_key: 
+    api_key:
         secure: "eCfnTcI+r8sijr0E50OfAPbUsF6OyEy2kW3+Dz2/oJ1WexxXaDCq8moSYOGBBhjGVazPFwSwW+d8pNWvJVBjdixsQIVtzzyHRWfTLR91gT9EqMk/c5Zu/+8cJPEPaipmmekv/
         +YfSto7XUfqb2qb8rTn/hgrimPMDHiGMzC5H4kv3RRi4yBCrat61qlH+VO2wR0waYo5GdLtEWXTD3xwkM7ZbVPEFIP4vT/MgP56sRgFwmGJOcT+47tpQ2hj/SOThQ6huEWGqrnzh74pjF3iu
         qZzRTDSoW9n8ZgyE00bSkq4NsDG2PKLz3RN3LiPCXqEGL+TOpewwLQc4gijn+zr65MeJ0rWd/XzTAhOM7PedPu30saFrx108VlWkq7qvd1VZDRpULMoxuB983RrdNv+OMO/DuhiKxihql4yb

@@ -10,9 +10,9 @@ use Image;
 class SavePhotoAction
 {
 
-    public function execute(int $id_product, ?array $images) : void
+    public function execute(int $id_product, ?array $images): void
     {
-        if(empty($images)) return;
+        if (empty($images)) return;
 
         foreach ($images as $image) {
 
@@ -28,7 +28,7 @@ class SavePhotoAction
      * @param UploadedFile $image
      * @return string
      */
-    private function saveImage(UploadedFile $image) : string
+    private function saveImage(UploadedFile $image): string
     {
         $name = time() . '_' . $image->getClientOriginalName();
         $img = Image::make($image)->fit(540, 480)->encode('jpg', 75);
@@ -44,12 +44,12 @@ class SavePhotoAction
      * @param string $name
      * @return void
      */
-    private function savePhoto(int $id_product, string $name) : void
+    private function savePhoto(int $id_product, string $name): void
     {
         $photo = new Photo;
-        $photo->product_id = $id_product; 
+        $photo->product_id = $id_product;
         $photo->name = $name;
-        
+
         $photo->save();
     }
 }

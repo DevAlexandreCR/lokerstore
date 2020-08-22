@@ -12,6 +12,11 @@ class Color extends Model
 
     public function stocks()
     {
-        return $this->hasMany(Stock::class);
+        return $this->belongsToMany(Stock::class);
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'stocks');
     }
 }

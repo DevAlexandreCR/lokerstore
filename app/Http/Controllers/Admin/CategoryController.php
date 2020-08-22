@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreRequest;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,7 +21,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Illuminate\View\View
+     * @return View
      */
     public function index() : View
     {
@@ -31,14 +32,13 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  App\Http\Requests\Category\StoreRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StoreRequest $request
+     * @param Category $category
+     * @return RedirectResponse
      */
     public function store(StoreRequest $request, Category $category) : RedirectResponse
     {
         $category->create($request->all());
-
         return redirect()
                     ->back()
                     ->with('success', __('Category has been created success'));
@@ -46,10 +46,9 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Category $category
+     * @return RedirectResponse
      */
     public function update(Request $request, Category $category) : RedirectResponse
     {
@@ -62,9 +61,9 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \Category  $category
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Category $category
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(Category $category) : RedirectResponse
     {

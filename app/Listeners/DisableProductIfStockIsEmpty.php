@@ -10,10 +10,10 @@ use Illuminate\Queue\InteractsWithQueue;
 class DisableProductIfStockIsEmpty
 {
     public $enableOrDisableProductAction;
+
     /**
-     * Create the event listener.
-     *
-     * @return void
+     * DisableProductIfStockIsEmpty constructor.
+     * @param EnableOrDisableProductAction $enableOrDisableProductAction
      */
     public function __construct(EnableOrDisableProductAction $enableOrDisableProductAction)
     {
@@ -21,10 +21,7 @@ class DisableProductIfStockIsEmpty
     }
 
     /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
+     * @param OnProductUpdateEvent $event
      */
     public function handle(OnProductUpdateEvent $event)
     {
