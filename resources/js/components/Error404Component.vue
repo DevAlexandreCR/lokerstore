@@ -5,7 +5,7 @@
             <a href="/home" class="btn btn-link btn-sm font-weight-bold">Volver</a>
         </div>
         <lottie-animation class="container"
-            path="/assets/lottie/404-page.json"
+            path="assets/lottie/404-page.json"
         />
     </div>
 </template>

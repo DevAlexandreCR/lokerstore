@@ -4,7 +4,7 @@
             <span class="spinner-border spinner-border-sm" ></span>
             Cargando...
             <lottie-animation class="container"
-                              path="/assets/lottie/loading.json"
+                              path="assets/lottie/loading.json"
             />
         </div>
     </div>

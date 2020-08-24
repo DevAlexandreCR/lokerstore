@@ -105,7 +105,7 @@
                             <form action="{{route('cart.show', auth()->id())}}" method="GET">
                                 <button type="submit" class="nav-link btn btn-link">
                                     <ion-icon size="small" name="cart-outline"></ion-icon>
-                                    @if(Auth::user()->cart->countProducts() > 0)
+                                    @if(Auth::user()->hasVerifiedEmail())
                                         <span class="badge bg-red">{{Auth::user()->cart->countProducts()}}</span>
                                     @endif
                                 </button>

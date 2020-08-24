@@ -6,7 +6,7 @@
         </div>
         <div class="container w-75">
             <lottie-animation class="container"
-                              path="/assets/lottie/404-page1.json"
+                              path="assets/lottie/404-page1.json"
             />
         </div>
     </div>
