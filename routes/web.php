@@ -31,7 +31,7 @@ Route::get('disabled-user', 'DisabledUserController@index');
 
 Route::get('products/{product}', 'ProductController@show')->name('web.products.show');
 
-Route::middleware('verified')
+Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('user/{user}/cart', 'CartController@show')->name('cart.show');
         Route::post('user/{user}/cart/', 'CartController@add')->name('cart.add');

@@ -21,7 +21,7 @@
       <h5 class="modal-title">{{ __('Add new product') }}</h5>
       <a href="{{ route('products.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
     </div>
-    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="card-body">
         <div class="row">
@@ -90,15 +90,20 @@
             <div class="row">
               <div class="col">
                   <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                      <a class="nav-link d-none active" id="Choose_category" data-toggle="tab" href="#Sub_Choose_category"
+                         role="tab" aria-controls="Choosecategoryname" aria-selected="true"></a>
                     @foreach ($categories as $key => $category)
-                    <a class="nav-link d-none {{$key == 0 ? 'active' : '' }}" id="{{$category->id}}" data-toggle="tab" href="#{{$category->name}}"
-                      role="tab" aria-controls="{{$category->name}}" aria-selected="{{$key == 0 ? 'true' : 'false' }}"></a>
+                    <a class="nav-link d-none" id="{{$category->id}}" data-toggle="tab" href="#{{$category->name}}"
+                      role="tab" aria-controls="{{$category->name}}" aria-selected="false"></a>
                     @endforeach
                     <select class="form-control" onchange="document.getElementById(this.value).click()">
+                        <option value="Choose_category">
+                            {{__('Choose category')}}
+                        </option>
                       @foreach ($categories as $key => $category)
-                      <a class="nav-link  {{$key == 0 ? 'active' : '' }}" id="{{$category->id}}" data-toggle="tab" href="#{{$category->name}}"
+                      <a class="nav-link" id="{{$category->id}}" data-toggle="tab" href="#{{$category->name}}"
                         role="tab" aria-controls="{{$category->name}}" aria-selected="{{$key == 0 ? 'true' : 'false' }}"></a>
-                      <option value="{{$category->id}}">
+                      <option @if($key == 0) selected @endif value="{{$category->id}}">
                         {{$category->name}}
                       </option>
                       @endforeach
@@ -110,7 +115,10 @@
                   @foreach ($categories as $key => $category)
                   <div class="tab-pane fade {{$key == 0 ? 'show active' : '' }}" id="{{$category->name}}" role="tabpanel" aria-labelledby="{{$category->id}}">
                     <select class="form-control" onchange="setCategory(this.value, 'id_category')">
-                      @foreach ($category->children as $sub)
+                        <option value="Choose_category">
+                            {{__('Choose category')}}
+                        </option>
+                      @foreach ($category->children as $key => $sub)
                       <option value="{{$sub->id}}">{{$sub->name}}</option>
                       @endforeach
                     </select>
