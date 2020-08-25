@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreRequest;
+use App\Interfaces\CategoryInterface;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -12,33 +13,33 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    protected $category;
+    protected $categories;
 
-    public function __construct(Category $category)
+    public function __construct(CategoryInterface $categories)
     {
-        $this->category = $category;
+        $this->categories = $categories;
     }
     /**
      * Display a listing of the resource.
      *
      * @return View
      */
-    public function index() : View
+    public function index(): View
     {
         return view('admin.category.index', [
-            'categories' => $this->category->primaries()
+            'categories' => $this->categories->index()
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      * @param StoreRequest $request
-     * @param Category $category
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Category $category) : RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $category->create($request->all());
+        $this->categories->store($request);
+
         return redirect()
                     ->back()
                     ->with('success', __('Category has been created success'));
@@ -50,9 +51,9 @@ class CategoryController extends Controller
      * @param Category $category
      * @return RedirectResponse
      */
-    public function update(Request $request, Category $category) : RedirectResponse
+    public function update(Request $request, Category $category): RedirectResponse
     {
-        $category->update($request->all());
+        $this->categories->update($request, $category);
 
         return redirect()
                     ->back()
@@ -65,9 +66,9 @@ class CategoryController extends Controller
      * @return RedirectResponse
      * @throws Exception
      */
-    public function destroy(Category $category) : RedirectResponse
+    public function destroy(Category $category): RedirectResponse
     {
-        $category->delete();
+        $this->categories->destroy($category);
 
         return redirect()
                     ->back()
