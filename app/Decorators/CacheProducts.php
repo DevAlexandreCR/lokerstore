@@ -6,11 +6,10 @@ use App\Actions\Photos\DeletePhotoAction;
 use App\Actions\Photos\SavePhotoAction;
 use App\Http\Requests\Products\ActiveRequest;
 use App\Http\Requests\Products\IndexRequest;
-use App\Http\Requests\Products\StoreRequest;
-use App\Http\Requests\Products\UpdateRequest;
 use App\Interfaces\ProductsInterface;
 use App\Models\Product;
 use App\Repositories\Products;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class CacheProducts implements ProductsInterface
@@ -22,16 +21,16 @@ class CacheProducts implements ProductsInterface
         $this->products = $products;
     }
 
-    public function index(IndexRequest $request)
+    public function query(IndexRequest $request)
     {
-        $page = 'products.page' . $request->get('page', 1);
+        $query = $this->convertQueryToString($request);
 
-        return Cache::tags(['products'])->rememberForever($page, function () use ($request){
-           return $this->products->index($request);
+        return Cache::tags(['products'])->rememberForever($query, function () use ($request){
+           return $this->products->query($request);
         });
     }
 
-    public function store(StoreRequest $request)
+    public function store($request)
     {
         $product = $this->products->store($request);
 
@@ -43,7 +42,7 @@ class CacheProducts implements ProductsInterface
         return $product;
     }
 
-    public function update(UpdateRequest $request, Product $product)
+    public function update($request, $product)
     {
         $product = $this->products->update($request, $product);
 
@@ -66,10 +65,27 @@ class CacheProducts implements ProductsInterface
         return $product;
     }
 
-    public function destroy(Product $product)
+    public function destroy($product)
     {
         $this->products->destroy($product);
 
         return Cache::tags('products')->flush();
+    }
+
+    public function index()
+    {
+        return Cache::tags(['products'])->rememberForever('all', function () {
+            return $this->products->index();
+        });
+    }
+
+    private function convertQueryToString(Request $request): string
+    {
+        $category = $request->get('category', null);
+        $tags = implode(',', $request->get('tags', []) );
+        $search = $request->get('search', null);
+        $page = $request->get('page', 1);
+
+        return 'products.page=' . $page . '$search=' . $search .'$category=' . $category . '$tags=' . $tags;
     }
 }

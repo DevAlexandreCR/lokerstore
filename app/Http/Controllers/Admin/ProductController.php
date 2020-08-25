@@ -7,7 +7,11 @@ use App\Http\Requests\Products\ActiveRequest;
 use App\Http\Requests\Products\IndexRequest;
 use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
+use App\Interfaces\CategoryInterface;
+use App\Interfaces\ColorsInterface;
 use App\Interfaces\ProductsInterface;
+use App\Interfaces\SizesInterface;
+use App\Interfaces\TagsInterface;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
@@ -31,18 +35,19 @@ class ProductController extends Controller
      * Display a listing of Products
      *
      * @param IndexRequest $request
+     * @param CategoryInterface $categories
      * @return View
      */
-    public function index(IndexRequest $request) : View
+    public function index(IndexRequest $request, CategoryInterface $categories): View
     {
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
 
-        $categories = Category::all();
+        $categories = $categories->all();
 
-        $products = $this->products->index($request);
+        $products = $this->products->query($request);
 
         return view('admin.products.index', [
             'products' => $products,
@@ -59,14 +64,20 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new product.
      *
+     * @param TagsInterface $tags
+     * @param CategoryInterface $categories
+     * @param ColorsInterface $colors
+     * @param SizesInterface $sizes
      * @return View
      */
-    public function create() : View
+    public function create(TagsInterface $tags, CategoryInterface $categories, ColorsInterface $colors,
+                            SizesInterface $sizes): View
     {
-        $categories = Category::primaries();
-        $tags = Tag::all();
-        $colors = Color::all();
-        $sizes = Size::all();
+        $categories = $categories->all();
+        $tags = $tags->index();
+        $colors = $colors->index();
+        $sizes = $sizes->index();
+
         return view('admin.products.create',
                     compact('categories', 'tags', 'sizes', 'colors')
                 );
@@ -82,8 +93,8 @@ class ProductController extends Controller
     {
         $product = $this->products->store($request);
 
-        return redirect(route('stocks.create', $product)
-        )->with('success', __('Your product has been save successfully'));
+        return redirect(route('stocks.create', $product))
+            ->with('success', __('Your product has been save successfully'));
     }
 
     /**
@@ -105,11 +116,12 @@ class ProductController extends Controller
      * Show the form for editing the specified product.
      *
      * @param Product $product
+     * @param CategoryInterface $categories
      * @return View
      */
-    public function edit(Product $product): View
+    public function edit(Product $product, CategoryInterface $categories): View
     {
-        $categories = Category::primaries();
+        $categories = $categories->index();
         $tags = Tag::all();
         return view('admin.products.edit', [
             'product'   => $product

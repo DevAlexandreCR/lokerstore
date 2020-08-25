@@ -18,7 +18,7 @@ class CacheCategories implements CategoryInterface
 
     public function index()
     {
-        return Cache::tags(['categories'])->rememberForever('categories', function () {
+        return Cache::tags(['categories'])->rememberForever('primaries', function () {
             return $this->categories->index();
         });
     }
@@ -42,5 +42,12 @@ class CacheCategories implements CategoryInterface
         $this->categories->destroy($model);
 
         Cache::tags(['categories'])->flush();
+    }
+
+    public function all()
+    {
+        return Cache::tags(['categories'])->rememberForever('all', function () {
+           return $this->categories->all();
+        });
     }
 }

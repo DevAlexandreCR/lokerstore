@@ -22,16 +22,23 @@ class Categories implements CategoryInterface
 
     public function store($request)
     {
-        $this->category->create($request->all());
+        return $this->category->create($request->all());
     }
 
     public function update($request, $model)
     {
         $model->update($request->all());
+
+        return $model;
     }
 
     public function destroy($model)
     {
         $model->delete();
+    }
+
+    public function all()
+    {
+        return $this->category->all();
     }
 }

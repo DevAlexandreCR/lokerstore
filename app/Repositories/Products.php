@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Http\Requests\Products\ActiveRequest;
 use App\Http\Requests\Products\IndexRequest;
-use App\Http\Requests\Products\StoreRequest;
-use App\Http\Requests\Products\UpdateRequest;
 use App\Interfaces\ProductsInterface;
 use App\Models\Product;
 
@@ -18,7 +16,7 @@ class Products implements ProductsInterface
         $this->product = $product;
     }
 
-    public function index(IndexRequest $request)
+    public function query(IndexRequest $request)
     {
         $category = $request->validationData()['category'];
         $tags = $request->validationData()['tags'];
@@ -33,7 +31,7 @@ class Products implements ProductsInterface
             ->paginate(15);
     }
 
-    public function store(StoreRequest $request)
+    public function store($request)
     {
         $product = $this->product->create($request->all());
 
@@ -44,7 +42,7 @@ class Products implements ProductsInterface
         return $product;
     }
 
-    public function update(UpdateRequest $request, Product $product)
+    public function update($request, $product)
     {
         $product->tags()->sync($request->get('tags'));
 
@@ -58,8 +56,13 @@ class Products implements ProductsInterface
         return $product->update($request->all());
     }
 
-    public function destroy(Product $product)
+    public function destroy($product)
     {
         return $product->delete();
+    }
+
+    public function index()
+    {
+        return $this->product->all();
     }
 }

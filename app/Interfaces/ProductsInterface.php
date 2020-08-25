@@ -8,15 +8,11 @@ use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
 use App\Models\Product;
 
-interface ProductsInterface {
+interface ProductsInterface extends RepositoryInterface
+{
 
-    public function index(IndexRequest $request);
-
-    public function store(StoreRequest $request);
-
-    public function update(UpdateRequest $request, Product $product);
+    public function query(IndexRequest $request);
 
     public function setActive(ActiveRequest $request, Product $product);
 
-    public function destroy(Product $product);
 }

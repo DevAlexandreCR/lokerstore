@@ -51,7 +51,7 @@ class CategoryController extends Controller
      * @param Category $category
      * @return RedirectResponse
      */
-    public function update(Request $request, Category $category) : RedirectResponse
+    public function update(Request $request, Category $category): RedirectResponse
     {
         $this->categories->update($request, $category);
 
@@ -66,7 +66,7 @@ class CategoryController extends Controller
      * @return RedirectResponse
      * @throws Exception
      */
-    public function destroy(Category $category) : RedirectResponse
+    public function destroy(Category $category): RedirectResponse
     {
         $this->categories->destroy($category);
 

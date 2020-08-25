@@ -3,14 +3,31 @@
 namespace App\Interfaces;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 interface RepositoryInterface {
 
+    /**
+     * @return mixed
+     */
     public function index();
 
-    public function store($request);
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function store(Request $request);
 
-    public function update($request, Model $model);
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return mixed
+     */
+    public function update(Request $request, Model $model);
 
+    /**
+     * @param Model $model
+     * @return mixed
+     */
     public function destroy(Model $model);
 }
