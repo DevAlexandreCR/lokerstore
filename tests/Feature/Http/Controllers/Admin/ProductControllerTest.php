@@ -142,6 +142,7 @@ class ProductControllerTest extends TestCase
      */
     public function testUpdateProduct()
     {
+        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
 
         foreach ($this->categories as $name) {

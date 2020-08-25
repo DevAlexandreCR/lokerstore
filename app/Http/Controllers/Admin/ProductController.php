@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Photos\DeletePhotoAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\ActiveRequest;
 use App\Http\Requests\Products\IndexRequest;
 use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
+use App\Interfaces\ProductsInterface;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use Exception;
 use Illuminate\Http\Request;
-use App\Actions\Photos\SavePhotoAction;
 use App\Models\Color;
 use App\Models\Size;
 use Illuminate\Http\RedirectResponse;
@@ -20,11 +20,11 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    protected $product;
+    protected $products;
 
-    public function __construct(Product $product)
+    public function __construct(ProductsInterface $products)
     {
-        $this->product = $product;
+        $this->products = $products;
     }
 
     /**
@@ -42,13 +42,10 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
+        $products = $this->products->index($request);
+
         return view('admin.products.index', [
-            'products' => $this->product
-                ->orderBy('created_at', $orderBy)
-                ->byCategory($category)
-                ->withTags($tags)
-                ->search($search)
-                ->paginate(15),
+            'products' => $products,
             'filters' => [
                 'category'  => $category,
                 'tags'      => $tags,
@@ -79,18 +76,11 @@ class ProductController extends Controller
      * Store a newly created product in storage.
      *
      * @param StoreRequest $request
-     * @param SavePhotoAction $savePhotoAction
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, SavePhotoAction $savePhotoAction) : RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $product = $this->product->create($request->all());
-
-        foreach ($request->get('tags') as $tag) {
-            $product->tags()->attach($tag);
-        }
-
-        $savePhotoAction->execute($product->id, $request->file('photos'));
+        $product = $this->products->store($request);
 
         return redirect(route('stocks.create', $product)
         )->with('success', __('Your product has been save successfully'));
@@ -103,7 +93,7 @@ class ProductController extends Controller
      * @param Product $product
      * @return View
      */
-    public function active(Request $request, Product $product) : View
+    public function active(Request $request, Product $product): View
     {
         return view('admin.products.active', [
             'product'   => $product,
@@ -117,7 +107,7 @@ class ProductController extends Controller
      * @param Product $product
      * @return View
      */
-    public function edit(Product $product) : View
+    public function edit(Product $product): View
     {
         $categories = Category::primaries();
         $tags = Tag::all();
@@ -133,20 +123,11 @@ class ProductController extends Controller
      *
      * @param UpdateRequest $request
      * @param Product $product
-     * @param DeletePhotoAction $deletePhotoAction
-     * @param SavePhotoAction $savePhotoAction
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Product $product, DeletePhotoAction $deletePhotoAction,
-                           SavePhotoAction $savePhotoAction) : RedirectResponse
+    public function update(UpdateRequest $request, Product $product): RedirectResponse
     {
-        $product->tags()->sync($request->get('tags'));
-
-        $savePhotoAction->execute($product->id, $request->file('photos'));
-
-        $deletePhotoAction->execute($request->get('delete_photos'));
-
-        $product->update($request->all());
+        $product = $this->products->update($request, $product);
 
         return redirect( route('products.edit', ['product' => $product]))
             ->with('product-updated', 'Product has been updated success');
@@ -159,9 +140,9 @@ class ProductController extends Controller
      * @param Product $product
      * @return RedirectResponse
      */
-    public function setActive(ActiveRequest $request, Product $product) : RedirectResponse
+    public function setActive(ActiveRequest $request, Product $product): RedirectResponse
     {
-        $product->update($request->all());
+        $this->products->setActive($request, $product);
 
         return redirect( route('products.index'))
                 ->with('product-updated', __('Your product has been update successfully'));
@@ -170,11 +151,11 @@ class ProductController extends Controller
     /**
      * @param Product $product
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
-    public function destroy(Product $product) : RedirectResponse
+    public function destroy(Product $product): RedirectResponse
     {
-        $product->delete();
+        $this->products->destroy($product);
 
         return redirect( route('products.index'))
                 ->with('product-deleted', "Product has been deleted success");
