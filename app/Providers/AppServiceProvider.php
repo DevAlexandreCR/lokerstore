@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Decorators\CacheCategories;
 use App\Decorators\CacheProducts;
+use App\Interfaces\CategoryInterface;
 use App\Interfaces\ProductsInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(ProductsInterface::class, CacheProducts::class);
+        $this->app->bind(CategoryInterface::class, CacheCategories::class);
     }
 }
