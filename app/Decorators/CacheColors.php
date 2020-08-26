@@ -21,7 +21,7 @@ class CacheColors implements ColorsInterface
      */
     public function index()
     {
-        Cache::tags(['colors'])->rememberForever('all', function () {
+        return Cache::tags(['colors'])->rememberForever('all', function () {
             return $this->colors->index();
         });
     }
