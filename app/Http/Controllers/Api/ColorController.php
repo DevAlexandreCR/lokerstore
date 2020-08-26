@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Color;
+use App\Interfaces\ColorsInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
     protected $colors;
 
-    public function __construct(Color $colors)
+    public function __construct(ColorsInterface $colors)
     {
         $this->colors = $colors;
     }
 
     public function index() : JsonResponse
     {
-        return response()->json($this->colors->all()->toArray());
+        return response()->json($this->colors->index());
     }
 }

@@ -9,7 +9,6 @@ use App\Http\Requests\Products\IndexRequest;
 use App\Interfaces\ProductsInterface;
 use App\Models\Product;
 use App\Repositories\Products;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class CacheProducts implements ProductsInterface
@@ -79,7 +78,7 @@ class CacheProducts implements ProductsInterface
         });
     }
 
-    private function convertQueryToString(Request $request): string
+    private function convertQueryToString(IndexRequest $request): string
     {
         $category = $request->get('category', null);
         $tags = implode(',', $request->get('tags', []) );

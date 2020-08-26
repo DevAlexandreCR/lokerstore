@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Decorators\Api\CacheApiProducts;
 use App\Decorators\CacheCategories;
 use App\Decorators\CacheColors;
 use App\Decorators\CacheProducts;
 use App\Decorators\CacheSizes;
 use App\Decorators\CacheTags;
+use App\Interfaces\Api\ApiProductsInterface;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ColorsInterface;
 use App\Interfaces\ProductsInterface;
@@ -38,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TagsInterface::class, CacheTags::class);
         $this->app->bind(ColorsInterface::class, CacheColors::class);
         $this->app->bind(SizesInterface::class, CacheSizes::class);
+        $this->app->bind(ApiProductsInterface::class, CacheApiProducts::class);
     }
 }

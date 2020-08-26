@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
+use App\Interfaces\CategoryInterface;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    protected $category;
+    protected $categories;
 
-    public function __construct(Category $category)
+    public function __construct(CategoryInterface $categories)
     {
-        $this->category = $category;
+        $this->categories = $categories;
     }
 
     /**
@@ -24,9 +24,8 @@ class CategoryController extends Controller
      */
     public function index() : JsonResponse
     {
-        return response()->json(CategoryResource::collection($this->category->primaries()));
+        return response()->json(CategoryResource::collection($this->categories->index()));
     }
-
 
     /**
      * Display the specified resource.
