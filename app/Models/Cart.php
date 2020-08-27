@@ -34,6 +34,11 @@ class Cart extends Model
         return round($price, 0,  PHP_ROUND_HALF_UP) . 'COP';
     }
 
+    public function emptyCart(): void
+    {
+        $this->stocks()->detach(null);
+    }
+
     public function getSubTotalFromProduct(Stock $stock)
     {
         $price = $stock->product->price * $stock->pivot->quantity;
