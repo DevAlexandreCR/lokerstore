@@ -29,6 +29,13 @@ class GenerateOrder implements OrderInterface
         $order = $this->orders->store($request);
 
         $this->orderDetails->create($order->id);
+
+        $order->orderDetails->each(function ($detail) use($order){
+            $order->order_price += $detail->total_price;
+        });
+
+        $order->save();
+
     }
 
     public function update(Request $request, Model $model)

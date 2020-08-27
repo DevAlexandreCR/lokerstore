@@ -37,4 +37,5 @@ Route::middleware(['auth', 'verified'])
         Route::post('user/{user}/cart/', 'CartController@add')->name('cart.add');
         Route::put('user/{user}/cart/', 'CartController@update')->name('cart.update');
         Route::delete('user/{user}/cart/{stock}', 'CartController@remove')->name('cart.remove');
+        Route::post('users/{user}/orders', 'OrderController@store')->name('user.order.store');
     });
