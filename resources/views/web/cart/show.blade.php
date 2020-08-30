@@ -107,7 +107,11 @@
                     </div>
                     <div class="card-footer text-muted">
                         <div class="btn-group-vertical btn-block" role="group">
-                            <button type="button" class="btn btn-success">{{__('Proceed to payment')}}</button>
+                            <form class="btn-block" action="{{route('user.order.store', [ 'user' => auth()->user()])}}" method="post">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{auth()->id()}}">
+                                <button type="submit" class="btn btn-success btn-block">{{__('Proceed to payment')}}</button>
+                            </form>
                             <a href="{{route('home')}}" type="button" class="btn btn-secondary">{{__('Continue shopping')}}</a>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Orders\StoreRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -18,7 +19,9 @@ class OrderController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $this->orders->store($request);
+        $redirect = $this->orders->store($request);
+
+        return new RedirectResponse($redirect);
     }
 
     public function update(Request $request, Order $order)

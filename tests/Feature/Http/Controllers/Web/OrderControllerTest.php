@@ -51,8 +51,7 @@ class OrderControllerTest extends TestCase
                 'user_id' => $this->user->id
             ]);
 
-        $response->assertStatus(200);
-
+        $response->assertStatus(302);
         $this->assertDatabaseHas('orders',
         [
             'user_id' => $this->user->id

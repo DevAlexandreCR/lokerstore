@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 class Orders implements OrderInterface
 {
     protected $order;
-    public static $STATUS_PENDING = 'pending';
-    public static $STATUS_REJECTED = 'rejected';
-    public static $STATUS_SUCCESS = 'complete';
 
     public function __construct(Order $order)
     {

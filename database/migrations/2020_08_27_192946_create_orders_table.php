@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\Orders;
+use App\Constants\Orders;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,10 +17,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedDecimal('order_price')->default(0);
-            $table->string('request_id')->nullable();
-            $table->string('process_url')->nullable();
-            $table->string('status')->default(Orders::$STATUS_PENDING);
+            $table->unsignedDecimal('amount')->default(0);
+            $table->string('status')->default(Orders::STATUS_PENDING_PAY);
             $table->timestamps();
 
             $table->foreign('user_id')
