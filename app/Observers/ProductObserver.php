@@ -13,7 +13,7 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        logger()->alert('product updated', ['emoji' => ':lentes_de_sol:']);
+        logger()->channel('prueba')->alert('product updated');
         event(new OnProductUpdateEvent($product));
     }
 }

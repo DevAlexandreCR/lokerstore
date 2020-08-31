@@ -37,6 +37,7 @@ trait Authentication
     {
         $seed = $this->getSeed();
         $nonce = $this->getNonce(false);
+//        dd(config('placetopay.baseUrl'));
         return [
             'login'     => config('placetopay.authId'),
             'tranKey'   => $this->tranKey($nonce, $seed),

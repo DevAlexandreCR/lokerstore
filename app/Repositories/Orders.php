@@ -37,4 +37,9 @@ class Orders implements OrderInterface
     {
         $model->delete();
     }
+
+    public function find(int $user_id, int $order_id)
+    {
+        return $this->order->with('payment')->find($order_id);
+    }
 }

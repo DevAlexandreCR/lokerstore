@@ -42,7 +42,7 @@ class CartControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('cart.show', $user));
 
         $response
-            ->assertViewIs('web.cart.show')
+            ->assertViewIs('web.users.cart.show')
             ->assertViewHas('cart');
     }
 

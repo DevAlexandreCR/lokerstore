@@ -1,6 +1,6 @@
-@extends('admin.home')
+@extends('web.users.main')
 
-@section('content')
+@section('user-main')
     <div class="container py-4">
         <h3>{{__('Shopping cart')}}</h3>
         @if($cart->stocks->count() === 0)
@@ -109,7 +109,7 @@
                         <div class="btn-group-vertical btn-block" role="group">
                             <form class="btn-block" action="{{route('user.order.store', [ 'user' => auth()->user()])}}" method="post">
                                 @csrf
-                                <input type="hidden" name="user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="user_id" value="{{$cart->user_id}}">
                                 <button type="submit" class="btn btn-success btn-block">{{__('Proceed to payment')}}</button>
                             </form>
                             <a href="{{route('home')}}" type="button" class="btn btn-secondary">{{__('Continue shopping')}}</a>

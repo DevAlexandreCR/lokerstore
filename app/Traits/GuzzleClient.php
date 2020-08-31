@@ -27,10 +27,8 @@ trait GuzzleClient
             return json_decode($response->getBody()->getContents());
 
         } catch (ClientException $e) {
-            dd($e);
             return json_decode($e->getResponse()->getBody()->getContents());
         } catch (ServerException $e) {
-            dd($e);
             return json_decode($e->getResponse()->getBody()->getContents());
         } catch (GuzzleException $e) {
             return [
@@ -60,10 +58,11 @@ trait GuzzleClient
                 ]
             ],
             'expiration' => $expiration,
-            'returnUrl' => config('app.url'),
+            'returnUrl' => route('user.order.show', [auth()->id(), $order->id]),
             'ipAddress' => '127.0.0.1',
             'userAgent' => request()->header('User-Agent')
         ];
+
     }
 
     public function getClient(): Client

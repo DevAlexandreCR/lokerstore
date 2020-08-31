@@ -2,9 +2,7 @@
 
 namespace App\Interfaces;
 
-use Illuminate\Http\Request;
-
 interface OrderInterface extends RepositoryInterface
 {
-
+    public function find(int $user_id, int $order_id);
 }

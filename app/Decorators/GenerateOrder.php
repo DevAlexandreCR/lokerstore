@@ -11,8 +11,6 @@ use App\Traits\GuzzleClient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use function GuzzleHttp\Promise\promise_for;
 
 class GenerateOrder implements OrderInterface
 {
@@ -69,11 +67,14 @@ class GenerateOrder implements OrderInterface
 
         if ($status === PlaceToPay::OK) {
             $this->payments->create($order_id, $requestId, $processUrl);
-            return Redirect::away($processUrl)->send();
+            return redirect()->away($processUrl)->send();
         } else {
-            redirect()->back()->with('error', $response->status->message);
+            return redirect()->to( route('orders.show', $order_id))->with('error', $response->status->message);
         }
+    }
 
-
+    public function find(int $user_id, int $order_id)
+    {
+        return $this->orders->find($user_id, $order_id);
     }
 }
