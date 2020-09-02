@@ -4,8 +4,11 @@ namespace App\Constants;
 
 class Payments
 {
-    public const STATUS_PENDING = 'pending';
-    public const STATUS_ACCEPTED = 'accepted';
-    public const STATUS_REJECTED = 'rejected';
-    public const STATUS_CANCELED = 'canceled';
+    public const STATUS_PENDING = 'PENDING';
+    public const STATUS_ACCEPTED = 'APPROVED';
+    public const STATUS_REJECTED = 'REJECTED';
+    public const STATUS_CANCELED = 'CANCELED';
+    public const FAILED = 'FAILED';
+    public const PENDING_VALIDATION = 'PENDING_VALIDATION';
+    public const REFUNDED = 'REFUNDED';
 }

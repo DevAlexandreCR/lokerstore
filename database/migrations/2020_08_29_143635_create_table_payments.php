@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\Payments;
+use App\Constants\PlaceToPay;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ class CreateTablePayments extends Migration
             $table->id();
             $table->string('request_id')->nullable();
             $table->string('process_url')->nullable();
-            $table->string('status')->default(Payments::STATUS_PENDING);
+            $table->string('status')->default(PlaceToPay::PENDING);
             $table->unsignedBigInteger('order_id');
             $table->timestamps();
 

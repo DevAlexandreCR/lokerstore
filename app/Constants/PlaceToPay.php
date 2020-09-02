@@ -23,4 +23,10 @@ class PlaceToPay
 
     public const PROCESS_URL = 'processUrl';
     public const REQUEST_ID = 'requestId';
+
+    /**
+     * Methods allowed
+     */
+    public const CREATE_REQUEST = 'createRequest';
+    public const GET_REQUEST_INFORMATION = 'getRequestInformation';
 }

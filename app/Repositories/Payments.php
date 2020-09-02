@@ -21,4 +21,11 @@ class Payments
                    'process_url' => $process_url
                 ]);
     }
+
+    public function setStatus(Payment $payment, string $status)
+    {
+        return $payment->update([
+            'status' => $status
+        ]);
+    }
 }

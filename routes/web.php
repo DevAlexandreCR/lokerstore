@@ -42,4 +42,5 @@ Route::middleware(['auth', 'verified'])
         Route::post('orders', 'OrderController@store')->name('user.order.store');
         Route::get('orders', 'OrderController@index')->name('user.orders.index');
         Route::get('orders/{order}', 'OrderController@show')->name('user.order.show');
+        Route::post('orders/status', 'OrderController@statusPayment')->name('user.order.status');
     });

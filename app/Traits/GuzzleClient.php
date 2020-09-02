@@ -2,12 +2,13 @@
 
 namespace App\Traits;
 
+use App\Constants\PlaceToPay;
 use App\Models\Order;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
-
+use Illuminate\Http\Client\Request;
 
 trait GuzzleClient
 {
@@ -15,14 +16,41 @@ trait GuzzleClient
 
     private $endPoint = 'api/session/';
 
-    public function sendRequest(Order $order)
+    /**
+     * @param string $method
+     * @param Order $order
+     * @return array[]|mixed
+     */
+    public function sendRequest(string $method, Order $order)
     {
         try {
             $client = $this->getClient();
-            $response =  $client->post($this->endPoint,
-                 [
-                     'json' => $this->data($order)
-                 ]);
+            switch ($method)
+            {
+                case PlaceToPay::CREATE_REQUEST:
+                    $response =  $client->post($this->endPoint,
+                        [
+                            'json' => $this->data($order)
+                        ]);
+                    break;
+                case PlaceToPay::GET_REQUEST_INFORMATION:
+                    $response = $client->post($this->endPoint . $order->payment->request_id,
+                        [
+                            'json' => [
+                                'auth' => $this->getAuth()
+                            ]
+                        ]);
+                    break;
+                default:
+                    return [
+                        'status' => [
+                            'status' => 0,
+                            'reason' => 'WR',
+                            'message' => 'Bad request, method undefined',
+                            'date' => date('c'),
+                        ],
+                    ];
+            }
 
             return json_decode($response->getBody()->getContents());
 
@@ -51,7 +79,7 @@ trait GuzzleClient
             'auth' => $auth,
             'payment' => [
                 'reference' => $order->id,
-                'description' => 'pago de prueba',
+                'description' => 'user ' . $order->user->email . ' pay order ' . $order->id,
                 'amount' => [
                     'currency' => 'COP',
                     'total' => $order->amount
@@ -59,7 +87,7 @@ trait GuzzleClient
             ],
             'expiration' => $expiration,
             'returnUrl' => route('user.order.show', [auth()->id(), $order->id]),
-            'ipAddress' => '127.0.0.1',
+            'ipAddress' => request()->getClientIp(),
             'userAgent' => request()->header('User-Agent')
         ];
 

@@ -2,9 +2,15 @@
 
 namespace Tests\Feature\Http\Controllers\Web;
 
+use App\Constants\Orders;
+use App\Constants\Payments;
+use App\Constants\PlaceToPay;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Payment;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Size;
@@ -56,6 +62,66 @@ class OrderControllerTest extends TestCase
         [
             'user_id' => $this->user->id
         ]);
+    }
+
+    public function testGetStatusPaymentApproved()
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => $this->user->id
+        ]);
+        factory(OrderDetail::class)->create([
+            'order_id' => $order->id
+        ]);
+        factory(Payment::class)->create([
+            'order_id' => $order->id,
+            'request_id' => 367394
+        ]);
+        $response = $this->actingAs($this->user)
+            ->post(route('user.order.status', [$this->user->id]),
+            [
+                'order_id' => $order->id
+            ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('user.order.show', [$this->user->id, $order->id]))
+            ->assertSessionHas('message');
+
+        $this->assertDatabaseHas('orders',
+            [
+                'id' => $order->id,
+                'status' => Orders::STATUS_PENDING_SHIPMENT
+            ]);
+    }
+
+    public function testGetStatusPaymentPending()
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => $this->user->id
+        ]);
+        factory(OrderDetail::class)->create([
+            'order_id' => $order->id
+        ]);
+        factory(Payment::class)->create([
+            'order_id' => $order->id,
+            'request_id' => 367478
+        ]);
+        $response = $this->actingAs($this->user)
+            ->post(route('user.order.status', [$this->user->id]),
+                [
+                    'order_id' => $order->id
+                ]);
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('user.order.show', [$this->user->id, $order->id]))
+            ->assertSessionHas('message');
+
+        $this->assertDatabaseHas('orders',
+            [
+                'id' => $order->id,
+                'status' => Orders::STATUS_PENDING_PAY
+            ]);
     }
 
     public function createProductRelations(): Stock

@@ -136,5 +136,20 @@
     "Proceed to payment": "Proceder al pago",
     "Continue shopping": "Continuar comprando",
     "Product removed to cart": "Producto eliminado del carrito!",
-    "Login to add products to cart": "Inicia sessión para agregar productos al carrito"
+    "Login to add products to cart": "Inicia sessión para agregar productos al carrito",
+    "Amount": "Valor total",
+    "Order created at": "Orden creada el",
+    "Order amount": "Pago total",
+    "Profile": "Perfil",
+    "Orders": "Órdenes",
+    "Cart": "Carrito",
+    "My Account": "Mi Cuenta",
+    "Pending payment": "Pago pendiente",
+    "Sent": "Enviado",
+    "Payment rejected": "Pago rechazado",
+    "Verify payment": "Verificar pago",
+    "Pending shipment": "Pendiente de envío",
+    "Canceled": "Cancelado",
+    "Success": "Completo",
+    "Your payment is not processed yet, this may take a few minutes": "Aún no se procesa tu pago, ésto puede tardar unos minutos"
 }

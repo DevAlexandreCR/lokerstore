@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Orders\StoreRequest;
+use App\Http\Requests\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -33,9 +33,9 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update(Request $request, Order $order)
+    public function statusPayment(UpdateRequest $request): RedirectResponse
     {
-
+        return $this->orders->getRequestInformation($request);
     }
 
     public function show(int $user_id, int $order_id): View
