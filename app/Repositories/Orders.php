@@ -2,12 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Constants\Orders as OrderConstants;
+use App\Constants\PlaceToPay;
 use App\Http\Requests\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Constants\Payments;
 
 class Orders implements OrderInterface
 {
@@ -40,16 +41,40 @@ class Orders implements OrderInterface
         $model->delete();
     }
 
-    public function find(int $user_id, int $order_id): Model
+    public function find(int $order_id)
     {
-        return $this->order->with('payment')->find($order_id);
+        return $this->order->with('payment')->findOrFail($order_id);
     }
 
-    public function getRequestInformation(UpdateRequest $request)
+    public function setStatus(int $order_id, string $status)
     {
-        $status = $request->get('status', Payments::STATUS_PENDING);
-        $order = $this->find($request->user()->id, $request->get('order_id', null));
+        $order = $this->find($order_id);
         $order->status = $status;
         $order->save();
+    }
+
+    public function getStatusFromStatusPayment(string $status): string
+    {
+        switch ($status)
+        {
+            case PlaceToPay::PENDING:
+                return OrderConstants::STATUS_PENDING_PAY;
+            case PlaceToPay::REJECTED:
+                return OrderConstants::STATUS_REJECTED;
+            case PlaceToPay::APPROVED:
+                return OrderConstants::STATUS_PENDING_SHIPMENT;
+            default :
+                return OrderConstants::STATUS_CANCELED;
+        }
+    }
+
+    public function getRequestInformation(int $order_id)
+    {
+        // TODO: Implement destroy() method.
+    }
+
+    public function resend(UpdateRequest $request)
+    {
+        // TODO: Implement destroy() method.
     }
 }

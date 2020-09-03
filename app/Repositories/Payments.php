@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Payment;
+use App\Constants\Payments as Pay;
 
 class Payments
 {
@@ -15,11 +16,15 @@ class Payments
 
     public function create(int $order_id, int $request_id, string $process_url): Payment
     {
-        return $this->payment->create([
-                   'order_id' => $order_id,
-                   'request_id' => $request_id,
-                   'process_url' => $process_url
-                ]);
+        return $this->payment->updateOrCreate(
+            [
+               'order_id' => $order_id
+            ],
+            [
+               'request_id' => $request_id,
+               'process_url' => $process_url,
+               'status' => Pay::STATUS_PENDING
+            ]);
     }
 
     public function setStatus(Payment $payment, string $status)

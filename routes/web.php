@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified'])
         Route::put('cart/', 'CartController@update')->name('cart.update');
         Route::delete('cart/{stock}', 'CartController@remove')->name('cart.remove');
         Route::post('orders', 'OrderController@store')->name('user.order.store');
+        Route::post('orders/resend', 'OrderController@resend')->name('user.order.resend');
         Route::get('orders', 'OrderController@index')->name('user.orders.index');
         Route::get('orders/{order}', 'OrderController@show')->name('user.order.show');
         Route::post('orders/status', 'OrderController@statusPayment')->name('user.order.status');

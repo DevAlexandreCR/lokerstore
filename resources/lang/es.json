@@ -146,10 +146,24 @@
     "My Account": "Mi Cuenta",
     "Pending payment": "Pago pendiente",
     "Sent": "Enviado",
+    "Details" : "Detalles",
     "Payment rejected": "Pago rechazado",
     "Verify payment": "Verificar pago",
     "Pending shipment": "Pendiente de envío",
     "Canceled": "Cancelado",
     "Success": "Completo",
-    "Your payment is not processed yet, this may take a few minutes": "Aún no se procesa tu pago, ésto puede tardar unos minutos"
+    "Your payment is not processed yet, this may take a few minutes"
+    : "Aún no se procesa tu pago, ésto puede tardar unos minutos",
+    "Payments may take a few minutes to be approved, if you have already paid please check later"
+    : "Los pagos pueden tardarce unos minutos en ser aprobados, si ya pagaste por favor verifica mas tarde",
+    "Or you can retry the payment again" : "O puedes reintentar el pago nuevamente",
+    "Retry payment" : "Reintentar pago",
+    "We are preparing your order, usually this takes one to two working days"
+    : "Estamos preparando tu pedido, normalmente esto tarde uno o dos días hábiles",
+    "Cancel Purchase" : "Cancelar compra",
+    "Your transaction  has been declined, you can try another payment method"
+    : "Tu transacción ha sido rechazada, puedes intentar con otro metodo de pago",
+    "Your order has been shipped" : "Tu pedido ha sido enviado",
+    "Buy completed" : "Comprar finalizada",
+    "Buy again" : "Comprar otra vez"
 }

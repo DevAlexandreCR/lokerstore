@@ -71,19 +71,10 @@
                         {{$order->getStatus()}}
                     </div>
                     <div class="card-body">
-                        @if($order->status === 'pending_pay')
-                            <p><small>los pagos pueden tardarce unos minutos en ser aprobados, si ya pagaste por favor verifica mas tarde</small></p>
-                            <form action="{{route('user.order.status', $order->user_id)}}" method="post">
-                                @csrf
-                                <input type="hidden" name="order_id" value="{{$order->id}}">
-                                <button type="submit" class="btn btn-block btn-sm btn-outline-success">{{__('Verify payment')}}</button>
-                            </form>
-                            <p><small>O puedes reintentar el pago nuevamente</small></p>
-                            <a href="{{$order->payment->process_url}}">reintentar pago</a>
-                        @endif
+                        <x-statusPayment :order="$order"></x-statusPayment>
                     </div>
                     <div class="card-footer">
-
+                        <a href="{{route('user.orders.index', [$order->user_id])}}" class="btn btn-block btn-sm btn-outline-dark my-2">{{__('Back')}}</a>
                     </div>
                 </div>
             </div>

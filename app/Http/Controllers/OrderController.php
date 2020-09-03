@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Orders\StoreRequest;
 use App\Http\Requests\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
-use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -21,9 +20,12 @@ class OrderController extends Controller
 
     public function store(StoreRequest $request): RedirectResponse
     {
-        $redirect = $this->orders->store($request);
+        return $this->orders->store($request);
+    }
 
-        return new RedirectResponse($redirect);
+    public function resend(UpdateRequest $request): RedirectResponse
+    {
+        return $this->orders->resend($request);
     }
 
     public function index(User $user): View
@@ -35,13 +37,16 @@ class OrderController extends Controller
 
     public function statusPayment(UpdateRequest $request): RedirectResponse
     {
-        return $this->orders->getRequestInformation($request);
+        $order_id = $request->get('order_id', null);
+
+        return $this->orders->getRequestInformation($order_id);
     }
 
     public function show(int $user_id, int $order_id): View
     {
-        $order = $this->orders->find($user_id, $order_id);
-
+        header("Cache-Control: no-cache, must-revalidate");
+        $this->orders->getRequestInformation($order_id);
+        $order = $this->orders->find($order_id);
         return view('web.users.orders.show', ['order' => $order]);
     }
 }
