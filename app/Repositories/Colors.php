@@ -21,7 +21,7 @@ class Colors implements ColorsInterface
      */
     public function index()
     {
-        return $this->color->all();
+        return $this->color::all();
     }
 
     /**

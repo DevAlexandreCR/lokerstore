@@ -11,4 +11,6 @@ interface OrderInterface extends RepositoryInterface
     public function getRequestInformation(int $order_id);
 
     public function resend(UpdateRequest $request);
+
+    public function reverse(UpdateRequest $request);
 }

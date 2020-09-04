@@ -8,16 +8,19 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
+use Illuminate\Database\Eloquent\Model;
 
 trait GuzzleClient
 {
     use Authentication;
 
     private $endPoint = 'api/session/';
+    private $reverseEndPoint = 'api/reverse/';
 
     /**
+     * send request to placetopay api
      * @param string $method
-     * @param Order $order
+     * @param Order|Model $order
      * @return array[]|mixed
      */
     public function sendRequest(string $method, Order $order)
@@ -40,6 +43,15 @@ trait GuzzleClient
                             ]
                         ]);
                     break;
+                case PlaceToPay::REVERSE_REQUEST:
+                    $response = $client->post($this->reverseEndPoint,
+                        [
+                            'json' => [
+                                'auth' => $this->getAuth(),
+                                'internalReference' => $order->payment->pay_reference
+                            ]
+                        ]);
+                    break;
                 default:
                     return [
                         'status' => [
@@ -51,12 +63,12 @@ trait GuzzleClient
                     ];
             }
 
-            return json_decode($response->getBody()->getContents());
+            return json_decode($response->getBody()->getContents(), true);
 
         } catch (ClientException $e) {
-            return json_decode($e->getResponse()->getBody()->getContents());
+            return json_decode($e->getResponse()->getBody()->getContents(), true);
         } catch (ServerException $e) {
-            return json_decode($e->getResponse()->getBody()->getContents());
+            return json_decode($e->getResponse()->getBody()->getContents(), true);
         } catch (GuzzleException $e) {
             return [
                 'status' => [
@@ -69,6 +81,11 @@ trait GuzzleClient
         }
     }
 
+    /**
+     * build data to send to request
+     * @param Order $order
+     * @return array
+     */
     private function data(Order $order): array
     {
         $auth = $this->getAuth();
@@ -92,6 +109,10 @@ trait GuzzleClient
 
     }
 
+    /**
+     * Initialize client from Guzzle
+     * @return Client
+     */
     public function getClient(): Client
     {
         return new Client([

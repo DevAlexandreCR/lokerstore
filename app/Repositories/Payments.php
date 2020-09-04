@@ -33,4 +33,11 @@ class Payments
             'status' => $status
         ]);
     }
+
+    public function setPayReference(Payment $payment, string $pay_reference)
+    {
+        return $payment->update([
+            'pay_reference' => $pay_reference
+        ]);
+    }
 }

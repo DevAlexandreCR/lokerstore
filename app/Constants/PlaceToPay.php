@@ -17,6 +17,8 @@ class PlaceToPay
     public const PENDING_VALIDATION = 'PENDING_VALIDATION';
     public const REFUNDED = 'REFUNDED';
 
+    public const MESSAGE_REVERSED = 'Se ha reversado el pago correctamente';
+
     /**
      * fields response
      */
@@ -28,5 +30,6 @@ class PlaceToPay
      * Methods allowed
      */
     public const CREATE_REQUEST = 'createRequest';
+    public const REVERSE_REQUEST = 'reverseRequest';
     public const GET_REQUEST_INFORMATION = 'getRequestInformation';
 }

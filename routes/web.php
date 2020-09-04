@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])
         Route::delete('cart/{stock}', 'CartController@remove')->name('cart.remove');
         Route::post('orders', 'OrderController@store')->name('user.order.store');
         Route::post('orders/resend', 'OrderController@resend')->name('user.order.resend');
+        Route::post('orders/reverse', 'OrderController@reverse')->name('user.order.reverse');
         Route::get('orders', 'OrderController@index')->name('user.orders.index');
         Route::get('orders/{order}', 'OrderController@show')->name('user.order.show');
         Route::post('orders/status', 'OrderController@statusPayment')->name('user.order.status');

@@ -12,7 +12,7 @@
         @break
         @case('pending_shipment')
             <p><small>{{__('We are preparing your order, usually this takes one to two working days')}}</small></p>
-            <form action="{{route('user.order.status', $order->user_id)}}" method="post">
+            <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
                 <button type="submit" class="btn btn-block btn-sm btn-danger">{{__('Cancel Purchase')}}</button>
@@ -37,6 +37,9 @@
             <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Buy again')}}</button>
         </form>
         @break
-
+        @case('canceled')
+        <p><small>{{__('Buy canceled')}}</small></p>
+        <p><small class="text-muted">{{__('Your order has been canceled')}}</small></p>
+        @break
     @endswitch
 </div>

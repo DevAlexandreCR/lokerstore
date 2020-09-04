@@ -7,6 +7,7 @@ use App\Constants\PlaceToPay;
 use App\Http\Requests\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
+use App\Constants\Payments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class Orders implements OrderInterface
 
     public function index()
     {
-        return $this->order->all();
+        return $this->order::all();
     }
 
     public function store(Request $request): Order
@@ -43,7 +44,7 @@ class Orders implements OrderInterface
 
     public function find(int $order_id)
     {
-        return $this->order->with('payment')->findOrFail($order_id);
+        return $this->order->load('payment')->findOrFail($order_id);
     }
 
     public function setStatus(int $order_id, string $status)
@@ -57,14 +58,14 @@ class Orders implements OrderInterface
     {
         switch ($status)
         {
-            case PlaceToPay::PENDING:
-                return OrderConstants::STATUS_PENDING_PAY;
             case PlaceToPay::REJECTED:
                 return OrderConstants::STATUS_REJECTED;
             case PlaceToPay::APPROVED:
                 return OrderConstants::STATUS_PENDING_SHIPMENT;
-            default :
+            case Payments::STATUS_CANCELED:
                 return OrderConstants::STATUS_CANCELED;
+            default:
+                return OrderConstants::STATUS_PENDING_PAY;
         }
     }
 
@@ -76,5 +77,10 @@ class Orders implements OrderInterface
     public function resend(UpdateRequest $request)
     {
         // TODO: Implement destroy() method.
+    }
+
+    public function reverse(UpdateRequest $request)
+    {
+        // TODO: Implement reverse() method.
     }
 }
