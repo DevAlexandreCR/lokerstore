@@ -20,7 +20,9 @@ class CreateTablePayments extends Migration
             $table->string('request_id')->nullable();
             $table->string('process_url')->nullable();
             $table->string('status')->default(PlaceToPay::PENDING);
-            $table->string('pay_reference')->nullable();
+            $table->string('reference')->nullable();
+            $table->string('method')->nullable();
+            $table->string('last_digit')->nullable();
             $table->unsignedBigInteger('order_id');
             $table->timestamps();
 

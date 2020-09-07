@@ -63,12 +63,12 @@ trait GuzzleClient
                     ];
             }
 
-            return json_decode($response->getBody()->getContents(), true);
+            return json_decode($response->getBody()->getContents(), false);
 
         } catch (ClientException $e) {
-            return json_decode($e->getResponse()->getBody()->getContents(), true);
+            return json_decode($e->getResponse()->getBody()->getContents(), false);
         } catch (ServerException $e) {
-            return json_decode($e->getResponse()->getBody()->getContents(), true);
+            return json_decode($e->getResponse()->getBody()->getContents(), false);
         } catch (GuzzleException $e) {
             return [
                 'status' => [

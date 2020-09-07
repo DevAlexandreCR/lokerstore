@@ -84,7 +84,7 @@ class GenerateOrder implements OrderInterface
                 else
                 {
                     $this->payments->setStatus($order->payment, $status);
-                    $this->payments->setPayReference($order->payment, $response->payment[0]->internalReference);
+                    $this->payments->setDataPayment($order->payment, $response);
                     $message = __('Your payment has been success');
                 }
                 break;
@@ -108,6 +108,7 @@ class GenerateOrder implements OrderInterface
     {
         $order = $this->orders->find($order_id);
         $response = $this->sendRequest( PlaceToPay::GET_REQUEST_INFORMATION, $order);
+
         return $this->responseHandler($response, $order_id);
     }
 

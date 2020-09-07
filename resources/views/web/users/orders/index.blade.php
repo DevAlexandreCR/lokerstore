@@ -1,14 +1,10 @@
 @extends('web.users.main')
 
 @section('user-main')
-    @if($orders->count() === 0)
-        <empty-cart-component></empty-cart-component>
-    @endif
-
     <div class="container py-4">
         <div class="modal-header"><h3>{{__('Orders')}}</h3></div>
             <div class="list-group">
-                @foreach($orders as $order)
+                @forelse($orders as $order)
                     <div class="list-group-item my-2">
                         <div class="row font-weight-bold py-2">
                             <div class="col-sm-3">{{__('Order created at')}}</div>
@@ -29,7 +25,11 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @empty
+                    <div class="container w-50">
+                        <empty-orders-component></empty-orders-component>
+                    </div>
+                @endforelse
             </div>
     </div>
 
