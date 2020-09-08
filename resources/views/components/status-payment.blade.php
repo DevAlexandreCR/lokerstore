@@ -1,5 +1,14 @@
 <div>
     @switch($order->status)
+        @case('failed')
+            <p><small>{{session('message')}}</small></p>
+            <p><small>{{__('Payment has failed, please retry')}}</small></p>
+            <form action="{{route('user.order.resend', $order->user_id)}}" method="post">
+                @csrf
+                <input type="hidden" name="order_id" value="{{$order->id}}">
+                <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Retry payment')}}</button>
+            </form>
+        @break
         @case('pending_pay')
             <p><small>{{__('Payments may take a few minutes to be approved, if you have already paid please check later')}}</small></p>
             <form action="{{route('user.order.status', $order->user_id)}}" method="post">

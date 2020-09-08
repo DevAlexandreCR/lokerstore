@@ -9,14 +9,15 @@ use App\Repositories\OrderDetails;
 use App\Repositories\Orders;
 use App\Repositories\Payments;
 use App\Constants\Payments as Pay;
-use App\Traits\GuzzleClient;
+use App\Constants\Orders as OrderConstants;
+use App\Traits\HttpClient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class GenerateOrder implements OrderInterface
 {
-    use GuzzleClient;
+    use HttpClient;
 
     protected $orders;
     protected $orderDetails;
@@ -93,6 +94,7 @@ class GenerateOrder implements OrderInterface
                 $message = __('Your payment has been rejected');
                 break;
             default:
+                $this->payments->setStatus($order->payment, Pay::FAILED);
                 $message = $response->status->message;
         }
         return redirect()->to( route('user.order.show', [auth()->id(), $order_id]))

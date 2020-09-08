@@ -33,21 +33,18 @@ class Order extends Model
         {
             case Orders::STATUS_PENDING_PAY:
                 return __('Pending payment');
-                break;
             case Orders::STATUS_PENDING_SHIPMENT:
                 return __('Pending shipment');
-                break;
             case Orders::STATUS_CANCELED:
                 return __('Canceled');
-                break;case Orders::STATUS_REJECTED:
+                case Orders::STATUS_REJECTED:
             return __('Payment rejected');
-                break;
             case Orders::STATUS_SENT:
                 return __('Sent');
-                break;
             case Orders::STATUS_SUCCESS:
                 return __('Complete');
-                break;
+            case Orders::STATUS_FAILED:
+                return __('Failed');
         }
     }
 }

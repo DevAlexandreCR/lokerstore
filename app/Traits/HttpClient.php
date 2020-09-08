@@ -4,18 +4,19 @@ namespace App\Traits;
 
 use App\Constants\PlaceToPay;
 use App\Models\Order;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Http;
 
-trait GuzzleClient
+trait HttpClient
 {
     use Authentication;
 
     private $endPoint = 'api/session/';
     private $reverseEndPoint = 'api/reverse/';
+
 
     /**
      * send request to placetopay api
@@ -26,58 +27,48 @@ trait GuzzleClient
     public function sendRequest(string $method, Order $order)
     {
         try {
-            $client = $this->getClient();
             switch ($method)
             {
                 case PlaceToPay::CREATE_REQUEST:
-                    $response =  $client->post($this->endPoint,
-                        [
-                            'json' => $this->data($order)
-                        ]);
-                    break;
+                    return  Http::asJson()->post(config('placetopay.baseUrl') . $this->endPoint,
+                            $this->data($order)
+                        )->object();
                 case PlaceToPay::GET_REQUEST_INFORMATION:
-                    $response = $client->post($this->endPoint . $order->payment->request_id,
+                    return Http::post(config('placetopay.baseUrl') . $this->endPoint .
+                        $order->payment->request_id,
                         [
-                            'json' => [
-                                'auth' => $this->getAuth()
-                            ]
-                        ]);
-                    break;
+                            'auth' => $this->getAuth()
+                        ])->object();
                 case PlaceToPay::REVERSE_REQUEST:
-                    $response = $client->post($this->reverseEndPoint,
+                    return Http::post(config('placetopay.baseUrl') . $this->reverseEndPoint,
                         [
-                            'json' => [
-                                'auth' => $this->getAuth(),
-                                'internalReference' => $order->payment->pay_reference
-                            ]
-                        ]);
-                    break;
+                            'auth' => $this->getAuth(),
+                            'internalReference' => $order->payment->pay_reference
+
+                        ])->object();
                 default:
-                    return [
+                    return json_encode([
                         'status' => [
                             'status' => 0,
                             'reason' => 'WR',
                             'message' => 'Bad request, method undefined',
                             'date' => date('c'),
                         ],
-                    ];
+                    ]);
             }
-
-            return json_decode($response->getBody()->getContents(), false);
-
         } catch (ClientException $e) {
             return json_decode($e->getResponse()->getBody()->getContents(), false);
         } catch (ServerException $e) {
             return json_decode($e->getResponse()->getBody()->getContents(), false);
-        } catch (GuzzleException $e) {
-            return [
+        } catch (HttpResponseException $e) {
+            return json_encode([
                 'status' => [
                     'status' => 0,
                     'reason' => 'WR',
                     'message' => $e->getMessage(),
                     'date' => date('c'),
                 ],
-            ];
+            ]);
         }
     }
 
@@ -107,17 +98,5 @@ trait GuzzleClient
             'userAgent' => request()->header('User-Agent')
         ];
 
-    }
-
-    /**
-     * Initialize client from Guzzle
-     * @return Client
-     */
-    public function getClient(): Client
-    {
-        return new Client([
-            'base_uri' => config('placetopay.baseUrl'),
-            'timeout' => config('placetopay.timeout')
-        ]);
     }
 }

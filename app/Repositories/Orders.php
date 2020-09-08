@@ -50,14 +50,17 @@ class Orders implements OrderInterface
     public function setStatus(int $order_id, string $status)
     {
         $order = $this->find($order_id);
-        $order->status = $status;
-        $order->save();
+        $order->update([
+            'status' => $status
+        ]);
     }
 
     public function getStatusFromStatusPayment(string $status): string
     {
         switch ($status)
         {
+            case PlaceToPay::FAILED:
+                return OrderConstants::STATUS_FAILED;
             case PlaceToPay::REJECTED:
                 return OrderConstants::STATUS_REJECTED;
             case PlaceToPay::APPROVED:
