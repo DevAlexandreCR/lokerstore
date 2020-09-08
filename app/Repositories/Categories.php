@@ -17,7 +17,7 @@ class Categories implements CategoryInterface
 
     public function index()
     {
-        return $this->category->primaries();
+        return $this->category::primaries();
     }
 
     public function store($request)
@@ -39,6 +39,6 @@ class Categories implements CategoryInterface
 
     public function all()
     {
-        return $this->category->all();
+        return $this->category::all();
     }
 }

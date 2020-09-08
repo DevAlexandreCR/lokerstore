@@ -19,7 +19,7 @@ class Tags implements TagsInterface
 
     public function index()
     {
-        return $this->tag->all();
+        return $this->tag::all();
     }
 
     public function store(Request $request)

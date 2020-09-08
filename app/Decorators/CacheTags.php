@@ -45,6 +45,6 @@ class CacheTags implements TagsInterface
 
     public function destroy(Model $model)
     {
-        $this->tags->destroy();
+        $model->delete();
     }
 }

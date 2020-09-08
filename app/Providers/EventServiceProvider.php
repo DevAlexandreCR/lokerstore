@@ -7,9 +7,11 @@ use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Listeners\DisableProductIfStockIsEmpty;
 use App\Listeners\EnableOrDisableProductIfStockEmpty;
 use App\Listeners\SetStockProduct;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\User;
+use App\Observers\PaymentObserver;
 use App\Observers\ProductObserver;
 use App\Observers\StockObserver;
 use App\Observers\UserObserver;
@@ -49,5 +51,6 @@ class EventServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         Stock::observe(StockObserver::class);
         User::observe(UserObserver::class);
+        Payment::observe(PaymentObserver::class);
     }
 }

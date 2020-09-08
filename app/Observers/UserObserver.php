@@ -8,7 +8,7 @@ class UserObserver
 {
     public function created(User $user): void
     {
-        logger()->alert('user created',
+        logger()->channel('slack')->alert('user created',
         [
             'name' => $user->name,
             'email' => $user->email,

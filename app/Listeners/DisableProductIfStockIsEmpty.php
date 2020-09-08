@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Actions\Products\EnableOrDisableProductAction;
 use App\Events\OnProductUpdateEvent;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class DisableProductIfStockIsEmpty
 {

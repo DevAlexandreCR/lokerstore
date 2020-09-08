@@ -5,6 +5,7 @@ namespace App\Decorators;
 use App\Interfaces\ColorsInterface;
 use App\Repositories\Colors;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class CacheColors implements ColorsInterface
@@ -40,13 +41,13 @@ class CacheColors implements ColorsInterface
     }
 
     /**
-     * @param $request
+     * @param Request $request
      * @param Model $model
      * @return mixed
      */
-    public function update($request, Model $model)
+    public function update(Request $request, Model $model)
     {
-        $model->update($request);
+        $model->update($request->all());
 
         Cache::tags(['colors'])->flush();
 
@@ -55,7 +56,6 @@ class CacheColors implements ColorsInterface
 
     /**
      * @param Model $model
-     * @return mixed
      */
     public function destroy(Model $model)
     {

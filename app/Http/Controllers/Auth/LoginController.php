@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
