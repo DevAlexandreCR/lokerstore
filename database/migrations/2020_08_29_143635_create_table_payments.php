@@ -23,12 +23,8 @@ class CreateTablePayments extends Migration
             $table->string('reference')->nullable();
             $table->string('method')->nullable();
             $table->string('last_digit')->nullable();
-            $table->unsignedBigInteger('order_id');
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
-
-            $table->foreign('order_id')
-                ->references('id')
-                ->on('orders');
         });
     }
 

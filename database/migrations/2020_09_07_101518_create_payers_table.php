@@ -15,7 +15,7 @@ class CreatePayersTable extends Migration
     {
         Schema::create('payers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('payment_id');
+            $table->foreignId('payment_id')->constrained()->cascadeOnDelete();
             $table->string('document')->nullable();
             $table->string('document_type')->nullable();
             $table->string('name')->nullable();
@@ -23,8 +23,6 @@ class CreatePayersTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
-
-            $table->foreign('payment_id')->references('id')->on('payments');
         });
     }
 
