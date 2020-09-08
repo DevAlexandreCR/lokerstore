@@ -79,7 +79,7 @@ class GenerateOrder implements OrderInterface
                 if ($response->status->message === PlaceToPay::MESSAGE_REVERSED)
                 {
                     $this->payments->setStatus($order->payment, Pay::STATUS_CANCELED);
-                    $message = __('Your payment has been reversed');
+                    $message = __('Your payment has been reversed success');
                 }
                 else
                 {
@@ -90,7 +90,7 @@ class GenerateOrder implements OrderInterface
                 break;
             case PlaceToPay::REJECTED:
                 $this->payments->setStatus($order->payment, $status);
-                $message = __('Your payment has been failed');
+                $message = __('Your payment has been rejected');
                 break;
             default:
                 $message = $response->status->message;

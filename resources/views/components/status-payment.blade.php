@@ -12,6 +12,56 @@
         @break
         @case('pending_shipment')
             <p><small>{{__('We are preparing your order, usually this takes one to two working days')}}</small></p>
+                <h3>{{__('Payer data')}}</h3>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('Name')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->payer->getFullName()}}
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('Document')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->payer->document_type}} : {{$order->payment->payer->document}}
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('Email')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->payer->email}}
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('Phone')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->payer->phone}}
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('Payment method')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->method}}
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('Last digit')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->last_digit}}
+                    </div>
+                </div>
+                <hr>
             <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
@@ -19,7 +69,7 @@
             </form>
         @break
         @case('sent')
-        <p><small>{{__('Your order has been shipped')}}</small></p>
+            <p><small>{{__('Your order has been shipped')}}</small></p>
         @break
         @case('rejected')
             <p><small>{{__('Your transaction  has been declined, you can try another payment method')}}</small></p>
@@ -30,16 +80,16 @@
             </form>
         @break
         @case('complete')
-        <p><small>{{__('Buy completed')}}</small></p>
-        <form action="{{route('user.order.status', $order->user_id)}}" method="post">d
-            @csrf
-            <input type="hidden" name="order_id" value="{{$order->id}}">
-            <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Buy again')}}</button>
-        </form>
+            <p><small>{{__('Buy completed')}}</small></p>
+            <form action="{{route('user.order.status', $order->user_id)}}" method="post">d
+                @csrf
+                <input type="hidden" name="order_id" value="{{$order->id}}">
+                <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Buy again')}}</button>
+            </form>
         @break
         @case('canceled')
-        <p><small>{{__('Buy canceled')}}</small></p>
-        <p><small class="text-muted">{{__('Your order has been canceled')}}</small></p>
+            <p><small>{{__('Buy canceled')}}</small></p>
+            <p><small class="text-muted">{{__('Your order has been canceled')}}</small></p>
         @break
     @endswitch
 </div>

@@ -37,6 +37,10 @@
     "User info": "Información del usuario",
     "Phone": "Teléfono",
     "Address": "Dirección",
+    "Document" : "Documento",
+    "Payment method" : "Método de pago",
+    "Payer data" : "Datos del pagador",
+    "Last digit" : "Terminada en",
     "Users": "Usuarios",
     "Save": "Guardar",
     "Confirm Password": "Confirmar contraseña",
@@ -164,6 +168,9 @@
     "Your transaction  has been declined, you can try another payment method"
     : "Tu transacción ha sido rechazada, puedes intentar con otro metodo de pago",
     "Your order has been shipped" : "Tu pedido ha sido enviado",
+    "Your payment has been success" : "Tu pago ha sido recibido exitosamente",
+    "Your payment has been rejected" : "Tu pago ha sido rechazado o ha expirado",
+    "Your payment has been reversed success" : "Tu pago ha sido devuelto exitosamente",
     "Buy completed" : "Comprar finalizada",
     "Buy again" : "Comprar otra vez"
 }
