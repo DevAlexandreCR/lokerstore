@@ -13,7 +13,6 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        logger()->channel('prueba')->alert('product updated');
         event(new OnProductUpdateEvent($product));
     }
 }

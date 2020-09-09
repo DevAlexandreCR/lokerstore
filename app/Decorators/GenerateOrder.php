@@ -5,6 +5,7 @@ namespace App\Decorators;
 use App\Constants\PlaceToPay;
 use App\Http\Requests\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
+use App\Jobs\QueryPayment;
 use App\Repositories\OrderDetails;
 use App\Repositories\Orders;
 use App\Repositories\Payments;

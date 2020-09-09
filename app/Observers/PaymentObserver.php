@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\QueryPayment;
 use App\Models\Payment;
 use App\Repositories\Orders;
 use App\Constants\Orders as OrderConstants;
