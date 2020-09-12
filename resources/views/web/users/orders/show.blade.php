@@ -27,31 +27,37 @@
     </div>
     <div class="container py-4">
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-8">
                 <div class="card card">
                     <div class="modal-header">
                         <h3>{{__('Order summary')}}</h3>
                         <small class="text-muted">{{$order->created_at}}</small>
                     </div>
                     <div class="card-body">
-                        <div class="row font-weight-bold py-2">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-4">{{__('Product')}}</div>
-                            <div class="col-sm-3">{{__('Stock')}}</div>
-                            <div class="col-sm-3 text-right">{{__('Price')}}</div>
-                        </div>
-                        @foreach($order->orderDetails as $detail)
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <img class="img-fluid" src="/photos/{{$detail->product->photos[0]->name}}">
-                            </div>
-                            <div class="col-sm-4">{{$detail->product->name}}</div>
-                            <div class="col-sm-3">{{$detail->quantity}}</div>
-                            <div class="col-sm-3 text-right">
-                                {{$detail->product->getPrice()}}
-                            </div>
-                        </div>
-                        @endforeach
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr class="text-center">
+                                <th scope="col">{{__('Photo')}}</th>
+                                <th scope="col">{{__('Product')}}</th>
+                                <th scope="col">{{__('Stock')}}</th>
+                                <th scope="col">{{__('Color')}}</th>
+                                <th scope="col">{{__('Size')}}</th>
+                                <th scope="col">{{__('Price')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($order->orderDetails as $detail)
+                            <tr class="text-center">
+                                <th><img class="img-table-mini" src="/photos/{{$detail->stock->product->photos[0]->name}}"></th>
+                                <th class="align-middle">{{$detail->stock->product->name}}</th>
+                                <th class="align-middle">{{$detail->quantity}}</th>
+                                <th class="align-middle"><span class="badge badge-color-{{strtolower($detail->stock->color->name)}}">.</span></th>
+                                <th class="align-middle">{{$detail->stock->size->name}}</th>
+                                <th class="align-middle">{{$detail->total_price}}</th>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="card-footer">
                         <div class="row text-right">
@@ -65,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <div class="card">
                     <div class="card-header">
                         {{$order->getStatus()}}

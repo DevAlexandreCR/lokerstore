@@ -8,6 +8,11 @@
     object-fit: cover;
 }
 
+.img-table-mini {
+    width: 5rem;
+    border-radius: 5px;
+}
+
 .img-hover-zoom {
     overflow: hidden; /* Removing this will break the effects */
 }

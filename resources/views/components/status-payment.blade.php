@@ -17,7 +17,12 @@
                 <button type="submit" class="btn btn-block btn-sm btn-dark">{{__('Verify payment')}}</button>
             </form>
             <p><small>{{__('Or you can retry the payment again')}}</small></p>
-            <a class="btn btn-success btn-sm btn-block" href="{{$order->payment->process_url}}">{{__('Retry payment')}}</a>
+                <a class="btn btn-success btn-sm btn-block" href="{{$order->payment->process_url}}">{{__('Retry payment')}}</a>
+                <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
+                    @csrf
+                    <input type="hidden" name="order_id" value="{{$order->id}}">
+                    <button type="submit" class="btn btn-block btn-sm btn-danger my-4">{{__('Cancel Purchase')}}</button>
+                </form>
         @break
         @case('pending_shipment')
             <p><small>{{__('We are preparing your order, usually this takes one to two working days')}}</small></p>
@@ -98,7 +103,33 @@
         @break
         @case('canceled')
             <p><small>{{__('Buy canceled')}}</small></p>
-            <p><small class="text-muted">{{__('Your order has been canceled')}}</small></p>
+            <p><small class="text-muted">{{__('Order has been canceled success')}}</small></p>
+            @if($order->payment->payer)
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{__('We give you back')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->amount}}
+                    </div>
+                </div>
+            <div class="row row-cols-2">
+                <div class="col-sm-6 text-muted text-left">
+                    {{__('Payment method')}}
+                </div>
+                <div class="col-sm-6 text-muted text-left">
+                    {{$order->payment->method}}
+                </div>
+            </div>
+            <div class="row row-cols-2">
+                <div class="col-sm-6 text-muted text-left">
+                    {{__('Last digit')}}
+                </div>
+                <div class="col-sm-6 text-muted text-left">
+                    {{$order->payment->last_digit}}
+                </div>
+            </div>
+            @endif
         @break
     @endswitch
 </div>

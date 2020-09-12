@@ -49,7 +49,7 @@ class OrderControllerTest extends TestCase
      *
      * @return void
      */
-    public function testStore()
+    public function testStore(): void
     {
         $response = $this->actingAs($this->user)
             ->post(route('user.order.store', $this->user),
@@ -59,12 +59,17 @@ class OrderControllerTest extends TestCase
 
         $response->assertStatus(302);
         $this->assertDatabaseHas('orders',
-        [
-            'user_id' => $this->user->id
-        ]);
+            [
+                'user_id' => $this->user->id
+            ]);
+
+        $this->assertDatabaseHas('stocks',
+            [
+                'quantity' => 3
+            ]);
     }
 
-    public function testGetStatusPaymentApproved()
+    public function testGetStatusPaymentApproved(): void
     {
         $order = factory(Order::class)->create([
             'user_id' => $this->user->id
@@ -94,7 +99,7 @@ class OrderControllerTest extends TestCase
             ]);
     }
 
-    public function testGetStatusPaymentPending()
+    public function testGetStatusPaymentPending(): void
     {
         $order = factory(Order::class)->create([
             'user_id' => $this->user->id
@@ -121,6 +126,28 @@ class OrderControllerTest extends TestCase
             [
                 'id' => $order->id,
 //                'status' => Orders::STATUS_PENDING_PAY
+            ]);
+    }
+
+    public function testAllStocksHasRestoredWhenOrderCanceled(): void
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => $this->user->id
+        ]);
+        factory(OrderDetail::class)->create([
+            'order_id' => $order->id
+        ]);
+        factory(Payment::class)->create([
+            'order_id' => $order->id,
+            'request_id' => 367478
+        ]);
+
+        $order->status = Orders::STATUS_CANCELED;
+        $order->save();
+
+        $this->assertDatabaseHas('stocks',
+            [
+                'quantity' => 5
             ]);
     }
 

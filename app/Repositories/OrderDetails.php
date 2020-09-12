@@ -22,9 +22,7 @@ class OrderDetails implements OrderDetailInterface
         $cart->stocks->each(function ($stock) use ($order_id) {
             $this->orderDetail->create([
                 'order_id' => $order_id,
-                'product_id' => $stock->product_id,
-                'color_id' => $stock->color_id,
-                'size_id' => $stock->size_id,
+                'stock_id' => $stock->id,
                 'quantity' => $stock->pivot->quantity,
                 'unit_price' => $stock->product->price,
                 'total_price' => $stock->product->price * $stock->pivot->quantity
