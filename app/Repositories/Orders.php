@@ -86,4 +86,13 @@ class Orders implements OrderInterface
     {
         // TODO: Implement reverse() method.
     }
+
+    public function cancel(UpdateRequest $request)
+    {
+        $order_id = $request->get('order_id', null);
+        $order = $this->find($order_id);
+        $payment = $order->payment;
+        $payment->status = Payments::STATUS_CANCELED;
+        $payment->save();
+    }
 }

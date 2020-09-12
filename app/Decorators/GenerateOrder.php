@@ -7,9 +7,9 @@ use App\Http\Requests\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Repositories\OrderDetails;
 use App\Repositories\Orders;
+use App\Constants\Orders as OrderConstants;
 use App\Repositories\Payments;
 use App\Constants\Payments as Pay;
-use App\Constants\Orders as OrderConstants;
 use App\Traits\HttpClient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
@@ -128,7 +128,14 @@ class GenerateOrder implements OrderInterface
     {
         $order_id = $request->get('order_id', null);
         $order = $this->orders->find($order_id);
-        $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
-        return $this->responseHandler($response, $order->id);
+        if($order->status === OrderConstants::STATUS_PENDING_SHIPMENT){
+            $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
+            return $this->responseHandler($response, $order->id);
+        }
+
+        $this->orders->cancel($request);
+
+        return redirect()->to( route('user.order.show', [auth()->id(), $order_id]))
+        ->with('message', 'Order has been canceled success');
     }
 }

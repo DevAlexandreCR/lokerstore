@@ -43,7 +43,7 @@ trait HttpClient
                     return Http::post(config('placetopay.baseUrl') . $this->reverseEndPoint,
                         [
                             'auth' => $this->getAuth(),
-                            'internalReference' => $order->payment->pay_reference
+                            'internalReference' => $order->payment->reference
 
                         ])->object();
                 default:
