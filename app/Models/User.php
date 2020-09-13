@@ -71,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Order::class);
     }
 
-    public function setEmailAttribute($value)
+    public function setEmailAttribute($value): void
     {
         $this->attributes['email'] = strtolower($value);
     }
@@ -83,7 +83,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function scopeSearch($query, $search)
     {
-        if(empty($search)) return;
+        if (empty($search)) {
+            return null;
+        }
         return $query
                 ->where('name', 'like', '%' . $search . '%')
                 ->orWhere('lastname', 'like', '%' . $search . '%')

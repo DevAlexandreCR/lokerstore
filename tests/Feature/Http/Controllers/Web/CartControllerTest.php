@@ -13,7 +13,8 @@ use App\Models\Tag;
 use App\Models\TypeSize;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use PermissionSeeder;
+use RoleSeeder;
 use Tests\TestCase;
 
 class CartControllerTest extends TestCase
@@ -24,6 +25,11 @@ class CartControllerTest extends TestCase
     {
         parent::setUp();
         $this->withoutExceptionHandling();
+
+        $this->seed([
+            PermissionSeeder::class,
+            RoleSeeder::class
+        ]);
     }
 
     private $categories = [
