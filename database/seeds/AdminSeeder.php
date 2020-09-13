@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -11,12 +12,14 @@ class AdminSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(Admin::class)->create([
+        $admin = factory(Admin::class)->create([
             'name' => 'admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@lokerstore.com',
             'password' => Hash::make('12345678')
         ]);
+
+        $admin->assignRole(Roles::ADMIN);
     }
 }
