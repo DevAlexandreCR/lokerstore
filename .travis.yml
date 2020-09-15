@@ -13,7 +13,6 @@ php:
 git:
     depth: 3
 before_install:
-    - mysql -u root --password=""
     - mysql -e 'CREATE DATABASE IF NOT EXISTS testing;'
 before_script:
     - composer install --prefer-dist --optimize-autoloader
