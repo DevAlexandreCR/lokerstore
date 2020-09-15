@@ -28,28 +28,28 @@ class CategorySeeder extends Seeder
         foreach ($sub_categories_ropa as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => 1
+                'id_parent' => Category::where('name', 'Ropa')->first()->id
             ]);
         }
 
         foreach ($sub_categories_zapatos as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => 2
+                'id_parent' => Category::where('name', 'Zapatos')->first()->id
             ]);
         }
 
         foreach ($sub_categories_deportes as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => 3
+                'id_parent' => Category::where('name', 'Deportes')->first()->id
             ]);
         }
 
         foreach ($sub_categories_accesorios as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => 4
+                'id_parent' => Category::where('name', 'Accesorios')->first()->id
             ]);
         }
     }

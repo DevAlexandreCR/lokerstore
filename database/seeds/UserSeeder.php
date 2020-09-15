@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\Roles;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,8 @@ class UserSeeder extends Seeder
             'is_active' => true
         ]);
 
-        factory(User::class, 50)->create();
+        factory(User::class, 50)->create()->each(function (User $user) {
+            $user->assignRole(Roles::CLIENT);
+        });
     }
 }

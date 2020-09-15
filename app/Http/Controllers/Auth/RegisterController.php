@@ -86,7 +86,7 @@ class RegisterController extends Controller
      * manejar la respuesta y que no loguee al usuario despues del registro
      *
      * @param Request $request
-     * @return void
+     * @return mixed
      */
     public function register(Request $request)
     {
@@ -99,12 +99,8 @@ class RegisterController extends Controller
 
         if ($response = $this->registered($request, $user)) {
             return $response;
-        } else {
-            return redirect('email/verify');
         }
 
-        return $request->wantsJson()
-                    ? new Response('', 201)
-                    : redirect($this->redirectPath());
+        return redirect('email/verify');
     }
 }

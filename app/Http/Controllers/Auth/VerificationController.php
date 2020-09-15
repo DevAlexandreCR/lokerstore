@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Constants\Roles;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
@@ -42,14 +43,14 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    protected function verified(Request $request)
+    protected function verified(Request $request): void
     {
         $cart = Cart::where('user_id', auth()->id())->first();
 
         if (!$cart){
-            $cart = new Cart();
-            $cart->user_id = auth()->id();
-            $cart->save();
+            Cart::create([
+                'user_id' => auth()->id()
+            ]);
         }
     }
 }

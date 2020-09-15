@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class TestDatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -16,14 +16,11 @@ class DatabaseSeeder extends Seeder
                 PermissionSeeder::class,
                 RoleSeeder::class,
                 CategorySeeder::class,
-                UserSeeder::class,
-                AdminSeeder::class,
                 TagSeeder::class,
                 TypeSizeSeeder::class,
                 SizeSeeder::class,
                 ColorSeeder::class,
-                ProductSeeder::class,
-                StockSeeder::class
+                TestProductSeeder::class
             ]);
     }
 }

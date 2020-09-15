@@ -13,7 +13,9 @@ use App\Models\Tag;
 use App\Models\TypeSize;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use PermissionSeeder;
+use RoleSeeder;
+use TestDatabaseSeeder;
 use Tests\TestCase;
 
 class CartControllerTest extends TestCase
@@ -24,13 +26,17 @@ class CartControllerTest extends TestCase
     {
         parent::setUp();
         $this->withoutExceptionHandling();
+
+        $this->seed([
+            TestDatabaseSeeder::class
+        ]);
     }
 
     private $categories = [
         'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
     ];
 
-    public function testShow()
+    public function testShow(): void
     {
         $user = factory(User::class)->create([
             'email_verified_at' => now()
@@ -46,7 +52,7 @@ class CartControllerTest extends TestCase
             ->assertViewHas('cart');
     }
 
-    public function testAnUserUnVerifiedCannotViewCart()
+    public function testAnUserUnVerifiedCannotViewCart(): void
     {
         $user = factory(User::class)->create([
             'email_verified_at' => null
@@ -58,17 +64,19 @@ class CartControllerTest extends TestCase
             ->assertRedirect(route('verification.notice'));
     }
 
-    public function testAnuserCanAddItemToCart()
+    public function testAnuserCanAddItemToCart(): void
     {
         $user = factory(User::class)->create([
             'email_verified_at' => now()
         ]);
 
-        $cart = factory(Cart::class)->create([
+        factory(Cart::class)->create([
             'user_id' => $user->id
         ]);
 
-        $stock = $this->createProductRelations();
+        $stock = factory(Stock::class)->create([
+            'quantity' => 5
+        ]);
 
         $response = $this->actingAs($user)->post(route('cart.add', $user),
             [
@@ -87,7 +95,7 @@ class CartControllerTest extends TestCase
             'quantity' => 2
         ]);
     }
-    public function testAnuserCanRemoveitemToCart()
+    public function testAnuserCanRemoveitemToCart(): void
     {
         $user = factory(User::class)->create([
             'email_verified_at' => now()
@@ -97,7 +105,9 @@ class CartControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $stock = $this->createProductRelations();
+        $stock = factory(Stock::class)->create([
+            'quantity' => 5
+        ]);
 
         $user->cart->stocks()->attach($stock->id, ['quantity' => 2]);
 
@@ -112,30 +122,5 @@ class CartControllerTest extends TestCase
                 'stock_id' => $stock->id,
                 'quantity' => 2
             ]);
-    }
-
-
-    public function createProductRelations(): Stock
-    {
-        foreach ($this->categories as $name) {
-            factory(Category::class)->create([
-                'name' => $name,
-                'id_parent' => null
-            ]);
-        }
-        factory(Category::class, 2)->create();
-        $tag = factory(Tag::class)->create();
-        $product = factory(Product::class)->create();
-        $product->tags()->attach($tag->id);
-        factory(Photo::class, rand(1, 5))->create([
-            'product_id' => $product->id
-        ]);
-        factory(TypeSize::class)->create();
-        factory(Size::class)->create();
-        factory(Color::class)->create();
-
-        return factory(Stock::class)->create([
-            'quantity' => 5
-        ]);
     }
 }
