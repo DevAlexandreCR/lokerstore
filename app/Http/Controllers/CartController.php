@@ -15,7 +15,7 @@ class CartController extends Controller
     {
         return view('web.users.cart.show',
         [
-            'cart' => $user->cart->with('stocks')->first()
+            'cart' => $user->cart
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -19,8 +20,8 @@ class OrderPolicy
         //
     }
 
-    public function index(User $authUser, User $user): bool
+    public function all(User $authUser, Order $order): bool
     {
-        return $authUser->id === $user->id;
+        return $authUser->id === $order->user_id;
     }
 }

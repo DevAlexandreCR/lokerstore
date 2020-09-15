@@ -19,7 +19,7 @@ class UserPolicy
         //
     }
 
-    public function profile(User $authUser, User $user): bool
+    public function all(User $authUser, User $user): bool
     {
         return $authUser->id === $user->id;
     }
