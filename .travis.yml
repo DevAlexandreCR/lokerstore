@@ -13,7 +13,7 @@ php:
 git:
     depth: 3
 before_install:
-    - mysql -e 'CREATE DATABASE IF NOT EXISTS testing;'
+    - mysql -e 'create database testing;'
 before_script:
     - composer install --prefer-dist --optimize-autoloader
     - npm install
