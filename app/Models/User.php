@@ -4,16 +4,20 @@ namespace App\Models;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
     use SoftDeletes;
+
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -48,33 +52,40 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Cart::class);
     }
 
-    public function setNameAttribute($value)
+    public function setNameAttribute($value): void
     {
         $this->attributes['name'] = strtolower($value);
         $this->attributes['name'] = rtrim($value);
         $this->attributes['name'] = ucwords($value);
     }
 
-    public function setLastnameAttribute($value)
+    public function setLastnameAttribute($value): void
     {
         $this->attributes['lastname'] = strtolower($value);
         $this->attributes['lastname'] = rtrim($value);
         $this->attributes['lastname'] = ucwords($value);
     }
 
-    public function setEmailAttribute($value)
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function setEmailAttribute($value): void
     {
         $this->attributes['email'] = strtolower($value);
     }
 
-    public function getFullNameAttribute()
+    public function getFullNameAttribute(): string
     {
         return "{$this->name} {$this->lastname}";
     }
 
     public function scopeSearch($query, $search)
     {
-        if(empty($search)) return;
+        if (empty($search)) {
+            return null;
+        }
         return $query
                 ->where('name', 'like', '%' . $search . '%')
                 ->orWhere('lastname', 'like', '%' . $search . '%')

@@ -59,7 +59,7 @@ return [
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            'level' => 'critical',
+            'level' => 'error'
         ],
 
         'papertrail' => [
@@ -98,6 +98,20 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        'payments' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/payments/laravel.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        'users' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/users/laravel.log'),
+            'level' => 'info',
+            'days' => 14,
         ],
     ],
 

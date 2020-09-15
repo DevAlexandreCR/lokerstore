@@ -88,8 +88,8 @@
                                     <ion-icon size="small" name="person-circle-outline"></ion-icon>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item btn">
-                                        {{ Auth::user()->name }}
+                                    <a href="{{route('user.profile', auth()->id())}}" class="dropdown-item btn">
+                                        {{ __('My Account') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -105,8 +105,8 @@
                             <form action="{{route('cart.show', auth()->id())}}" method="GET">
                                 <button type="submit" class="nav-link btn btn-link">
                                     <ion-icon size="small" name="cart-outline"></ion-icon>
-                                    @if(Auth::user()->hasVerifiedEmail())
-                                        <span class="badge bg-red">{{Auth::user()->cart->countProducts()}}</span>
+                                    @if(auth()->user()->hasVerifiedEmail() && auth()->user()->cart->countProducts() > 0)
+                                        <span class="badge bg-red">{{auth()->user()->cart->countProducts()}}</span>
                                     @endif
                                 </button>
                             </form>

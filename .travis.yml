@@ -15,11 +15,8 @@ git:
 before_install:
     - mysql -e 'create database testing;'
 before_script:
-    - composer self-update
     - composer install --prefer-dist --optimize-autoloader
     - npm install
-    - npm run production
-    - php artisan storage:link
 script:
     - php artisan migrate --force
     - php artisan test

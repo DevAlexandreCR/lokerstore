@@ -5,16 +5,15 @@ namespace App\Listeners;
 use App\Actions\Products\UpdateStockProductAction;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Models\Product;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SetStockProduct
 {
     public $updateStockProductAction;
+
     /**
      * Create the event listener.
      *
-     * @return void
+     * @param UpdateStockProductAction $updateStockProductAction
      */
     public function __construct(UpdateStockProductAction $updateStockProductAction)
     {
@@ -24,7 +23,7 @@ class SetStockProduct
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param OnStockCreatedOrUpdatedEvent $event
      * @return void
      */
     public function handle(OnStockCreatedOrUpdatedEvent $event)
@@ -38,7 +37,7 @@ class SetStockProduct
         foreach ($stocks as $stk) {
             $quantity += $stk->quantity;
         }
-        
+
         $this->updateStockProductAction->execute($product, $quantity);
     }
 }

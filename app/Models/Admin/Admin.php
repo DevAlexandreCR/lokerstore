@@ -2,10 +2,12 @@
 
 namespace App\Models\Admin;
 
+use App\Constants\Admins;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
@@ -13,6 +15,9 @@ class Admin extends Authenticatable
 
     use SoftDeletes;
 
+    use HasRoles;
+
+    protected $guard_name = Admins::GUARDED;
     /**
      * The attributes that are mass assignable.
      *

@@ -21,7 +21,7 @@
 <div class="container">
   <div class="row">
     @if ( session('user-deleted'))
-    
+
     <div class="container py-2">
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,7 +31,7 @@
         <strong>{{__('Success!')}}</strong> {{ session('user-deleted') }}
       </div>
     </div>
-    
+
     @endif
     @if (!empty($user_not_found))
     <div class="container" role="alert">
@@ -65,35 +65,35 @@
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->phone }}</td>
                   @if ($user->is_active)
-                  <td> 
+                  <td>
                     <span class="badge badge-info"> {{ __('Enabled') }}</span>
                   </td>
                   @else
-                  <td class="text-muted"> 
+                  <td class="text-muted">
                     <span class="badge badge-danger"> {{ __('Disabled') }}</span>
                   </td>
                   @endif
                   <td>
-                    <div class="btn-group btn-block btn-group-sm text-center" 
+                    <div class="btn-group btn-block btn-group-sm text-center"
                     role="group"
                     style="border-left: groove">
-                      <a type="button" class="btn btn-link" 
-                      data-toggle="tooltip" 
-                      data-placement="top" 
+                      <a type="button" class="btn btn-link"
+                      data-toggle="tooltip"
+                      data-placement="top"
                       title="{{__('View')}}"
                       href="{{route('users.show', ['user' => $user])}}">
                       <ion-icon name="eye"></ion-icon>
                       </a>
-                      <a type="button" class="btn btn-link" 
-                      data-toggle="tooltip" 
-                      data-placement="top" 
+                      <a type="button" class="btn btn-link"
+                      data-toggle="tooltip"
+                      data-placement="top"
                       title="@if($user->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
                       href="{{ route('users.edit', ['user' => $user, 'input_name' => 'is_active'])}}">
                       <ion-icon name="power"></ion-icon>
                       </a>
-                      <a type="button" class="btn btn-link" 
-                      data-toggle="tooltip" 
-                      data-placement="top" 
+                      <a type="button" class="btn btn-link"
+                      data-toggle="tooltip"
+                      data-placement="top"
                       title="{{__('Remove')}}"
                       href="{{route('users.edit', ['user' => $user, 'input_name' => 'delete'])}}">
                       <ion-icon name="trash"></ion-icon>
@@ -102,7 +102,7 @@
                   </td>
                 </tr>
           @endforeach
-        </tbody>  
+        </tbody>
     </table>
   </div>
   <div class="container">
@@ -110,7 +110,7 @@
       <div class="col-8">{{ $users->links() }}</div>
       <div class="col-4">
         <div class="row" style="float: right">
-          <div class="col"><strong>{{__('Users')}}</strong></div>
+          <div class="col"><strong>{{__('users')}}</strong></div>
           <div class="col">{{ \App\Models\User::count()}}</div>
         </div>
       </div>

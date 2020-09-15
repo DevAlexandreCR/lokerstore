@@ -7,6 +7,7 @@ window.Vue = require('vue');
 Vue.component('banner-component', require('./components/BannerComponent.vue').default)
 Vue.component('error404-component', require('./components/Error404Component.vue').default)
 Vue.component('empty-cart-component', require('./components/EmptyCartComponent.vue').default)
+Vue.component('empty-orders-component', require('./components/EmptyOrdersComponent.vue').default)
 
 Vue.use(VuePaginate)
 

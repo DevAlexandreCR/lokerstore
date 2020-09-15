@@ -5,18 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\IndexRequest;
 use App\Http\Resources\ProductResource;
+use App\Interfaces\Api\ApiProductsInterface;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    protected $product;
+    protected $apiProducts;
 
-    public function __construct(Product $product)
+    public function __construct(ApiProductsInterface $apiProducts)
     {
-        $this->product = $product;
+        $this->apiProducts = $apiProducts;
     }
 
     /**
@@ -26,22 +25,8 @@ class ProductController extends Controller
      */
     public function index(IndexRequest $request) : JsonResponse
     {
-        $category = $request->validationData()['category'];
-        $tags = $request->validationData()['tags'];
-        $colors = $request->validationData()['colors'];
-        $sizes = $request->validationData()['sizes'];
-        $price = $request->validationData()['price'];
-        $search = $request->validationData()['search'];
         return response()->json(ProductResource::collection(
-            $this->product
-                ->active()
-                ->byCategory($category)
-                ->price($price)
-                ->colors($colors)
-                ->sizes($sizes)
-                ->withTags($tags)
-                ->search($search)
-                ->get()
+            $this->apiProducts->query($request)
         ));
     }
 

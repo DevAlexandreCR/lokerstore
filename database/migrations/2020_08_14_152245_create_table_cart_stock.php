@@ -15,19 +15,10 @@ class CreateTableCartStock extends Migration
     {
         Schema::create('cart_stock', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cart_id');
-            $table->unsignedBigInteger('stock_id');
+            $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('stock_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('quantity')->unsigned()->nullable(false);
             $table->timestamps();
-
-            $table->foreign('cart_id')
-                ->references('id')
-                ->on('carts')
-                ->onDelete('cascade');
-            $table->foreign('stock_id')
-                ->references('id')
-                ->on('stocks')
-                ->onDelete('cascade');
         });
     }
 
