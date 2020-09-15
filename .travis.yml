@@ -15,9 +15,6 @@ git:
 before_install:
     - mysql -e 'CREATE DATABASE IF NOT EXISTS testing;'
 before_script:
-    - cp .env.example .env
-    - cp .env.testing.example .env.testing
-    - php artisan key:generate
     - composer install --prefer-dist --optimize-autoloader
     - npm install
 script:
