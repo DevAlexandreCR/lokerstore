@@ -19,6 +19,7 @@ before_script:
     - npm install
 script:
     - php artisan migrate --force
+    - php artisan seed --force
     - php artisan test
 notifications:
     email:
