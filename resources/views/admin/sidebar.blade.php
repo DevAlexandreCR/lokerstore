@@ -17,7 +17,7 @@
         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('users.index') ?: 'font-weight-bolder'}}"
          href="{{ route('users.index') }}"
          style="color: black"
-         >{{__('users')}}</a>
+         >{{__('Users')}}</a>
          <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('products.index') ?: 'font-weight-bolder'}}"
          href="{{ route('products.index') }}"
          style="color: black"

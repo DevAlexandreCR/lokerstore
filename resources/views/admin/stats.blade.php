@@ -1,7 +1,6 @@
 @extends('admin.home')
 
 @section('main')
-<banner-component/>
 <div class="content py-4">
     <div class="row">
         <div class="col">
@@ -29,7 +28,7 @@
                   <h5 class="card-title">Ventas ultimo mes</h5>
                   <p class="card-text">147</p>
                 </div>
-        </div> 
+        </div>
         </div>
     </div>
     <div class="row">
@@ -58,8 +57,8 @@
                   <h5 class="card-title">Ventas Hoy</h5>
                   <p class="card-text">3</p>
                 </div>
-        </div> 
+        </div>
         </div>
     </div>
     <hr>
-@endsection 
+@endsection
