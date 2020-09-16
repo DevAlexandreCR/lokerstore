@@ -19,7 +19,7 @@ Auth::routes(['verify' => true]);
 
 // add route to run command to links heroku
 Route::get('/artisan/storage', function() {
-    $command = 'storage:link';
+    $command = 'storage:link --relative';
     Artisan::call($command);
     return Artisan::output();
 });
