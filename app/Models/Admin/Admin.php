@@ -48,13 +48,13 @@ class Admin extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $passwordSend = new ResetPassword($token);
-        $passwordSend->createUrlUsing(function ($notifiable, $token) {
+        $passwordSend::createUrlUsing(function ($notifiable, $token) {
             return url(route('admin.password.reset', [
                 'token' => $token,
                 'email' => $notifiable->getEmailForPasswordReset(),

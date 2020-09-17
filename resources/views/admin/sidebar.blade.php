@@ -14,6 +14,10 @@
         >{{__('Home')}}</a>
         </div>
         <br>
+        <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('admins.index') ?: 'font-weight-bolder'}}"
+           href="{{ route('admins.index') }}"
+           style="color: black"
+        >{{__('Staff')}}</a>
         <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('users.index') ?: 'font-weight-bolder'}}"
          href="{{ route('users.index') }}"
          style="color: black"

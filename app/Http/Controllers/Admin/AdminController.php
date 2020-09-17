@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Admin;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -17,9 +18,18 @@ class AdminController extends Controller
         $this->admin = $admin;
     }
 
-    public function index(Request $request): Collection
+    public function index(): View
     {
-        return $this->admin->all();
+        return view('admin.admins.index', [
+            'admins' => $this->admin::all(),
+            'roles' => Role::pluck('name', 'id')
+        ]);
+    }
+
+    public function show(Admin $admin): View
+    {
+        $roles = Role::pluck('name', 'id');
+        return view('admin.admins.show', compact(['admin', 'roles']));
     }
 
     /**
@@ -32,18 +42,7 @@ class AdminController extends Controller
     {
         $this->admin->create($request->all());
 
-        return redirect()->back()->with('success', __('Admin has been created success'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Admin  $admin
-     * @return Admin
-     */
-    public function show(Admin $admin): Admin
-    {
-        return $admin;
+        return redirect()->route('admins.index')->with('success', __('Admin has been created success'));
     }
 
     /**
@@ -57,7 +56,7 @@ class AdminController extends Controller
     {
         $admin->update($request->all());
 
-        return redirect()->back()->with('success', __('Admin has been updated success'));
+        return redirect()->route('admins.index')->with('success', __('Admin has been updated success'));
     }
 
     /**
@@ -70,6 +69,6 @@ class AdminController extends Controller
     {
         $admin->delete();
 
-        return redirect()->back()->with('success', __('Admin has been remove success'));
+        return redirect()->route('admins.index')->with('success', __('Admin has been remove success'));
     }
 }
