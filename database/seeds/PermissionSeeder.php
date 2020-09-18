@@ -20,11 +20,5 @@ class PermissionSeeder extends Seeder
                 'guard_name' => Admins::GUARDED
             ]);
         }
-
-        foreach (Permissions::getClientPermissions() as $permission){
-            Permission::create([
-                'name' => $permission
-            ]);
-        }
     }
 }

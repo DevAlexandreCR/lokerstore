@@ -40,7 +40,10 @@ Route::middleware('auth:admin')->group(function () {
         ->except('edit', 'create');
     Route::resource('roles', 'RoleController')
         ->names('roles')
-        ->except('edit', 'create', 'show');
+        ->only('store', 'index', 'update', 'destroy');
+    Route::resource('permissions', 'PermissionController')
+        ->names('permissions')
+        ->only('store', 'update', 'destroy');
 });
 
 

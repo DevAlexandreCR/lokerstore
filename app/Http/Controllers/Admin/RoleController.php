@@ -3,47 +3,46 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use http\Exception;
+use App\Http\Requests\Roles\StoreRequest;
+use App\Http\Requests\Roles\UpdateRequest;
+use App\Interfaces\PermissionInterface;
+use App\Interfaces\RoleInterface;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    protected $role;
+    protected $roles;
 
-    public function __construct(Role $role)
+    public function __construct(RoleInterface $roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param PermissionInterface $permissions
      * @return View
      */
-    public function index(): View
+    public function index(PermissionInterface $permissions): View
     {
         return view('admin.roles.index', [
-            'roles' => Role::pluck('name', 'id'),
-            'permissions' => Permission::pluck('name', 'id'),
+            'roles' => $this->roles->index(),
+            'permissions' => $permissions->index(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param StoreRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $this->role::create([
-            'name' => $request->get('name'),
-            'guard_name' => $request->get('guard_name')
-        ]);
+        $this->roles->store($request);
 
         return redirect()->route('roles.index')->with('success', __('Role has been created successfully'));
     }
@@ -51,13 +50,13 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param Role $role
      * @return RedirectResponse
      */
-    public function update(Request $request, Role $role): RedirectResponse
+    public function update(UpdateRequest $request, Role $role): RedirectResponse
     {
-        $role->update($request->all());
+        $this->roles->update($request, $role);
 
         return redirect()->route('roles.index')->with('success', __('Role has been updated successfully'));
     }
@@ -71,7 +70,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role): RedirectResponse
     {
-        $role->delete();
+        $this->roles->destroy($role);
 
         return redirect()->route('roles.index')->with('success', __('Role has been removed successfully'));
     }

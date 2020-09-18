@@ -180,5 +180,11 @@
     "Buy canceled" : "Compra cancelada",
     "We give you back": "Te devolvimos",
     "Add employee" : "Agregar empleado",
-    "Staff" : "Personal"
+    "Staff" : "Personal",
+    "Employee" : "Empleado",
+    "Permissions" : "Permisos",
+    "Permission" : "Permiso",
+    "Add role" : "Agregar rol",
+    "Add permission" : "Agregar permiso",
+    "Administrator" : "Administrador"
 }
