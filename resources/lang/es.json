@@ -186,5 +186,10 @@
     "Permission" : "Permiso",
     "Add role" : "Agregar rol",
     "Add permission" : "Agregar permiso",
-    "Administrator" : "Administrador"
+    "Update permissions" : "Actualizar permisos",
+    "Update user" : "Actualizar usuario",
+    "User data" : "Datos del usuario",
+    "Email address" : "Correo electrónico",
+    "Administrator" : "Administrador",
+    "The user have all permissions": "El usuario tiene todos los permisos"
 }

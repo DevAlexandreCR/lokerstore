@@ -44,6 +44,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('permissions', 'PermissionController')
         ->names('permissions')
         ->only('store', 'update', 'destroy');
+    Route::put('update-permissions/{admin}', 'AdminPermissionsController@update')
+        ->name('update-permissions');
 });
 
 

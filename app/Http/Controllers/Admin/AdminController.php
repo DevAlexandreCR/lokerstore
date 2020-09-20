@@ -7,6 +7,7 @@ use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
@@ -28,8 +29,9 @@ class AdminController extends Controller
 
     public function show(Admin $admin): View
     {
-        $roles = Role::pluck('name', 'id');
-        return view('admin.admins.show', compact(['admin', 'roles']));
+        $permissions = Permission::pluck('name', 'id');
+        $roles = Role::all(['name', 'id']);
+        return view('admin.admins.show', compact(['admin', 'permissions', 'roles']));
     }
 
     /**
@@ -56,7 +58,9 @@ class AdminController extends Controller
     {
         $admin->update($request->all());
 
-        return redirect()->route('admins.index')->with('success', __('Admin has been updated success'));
+        $admin->syncRoles($request->roles);
+
+        return redirect()->route('admins.show', $admin->id)->with('success', __('Admin has been updated success'));
     }
 
     /**

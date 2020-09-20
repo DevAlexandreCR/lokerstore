@@ -86,7 +86,7 @@ class AdminControllerTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect(route('admins.index'))
+            ->assertRedirect(route('admins.show', $this->admin->id))
             ->assertSessionHas('success');
 
         $this->assertDatabaseHas('admins', [
@@ -99,14 +99,14 @@ class AdminControllerTest extends TestCase
     public function testDestroy(): void
     {
         $admin2 = factory(Admin::class)->create();
-        $response = $this->actingAs($this->admin, 'admin')->put(route('admins.destroy', $admin2->id));
+        $response = $this->actingAs($this->admin, 'admin')->delete(route('admins.destroy', $admin2->id));
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('admins.index'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('admins', [
+        $this->assertDatabaseMissing('admins', [
             'id' => $admin2->id,
             'name' => $admin2->name,
             'email' => $admin2->email

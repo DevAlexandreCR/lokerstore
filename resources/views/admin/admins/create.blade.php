@@ -7,16 +7,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="{{route('admins.store')}}" method="post">
-                    @csrf
+            <form action="{{route('admins.store')}}" method="post">
+                @csrf
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="name">{{__('Name')}}</label>
                         <input class="form-control" type="text" name="name" id="name">
                         <label for="email">{{__('Email Address')}}</label>
                         <input class="form-control" type="email" name="email" id="email" autocomplete="nope">
-                        <label for="pass">{{__('Password')}}</label>
-                        <input class="form-control" type="password" name="pass" id="pass">
+                        <label for="password">{{__('Password')}}</label>
+                        <input class="form-control" type="password" name="password" id="password">
                         <label for="status">{{__('Status')}}</label>
                         <select class="form-control" type="password" name="status" id="status">
                             <option value="0" selected>{{__('Disabled')}}</option>
@@ -29,12 +29,11 @@
                             @endforeach
                         </select>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

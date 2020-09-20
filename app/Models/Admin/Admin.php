@@ -13,8 +13,6 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
-    use SoftDeletes;
-
     use HasRoles;
 
     protected $guard_name = Admins::GUARDED;
@@ -24,7 +22,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'is_active'
     ];
 
     /**

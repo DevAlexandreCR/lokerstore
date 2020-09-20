@@ -32,7 +32,7 @@
                                 <span class="badge badge-danger"> {{ __('Disabled') }}</span>
                             </td>
                         @endif
-                        <td>{{ $admin->getRoleNames()[0] }}</td>
+                        <td>{{ optional($admin->getRoleNames())[0] }}</td>
                         <td>
                             <div class="btn-group btn-block btn-group-sm text-center"
                                  role="group"
@@ -45,14 +45,18 @@
                                     <ion-icon name="eye"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link"
-                                   data-toggle="tooltip"
+                                   data-toggle="modal"
+                                   data-target="#enableEmployee"
                                    data-placement="top"
+                                   data-admin="{{ $admin }}"
                                    title="@if($admin->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
                                    >
                                     <ion-icon name="power"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link"
-                                   data-toggle="tooltip"
+                                   data-toggle="modal"
+                                   data-target="#removeEmployee"
+                                   data-admin="{{ $admin }}"
                                    data-placement="top"
                                    title="{{__('Remove')}}"
                                    >
@@ -66,6 +70,51 @@
             </table>
         </div>
     </div>
-
     @include('admin.admins.create')
+    @include('admin.admins.enable')
+    @include('admin.admins.delete')
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#enableEmployee').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget) // Button that triggered the modal
+            let admin = button.data('admin')
+            console.log(admin)
+            let modal = $(this)
+            let value
+            if (admin.is_active) {
+                value = 0
+                modal.find('.modal-title').text('Inhabilitar usuario ' + admin.email)
+                modal.find('.modal-body p').text('Habilitado')
+                modal.find('.modal-body button').text('Inhabilitar')
+                $('#alertDisable').show()
+            } else {
+                $('#alertDisable').hide()
+                value = 1
+                modal.find('.modal-title').text('Habilitar usuario ' + admin.email)
+                modal.find('.modal-body p').text('Inhabilitado')
+                modal.find('.modal-body button').text('Habilitar')
+            }
+            let url = `${document.documentURI}/${admin.id}`
+            console.log(url)
+            $('#inputEnable').val(value)
+            $('formEnable').attr('action', url)
+        })
+        $('#removeEmployee').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget) // Button that triggered the modal
+            let admin = button.data('admin')
+            console.log(admin)
+            let modal = $(this)
+            let value
+            value = 0
+            modal.find('.modal-title').text('Eliminar usuario ' + admin.email)
+            modal.find('.modal-body p').text(admin.name)
+            let url = `${document.documentURI}/${admin.id}`
+            console.log(url)
+            $('#inputRemove').val(value)
+            $('formRemove').attr('action', url)
+        })
+    });
+
+</script>
