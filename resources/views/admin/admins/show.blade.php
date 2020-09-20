@@ -8,7 +8,7 @@
                 <form action="{{route('admins.update', $admin->id)}}" method="post">
                     @csrf
                     @method('PUT')
-                    <table class="table">
+                    <table class="table table-responsive-sm">
                         <thead>
                         <tr>
                             <th class="align-middle">{{__('Name')}}:</th>
@@ -53,7 +53,7 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     @if($admin->hasRole('Administrator'))
                         <div class="jumbotron">
-                            <h5 class="display-4">{{__('Administrator')}}</h5>
+                            <h1 >{{__('Administrator')}}</h1>
                             <p class="lead">{{__('The user have all permissions')}}</p>
                         </div>
                     @else
@@ -63,9 +63,16 @@
                             <ul class="list-group list-group-scroll">
                                 @foreach ($permissions as $id => $name)
                                     <li class="list-group-item-action text-right">
+                                        @foreach($admin->roles as $role)
+                                            @if($role->hasPermissionTo($name)) {{__('Permission from role')}}:  @endif
+                                        @endforeach
                                         <label for="perm{{$id}}">{{$name}}</label>
                                         <input class="nv-check-box" type="checkbox" id="perm{{$id}}" name="permissions[]" value="{{$id}}"
-                                               @if($admin->hasPermissionTo($name)) checked @endif>
+                                               @if($admin->hasPermissionTo($name)) checked @endif
+                                                @foreach($admin->roles as $role)
+                                                    @if($role->hasPermissionTo($name)) disabled @endif
+                                                @endforeach
+                                               >
                                     </li>
                                 @endforeach
                             </ul>

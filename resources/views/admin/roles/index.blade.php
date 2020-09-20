@@ -25,11 +25,17 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <h3>{{__('Permissions')}}</h3>
                 <div class="tab-content" id="v-pills-tabContent">
                     @foreach($roles as $key => $role)
                         <div class="tab-pane fade show @if ($key === 0) 'active' @endif" id="{{$role->name}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            @if($role->name === 'Administrator')
+                                <div class="jumbotron">
+                                    <h1>{{__('Administrator')}}</h1>
+                                    <p class="lead">{{__('The user have all permissions')}}</p>
+                                </div>
+                            @else
                             <form action="{{route('roles.update', $role->id)}}" method="post">
                                 @csrf
                                 @method('PUT')
@@ -37,13 +43,14 @@
                                     @foreach ($permissions as $id => $name)
                                         <li class="list-group-item-action text-right">
                                             <label for="perm{{$id}}">{{$name}}</label>
-                                            <input class="nv-check-box" type="checkbox" id="perm{{$id}}" name="permissions[]" value="{{$id}}"
+                                            <input class="custom-checkbox ml-4 mr-2" type="checkbox" id="perm{{$id}}" name="permissions[]" value="{{$id}}"
                                                    @if($role->hasDirectPermission($name, 'admin')) checked @endif>
                                         </li>
                                     @endforeach
                                 </ul>
                                 <button type="submit" class="btn btn-block btn-success">{{__('Update permissions')}}</button>
                             </form>
+                            @endif
                         </div>
                     @endforeach
                 </div>
