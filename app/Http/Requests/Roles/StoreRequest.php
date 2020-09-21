@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Roles;
 
-use App\Constants\Admins;
-use App\Constants\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Role;
 
 class StoreRequest extends FormRequest
 {
@@ -15,7 +15,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user(Admins::GUARDED)->hasPermissionTo(Permissions::CREATE_ROLES);
+        return Gate::allows('create', Role::class);
     }
 
     /**
@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => ['required', 'string', 'max:15', 'unique:roles'],
+            'name' => ['required', 'string', 'max:15', 'unique:roles'],
         ];
     }
 }

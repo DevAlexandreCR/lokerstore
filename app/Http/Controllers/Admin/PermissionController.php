@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Permissions\StoreRequest;
 use App\Http\Requests\Permissions\UpdateRequest;
 use App\Interfaces\PermissionInterface;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
@@ -51,9 +52,12 @@ class PermissionController extends Controller
      *
      * @param Permission $permission
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy(Permission $permission): RedirectResponse
     {
+        $this->authorize('delete', $permission);
+
         $this->permission->destroy($permission);
 
         return redirect()->route('roles.index')->with('success', __('Permission has been removed successfully'));

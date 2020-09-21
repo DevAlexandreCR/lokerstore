@@ -4,7 +4,6 @@ namespace Tests\Feature\Policies;
 
 use App\Constants\Admins;
 use App\Constants\Permissions;
-use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -72,24 +71,28 @@ class RolePolicyTest extends TestCase
 
     public function testAllRoleRoutesWithPermissions(): void
     {
-        $this->admin->syncPermissions([
+        $id = Role::all()->random()->id;
+        $role = factory(Role::class)->create();
+
+        $role->syncPermissions([
             Permissions::VIEW_ROLES,
             Permissions::DELETE_ROLES,
             Permissions::EDIT_ROLES,
             Permissions::CREATE_ROLES,
         ]);
-        $role = factory(Role::class)->create();
+
+        $this->admin->assignRole($role->name);
 
         $this->actingAs($this->admin, Admins::GUARDED)
             ->get(route('roles.index'))->assertStatus(200);
 
         $this->actingAs($this->admin, Admins::GUARDED)
-            ->put(route('roles.update', $role->id))->assertStatus(302);
+            ->put(route('roles.update', $id))->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)
-            ->delete(route('roles.destroy', $role->id))->assertStatus(302);
+            ->delete(route('roles.destroy', $id))->assertStatus(302);
 
-        $this->actingAs($this->admin, Admins::GUARDED)->post(route('roles.store', $role->id), [
+        $this->actingAs($this->admin, Admins::GUARDED)->post(route('roles.store', $id), [
             'name' => 'test role'
         ])->assertStatus(302);
     }

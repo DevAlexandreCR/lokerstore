@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Permissions;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
 
 class StoreRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('create', Permission::class);
     }
 
     /**
@@ -24,7 +26,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => ['required', 'string', 'max:15', 'unique:permissions'],
+            'name' => ['required', 'string', 'max:15', 'unique:permissions'],
         ];
     }
 }

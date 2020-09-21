@@ -29,6 +29,7 @@ class RoleControllerTest extends TestCase
         ]);
 
         $this->admin = factory(Admin::class)->create();
+        $this->admin->assignRole(Roles::ADMIN);
     }
 
     /**
@@ -49,8 +50,7 @@ class RoleControllerTest extends TestCase
     public function testStore(): void
     {
         $response = $this->actingAs($this->admin, 'admin')->post(route('roles.store'), [
-            'name' => 'new Role',
-            'guard_name'   => 'admin'
+            'name' => 'new Role'
         ]);
 
         $response

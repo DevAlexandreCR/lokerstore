@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Roles;
 
-use App\Constants\Admins;
-use App\Constants\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Role;
 
 class UpdateRequest extends FormRequest
 {
@@ -15,7 +15,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user(Admins::GUARDED)->hasPermissionTo(Permissions::EDIT_ROLES);
+        return Gate::allows('update', $this->role);
     }
 
     /**
