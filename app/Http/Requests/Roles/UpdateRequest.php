@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Roles;
 
+use App\Constants\Admins;
+use App\Constants\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -13,7 +15,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user(Admins::GUARDED)->hasPermissionTo(Permissions::EDIT_ROLES);
     }
 
     /**

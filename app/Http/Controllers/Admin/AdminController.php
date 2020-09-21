@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\UpdateRequest;
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -30,6 +29,12 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Show current admin
+     *
+     * @param Admin $admin
+     * @return View
+     */
     public function show(Admin $admin): View
     {
         $permissions = Permission::pluck('name', 'id');
@@ -38,7 +43,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param StoreRequest $request
      * @return RedirectResponse
@@ -65,7 +69,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
      * @param Admin $admin
      * @return RedirectResponse

@@ -48,6 +48,13 @@ class Permissions
     public const CREATE_CART = 'create cart';
     public const DELETE_CART = 'delete cart';
 
+    //cart
+    public const VIEW_ROLES = 'view roles';
+    public const EDIT_ROLES = 'edit roles';
+    public const CREATE_ROLES = 'create roles';
+    public const DELETE_ROLES = 'delete roles';
+
+
     public static function getAdminPermissions(): array
     {
         return array(
@@ -77,7 +84,11 @@ class Permissions
             self::DELETE_PAYMENTS,
             self::VIEW_CART,
             self::EDIT_CART,
-            self::DELETE_CART
+            self::DELETE_CART,
+            self::VIEW_ROLES,
+            self::EDIT_ROLES,
+            self::CREATE_ROLES,
+            self::DELETE_ROLES,
         );
     }
 
