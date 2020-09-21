@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class UpdateRequest extends FormRequest
+class UpdatePermissionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +15,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('update', $this->admin);
+        return Gate::allows('update', Auth::user());
     }
 
     /**
@@ -25,11 +26,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => ['string', 'max:50'],
-            'email'     => ['string', 'max:50', 'unique:admins'. $this ->id . ',id'],
-            'password'  => ['string'],
-            'status'    => ['boolean'],
-            'roles'     => ['array'],
+            'permissions'      => ['required', 'array']
         ];
     }
 }

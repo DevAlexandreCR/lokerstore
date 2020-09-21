@@ -61,7 +61,7 @@ class PermissionsPolicyTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function testAllRoleRoutesWithPermissions(): void
+    public function testAllPermissionsRoutesWithPermissions(): void
     {
         $id = Permission::all()->random()->id;
         $role = factory(Role::class)->create();

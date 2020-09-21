@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UpdatePermissionsRequest;
 use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class AdminPermissionsController extends Controller
         $this->admin = $admin;
     }
 
-    public function update(Request $request, Admin $admin): RedirectResponse
+    public function update(UpdatePermissionsRequest $request, Admin $admin): RedirectResponse
     {
         $admin->syncPermissions($request->permissions);
         return redirect()->route('admins.show', $admin->id)

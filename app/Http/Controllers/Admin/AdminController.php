@@ -19,6 +19,7 @@ class AdminController extends Controller
     public function __construct(AdminInterface $admins)
     {
         $this->admins = $admins;
+        $this->authorizeResource(Admin::class, 'admin');
     }
 
     public function index(): View
@@ -39,6 +40,7 @@ class AdminController extends Controller
     {
         $permissions = Permission::pluck('name', 'id');
         $roles = Role::all(['name', 'id']);
+
         return view('admin.admins.show', compact(['admin', 'permissions', 'roles']));
     }
 
