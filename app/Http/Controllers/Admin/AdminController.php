@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreRequest;
+use App\Http\Requests\Admin\UpdateRequest;
+use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,17 +15,17 @@ use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
-    public $admin;
+    public $admins;
 
-    public function __construct(Admin $admin)
+    public function __construct(AdminInterface $admins)
     {
-        $this->admin = $admin;
+        $this->admins = $admins;
     }
 
     public function index(): View
     {
         return view('admin.admins.index', [
-            'admins' => $this->admin::all(),
+            'admins' => $this->admins->index(),
             'roles' => Role::pluck('name', 'id')
         ]);
     }
@@ -37,12 +40,12 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param StoreRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $this->admin->create($request->all());
+        $this->admins->store($request);
 
         return redirect()->route('admins.index')->with('success', __('Admin has been created success'));
     }
@@ -50,15 +53,13 @@ class AdminController extends Controller
     /**
      * Update current admin
      *
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param Admin $admin
      * @return RedirectResponse
      */
-    public function update(Request $request, Admin $admin): RedirectResponse
+    public function update(UpdateRequest $request, Admin $admin): RedirectResponse
     {
-        $admin->update($request->all());
-
-        $admin->syncRoles($request->roles);
+        $this->admins->update($request, $admin);
 
         return redirect()->route('admins.show', $admin->id)->with('success', __('User has been updated success'));
     }
@@ -71,7 +72,7 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin): RedirectResponse
     {
-        $admin->delete();
+        $this->admins->destroy($admin);
 
         return redirect()->route('admins.index')->with('success', __('Admin has been remove success'));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Decorators\AdminDecorator;
 use App\Decorators\Api\CacheApiProducts;
 use App\Decorators\CacheCategories;
 use App\Decorators\CacheColors;
@@ -11,6 +12,7 @@ use App\Decorators\CacheRoles;
 use App\Decorators\CacheSizes;
 use App\Decorators\CacheTags;
 use App\Decorators\GenerateOrder;
+use App\Interfaces\AdminInterface;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ColorsInterface;
@@ -50,5 +52,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrderInterface::class, GenerateOrder::class);
         $this->app->bind(PermissionInterface::class, CachePermission::class);
         $this->app->bind(RoleInterface::class, CacheRoles::class);
+        $this->app->bind(AdminInterface::class, AdminDecorator::class);
     }
 }
