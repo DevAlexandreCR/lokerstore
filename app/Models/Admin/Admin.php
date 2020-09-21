@@ -13,8 +13,6 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
-    use SoftDeletes;
-
     use HasRoles;
 
     protected $guard_name = Admins::GUARDED;
@@ -24,7 +22,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'is_active'
     ];
 
     /**
@@ -48,13 +46,13 @@ class Admin extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $passwordSend = new ResetPassword($token);
-        $passwordSend->createUrlUsing(function ($notifiable, $token) {
+        $passwordSend::createUrlUsing(function ($notifiable, $token) {
             return url(route('admin.password.reset', [
                 'token' => $token,
                 'email' => $notifiable->getEmailForPasswordReset(),

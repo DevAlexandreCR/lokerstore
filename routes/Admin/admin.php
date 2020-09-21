@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 | Admin Routes
 |--------------------------------------------------------------------------
 |
-|Toda la configuracion de la ruta se encuantra en RouteServiceProvider 
+|Toda la configuracion de la ruta se encuantra en RouteServiceProvider
 |
 */
 // Login routes
@@ -35,6 +35,17 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('tags', 'TagController')->except(['show', 'create', 'edit']);
     Route::resource('stocks', 'StockController')->except(['show', 'edit', 'create']);
     Route::get('stocks/create/{product}', 'StockController@create')->name('stocks.create');
+    Route::resource('admins', 'AdminController')
+        ->names('admins')
+        ->except('edit', 'create');
+    Route::resource('roles', 'RoleController')
+        ->names('roles')
+        ->only('store', 'index', 'update', 'destroy');
+    Route::resource('permissions', 'PermissionController')
+        ->names('permissions')
+        ->only('store', 'update', 'destroy');
+    Route::put('update-permissions/{admin}', 'AdminPermissionsController@update')
+        ->name('update-permissions');
 });
 
 

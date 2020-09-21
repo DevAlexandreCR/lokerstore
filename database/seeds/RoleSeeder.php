@@ -23,16 +23,9 @@ class RoleSeeder extends Seeder
             'name' => Roles::EMPLOYEE,
             'guard_name' => Admins::GUARDED
             ]);
-        $roleClient = Role::create([
-            'name' => Roles::CLIENT
-            ]);
 
         $roleEmployee->syncPermissions([
             Permissions::getEmployePermissions()
-        ]);
-
-        $roleClient->syncPermissions([
-            Permissions::getClientPermissions()
         ]);
     }
 }

@@ -36,7 +36,7 @@ class ProductControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndex(): void
     {
         $admin = factory(Admin::class)->create();
 
@@ -48,7 +48,7 @@ class ProductControllerTest extends TestCase
             ->assertViewHas('products');
     }
 
-    public function testIndexWithQuery()
+    public function testIndexWithQuery(): void
     {
         $admin = factory(Admin::class)->create();
         $tag = factory(Tag::class)->create();
@@ -80,7 +80,7 @@ class ProductControllerTest extends TestCase
             ->assertViewHas('products');
     }
 
-    public function testEditProduct()
+    public function testEditProduct(): void
     {
         $admin = factory(Admin::class)->create();
 
@@ -108,7 +108,7 @@ class ProductControllerTest extends TestCase
      *
      * @return void
      */
-    public function testStore()
+    public function testStore(): void
     {
         $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
@@ -151,7 +151,7 @@ class ProductControllerTest extends TestCase
      *
      * @return void
      */
-    public function testUpdateProduct()
+    public function testUpdateProduct(): void
     {
         $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
@@ -193,7 +193,7 @@ class ProductControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDeleteProduct()
+    public function testDeleteProduct(): void
     {
         $admin = factory(Admin::class)->create();
 
