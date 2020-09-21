@@ -20,6 +20,6 @@ class AdminPermissionsController extends Controller
     {
         $admin->syncPermissions($request->permissions);
         return redirect()->route('admins.show', $admin->id)
-            ->with('success', __('Permissions has been added success'));
+            ->with('success', __('Permissions has been updated success'));
     }
 }

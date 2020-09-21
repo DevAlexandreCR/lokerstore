@@ -60,7 +60,7 @@ class AdminController extends Controller
 
         $admin->syncRoles($request->roles);
 
-        return redirect()->route('admins.show', $admin->id)->with('success', __('Admin has been updated success'));
+        return redirect()->route('admins.show', $admin->id)->with('success', __('User has been updated success'));
     }
 
     /**

@@ -192,5 +192,9 @@
     "Email address" : "Correo electrónico",
     "Administrator" : "Administrador",
     "The user have all permissions": "El usuario tiene todos los permisos",
-    "Permission from role": "Permiso asignado desde el rol"
+    "Permission from role": "Permiso asignado desde el rol",
+    "Permissions has been updated success": "Los permisos se han actualizado exitosamente",
+    "Role has been updated successfully": "El rol se ha actualizado exitosamente",
+    "Role has been removed successfully": "El rol se ha eliminado exitosamente",
+    "Role has been created successfully": "El rol se ha creado exitosamente"
 }

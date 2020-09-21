@@ -1,12 +1,18 @@
 @extends('admin.home')
 
 @section('main')
-    <div class="row py-4">
-        @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                <p>{{session('success')}}</p>
+    @if (session('success'))
+        <div class="container py-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>{{__('Success!')}}</strong> {{ session('success') }}
             </div>
-        @endif
+        </div>
+    @endif
+    <div class="row py-4">
         <div class="container">
             <button type="button" data-toggle="modal" data-target="#addRole"class="btn btn-dark">{{__('Add role')}}</button>
             <button type="button" data-toggle="modal" data-target="#addPermission"class="btn btn-dark">{{__('Add permission')}}</button>
@@ -18,10 +24,22 @@
                 <h3>{{__('Roles')}}</h3>
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     @foreach($roles as $key => $role)
-                        <a class="nav-link @if ($key === 0) 'active' @endif" id="v-ills-home-tab" data-toggle="pill"
-                           href="#{{$role->name}}" role="tab" aria-controls="{{$role->name}}" aria-selected="true">
-                            {{__($role->name)}}
-                        </a>
+                        <div class="row">
+                            <div class="col-10">
+                                <a class="nav-link @if ($key === 0) 'active' @endif" id="v-ills-home-tab" data-toggle="pill"
+                                   href="#{{$role->name}}" role="tab" aria-controls="{{$role->name}}" aria-selected="true">
+                                    {{__($role->name)}}
+                                </a>
+                            </div>
+                            <div class="col-2">
+                                <form action="{{route('roles.destroy', $role->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                    @if($role->name === 'Administrator') disabled="disabled"@endif><ion-icon name="trash"></ion-icon></button>
+                                </form>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
