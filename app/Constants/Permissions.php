@@ -60,6 +60,19 @@ class Permissions
     public const CREATE_PERMISSIONS = 'create permissions';
     public const DELETE_PERMISSIONS = 'delete permissions';
 
+    //categories
+    public const VIEW_CATEGORIES = 'view categories';
+    public const EDIT_CATEGORIES = 'edit categories';
+    public const CREATE_CATEGORIES = 'create categories';
+    public const DELETE_CATEGORIES = 'delete categories';
+
+    //tags
+    public const VIEW_TAGS = 'view tags';
+    public const EDIT_TAGS = 'edit tags';
+    public const CREATE_TAGS = 'create tags';
+    public const DELETE_TAGS = 'delete  tags';
+
+
 
     public static function getAllPermissions(): array
     {
@@ -99,6 +112,14 @@ class Permissions
             self::EDIT_PERMISSIONS,
             self::CREATE_PERMISSIONS,
             self::DELETE_PERMISSIONS,
+            self::VIEW_CATEGORIES,
+            self::EDIT_CATEGORIES,
+            self::CREATE_CATEGORIES,
+            self::DELETE_CATEGORIES,
+            self::VIEW_TAGS,
+            self::EDIT_TAGS,
+            self::CREATE_TAGS,
+            self::DELETE_TAGS
         );
     }
 

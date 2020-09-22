@@ -3,7 +3,9 @@
 namespace App\Http\Requests\Products;
 
 use App\Helpers\Products\ProductRequestHelper;
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class IndexRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class IndexRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,7 +24,7 @@ class IndexRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'category'      => ['nullable', 'string'],

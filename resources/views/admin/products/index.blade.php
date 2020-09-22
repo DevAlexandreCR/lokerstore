@@ -127,7 +127,7 @@
                             <td>
                                 <div class="btn-group">
                                     <a class="btn btn-link btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="badge badge-success">{{$product->tags[0]->name}}</span>
+                                        <span class="badge badge-success">{{optional($product->tags->first())->name}}</span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <ul class="list-group">
@@ -187,7 +187,7 @@
                     @endforeach
                 </tbody>
             </table>
-            @if ($products->count() == 0)
+            @if ($products->count() === 0)
             <div class="container-fluid" role="alert">
             <strong>{{ __('No results found') }}</strong> <a class="btn btn-sm btn-link" href="{{route('products.index')}}">{{__('See all')}}</a>
             </div>

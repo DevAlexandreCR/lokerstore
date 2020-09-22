@@ -23,7 +23,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.update');
 
 // Routes admin management
-Route::middleware('auth:admin')->group(function () {
+Route::middleware(['auth:admin', 'enabled'])->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
     Route::resource('users', 'UserController')->except(['create', 'store']);
 

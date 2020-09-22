@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Stocks;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateRequest extends FormRequest
 {
@@ -11,9 +12,9 @@ class UpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return true;
+        return Gate::allows('update', $this->stock);
     }
 
     /**
@@ -21,7 +22,7 @@ class UpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'quantity' => ['required', 'integer', 'min:0'],

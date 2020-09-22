@@ -9,6 +9,7 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\TypeSize;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,6 +19,7 @@ class StockController extends Controller
     protected $stock;
     public function __construct(Stock $stock)
     {
+        $this->authorizeResource(Stock::class, 'stock');
         $this->stock = $stock;
     }
 
@@ -57,7 +59,7 @@ class StockController extends Controller
      * @param Stock $stock
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Stock $stock)
+    public function update(UpdateRequest $request, Stock $stock): RedirectResponse
     {
         $stock->update($request->all());
 
@@ -68,9 +70,9 @@ class StockController extends Controller
      * Remove the specified resource from storage.
      * @param Stock $stock
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
-    public function destroy(Stock $stock)
+    public function destroy(Stock $stock): RedirectResponse
     {
         $stock->delete();
 

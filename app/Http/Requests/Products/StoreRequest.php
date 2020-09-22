@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Products;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreRequest extends FormRequest
 {
@@ -11,9 +13,9 @@ class StoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return true;
+        return Gate::allows('create', Product::class);
     }
 
     /**
@@ -21,7 +23,7 @@ class StoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name'          => ['required', 'string', 'max:100', 'min:3'],

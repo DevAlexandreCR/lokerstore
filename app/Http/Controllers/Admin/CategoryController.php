@@ -17,6 +17,7 @@ class CategoryController extends Controller
 
     public function __construct(CategoryInterface $categories)
     {
+        $this->authorizeResource(Category::class, 'category');
         $this->categories = $categories;
     }
     /**

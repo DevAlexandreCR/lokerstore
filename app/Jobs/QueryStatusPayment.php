@@ -35,7 +35,7 @@ class QueryStatusPayment implements ShouldQueue
      * @param Pay $pay
      * @return void
      */
-    public function handle(Pay $pay)
+    public function handle(Pay $pay): void
     {
         logger()->channel(Logs::CHANNEL_PAYMENTS)->info('querying payment: ' . $this->order->payment->id .
             ' with status: ' . $this->order->payment->status);

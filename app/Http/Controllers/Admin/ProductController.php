@@ -16,6 +16,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Models\Color;
 use App\Models\Size;
@@ -28,6 +29,7 @@ class ProductController extends Controller
 
     public function __construct(ProductsInterface $products)
     {
+        $this->authorizeResource(Product::class, 'product');
         $this->products = $products;
     }
 
@@ -103,9 +105,12 @@ class ProductController extends Controller
      * @param Request $request
      * @param Product $product
      * @return View
+     * @throws AuthorizationException
      */
     public function active(Request $request, Product $product): View
     {
+        $this->authorize('view', $product);
+
         return view('admin.products.active', [
             'product'   => $product,
             'input_name'=> $request->get('input_name')

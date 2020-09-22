@@ -15,6 +15,7 @@ class TagController extends Controller
 
     public function __construct(Tag $tag)
     {
+        $this->authorizeResource(Tag::class, 'tag');
         $this->tag = $tag;
     }
 
