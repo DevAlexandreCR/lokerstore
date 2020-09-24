@@ -3,23 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\ActiveRequest;
-use App\Http\Requests\Products\IndexRequest;
-use App\Http\Requests\Products\StoreRequest;
-use App\Http\Requests\Products\UpdateRequest;
+use App\Http\Requests\Admin\Products\ActiveRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\StoreRequest;
+use App\Http\Requests\Admin\Products\UpdateRequest;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ColorsInterface;
 use App\Interfaces\ProductsInterface;
 use App\Interfaces\SizesInterface;
 use App\Interfaces\TagsInterface;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use App\Models\Color;
-use App\Models\Size;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -33,7 +30,7 @@ class ProductController extends Controller
         $this->products = $products;
     }
 
-    /**
+    /*
      * Display a listing of Products
      *
      * @param IndexRequest $request

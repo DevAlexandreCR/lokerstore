@@ -12,13 +12,14 @@ class StockSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws Exception
      */
-    public function run()
+    public function run(): void
     {
         $products = Product::all();
 
         foreach ($products as $key => $product) {
-            factory(Stock::class, rand(1,5))->create([
+            factory(Stock::class, random_int(1,5))->create([
                 'product_id' => $product->id
             ]);
         }

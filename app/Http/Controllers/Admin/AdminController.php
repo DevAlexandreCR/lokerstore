@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreRequest;
-use App\Http\Requests\Admin\UpdateRequest;
+use App\Http\Requests\Admin\Admins\StoreRequest;
+use App\Http\Requests\Admin\Admins\UpdateRequest;
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
@@ -53,7 +53,7 @@ class AdminController extends Controller
     {
         $this->admins->store($request);
 
-        return redirect()->route('admins.index')->with('success', __('Admin has been created success'));
+        return redirect()->route('admins.index')->with('success', __('Admins has been created success'));
     }
 
     /**
@@ -79,6 +79,6 @@ class AdminController extends Controller
     {
         $this->admins->destroy($admin);
 
-        return redirect()->route('admins.index')->with('success', __('Admin has been remove success'));
+        return redirect()->route('admins.index')->with('success', __('Admins has been remove success'));
     }
 }

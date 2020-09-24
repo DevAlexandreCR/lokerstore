@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Http\Resources\ProductResource;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Models\Product;

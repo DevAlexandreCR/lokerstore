@@ -2,7 +2,7 @@
 
 namespace App\Decorators\Api;
 
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Repositories\Api\ApiProducts;
 use Illuminate\Database\Eloquent\Model;

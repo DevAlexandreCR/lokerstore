@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UpdatePermissionsRequest;
+use App\Http\Requests\Admin\Admins\UpdatePermissionsRequest;
 use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class AdminPermissionsController extends Controller
 {

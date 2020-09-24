@@ -57,7 +57,7 @@ class ProductsPolicyTest extends TestCase
                 'price'         =>  2000,
                 'id_category'   => Category::all()->random()->id,
                 'tags'          => [Tag::all()->random()->id],
-                'photos'        => [$this->faker->file(storage_path('app/public/photos'))]
+                'Photos'        => [$this->faker->file(storage_path('app/public/photos'))]
             ]);
 
         $response->assertStatus(403);
@@ -117,7 +117,7 @@ class ProductsPolicyTest extends TestCase
                 'price'         =>  2000,
                 'id_category'   => Category::all()->random()->id,
                 'tags'          => [Tag::all()->random()->id],
-                'photos'        => [$this->faker->file(storage_path('app/public/photos'))]
+                'Photos'        => [$this->faker->file(storage_path('app/public/photos'))]
             ])->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)
@@ -136,7 +136,7 @@ class ProductsPolicyTest extends TestCase
             'price'         =>  2000,
             'id_category'   => Category::all()->random()->id,
             'tags'          => [Tag::all()->random()->id],
-            'photos'        => [$this->faker->file(storage_path('app/public/photos'))]
+            'Photos'        => [$this->faker->file(storage_path('app/public/photos'))]
         ])->assertStatus(302);
     }
 }

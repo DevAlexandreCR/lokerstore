@@ -7,7 +7,7 @@ use App\Models\Stock;
 
 class StockObserver
 {
-    public function creating(Stock $stock)
+    public function creating(Stock $stock): bool
     {
         $stockExist = Stock::where('product_id', $stock->product_id)
                 ->where('color_id', $stock->color_id)

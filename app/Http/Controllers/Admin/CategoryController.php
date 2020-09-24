@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Admin\Category\StoreRequest;
 use App\Interfaces\CategoryInterface;
 use App\Models\Category;
 use Exception;

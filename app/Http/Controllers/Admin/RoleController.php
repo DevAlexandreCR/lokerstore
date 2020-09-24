@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Roles\StoreRequest;
-use App\Http\Requests\Roles\UpdateRequest;
+use App\Http\Requests\Admin\Roles\StoreRequest;
+use App\Http\Requests\Admin\Roles\UpdateRequest;
 use App\Interfaces\PermissionInterface;
 use App\Interfaces\RoleInterface;
 use Exception;

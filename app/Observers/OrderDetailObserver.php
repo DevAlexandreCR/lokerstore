@@ -3,9 +3,8 @@
 namespace App\Observers;
 
 use App\Models\OrderDetail;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderDetailObserver implements ShouldQueue
+class OrderDetailObserver
 {
     /**
      * Handle the order detail "created" event.
@@ -17,6 +16,24 @@ class OrderDetailObserver implements ShouldQueue
     {
         $stock = $orderDetail->stock;
         $stock->quantity -= $orderDetail->quantity;
+        $stock->save();
+    }
+
+    /**
+     * Handle the order detail "created" event.
+     *
+     * @param  OrderDetail  $orderDetail
+     * @return void
+     */
+    public function updated(OrderDetail $orderDetail): void
+    {
+        $changes = $orderDetail->getChanges();
+        $quantity = $changes['quantity'];
+        $quantityOriginal = $orderDetail->getOriginal('quantity');
+
+        $quantityToStock = $quantityOriginal - $quantity;
+        $stock = $orderDetail->stock;
+        $stock->quantity += $quantityToStock;
         $stock->save();
     }
 }

@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Permissions\StoreRequest;
-use App\Http\Requests\Permissions\UpdateRequest;
+use App\Http\Requests\Admin\Permissions\StoreRequest;
+use App\Http\Requests\Admin\Permissions\UpdateRequest;
 use App\Interfaces\PermissionInterface;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller

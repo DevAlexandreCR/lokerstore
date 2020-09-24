@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Stocks\StoreRequest;
-use App\Http\Requests\Stocks\UpdateRequest;
+use App\Http\Requests\Admin\Stocks\StoreRequest;
+use App\Http\Requests\Admin\Stocks\UpdateRequest;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\TypeSize;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class StockController extends Controller

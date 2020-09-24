@@ -15,7 +15,7 @@
             <div v-bind:class="[ 'col-md-6', (category.id%2 === 0) ? '' : 'order-12']"
                  v-on:click="goToShowcase(category.name)">
                 <img v-if="selectedRandomProducts[4]" class="img-fluid img-category"
-                     :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
+                     :src="'/storage/Photos/' + selectedRandomProducts[4].photos[0].name" alt="">
                 <div class="ofert-title">Hasta 50% Off</div>
             </div>
             <div class="col-md-6" v-if="products.length > 0">

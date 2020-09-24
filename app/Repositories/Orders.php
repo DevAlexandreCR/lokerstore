@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Constants\Orders as OrderConstants;
 use App\Constants\PlaceToPay;
-use App\Http\Requests\Orders\UpdateRequest;
+use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use App\Constants\Payments;
