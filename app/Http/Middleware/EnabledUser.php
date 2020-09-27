@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Constants\Admins;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,16 +16,14 @@ class EnabledUser
      * @param Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $guard)
     {
-
         /**
          * si el usuario esta inhabilitado lo redirecciona a la vista correspondiente
          */
-        if ($request->user() && ! $request->user()->is_active) {
+        if ($request->user($guard) && ! $request->user($guard)->is_active) {
             return  redirect('/disabled-user');
         }
-
         return $next($request);
     }
 }

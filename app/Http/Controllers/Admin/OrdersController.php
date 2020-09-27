@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\Orders\indexRequest;
 use App\Http\Requests\Admin\Orders\UpdateRequest;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrdersController extends Controller
@@ -17,6 +16,7 @@ class OrdersController extends Controller
 
     public function __construct(OrderDecorator $orders)
     {
+        $this->authorizeResource(Order::class, 'order');
         $this->orders = $orders;
     }
 

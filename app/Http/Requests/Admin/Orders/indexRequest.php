@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Orders;
 
+use App\Models\Order;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class indexRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class indexRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('viewAny', Order::class);
     }
 
     /**

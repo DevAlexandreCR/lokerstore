@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\Orders;
 
 use App\Constants\Orders;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
@@ -15,7 +16,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('update', $this->order);
     }
 
     /**
@@ -27,7 +28,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'status' => ['string', Rule::in(Orders::getAllStatus())],
-            'amount' => ['number', 'min:1000']
+            'amount' => ['numeric', 'min:1000']
         ];
     }
 }

@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Models\Admin\Admin;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\Tag;
 use App\Models\User;
 use App\Policies\Admin\AdminsPolicy;
 use App\Policies\Admin\CategoriesPolicy;
+use App\Policies\Admin\OrdersPolicy;
 use App\Policies\Admin\PermissionsPolicy;
 use App\Policies\Admin\ProductsPolicy;
 use App\Policies\Admin\RolePolicy;
@@ -36,7 +38,8 @@ class AuthServiceProvider extends ServiceProvider
         Category::class     => CategoriesPolicy::class,
         Tag::class          => TagsPolicy::class,
         Stock::class        => StocksPolicy::class,
-        Product::class      => ProductsPolicy::class
+        Product::class      => ProductsPolicy::class,
+        Order::class        => OrdersPolicy::class
     ];
 
     /**
