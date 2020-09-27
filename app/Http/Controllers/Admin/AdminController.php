@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreRequest;
-use App\Http\Requests\Admin\UpdateRequest;
+use App\Http\Requests\Admin\Admins\StoreRequest;
+use App\Http\Requests\Admin\Admins\UpdateRequest;
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -20,6 +19,7 @@ class AdminController extends Controller
     public function __construct(AdminInterface $admins)
     {
         $this->admins = $admins;
+        $this->authorizeResource(Admin::class, 'admin');
     }
 
     public function index(): View
@@ -30,15 +30,21 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Show current admin
+     *
+     * @param Admin $admin
+     * @return View
+     */
     public function show(Admin $admin): View
     {
         $permissions = Permission::pluck('name', 'id');
         $roles = Role::all(['name', 'id']);
+
         return view('admin.admins.show', compact(['admin', 'permissions', 'roles']));
     }
 
     /**
-     * Store a newly created resource in storage.
      *
      * @param StoreRequest $request
      * @return RedirectResponse
@@ -47,7 +53,7 @@ class AdminController extends Controller
     {
         $this->admins->store($request);
 
-        return redirect()->route('admins.index')->with('success', __('Admin has been created success'));
+        return redirect()->route('admins.index')->with('success', __('Admins has been created success'));
     }
 
     /**
@@ -65,7 +71,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
      * @param Admin $admin
      * @return RedirectResponse
@@ -74,6 +79,6 @@ class AdminController extends Controller
     {
         $this->admins->destroy($admin);
 
-        return redirect()->route('admins.index')->with('success', __('Admin has been remove success'));
+        return redirect()->route('admins.index')->with('success', __('Admins has been remove success'));
     }
 }

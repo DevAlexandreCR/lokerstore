@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Constants\Admins;
+use App\Constants\Roles;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -60,5 +61,10 @@ class Admin extends Authenticatable
         });
 
         $this->notify($passwordSend);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(Roles::ADMIN);
     }
 }

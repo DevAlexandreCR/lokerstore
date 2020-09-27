@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'status'];
+    protected $fillable = ['user_id', 'status', 'amount'];
 
     public function user(): BelongsTo
     {
@@ -46,5 +46,21 @@ class Order extends Model
             case Orders::STATUS_FAILED:
                 return __('Failed');
         }
+    }
+
+    public function getAmount() : string
+    {
+        return round($this->amount, 0,  PHP_ROUND_HALF_UP) . 'COP';
+    }
+
+    public function getAllStatus(): array
+    {
+        return [
+            Orders::STATUS_CANCELED => __('Canceled'),
+            Orders::STATUS_PENDING_PAY => __('Pending payment'),
+            Orders::STATUS_PENDING_SHIPMENT => __('Pending shipment'),
+            Orders::STATUS_SENT => __('Sent'),
+            Orders::STATUS_SUCCESS => __('Completo'),
+        ];
     }
 }

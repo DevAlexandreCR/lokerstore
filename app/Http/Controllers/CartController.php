@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Cart\AddCartRequest;
-use App\Http\Requests\Cart\UpdateRequest;
+use App\Http\Requests\Web\Cart\AddCartRequest;
+use App\Http\Requests\Web\Cart\UpdateRequest;
 use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;

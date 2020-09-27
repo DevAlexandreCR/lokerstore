@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Api;
 
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\RepositoryInterface;
 
 interface ApiProductsInterface extends RepositoryInterface

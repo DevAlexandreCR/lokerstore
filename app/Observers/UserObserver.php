@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Constants\Logs;
-use App\Constants\Roles;
 use App\Models\User;
 
 class UserObserver

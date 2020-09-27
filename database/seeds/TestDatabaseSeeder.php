@@ -9,7 +9,7 @@ class TestDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->call(
             [

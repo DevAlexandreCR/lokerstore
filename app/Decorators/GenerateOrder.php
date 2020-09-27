@@ -3,7 +3,7 @@
 namespace App\Decorators;
 
 use App\Constants\PlaceToPay;
-use App\Http\Requests\Orders\UpdateRequest;
+use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Repositories\OrderDetails;
 use App\Repositories\Orders;

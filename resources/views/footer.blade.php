@@ -1,4 +1,4 @@
-<footer id="sticky-footer" class="py-4 text-white-50" 
+<footer id="sticky-footer" class="py-4 text-white-50"
     style="background-position: center center;
     background-repeat: no-repeat;
     width: 100%;
@@ -11,9 +11,9 @@
             @if (strpos(Request::url(), 'admin'))
             <a href="{{route('home')}}"><small>Tienda</small></a>
             @else
-            <a href="{{route('admin.home')}}"><small>Admin</small></a>
+            <a href="{{route('admin.home')}}"><small>Admins</small></a>
             @endif
-            
+
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\OrderDetail;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::model('order_detail', OrderDetail::class);
 
         parent::boot();
     }
@@ -63,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
         Route::middleware('web')
             ->namespace($this->namespace)
@@ -77,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
@@ -92,12 +93,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapAdminRoutes()
+    protected function mapAdminRoutes(): void
     {
         Route::middleware('auth:admin')
             ->middleware('admin')
             ->prefix('admin')
             ->namespace($this->namespace . '\Admin')
-            ->group(base_path('routes/Admin/admin.php'));
+            ->group(base_path('routes/admin.php'));
     }
 }

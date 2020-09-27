@@ -29,7 +29,7 @@ class DeletePhotoAction
      */
     private function deleteImage(string $name): void
     {
-        Storage::disk('public')->delete('photos/' . $name);
+        Storage::disk('public')->delete('Photos/' . $name);
     }
 
     /**

@@ -81,7 +81,7 @@
                                         <input class="nv-check-box" type="checkbox" id="perm{{$id}}" name="permissions[]" value="{{$id}}"
                                                @if($admin->hasPermissionTo($name)) checked @endif
                                                 @foreach($admin->roles as $role)
-                                                    @if($role->hasPermissionTo($name)) disabled @endif
+                                                    @if($role->hasPermissionTo($name, 'admin')) disabled @endif
                                                 @endforeach
                                                >
                                     </li>

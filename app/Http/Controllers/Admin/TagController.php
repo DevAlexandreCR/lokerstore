@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tags\IndexRequest;
-use App\Http\Requests\Tags\StoreAndUpdateRequest;
+use App\Http\Requests\Admin\Tags\IndexRequest;
+use App\Http\Requests\Admin\Tags\StoreAndUpdateRequest;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -15,6 +15,7 @@ class TagController extends Controller
 
     public function __construct(Tag $tag)
     {
+        $this->authorizeResource(Tag::class, 'tag');
         $this->tag = $tag;
     }
 

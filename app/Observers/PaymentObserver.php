@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Models\Payment;
 use App\Repositories\Orders;
-use App\Constants\Orders as OrderConstants;
 
 class PaymentObserver
 {
@@ -22,15 +21,16 @@ class PaymentObserver
      * @param  Payment  $payment
      * @return void
      */
-    public function updated(Payment $payment)
+    public function updated(Payment $payment): void
     {
         $status = $this->orders->getStatusFromStatusPayment($payment->status);
         $this->orders->setStatus($payment->order_id, $status);
     }
 
-    public function created(Payment $payment)
+    public function created(Payment $payment): void
     {
-        $this->orders->setStatus($payment->order_id, OrderConstants::STATUS_PENDING_PAY);
+        $status = $this->orders->getStatusFromStatusPayment($payment->status);
+        $this->orders->setStatus($payment->order_id, $status);
     }
 
 }

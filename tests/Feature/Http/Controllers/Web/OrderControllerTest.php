@@ -18,6 +18,7 @@ class OrderControllerTest extends TestCase
     use RefreshDatabase;
 
     protected $user;
+    protected $stock;
 
     public function setUp(): void
     {
@@ -34,11 +35,11 @@ class OrderControllerTest extends TestCase
         $this->user->cart = factory(Cart::class)->create([
             'user_id' => $this->user->id
         ]);
-        $stock = factory(Stock::class)->create([
+        $this->stock = factory(Stock::class)->create([
             'quantity' => 5
         ]);
 
-        $this->user->cart->stocks()->attach($stock->id, ['quantity' => 2]);
+        $this->user->cart->stocks()->attach($this->stock->id, ['quantity' => 2]);
     }
 
     /**
@@ -132,6 +133,7 @@ class OrderControllerTest extends TestCase
             'user_id' => $this->user->id
         ]);
         factory(OrderDetail::class)->create([
+            'stock_id' => $this->stock->id,
             'order_id' => $order->id
         ]);
         factory(Payment::class)->create([
@@ -144,6 +146,7 @@ class OrderControllerTest extends TestCase
 
         $this->assertDatabaseHas('stocks',
             [
+                'id'       => $this->stock->id,
                 'quantity' => 5
             ]);
     }

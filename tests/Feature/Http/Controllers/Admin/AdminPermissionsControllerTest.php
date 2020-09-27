@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class AdminPermissionsControllerTest extends TestCase
 {
-
     use RefreshDatabase;
 
     protected $admin;

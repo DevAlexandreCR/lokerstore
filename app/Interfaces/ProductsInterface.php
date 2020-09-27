@@ -2,8 +2,8 @@
 
 namespace App\Interfaces;
 
-use App\Http\Requests\Products\ActiveRequest;
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\ActiveRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Models\Product;
 
 interface ProductsInterface extends RepositoryInterface

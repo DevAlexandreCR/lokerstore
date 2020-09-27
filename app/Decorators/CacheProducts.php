@@ -4,8 +4,8 @@ namespace App\Decorators;
 
 use App\Actions\Photos\DeletePhotoAction;
 use App\Actions\Photos\SavePhotoAction;
-use App\Http\Requests\Products\ActiveRequest;
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\ActiveRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\ProductsInterface;
 use App\Models\Product;
 use App\Repositories\Products;
@@ -20,7 +20,7 @@ class CacheProducts implements ProductsInterface
         $this->products = $products;
     }
 
-    public function query(IndexRequest $request)
+    public function query($request)
     {
         $query = $this->convertQueryToString($request);
 
@@ -36,7 +36,7 @@ class CacheProducts implements ProductsInterface
         Cache::tags('products')->flush();
 
         $savePhotoAction = new SavePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('photos'));
+        $savePhotoAction->execute($product->id, $request->file('Photos'));
 
         return $product;
     }
@@ -49,7 +49,7 @@ class CacheProducts implements ProductsInterface
 
         $savePhotoAction = new SavePhotoAction();
         $deletePhotoAction = new DeletePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('photos'));
+        $savePhotoAction->execute($product->id, $request->file('Photos'));
         $deletePhotoAction->execute($request->get('delete_photos'));
 
         return $product;

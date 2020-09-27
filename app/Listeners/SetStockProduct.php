@@ -30,7 +30,7 @@ class SetStockProduct
     {
         $stock = $event->stock;
 
-        $product = Product::find($stock->product->id);
+        $product = Product::find($stock->product_id);
 
         $stocks = $product->stocks;
         $quantity = 0;

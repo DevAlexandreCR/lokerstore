@@ -2,8 +2,7 @@
 
 namespace App\Repositories\Api;
 
-use App\Http\Requests\Products\ActiveRequest;
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;

@@ -25,22 +25,12 @@ class QueryPayments extends Command
     protected $description = 'Query pendings payments';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @param Order $orderModel
      * @return void
      */
-    public function handle(Order $orderModel)
+    public function handle(Order $orderModel): void
     {
         $pendingsOrders = $orderModel->where('status', Orders::STATUS_PENDING_PAY)->get();
         logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payments pendings: ' . $pendingsOrders->count());

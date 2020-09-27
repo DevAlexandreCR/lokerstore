@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Web\Users\UserRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -17,6 +17,8 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->user = $user;
+
+        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -99,11 +101,11 @@ class UserController extends Controller
                 'users' => $this->user->search($search)->paginate(10),
                 'user_found' => "Mostrando resultados para: $search"
             ]);
-        } else {
-            return view('admin.users.index', [
-                'users' => $this->user->search($search)->paginate(10),
-                'user_not_found' => "No se encontraron resultados para $search"
-            ]);
         }
+
+        return view('admin.users.index', [
+            'users' => $this->user->search($search)->paginate(10),
+            'user_not_found' => "No se encontraron resultados para $search"
+        ]);
     }
 }

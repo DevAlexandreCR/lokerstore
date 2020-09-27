@@ -11,4 +11,17 @@ class Payments
     public const FAILED = 'FAILED';
     public const PENDING_VALIDATION = 'PENDING_VALIDATION';
     public const REFUNDED = 'REFUNDED';
+
+    public static function getAllStatus(): array
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_ACCEPTED,
+            self::STATUS_REJECTED,
+            self::STATUS_CANCELED,
+            self::FAILED,
+            self::PENDING_VALIDATION,
+            self::REFUNDED,
+        ];
+    }
 }

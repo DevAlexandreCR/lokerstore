@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Constants\Orders;
-use App\Http\Requests\Orders\StoreRequest;
-use App\Http\Requests\Orders\UpdateRequest;
+use App\Http\Requests\Web\Orders\StoreRequest;
+use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use App\Models\User;

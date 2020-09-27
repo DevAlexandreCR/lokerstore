@@ -258,7 +258,7 @@
         if (photo) {
             var img = divToClone.getElementsByTagName('img')[0]
             img.classList.add('img-thumbnail')
-            img.src = '/photos/' + photo.name
+            img.src = '/Photos/' + photo.name
             img.id = photo.id
         }
         input.addEventListener('change', function() {
@@ -299,7 +299,7 @@
         var photos = getPhotos()
         var img = div.getElementsByTagName('img')[0]
         img.classList.add('img-thumbnail')
-        img.src ='../../../public/storage/photos/' + photos[0].name
+        img.src ='../../../public/storage/Photos/' + photos[0].name
         img.id = photos[0].id
 
         if(photos.length > 1) {
