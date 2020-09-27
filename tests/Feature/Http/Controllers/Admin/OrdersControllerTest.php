@@ -92,4 +92,24 @@ class OrdersControllerTest extends TestCase
             'id' => $id
         ]);
     }
+
+    public function testAnAdminCanQueryAnOrderToP2P(): void
+    {
+        $order = Order::all()->random();
+
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.verify', $order->id));
+
+        $response
+            ->assertStatus(302);
+    }
+
+    public function testAnAdminCanReverseAPurchase(): void
+    {
+        $order = Order::all()->random();
+
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.reverse', $order->id));
+
+        $response
+            ->assertStatus(302);
+    }
 }

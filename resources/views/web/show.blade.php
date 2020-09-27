@@ -81,7 +81,8 @@
                                         <label class="mr-md-5 font-weight-bold">{{__('Choose color')}}: </label>
                                             @foreach ($size->colors as $color)
                                             <div class="form-check d-inline-block">
-                                                <input class="form-check-input" type="radio" name="color_id" id="color" value="{{$color->id}}">
+                                                <input class="form-check-input" type="radio" name="color_id"
+                                                       id="color{{$color->name}}" value="{{$color->id}}" onchange="setMaxQuantityToInput({{$color->pivot->quantity}})">
                                                 <label class="form-check-label mt-1" for="exampleRadios1">
                                                     <span class="badge bg-{{strtolower($color->name)}}">{{strtolower(__($color->name))}}</span>
                                                 </label>
@@ -90,17 +91,18 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <small class="text-small text-danger" id="quantitySmall"></small>
                             <div id="div-quant" class="input-group">
                                 <label class="mr-md-5 font-weight-bold mt-2">{{__('Stock')}}: </label>
                                 <div class="input-group-prepend">
-                                    <button class="btn btn-link btn-sm" onclick="less('quantity')" type="button" id="button-addon1">
+                                    <button class="btn btn-link btn-sm" onclick="less('quantityInput')" type="button" id="button-addon1">
                                         <ion-icon name="remove-outline"></ion-icon>
                                     </button>
                                 </div>
                                 <input type="number" class="form-control-plaintext col-2 text-center pl-2" placeholder="0"
-                                       min="0" aria-describedby="button-addon1" id="quantity" name="quantity">
+                                       min="0" aria-describedby="button-addon1" id="quantityInput" name="quantity">
                                 <div class="input-group-append">
-                                    <button onclick="add('quantity')" class="btn btn-link btn-sm" type="button" id="button-addon1">
+                                    <button onclick="add('quantityInput')" class="btn btn-link btn-sm" type="button" id="button-addon1">
                                         <ion-icon name="add-outline"></ion-icon>
                                     </button>
                                 </div>
@@ -111,7 +113,12 @@
                             @guest()
                                 <small class="text-muted">{{__('Login to add products to cart')}}</small>
                             @endguest
-                            <button type="submit" class="btn btn-primary btn-block">{{__('Add to cart')}}</button>
+                            @if($product->stocks->count() === 0)
+                                <small class="text-muted text-danger">{{__('Producto Agotado')}}</small>
+                                <button type="button" disabled class="btn btn-primary btn-block">{{__('Add to cart')}}</button>
+                            @else
+                                <button type="submit" class="btn btn-primary btn-block">{{__('Add to cart')}}</button>
+                            @endif
                             <button class="btn btn-light btn-block" type="button" onclick="goBack()">{{__('Back')}}</button>
                         </div>
                     </form>
@@ -128,18 +135,26 @@
         window.history.back();
     }
 
+    function setMaxQuantityToInput(quantity) {
+        document.getElementById('quantityInput').max = quantity
+        if (quantity < 5) {
+            document.getElementById('quantitySmall').innerText = 'Solo quedan ' + quantity + ' artículos en stock'
+        }
+    }
+
     function add(id){
         let input = document.getElementById(id)
-        console.log(input.value)
         let value
+        let max = document.getElementById('quantityInput').max
         if(input.value) value = parseInt(input.value)
         else value = 0
-        input.value = value + 1
+        if (value < max) {
+            input.value = value + 1
+            }
     }
 
     function less(id){
         let input = document.getElementById(id)
-        console.log(input.value)
         let value
         if(input.value) value = parseInt(input.value)
         else value = 0

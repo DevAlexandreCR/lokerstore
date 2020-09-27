@@ -54,6 +54,8 @@ Route::middleware(['auth:admin', 'enabled'])->group(function () {
     Route::resource('orders', 'OrdersController')
         ->names('orders')
         ->only('index', 'show', 'destroy', 'update');
+    Route::get('orders/{order}/verify', 'OrdersController@verify')->name('orders.verify');
+    Route::get('orders/{order}/reverse', 'OrdersController@reverse')->name('orders.reverse');
 
     Route::resource('order_details', 'OrderDetailsController')
         ->names('order_details')

@@ -96,8 +96,6 @@ class Product extends Model
 
     public function scopeSizesByProduct($query, $product_id)
     {
-        if (empty($sizes)) return null;
-
         return $query->whereHas('stocks', function ($query) use ($product_id) {
             $query
                 ->where('product_id', $product_id)

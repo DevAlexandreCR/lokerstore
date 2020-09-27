@@ -24,8 +24,8 @@ class RoleSeeder extends Seeder
             'guard_name' => Admins::GUARDED
             ]);
 
-        $roleEmployee->syncPermissions([
-            Permissions::getEmployePermissions()
-        ]);
+        foreach (Permissions::getEmployePermissions() as $permission) {
+            $roleEmployee->givePermissionTo($permission);
+        }
     }
 }

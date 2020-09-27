@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Models\Stock;
+use Exception;
 
 class StockObserver
 {
@@ -33,6 +34,7 @@ class StockObserver
     /**
      * Handle the stock "updated" event.
      * @param Stock $stock
+     * @throws Exception
      */
     public function updated(Stock $stock): void
     {

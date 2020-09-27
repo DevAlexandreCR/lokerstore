@@ -12,6 +12,21 @@
             </div>
         </div>
     @endif
+    @if ( $errors->any() )
+
+        @foreach ($errors->all() as $error)
+            <div class="container align-self-start col-4 py-2">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>{{__('Error!')}}</strong> {{ $error }}
+                </div>
+            </div>
+        @endforeach
+
+    @endif
     <div class="row py-4">
         <div class="container">
             <button type="button" data-toggle="modal" data-target="#addRole"class="btn btn-dark">{{__('Add role')}}</button>
@@ -69,7 +84,7 @@
                                         <li class="list-group-item-action text-right">
                                             <label for="perm{{$id}}">{{$name}}</label>
                                             <input class="custom-checkbox ml-4 mr-2" type="checkbox" id="perm{{$id}}" name="permissions[]" value="{{$id}}"
-                                                   @if($role->hasDirectPermission($name, 'admin')) checked @endif>
+                                                   @if($role->hasDirectPermission($name)) checked @endif>
                                         </li>
                                     @endforeach
                                 </ul>

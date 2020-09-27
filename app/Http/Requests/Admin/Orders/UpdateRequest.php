@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Admin\Admins;
+namespace App\Http\Requests\Admin\Orders;
 
+use App\Constants\Orders;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
-class UpdatePermissionsRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,8 +15,7 @@ class UpdatePermissionsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('update', Auth::user());
-
+        return true;
     }
 
     /**
@@ -27,7 +26,8 @@ class UpdatePermissionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'permissions' => ['array']
+            'status' => ['string', Rule::in(Orders::getAllStatus())],
+            'amount' => ['number', 'min:1000']
         ];
     }
 }

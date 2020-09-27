@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{$order->id}}</td>
                         <td>{{$order->created_at}}</td>
-                        <td>{{$order->status}}</td>
+                        <td>{{$order->getStatus()}}</td>
                         <td>{{$order->amount}}</td>
                         <td>{{$order->user->email}}</td>
                         <td>

@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Decorators\OrderDecorator;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Orders\indexRequest;
+use App\Http\Requests\Admin\Orders\UpdateRequest;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class OrdersController extends Controller
 {
     private $orders;
 
-    public function __construct(Order $orders)
+    public function __construct(OrderDecorator $orders)
     {
         $this->orders = $orders;
     }
@@ -21,12 +23,13 @@ class OrdersController extends Controller
     /**
      * Display a listing of the orders.
      *
+     * @param indexRequest $request
      * @return View
      */
-    public function index(): View
+    public function index(IndexRequest $request): View
     {
         return view('admin.orders.index', [
-            'orders' => $this->orders::all()
+            'orders' => $this->orders->index($request)
         ]);
     }
 
@@ -46,13 +49,13 @@ class OrdersController extends Controller
     /**
      * Update the specified order in storage.
      *
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param Order $order
      * @return RedirectResponse
      */
-    public function update(Request $request, Order $order): RedirectResponse
+    public function update(UpdateRequest $request, Order $order): RedirectResponse
     {
-        $order->update($request->all());
+        $this->orders->update($request, $order);
 
         return redirect()
             ->route('orders.show', $order->id)
@@ -67,10 +70,20 @@ class OrdersController extends Controller
      */
     public function destroy(Order $order): RedirectResponse
     {
-        $this->orders::destroy($order->id);
+        $this->orders->destroy($order);
 
         return redirect()
             ->route('orders.index')
             ->with('success', __('Order removed successfully'));
+    }
+
+    public function verify(Order $order): RedirectResponse
+    {
+        return $this->orders->verify($order);
+    }
+
+    public function reverse(Order $order): RedirectResponse
+    {
+        return $this->orders->reverse($order);
     }
 }

@@ -11,8 +11,11 @@ use Illuminate\Database\Eloquent\Factory;
 $factory->define(Payment::class, function (Faker $faker) {
     return [
         'order_id' => Order::all()->random()->id,
-        'status' => Payments::STATUS_PENDING,
+        'status' => $faker->randomElement(Payments::getAllStatus()),
         'process_url' => $faker->url,
-        'request_id' => $faker->randomNumber(6)
+        'request_id' => $faker->randomNumber(6),
+        'reference' => $faker->bankAccountNumber,
+        'method' => $faker->creditCardType,
+        'last_digit' => '********' . $faker->randomNumber(4)
     ];
 });

@@ -47,4 +47,20 @@ class Order extends Model
                 return __('Failed');
         }
     }
+
+    public function getAmount() : string
+    {
+        return round($this->amount, 0,  PHP_ROUND_HALF_UP) . 'COP';
+    }
+
+    public function getAllStatus(): array
+    {
+        return [
+            Orders::STATUS_CANCELED => __('Canceled'),
+            Orders::STATUS_PENDING_PAY => __('Pending payment'),
+            Orders::STATUS_PENDING_SHIPMENT => __('Pending shipment'),
+            Orders::STATUS_SENT => __('Sent'),
+            Orders::STATUS_SUCCESS => __('Completo'),
+        ];
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Constants\Logs;
 use App\Constants\Orders;
+use App\Jobs\SendEmailUsers;
 use App\Models\Order;
 
 class OrderObserver
@@ -22,6 +23,7 @@ class OrderObserver
             case Orders::STATUS_PENDING_SHIPMENT:
                 logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payment ' . $order->payment->id .
                 ' has been success');
+                dispatch(new SendEmailUsers($order));
                 break;
             case Orders::STATUS_CANCELED:
                 logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Order ' . $order->payment->id .

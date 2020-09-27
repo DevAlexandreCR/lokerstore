@@ -198,5 +198,8 @@
     "Role has been removed successfully": "El rol se ha eliminado exitosamente",
     "Role has been created successfully": "El rol se ha creado exitosamente",
     "Remove roles" : "Eliminar rol",
-    "View permissions" : "Ver permisos para "
+    "View permissions" : "Ver permisos para ",
+    "Order details" : "Detalles de la orden",
+    "Payment" : "Pago",
+    "Update order" : "Actualizar orden"
 }
