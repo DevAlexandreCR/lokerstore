@@ -12,11 +12,12 @@ class EnabledUser
     /**
      * Handle an incoming request.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @param Closure $next
+     * @param null|string $guard
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $guard)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
         /**
          * si el usuario esta inhabilitado lo redirecciona a la vista correspondiente
