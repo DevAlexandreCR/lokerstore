@@ -40,7 +40,7 @@ class OrderDetailsControllerTest extends TestCase
     public function testAnAdminCanUpdateAnOrderDetail(): void
     {
         $stock = factory(Stock::class)->create([
-            'quantity' => 10
+            'quantity' => 20
         ]);
 
         $detail = factory(OrderDetail::class)->create([
@@ -67,7 +67,7 @@ class OrderDetailsControllerTest extends TestCase
 
         $this->assertDatabaseHas('stocks', [
             'id' => $detail->stock_id,
-            'quantity' => 7
+            'quantity' => 17
         ]);
     }
 
@@ -75,6 +75,8 @@ class OrderDetailsControllerTest extends TestCase
     {
         $detail = OrderDetail::all()->random();
         $id = $detail->id;
+        $amount = $detail->total_price;
+        $amountOrder = $detail->order->amount;
 
         $response = $this->actingAs($this->admin, Admins::GUARDED)
             ->delete(route('order_details.destroy', $detail->id));
@@ -86,6 +88,10 @@ class OrderDetailsControllerTest extends TestCase
 
         $this->assertDatabaseMissing('order_details', [
             'id' => $id
+        ]);
+        $this->assertDatabaseMissing('orders', [
+            'id' => $detail->order_id,
+            'amount' => $amount - $amountOrder
         ]);
     }
 }

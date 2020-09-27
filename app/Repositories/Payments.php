@@ -30,7 +30,7 @@ class Payments
             ]);
     }
 
-    public function setStatus(Payment $payment, string $status)
+    public function setStatus(Payment $payment, string $status): bool
     {
         return $payment->update([
             'status' => $status

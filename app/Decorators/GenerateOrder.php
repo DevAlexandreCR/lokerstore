@@ -5,6 +5,7 @@ namespace App\Decorators;
 use App\Constants\PlaceToPay;
 use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
+use App\Models\Order;
 use App\Repositories\OrderDetails;
 use App\Repositories\Orders;
 use App\Constants\Orders as OrderConstants;
@@ -49,7 +50,7 @@ class GenerateOrder implements OrderInterface
 
         $response = $this->sendRequest(PlaceToPay::CREATE_REQUEST, $order);
 
-        return $this->responseHandler($response, $order->id);
+        return $this->responseHandler($response, $order);
     }
 
     public function update(Request $request, Model $model)
@@ -62,16 +63,15 @@ class GenerateOrder implements OrderInterface
         // TODO: Implement destroy() method.
     }
 
-    public function responseHandler($response, int $order_id): RedirectResponse
+    public function responseHandler($response, Order $order): RedirectResponse
     {
         $status = $response->status->status;
-        $order = $this->find($order_id);
         switch ($status)
         {
             case PlaceToPay::OK:
                 $requestId = $response->requestId;
                 $processUrl = $response->processUrl;
-                $this->payments->create($order_id, $requestId, $processUrl);
+                $this->payments->create($order->id, $requestId, $processUrl);
                 return redirect()->away($processUrl)->send();
             case PlaceToPay::PENDING;
                 $message = __('Your payment is not processed yet, this may take a few minutes');
@@ -97,7 +97,7 @@ class GenerateOrder implements OrderInterface
                 $this->payments->setStatus($order->payment, Pay::FAILED);
                 $message = $response->status->message;
         }
-        return redirect()->to( route('user.order.show', [auth()->id(), $order_id]))
+        return redirect()->to( route('user.order.show', [auth()->id(), $order->id]))
             ->with('message', $message);
     }
 
@@ -111,7 +111,7 @@ class GenerateOrder implements OrderInterface
         $order = $this->orders->find($order_id);
         $response = $this->sendRequest( PlaceToPay::GET_REQUEST_INFORMATION, $order);
 
-        return $this->responseHandler($response, $order_id);
+        return $this->responseHandler($response, $order);
     }
 
     public function resend(UpdateRequest $request)
@@ -121,7 +121,7 @@ class GenerateOrder implements OrderInterface
 
         $response = $this->sendRequest( PlaceToPay::CREATE_REQUEST, $order);
 
-        return $this->responseHandler($response, $order_id);
+        return $this->responseHandler($response, $order);
     }
 
     public function reverse(UpdateRequest $request)
@@ -130,7 +130,7 @@ class GenerateOrder implements OrderInterface
         $order = $this->orders->find($order_id);
         if($order->status === OrderConstants::STATUS_PENDING_SHIPMENT){
             $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
-            return $this->responseHandler($response, $order->id);
+            return $this->responseHandler($response, $order);
         }
 
         $this->orders->cancel($request);

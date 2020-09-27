@@ -12,11 +12,19 @@ class OrderDetailObserver
      * @param  OrderDetail  $orderDetail
      * @return void
      */
-    public function created(OrderDetail $orderDetail)
+    public function created(OrderDetail $orderDetail): void
     {
         $stock = $orderDetail->stock;
         $stock->quantity -= $orderDetail->quantity;
         $stock->save();
+
+        $order = $orderDetail->order;
+        $order->amount = 0;
+        $order->orderDetails->each(function ($detail) use($order){
+            $order->amount += $detail->total_price;
+        });
+
+        $order->save();
     }
 
     /**
@@ -35,5 +43,16 @@ class OrderDetailObserver
         $stock = $orderDetail->stock;
         $stock->quantity += $quantityToStock;
         $stock->save();
+    }
+
+    public function deleted(OrderDetail $orderDetail): void
+    {
+        $order = $orderDetail->order;
+        $order->amount = 0;
+
+        $order->orderDetails->each(function ($detail) use($order){
+            $order->amount += $detail->total_price;
+        });
+        $order->save();
     }
 }

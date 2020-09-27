@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factory;
 $factory->define(Order::class, function (Faker $faker) {
     return [
         'user_id' => User::all()->random()->id,
-        'amount' => $faker->numberBetween(10000, 100000),
-        'status' => $faker->randomElement(Orders::getAllStatus())
+        'amount' => 0,
+        'status' => Orders::STATUS_PENDING_PAY
     ];
 });

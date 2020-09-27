@@ -20,6 +20,9 @@ class OrderSeeder extends Seeder
         $orders = factory(Order::class, 10)->create();
 
         $orders->each( function ($order) {
+            factory(OrderDetail::class, random_int(1,3))->create([
+                'order_id' => $order->id
+            ]);
             $payment = factory(Payment::class)->create([
                 'order_id' => $order->id
             ]);
@@ -29,7 +32,6 @@ class OrderSeeder extends Seeder
                     'payment_id' => $payment->id
                 ]);
             }
-            factory(OrderDetail::class, random_int(1,3))->create();
         });
     }
 }

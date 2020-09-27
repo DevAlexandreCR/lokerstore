@@ -26,7 +26,7 @@ class OrderObserver
                 dispatch(new SendEmailUsers($order));
                 break;
             case Orders::STATUS_CANCELED:
-                logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Order ' . $order->payment->id .
+                logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Order ' . $order->id .
                     ' has been canceled, updating stocks ...');
                 $order->orderDetails->each(function ($detail) {
                     $stock = $detail->stock;
