@@ -8,9 +8,9 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3.13",
-        "ext-http": "*",
+        "php": "^7.4",
         "ext-json": "*",
+        "ext-http": "*",
         "ext-openssl": "*",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
@@ -33,7 +33,8 @@
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
         "phpstan/phpstan": "^0.12.31",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "roave/security-advisories": "dev-master"
     },
     "config": {
         "optimize-autoloader": true,
