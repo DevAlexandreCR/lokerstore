@@ -55,7 +55,11 @@ class OrderControllerTest extends TestCase
                 'user_id' => $this->user->id
             ]);
 
-        $response->assertStatus(302);
+        $redirectUrl = $response->headers->get('Location');
+        $response
+            ->assertStatus(302)
+            ->assertRedirect($redirectUrl);
+
         $this->assertDatabaseHas('orders',
             [
                 'user_id' => $this->user->id

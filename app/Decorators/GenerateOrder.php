@@ -97,7 +97,7 @@ class GenerateOrder implements OrderInterface
                 $this->payments->setStatus($order->payment, Pay::FAILED);
                 $message = $response->status->message;
         }
-        return redirect()->to( route('user.order.show', [auth()->id(), $order->id]))
+        return redirect()->to( route('user.order.show', [auth()->id(), $order->refresh()->id]))
             ->with('message', $message);
     }
 

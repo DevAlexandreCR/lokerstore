@@ -82,7 +82,10 @@
                                             <form action="{{route('order_details.destroy', $detail->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger mx-2">
+                                                <button @if($order->status !== \App\Constants\Orders::STATUS_PENDING_PAY)
+                                                            disabled
+                                                        @endif
+                                                        type="submit" class="btn btn-sm btn-danger mx-2">
                                                     <ion-icon name="trash"></ion-icon>
                                                 </button>
                                             </form>

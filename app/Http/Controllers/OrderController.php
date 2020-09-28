@@ -56,8 +56,6 @@ class OrderController extends Controller
 
     public function show(User $user, Order $order): View
     {
-        header("Cache-Control: no-cache, must-revalidate");
-
         if ($order->status === Orders::STATUS_PENDING_PAY && $order->payment) {
             $this->orders->getRequestInformation($order->id);
         }
