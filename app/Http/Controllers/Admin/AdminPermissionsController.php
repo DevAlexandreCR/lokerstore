@@ -16,6 +16,13 @@ class AdminPermissionsController extends Controller
         $this->admin = $admin;
     }
 
+    /**
+     * Update the permissions to admin
+     *
+     * @param UpdatePermissionsRequest $request
+     * @param Admin $admin
+     * @return RedirectResponse
+     */
     public function update(UpdatePermissionsRequest $request, Admin $admin): RedirectResponse
     {
         $admin->syncPermissions($request->permissions);

@@ -6,6 +6,7 @@ public/images
 public/storage
 /storage/*.key
 /vendor
+/reports
 /vendor/**/.git
 .env
 .env.testing
