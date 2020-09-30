@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Carts;
 use App\Http\Requests\Web\Cart\AddCartRequest;
 use App\Http\Requests\Web\Cart\UpdateRequest;
 use App\Models\Stock;
@@ -11,11 +12,11 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function show(User $user): View
+    public function show(User $user, Carts $carts): View
     {
         return view('web.users.cart.show',
         [
-            'cart' => $user->cart
+            'cart' => $carts->getCart($user->id)
         ]);
     }
 

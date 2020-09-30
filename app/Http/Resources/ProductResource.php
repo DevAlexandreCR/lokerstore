@@ -13,13 +13,8 @@ class ProductResource extends JsonResource
      * @param  Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
-        $request['category.parent'] = $this->resource->category->parent;
-        $request['tags'] = $this->resource->tags;
-        $request['Photos'] = $this->resource->photos;
-        $request['colors'] = $this->resource->colors;
-        $request['sizes'] = $this->resource->sizes;
         return parent::toArray($request);
     }
 }

@@ -22,7 +22,7 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    protected $products;
+    protected ProductsInterface $products;
 
     public function __construct(ProductsInterface $products)
     {
@@ -30,17 +30,16 @@ class ProductController extends Controller
         $this->products = $products;
     }
 
-    /*
-     * Display a listing of Products
-     *
+    /**
      * @param IndexRequest $request
      * @param CategoryInterface $categories
+     * @param TagsInterface $tags
      * @return View
      */
-    public function index(IndexRequest $request, CategoryInterface $categories): View
+    public function index(IndexRequest $request, CategoryInterface $categories, TagsInterface $tags): View
     {
         $category = $request->validationData()['category'];
-        $tags = $request->validationData()['tags'];
+        $tagsFilter = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
 
@@ -49,14 +48,15 @@ class ProductController extends Controller
         $products = $this->products->query($request);
 
         return view('admin.products.index', [
-            'products' => $products,
+            'products'  => $products,
+            'categories'=> $categories,
+            'tags'      => $tags->index(),
             'filters' => [
                 'category'  => $category,
-                'tags'      => $tags,
+                'tags'      => $tagsFilter,
                 'search'    => $search,
                 'orderBy'   => $orderBy
-            ],
-            'categories' => $categories
+            ]
         ]);
     }
 

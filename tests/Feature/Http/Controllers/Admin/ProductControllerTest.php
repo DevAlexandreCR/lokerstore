@@ -110,6 +110,7 @@ class ProductControllerTest extends TestCase
      */
     public function testUpdateProduct(): void
     {
+        $this->withoutExceptionHandling();
         $product =  Product::all()->random();
         $response = $this->actingAs($this->admin, 'admin')->put(route('products.update', [
             'product' =>  $product->id

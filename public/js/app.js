@@ -71990,6 +71990,7 @@ var url = "".concat("http://localhost", "/api/");
 
 var getProducts = function getProducts() {
   var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  console.log('get products...');
   return axios.get("".concat(url, "products"), {
     params: query
   }).then(function (res) {
@@ -71998,18 +71999,21 @@ var getProducts = function getProducts() {
 };
 
 var getCategories = function getCategories() {
+  console.log('get categories...');
   return axios.get("".concat(url, "categories")).then(function (res) {
     return res.data;
   });
 };
 
 var getColors = function getColors() {
+  console.log('get colors...');
   return axios.get("".concat(url, "colors")).then(function (res) {
     return res.data;
   });
 };
 
 var getSizes = function getSizes() {
+  console.log('get sizes...');
   return axios.get("".concat(url, "type_sizes")).then(function (res) {
     return res.data;
   });

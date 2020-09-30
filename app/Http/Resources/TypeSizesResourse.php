@@ -15,7 +15,6 @@ class TypeSizesResourse extends JsonResource
      */
     public function toArray($request)
     {
-        $request['sizes'] = $this->resource->sizes;
         return parent::toArray($request);
     }
 }

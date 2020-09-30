@@ -28,6 +28,7 @@ class Products implements ProductsInterface
             ->byCategory($category)
             ->withTags($tags)
             ->search($search)
+            ->with('category', 'photos', 'tags', 'stocks')
             ->paginate(15);
     }
 
@@ -44,7 +45,7 @@ class Products implements ProductsInterface
 
     public function update($request, $product)
     {
-        $product->tags()->sync($request->get('tags'));
+        $product->tags()->sync($request->get('tags', null));
 
         $product->update($request->all());
 

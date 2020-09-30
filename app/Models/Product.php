@@ -19,7 +19,7 @@ class Product extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'id_category');
+        return $this->belongsTo(Category::class, 'id_category')->select(['id', 'name', 'id_parent']);
     }
 
     public function tags(): BelongsToMany
@@ -29,13 +29,12 @@ class Product extends Model
 
     public function stocks(): HasMany
     {
-        return $this->hasMany(Stock::class)
-                    ->orderBy('color_id');
+        return $this->hasMany(Stock::class);
     }
 
     public function photos(): HasMany
     {
-        return $this->hasMany(Photo::class);
+        return $this->hasMany(Photo::class)->select(['id', 'name', 'product_id']);
     }
 
     public function sizes(): BelongsToMany
@@ -98,8 +97,7 @@ class Product extends Model
     {
         return $query->whereHas('stocks', function ($query) use ($product_id) {
             $query
-                ->where('product_id', $product_id)
-                ;
+                ->where('product_id', $product_id);
         });
     }
 
@@ -130,9 +128,9 @@ class Product extends Model
     {
         if ($this->is_active){
             return __('Enabled');
-        } else {
-            return __('Disabled');
         }
+
+        return __('Disabled');
     }
 
     public function getPrice() : string
@@ -168,11 +166,7 @@ class Product extends Model
      */
     private function getIdCategory(string $category) : int
     {
-        (Category::where('name', $category)->exists())
-        ? $id = Category::where('name', $category)->first()->id
-        : $id = 0;
-
-        return $id;
+        return Category::where('name', $category)->firstOrFail()->id;
     }
 
 }

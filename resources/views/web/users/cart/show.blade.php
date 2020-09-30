@@ -13,7 +13,7 @@
                         <div class="list-group-item my-2">
                             <div class="row align-items-center">
                                 <div class="col-sm-2">
-                                    <img class="img-fluid" src="/storage/photos/{{$stock->product->photos[0]->name}}">
+                                    <img class="img-fluid" src="/storage/photos/{{$stock->product->photos->first()->name}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="font-weight-bold">{{$stock->product->name}}</p>

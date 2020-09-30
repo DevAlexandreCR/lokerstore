@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Interfaces\TagsInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Tags\IndexRequest;
 use App\Http\Requests\Admin\Tags\StoreAndUpdateRequest;
@@ -11,12 +12,12 @@ use Illuminate\View\View;
 
 class TagController extends Controller
 {
-    protected $tag;
+    protected TagsInterface $tags;
 
-    public function __construct(Tag $tag)
+    public function __construct(TagsInterface $tags)
     {
         $this->authorizeResource(Tag::class, 'tag');
-        $this->tag = $tag;
+        $this->tags = $tags;
     }
 
     /**
@@ -26,9 +27,8 @@ class TagController extends Controller
      */
     public function index(IndexRequest $request) : View
     {
-        $search = $request->get('search', null);
         return view('admin.tags.index', [
-            'tags' => $this->tag->search($search)->paginate(10)
+            'tags' => $this->tags->search($request)
         ]);
     }
 
@@ -39,7 +39,7 @@ class TagController extends Controller
      */
     public function store(StoreAndUpdateRequest $request) : RedirectResponse
     {
-        $this->tag->create($request->all());
+        $this->tags->store($request);
 
         return redirect()
                     ->back()
@@ -54,7 +54,7 @@ class TagController extends Controller
      */
     public function update(StoreAndUpdateRequest $request, Tag $tag) : RedirectResponse
     {
-        $tag->update($request->all());
+        $this->tags->update($request, $tag);
 
         return redirect()
                     ->back()
@@ -69,7 +69,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag) : RedirectResponse
     {
-        $tag->delete();
+        $this->tags->destroy($tag);
 
         return redirect()
                 ->back()

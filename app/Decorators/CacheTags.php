@@ -7,11 +7,12 @@ use App\Repositories\Tags;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\Admin\Tags\IndexRequest;
 
 class CacheTags implements TagsInterface
 {
 
-    protected $tags;
+    protected Tags $tags;
 
     public function __construct(Tags $tags)
     {
@@ -27,24 +28,30 @@ class CacheTags implements TagsInterface
 
     public function store(Request $request)
     {
-        $tag = $this->tags->store($request);
-
         Cache::tags(['tags'])->flush();
 
-        return $tag;
+        return $this->tags->store($request);
     }
 
     public function update(Request $request, Model $model)
     {
-        $tag = $this->tags->update($request, $model);
-
         Cache::tags(['tags'])->flush();
 
-        return $tag;
+        return $this->tags->update($request, $model);
     }
 
     public function destroy(Model $model)
     {
-        $model->delete();
+        Cache::tags(['tags'])->flush();
+
+        $this->tags->destroy($model);
+    }
+
+    public function search(IndexRequest $request)
+    {
+        $search = $request->get('search', null);
+        return Cache::tags(['tags'])->rememberForever($search, function () use ($request){
+            return $this->tags->search($request);
+        });
     }
 }

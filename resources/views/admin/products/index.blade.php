@@ -99,92 +99,92 @@
         <div class="row">
             <table class="table table-sm table-striped table-condensed table-hover table-secondary ">
                 <thead>
-                    <tr>
-                        <th>{{__('Id')}}</th>
-                        <th>{{__('Created at')}}</th>
-                        <th>{{__('Category')}}</th>
-                        <th>{{__('Name')}}</th>
-                        <th>{{__('Description')}}</th>
-                        <th>{{__('Stock')}}</th>
-                        <th>{{__('Price')}}</th>
-                        <th>{{__('Tags')}}</th>
-                        <th>{{__('Status')}}</th>
-                        <th style="text-align: center">{{__('View')}}</th>
-                    </tr>
+                <tr>
+                    <th>{{__('Id')}}</th>
+                    <th>{{__('Created at')}}</th>
+                    <th>{{__('Category')}}</th>
+                    <th>{{__('Name')}}</th>
+                    <th>{{__('Description')}}</th>
+                    <th>{{__('Stock')}}</th>
+                    <th>{{__('Price')}}</th>
+                    <th>{{__('Tags')}}</th>
+                    <th>{{__('Status')}}</th>
+                    <th style="text-align: center">{{__('View')}}</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $key => $product)
-                        <tr class="@if(!$product->is_active) text-muted @endif">
-                            <td scope="row">{{ $key }}</td>
-                            <td>{{ $product->created_at->format('d-m-yy') }}</td>
-                            <td>{{ $product->category->name }}</td>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->getDescription()}}...</td>
-                            <td>
-                                <a  href="{{route('stocks.create', $product)}}"><span class="badge badge-link badge-pill"><ion-icon name="navigate-circle-outline"></ion-icon>{{ $product->stock }}</span></a>
-                            </td>
-                            <td>{{ $product->price }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-link btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="badge badge-success">{{optional($product->tags->first())->name}}</span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <ul class="list-group">
-                                            @foreach ($product->tags as $tag)
-                                                <li class="list-group-item">{{$tag->name}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                @foreach ($products as $key => $product)
+                    <tr class="@if(!$product->is_active) text-muted @endif">
+                        <td scope="row">{{ $key }}</td>
+                        <td>{{ $product->created_at->format('d-m-yy') }}</td>
+                        <td>{{ $product->category->name }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->getDescription()}}...</td>
+                        <td>
+                            <a  href="{{route('stocks.create', $product)}}"><span class="badge badge-link badge-pill"><ion-icon name="navigate-circle-outline"></ion-icon>{{ $product->stock }}</span></a>
+                        </td>
+                        <td>{{ $product->price }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-link btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="badge badge-success">{{optional($product->tags->first())->name}}</span>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <ul class="list-group">
+                                        @foreach ($product->tags as $tag)
+                                            <li class="list-group-item">{{$tag->name}}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
-                            </td>
-                            @if ($product->is_active)
+                            </div>
+                        </td>
+                        @if ($product->is_active)
                             <td>
-                            <span class="badge badge-info"> {{ __('Enabled') }}</span>
+                                <span class="badge badge-info"> {{ __('Enabled') }}</span>
                             </td>
-                            @else
+                        @else
                             <td class="text-muted">
-                            <span class="badge badge-danger"> {{ __('Disabled') }}</span>
+                                <span class="badge badge-danger"> {{ __('Disabled') }}</span>
                             </td>
-                            @endif
-                            <td>
+                        @endif
+                        <td>
                             <div class="btn-group btn-block btn-group-sm text-center"
-                            role="group"
-                            style="border-left: groove">
+                                 role="group"
+                                 style="border-left: groove">
                                 @include('admin.products.detail', ['product' => $product])
                                 <a type="button" class="btn btn-link btn-sm"
-                                data-placement="top"
-                                title="{{__('View')}}"
-                                data-toggle="modal"
-                                data-target="#modalDetail{{$product->id}}"
+                                   data-placement="top"
+                                   title="{{__('View')}}"
+                                   data-toggle="modal"
+                                   data-target="#modalDetail{{$product->id}}"
                                 >
-                                <ion-icon name="eye"></ion-icon>
+                                    <ion-icon name="eye"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link btn-sm"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="{{__('Edit')}}"
-                                href="{{ route('products.edit', ['product' => $product])}}">
-                                <ion-icon name="create-outline"></ion-icon>
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="{{__('Edit')}}"
+                                   href="{{ route('products.edit', ['product' => $product])}}">
+                                    <ion-icon name="create-outline"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link btn-sm"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="@if($product->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
-                                href="{{ route('products.active', ['product' => $product, 'input_name' => 'is_active'])}}">
-                                <ion-icon name="power"></ion-icon>
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="@if($product->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
+                                   href="{{ route('products.active', ['product' => $product, 'input_name' => 'is_active'])}}">
+                                    <ion-icon name="power"></ion-icon>
                                 </a>
                                 <a type="button" class="btn btn-link btn-sm"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="{{__('Remove')}}"
-                                href="{{route('products.active', ['product' => $product, 'input_name' => 'delete'])}}">
-                                <ion-icon name="trash"></ion-icon>
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="{{__('Remove')}}"
+                                   href="{{route('products.active', ['product' => $product, 'input_name' => 'delete'])}}">
+                                    <ion-icon name="trash"></ion-icon>
                                 </a>
                             </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
             @if ($products->count() === 0)
@@ -198,7 +198,7 @@
                     <div class="col-4">
                     <div class="row" style="float: right">
                         <div class="col"><strong>{{__('Products')}}</strong></div>
-                        <div class="col">{{ \App\Models\Product::count()}}</div>
+                        <div class="col">{{ $products->count()}}</div>
                     </div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                @foreach (\App\Models\Tag::all() as $tag)
+                                @foreach ($tags as $tag)
                                     <div class="card m-2">
                                         <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
                                         <input type="checkbox" class="custom-control-input"

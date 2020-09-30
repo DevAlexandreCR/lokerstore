@@ -56,7 +56,7 @@ class CacheApiProducts implements ApiProductsInterface
         $price = $request->validationData()['price'];
         $search = $request->validationData()['search'];
 
-        return 'products.' . '$search=' . $search .'$category=' . $category . '$tags=' . $tags .
+        return '$search=' . $search .'$category=' . $category . '$tags=' . $tags .
             '$sizes=' . $sizes . '$colors=' . $colors . 'price=' . $price;
     }
 }
