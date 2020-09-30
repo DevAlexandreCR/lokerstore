@@ -27,14 +27,16 @@ class ApiProducts implements ApiProductsInterface
         $price = $request->validationData()['price'];
         $search = $request->validationData()['search'];
 
-        return $this->product->active()
-                    ->byCategory($category)
-                    ->price($price)
-                    ->colors($colors)
-                    ->sizes($sizes)
-                    ->withTags($tags)
-                    ->search($search)
-                    ->get();
+        return $this->product
+            ->active()
+            ->byCategory($category)
+            ->price($price)
+            ->colors($colors)
+            ->sizes($sizes)
+            ->withTags($tags)
+            ->search($search)
+            ->with('category', 'photos')
+            ->get();
     }
 
     public function index()

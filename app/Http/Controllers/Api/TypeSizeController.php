@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TypeSizesResourse;
 use App\Models\TypeSize;
 use Illuminate\Http\JsonResponse;
 
@@ -17,6 +18,8 @@ class TypeSizeController extends Controller
 
     public function index() : JsonResponse
     {
-        return response()->json($this->typeSizes::with('sizes')->get());
+        return response()->json(TypeSizesResourse::collection(
+            $this->typeSizes::with('sizes')->get(['id', 'name'])
+        ));
     }
 }

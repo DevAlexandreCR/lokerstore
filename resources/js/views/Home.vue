@@ -100,6 +100,7 @@
                         search: search
                     }
                     this.$router.push({name: 'showcase', query: query}).catch((e)=>{console.log(e);})
+
                 }
 
             }
@@ -108,10 +109,9 @@
             this.getProducts()
             api.getProducts().then(products => {
                 products.forEach(product => {
-                        this.products.push(product)
-                    });
-                })
-
+                    this.products.push(product)
+                });
+            })
             api.getCategories().then(categories => {
                 this.categories = categories
             })

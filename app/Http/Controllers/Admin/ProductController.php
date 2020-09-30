@@ -50,13 +50,13 @@ class ProductController extends Controller
 
         return view('admin.products.index', [
             'products' => $products,
+            'categories' => $categories,
             'filters' => [
                 'category'  => $category,
                 'tags'      => $tags,
                 'search'    => $search,
                 'orderBy'   => $orderBy
-            ],
-            'categories' => $categories
+            ]
         ]);
     }
 

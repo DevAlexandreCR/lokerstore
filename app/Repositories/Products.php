@@ -28,6 +28,7 @@ class Products implements ProductsInterface
             ->byCategory($category)
             ->withTags($tags)
             ->search($search)
+            ->with('category', 'photos', 'tags', 'stocks')
             ->paginate(15);
     }
 
