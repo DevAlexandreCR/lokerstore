@@ -111,7 +111,7 @@
       <div class="col-4">
         <div class="row" style="float: right">
           <div class="col"><strong>{{__('users')}}</strong></div>
-          <div class="col">{{ \App\Models\User::count()}}</div>
+          <div class="col">{{ $users->count()}}</div>
         </div>
       </div>
     </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Users\IndexRequest;
 use App\Http\Requests\Web\Users\UserRequest;
+use App\Interfaces\UsersInterface;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -12,25 +14,35 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    protected $user;
+    protected UsersInterface $users;
 
-    public function __construct(User $user)
+    public function __construct(UsersInterface $users)
     {
-        $this->user = $user;
+        $this->users = $users;
 
         $this->authorizeResource(User::class, 'user');
     }
 
     /**
      * Display a listing of the users.
-     * @param Request $request
+     * @param IndexRequest $request
      * @return View
      */
-    public function index(Request $request) : View
+    public function index(IndexRequest $request) : View
     {
+        $users = $this->users->search($request);
         $search =  $request->get('search');
+        if ($users->count() > 0) {
+            return view('admin.users.index', [
+                'users' => $users,
+                'user_found' => "Mostrando resultados para: $search"
+            ]);
+        }
 
-        return $this->searchUser($search);
+        return view('admin.users.index', [
+            'users' => $users,
+            'user_not_found' => "No se encontraron resultados para $search"
+        ]);
     }
 
     /**
@@ -68,44 +80,22 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user) : RedirectResponse
     {
-        $user->update($request->all());
+        $this->users->update($request, $user);
 
-        return redirect( route('users.show', ['user' => $user]))->with('user-updated', 'User has been updated success');
+        return redirect( route('users.show',
+            ['user' => $user]))
+            ->with('user-updated', 'User has been updated success');
     }
 
     /**
      * Remove the specified user from storage.
      * @param User $user
      * @return RedirectResponse
-     * @throws Exception
      */
     public function destroy(User $user) : RedirectResponse
     {
-        $user->delete();
+        $this->users->destroy($user);
 
         return redirect("admin/users")->with('user-deleted', "User has been deleted success");
-    }
-
-
-    /**
-     * Funcion busca un usuario en la tabla users
-     * y busca coincidencias en los campos name, lastname, email y phone
-     *
-     * @param string|null $search
-     * @return View
-     */
-    private function searchUser(?string $search) : View
-    {
-        if ($this->user->search($search)->count() > 0) {
-            return view('admin.users.index', [
-                'users' => $this->user->search($search)->paginate(10),
-                'user_found' => "Mostrando resultados para: $search"
-            ]);
-        }
-
-        return view('admin.users.index', [
-            'users' => $this->user->search($search)->paginate(10),
-            'user_not_found' => "No se encontraron resultados para $search"
-        ]);
     }
 }

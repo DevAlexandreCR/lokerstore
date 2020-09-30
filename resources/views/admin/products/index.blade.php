@@ -187,18 +187,18 @@
                 @endforeach
                 </tbody>
             </table>
-{{--            @if ($products->count() === 0)--}}
-{{--            <div class="container-fluid" role="alert">--}}
-{{--            <strong>{{ __('No results found') }}</strong> <a class="btn btn-sm btn-link" href="{{route('products.index')}}">{{__('See all')}}</a>--}}
-{{--            </div>--}}
-{{--            @endif--}}
+            @if ($products->count() === 0)
+            <div class="container-fluid" role="alert">
+            <strong>{{ __('No results found') }}</strong> <a class="btn btn-sm btn-link" href="{{route('products.index')}}">{{__('See all')}}</a>
+            </div>
+            @endif
             <div class="container">
                 <div class="row">
                     <div class="col-8">{{ $products->links() }}</div>
                     <div class="col-4">
                     <div class="row" style="float: right">
                         <div class="col"><strong>{{__('Products')}}</strong></div>
-{{--                        <div class="col">{{ \App\Models\Product::count()}}</div>--}}
+                        <div class="col">{{ $products->count()}}</div>
                     </div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                @foreach (\App\Models\Tag::all() as $tag)
+                                @foreach ($tags as $tag)
                                     <div class="card m-2">
                                         <div class="custom-control custom-checkbox mr-sm-2 ml-sm-2">
                                         <input type="checkbox" class="custom-control-input"

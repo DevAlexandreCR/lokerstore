@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Interfaces\ColorsInterface;
 use App\Http\Controllers\Controller;
+use App\Interfaces\TypeSizesInterface;
 use App\Http\Requests\Admin\Stocks\StoreRequest;
 use App\Http\Requests\Admin\Stocks\UpdateRequest;
-use App\Models\Color;
 use App\Models\Product;
 use App\Models\Stock;
-use App\Models\TypeSize;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -38,17 +38,16 @@ class StockController extends Controller
      * Return view for create a new stock
      *
      * @param Product $product
+     * @param ColorsInterface $colors
+     * @param TypeSizesInterface $sizes
      * @return View
      */
-    public function create(Product $product) : View
+    public function create(Product $product, ColorsInterface $colors, TypeSizesInterface $sizes) : View
     {
-        $colors = Color::all(['id', 'name']);
-        $type_sizes = TypeSize::all(['id', 'name']);
-
         return view('admin.stocks.index', [
-            'product' => $product,
-            'colors' => $colors,
-            'type_sizes' => $type_sizes
+            'product' => $product->load( 'stocks','stocks.color', 'stocks.size', 'stocks.size.type'),
+            'colors' => $colors->index(),
+            'type_sizes' => $sizes->all()
         ]);
     }
 

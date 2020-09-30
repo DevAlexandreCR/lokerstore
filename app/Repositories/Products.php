@@ -45,7 +45,7 @@ class Products implements ProductsInterface
 
     public function update($request, $product)
     {
-        $product->tags()->sync($request->get('tags'));
+        $product->tags()->sync($request->get('tags', null));
 
         $product->update($request->all());
 

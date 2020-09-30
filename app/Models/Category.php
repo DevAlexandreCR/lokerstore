@@ -31,7 +31,7 @@ class Category extends Model
     {
         return self::all('id', 'name', 'id_parent')
             ->where('id_parent', '==', null)
-            ->load('children');
+            ->load(['children', 'children.products']);
     }
 
     public static function subCategories()

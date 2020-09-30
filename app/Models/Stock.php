@@ -12,12 +12,12 @@ class Stock extends Model
 
     public function size()
     {
-        return $this->belongsTo(Size::class);
+        return $this->belongsTo(Size::class)->select(['id', 'name', 'type_sizes_id']);
     }
 
     public function color()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Color::class)->select(['id', 'name']);
     }
 
     public function product()

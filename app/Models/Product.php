@@ -24,7 +24,7 @@ class Product extends Model
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class)->select(['name']);
+        return $this->belongsToMany(Tag::class);
     }
 
     public function stocks(): HasMany

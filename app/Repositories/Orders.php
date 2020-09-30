@@ -22,7 +22,7 @@ class Orders implements OrderInterface
 
     public function index()
     {
-        return $this->order::all();
+        return $this->order::with(['user'])->get();
     }
 
     public function store(Request $request): Order

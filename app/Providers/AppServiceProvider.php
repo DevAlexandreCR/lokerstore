@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Decorators\AdminDecorator;
+use App\Decorators\CacheTypeSizes;
+use App\Interfaces\TypeSizesInterface;
 use App\Decorators\Api\CacheApiProducts;
 use App\Decorators\CacheCategories;
 use App\Decorators\CacheColors;
@@ -11,6 +13,7 @@ use App\Decorators\CacheProducts;
 use App\Decorators\CacheRoles;
 use App\Decorators\CacheSizes;
 use App\Decorators\CacheTags;
+use App\Decorators\CacheUsers;
 use App\Decorators\GenerateOrder;
 use App\Interfaces\AdminInterface;
 use App\Interfaces\Api\ApiProductsInterface;
@@ -22,6 +25,7 @@ use App\Interfaces\ProductsInterface;
 use App\Interfaces\RoleInterface;
 use App\Interfaces\SizesInterface;
 use App\Interfaces\TagsInterface;
+use App\Interfaces\UsersInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -53,5 +57,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PermissionInterface::class, CachePermission::class);
         $this->app->bind(RoleInterface::class, CacheRoles::class);
         $this->app->bind(AdminInterface::class, AdminDecorator::class);
+        $this->app->bind(UsersInterface::class, CacheUsers::class);
+        $this->app->bind(TypeSizesInterface::class, CacheTypeSizes::class);
     }
 }

@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     @if ( session('success'))
-        
+
                     <div class="container py-2">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -16,7 +16,7 @@
                             <strong>{{__('Success!')}}</strong> {{ session('success') }}
                         </div>
                     </div>
-                  
+
                     @endif
                     @error('name')
                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -67,8 +67,8 @@
                             <div class="btn-group btn-group-sm text-center">
                             <form action="{{ route('products.index') }}" class="mr-2" method="GET">
                                 <input type="text" name="tags[{{$tag->name}}]" hidden value="{{$tag->name}}">
-                                <button type="submit" class="btn btn-sm btn-blue" 
-                                    data-placement="top" 
+                                <button type="submit" class="btn btn-sm btn-blue"
+                                    data-placement="top"
                                     title="{{__('View products')}}"
                                     data-target="tooltip"
                                     >
@@ -77,17 +77,17 @@
                             </form>
                             @include('admin.tags.edit', ['tag' => $tag])
                             @include('admin.tags.delete', ['tag' => $tag])
-                                <button type="button" class="btn btn-success btn-sm mr-2" 
-                                data-toggle="modal" 
-                                data-placement="top" 
+                                <button type="button" class="btn btn-success btn-sm mr-2"
+                                data-toggle="modal"
+                                data-placement="top"
                                 title="{{__('Edit')}}"
                                 data-target="#modalEdit{{$tag->name}}"
                                 >
                                 <ion-icon name="create-outline"></ion-icon>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-sm" 
-                                data-toggle="modal" 
-                                data-placement="top" 
+                                <button type="button" class="btn btn-danger btn-sm"
+                                data-toggle="modal"
+                                data-placement="top"
                                 data-target="#modalDelete{{$tag->id}}"
                                 title="{{__('Remove')}}">
                                 <ion-icon name="trash"></ion-icon>
@@ -98,7 +98,7 @@
                     @endforeach
                 </tbody>
             </table>
-            @if ($tags->count() == 0)
+            @if ($tags->count() === 0)
             <div class="container-fluid" role="alert">
             <strong>{{ __('No results found') }}</strong> <a class="btn btn-sm btn-link" href="{{route('tags.index')}}">{{__('See all')}}</a>
             </div>
@@ -109,7 +109,7 @@
                     <div class="col-4">
                     <div class="row" style="float: right">
                         <div class="col"><strong>{{__('Tags')}}</strong></div>
-                        <div class="col">{{ \App\Models\Tag::count()}}</div>
+                        <div class="col">{{ $tags->count()}}</div>
                     </div>
                     </div>
                 </div>
@@ -121,4 +121,4 @@
     </div>
     @include('admin.tags.create')
 @endsection
- 
+

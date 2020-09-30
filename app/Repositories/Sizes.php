@@ -19,7 +19,7 @@ class Sizes implements SizesInterface
 
     public function index()
     {
-        return $this->size::all();
+        return $this->size::all(['id', 'name', 'type_sizes_id']);
     }
 
     public function store(Request $request)

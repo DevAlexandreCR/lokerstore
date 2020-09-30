@@ -20,7 +20,7 @@ class Admins implements AdminInterface
 
     public function index()
     {
-        return $this->admin::all();
+        return $this->admin::with('roles')->get();
     }
 
     public function store(Request $request)

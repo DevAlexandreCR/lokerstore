@@ -20,7 +20,13 @@ class Cart extends Model
 
     public function countProducts(): int
     {
-        return $this->stocks()->get()->count();
+        return $this->stocks()->count();
+    }
+
+    public function scopeCart($query, int $id)
+    {
+        return $query
+            ->where('user_id', $id);
     }
 
     public function cartPrice()
