@@ -111,10 +111,10 @@
                         @csrf
                         @method('PUT')
                         <div class="card-body">
-                            @if($order->status === 'pending_pay' || $order->status === 'rejected')
+                            @if($order->status === \App\Constants\Orders::STATUS_PENDING_PAY || $order->status === \App\Constants\Orders::STATUS_REJECTED)
                                 <div class="form-group">
                                     <label for="amount">{{__('Price')}}</label>
-                                    <input class="form-control" type="number" name="amount" value="{{$order->amount}}">
+                                    <input class="form-control" type="number" id="amount" name="amount" value="{{$order->amount}}">
                                 </div>
                             @endif
                                 <label for="status">{{__('Status')}}</label>

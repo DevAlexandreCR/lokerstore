@@ -3,33 +3,37 @@
 @section('user-main')
     <div class="container py-4">
         <div class="modal-header"><h3>{{__('Orders')}}</h3></div>
-            <div class="list-group">
-                @forelse($orders as $order)
-                    <div class="list-group-item my-2">
-                        <div class="row font-weight-bold py-2">
-                            <div class="col-sm-3">{{__('Order created at')}}</div>
-                            <div class="col-sm-3">{{__('Status')}}</div>
-                            <div class="col-sm-3">{{__('Amount')}}</div>
-                            <div class="col-sm-3 text-center">{{__('Details')}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">{{$order->created_at}}</div>
-                            <div class="col-sm-3">{{$order->getStatus()}}</div>
-                            <div class="col-sm-3">
-                                {{$order->amount}}
-                            </div>
-                            <div class="col-sm-3 text-center">
-                                <div class="btn btn-group">
-                                    <a href="{{route('user.order.show', [$order->user_id, $order->id])}}" class="btn btn-sm btn-outline-success"><ion-icon name="eye"></ion-icon></a>
+            <div class="container justify-content-center">
+                <table class="table table-borderless table-responsive-sm table-sm table-secondary">
+                    <thead>
+                        <tr>
+                            <th>{{__('Order created at')}}</th>
+                            <th>{{__('Status')}}</th>
+                            <th>{{__('Amount')}}</th>
+                            <th class="text-center">{{__('Details')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($orders as $order)
+                            <tr>
+                                <td>{{$order->created_at}}</td>
+                                <td>{{$order->getStatus()}}</td>
+                                <td>
+                                    {{$order->amount}}
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn btn-group">
+                                        <a href="{{route('user.order.show', [$order->user_id, $order->id])}}" class="btn btn-sm btn-outline-success"><ion-icon name="eye"></ion-icon></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                                <div class="container w-50">
+                                    <empty-orders-component></empty-orders-component>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    @empty
-                    <div class="container w-50">
-                        <empty-orders-component></empty-orders-component>
-                    </div>
-                @endforelse
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
     </div>
 

@@ -20,9 +20,9 @@ class GenerateOrder implements OrderInterface
 {
     use HttpClient;
 
-    protected $orders;
-    protected $orderDetails;
-    protected $payments;
+    protected Orders $orders;
+    protected OrderDetails $orderDetails;
+    protected Payments $payments;
 
     public function __construct(Orders $orders, OrderDetails $orderDetails, Payments $payments)
     {

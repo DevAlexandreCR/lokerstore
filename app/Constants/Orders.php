@@ -24,4 +24,15 @@ class Orders
             self::STATUS_PENDING_SHIPMENT,
         ];
     }
+
+    public static function getClientStatus(): array
+    {
+        return [
+            self::STATUS_CANCELED => __('Canceled'),
+            self::STATUS_PENDING_PAY => __('Pending payment'),
+            self::STATUS_PENDING_SHIPMENT => __('Pending shipment'),
+            self::STATUS_SENT => __('Sent'),
+            self::STATUS_SUCCESS => __('Completo'),
+        ];
+    }
 }

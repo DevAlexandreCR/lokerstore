@@ -24,7 +24,7 @@ class UserControllerTest extends TestCase
         $this->withoutExceptionHandling();
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
         $this->admin = factory(Admin::class)->create();
 
@@ -124,6 +124,7 @@ class UserControllerTest extends TestCase
      */
     public function testSearchUser(): void
     {
+        factory(User::class, 30)->create();
         factory(User::class)->create([
             'name' => 'jose',
             'email' => 'jose@gmail.com'
@@ -140,7 +141,9 @@ class UserControllerTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('admin.users.index')
             ->assertViewHas('user_found')
-            ->assertViewHas('users');
+            ->assertViewHas('users')
+            ->assertSee('jose@gmail.com')
+            ->assertSee('josefina@gmail.com');
     }
 
     /**

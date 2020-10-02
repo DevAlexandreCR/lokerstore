@@ -4,7 +4,7 @@
 <div class="container py-4" style="max-width: 80%">
     <div class="card shadow">
       <div class="modal-header bg-light">
-        <h5 class="modal-title">{{ __('Edit product') }}</h5>
+        <h5 class="modal-title">{{ __('Remove product') }}</h5>
         <a href="{{ route('products.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
       </div>
       <div class="card-body">
@@ -15,7 +15,7 @@
                 @method('PUT')
               @if ($product->is_active)
               <div class="alert alert-danger" role="alert">
-                <strong>{{__('This action will remove the product')}}</strong>
+                <strong>{{__('This action will disable the product')}}</strong>
               <a href="{{ route('products.index') }}" type="button" class="btn btn-secondary btn-sm" style="float: right">{{__('Back')}}</a>
               </div>
               @endif
@@ -47,7 +47,7 @@
                 @csrf
                 @method('DELETE')
                 <div class="alert alert-danger" role="alert">
-                  <strong>{{__('This action will remove the product')}} 
+                  <strong>{{__('This action will remove the product')}}
                     <ion-icon name="skull-outline"></ion-icon>
                     <ion-icon name="alert-circle-outline"></ion-icon>
                     <ion-icon name="hand-left-outline"></ion-icon></strong>
@@ -62,13 +62,13 @@
                 </div>
               </form>
                   @break
-              @default   
+              @default
                   <div class="form-group">
                     <div class="alert alert-info" role="alert">
                       <strong>{{__('Oops! You\'re lost?')}}</strong>
                         <?php $input_name = 'lost' ?>;
                     </div>
-                  </div>  
+                  </div>
           @endswitch
           @if ($input_name === 'lost')
                 <a href="{{route('products.index')}}" class="btn btn-primary">{{__('Back')}}</a>

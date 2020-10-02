@@ -12,7 +12,9 @@ class SavePhotoAction
 
     public function execute(int $id_product, ?array $images): void
     {
-        if (empty($images)) return;
+        if (empty($images)) {
+            return;
+        }
 
         foreach ($images as $image) {
 

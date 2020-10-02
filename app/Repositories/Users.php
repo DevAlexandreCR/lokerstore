@@ -21,7 +21,9 @@ class Users implements UsersInterface
     public function search(IndexRequest $request)
     {
         $search =  $request->get('search');
-        return $this->users->search($search)->paginate(15);
+        return $this->users
+            ->search($search)
+            ->paginate(15);
     }
 
     public function index()

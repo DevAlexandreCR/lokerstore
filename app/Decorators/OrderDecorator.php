@@ -18,9 +18,9 @@ class OrderDecorator
 {
     use HttpClient;
 
-    protected $orders;
-    protected $orderDetails;
-    protected $payments;
+    protected Orders $orders;
+    protected OrderDetails $orderDetails;
+    protected Payments $payments;
 
     public function __construct(Orders $orders, OrderDetails $orderDetails, Payments $payments)
     {
@@ -31,7 +31,7 @@ class OrderDecorator
 
     public function index(IndexRequest $request)
     {
-        return $this->orders->index();
+        return $this->orders->query($request);
     }
 
     public function update(Request $request, Model $model): void

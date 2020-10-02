@@ -117,7 +117,7 @@
             </div>
         </nav>
 
-        <main class="py-0" >
+        <main class="py-0 min-vh-100" >
             @yield('content')
         </main>
     </div>

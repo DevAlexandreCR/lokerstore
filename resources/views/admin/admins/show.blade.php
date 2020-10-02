@@ -14,7 +14,7 @@
             </div>
         @endif
         <div class="row my-4">
-            <div class="col-md-5">
+            <div class="col-lg-6">
                 <h4>{{__('User data')}}</h4>
                 <form action="{{route('admins.update', $admin->id)}}" method="post">
                     @csrf
@@ -59,7 +59,7 @@
                         <button type="submit" class="btn btn-success btn-block my-3">{{__('Update user')}}</button>
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <h3>{{__('Permissions')}}</h3>
                 <div class="tab-content" id="v-pills-tabContent">
                     @if($admin->hasRole('Administrator'))

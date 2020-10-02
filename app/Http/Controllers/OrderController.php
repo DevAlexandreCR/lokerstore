@@ -13,7 +13,7 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    protected $orders;
+    protected OrderInterface $orders;
 
     public function __construct(OrderInterface $orders)
     {
