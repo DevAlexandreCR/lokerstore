@@ -184,7 +184,7 @@
                         <div class="container text-center">
                             <h6>{{__('Add images')}}</h6>
                         </div>
-                        <div class="col-4 increment">
+                        <div class="col increment">
                             <div class="card m-3" style="width: 18rem;" id="card-img">
                                 <img>
                                 <div class="card-body">
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 d-none" id="clone">
+                        <div class="col d-none" id="clone">
                             <div class="card m-3" style="width: 18rem;">
                                 <img>
                                 <div class="card-body">
