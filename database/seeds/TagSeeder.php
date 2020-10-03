@@ -18,5 +18,6 @@ class TagSeeder extends Seeder
         factory(Tag::class)->create([
             'name' => 'Mujer'
         ]);
+        factory(Tag::class, 10)->create();
     }
 }
