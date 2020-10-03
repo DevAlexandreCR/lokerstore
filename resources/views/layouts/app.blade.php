@@ -72,10 +72,13 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="#">Mujer</a>
+                                <a class="nav-link" href="{{route('home', 'show?tags=Mujer')}}">{{__('Mujer')}}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="#">Hombre</a>
+                                <a class="nav-link" href="{{route('home', 'show?tags=Hombre')}}">{{__('Hombre')}}</a>
+                            </li>
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="{{route('home', 'show?')}}">{{__('See all')}}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
