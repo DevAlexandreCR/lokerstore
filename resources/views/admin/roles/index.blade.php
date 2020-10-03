@@ -27,15 +27,15 @@
         @endforeach
 
     @endif
-    <div class="row py-4">
-        <div class="container">
+    <div class="row py-2">
+        <div class="container shadow-sm py-4 bg-secondary">
             <button type="button" data-toggle="modal" data-target="#addRole"class="btn btn-dark">{{__('Add role')}}</button>
             <button type="button" data-toggle="modal" data-target="#addPermission"class="btn btn-dark">{{__('Add permission')}}</button>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3"><h3>{{__('Remove roles')}}</h3>
+            <div class="col-md-3 card py-2"><h3>{{__('Remove roles')}}</h3>
                 <table class="table">
                     <thead>
                         @foreach($roles as $key => $role)
@@ -56,7 +56,7 @@
             </div>
             <div class="col-md-4">
                 <h3>{{__('Roles')}}</h3>
-                <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="nav nav-pills card py-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     @foreach($roles as $key => $role)
                         <a class="nav-link btn-block @if ($key === 0) 'active' @endif" id="v-ills-home-tab" data-toggle="pill"
                            href="#{{$role->name}}" role="tab" aria-controls="{{$role->name}}" aria-selected="true">
@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-5">
                 <h3>{{__('Permissions')}}</h3>
-                <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-content card" id="v-pills-tabContent">
                     @foreach($roles as $key => $role)
                         <div class="tab-pane fade  @if ($key === 0) 'show active' @endif" id="{{$role->name}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             @if($role->name === 'Administrator')

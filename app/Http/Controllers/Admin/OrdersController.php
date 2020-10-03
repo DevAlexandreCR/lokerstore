@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class OrdersController extends Controller
 {
-    private $orders;
+    private OrderDecorator $orders;
 
     public function __construct(OrderDecorator $orders)
     {
@@ -29,7 +29,10 @@ class OrdersController extends Controller
     public function index(IndexRequest $request): View
     {
         return view('admin.orders.index', [
-            'orders' => $this->orders->index($request)
+            'orders' => $this->orders->index($request),
+            'email' => $request->get('email'),
+            'date' => $request->get('date'),
+            'status' => $request->get('status')
         ]);
     }
 
@@ -42,7 +45,10 @@ class OrdersController extends Controller
     public function show(Order $order): View
     {
         return view('admin.orders.show', [
-            'order' => $order
+            'order' => $order->load('orderDetails',
+                'payment', 'payment.payer', 'orderDetails.stock',
+                'orderDetails.stock.product', 'orderDetails.stock.product.photos',
+                'orderDetails.stock.color','orderDetails.stock.size')
         ]);
     }
 

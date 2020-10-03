@@ -11,7 +11,9 @@ class DeletePhotoAction
 
     public function execute(?array $idsPhotos): void
     {
-        if (empty($idsPhotos)) return;
+        if (empty($idsPhotos)) {
+            return;
+        }
 
         foreach ($idsPhotos as $id) {
 
@@ -29,7 +31,7 @@ class DeletePhotoAction
      */
     private function deleteImage(string $name): void
     {
-        Storage::disk('public')->delete('Photos/' . $name);
+        Storage::disk('public')->delete('photos/' . $name);
     }
 
     /**

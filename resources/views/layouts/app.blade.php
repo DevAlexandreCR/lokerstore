@@ -35,7 +35,8 @@
                     {{ config('app.name') }}
                 </a>
                 @endif
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -71,10 +72,13 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="#">Mujer</a>
+                                <a class="nav-link" href="{{route('home', 'show?tags=Mujer')}}">{{__('Mujer')}}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="#">Hombre</a>
+                                <a class="nav-link" href="{{route('home', 'show?tags=Hombre')}}">{{__('Hombre')}}</a>
+                            </li>
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="{{route('home', 'show?')}}">{{__('See all')}}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -117,7 +121,7 @@
             </div>
         </nav>
 
-        <main class="py-0" >
+        <main class="py-0 min-vh-100" >
             @yield('content')
         </main>
     </div>

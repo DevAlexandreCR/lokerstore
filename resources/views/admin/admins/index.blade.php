@@ -32,7 +32,7 @@
             <button type="button" data-toggle="modal" data-target="#addEmployee" class="btn btn-primary">{{__('Add employee')}}</button>
         </div>
         <div class="row">
-            <table id="table_id" class="table table-sm table-striped table-condensed table-hover table-secondary">
+            <table id="table_id" class="table table-sm table-responsive-sm table-striped table-condensed table-hover table-secondary">
                 <thead>
                 <tr>
                     <th>{{__('Id')}}</th>

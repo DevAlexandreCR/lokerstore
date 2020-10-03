@@ -14,8 +14,8 @@ trait HttpClient
 {
     use Authentication;
 
-    private $endPoint = 'api/session/';
-    private $reverseEndPoint = 'api/reverse/';
+    private string $endPoint = 'api/session/';
+    private string $reverseEndPoint = 'api/reverse/';
 
 
     /**
@@ -54,12 +54,12 @@ trait HttpClient
                             'message' => 'Bad request, method undefined',
                             'date' => date('c'),
                         ],
-                    ]);
+                    ], JSON_THROW_ON_ERROR);
             }
         } catch (ClientException $e) {
-            return json_decode($e->getResponse()->getBody()->getContents(), false);
+            return json_decode($e->getResponse()->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
         } catch (ServerException $e) {
-            return json_decode($e->getResponse()->getBody()->getContents(), false);
+            return json_decode($e->getResponse()->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
         } catch (HttpResponseException $e) {
             return json_encode([
                 'status' => [
@@ -68,7 +68,7 @@ trait HttpClient
                     'message' => $e->getMessage(),
                     'date' => date('c'),
                 ],
-            ]);
+            ], JSON_THROW_ON_ERROR);
         }
     }
 

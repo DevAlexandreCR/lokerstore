@@ -1,6 +1,6 @@
 <template>
-    <div class="container-fluid" id="accordion">
-        <div class="card border-primary m-2" v-show="hasFiltersActive">
+    <div class="" id="accordion">
+        <div class="card border-primary my-2" v-show="hasFiltersActive">
             <div class="card-header">
                 <h6>Filtros</h6>
             </div>
@@ -56,7 +56,7 @@
                 <button type="button" class="btn btn-primary btn-sm" @click="resetFilters()">Limpiar filtros</button>
             </div>
         </div>
-        <div class="card border-primary m-2">
+        <div class="card border-primary my-2">
           <div class="card-header">
               <h6>Categorias</h6>
           </div>
@@ -73,7 +73,7 @@
             </ul>
           </div>
         </div>
-        <div class="card border-primary m-2">
+        <div class="card border-primary my-2">
           <div class="card-header">
               <h6>Precio</h6>
           </div>
@@ -97,7 +97,7 @@
               <button type="button" class="btn btn-primary btn-sm" @click="sendQuery()">Aplicar</button>
           </div>
         </div>
-        <div class="card border-primary m-2">
+        <div class="card border-primary my-2">
           <div class="card-header">
               <h6>Colores</h6>
           </div>
@@ -124,7 +124,7 @@
               <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">Aplicar</button>
           </div>
         </div>
-        <div class="card border-primary m-2">
+        <div class="card border-primary my-2">
           <div class="card-header">
               <h6>Tallas</h6>
           </div>

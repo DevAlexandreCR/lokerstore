@@ -4,7 +4,8 @@
     <div class="container-fluid my-2 p-4 shadow-sm bg-secondary">
         <form name="search" class="justify-content-end flex-wrap"  method="GET" class="bg-dark" action="{{ route('tags.index') }}">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-6">
+                    <strong class="d-none d-sm-block text-muted">{{__('Tags')}}</strong>
                     @if ( session('success'))
 
                     <div class="container py-2">
@@ -18,7 +19,16 @@
                     </div>
 
                     @endif
-                    @error('name')
+                        @error('name')
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <strong>{{__('Error')}}</strong> {{$message}}
+                            </div>
+                        @enderror
+                    @error('search')
                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -27,17 +37,8 @@
                             <strong>{{__('Error')}}</strong> {{$message}}
                         </div>
                     @enderror
-                    @error('search')
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{__('Error')}}</strong> {{$message}}
-                    </div>
-                    @enderror
                 </div>
-                <div class="col-3 form-inline my-2 my-lg-0 align-self-right">
+                <div class="col-sm-6 form-inline my-2 my-lg-0 justify-content-end">
                     <input class="form-control form-control-sm mr-sm-2" name="search" type="search" placeholder="{{__('Search')}}" aria-label="Search">
                     <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" id="search" type="submit">{{__('Search')}}</button>
                 </div>
@@ -46,7 +47,7 @@
     </div>
     <div class="container bg-secondary shadow my-2">
         <div class="row">
-            <table class="table table-sm table-striped table-condensed table-hover table-secondary">
+            <table class="table table-sm table-striped table-condensed table-responsive-sm table-hover table-secondary">
                 <thead>
                     <tr>
                         <th>{{__('Id')}}</th>

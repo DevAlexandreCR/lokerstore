@@ -31,7 +31,7 @@
     </div>
     <div class="container-fluid my-2">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xl-3">
                 <div class="card">
                     <div class="card-header"><h5>{{__('User data')}}</h5></div>
                     <div class="card-body">
@@ -54,11 +54,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-xl-6">
                 <div class="card">
                     <div class="card-header"><h5>{{__('Order details')}}</h5></div>
                     <div class="card-body">
-                        <table class="table table-hover table-sm">
+                        <table class="table table-hover table-sm table-responsive-md">
                             <thead>
                             <tr class="text-left">
                                 <th>{{__('Id')}}</th>
@@ -104,17 +104,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-xl-3">
                 <div class="card">
                     <div class="card-header"><h5>{{__('Update order')}}</h5></div>
                     <form action="{{route('orders.update', $order->id)}}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
-                            @if($order->status === 'pending_pay' || $order->status === 'rejected')
+                            @if($order->status === \App\Constants\Orders::STATUS_PENDING_PAY || $order->status === \App\Constants\Orders::STATUS_REJECTED)
                                 <div class="form-group">
                                     <label for="amount">{{__('Price')}}</label>
-                                    <input class="form-control" type="number" name="amount" value="{{$order->amount}}">
+                                    <input class="form-control" type="number" id="amount" name="amount" value="{{$order->amount}}">
                                 </div>
                             @endif
                                 <label for="status">{{__('Status')}}</label>
@@ -141,7 +141,7 @@
                         <div class="card-header"><h5>{{__('Payment')}}</h5></div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-lg-6">
                                     <h6>{{__('Payer data')}}</h6>
                                     @if($order->payment->payer)
                                         <div class="row row-cols-2">
@@ -195,7 +195,7 @@
                                         <hr>
                                     @endif
                                 </div>
-                                <div class="col">
+                                <div class="col-lg-6">
                                     <h6>{{__('Status')}}</h6>
                                     @switch($order->payment->status)
                                         @case('FAILED')

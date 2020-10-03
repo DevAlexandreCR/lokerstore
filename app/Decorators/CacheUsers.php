@@ -22,7 +22,8 @@ class CacheUsers implements UsersInterface
 
     public function search(IndexRequest $request)
     {
-        return Cache::tags('users')->rememberForever('users', function () use ($request){
+        $search =  $request->get('search');
+        return Cache::tags('users')->rememberForever($search, function () use ($request){
             return $this->users->search($request);
         });
     }

@@ -10,19 +10,35 @@ use App\Models\Order;
 use App\Constants\Payments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Orders\indexRequest;
 
 class Orders implements OrderInterface
 {
-    protected $order;
+    protected Order $order;
 
     public function __construct(Order $order)
     {
         $this->order = $order;
     }
 
+    public function query(indexRequest $request)
+    {
+        $email = $request->get('email');
+        $date = $request->get('date');
+        $status = $request->get('status');
+        return $this->order::with(['user'])
+            ->orderBy('created_at', 'desc')
+            ->status($status)
+            ->userEmail($email)
+            ->date($date)
+            ->paginate(15);
+
+    }
+
     public function index()
     {
-        return $this->order::with(['user'])->get();
+        return $this->order::with(['user'])
+            ->get();
     }
 
     public function store(Request $request): Order

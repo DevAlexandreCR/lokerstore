@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-2 p-0" style="z-index: 1">
+    <div class="container-fluid">
+        <div class="row min-vh-100 flex-column  flex-md-row">
             @yield('sidebar',View::make('admin.sidebar'))
+            <main class="col bg-faded py-3 flex-grow-1">
+                @yield('main')
+            </main>
         </div>
-        <div class="col">
-            @yield('main') 
-        </div>
-    </div> 
-</div>
+    </div>
 @endsection

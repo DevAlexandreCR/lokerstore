@@ -14,7 +14,6 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-
     use SoftDeletes;
 
     /**
@@ -84,6 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if (empty($search)) {
             return null;
         }
+
         return $query
                 ->where('name', 'like', '%' . $search . '%')
                 ->orWhere('lastname', 'like', '%' . $search . '%')

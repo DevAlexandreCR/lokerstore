@@ -27,14 +27,14 @@
     </div>
     <div class="container py-4">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-lg-8">
                 <div class="card card">
                     <div class="modal-header">
                         <h3>{{__('Order summary')}}</h3>
                         <small class="text-muted">{{$order->created_at}}</small>
                     </div>
                     <div class="card-body">
-                        <table class="table table-borderless">
+                        <table class="table table-borderless table-responsive-lg">
                             <thead>
                             <tr class="text-center">
                                 <th scope="col">{{__('Photo')}}</th>
@@ -71,8 +71,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="card">
+            <div class="col-lg-4">
+                <div class="card my-2 my-lg-0">
                     <div class="card-header">
                         {{$order->getStatus()}}
                     </div>

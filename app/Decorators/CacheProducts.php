@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheProducts implements ProductsInterface
 {
-    protected $products;
+    protected Products $products;
 
     public function __construct(Products $products)
     {
@@ -24,7 +24,7 @@ class CacheProducts implements ProductsInterface
     {
         $query = $this->convertQueryToString($request);
 
-        return Cache::tags(['products'])->rememberForever($query, function () use ($request){
+        return Cache::tags('products')->rememberForever($query, function () use ($request){
            return $this->products->query($request);
         });
     }
@@ -33,10 +33,10 @@ class CacheProducts implements ProductsInterface
     {
         $product = $this->products->store($request);
 
-        Cache::tags('products')->flush();
+        Cache::tags(['products', 'api.products'])->flush();
 
         $savePhotoAction = new SavePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('Photos'));
+        $savePhotoAction->execute($product->id, $request->file('photos'));
 
         return $product;
     }
@@ -45,11 +45,10 @@ class CacheProducts implements ProductsInterface
     {
         $product = $this->products->update($request, $product);
 
-        Cache::tags('products')->flush();
-
+        Cache::tags(['products', 'api.products'])->flush();
         $savePhotoAction = new SavePhotoAction();
         $deletePhotoAction = new DeletePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('Photos'));
+        $savePhotoAction->execute($product->id, $request->file('photos'));
         $deletePhotoAction->execute($request->get('delete_photos'));
 
         return $product;
@@ -59,7 +58,7 @@ class CacheProducts implements ProductsInterface
     {
         $product = $this->products->setActive($request, $product);
 
-        Cache::tags('products')->flush();
+        Cache::tags(['products', 'api.products'])->flush();
 
         return $product;
     }
@@ -68,12 +67,12 @@ class CacheProducts implements ProductsInterface
     {
         $this->products->destroy($product);
 
-        return Cache::tags('products')->flush();
+        return Cache::tags(['products', 'api.products'])->flush();
     }
 
     public function index()
     {
-        return Cache::tags(['products'])->rememberForever('all', function () {
+        return Cache::tags(['products', 'api.products'])->rememberForever('all', function () {
             return $this->products->index();
         });
     }
@@ -85,6 +84,6 @@ class CacheProducts implements ProductsInterface
         $search = $request->get('search', null);
         $page = $request->get('page', 1);
 
-        return 'products.page=' . $page . '$search=' . $search .'$category=' . $category . '$tags=' . $tags;
+        return '.page=' . $page . '$search=' . $search .'$category=' . $category . '$tags=' . $tags;
     }
 }

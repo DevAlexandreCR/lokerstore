@@ -4,67 +4,15 @@
     <div class="container-fluid my-2 p-4 shadow-sm bg-secondary round">
         <form name="search"  method="GET" action="{{ route('products.index') }}">
             <div class="row">
-                <div class="col-sm-3">
-                <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-link" data-toggle="modal" data-target="#sortModal" onclick="modal({{json_encode($filters)}}, true)" role="button"><ion-icon name="options-outline"></ion-icon></a>
-                    <a class="btn btn-link text-decoration-none" data-toggle="modal" onclick="modal({{json_encode($filters)}}, true)" data-target="#sortModal">{{__('Filter and sort')}}</a>
-                </div>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        @foreach ($filters as $key => $value)
-                            @switch($key)
-                                @case('category')
-                                    @if ($value)
-                                        <input type="hidden" name="category" id="{{$value}}tag" value="{{$value}}">
-                                        <span class="badge badge-pill badge-dark shadow-sm p-0 ml-2 pl-2">{{$value}}
-                                            <a class="btn btn-link" onclick="removeFilter('{{$value}}')">
-                                                <ion-icon name="close-outline"></ion-icon>
-                                            </a>
-                                        </span>
-                                    @endif
-                                    @break
-                                @case('tags')
-                                    @if ($value)
-                                        @foreach ($value as $key => $val)
-                                            <input type="hidden" name="tags[{{$key}}]" id="{{$key}}tag" value="{{$key}}">
-                                            <span class="badge badge-pill badge-danger shadow-sm p-0 ml-2 pl-2">{{$key}}
-                                                <a class="btn btn-link" onclick="removeFilter('{{$key}}')">
-                                                    <ion-icon name="close-outline"></ion-icon>
-                                                </a>
-                                            </span>
-                                        @endforeach
-                                    @endif
-                                    @break
-                                @case('orderBy')
-                                    @if ($value && $value != 'desc')
-                                        <input type="hidden" name="orderBy" id="{{$value}}tag" value="{{$value}}">
-                                        <span class="badge badge-pill badge-light shadow-sm p-0 ml-2 pl-2">{{__('Order by')}} {{$value}}
-                                            <a class="btn btn-link" onclick="removeFilter('{{$value}}')">
-                                                <ion-icon name="close-outline"></ion-icon>
-                                            </a>
-                                        </span>
-                                    @endif
-                                @break
-                                @case('search')
-                                    @if ($value)
-                                        <input type="hidden" name="search" id="{{$value}}tag" value="{{$value}}">
-                                        <span class="badge badge-pill badge-success shadow-sm p-0 ml-2 pl-2">{{$value}}
-                                            <a class="btn btn-link" onclick="removeFilter('{{$value}}')">
-                                                <ion-icon name="close-outline"></ion-icon>
-                                            </a>
-                                        </span>
-                                    @endif
-                                    @break
-                                @default
-
-                            @endswitch
-                        @endforeach
+                <div class="col-sm-8">
+                    <div class="btn-group btn-group-sm" role="group">
+                    <a class="btn btn-link" data-toggle="modal" data-target="#sortModal" onclick="modal({{json_encode($filters)}}, true)" role="button"><ion-icon name="options-outline"></ion-icon></a>
+                        <a class="btn btn-link text-decoration-none" data-toggle="modal" onclick="modal({{json_encode($filters)}}, true)" data-target="#sortModal">{{__('Filter and sort')}}</a>
                     </div>
                 </div>
-                <div class="col-4 form-inline my-2 my-lg-0 float-right">
+                <div class="col-sm-4 form-inline my-2 my-lg-0 justify-content-end">
                     <input class="form-control form-control-sm mr-sm-2" name="search" type="search" placeholder="{{__('Search')}}" aria-label="Search">
-                    <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" id="search" type="submit">{{__('Search')}}</button>
+                    <button class="btn btn-outline-primary btn-sm my-2 my-sm-1" id="search" type="submit">{{__('Search')}}</button>
                 </div>
             </div>
         </form>
@@ -97,7 +45,7 @@
   @endif
     <div class="container-fluid bg-secondary shadow-sm my-2">
         <div class="row">
-            <table class="table table-sm table-striped table-condensed table-hover table-secondary ">
+            <table class="table table-sm table-striped table-condensed table-hover table-secondary table-responsive-xl">
                 <thead>
                 <tr>
                     <th>{{__('Id')}}</th>

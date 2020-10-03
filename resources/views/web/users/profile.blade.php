@@ -15,13 +15,12 @@
 
     @endif
 
-    <div class="container py-3" style="max-width: 80%">
-        <div class="container">
-            <div class="modal-header">
-                <h5 class="modal-title font-weight-bold">{{ __('User info') }}</h5>
-                <a href="{{ route('users.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
-            </div>
-            <form action="{{route('users.update', ['user' => $user])}}" method="POST">
+    <div class="container py-3">
+        <div class="modal-header">
+            <h5 class="modal-title font-weight-bold">{{ __('User info') }}</h5>
+            <a href="{{ route('users.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
+        </div>
+        <form action="{{route('users.update', ['user' => $user])}}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -155,7 +154,6 @@
                     </div>
                 </div>
             </form>
-        </div>
     </div>
 @endsection
 

@@ -27,6 +27,31 @@ class Order extends Model
         return $this->hasOne(Payment::class);
     }
 
+    public function scopeStatus($query, string $status = null)
+    {
+        return $query->where('status', $status ?: Orders::STATUS_PENDING_SHIPMENT);
+    }
+    public function scopeDate($query, string $date = null)
+    {
+        if ($date) {
+            return $query->whereDate('created_at', $date);
+        }
+
+        return null;
+    }
+
+    public function scopeUserEmail($query, string $email = null)
+    {
+        if ($email){
+            return $query->whereHas('user', function($query) use ($email) {
+                $query->where('email', 'like', '%' . $email . '%');
+            });
+        }
+
+        return null;
+    }
+
+
     public function getStatus(): string
     {
         switch ($this->status)

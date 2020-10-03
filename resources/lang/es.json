@@ -201,5 +201,11 @@
     "View permissions" : "Ver permisos para ",
     "Order details" : "Detalles de la orden",
     "Payment" : "Pago",
-    "Update order" : "Actualizar orden"
+    "Update order" : "Actualizar orden",
+    "See all orders" : "Ver todas las órdenes",
+    "User" : "Usuario",
+    "Date" : "Fecha",
+    "Search user" : "Buscar usuario",
+    "Save product" : "Guardar producto",
+    "Update product" : "Actualizar producto"
 }

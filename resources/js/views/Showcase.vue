@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid" id="showcase">
+    <div id="showcase" class="m-auto">
         <div class="container">
             <div class="row my-1" id="navbar-category">
                 <div class="col-sm-2 d-none d-sm-block">
@@ -34,11 +34,17 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-sm-3">
+        <div class="col-3">
+            <a class="btn btn-sm btn-dark btn-block d-md-none" data-toggle="collapse" href="#collapseFilters" data-trigger="#collapseFilters" role="button" aria-expanded="false"
+               aria-controls="collapseFilters">
+                Filtros
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-lg-2 container collapse navbar-collapse" id="collapseFilters">
                 <filters-component @sendQuery="sendQuery" :query="query" @setSearch="setSearch" :search="search"></filters-component>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9 col-lg-10">
                 <products-grid-component @sendQuery="sendQuery" :loading="loading" :products="products"></products-grid-component>
             </div>
         </div>
@@ -136,6 +142,7 @@
             },
 
             sendQuery(query, reload = false) {
+                $('#collapseFilters').collapse('hide')
                 this.$router.push({name: 'showcase', query: query}).catch(()=>{})
                 this.loading = true
                 if (reload) location.reload()
@@ -150,6 +157,16 @@
                         this.products.push(products)
                     })
                 })
+            },
+
+            getScreenSize() {
+                let size = screen.width
+
+                if (size < 768) {
+                    $('#collapseFilters').collapse('hide')
+                } else {
+                    $('#collapseFilters').collapse('show')
+                }
             }
         },
 
@@ -159,7 +176,7 @@
         },
 
         mounted() {
-
+            this.getScreenSize()
         }
     }
 </script>
