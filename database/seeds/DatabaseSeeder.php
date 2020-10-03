@@ -16,12 +16,10 @@ class DatabaseSeeder extends Seeder
                 PermissionSeeder::class,
                 RoleSeeder::class,
                 CategorySeeder::class,
-                AdminSeeder::class,
                 TypeSizeSeeder::class,
                 SizeSeeder::class,
                 ColorSeeder::class,
-                TagSeeder::class,
-                ProductSeeder::class
+                TagSeeder::class
             ]);
     }
 }

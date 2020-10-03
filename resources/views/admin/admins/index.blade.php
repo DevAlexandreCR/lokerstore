@@ -106,7 +106,6 @@
         $('#enableEmployee').on('show.bs.modal', function (event) {
             let button = $(event.relatedTarget) // Button that triggered the modal
             let admin = button.data('admin')
-            console.log(admin)
             let modal = $(this)
             let value
             if (admin.is_active) {
@@ -123,23 +122,18 @@
                 modal.find('.modal-body button').text('Habilitar')
             }
             let url = `${document.documentURI}/${admin.id}`
-            console.log(url)
             $('#inputEnable').val(value)
-            $('formEnable').attr('action', url)
+            $('#formEnable').attr('action', url)
         })
         $('#removeEmployee').on('show.bs.modal', function (event) {
             let button = $(event.relatedTarget) // Button that triggered the modal
             let admin = button.data('admin')
             console.log(admin)
             let modal = $(this)
-            let value
-            value = 0
             modal.find('.modal-title').text('Eliminar usuario ' + admin.email)
             modal.find('.modal-body p').text(admin.name)
             let url = `${document.documentURI}/${admin.id}`
-            console.log(url)
-            $('#inputRemove').val(value)
-            $('formRemove').attr('action', url)
+            $('#formRemove').attr('action', url)
         })
     });
 

@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'is_active' => true
         ]);
 
-        factory(User::class, 10)->create()->each(function (User $user) {
+        factory(User::class, 30)->create()->each(function (User $user) {
             factory(Cart::class)->create([
                 'user_id' => $user->id
             ]);
