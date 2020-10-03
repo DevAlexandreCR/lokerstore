@@ -34,11 +34,11 @@
             </transition>
         </div>
         <div class="container" v-show="isNotHomeRoute()">
-        <div class="row justify-content-center">
-            <div class="col-sm-6 first">
+        <div class="row">
+            <div class="col-md-6 first">
                 <gender-component :filter="'Mujer'"></gender-component>
             </div>
-            <div class="col-sm-6">
+            <div class="col-md-6">
                 <gender-component :filter="'Hombre'"></gender-component>
             </div>
         </div>

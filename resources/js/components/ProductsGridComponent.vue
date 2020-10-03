@@ -1,21 +1,21 @@
 <template>
-    <div class="container-fluid mt-1">
+    <div class="mt-1">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-8">
                 <div class="container">
-                    <div class="form-inline pt-4 pl-4">
+                    <div class="form-inline pt-4 pl-2">
                         <label class="text-small" for="exampleFormControlSelect1">Ordenar por: </label>
-                        <select class="form-control ml-2 mr-2" id="exampleFormControlSelect1" v-on:change="orderBy($event)">
+                        <select class="form-control form-control-sm ml-2 mr-2" id="exampleFormControlSelect1" v-on:change="orderBy($event)">
                             <option selected value="0">Ordenar por </option>
                             <option value="1">Menor Precio</option>
                             <option value="2">Mayor Precio</option>
                             <option value="3">Nombre</option>
                         </select>
-                        <label class="text-small" for="exampleFormControlSelect1"> Encontrados {{products.length}} productos </label>
+                        <small class="text-small" for="exampleFormControlSelect1"> Encontrados {{products.length}} productos </small>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 pt-4">
+            <div class="col-4 pt-4">
                 <paginate-links v-if="products.length > 0"
                                 for="products"
                                 :classes="{
@@ -27,13 +27,12 @@
                 </paginate-links>
             </div>
         </div>
-        <paginate v-if="products.length > 0" name="products" :list="products" :per="15" class="paginate-list">
-            <div class="row row-cols-3" >
-                <div class="col-sm-4 my-2" v-for="product in paginated('products')" :key="product.name">
+        <paginate v-if="products.length > 0" name="products" :list="products" :per="15" class="">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-sm-6  my-2" v-for="product in paginated('products')" :key="product.name">
                     <product-component :product="product"></product-component>
                 </div>
             </div>
-
         </paginate>
 
         <div v-else>

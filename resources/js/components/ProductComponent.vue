@@ -3,14 +3,14 @@
         <img :src="'/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-5 text-name">{{product.name}}</div>
-                <div class="col-sm-7"><p class="text-price">
+                <div class="col-lg-6 text-name text-sm-center">{{product.name}}</div>
+                <div class="col-lg-6"><p class="text-price">
                     <span class="text-old-price">${{ product.price | oldPrice }}</span>
                     <strong>${{ product.price | price }}</strong></p>
                 </div>
             </div>
             <div class="row container">
-                <div class="text-left">{{ product.description | truncate }}</div>
+                <p class="text-left d-none d-md-block">{{ product.description | truncate }}</p>
             </div>
         </div>
     </div>

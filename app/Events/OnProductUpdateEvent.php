@@ -15,7 +15,7 @@ class OnProductUpdateEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $product;
+    public Product $product;
 
     /**
      * OnProductUpdateEvent constructor.

@@ -22,7 +22,7 @@ class CacheApiProducts implements ApiProductsInterface
     public function query(IndexRequest $request)
     {
         $query = $this->convertQueryToString($request);
-        return Cache::tags(['api.products'])->rememberForever($query, function () use ($request) {
+        return Cache::tags('api.products')->rememberForever($query, function () use ($request) {
             return $this->apiProducts->query($request);
         });
     }
