@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 class CacheApiProducts implements ApiProductsInterface
 {
 
-    protected $apiProducts;
+    protected ApiProducts $apiProducts;
 
     public function __construct(ApiProducts $apiProducts)
     {

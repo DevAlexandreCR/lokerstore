@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheRoles implements RoleInterface
 {
-    protected $roles;
+    protected Roles $roles;
 
     public function __construct(Roles $roles)
     {

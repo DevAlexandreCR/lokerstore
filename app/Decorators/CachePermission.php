@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CachePermission implements PermissionInterface
 {
-    protected $permissions;
+    protected Permissions $permissions;
 
     public function __construct(Permissions $permissions)
     {

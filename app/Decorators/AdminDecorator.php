@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class AdminDecorator implements AdminInterface
 {
-    protected $admins;
+    protected Admins $admins;
 
     public function __construct(Admins $admins)
     {

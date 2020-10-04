@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 class CacheCategories implements CategoryInterface
 {
 
-    protected $categories;
+    protected Categories $categories;
 
     public function __construct(Categories $categories)
     {

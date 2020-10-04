@@ -106,7 +106,7 @@ class GenerateOrder implements OrderInterface
         return $this->orders->find($order_id);
     }
 
-    public function getRequestInformation(int $order_id)
+    public function getRequestInformation(int $order_id): RedirectResponse
     {
         $order = $this->orders->find($order_id);
         $response = $this->sendRequest( PlaceToPay::GET_REQUEST_INFORMATION, $order);
@@ -114,7 +114,7 @@ class GenerateOrder implements OrderInterface
         return $this->responseHandler($response, $order);
     }
 
-    public function resend(UpdateRequest $request)
+    public function resend(UpdateRequest $request): RedirectResponse
     {
         $order_id = $request->get('order_id', null);
         $order = $this->orders->find($order_id);

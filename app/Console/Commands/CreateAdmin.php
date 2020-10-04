@@ -24,21 +24,11 @@ class CreateAdmin extends Command
     protected $description = 'Command create a new user admin';
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
      * @return void
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
+    public function handle(): void
     {
         $this->makeUser();
     }
