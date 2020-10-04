@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +15,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
+    protected string $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     public function __construct()
     {
@@ -38,7 +37,7 @@ class LoginController extends Controller
      * ademas el atributo is_active debe ser true para poder loguearse
      *
      * @param Request $request
-     * @return Array
+     * @return array
      */
     protected function credentials(Request $request): array
     {
@@ -62,7 +61,7 @@ class LoginController extends Controller
         ) {
             $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
+            $this->sendLockoutResponse($request);
         }
 
         if ($this->attemptLogin($request)) {

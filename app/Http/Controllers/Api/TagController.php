@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class TagController extends Controller
 {
-    protected $tags;
+    protected Tag $tags;
 
     public function __construct(Tag $tags)
     {
@@ -17,6 +17,6 @@ class TagController extends Controller
 
     public function index() : JsonResponse
     {
-        return response()->json($this->tags->all()->toArray());
+        return response()->json($this->tags::all()->toArray());
     }
 }

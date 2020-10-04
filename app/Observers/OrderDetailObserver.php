@@ -45,6 +45,9 @@ class OrderDetailObserver
         $stock->save();
     }
 
+    /**
+     * @param OrderDetail $orderDetail
+     */
     public function deleted(OrderDetail $orderDetail): void
     {
         $order = $orderDetail->order;

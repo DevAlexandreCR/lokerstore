@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -27,6 +28,9 @@ class Category extends Model
         return $this->hasMany(__CLASS__, 'id_parent')->select(['id', 'name', 'id_parent']);
     }
 
+    /**
+     * @return Category[]|Collection
+     */
     public static function primaries()
     {
         return self::all('id', 'name', 'id_parent')
@@ -34,11 +38,17 @@ class Category extends Model
             ->load(['children', 'children.products']);
     }
 
+    /**
+     * @return Category[]|Collection
+     */
     public static function subCategories()
     {
         return self::all(['id', 'name', 'id_parent'])->where('id_parent', '!=', null);
     }
 
+    /**
+     * @return string
+     */
     public function getFullCategory(): string
     {
         return $this->parent()->qualifyColumn('name') . ' - ' . $this->name;

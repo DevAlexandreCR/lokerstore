@@ -11,11 +11,19 @@ class Tag extends Model
 
     protected $table = 'tags';
 
+    /**
+     * @return BelongsToMany
+     */
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }
 
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
     public function scopeSearch($query, $search)
     {
         if (! $search) {

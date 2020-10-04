@@ -12,6 +12,11 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
+    /**
+     * @param User $user
+     * @param Carts $carts
+     * @return View
+     */
     public function show(User $user, Carts $carts): View
     {
         return view('web.users.cart.show',
@@ -20,9 +25,13 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * @param AddCartRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function add(AddCartRequest $request, User $user): RedirectResponse
     {
-
         $product_id = $request->get('product_id', null);
         $color_id = $request->get('color_id', null);
         $size_id = $request->get('size_id', null);
@@ -35,6 +44,11 @@ class CartController extends Controller
         return redirect()->back()->with('success', __('Product Added to cart'));
     }
 
+    /**
+     * @param UpdateRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function update(UpdateRequest $request, User $user): RedirectResponse
     {
         $stock_id = $request->get('stock_id', null);
@@ -46,6 +60,11 @@ class CartController extends Controller
         return redirect()->back()->with('success', __('Product Added to cart'));
     }
 
+    /**
+     * @param User $user
+     * @param Stock $stock
+     * @return RedirectResponse
+     */
     public function remove(User $user, Stock $stock): RedirectResponse
     {
         $user->cart->stocks()->detach($stock->id);

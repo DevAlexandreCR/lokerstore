@@ -15,7 +15,7 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    protected $roles;
+    protected RoleInterface $roles;
 
     public function __construct(RoleInterface $roles)
     {

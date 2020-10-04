@@ -21,6 +21,10 @@ class Orders implements OrderInterface
         $this->order = $order;
     }
 
+    /**
+     * @param indexRequest $request
+     * @return mixed
+     */
     public function query(indexRequest $request)
     {
         $email = $request->get('email');
@@ -41,11 +45,20 @@ class Orders implements OrderInterface
             ->get();
     }
 
+    /**
+     * @param Request $request
+     * @return Order
+     */
     public function store(Request $request): Order
     {
         return $this->order->create($request->all());
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return Model|mixed
+     */
     public function update(Request $request, Model $model)
     {
         $model->update($request->all());
@@ -53,17 +66,28 @@ class Orders implements OrderInterface
         return $model;
     }
 
+    /**
+     * @param Model $model
+     */
     public function destroy(Model $model): void
     {
-        $model->delete();
+        $this->order::destroy($model->id);
     }
 
+    /**
+     * @param int $order_id
+     * @return mixed
+     */
     public function find(int $order_id)
     {
         return $this->order->load('payment')->findOrFail($order_id);
     }
 
-    public function setStatus(int $order_id, string $status)
+    /**
+     * @param int $order_id
+     * @param string $status
+     */
+    public function setStatus(int $order_id, string $status): void
     {
         $order = $this->find($order_id);
         $order->update([
@@ -71,6 +95,10 @@ class Orders implements OrderInterface
         ]);
     }
 
+    /**
+     * @param string $status
+     * @return string
+     */
     public function getStatusFromStatusPayment(string $status): string
     {
         switch ($status)
@@ -103,7 +131,10 @@ class Orders implements OrderInterface
         // TODO: Implement reverse() method.
     }
 
-    public function cancel(UpdateRequest $request)
+    /**
+     * @param UpdateRequest $request
+     */
+    public function cancel(UpdateRequest $request): void
     {
         $order_id = $request->get('order_id', null);
         $order = $this->find($order_id);

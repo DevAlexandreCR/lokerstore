@@ -8,7 +8,7 @@ use App\Models\Product;
 
 class SetStockProduct
 {
-    public $updateStockProductAction;
+    public UpdateStockProductAction $updateStockProductAction;
 
     /**
      * Create the event listener.
@@ -26,7 +26,7 @@ class SetStockProduct
      * @param OnStockCreatedOrUpdatedEvent $event
      * @return void
      */
-    public function handle(OnStockCreatedOrUpdatedEvent $event)
+    public function handle(OnStockCreatedOrUpdatedEvent $event): void
     {
         $stock = $event->stock;
 

@@ -44,11 +44,17 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_active' => 'boolean'
     ];
 
+    /**
+     * @return HasOne
+     */
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);
     }
 
+    /**
+     * @param $value
+     */
     public function setNameAttribute($value): void
     {
         $this->attributes['name'] = strtolower($value);
@@ -56,6 +62,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['name'] = ucwords($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setLastnameAttribute($value): void
     {
         $this->attributes['lastname'] = strtolower($value);
@@ -63,21 +72,35 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['lastname'] = ucwords($value);
     }
 
+    /**
+     * @return HasMany
+     */
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * @param $value
+     */
     public function setEmailAttribute($value): void
     {
         $this->attributes['email'] = strtolower($value);
     }
 
+    /**
+     * @return string
+     */
     public function getFullNameAttribute(): string
     {
         return "{$this->name} {$this->lastname}";
     }
 
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
     public function scopeSearch($query, $search)
     {
         if (empty($search)) {

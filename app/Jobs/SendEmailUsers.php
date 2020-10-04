@@ -15,7 +15,7 @@ class SendEmailUsers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $order;
+    protected Order $order;
 
     public function __construct(Order $order)
     {

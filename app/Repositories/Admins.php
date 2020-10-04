@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class Admins implements AdminInterface
 {
-    protected $admin;
+    protected Admin $admin;
 
     public function __construct(Admin $admin)
     {
@@ -23,6 +23,10 @@ class Admins implements AdminInterface
         return $this->admin::with('roles')->get();
     }
 
+    /**
+     * @param Request $request
+     * @return mixed|void
+     */
     public function store(Request $request)
     {
         $this->admin->create($request->all());
@@ -35,8 +39,12 @@ class Admins implements AdminInterface
         $model->syncRoles($request->roles);
     }
 
+    /**
+     * @param Model $model
+     * @return mixed|void
+     */
     public function destroy(Model $model)
     {
-        $model->delete();
+        $this->admin::destroy($model->id);
     }
 }

@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Permission;
 
 class Permissions implements PermissionInterface
 {
-    protected $permission;
+    protected Permission $permission;
 
     public function __construct(Permission $permission)
     {
@@ -24,6 +24,10 @@ class Permissions implements PermissionInterface
         return $this->permission::pluck('name', 'id');
     }
 
+    /**
+     * @param Request $request
+     * @return mixed|void
+     */
     public function store(Request $request)
     {
         $this->permission::create([
@@ -32,6 +36,11 @@ class Permissions implements PermissionInterface
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return mixed|void
+     */
     public function update(Request $request, Model $model)
     {
         $model->update([
@@ -39,8 +48,12 @@ class Permissions implements PermissionInterface
         ]);
     }
 
+    /**
+     * @param Model $model
+     * @return mixed|void
+     */
     public function destroy(Model $model)
     {
-        $model->delete();
+        $this->permission::destroy($model->id);
     }
 }

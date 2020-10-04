@@ -18,11 +18,11 @@ class QueryStatusPayment implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, HttpClient;
 
-    public $order;
+    public Order $order;
 
-    public $tries = 5;
+    public int $tries = 5;
 
-    public $maxExceptions = 3;
+    public int $maxExceptions = 3;
 
     public function __construct(Order $order)
     {
@@ -45,6 +45,10 @@ class QueryStatusPayment implements ShouldQueue
         $this->responseHandler($response, $pay);
     }
 
+    /**
+     * @param $response
+     * @param Pay $payments
+     */
     public function responseHandler($response, Pay $payments): void
     {
         $status = $response->status->status;

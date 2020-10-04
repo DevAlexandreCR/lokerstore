@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 
 class AdminPermissionsController extends Controller
 {
-    public $admin;
+    public Admin $admin;
 
     public function __construct(Admin $admin)
     {

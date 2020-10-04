@@ -23,11 +23,20 @@ class Tags implements TagsInterface
         return $this->tag::all(['id', 'name']);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function store(Request $request)
     {
         return $this->tag->create($request->all());
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return Model|mixed
+     */
     public function update(Request $request, Model $model)
     {
         $model->update($request->all());
@@ -35,11 +44,19 @@ class Tags implements TagsInterface
         return $model;
     }
 
+    /**
+     * @param Model $model
+     * @return mixed|void
+     */
     public function destroy(Model $model)
     {
         $this->tag::destroy($model->id);
     }
 
+    /**
+     * @param IndexRequest $request
+     * @return mixed
+     */
     public function search(IndexRequest $request)
     {
         $search = $request->get('search', null);

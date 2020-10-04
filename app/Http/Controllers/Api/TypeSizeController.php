@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class TypeSizeController extends Controller
 {
-    protected $typeSizes;
+    protected TypeSize $typeSizes;
 
     public function __construct(TypeSize $typeSizes)
     {

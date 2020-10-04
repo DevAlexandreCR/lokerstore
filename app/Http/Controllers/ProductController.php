@@ -7,6 +7,10 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+    /**
+     * @param Product $product
+     * @return View
+     */
     public function show(Product $product): View
     {
         return view('web.show', [

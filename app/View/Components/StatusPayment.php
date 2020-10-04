@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 class StatusPayment extends Component
 {
-    public $order;
+    public Order $order;
 
     /**
      * Create a new component instance.

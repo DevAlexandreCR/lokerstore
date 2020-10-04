@@ -12,7 +12,7 @@ class OrderPayed extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
+    public Order $order;
 
     public function __construct(Order $order)
     {

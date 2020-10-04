@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -17,26 +16,41 @@ class Product extends Model
         'name', 'description', 'price', 'stock', 'id_category', 'is_active'
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'id_category')->select(['id', 'name', 'id_parent']);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function stocks(): HasMany
     {
         return $this->hasMany(Stock::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function photos(): HasMany
     {
         return $this->hasMany(Photo::class)->select(['id', 'name', 'product_id']);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function sizes(): BelongsToMany
     {
         return $this
@@ -46,6 +60,11 @@ class Product extends Model
                     }]);
     }
 
+    /**
+     * @param $query
+     * @param $category
+     * @return mixed|null
+     */
     public function scopeByCategory($query, $category)
     {
         if (empty($category)) return null;
@@ -59,6 +78,11 @@ class Product extends Model
         });
     }
 
+    /**
+     * @param $query
+     * @param $price
+     * @return mixed|null
+     */
     public function scopePrice($query, $price)
     {
         if (!$price) return null;
@@ -70,11 +94,20 @@ class Product extends Model
                     ->where('price', '<', $price[1]);
     }
 
+    /**
+     * @param string $price
+     * @return array
+     */
     public function splitPrice(string $price) : array
     {
         return explode('-', $price);
     }
 
+    /**
+     * @param $query
+     * @param $colors
+     * @return mixed|null
+     */
     public function scopeColors($query, $colors)
     {
         if (empty($colors)) return null;
@@ -84,6 +117,11 @@ class Product extends Model
         });
     }
 
+    /**
+     * @param $query
+     * @param $sizes
+     * @return mixed|null
+     */
     public function scopeSizes($query, $sizes)
     {
         if (empty($sizes)) return null;
@@ -93,6 +131,11 @@ class Product extends Model
         });
     }
 
+    /**
+     * @param $query
+     * @param $product_id
+     * @return mixed|null
+     */
     public function scopeSizesByProduct($query, $product_id)
     {
         return $query->whereHas('stocks', function ($query) use ($product_id) {
@@ -101,11 +144,20 @@ class Product extends Model
         });
     }
 
+    /**
+     * @param $query
+     * @return mixed|null
+     */
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
+    /**
+     * @param $query
+     * @param $tags
+     * @return mixed|null
+     */
     public function scopeWithTags($query, $tags)
     {
         if (empty($tags)) return null;
@@ -115,6 +167,11 @@ class Product extends Model
         });
     }
 
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed|null
+     */
     public function scopeSearch($query, $search)
     {
         if (empty($search)) return null;
@@ -124,7 +181,10 @@ class Product extends Model
                 ->orWhere('description', 'like', '%' . $search . '%');
     }
 
-    public function getStatus() : string
+    /**
+     * @return string
+     */
+    public function getStatus(): string
     {
         if ($this->is_active){
             return __('Enabled');
@@ -133,17 +193,23 @@ class Product extends Model
         return __('Disabled');
     }
 
-    public function getPrice() : string
+    /**
+     * @return string
+     */
+    public function getPrice(): string
     {
        return round($this->price, 0,  PHP_ROUND_HALF_UP) . 'COP';
     }
 
+    /**
+     * @return false|string
+     */
     public function getDescription()
     {
         return substr($this->description, 0 , 30);
     }
 
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
 
@@ -164,7 +230,7 @@ class Product extends Model
      * @param string $category
      * @return integer
      */
-    private function getIdCategory(string $category) : int
+    private function getIdCategory(string $category): int
     {
         return Category::where('name', $category)->firstOrFail()->id;
     }

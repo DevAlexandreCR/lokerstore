@@ -11,7 +11,7 @@ class ProductObserver
      * Handle the product "updated" event.
      * @param Product $product
      */
-    public function updated(Product $product)
+    public function updated(Product $product): void
     {
         event(new OnProductUpdateEvent($product));
     }

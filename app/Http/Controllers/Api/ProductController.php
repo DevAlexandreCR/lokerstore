@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
-    protected $apiProducts;
+    protected ApiProductsInterface $apiProducts;
 
     public function __construct(ApiProductsInterface $apiProducts)
     {

@@ -12,25 +12,45 @@ class Order extends Model
 {
     protected $fillable = ['user_id', 'status', 'amount'];
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function orderDetails(): HasMany
     {
         return $this->hasMany(OrderDetail::class);
     }
 
+    /**
+     * @return HasOne
+     */
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
     }
 
+    /**
+     * @param $query
+     * @param string|null $status
+     * @return mixed
+     */
     public function scopeStatus($query, string $status = null)
     {
         return $query->where('status', $status ?: Orders::STATUS_PENDING_SHIPMENT);
     }
+
+    /**
+     * @param $query
+     * @param string|null $date
+     * @return |null
+     */
     public function scopeDate($query, string $date = null)
     {
         if ($date) {
@@ -40,6 +60,11 @@ class Order extends Model
         return null;
     }
 
+    /**
+     * @param $query
+     * @param string|null $email
+     * @return |null
+     */
     public function scopeUserEmail($query, string $email = null)
     {
         if ($email){
@@ -51,7 +76,9 @@ class Order extends Model
         return null;
     }
 
-
+    /**
+     * @return string
+     */
     public function getStatus(): string
     {
         switch ($this->status)
@@ -70,14 +97,22 @@ class Order extends Model
                 return __('Complete');
             case Orders::STATUS_FAILED:
                 return __('Failed');
+            default:
+                return __('');
         }
     }
 
-    public function getAmount() : string
+    /**
+     * @return string
+     */
+    public function getAmount(): string
     {
         return round($this->amount, 0,  PHP_ROUND_HALF_UP) . 'COP';
     }
 
+    /**
+     * @return array
+     */
     public function getAllStatus(): array
     {
         return [

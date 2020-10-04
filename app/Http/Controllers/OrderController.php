@@ -20,6 +20,11 @@ class OrderController extends Controller
         $this->orders = $orders;
     }
 
+    /**
+     * @param StoreRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function store(StoreRequest $request, User $user): RedirectResponse
     {
         return $this->orders->store($request);

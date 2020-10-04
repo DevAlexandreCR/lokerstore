@@ -13,7 +13,7 @@ use function GuzzleHttp\Promise\all;
 
 class Roles implements RoleInterface
 {
-    protected $role;
+    protected Role $role;
 
     public function __construct(Role $role)
     {
@@ -25,6 +25,10 @@ class Roles implements RoleInterface
         return $this->role::all(['id', 'name']);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed|void
+     */
     public function store(Request $request)
     {
         $this->role::create([
@@ -33,6 +37,11 @@ class Roles implements RoleInterface
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return mixed|void
+     */
     public function update(Request $request, Model $model)
     {
         $model->update($request->all());
@@ -40,8 +49,12 @@ class Roles implements RoleInterface
         $model->syncPermissions($request->permissions);
     }
 
+    /**
+     * @param Model $model
+     * @return mixed|void
+     */
     public function destroy(Model $model)
     {
-        $model->delete();
+        $this->role::destroy($model->id);
     }
 }

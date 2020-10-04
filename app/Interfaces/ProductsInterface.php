@@ -8,9 +8,17 @@ use App\Models\Product;
 
 interface ProductsInterface extends RepositoryInterface
 {
-
+    /**
+     * @param IndexRequest $request
+     * @return mixed
+     */
     public function query(IndexRequest $request);
 
+    /**
+     * @param ActiveRequest $request
+     * @param Product $product
+     * @return mixed
+     */
     public function setActive(ActiveRequest $request, Product $product);
 
 }

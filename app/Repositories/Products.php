@@ -2,6 +2,9 @@
 
 namespace App\Repositories;
 
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\Admin\Products\ActiveRequest;
 use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\ProductsInterface;
@@ -9,13 +12,17 @@ use App\Models\Product;
 
 class Products implements ProductsInterface
 {
-    protected $product;
+    protected Product $product;
 
     public function __construct(Product $product)
     {
         $this->product = $product;
     }
 
+    /**
+     * @param IndexRequest $request
+     * @return mixed
+     */
     public function query(IndexRequest $request)
     {
         $category = $request->validationData()['category'];
@@ -32,7 +39,11 @@ class Products implements ProductsInterface
             ->paginate(15);
     }
 
-    public function store($request)
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function store(Request $request)
     {
         $product = $this->product->create($request->all());
 
@@ -43,7 +54,12 @@ class Products implements ProductsInterface
         return $product;
     }
 
-    public function update($request, $product)
+    /**
+     * @param Request $request
+     * @param Model $product
+     * @return Model|mixed
+     */
+    public function update(Request $request, Model $product)
     {
         $product->tags()->sync($request->get('tags', null));
 
@@ -52,6 +68,11 @@ class Products implements ProductsInterface
         return $product;
     }
 
+    /**
+     * @param ActiveRequest $request
+     * @param Product $product
+     * @return bool|mixed
+     */
     public function setActive(ActiveRequest $request, Product $product)
     {
         return $product->update($request->all());
@@ -62,6 +83,9 @@ class Products implements ProductsInterface
         return $product->delete();
     }
 
+    /**
+     * @return Product[]|Collection|mixed
+     */
     public function index()
     {
         return $this->product::all();

@@ -83,11 +83,19 @@ class OrdersController extends Controller
             ->with('success', __('Order removed successfully'));
     }
 
+    /**
+     * @param Order $order
+     * @return RedirectResponse
+     */
     public function verify(Order $order): RedirectResponse
     {
         return $this->orders->verify($order);
     }
 
+    /**
+     * @param Order $order
+     * @return RedirectResponse
+     */
     public function reverse(Order $order): RedirectResponse
     {
         return $this->orders->reverse($order);

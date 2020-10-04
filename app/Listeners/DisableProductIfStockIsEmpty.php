@@ -7,7 +7,7 @@ use App\Events\OnProductUpdateEvent;
 
 class DisableProductIfStockIsEmpty
 {
-    public $enableOrDisableProductAction;
+    public EnableOrDisableProductAction $enableOrDisableProductAction;
 
     /**
      * DisableProductIfStockIsEmpty constructor.
@@ -21,11 +21,11 @@ class DisableProductIfStockIsEmpty
     /**
      * @param OnProductUpdateEvent $event
      */
-    public function handle(OnProductUpdateEvent $event)
+    public function handle(OnProductUpdateEvent $event): void
     {
         $product = $event->product;
 
-        if ($product->stock == 0 && $product->is_active)
+        if ($product->stock === 0 && $product->is_active)
         {
             $this->enableOrDisableProductAction->execute($product, false);
         }

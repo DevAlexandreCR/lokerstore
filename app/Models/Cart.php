@@ -29,7 +29,7 @@ class Cart extends Model
             ->where('user_id', $id);
     }
 
-    public function cartPrice()
+    public function cartPrice(): string
     {
         $price = 0;
         $stocks = $this->stocks()->get(['product_id']);
@@ -45,7 +45,7 @@ class Cart extends Model
         $this->stocks()->detach(null);
     }
 
-    public function getSubTotalFromProduct(Stock $stock)
+    public function getSubTotalFromProduct(Stock $stock): string
     {
         $price = $stock->product->price * $stock->pivot->quantity;
         return round($price, 0,  PHP_ROUND_HALF_UP) . 'COP';

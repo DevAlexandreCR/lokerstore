@@ -16,7 +16,7 @@ class Admin extends Authenticatable
 
     use HasRoles;
 
-    protected $guard_name = Admins::GUARDED;
+    protected string $guard_name = Admins::GUARDED;
     /**
      * The attributes that are mass assignable.
      *
@@ -63,6 +63,9 @@ class Admin extends Authenticatable
         $this->notify($passwordSend);
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin(): bool
     {
         return $this->hasRole(Roles::ADMIN);

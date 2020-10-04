@@ -11,13 +11,17 @@ use Illuminate\Http\Request;
 class ApiProducts implements ApiProductsInterface
 {
 
-    protected $product;
+    protected Product $product;
 
     public function __construct(Product $product)
     {
         $this->product = $product;
     }
 
+    /**
+     * @param IndexRequest $request
+     * @return mixed
+     */
     public function query(IndexRequest $request)
     {
         $category = $request->validationData()['category'];

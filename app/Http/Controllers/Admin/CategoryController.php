@@ -13,7 +13,7 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    protected $categories;
+    protected CategoryInterface $categories;
 
     public function __construct(CategoryInterface $categories)
     {

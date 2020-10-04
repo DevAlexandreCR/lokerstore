@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-    protected $permission;
+    protected PermissionInterface $permission;
 
     public function __construct(PermissionInterface $permission)
     {

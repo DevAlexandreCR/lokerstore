@@ -4,7 +4,7 @@ namespace App\Helpers\Products;
 
 class ProductRequestHelper
 {
-    public static function transform(array $data)
+    public static function transform(array $data): array
     {
         $newDataArray = $data;
         (array_key_exists('category', $data)) ? $newDataArray['category'] = $data['category'] :
@@ -31,12 +31,12 @@ class ProductRequestHelper
         $newArray = [];
 
         foreach ($dataTags as $key => $tag) {
-            if (gettype($key) === 'string') {
+            if (is_string($key)) {
                 $newArray = $dataTags;
                 break;
-            } else {
-                $newArray[$tag] = $tag;
             }
+
+            $newArray[$tag] = $tag;
         }
 
         return $newArray;
@@ -50,7 +50,7 @@ class ProductRequestHelper
     {
         $newArray = [];
 
-        if (gettype($data) === 'string'){
+        if (is_string($data)){
             $newArray[0] = $data;
         } else {
             $newArray = $data;

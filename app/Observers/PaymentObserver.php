@@ -7,8 +7,7 @@ use App\Repositories\Orders;
 
 class PaymentObserver
 {
-
-    protected $orders;
+    protected Orders $orders;
 
     public function __construct(Orders $orders)
     {

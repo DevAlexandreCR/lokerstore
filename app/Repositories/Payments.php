@@ -8,8 +8,8 @@ use App\Constants\Payments as Pay;
 
 class Payments
 {
-    protected $payment;
-    protected $payer;
+    protected Payment $payment;
+    protected Payer $payer;
 
     public function __construct(Payment $payment, Payer $payer)
     {
@@ -17,6 +17,12 @@ class Payments
         $this->payer = $payer;
     }
 
+    /**
+     * @param int $order_id
+     * @param int $request_id
+     * @param string $process_url
+     * @return Payment
+     */
     public function create(int $order_id, int $request_id, string $process_url): Payment
     {
         return $this->payment->updateOrCreate(
@@ -30,6 +36,11 @@ class Payments
             ]);
     }
 
+    /**
+     * @param Payment $payment
+     * @param string $status
+     * @return bool
+     */
     public function setStatus(Payment $payment, string $status): bool
     {
         return $payment->update([
@@ -42,7 +53,7 @@ class Payments
      * @param $data
      * @return bool
      */
-    public function setDataPayment(Payment $payment, $data)
+    public function setDataPayment(Payment $payment, $data): bool
     {
         $pay = $data->payment[0];
         $payer = $data->request->payer;

@@ -11,11 +11,17 @@ class OrderDetail extends Model
 
     protected $fillable = ['order_id', 'stock_id', 'quantity', 'unit_price', 'total_price'];
 
+    /**
+     * @return BelongsTo
+     */
     public function stock(): BelongsTo
     {
         return $this->belongsTo(Stock::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

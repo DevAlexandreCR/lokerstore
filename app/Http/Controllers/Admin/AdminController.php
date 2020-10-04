@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
-    public $admins;
+    public AdminInterface $admins;
 
     public function __construct(AdminInterface $admins)
     {

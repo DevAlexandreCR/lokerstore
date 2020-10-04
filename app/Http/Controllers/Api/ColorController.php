@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class ColorController extends Controller
 {
-    protected $colors;
+    protected ColorsInterface $colors;
 
     public function __construct(ColorsInterface $colors)
     {

@@ -4,7 +4,6 @@ namespace App\Http\Requests\Admin\Roles;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Spatie\Permission\Models\Role;
 
 class UpdateRequest extends FormRequest
 {

@@ -18,6 +18,11 @@ class Users implements UsersInterface
     {
         $this->users = $users;
     }
+
+    /**
+     * @param IndexRequest $request
+     * @return mixed
+     */
     public function search(IndexRequest $request)
     {
         $search =  $request->get('search');
@@ -41,6 +46,10 @@ class Users implements UsersInterface
         $model->update($request->all());
     }
 
+    /**
+     * @param Model $model
+     * @return mixed|void
+     */
     public function destroy(Model $model)
     {
         $this->users::destroy($model->id);

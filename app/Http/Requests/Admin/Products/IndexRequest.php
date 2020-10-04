@@ -3,9 +3,7 @@
 namespace App\Http\Requests\Admin\Products;
 
 use App\Helpers\Products\ProductRequestHelper;
-use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 
 class IndexRequest extends FormRequest
 {
@@ -37,7 +35,10 @@ class IndexRequest extends FormRequest
         ];
     }
 
-    public function validationData()
+    /**
+     * @return array
+     */
+    public function validationData(): array
     {
         return ProductRequestHelper::transform($this->all());
     }

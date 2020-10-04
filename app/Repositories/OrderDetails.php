@@ -8,13 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderDetails implements OrderDetailInterface
 {
-    protected $orderDetail;
+    protected OrderDetail $orderDetail;
 
     public function __construct(OrderDetail $orderDetail)
     {
         $this->orderDetail = $orderDetail;
     }
 
+    /**
+     * @param int $order_id
+     * @return mixed|void
+     */
     public function create(int $order_id)
     {
         $cart = Auth::user()->cart;
