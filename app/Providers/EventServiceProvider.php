@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Admin\Admin;
+use App\Observers\AdminObserver;
 use App\Events\OnProductUpdateEvent;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Listeners\DisableProductIfStockIsEmpty;
@@ -57,5 +59,6 @@ class EventServiceProvider extends ServiceProvider
         Payment::observe(PaymentObserver::class);
         Order::observe(OrderObserver::class);
         OrderDetail::observe(OrderDetailObserver::class);
+        Admin::observe(AdminObserver::class);
     }
 }

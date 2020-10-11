@@ -38,15 +38,6 @@ class ProductsPolicyTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function testAdminWithoutPermissionCannotViewAProduct(): void
-    {
-        $id = factory(Product::class)->create()->id;
-        $response = $this->actingAs($this->admin, Admins::GUARDED)
-            ->get(route('products.show', $id));
-
-        $response->assertStatus(403);
-    }
-
     public function testAdminWithoutPermissionCannotCreateProducts(): void
     {
         $response = $this->actingAs($this->admin, Admins::GUARDED)

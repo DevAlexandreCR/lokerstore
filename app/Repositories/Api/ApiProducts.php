@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Api;
 
+use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Models\Product;
@@ -39,7 +40,7 @@ class ApiProducts implements ApiProductsInterface
             ->sizes($sizes)
             ->withTags($tags)
             ->search($search)
-            ->with('category', 'photos')
+            ->with('category', 'photos', 'stocks')
             ->get();
     }
 
@@ -50,16 +51,25 @@ class ApiProducts implements ApiProductsInterface
 
     public function store(Request $request)
     {
-        // TODO: Implement store() method.
+        return $this->product->create($request->all());
     }
 
-    public function update(Request $request, Model $model)
+    public function update(Request $request, Model $product)
     {
-        // TODO: Implement update() method.
+        $product->update($request->all());
     }
 
     public function destroy(Model $model)
     {
-        // TODO: Implement destroy() method.
+        $this->product::destroy($model->id);
+    }
+
+    /**
+     * @param Product $product
+     * @return Collection
+     */
+    public function show(Product $product): Collection
+    {
+        return $this->product::with('stocks', 'category', 'photos')->where('id', $product->id)->get();
     }
 }

@@ -89,7 +89,7 @@ class ProductControllerTest extends TestCase
             'price'         =>  2000,
             'id_category'   => Category::all()->random()->id,
             'tags'          => [Tag::all()->random()->id],
-            'Photos'        => [$this->faker->file(storage_path('app/public/photos'))]
+            'photos'        => [$this->faker->file(storage_path('app/public/photos'))]
         ]);
 
         $response

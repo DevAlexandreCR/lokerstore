@@ -27,7 +27,7 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
     Route::resource('users', 'UserController')->except(['create', 'store']);
 
-    Route::resource('products', 'ProductController');
+    Route::resource('products', 'ProductController')->except(['show']);
     Route::get('products/active/{product}', 'ProductController@active')->name('products.active');
     Route::put('products/active/{product}', 'ProductController@setActive')->name('products.set_active');
 

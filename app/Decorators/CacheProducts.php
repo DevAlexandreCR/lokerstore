@@ -56,7 +56,7 @@ class CacheProducts implements ProductsInterface
 
     public function setActive(ActiveRequest $request, Product $product)
     {
-        $product = $this->products->setActive($request, $product);
+        $this->products->setActive($request, $product);
 
         Cache::tags(['products', 'api.products'])->flush();
 

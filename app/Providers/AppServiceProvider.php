@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Decorators\AdminDecorator;
 use App\Decorators\CacheTypeSizes;
 use App\Interfaces\TypeSizesInterface;
+use App\Decorators\Api\StocksDecorator;
+use App\Decorators\Api\PhotosDecorator;
 use App\Decorators\Api\CacheApiProducts;
 use App\Decorators\CacheCategories;
 use App\Decorators\CacheColors;
@@ -16,6 +18,8 @@ use App\Decorators\CacheTags;
 use App\Decorators\CacheUsers;
 use App\Decorators\GenerateOrder;
 use App\Interfaces\AdminInterface;
+use App\Interfaces\Api\ApiStocksInterface;
+use App\Interfaces\Api\ApiPhotosInterface;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ColorsInterface;
@@ -59,5 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AdminInterface::class, AdminDecorator::class);
         $this->app->bind(UsersInterface::class, CacheUsers::class);
         $this->app->bind(TypeSizesInterface::class, CacheTypeSizes::class);
+        $this->app->bind(ApiStocksInterface::class, StocksDecorator::class);
+        $this->app->bind(ApiPhotosInterface::class, PhotosDecorator::class);
     }
 }
