@@ -5,7 +5,6 @@ namespace App\Models\Admin;
 use App\Constants\Admins;
 use App\Constants\Roles;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -13,7 +12,6 @@ use Spatie\Permission\Traits\HasRoles;
 class Admin extends Authenticatable
 {
     use Notifiable;
-
     use HasRoles;
 
     protected string $guard_name = Admins::GUARDED;
@@ -70,4 +68,6 @@ class Admin extends Authenticatable
     {
         return $this->hasRole(Roles::ADMIN);
     }
+
+
 }

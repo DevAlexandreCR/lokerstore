@@ -49,7 +49,7 @@ class AdminControllerTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->post(route('admins.store'), [
             'name' => 'employee 1',
             'email' => 'employee1@example.com',
-            'password' => $password = Hash::make('12345678'),
+            'password' => '12345678',
             'is_active' => true
         ]);
 
@@ -61,7 +61,7 @@ class AdminControllerTest extends TestCase
         $this->assertDatabaseHas('admins', [
             'name' => 'employee 1',
             'email' => 'employee1@example.com',
-            'password' => $password,
+            'password' => Hash::check('12345678', '12345678'),
             'is_active' => 1
         ]);
 

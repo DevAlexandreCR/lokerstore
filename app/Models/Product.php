@@ -37,7 +37,7 @@ class Product extends Model
      */
     public function stocks(): HasMany
     {
-        return $this->hasMany(Stock::class);
+        return $this->hasMany(Stock::class)->select(['id', 'product_id', 'color_id', 'size_id', 'quantity']);
     }
 
     /**

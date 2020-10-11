@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Stock;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Interfaces\Api\ApiStocksInterface;
+use App\Http\Requests\Api\Stocks\UpdateRequest;
+
+class StockController extends Controller
+{
+    private ApiStocksInterface $stocks;
+
+    public function __construct(ApiStocksInterface $stocks)
+    {
+        $this->stocks = $stocks;
+    }
+
+    public function update(UpdateRequest $request, Stock $stock): JsonResponse
+    {
+        $this->stocks->update($request, $stock);
+
+        return response()->json([
+            'status' => [
+                'status'  => 'OK',
+                'message' => 'Stock was updated successfully',
+                'code'    => 200
+            ],
+            'stock' => $stock
+        ]);
+    }
+}

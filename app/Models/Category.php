@@ -51,6 +51,6 @@ class Category extends Model
      */
     public function getFullCategory(): string
     {
-        return $this->parent()->qualifyColumn('name') . ' - ' . $this->name;
+        return $this->parent->name . ' - ' . $this->name;
     }
 }

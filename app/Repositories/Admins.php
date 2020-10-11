@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,12 @@ class Admins implements AdminInterface
      */
     public function store(Request $request)
     {
-        $this->admin->create($request->all());
+        $this->admin->create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password')),
+            'is_active' => true
+        ]);
     }
 
     public function update(Request $request, Model $model)

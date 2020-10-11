@@ -13,20 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('/products', 'ProductController')->middleware('auth:api');
-Route::get('/products', 'ProductController@index')->name('api.index');
-Route::get('/products/{product}', 'ProductController@show')->name('api.show');
+    Route::middleware('auth:api')
+        ->prefix('/products')
+        ->group(function() {
+            Route::apiResource('/products', 'ProductController')
+                ->except('index', 'show')
+                ->name('store', 'api.products.store')
+                ->name('destroy', 'api.products.destroy')
+                ->name('update', 'api.products.update');
 
-Route::apiResource('/categories', 'CategoryController')->middleware('auth:api');
-Route::get('/categories', 'CategoryController@index')->name('categories.index');
-Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
+            Route::put('/stocks/{stock}', 'StockController@update')
+                ->name('api.stocks.update');
 
-Route::apiResource('/colors', 'ColorController')->middleware('auth:api')->names('api.colors');
-Route::get('/colors', 'ColorController@index')->name('api.colors.index');
+            Route::post('/photos', 'PhotosController@store')
+                ->name('api.photos.store');
 
-Route::apiResource('/type_sizes', 'ColorController')->middleware('auth:api')->names('api.type_sizes');
-Route::get('/type_sizes', 'TypeSizeController@index')->name('api.type_sizes.index');
+            Route::delete('/photos', 'PhotosController@destroy')
+                ->name('api.photos.destroy');
+    });
 
-Route::apiResource('/tags', 'TagController')->middleware('auth:api')->names('api.tags');
-Route::get('/tags', 'ColorController@index')->name('api.tags.index');
+
+    Route::get('/products', 'ProductController@index')->name('api.index');
+    Route::get('/products/{product}', 'ProductController@show')->name('api.show');
+
+
+
+    Route::get('/categories', 'CategoryController@index')->name('categories.index');
+    Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
+
+    Route::get('/colors', 'ColorController@index')->name('api.colors.index');
+
+    Route::get('/type_sizes', 'TypeSizeController@index')->name('api.type_sizes.index');
+
+    Route::get('/tags', 'ColorController@index')->name('api.tags.index');
 

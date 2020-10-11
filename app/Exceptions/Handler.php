@@ -2,8 +2,13 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -29,10 +34,10 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param Throwable $exception
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception|Throwable
      */
     public function report(Throwable $exception)
     {
@@ -42,14 +47,34 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  Request  $request
+     * @param Throwable $exception
+     * @return Response
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function render($request, Throwable $exception)
     {
+        if (strpos($request->path(), 'api') !== false) {
+            if ($exception instanceof ModelNotFoundException) {
+                return response()->json([
+                    'status' => [
+                        'status' => 'failed',
+                        'message' => 'Product not found',
+                        'code'    => 404
+                    ]
+                ], 404);
+            } else if ($exception instanceof NotFoundHttpException) {
+                return response()->json([
+                    'status' => [
+                        'status' => 'failed',
+                        'message' => 'Route not found',
+                        'code'    => 404
+                    ]
+                ], 404);
+            }
+
+        }
         return parent::render($request, $exception);
     }
 }

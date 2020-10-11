@@ -17,6 +17,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
 
+    protected $namespaceApi = 'App\Http\Controllers\Api';
+
+    protected $namespaceAdmin = 'App\Http\Controllers\Admin';
+
     /**
      * The path to the "home" route for your application.
      *
@@ -36,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Route::model('order_detail', OrderDetail::class);
 
@@ -48,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map(): void
     {
         $this->mapApiRoutes();
 
@@ -82,7 +86,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->namespace . '\Api')
+            ->namespace($this->namespaceApi)
             ->group(base_path('routes/api.php'));
     }
 
@@ -98,7 +102,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('auth:admin')
             ->middleware('admin')
             ->prefix('admin')
-            ->namespace($this->namespace . '\Admin')
+            ->namespace($this->namespaceAdmin)
             ->group(base_path('routes/admin.php'));
     }
 }
