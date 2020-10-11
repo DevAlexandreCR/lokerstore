@@ -67,7 +67,6 @@ class ApiProductControllerTest extends TestCase
 
     public function testAnAdminAuthenticatedCanCreateAProduct(): void
     {
-        Storage::fake('public_photos');
         $category = Category::all()->random()->id;
         $size1 = Size::all()->random();
         $color1 = Color::all()->random()->name;
@@ -118,8 +117,6 @@ class ApiProductControllerTest extends TestCase
                     'description'   => 'This product is amazing and great for you',
                 ]
             ]);
-
-//        Storage::disk('public_photos')->assertExists($file->hashName());
 
         $this->assertDatabaseHas('products', [
             'name'          => 'new product',

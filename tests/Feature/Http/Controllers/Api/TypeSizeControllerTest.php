@@ -13,9 +13,8 @@ class TypeSizeControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndex(): void
     {
-        $this->withoutExceptionHandling();
         $response = $this->get(route('api.type_sizes.index'));
 
         $response->assertStatus(200);

@@ -55,9 +55,6 @@ class ApiPhotosControllerTest extends TestCase
                     'code'    => 200
                 ]
             ]);
-//        $this->assertDatabaseHas('photos', [
-//            'product_id' => $product->id
-//        ]);
     }
 
     public function testAnAdminAuthenticatedCanDeleteAPhoto(): void
@@ -86,6 +83,7 @@ class ApiPhotosControllerTest extends TestCase
                     'code'    => 200
                 ]
             ]);
+
         $this->assertDatabaseMissing('photos', [
             'id' => $photo->id,
             'product_id' => $photo->product_id,
