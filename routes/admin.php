@@ -60,6 +60,11 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::resource('order_details', 'OrderDetailsController')
         ->names('order_details')
         ->only('destroy', 'update');
+
+    Route::resource('excel-products', 'ExcelController')
+        ->only('index', 'store')
+        ->name('index', 'products.export')
+        ->name('store', 'products.import');
 });
 
 

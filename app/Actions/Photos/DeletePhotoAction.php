@@ -4,7 +4,6 @@ namespace App\Actions\Photos;
 
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
-use Image;
 
 class DeletePhotoAction
 {

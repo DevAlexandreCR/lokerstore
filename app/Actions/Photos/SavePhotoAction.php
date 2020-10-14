@@ -4,8 +4,8 @@ namespace App\Actions\Photos;
 
 use App\Models\Photo;
 use Illuminate\Http\UploadedFile;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-use Image;
 
 class SavePhotoAction
 {

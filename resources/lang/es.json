@@ -207,5 +207,10 @@
     "Date" : "Fecha",
     "Search user" : "Buscar usuario",
     "Save product" : "Guardar producto",
-    "Update product" : "Actualizar producto"
+    "Update product" : "Actualizar producto",
+    "Exporting products... we'll send you an email when the download is available"
+    : "Exportando productos... te enviaremos un email cuando esté disponible la descarga",
+    "Products exported successfully": "Productos exportados satisfactoriamente",
+    "Good bye": "Chao!",
+    "Download": "Descargar"
 }
