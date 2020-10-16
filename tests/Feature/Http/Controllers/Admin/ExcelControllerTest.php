@@ -42,7 +42,7 @@ class ExcelControllerTest extends TestCase
             ->assertStatus(302);
 
         Excel::matchByRegex();
-        // For a given dynamic named file 'invoices_2019.xlsx'
+
         Excel::assertStored('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports');
 
         Excel::assertQueued('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports',function(ProductsExport $export) {
