@@ -90,15 +90,16 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
     public function styles(Worksheet $sheet): array
     {
         $sheet->setMergeCells(['A1:C1', 'D1:F1']);
-        $sheet->getStyle('A1:C1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('A1:C1')->getFill()->setStartColor(new Color(Color::COLOR_DARKYELLOW));
+        $sheet->getStyle('C2:C1000')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('D1:F1')->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle('D1:F1')->getFill()->setStartColor(new Color(Color::COLOR_DARKRED));
+        $sheet->getStyle('A1:C1')->getFill()->setFillType(Fill::FILL_SOLID);
+        $sheet->getStyle('A1:C1')->getFill()->setStartColor(new Color(Color::COLOR_DARKYELLOW));
         $sheet->getStyle('A2:F2')->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle('A2:F2')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle('A1:F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:F2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
-        $sheet->getStyle('C2:C1000')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
         optional($sheet->getCell('A1'))->setValue(trans('Category'));
         optional($sheet->getCell('D1'))->setValue('Sub-' . trans('Category'));
         optional($sheet->getRowDimension(1))->setRowHeight(30);
