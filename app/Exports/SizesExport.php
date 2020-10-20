@@ -2,19 +2,17 @@
 
 namespace App\Exports;
 
-use App\Models\Category;
+use App\Models\TypeSize;
 use Illuminate\Support\Collection;
 use PhpOffice\PhpSpreadsheet\Exception;
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Style\Color;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -24,19 +22,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStyles,
+class SizesExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStyles,
     ShouldAutoSize, WithColumnWidths, WithCustomStartCell, WithEvents
 {
     use RegistersEventListeners;
 
-    private array $subCategories;
-
+    private array $sizes;
     /**
     * @return Collection
     */
     public function collection(): Collection
     {
-        return Category::primaries();
+        return TypeSize::all();
     }
 
     /**
@@ -44,42 +41,42 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
      */
     public function headings(): array
     {
-
         return [
             trans('ID'),
             trans('Name'),
             null,
             trans('ID'),
             trans('Name'),
-            trans('Category'),
+            'ID' . trans('Type-Size'),
+
         ];
     }
 
     /**
-     * @param Category $category
+     * @param TypeSize $typeSize
      * @return array
      */
-    public function map($category): array
+    public function map($typeSize): array
     {
-        $this->subCategories = [];
+        $this->sizes = [];
         $row = [
             [
-                $category->id,
-                $category->name,
+                $typeSize->id,
+                $typeSize->name,
                 '--->'
             ]
         ];
-        $category->children()->each( function ($subCategory)  {
-            $this->subCategories[] = [
+        $typeSize->sizes()->each( function ($size)  {
+            $this->sizes[] = [
                 null,
                 null,
                 null,
-               $subCategory->id,
-               $subCategory->name,
-               $subCategory->id_parent,
+                $size->id,
+                $size->name,
+                $size->type->id
             ];
         });
-        return array_merge($row, $this->subCategories);
+        return array_merge($row, $this->sizes);
     }
 
     /**
@@ -91,16 +88,16 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
     {
         $sheet->setMergeCells(['A1:C1', 'D1:F1']);
         $sheet->getStyle('A1:C1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('A1:C1')->getFill()->setStartColor(new Color(Color::COLOR_DARKYELLOW));
+        $sheet->getStyle('A1:C1')->getFill()->setStartColor(new Color(Color::COLOR_GREEN));
         $sheet->getStyle('D1:F1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('D1:F1')->getFill()->setStartColor(new Color(Color::COLOR_DARKRED));
+        $sheet->getStyle('D1:F1')->getFill()->setStartColor(new Color(Color::COLOR_DARKGREEN));
         $sheet->getStyle('A2:F2')->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle('A2:F2')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle('A1:F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:F2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
-        $sheet->getStyle('C2:C1000')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        optional($sheet->getCell('A1'))->setValue(trans('Category'));
-        optional($sheet->getCell('D1'))->setValue('Sub-' . trans('Category'));
+        $sheet->getStyle('E2:E1000')->getFill()->setFillType(Fill::FILL_NONE);
+        optional($sheet->getCell('A1'))->setValue(trans('Type-Size'));
+        optional($sheet->getCell('D1'))->setValue(trans('Size'));
         optional($sheet->getRowDimension(1))->setRowHeight(30);
         return [
             1    => [
@@ -123,7 +120,7 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
      */
     public function title(): string
     {
-        return trans('Categories');
+        return trans('Sizes');
     }
 
     /**
@@ -132,7 +129,7 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
     public function columnWidths(): array
     {
         return [
-            'C' => 20
+            'C' => 5
         ];
     }
 
@@ -143,7 +140,6 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
     {
         return 'A2';
     }
-
     public static function afterSheet(AfterSheet $event): void
     {
         $workSheet = $event->getSheet()->getDelegate();
@@ -155,7 +151,7 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
                     if (!is_null($cell->getValue())) {
                         $row = $cell->getRow();
                         $workSheet->getStyle('A' . $row . ':F' . $row)->getFill()->setFillType(Fill::FILL_SOLID);
-                        $workSheet->getStyle('A' . $row . ':F' . $row)->getFill()->setStartColor(new Color('B2B2B2'));
+                        $workSheet->getStyle('A' . $row . ':F' . $row)->getFill()->setStartColor(new Color('CACAFF'));
                     }
                 }
             }

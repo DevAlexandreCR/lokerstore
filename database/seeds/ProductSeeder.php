@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
         Product::inRandomOrder()->each(function ($product) use ($tags) {
 
             $product->tags()->attach(
-                $tags->random(random_int(1, 3))->pluck('id')->toArray()
+                $tags->random(random_int(1,  2))->pluck('id')->toArray()
             );
 
             factory(Photo::class, random_int(1, 2))->create([

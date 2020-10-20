@@ -10,7 +10,7 @@ class TypeSizeSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $types = ['Zapatos', 'Prendas-Superiores', 'Prendas-Inferiores', 'Especial'];
 

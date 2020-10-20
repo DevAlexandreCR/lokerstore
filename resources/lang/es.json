@@ -212,5 +212,9 @@
     : "Exportando productos... te enviaremos un email cuando esté disponible la descarga",
     "Products exported successfully": "Productos exportados satisfactoriamente",
     "Good bye": "Chao!",
-    "Download": "Descargar"
+    "Download": "Descargar",
+    "Size": "Talla",
+    "Sizes": "Tallas",
+    "Type-Size": "Tipo de talla",
+    "Colors": "Colores"
 }
