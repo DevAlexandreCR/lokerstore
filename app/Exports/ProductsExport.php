@@ -3,36 +3,30 @@
 namespace App\Exports;
 
 use App\Models\Product;
-
 use App\Interfaces\ProductsInterface;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
-use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use PhpOffice\PhpSpreadsheet\Style\Protection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
 class ProductsExport extends DefaultValueBinder implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize,
-    WithStyles, WithColumnWidths, WithTitle, WithCustomValueBinder, WithEvents
+    WithStyles, WithCustomValueBinder, WithMultipleSheets, WithTitle, WithColumnWidths
 {
-    use Exportable, RegistersEventListeners;
+    use Exportable;
 
     private ProductsInterface $products;
 
@@ -63,7 +57,6 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             trans('Enabled'),
             trans('Category'),
             trans('Tags'),
-            trans('Stocks'),
         ];
     }
     /**
@@ -72,38 +65,16 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
      */
     public function map($product): array
     {
-        $array = [
-            [
-                $product->id,
-                $product->name,
-                $product->description,
-                $product->stock,
-                $product->price,
-                ($product->is_active)? 'Si' : 'No',
-                $product->category->name,
-                $product->id,
-                trans('Color'),
-                trans('Size'),
-                trans('Stock')
-            ]
+        return [
+            $product->id,
+            $product->name,
+            $product->description,
+            '=SUMIFS(Stocks!F:F,Stocks!B:B,A:A)',
+            $product->price,
+            ($product->is_active)? 'Si' : 'No',
+            $product->category->name,
+            'tags'
         ];
-        foreach ($product->stocks as $stock) {
-            $stockArray = [
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                $stock->color->name,
-                $stock->size->name,
-                $stock->quantity,
-            ];
-            $array[] = $stockArray;
-        }
-        return $array;
     }
 
     /**
@@ -113,14 +84,6 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
      */
     public function bindValue(Cell $cell, $value): bool
     {
-        if ($value === trans('Color') || $value === trans('Size') || $value === trans('Stock')) {
-            $cell->getStyle()->getFont()->setBold(true);
-            $cell->getStyle()->getFont()->setColor(new Color(Color::COLOR_WHITE));
-            $cell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID);
-            $cell->getStyle()->getFill()->setStartColor(new Color('696868'));
-            $cell->getStyle()->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
-        }
-
         if (in_array($cell->getColumn(), ['A', 'D', 'F'])) {
             $cell->getStyle()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         }
@@ -129,14 +92,36 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
     }
 
     /**
+     * @return array
+     */
+    public function sheets(): array
+    {
+        return [
+            $this,
+            new StocksExport(),
+            new CategoriesExport(),
+            new ColorsExport(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function columnWidths(): array
+    {
+        return [
+            'C' => 90,
+            'D' => 10
+        ];
+    }
+
+    /**
      * @param Worksheet $sheet
      * @return mixed
-     * @throws Exception
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->mergeCells('I1:K1');
-        $sheet->setSelectedCells('A1:K1' );
+        $sheet->setSelectedCells('A1:H1' );
         $sheet->getStyle($sheet->getSelectedCells())->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle($sheet->getSelectedCells())->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle($sheet->getSelectedCells())->getFont()->setColor(new Color(Color::COLOR_WHITE));
@@ -149,19 +134,9 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             1    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 12
+                    'size' => 13
                 ],
             ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function columnWidths(): array
-    {
-        return [
-            'C' => 50
         ];
     }
 
@@ -171,22 +146,5 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
     public function title(): string
     {
         return trans('Products');
-    }
-
-    public static function afterSheet(AfterSheet $event)
-    {
-        foreach ($event->getSheet()->getDelegate()->getRowIterator() as $row) {
-            $iteratorCell = $row->getCellIterator();
-            foreach ($iteratorCell as $cell) {
-                if ($cell->getValue() === null) {
-                    $cell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID);
-                    $cell->getStyle()->getFill()->setStartColor(new Color('EDE9E9'));
-                }
-            }
-        }
-        $event->getDelegate()->getDelegate()->setShowGridlines(false);
-        $event->getDelegate()->getDelegate()->getProtection()->setSheet(true);
-        $event->getDelegate()->getDelegate()->getStyle('A1:C1000')->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
-        $event->getDelegate()->getDelegate()->getStyle('E1:Z1000')->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
     }
 }

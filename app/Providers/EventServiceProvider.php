@@ -7,7 +7,6 @@ use App\Observers\AdminObserver;
 use App\Events\OnProductUpdateEvent;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Listeners\DisableProductIfStockIsEmpty;
-use App\Listeners\EnableOrDisableProductIfStockEmpty;
 use App\Listeners\SetStockProduct;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -49,7 +48,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 

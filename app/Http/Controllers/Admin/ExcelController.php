@@ -6,7 +6,6 @@ use App\Constants\Admins;
 use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ProductsInterface;
-use Illuminate\Support\Facades\Storage;
 use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Http\Requests\Admin\Excel\ExportRequest;
 
