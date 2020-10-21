@@ -59,6 +59,7 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             trans('Stock'),
             trans('Price'),
             trans('Enabled'),
+            'ID ' . trans('Category'),
             trans('Category'),
             trans('Tags'),
         ];
@@ -75,9 +76,10 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             $product->id,
             $product->name,
             $product->description,
-            '=SUMIFS(Stocks!F:F,Stocks!B:B,A:A)',
+            '=SUMIFS(Stocks!H:H,Stocks!B:B,A:A)',
             $product->price,
             ($product->is_active)? 'Si' : 'No',
+            $product->category->id,
             $product->category->name,
             $tagsString
         ];
@@ -128,13 +130,12 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->setSelectedCells('A1:H1' );
-        $sheet->getStyle($sheet->getSelectedCells())->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle($sheet->getSelectedCells())->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
-        $sheet->getStyle($sheet->getSelectedCells())->getFont()->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle($sheet->getSelectedCells())->getFill()->setStartColor(new Color('E75858'));
-        $sheet->getStyle($sheet->getSelectedCells())->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle($sheet->getSelectedCells())->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A1:I1')->getFill()->setFillType(Fill::FILL_SOLID);
+        $sheet->getStyle('A1:I1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+        $sheet->getStyle('A1:I1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+        $sheet->getStyle('A1:I1')->getFill()->setStartColor(new Color('E75858'));
+        $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:I1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         return [
@@ -163,9 +164,9 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
         foreach ($rowIterator as $row) {
             $index = $row->getRowIndex();
             if ($index % 2 === 1) {
-                $workSheet->getStyle('A' . $index . ':H' . $index)
+                $workSheet->getStyle('A' . $index . ':I' . $index)
                     ->getFill()->setFillType(Fill::FILL_SOLID);
-                $workSheet->getStyle('A' . $index . ':H' . $index)
+                $workSheet->getStyle('A' . $index . ':I' . $index)
                     ->getFill()->setStartColor(new Color('FAE7E2'));
             }
         }

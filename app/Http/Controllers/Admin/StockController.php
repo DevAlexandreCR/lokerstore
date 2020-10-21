@@ -16,6 +16,7 @@ use Illuminate\View\View;
 class StockController extends Controller
 {
     protected Stock $stock;
+
     public function __construct(Stock $stock)
     {
         $this->authorizeResource(Stock::class, 'stock');

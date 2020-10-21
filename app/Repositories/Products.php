@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\Tag;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -89,5 +91,27 @@ class Products implements ProductsInterface
     public function index()
     {
         return $this->product::all();
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return Product|null
+     */
+    public function create(int $id = 0, array $data = []): ?Product
+    {
+        $product = $this->product->updateOrCreate([
+            'id' => $id
+        ], $data);
+
+        $tags = array();
+        $tagsNames = explode(', ', $data['tags']);
+        foreach ($tagsNames as $tag) {
+            $tagDB = Tag::where('name', $tag)->first();
+            $tags[] = $tagDB->id;
+        }
+        $product->tags()->sync($tags);
+
+        return $product;
     }
 }

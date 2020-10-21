@@ -7,8 +7,11 @@ use App\Constants\Roles;
 use App\Constants\Admins;
 use App\Models\Admin\Admin;
 use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
+use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Queue;
+use App\Jobs\NotifyAdminsAfterCompleteExport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -33,20 +36,43 @@ class ExcelControllerTest extends TestCase
         $this->admin->assignRole(Roles::ADMIN);
     }
 
-//    public function testAnAdminAuthenticatedWithPermissionsCanExportProducts(): void
-//    {
-//        $response = $this->actingAs($this->admin, Admins::GUARDED)
-//            ->get(route('products.export'));
-//
-//        $response
-//            ->assertStatus(302);
-//
-//        Excel::matchByRegex();
-//
-//        Excel::assertStored('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports');
-//
-//        Excel::assertQueued('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports',function(ProductsExport $export) {
-//            return true;
-//        });
-//    }
+    public function testAnAdminAuthenticatedWithPermissionsCanExportProducts(): void
+    {
+        $response = $this->actingAs($this->admin, Admins::GUARDED)
+            ->get(route('products.export'));
+
+        $response
+            ->assertStatus(302);
+
+        Excel::matchByRegex();
+
+        Excel::assertStored('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports');
+
+        Excel::assertQueued('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports',function(ProductsExport $export) {
+            return true;
+        });
+    }
+    public function testAnAdminAuthenticatedWithPermissionsCanImportProducts(): void
+    {
+        $this->withoutExceptionHandling();
+        $file = new UploadedFile(
+            storage_path('app/public/imports/products.xlsx'),
+            'products.xlsx',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            null,
+            true
+        );
+        $response = $this->actingAs($this->admin, Admins::GUARDED)
+            ->post(route('products.import'), [
+                'file' => $file
+            ]);
+
+        $response
+            ->assertStatus(302);
+
+        Excel::assertQueued($file->getFilename(), 'imports', function(ProductsImport $import) {
+            return true;
+        });
+    }
+
 }

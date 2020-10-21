@@ -63,6 +63,7 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
     {
         $this->subCategories = [];
         $row = [
+            [],
             [
                 $category->id,
                 $category->name,

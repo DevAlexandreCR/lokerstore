@@ -41,7 +41,9 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
         return [
             $stock->id,
             $stock->product->id,
+            $stock->color->id,
             $stock->color->name,
+            $stock->size->id,
             $stock->size->type->name,
             $stock->size->name,
             $stock->quantity
@@ -56,7 +58,9 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
         return [
             'Id',
             trans('Product'),
+            trans('Color id'),
             trans('Color'),
+            trans('Size') . 'id',
             trans('Type size'),
             trans('Size'),
             trans('Stock'),
@@ -77,13 +81,13 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:F1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('A1:F1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
-        $sheet->getStyle('A1:F1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle('A1:F1')->getFill()->setStartColor(new Color('8C8C8C'));
-        $sheet->getStyle('A1:F1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('E2:E10000')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A1:F1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A1:H1')->getFill()->setFillType(Fill::FILL_SOLID);
+        $sheet->getStyle('A1:H1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+        $sheet->getStyle('A1:H1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+        $sheet->getStyle('A1:H1')->getFill()->setStartColor(new Color('8C8C8C'));
+        $sheet->getStyle('A1:H1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('G2:G10000')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:H1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         return [
@@ -104,9 +108,9 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
         foreach ($rowIterator as $row) {
             $index = $row->getRowIndex();
             if ($index % 2 === 1) {
-                $workSheet->getStyle('A' . $index . ':F' . $index)
+                $workSheet->getStyle('A' . $index . ':H' . $index)
                     ->getFill()->setFillType(Fill::FILL_SOLID);
-                $workSheet->getStyle('A' . $index . ':F' . $index)
+                $workSheet->getStyle('A' . $index . ':H' . $index)
                     ->getFill()->setStartColor(new Color('F2F2F2'));
             }
         }

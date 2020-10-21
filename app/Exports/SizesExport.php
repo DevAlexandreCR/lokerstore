@@ -60,6 +60,7 @@ class SizesExport implements FromCollection, WithTitle, WithHeadings, WithMappin
     {
         $this->sizes = [];
         $row = [
+            [],
             [
                 $typeSize->id,
                 $typeSize->name,
