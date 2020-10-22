@@ -10,7 +10,7 @@ class TagSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         factory(Tag::class)->create([
             'name' => 'Hombre'
@@ -18,6 +18,5 @@ class TagSeeder extends Seeder
         factory(Tag::class)->create([
             'name' => 'Mujer'
         ]);
-        factory(Tag::class, 10)->create();
     }
 }

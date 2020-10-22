@@ -42,6 +42,7 @@ class CacheCategories implements CategoryInterface
         $this->categories->destroy($model);
 
         Cache::tags(['categories'])->flush();
+        Cache::tags(['products', 'api.products'])->flush();
     }
 
     public function all()

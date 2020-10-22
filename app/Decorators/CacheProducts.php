@@ -86,4 +86,15 @@ class CacheProducts implements ProductsInterface
 
         return '.page=' . $page . '$search=' . $search .'$category=' . $category . '$tags=' . $tags;
     }
+
+    /**
+     * @param array $data
+     * @return ?Product
+     */
+    public function create(array $data = []): ?Product
+    {
+        Cache::tags(['products', 'api.products'])->flush();
+
+        return $this->products->create($data);
+    }
 }

@@ -207,5 +207,30 @@
     "Date" : "Fecha",
     "Search user" : "Buscar usuario",
     "Save product" : "Guardar producto",
-    "Update product" : "Actualizar producto"
+    "Update product" : "Actualizar producto",
+    "Exporting products... we'll send you an email when the download is available"
+    : "Exportando productos... te enviaremos un email cuando esté disponible la descarga",
+    "Importing products... we'll send you an email when the import is ended"
+    : "Importando productos... te enviaremos un email cuando la importacion haya terminado",
+    "Products exported successfully": "Productos exportados satisfactoriamente",
+    "Products imported successfully": "Productos importados satisfactoriamente",
+    "Products imported with errors": "Productos importados con errores",
+    "Good bye": "Chao!",
+    "Download": "Descargar",
+    "Size": "Talla",
+    "Size ID": "ID Talla",
+    "Sizes": "Tallas",
+    "Type-Size": "Tipo de talla",
+    "Colors": "Colores",
+    "Choose file": "Escoger archivo",
+    "Import": "Importar",
+    "Export": "Exportar",
+    "Submit": "Enviar",
+    "Close": "Cerrar",
+    "Products saved": "Productos guardados",
+    "Errors": "Errores",
+    "Row": "Fila",
+    "Field": "Campo",
+    "Value": "Valor",
+    "Category id": "ID Categoría"
 }

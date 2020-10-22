@@ -144,7 +144,7 @@ class ProductController extends Controller
         $product = $this->products->update($request, $product);
 
         return redirect( route('products.edit', ['product' => $product]))
-            ->with('product-updated', 'Product has been updated success');
+            ->with('success', trans('Product has been updated success'));
     }
 
     /**
@@ -159,7 +159,7 @@ class ProductController extends Controller
         $this->products->setActive($request, $product);
 
         return redirect( route('products.index'))
-                ->with('product-updated', __('Your product has been update successfully'));
+                ->with('seccess', trans('Your product has been update successfully'));
     }
 
     /**
@@ -172,6 +172,6 @@ class ProductController extends Controller
         $this->products->destroy($product);
 
         return redirect( route('products.index'))
-                ->with('product-deleted', "Product has been deleted success");
+                ->with('success', trans('Product has been deleted success'));
     }
 }

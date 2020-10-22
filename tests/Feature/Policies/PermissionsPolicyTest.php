@@ -76,7 +76,9 @@ class PermissionsPolicyTest extends TestCase
         $this->admin->assignRole($role->name);
 
         $this->actingAs($this->admin, Admins::GUARDED)
-            ->put(route('permissions.update', $id))->assertStatus(302);
+            ->put(route('permissions.update', $id), [
+                'name' => 'updated permission'
+            ])->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)
             ->delete(route('permissions.destroy', $id))->assertStatus(302);
