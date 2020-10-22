@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Color;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Style\Color as Colors;
 use Illuminate\Support\Collection;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -82,6 +83,8 @@ class ColorsExport extends DefaultValueBinder implements FromCollection, WithTit
         $sheet->getStyle($sheet->getSelectedCells())->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle($sheet->getSelectedCells())->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
+        $sheet->getProtection()->setPassword(config('app.name'));
+        $sheet->getProtection()->setSheet(true);
 
         return [
             1    => [

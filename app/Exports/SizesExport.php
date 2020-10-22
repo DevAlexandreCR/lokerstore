@@ -100,6 +100,8 @@ class SizesExport implements FromCollection, WithTitle, WithHeadings, WithMappin
         optional($sheet->getCell('A1'))->setValue(trans('Type-Size'));
         optional($sheet->getCell('D1'))->setValue(trans('Size'));
         optional($sheet->getRowDimension(1))->setRowHeight(30);
+        $sheet->getProtection()->setPassword(config('app.name'));
+        $sheet->getProtection()->setSheet(true);
         return [
             1    => [
                 'font' => [

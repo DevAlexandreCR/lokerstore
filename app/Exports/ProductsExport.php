@@ -76,7 +76,7 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             $product->id,
             $product->name,
             $product->description,
-            '=SUMIFS(Stocks!H:H,Stocks!B:B,A:A)',
+            '=SUMIFS(Stocks!H:H,Stocks!B:B,B:B)',
             $product->price,
             ($product->is_active)? 'Si' : 'No',
             $product->category->id,
@@ -156,7 +156,10 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
         return trans('Products');
     }
 
-    public static function afterSheet(AfterSheet $event)
+    /**
+     * @param AfterSheet $event
+     */
+    public static function afterSheet(AfterSheet $event): void
     {
         $workSheet = $event->getSheet()->getDelegate();
         $rowIterator = $event->getSheet()->getDelegate()->getRowIterator(2, 1000);

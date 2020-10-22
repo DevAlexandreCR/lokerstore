@@ -19,7 +19,6 @@
             <th>{{trans('Import')}}</th>
             <th>{{trans('Row')}}</th>
             <th>{{trans('Field')}}</th>
-            <th>{{trans('Value')}}</th>
             <th>{{trans('Errors')}}</th>
         </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{trans($failure->import)}}</td>
                 <td>{{$failure->row}}</td>
                 <td>{{trans($failure->attribute)}}</td>
-                <td>{{$failure->values}}</td>
                 <td>{{$failure->errors}}</td>
             </tr>
         @endforeach

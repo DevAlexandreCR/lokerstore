@@ -113,7 +113,7 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
             '*.0' => ['integer', 'min:0'],
             '*.1' => ['required', 'string', 'max:100'],
             '*.2' => ['required', 'string', 'max:255'],
-            '*.3' => ['required', 'string', 'in:"=SUMIFS(Stocks!H:H,Stocks!B:B,A:A)"'],
+            '*.3' => ['required', 'string'],
             '*.4' => ['required', 'numeric', 'min:1000'],
             '*.5' => ['required', 'string', 'in:Si,No'],
             '*.6' => ['required', 'integer', 'exists:categories,id'],

@@ -82,11 +82,6 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
      */
     public function styles(Worksheet $sheet)
     {
-        foreach ($sheet->getColumnIterator('G','G') as $column) {
-            foreach ($column->getCellIterator() as $cell) {
-                $cell->setDataType(DataType::TYPE_STRING);
-            }
-        }
         $sheet->getStyle('A1:H1')->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle('A1:H1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle('A1:H1')->getFont()->setColor(new Color(Color::COLOR_WHITE));

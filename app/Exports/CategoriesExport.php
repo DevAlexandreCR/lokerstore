@@ -104,6 +104,10 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
         optional($sheet->getCell('A1'))->setValue(trans('Category'));
         optional($sheet->getCell('D1'))->setValue('Sub-' . trans('Category'));
         optional($sheet->getRowDimension(1))->setRowHeight(30);
+
+        $sheet->getProtection()->setPassword(config('app.name'));
+        $sheet->getProtection()->setSheet(true);
+
         return [
             1    => [
                 'font' => [
