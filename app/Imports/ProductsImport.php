@@ -5,8 +5,8 @@ namespace App\Imports;
 use Throwable;
 use Maatwebsite\Excel\Row;
 use App\Models\ErrorImport;
+use App\Interfaces\StocksInterface;
 use App\Interfaces\ProductsInterface;
-use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Validators\Failure;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -24,12 +24,12 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
     use Importable;
 
     private ProductsInterface $products;
+    private StocksInterface $stocks;
 
-    public array $errors = array();
-
-    public function __construct(ProductsInterface $products)
+    public function __construct(ProductsInterface $products, StocksInterface $stocks)
     {
         $this->products = $products;
+        $this->stocks = $stocks;
     }
 
     /**
@@ -40,13 +40,13 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
     {
         $rows = $row->toArray();
 
-        $this->products->create((int)$rows[0], [
-            'name' => $rows[1],
+        $this->products->create([
+            'name'        => $rows[1],
             'description' => $rows[2],
-            'price' => $rows[4],
-            'is_active' => $rows[5] === 'Si' ? 1 : 0,
+            'price'       => $rows[4],
+            'is_active'   => $rows[5] === 'Si' ? 1 : 0,
             'id_category' => $rows[6],
-            'tags' => $rows[8]
+            'tags'        => $rows[8]
         ]);
     }
 
@@ -57,7 +57,7 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
     {
         return [
             $this,
-            new StocksImport()
+            new StocksImport($this->stocks)
         ];
     }
 
@@ -95,9 +95,11 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
         foreach($failures as $failure) {
 
             ErrorImport::create([
+                'import'    => 'products',
                 'row'       => $failure->row(),
                 'attribute' => $failure->attribute(),
-                'errors'    => json_encode($failure->errors(), JSON_THROW_ON_ERROR),
+                'value'     => implode(', ', $failure->values()),
+                'errors'    => implode(', ', $failure->errors())
             ]);
         }
     }
@@ -108,7 +110,33 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
     public function rules(): array
     {
         return [
-            '*.0' => ['array', 'min:0']
+            '*.0' => ['integer', 'min:0'],
+            '*.1' => ['required', 'string', 'max:100'],
+            '*.2' => ['required', 'string', 'max:255'],
+            '*.3' => ['required', 'string', 'in:"=SUMIFS(Stocks!H:H,Stocks!B:B,A:A)"'],
+            '*.4' => ['required', 'numeric', 'min:1000'],
+            '*.5' => ['required', 'string', 'in:Si,No'],
+            '*.6' => ['required', 'integer', 'exists:categories,id'],
+            '*.7' => ['required', 'string', 'max:255'],
+            '*.8' => ['required', 'string', 'max:255'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function customValidationAttributes(): array
+    {
+        return [
+            '0' => 'ID',
+            '1' => 'Name',
+            '2' => 'Description',
+            '3' => 'Stock',
+            '4' => 'Price',
+            '5' => 'Enabled',
+            '6' => 'Category id',
+            '7' => 'Category',
+            '8' => 'Tags'
         ];
     }
 }

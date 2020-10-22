@@ -15,9 +15,11 @@ class CreateErrorImportsTable extends Migration
     {
         Schema::create('error_imports', function (Blueprint $table) {
             $table->id();
+            $table->string('import', 50)->nullable();
             $table->unsignedInteger('row')->nullable();
             $table->string('attribute', 100)->nullable();
-            $table->json('errors')->nullable();
+            $table->string('values', 300)->nullable();
+            $table->string('errors', 300)->nullable();
             $table->timestamps();
         });
     }

@@ -94,14 +94,13 @@ class Products implements ProductsInterface
     }
 
     /**
-     * @param int $id
      * @param array $data
      * @return Product|null
      */
-    public function create(int $id = 0, array $data = []): ?Product
+    public function create(array $data = []): ?Product
     {
         $product = $this->product->updateOrCreate([
-            'id' => $id
+            'name' => $data['name']
         ], $data);
 
         $tags = array();

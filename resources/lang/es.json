@@ -214,9 +214,11 @@
     : "Importando productos... te enviaremos un email cuando la importacion haya terminado",
     "Products exported successfully": "Productos exportados satisfactoriamente",
     "Products imported successfully": "Productos importados satisfactoriamente",
+    "Products imported with errors": "Productos importados con errores",
     "Good bye": "Chao!",
     "Download": "Descargar",
     "Size": "Talla",
+    "Size ID": "ID Talla",
     "Sizes": "Tallas",
     "Type-Size": "Tipo de talla",
     "Colors": "Colores",
@@ -225,5 +227,10 @@
     "Export": "Exportar",
     "Submit": "Enviar",
     "Close": "Cerrar",
-    "Products saved": "Productos guardados"
+    "Products saved": "Productos guardados",
+    "Errors": "Errores",
+    "Row": "Fila",
+    "Field": "Campo",
+    "Value": "Valor",
+    "Category id": "ID Categoría"
 }

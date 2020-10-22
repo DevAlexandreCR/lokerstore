@@ -32,22 +32,12 @@ class ImportEnds extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $message = new MailMessage();
-        $failures = ErrorImport::all();
-        $message
+        return (new MailMessage())
             ->subject(trans('Products saved'))
-            ->line(trans('Products imported successfully'))
-            ->line(trans('Errors: ') . count($failures));
-        foreach ($failures as $failure) {
-            foreach (json_decode($failure->errors, true, 512, JSON_THROW_ON_ERROR) as $error) {
-                $message->line($error);
-            }
-            ErrorImport::destroy($failure->id);
-        }
-
-        return $message
-            ->action(trans('View'), route('products.index'))
-            ->line(trans('Good bye'));
+            ->markdown('emails.excel.imports', [
+                'failures' => ErrorImport::all(),
+                'name'     => $notifiable->name
+            ]);
     }
 
     /**

@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -40,7 +41,7 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
     {
         return [
             $stock->id,
-            $stock->product->id,
+            $stock->product->name,
             $stock->color->id,
             $stock->color->name,
             $stock->size->id,
@@ -61,7 +62,7 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
             trans('Color id'),
             trans('Color'),
             trans('Size') . 'id',
-            trans('Type size'),
+            trans('Type-Size'),
             trans('Size'),
             trans('Stock'),
         ];
@@ -81,6 +82,11 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
      */
     public function styles(Worksheet $sheet)
     {
+        foreach ($sheet->getColumnIterator('G','G') as $column) {
+            foreach ($column->getCellIterator() as $cell) {
+                $cell->setDataType(DataType::TYPE_STRING);
+            }
+        }
         $sheet->getStyle('A1:H1')->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle('A1:H1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle('A1:H1')->getFont()->setColor(new Color(Color::COLOR_WHITE));

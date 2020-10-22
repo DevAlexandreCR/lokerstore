@@ -22,9 +22,8 @@ interface ProductsInterface extends RepositoryInterface
     public function setActive(ActiveRequest $request, Product $product);
 
     /**
-     * @param int $id
      * @param array $data
      * @return Product|null
      */
-    public function create(int $id = 0, array $data = []): ?Product;
+    public function create(array $data = []): ?Product;
 }
