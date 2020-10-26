@@ -12,13 +12,14 @@ class CreateOrdersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('admin_id')->nullable()->constrained()->onDelete('SET NULL');
             $table->unsignedDecimal('amount', 10)->default(0);
-            $table->string('status')->default(Orders::STATUS_PENDING_PAY);
+            $table->enum('status', Orders::getAllStatus())->default(Orders::STATUS_PENDING_PAY);
             $table->timestamps();
         });
     }
@@ -28,7 +29,7 @@ class CreateOrdersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('orders');
     }

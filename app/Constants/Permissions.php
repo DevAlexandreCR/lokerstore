@@ -4,7 +4,9 @@
 namespace App\Constants;
 
 
-class Permissions
+use MyCLabs\Enum\Enum;
+
+class Permissions extends Enum
 {
     //users
     public const VIEW_USERS = 'view users';

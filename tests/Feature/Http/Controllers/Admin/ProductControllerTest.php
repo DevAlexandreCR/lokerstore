@@ -124,7 +124,7 @@ class ProductControllerTest extends TestCase
 
         $response
             ->assertRedirect(route('products.edit', ['product' => $product->id]))
-            ->assertSessionHas('product-updated')
+            ->assertSessionHas('success')
             ->assertStatus(302);
         $this->assertDatabaseHas('products', ['name' => 'mi nuevo super producto']);
     }
@@ -141,7 +141,7 @@ class ProductControllerTest extends TestCase
         ]));
 
         $response->assertRedirect(route('products.index'))
-            ->assertSessionHas('product-deleted')
+            ->assertSessionHas('success')
             ->assertStatus(302);
     }
 }

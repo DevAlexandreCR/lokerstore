@@ -24,9 +24,9 @@ class ProductSeeder extends Seeder
                 $tags->random(random_int(1,  2))->pluck('id')->toArray()
             );
 
-            factory(Photo::class, random_int(1, 2))->create([
-                'product_id' => $product->id
-            ]);
+//            factory(Photo::class, random_int(1, 2))->create([
+//                'product_id' => $product->id
+//            ]);
         });
     }
 }
