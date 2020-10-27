@@ -25,7 +25,6 @@ class ExcelController extends Controller
     public function index(ExportRequest $request, ProductsInterface $products): RedirectResponse
     {
         $fileName = 'products_' . now()->format('Y-m-d') .'.xlsx';
-
         (new ProductsExport($products))->queue($fileName, 'exports')->chain([
             new NotifyAdminsAfterCompleteExport($request->user(Admins::GUARDED), $fileName)
         ]);
@@ -36,6 +35,7 @@ class ExcelController extends Controller
     /**
      * @param ImportRequest $request
      * @param ProductsInterface $products
+     * @param StocksInterface $stocks
      * @return RedirectResponse
      */
     public function store(ImportRequest $request, ProductsInterface $products, StocksInterface $stocks): RedirectResponse

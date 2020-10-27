@@ -30,22 +30,37 @@
                         <div class="col-sm-2">
                             <h6 class="card-title"> {{__('Name')}} </h6>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <div class="form-group">
                                 <input type="name" class="form-control  @error('name') is-invalid @enderror" id="name"
                                        required placeholder="{{__('Name')}}"
                                        name="name" aria-describedby="nameHelp" value="{{ old('name')}}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <h6 class="card-title"> {{__('Reference')}} </h6>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <input type="name" class="form-control  @error('reference') is-invalid @enderror" id="name"
+                                       required placeholder="{{__('0000')}}"
+                                       name="reference" aria-describedby="nameHelp" value="{{ old('reference')}}">
+                                @error('reference')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <h6 class="card-title"> {{__('Stock')}} </h6>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock"
                                    disabled placeholder="{{ __('This value will be added automatically') }}"
                                    name="stock" aria-describedby="lastnameHelp">
@@ -74,18 +89,27 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Price')}} </h6>
+                        <div class="col-sm-2 ml-2">
+                            <div class="form-group">
+                                <input type="number" class="form-control  @error('cost') is-invalid @enderror"
+                                       id="cost" required placeholder="{{trans('Cost')}}"
+                                       name="cost" aria-describedby="priceHelp" value="{{ old('cost') }}">
+                                @error('cost')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <input type="number" class="form-control  @error('price') is-invalid @enderror"
-                                       id="price" required placeholder="0"
+                                       id="price" required placeholder="{{trans('Price')}}"
                                        name="price" aria-describedby="priceHelp" value="{{ old('price') }}">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
@@ -145,9 +169,9 @@
                                 </div>
                             </div>
                             @error('category')
-                            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
                     </div>

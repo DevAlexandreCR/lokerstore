@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
+use AdminSeeder;
 use App\Constants\Admins;
 use App\Constants\Orders;
 use App\Constants\Roles;

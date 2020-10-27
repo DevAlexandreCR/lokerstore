@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
+use AdminSeeder;
 use App\Constants\Admins;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
@@ -29,6 +30,7 @@ class OrderDetailsControllerTest extends TestCase
             TestDatabaseSeeder::class,
             UserSeeder::class,
             StockSeeder::class,
+            AdminSeeder::class,
             OrderSeeder::class
         ]);
 
@@ -39,6 +41,7 @@ class OrderDetailsControllerTest extends TestCase
 
     public function testAnAdminCanUpdateAnOrderDetail(): void
     {
+        $this->withoutExceptionHandling();
         $stock = factory(Stock::class)->create([
             'quantity' => 20
         ]);
@@ -89,9 +92,9 @@ class OrderDetailsControllerTest extends TestCase
         $this->assertDatabaseMissing('order_details', [
             'id' => $id
         ]);
-        $this->assertDatabaseMissing('orders', [
+        $this->assertDatabaseHas('orders', [
             'id' => $detail->order_id,
-            'amount' => $amount - $amountOrder
+            'amount' => $amountOrder - $amount
         ]);
     }
 }

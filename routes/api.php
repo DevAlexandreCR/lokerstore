@@ -16,12 +16,6 @@ use Illuminate\Support\Facades\Route;
     Route::middleware('auth:api')
         ->prefix('/products')
         ->group(function() {
-            Route::apiResource('/products', 'ProductController')
-                ->except('index', 'show')
-                ->name('store', 'api.products.store')
-                ->name('destroy', 'api.products.destroy')
-                ->name('update', 'api.products.update');
-
             Route::put('/stocks/{stock}', 'StockController@update')
                 ->name('api.stocks.update');
 
@@ -31,6 +25,13 @@ use Illuminate\Support\Facades\Route;
             Route::delete('/photos', 'PhotosController@destroy')
                 ->name('api.photos.destroy');
     });
+
+    Route::middleware('auth:api')
+        ->apiResource('products', 'ProductController')
+        ->except('index', 'show')
+        ->name('store', 'api.products.store')
+        ->name('destroy', 'api.products.destroy')
+        ->name('update', 'api.products.update');
 
 
     Route::get('/products', 'ProductController@index')->name('api.index');

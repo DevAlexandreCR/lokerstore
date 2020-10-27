@@ -25,6 +25,7 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\WithPreCalculateFormulas;
 
 class ProductsExport extends DefaultValueBinder implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize,
     WithStyles, WithCustomValueBinder, WithMultipleSheets, WithTitle, WithColumnWidths, WithEvents
@@ -54,14 +55,16 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
     {
         return [
             'Id',
+            trans('Reference'),
             trans('Name'),
             trans('Description'),
             trans('Stock'),
+            trans('Cost'),
             trans('Price'),
             trans('Enabled'),
             'ID ' . trans('Category'),
             trans('Category'),
-            trans('Tags'),
+            trans('Tags')
         ];
     }
     /**
@@ -74,9 +77,12 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
         $tagsString = implode(', ', $tags);
         return [
             $product->id,
+            $product->reference,
             $product->name,
             $product->description,
-            '=SUMIFS(Stocks!H:H,Stocks!B:B,B:B)',
+            $product->stock,
+//            '=SUMIFS(Stocks!H:H,Stocks!B:B,B:B)',
+            $product->cost,
             $product->price,
             ($product->is_active)? 'Si' : 'No',
             $product->category->id,
@@ -92,7 +98,7 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
      */
     public function bindValue(Cell $cell, $value): bool
     {
-        if (in_array($cell->getColumn(), ['A', 'D', 'F'])) {
+        if (in_array($cell->getColumn(), ['A', 'B', 'G', 'H', 'I'])) {
             $cell->getStyle()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         }
 
@@ -119,8 +125,8 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
     public function columnWidths(): array
     {
         return [
-            'C' => 90,
-            'D' => 10
+            'D' => 90,
+            'F' => 10
         ];
     }
 
@@ -130,12 +136,12 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:I1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('A1:I1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
-        $sheet->getStyle('A1:I1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle('A1:I1')->getFill()->setStartColor(new Color('E75858'));
-        $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A1:I1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A1:K1')->getFill()->setFillType(Fill::FILL_SOLID);
+        $sheet->getStyle('A1:K1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+        $sheet->getStyle('A1:K1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+        $sheet->getStyle('A1:K1')->getFill()->setStartColor(new Color('E75858'));
+        $sheet->getStyle('A1:K1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:K1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         return [
@@ -167,9 +173,9 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
         foreach ($rowIterator as $row) {
             $index = $row->getRowIndex();
             if ($index % 2 === 1) {
-                $workSheet->getStyle('A' . $index . ':I' . $index)
+                $workSheet->getStyle('A' . $index . ':K' . $index)
                     ->getFill()->setFillType(Fill::FILL_SOLID);
-                $workSheet->getStyle('A' . $index . ':I' . $index)
+                $workSheet->getStyle('A' . $index . ':K' . $index)
                     ->getFill()->setStartColor(new Color('FAE7E2'));
             }
         }

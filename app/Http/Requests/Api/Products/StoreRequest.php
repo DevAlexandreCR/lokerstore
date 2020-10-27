@@ -28,8 +28,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'reference'     => ['required', 'integer', 'max:100000', 'min:1'],
             'name'          => ['required', 'string', 'max:50', 'min:3'],
             'description'   => ['required', 'string', 'min:10', 'max:300'],
+            'cost'          => ['required', 'numeric'],
             'price'         => ['required', 'numeric'],
             'id_category'   => ['required', 'integer', 'exists:categories,id'],
             'tags'          => ['required', 'array', 'exists:tags,name'],

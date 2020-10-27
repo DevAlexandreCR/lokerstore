@@ -21,7 +21,7 @@ use Illuminate\Foundation\Testing\WithFaker;
      */
     public function run(): void
     {
-        $orders = factory(Order::class, 500)->create();
+        $orders = factory(Order::class, 10)->create();
 
         $orders->each( function ($order) {
             factory(OrderDetail::class, random_int(1,3))->create([

@@ -25,13 +25,15 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'reference'     => ['required', 'integer', 'min:1', 'max:999999'],
             'name'          => ['required', 'string', 'max:100', 'min:3'],
             'description'   => ['required', 'string', 'min:30', 'max:300'],
+            'cost'          => ['required', 'numeric'],
             'price'         => ['required', 'numeric'],
             'id_category'   => ['required', 'integer'],
             'tags'          => ['required', 'array'],
             'delete_photos' => ['array'],
-            'Photos'        => ['array']
+            'photos'        => ['array']
         ];
     }
 }

@@ -9,7 +9,8 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm">
+                        <h5 >{{trans('Reference')}}: {{$product->reference}}</h5>
                         <div id="carousel{{$product->id}}" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach ($product->photos as $key => $photo)
@@ -28,7 +29,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="row ">
                             <p><strong>{{__('Description')}}</strong></p>
                             <div class="container">
@@ -37,12 +38,12 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><strong>{{__('Price')}}</strong></p>
-                                <p>{{$product->getPrice()}}</p>
+                                <p><strong>{{__('Cost')}}</strong></p>
+                                <p>{{$product->cost}}</p>
                             </div>
                             <div class="col">
-                                <p><strong>{{__('Stock')}}</strong></p>
-                                <p>{{$product->stock}}</p>
+                                <p><strong>{{__('Price')}}</strong></p>
+                                <p>{{$product->getPrice()}}</p>
                             </div>
                             <div class="col">
                                 <p><strong>{{__('Status')}}</strong></p>
@@ -51,6 +52,10 @@
                         </div>
                         <hr>
                         <div class="row">
+                            <div class="col">
+                                <p><strong>{{__('Status')}}</strong></p>
+                                <p>{{$product->getStatus()}}</p>
+                            </div>
                             <div class="col">
                                 <p><strong>{{__('Category')}}</strong></p>
                                 <p>{{$product->category->getFullCategory()}}</p>

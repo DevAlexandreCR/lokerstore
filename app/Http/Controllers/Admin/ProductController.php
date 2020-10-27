@@ -72,7 +72,7 @@ class ProductController extends Controller
     public function create(TagsInterface $tags, CategoryInterface $categories, ColorsInterface $colors,
                             SizesInterface $sizes): View
     {
-        $categories = $categories->all();
+        $categories = $categories->index();
         $tags = $tags->index();
         $colors = $colors->index();
         $sizes = $sizes->index();

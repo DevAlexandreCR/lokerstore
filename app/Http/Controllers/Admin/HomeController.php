@@ -31,6 +31,7 @@ class HomeController extends Controller
         $firstMonth = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
         DB::unprepared("call orders_metrics_generate('$firstMonth', '$until', '$metricSeller', 'admin_id')");
         DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricOrders', 'none')");
+        DB::unprepared("call categories_metrics_generate('$firstMonth', '$until')");
 
         return view('admin.stats', [
             'metricsGeneral' => $this->metrics->getMetricsAllOrders(),

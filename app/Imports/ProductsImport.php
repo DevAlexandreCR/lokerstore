@@ -41,11 +41,13 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
         $rows = $row->toArray();
 
         $this->products->create([
-            'name'        => $rows[1],
-            'description' => $rows[2],
-            'price'       => $rows[4],
-            'is_active'   => $rows[5] === 'Si' ? 1 : 0,
-            'id_category' => $rows[6],
+            'reference'   => $rows[1],
+            'name'        => $rows[2],
+            'description' => $rows[3],
+            'cost'        => $rows[4],
+            'price'       => $rows[5],
+            'is_active'   => $rows[6] === 'Si' ? 1 : 0,
+            'id_category' => $rows[7],
             'tags'        => $rows[8]
         ]);
     }
@@ -110,15 +112,17 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
     public function rules(): array
     {
         return [
-            '*.0' => ['integer', 'min:0'],
-            '*.1' => ['required', 'string', 'max:100'],
-            '*.2' => ['required', 'string', 'max:255'],
-            '*.3' => ['required', 'string'],
-            '*.4' => ['required', 'numeric', 'min:1000'],
-            '*.5' => ['required', 'string', 'in:Si,No'],
-            '*.6' => ['required', 'integer', 'exists:categories,id'],
-            '*.7' => ['required', 'string', 'max:255'],
-            '*.8' => ['required', 'string', 'max:255'],
+            '*.0'  => ['integer', 'min:0'],
+            '*.1'  => ['required','integer', 'min:1', 'max:100000'],
+            '*.2'  => ['required', 'string', 'max:100'],
+            '*.3'  => ['required', 'string', 'max:255'],
+            '*.4'  => ['required', 'string'],
+            '*.5'  => ['required', 'numeric', 'min:1000'],
+            '*.6'  => ['required', 'numeric', 'min:1000'],
+            '*.7'  => ['required', 'string', 'in:Si,No'],
+            '*.8'  => ['required', 'integer', 'exists:categories,id'],
+            '*.9'  => ['required', 'string', 'max:255'],
+            '*.10' => ['required', 'string', 'max:255'],
         ];
     }
 

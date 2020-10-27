@@ -8,6 +8,8 @@
     "Name": "Nombre",
     "Lastname": "Apellido",
     "Status": "Estado",
+    "Cost": "Costo",
+    "Reference": "Referencia",
     "Enabled": "Habilitado",
     "Disabled": "Inhabilitado",
     "Success!": "Hecho!",
