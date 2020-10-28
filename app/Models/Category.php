@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
+use App\Constants\Metrics;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Category extends Model
 {
     protected $table = 'categories';
 
     protected $fillable = ['name', 'id_parent'];
+
+    public function metrics(): MorphMany
+    {
+        return $this->morphMany(Metric::class, 'measurable',Metrics::CATEGORIES);
+    }
 
     public function products(): HasMany
     {

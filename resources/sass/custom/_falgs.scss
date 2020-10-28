@@ -1,0 +1,35 @@
+.flag{
+    min-width: 20rem;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    border-left-style: solid;
+    border-left-width: 8px;
+}
+
+.flag-blue {
+    border-left-color: #3f9ae5;
+}
+
+.flag-red {
+    border-left-color: red;
+}
+
+.flag-yellow {
+    border-left-color: yellow;
+}
+
+.flag-black {
+    border-left-color: black;
+}
+
+.flag-green {
+    border-left-color: green;
+}
+
+@media (max-width: $breakpoint-phone) {
+    .flag {
+        min-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

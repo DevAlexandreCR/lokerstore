@@ -9,6 +9,6 @@ use MyCLabs\Enum\Enum;
 class Metrics extends Enum
 {
     public const ORDERS   = 'orders';
-    public const PRODUCTS = 'categories';
+    public const CATEGORIES = 'categories';
     public const SELLER   = 'admins';
 }

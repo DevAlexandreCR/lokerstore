@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Metric;
+use App\Constants\Orders;
 use App\Constants\Metrics;
+use App\Interfaces\UsersInterface;
 use App\Repositories\Metrics as MetricsRepo;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -18,9 +21,10 @@ class HomeController extends Controller
     }
 
     /**
+     * @param UsersInterface $users
      * @return View
      */
-    public function index(): View
+    public function index(UsersInterface $users): View
     {
         $metricOrders = Metrics::ORDERS;
         $metricSeller = Metrics::SELLER;
@@ -34,8 +38,11 @@ class HomeController extends Controller
         DB::unprepared("call categories_metrics_generate('$firstMonth', '$until')");
 
         return view('admin.stats', [
-            'metricsGeneral' => $this->metrics->getMetricsAllOrders(),
-            'metricsSeller'  => $this->metrics->getMetricsAdminOrders()
+            'metricsGeneral'  => $this->metrics->getMetricsAllOrders(),
+            'metricsSeller'   => $this->metrics->getMetricsAdminOrders(),
+            'metricsCategory' => $this->metrics->getMetricsCategory(),
+            'pendingShipment' => $this->metrics->getpendingShipmentOrders(),
+            'usersCount'      => $users->index()->count()
         ]);
     }
 }

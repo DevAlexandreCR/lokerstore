@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
+use App\Models\Category;
+use App\Constants\Metrics;
+use App\Models\Admin\Admin;
+use App\Repositories\Users;
 use App\Repositories\Stocks;
 use App\Decorators\AdminDecorator;
 use App\Decorators\CacheTypeSizes;
@@ -33,6 +38,7 @@ use App\Interfaces\SizesInterface;
 use App\Interfaces\TagsInterface;
 use App\Interfaces\UsersInterface;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -68,5 +74,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ApiStocksInterface::class, StocksDecorator::class);
         $this->app->bind(ApiPhotosInterface::class, PhotosDecorator::class);
         $this->app->bind(StocksInterface::class, Stocks::class);
+        $this->app->bind(UsersInterface::class, Users::class);
+
+        Relation::morphMap([
+            Metrics::CATEGORIES => Category::class,
+            Metrics::SELLER     => Admin::class,
+            Metrics::ORDERS     => Order::class
+        ]);
     }
 }

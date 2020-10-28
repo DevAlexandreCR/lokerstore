@@ -1899,6 +1899,397 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/SalesPercentComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/SalesPercentComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/constants */ "./resources/js/constants/constants.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'sales-percent-component',
+  props: {
+    metrics: {
+      type: Array,
+      "default": []
+    }
+  },
+  computed: {
+    salesLastMonth: function salesLastMonth() {
+      var _metrics;
+
+      var metrics = this.filterMetrics(_constants_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ORDER_STATUS_SENT);
+      return (_metrics = metrics[metrics.length - 2]) !== null && _metrics !== void 0 ? _metrics : 0;
+    },
+    salesThisMonth: function salesThisMonth() {
+      var _metrics2;
+
+      var metrics = this.filterMetrics(_constants_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ORDER_STATUS_SENT);
+      return (_metrics2 = metrics[metrics.length - 1]) !== null && _metrics2 !== void 0 ? _metrics2 : 0;
+    },
+    salesThisMonthString: function salesThisMonthString() {
+      var value = this.salesThisMonth;
+      value = value.toString();
+      value = value.split(/(?=(?:...)*$)/);
+      value = value.join('.');
+      return '$' + value;
+    },
+    salesLastMonthString: function salesLastMonthString() {
+      var value = this.salesLastMonth;
+      value = value.toString();
+      value = value.split(/(?=(?:...)*$)/);
+      value = value.join('.');
+      return '$' + value;
+    },
+    progress: function progress() {
+      var percent = this.salesThisMonth / this.salesLastMonth * 100;
+      return Math.round(percent);
+    }
+  },
+  methods: {
+    filterMetrics: function filterMetrics(status) {
+      var sends = this.metrics.filter(function (metric) {
+        return metric.status === status;
+      });
+      var metrics = [];
+      sends.forEach(function (metric) {
+        var _metrics$date;
+
+        var date = new Date(metric.date).getMonth();
+        var total = (_metrics$date = metrics[date]) !== null && _metrics$date !== void 0 ? _metrics$date : 0;
+        metrics[date] = total + parseInt(metric.amount);
+      });
+      return metrics;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'category-metric',
+  data: function data() {
+    return {};
+  },
+  props: {
+    metrics: {
+      type: Array,
+      "default": {}
+    }
+  },
+  methods: {
+    filterMetric: function filterMetric() {
+      var categories = [];
+      this.metrics.forEach(function (metric) {
+        categories.push(metric.total);
+      });
+      return categories;
+    }
+  },
+  computed: {
+    labels: function labels() {
+      var ids = [];
+      this.metrics.forEach(function (metric) {
+        ids.push(metric.measurable.name);
+      });
+      return ids;
+    },
+    dataSells: function dataSells() {
+      return this.filterMetric();
+    }
+  },
+  mounted: function mounted() {
+    var ctx = document.getElementById('categoriesChart');
+    new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: this.labels,
+        datasets: [{
+          data: this.dataSells,
+          backgroundColor: ['rgba(255, 206, 86, 1)', 'rgba(255, 0, 0, 1)', 'rgba(153, 102, 255, 1)']
+        }]
+      },
+      options: {}
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants/constants */ "./resources/js/constants/constants.js");
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'orders-metric',
+  data: function data() {
+    return {
+      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    };
+  },
+  props: {
+    metrics: {
+      type: Array,
+      "default": []
+    }
+  },
+  methods: {
+    filterMetric: function filterMetric(status) {
+      var sends = this.metrics.filter(function (metric) {
+        return metric.status === status;
+      });
+      var metrics = [];
+      sends.forEach(function (metric) {
+        var _metrics$date;
+
+        var date = new Date(metric.date).getMonth();
+        var total = (_metrics$date = metrics[date]) !== null && _metrics$date !== void 0 ? _metrics$date : 0;
+        metrics[date] = total + parseInt(metric.amount);
+      });
+      return metrics.filter(function (metric) {
+        return metric !== null;
+      });
+    }
+  },
+  computed: {
+    labels: function labels() {
+      var months = [];
+      this.metrics.forEach(function (metric) {
+        var date = new Date(metric.date);
+        var month = date.toLocaleString('default', {
+          month: 'long'
+        });
+
+        if (!months.includes(month)) {
+          months.push(month);
+        }
+      });
+      return months;
+    },
+    dataSent: function dataSent() {
+      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_SENT);
+    },
+    dataRejected: function dataRejected() {
+      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_REJECTED);
+    }
+  },
+  mounted: function mounted() {
+    var ctx = document.getElementById('ordersChart');
+    new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
+      type: 'line',
+      data: {
+        labels: this.labels,
+        datasets: [{
+          label: 'Ventas',
+          data: this.dataSent,
+          backgroundColor: ['rgba(155, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)'],
+          borderColor: ['rgba(155, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(7, 12, 12, 1)', 'rgba(13, 12, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)', 'rgba(225, 159, 143, 1)'],
+          borderWidth: 3
+        }, {
+          label: 'Ventas Canceladas',
+          data: this.dataRejected,
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 3
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              userCallback: function userCallback(value, index, values) {
+                value = value.toString();
+                value = value.split(/(?=(?:...)*$)/);
+                value = value.join('.');
+                return '$' + value;
+              }
+            }
+          }]
+        },
+        tooltips: {
+          callbacks: {
+            label: function label(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              var value = tooltipItem.yLabel;
+              value = value.toString();
+              value = value.split(/(?=(?:...)*$)/);
+              value = value.join('.');
+              return datasetLabel + ': $ ' + value;
+            }
+          }
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/SellersMetric.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/charts/SellersMetric.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'sellers-metric',
+  data: function data() {
+    return {};
+  },
+  props: {
+    metrics: {
+      type: Array,
+      "default": {}
+    }
+  },
+  methods: {
+    filterMetric: function filterMetric() {
+      var sells = [];
+      this.metrics.forEach(function (metric) {
+        sells.push(parseInt(metric.amount));
+      });
+      return sells;
+    }
+  },
+  computed: {
+    labels: function labels() {
+      var ids = [];
+      this.metrics.forEach(function (metric) {
+        ids.push(metric.measurable.name);
+      });
+      return ids;
+    },
+    dataSells: function dataSells() {
+      return this.filterMetric();
+    }
+  },
+  mounted: function mounted() {
+    console.log(this.metrics);
+    var ctx = document.getElementById('sellersChart');
+    new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: this.labels,
+        datasets: [{
+          label: 'Mejor vendedor',
+          data: this.dataSells,
+          backgroundColor: ['rgba(15, 99, 12, 1)', 'rgba(54, 162, 235, 1)', 'rgba(200, 26, 16, 1)', 'rgba(55, 20, 96, 1)', 'rgba(0, 255, 1, 1)']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true
+            },
+            ticks: {
+              beginAtZero: true
+            },
+            stacked: true
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Ventas'
+            },
+            stacked: true,
+            ticks: {
+              beginAtZero: true,
+              userCallback: function userCallback(value, index, values) {
+                value = value.toString();
+                value = value.split(/(?=(?:...)*$)/);
+                value = value.join('.');
+                return '$' + value;
+              }
+            }
+          }]
+        },
+        tooltips: {
+          callbacks: {
+            label: function label(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              var value = tooltipItem.xLabel;
+              value = value.toString();
+              value = value.split(/(?=(?:...)*$)/);
+              value = value.join('.');
+              return datasetLabel + ': $ ' + value;
+            }
+          }
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BannerComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BannerComponent.vue?vue&type=script&lang=js& ***!
@@ -2781,202 +3172,6 @@ __webpack_require__.r(__webpack_exports__);
           break;
       }
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/OrdersMetric.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/charts/OrdersMetric.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants/constants */ "./resources/js/constants/constants.js");
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'orders-metric',
-  data: function data() {
-    return {
-      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    };
-  },
-  props: {
-    metrics: {
-      type: Array,
-      "default": {}
-    }
-  },
-  methods: {
-    filterMetric: function filterMetric(status) {
-      var sends = this.metrics.filter(function (metric) {
-        return metric.status === status;
-      });
-      var metrics = [];
-      sends.forEach(function (metric) {
-        var _metrics$date;
-
-        var date = new Date(metric.date).getMonth();
-        var total = (_metrics$date = metrics[date]) !== null && _metrics$date !== void 0 ? _metrics$date : 0;
-        metrics[date] = total + metric.total;
-      });
-      return metrics;
-    }
-  },
-  computed: {
-    labels: function labels() {
-      var months = [];
-      var date = new Date();
-      var count = -1;
-      this.months.forEach(function (month) {
-        if (date.getMonth() === count) return;
-        months.push(month);
-        count++;
-      });
-      return months;
-    },
-    dataSent: function dataSent() {
-      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_SENT);
-    },
-    dataRejected: function dataRejected() {
-      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_REJECTED);
-    }
-  },
-  created: function created() {},
-  mounted: function mounted() {
-    var ctx = document.getElementById('ordersChart');
-    new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
-      type: 'line',
-      data: {
-        labels: this.labels,
-        datasets: [{
-          label: 'Ventas Completadas',
-          data: this.dataSent,
-          backgroundColor: ['rgba(155, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)'],
-          borderColor: ['rgba(155, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(7, 12, 12, 1)', 'rgba(13, 12, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)', 'rgba(225, 159, 143, 1)'],
-          borderWidth: 3
-        }, {
-          label: 'Ventas Canceladas',
-          data: this.dataRejected,
-          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-          borderWidth: 3
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/SellersMetric.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/charts/SellersMetric.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'sellers-metric',
-  data: function data() {
-    return {};
-  },
-  props: {
-    metrics: {
-      type: Array,
-      "default": {}
-    }
-  },
-  methods: {
-    filterMetric: function filterMetric() {
-      var sells = [];
-      this.metrics.forEach(function (metric) {
-        var _metric$measurable_id, _sells$id$toString;
-
-        var id = (_metric$measurable_id = metric.measurable_id) !== null && _metric$measurable_id !== void 0 ? _metric$measurable_id : 0;
-        var total = (_sells$id$toString = sells[id.toString()]) !== null && _sells$id$toString !== void 0 ? _sells$id$toString : 0;
-        sells[id] = total + metric.total;
-      });
-      return sells.filter(function (value) {
-        return value != null;
-      });
-    }
-  },
-  computed: {
-    labels: function labels() {
-      var ids = [];
-      this.metrics.forEach(function (metric) {
-        var _metric$measurable_id2;
-
-        var id = (_metric$measurable_id2 = metric.measurable_id) !== null && _metric$measurable_id2 !== void 0 ? _metric$measurable_id2 : 0;
-
-        if (!ids.includes(id)) {
-          ids[id] = id;
-        }
-      });
-      return ids.filter(function (value) {
-        return value != null;
-      });
-    },
-    dataSells: function dataSells() {
-      return this.filterMetric();
-    }
-  },
-  created: function created() {},
-  mounted: function mounted() {
-    var ctx = document.getElementById('sellersChart');
-    new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.labels,
-        datasets: [{
-          label: 'Ventas este mes',
-          data: this.dataSells,
-          backgroundColor: ['rgba(15, 99, 12, 1)', 'rgba(54, 162, 235, 1)', 'rgba(200, 26, 16, 1)', 'rgba(55, 20, 96, 1)', 'rgba(245, 6, 249, 1)', 'rgba(5, 60, 59, 1)', 'rgba(25, 86, 199, 1)']
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
   }
 });
 
@@ -92001,6 +92196,171 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/SalesPercentComponent.vue?vue&type=template&id=f23bd972&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/SalesPercentComponent.vue?vue&type=template&id=f23bd972& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "flag flag-yellow ml-sm-2 shadow-sm mb-3 text-right" },
+    [
+      _c("div", { staticClass: "card-body" }, [
+        _c("small", { staticClass: "text-black-50 " }, [
+          _vm._v("ventas mes pasado: "),
+          _c("strong", [_vm._v(_vm._s(_vm.salesLastMonthString))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "progress" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "progress-bar progress-bar-animated progress-bar-striped",
+              style: {
+                width: (_vm.salesThisMonth / _vm.salesLastMonth) * 100 + "%"
+              },
+              attrs: {
+                role: "progressbar",
+                "aria-valuenow": _vm.salesThisMonth,
+                "aria-valuemin": "0",
+                "aria-valuemax": _vm.salesLastMonth
+              }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.progress + "%") +
+                  "\n            "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("small", { staticClass: "text-black-50 float-left mb-2" }, [
+          _vm._v("ventas este mes: "),
+          _c("strong", [_vm._v(_vm._s(_vm.salesThisMonthString))])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=template&id=7bf5036b&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=template&id=7bf5036b& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "contaner-fluid" }, [
+      _c("canvas", { attrs: { id: "categoriesChart" } })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=template&id=f22e5c5c&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=template&id=f22e5c5c& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "contaner-fluid" }, [
+      _c("canvas", { attrs: { id: "ordersChart" } })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/SellersMetric.vue?vue&type=template&id=37f29017&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/charts/SellersMetric.vue?vue&type=template&id=37f29017& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "contaner-fluid" }, [
+      _c("canvas", { attrs: { id: "sellersChart" } })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BannerComponent.vue?vue&type=template&id=19491b16&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BannerComponent.vue?vue&type=template&id=19491b16& ***!
@@ -93539,72 +93899,6 @@ var render = function() {
   )
 }
 var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/OrdersMetric.vue?vue&type=template&id=773981d8&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/charts/OrdersMetric.vue?vue&type=template&id=773981d8& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "contaner-fluid" }, [
-      _c("canvas", { attrs: { id: "ordersChart" } })
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/SellersMetric.vue?vue&type=template&id=ac7469d6&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/charts/SellersMetric.vue?vue&type=template&id=ac7469d6& ***!
-  \***********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "contaner-fluid" }, [
-      _c("canvas", { attrs: { id: "sellersChart" } })
-    ])
-  }
-]
 render._withStripped = true
 
 
@@ -110000,6 +110294,282 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin-components/SalesPercentComponent.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin-components/SalesPercentComponent.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SalesPercentComponent_vue_vue_type_template_id_f23bd972___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SalesPercentComponent.vue?vue&type=template&id=f23bd972& */ "./resources/js/admin-components/SalesPercentComponent.vue?vue&type=template&id=f23bd972&");
+/* harmony import */ var _SalesPercentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SalesPercentComponent.vue?vue&type=script&lang=js& */ "./resources/js/admin-components/SalesPercentComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SalesPercentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SalesPercentComponent_vue_vue_type_template_id_f23bd972___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SalesPercentComponent_vue_vue_type_template_id_f23bd972___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin-components/SalesPercentComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/SalesPercentComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/admin-components/SalesPercentComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesPercentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesPercentComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/SalesPercentComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesPercentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/SalesPercentComponent.vue?vue&type=template&id=f23bd972&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/admin-components/SalesPercentComponent.vue?vue&type=template&id=f23bd972& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesPercentComponent_vue_vue_type_template_id_f23bd972___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesPercentComponent.vue?vue&type=template&id=f23bd972& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/SalesPercentComponent.vue?vue&type=template&id=f23bd972&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesPercentComponent_vue_vue_type_template_id_f23bd972___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesPercentComponent_vue_vue_type_template_id_f23bd972___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/CategoryMetric.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin-components/charts/CategoryMetric.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CategoryMetric_vue_vue_type_template_id_7bf5036b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CategoryMetric.vue?vue&type=template&id=7bf5036b& */ "./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=template&id=7bf5036b&");
+/* harmony import */ var _CategoryMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CategoryMetric.vue?vue&type=script&lang=js& */ "./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CategoryMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CategoryMetric_vue_vue_type_template_id_7bf5036b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CategoryMetric_vue_vue_type_template_id_7bf5036b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin-components/charts/CategoryMetric.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoryMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CategoryMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoryMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=template&id=7bf5036b&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=template&id=7bf5036b& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoryMetric_vue_vue_type_template_id_7bf5036b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CategoryMetric.vue?vue&type=template&id=7bf5036b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/CategoryMetric.vue?vue&type=template&id=7bf5036b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoryMetric_vue_vue_type_template_id_7bf5036b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CategoryMetric_vue_vue_type_template_id_7bf5036b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/OrdersMetric.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/admin-components/charts/OrdersMetric.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _OrdersMetric_vue_vue_type_template_id_f22e5c5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrdersMetric.vue?vue&type=template&id=f22e5c5c& */ "./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=template&id=f22e5c5c&");
+/* harmony import */ var _OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrdersMetric.vue?vue&type=script&lang=js& */ "./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _OrdersMetric_vue_vue_type_template_id_f22e5c5c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _OrdersMetric_vue_vue_type_template_id_f22e5c5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin-components/charts/OrdersMetric.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./OrdersMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=template&id=f22e5c5c&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=template&id=f22e5c5c& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_template_id_f22e5c5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./OrdersMetric.vue?vue&type=template&id=f22e5c5c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/OrdersMetric.vue?vue&type=template&id=f22e5c5c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_template_id_f22e5c5c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_template_id_f22e5c5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/SellersMetric.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/admin-components/charts/SellersMetric.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SellersMetric_vue_vue_type_template_id_37f29017___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SellersMetric.vue?vue&type=template&id=37f29017& */ "./resources/js/admin-components/charts/SellersMetric.vue?vue&type=template&id=37f29017&");
+/* harmony import */ var _SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SellersMetric.vue?vue&type=script&lang=js& */ "./resources/js/admin-components/charts/SellersMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SellersMetric_vue_vue_type_template_id_37f29017___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SellersMetric_vue_vue_type_template_id_37f29017___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin-components/charts/SellersMetric.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/SellersMetric.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/admin-components/charts/SellersMetric.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SellersMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/SellersMetric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/charts/SellersMetric.vue?vue&type=template&id=37f29017&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/admin-components/charts/SellersMetric.vue?vue&type=template&id=37f29017& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_template_id_37f29017___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SellersMetric.vue?vue&type=template&id=37f29017& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/charts/SellersMetric.vue?vue&type=template&id=37f29017&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_template_id_37f29017___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_template_id_37f29017___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/api.js":
 /*!*****************************!*\
   !*** ./resources/js/api.js ***!
@@ -110070,12 +110640,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var vue_paginate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-paginate */ "./node_modules/vue-paginate/dist/vue-paginate.js");
 /* harmony import */ var vue_paginate__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_paginate__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_charts_SellersMetric__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/charts/SellersMetric */ "./resources/js/components/charts/SellersMetric.vue");
-/* harmony import */ var _components_charts_OrdersMetric__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/charts/OrdersMetric */ "./resources/js/components/charts/OrdersMetric.vue");
-/* harmony import */ var _components_EmptyCartComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/EmptyCartComponent */ "./resources/js/components/EmptyCartComponent.vue");
-/* harmony import */ var _components_EmptyOrdersComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/EmptyOrdersComponent */ "./resources/js/components/EmptyOrdersComponent.vue");
-/* harmony import */ var _components_Error404Component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Error404Component */ "./resources/js/components/Error404Component.vue");
-/* harmony import */ var _components_BannerComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/BannerComponent */ "./resources/js/components/BannerComponent.vue");
+/* harmony import */ var _components_EmptyCartComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/EmptyCartComponent */ "./resources/js/components/EmptyCartComponent.vue");
+/* harmony import */ var _components_EmptyOrdersComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/EmptyOrdersComponent */ "./resources/js/components/EmptyOrdersComponent.vue");
+/* harmony import */ var _components_Error404Component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Error404Component */ "./resources/js/components/Error404Component.vue");
+/* harmony import */ var _components_BannerComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/BannerComponent */ "./resources/js/components/BannerComponent.vue");
+/* harmony import */ var _admin_components_charts_OrdersMetric__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin-components/charts/OrdersMetric */ "./resources/js/admin-components/charts/OrdersMetric.vue");
+/* harmony import */ var _admin_components_charts_SellersMetric__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admin-components/charts/SellersMetric */ "./resources/js/admin-components/charts/SellersMetric.vue");
+/* harmony import */ var _admin_components_charts_CategoryMetric__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin-components/charts/CategoryMetric */ "./resources/js/admin-components/charts/CategoryMetric.vue");
+/* harmony import */ var _admin_components_SalesPercentComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin-components/SalesPercentComponent */ "./resources/js/admin-components/SalesPercentComponent.vue");
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 
@@ -110087,12 +110659,16 @@ window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('banner-component', _components_BannerComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('error404-component', _components_Error404Component__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('empty-cart-component', _components_EmptyCartComponent__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('empty-orders-component', _components_EmptyOrdersComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders-metric', _components_charts_OrdersMetric__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('sellers-metric', _components_charts_SellersMetric__WEBPACK_IMPORTED_MODULE_4__["default"]);
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('banner-component', _components_BannerComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('error404-component', _components_Error404Component__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('empty-cart-component', _components_EmptyCartComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('empty-orders-component', _components_EmptyOrdersComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders-metric', _admin_components_charts_OrdersMetric__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('sellers-metric', _admin_components_charts_SellersMetric__WEBPACK_IMPORTED_MODULE_9__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('category-metric', _admin_components_charts_CategoryMetric__WEBPACK_IMPORTED_MODULE_10__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('sales-percent-component', _admin_components_SalesPercentComponent__WEBPACK_IMPORTED_MODULE_11__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_paginate__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.ignoredElements = [/^ion-/];
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
@@ -110901,144 +111477,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductsGridComponent_vue_vue_type_template_id_9500c310___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductsGridComponent_vue_vue_type_template_id_9500c310___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/charts/OrdersMetric.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/charts/OrdersMetric.vue ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _OrdersMetric_vue_vue_type_template_id_773981d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrdersMetric.vue?vue&type=template&id=773981d8& */ "./resources/js/components/charts/OrdersMetric.vue?vue&type=template&id=773981d8&");
-/* harmony import */ var _OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrdersMetric.vue?vue&type=script&lang=js& */ "./resources/js/components/charts/OrdersMetric.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _OrdersMetric_vue_vue_type_template_id_773981d8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _OrdersMetric_vue_vue_type_template_id_773981d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/charts/OrdersMetric.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/charts/OrdersMetric.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/charts/OrdersMetric.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./OrdersMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/OrdersMetric.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/charts/OrdersMetric.vue?vue&type=template&id=773981d8&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/charts/OrdersMetric.vue?vue&type=template&id=773981d8& ***!
-  \****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_template_id_773981d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./OrdersMetric.vue?vue&type=template&id=773981d8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/OrdersMetric.vue?vue&type=template&id=773981d8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_template_id_773981d8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OrdersMetric_vue_vue_type_template_id_773981d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/charts/SellersMetric.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/charts/SellersMetric.vue ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SellersMetric_vue_vue_type_template_id_ac7469d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SellersMetric.vue?vue&type=template&id=ac7469d6& */ "./resources/js/components/charts/SellersMetric.vue?vue&type=template&id=ac7469d6&");
-/* harmony import */ var _SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SellersMetric.vue?vue&type=script&lang=js& */ "./resources/js/components/charts/SellersMetric.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SellersMetric_vue_vue_type_template_id_ac7469d6___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SellersMetric_vue_vue_type_template_id_ac7469d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/charts/SellersMetric.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/charts/SellersMetric.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/charts/SellersMetric.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SellersMetric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/SellersMetric.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/charts/SellersMetric.vue?vue&type=template&id=ac7469d6&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/charts/SellersMetric.vue?vue&type=template&id=ac7469d6& ***!
-  \*****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_template_id_ac7469d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SellersMetric.vue?vue&type=template&id=ac7469d6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/charts/SellersMetric.vue?vue&type=template&id=ac7469d6&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_template_id_ac7469d6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellersMetric_vue_vue_type_template_id_ac7469d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

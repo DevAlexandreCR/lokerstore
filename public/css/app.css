@@ -49,7 +49,7 @@ h6 {
 }
 
 .bg-white {
-  background: white;
+  background-color: white;
   font: icon;
 }
 
@@ -11414,6 +11414,42 @@ a.text-dark:focus {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #000000;
+}
+
+.flag {
+  min-width: 20rem;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  border-left-style: solid;
+  border-left-width: 8px;
+}
+
+.flag-blue {
+  border-left-color: #3f9ae5;
+}
+
+.flag-red {
+  border-left-color: red;
+}
+
+.flag-yellow {
+  border-left-color: yellow;
+}
+
+.flag-black {
+  border-left-color: black;
+}
+
+.flag-green {
+  border-left-color: green;
+}
+
+@media (max-width: 414px) {
+  .flag {
+    min-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .row-nav {

@@ -234,5 +234,8 @@
     "Row": "Fila",
     "Field": "Campo",
     "Value": "Valor",
-    "Category id": "ID Categoría"
+    "Category id": "ID Categoría",
+    "Sales": "Ventas",
+    "Sellers": "Vendedores",
+    "Trend products": "Productos en tendencia"
 }

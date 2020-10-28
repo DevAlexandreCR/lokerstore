@@ -11,7 +11,7 @@ CREATE PROCEDURE `orders_metrics_generate` (p_from date, p_until date, p_type va
 BEGIN
     START TRANSACTION;
     DELETE FROM `metrics` WHERE `metric` = p_type COLLATE utf8_unicode_ci;
-    INSERT INTO `metrics` (`date`, `measurable_id`, `status`, `total`, `metric`)
+    INSERT INTO `metrics` (`date`, `measurable_id`, `status`, `total`, `metric`, `amount`)
         SELECT DATE(`created_at`) AS date,
         CASE
         	WHEN p_field = 'none' THEN NULL
@@ -20,7 +20,8 @@ BEGIN
     	as measurable_id,
         `status`,
         COUNT(*) as total,
-        p_type as metric
+        p_type as metric,
+        SUM(`amount`) as amount
         FROM orders
     WHERE `created_at` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
     GROUP BY `date`, `measurable_id`, `status`, `metric`;

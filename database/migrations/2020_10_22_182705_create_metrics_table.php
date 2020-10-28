@@ -21,6 +21,7 @@ class CreateMetricsTable extends Migration
             $table->unsignedBigInteger('measurable_id')->nullable();
             $table->enum('status', \App\Constants\Orders::getAllStatus())->nullable();
             $table->integer('total')->default(0);
+            $table->decimal('amount', 10,2)->nullable();
             $table->timestamps();
         });
 

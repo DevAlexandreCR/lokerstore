@@ -20,7 +20,7 @@ export default {
     props: {
         metrics: {
             type: Array,
-            default: {}
+            default: []
         }
     },
     methods: {
@@ -30,21 +30,23 @@ export default {
             sends.forEach(metric => {
                 let date = new Date(metric.date).getMonth()
                 let total = metrics[date] ?? 0
-                metrics[date] = total + metric.total
+                metrics[date] = total +  parseInt(metric.amount)
             })
-            return metrics
+            return metrics.filter(metric => {
+                return metric !== null
+            })
         }
     },
 
     computed: {
         labels: function () {
             let months = []
-            let date = new Date()
-            let count = -1
-            this.months.forEach(month => {
-                if (date.getMonth() === count) return
-                months.push(month)
-                count++
+            this.metrics.forEach(metric => {
+                let date = new Date(metric.date)
+                let month = date.toLocaleString('default', { month: 'long' })
+                if (!months.includes(month)) {
+                    months.push(month)
+                }
             })
             return months
         },
@@ -57,9 +59,6 @@ export default {
             return this.filterMetric(Constants.ORDER_STATUS_REJECTED)
         }
     },
-    created() {
-
-    },
 
     mounted() {
         let ctx = document.getElementById('ordersChart');
@@ -68,7 +67,7 @@ export default {
             data: {
                 labels: this.labels,
                 datasets: [{
-                    label: 'Ventas Completadas',
+                    label: 'Ventas',
                     data: this.dataSent,
                     backgroundColor: [
                         'rgba(155, 99, 132, 0.2)',
@@ -124,9 +123,27 @@ export default {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            userCallback: function(value, index, values) {
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join('.');
+                                return '$' + value;
+                            }
                         }
                     }]
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, chart){
+                            let datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            let value = tooltipItem.yLabel
+                            value = value.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            value = value.join('.');
+                            return datasetLabel + ': $ ' + value;
+                        }
+                    }
                 }
             }
         });

@@ -24,4 +24,14 @@ class Metrics
     {
         return $this->metrics->sellerOrdersMetrics()->get();
     }
+
+    public function getMetricsCategory()
+    {
+        return $this->metrics->categorymoreSoldMetrics()->get();
+    }
+
+    public function getpendingShipmentOrders()
+    {
+        return $this->metrics->pendingShipmentOrders()->get()->count();
+    }
 }
