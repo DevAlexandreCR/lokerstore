@@ -14,13 +14,6 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = factory(Admin::class)->create([
-            'name'      => 'admin',
-            'email'     => 'admin@' . config('app.name') . '.com',
-            'password'  => Hash::make('12345678')
-        ]);
-
-        $admin->assignRole(Roles::ADMIN);
         factory(Admin::class, 10)->create();
     }
 }

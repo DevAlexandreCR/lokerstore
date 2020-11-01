@@ -11,6 +11,8 @@ use App\Repositories\Stocks;
 use App\Decorators\AdminDecorator;
 use App\Decorators\CacheTypeSizes;
 use App\Interfaces\StocksInterface;
+use App\Interfaces\MetricsInterface;
+use App\Decorators\MetricsDecorator;
 use App\Interfaces\TypeSizesInterface;
 use App\Decorators\Api\StocksDecorator;
 use App\Decorators\Api\PhotosDecorator;
@@ -75,6 +77,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ApiPhotosInterface::class, PhotosDecorator::class);
         $this->app->bind(StocksInterface::class, Stocks::class);
         $this->app->bind(UsersInterface::class, Users::class);
+        $this->app->bind(MetricsInterface::class, MetricsDecorator::class);
 
         Relation::morphMap([
             Metrics::CATEGORIES => Category::class,

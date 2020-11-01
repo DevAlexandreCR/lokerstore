@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Metric;
 use App\Models\Admin\Admin;
 use App\Models\Category;
 use App\Models\Order;
@@ -9,6 +10,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\Tag;
 use App\Models\User;
+use App\Policies\Admin\HomePolicy;
 use App\Policies\Admin\AdminsPolicy;
 use App\Policies\Admin\CategoriesPolicy;
 use App\Policies\Admin\OrdersPolicy;
@@ -39,7 +41,8 @@ class AuthServiceProvider extends ServiceProvider
         Tag::class          => TagsPolicy::class,
         Stock::class        => StocksPolicy::class,
         Product::class      => ProductsPolicy::class,
-        Order::class        => OrdersPolicy::class
+        Order::class        => OrdersPolicy::class,
+        Metric::class       => HomePolicy::class
     ];
 
     /**

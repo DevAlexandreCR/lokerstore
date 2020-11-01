@@ -36,7 +36,6 @@ class OrderDetailsControllerTest extends TestCase
 
         $this->admin = factory(Admin::class)->create();
         $this->admin->assignRole(Roles::ADMIN);
-        $this->withoutExceptionHandling();
     }
 
     public function testAnAdminCanUpdateAnOrderDetail(): void

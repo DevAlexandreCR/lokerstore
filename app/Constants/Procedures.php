@@ -10,7 +10,7 @@ class Procedures
 CREATE PROCEDURE `orders_metrics_generate` (p_from date, p_until date, p_type varchar(255), p_field varchar(255))
 BEGIN
     START TRANSACTION;
-    DELETE FROM `metrics` WHERE `metric` = p_type COLLATE utf8_unicode_ci;
+    DELETE FROM `metrics` WHERE `metric` = p_type COLLATE utf8_unicode_ci AND `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
     INSERT INTO `metrics` (`date`, `measurable_id`, `status`, `total`, `metric`, `amount`)
         SELECT DATE(`created_at`) AS date,
         CASE
@@ -33,7 +33,7 @@ EOT;
 CREATE PROCEDURE categories_metrics_generate(p_from date, p_until date)
 BEGIN
     START TRANSACTION;
-    DELETE FROM `metrics` WHERE `metric` = "categories" COLLATE utf8_unicode_ci;
+    DELETE FROM `metrics` WHERE `metric` = "categories" COLLATE utf8_unicode_ci AND `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
     INSERT INTO `metrics` (`date`, `measurable_id`, `status`, `total`, `metric`)
         SELECT DATE(orders.created_at) AS date,
       	products.id_category as measurable_id,

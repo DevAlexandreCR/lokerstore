@@ -2221,7 +2221,11 @@ __webpack_require__.r(__webpack_exports__);
     labels: function labels() {
       var ids = [];
       this.metrics.forEach(function (metric) {
-        ids.push(metric.measurable.name);
+        if (metric.measurable) {
+          ids.push(metric.measurable.name);
+        } else {
+          ids.push('Online');
+        }
       });
       return ids;
     },
@@ -2230,7 +2234,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log(this.metrics);
     var ctx = document.getElementById('sellersChart');
     new chart_js__WEBPACK_IMPORTED_MODULE_0___default.a(ctx, {
       type: 'horizontalBar',
@@ -2256,7 +2259,7 @@ __webpack_require__.r(__webpack_exports__);
           }],
           xAxes: [{
             scaleLabel: {
-              display: true,
+              display: false,
               labelString: 'Ventas'
             },
             stacked: true,
@@ -92227,9 +92230,7 @@ var render = function() {
             {
               staticClass:
                 "progress-bar progress-bar-animated progress-bar-striped",
-              style: {
-                width: (_vm.salesThisMonth / _vm.salesLastMonth) * 100 + "%"
-              },
+              style: { width: _vm.progress + "%" },
               attrs: {
                 role: "progressbar",
                 "aria-valuenow": _vm.salesThisMonth,

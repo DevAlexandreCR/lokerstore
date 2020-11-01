@@ -4,7 +4,7 @@
             <small class="text-black-50 ">ventas mes pasado: <strong>{{salesLastMonthString}}</strong></small>
             <div class="progress">
                 <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
-                     :style="{'width': `${salesThisMonth/salesLastMonth * 100 }%`}"
+                     :style="{'width': `${progress}%`}"
                      :aria-valuenow="salesThisMonth" aria-valuemin="0" :aria-valuemax="salesLastMonth">
                     {{ `${progress}%` }}
                 </div>

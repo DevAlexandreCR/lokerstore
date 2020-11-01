@@ -5,8 +5,10 @@ namespace App\Repositories;
 
 
 use App\Models\Metric;
+use App\Interfaces\MetricsInterface;
+use App\Http\Requests\Admin\Reports\ReportRequest;
 
-class Metrics
+class Metrics implements MetricsInterface
 {
     private Metric $metrics;
 
@@ -33,5 +35,22 @@ class Metrics
     public function getpendingShipmentOrders()
     {
         return $this->metrics->pendingShipmentOrders()->get()->count();
+    }
+
+    /**
+     * @return array
+     */
+    public function homeMetrics(): array
+    {
+        // TODO: Implement homeMetrics() method.
+    }
+
+    /**
+     * @param ReportRequest $request
+     * @return mixed
+     */
+    public function reports(ReportRequest $request)
+    {
+        // TODO: Implement reports() method.
     }
 }

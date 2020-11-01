@@ -3,46 +3,38 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Metric;
-use App\Constants\Orders;
-use App\Constants\Metrics;
-use App\Interfaces\UsersInterface;
-use App\Repositories\Metrics as MetricsRepo;
-use Illuminate\Support\Facades\DB;
+use App\Interfaces\MetricsInterface;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use App\Http\Requests\Admin\Reports\ReportRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class HomeController extends Controller
 {
-    private MetricsRepo $metrics;
+    private MetricsInterface $metrics;
 
-    public function __construct(MetricsRepo $metrics)
+    public function __construct(MetricsInterface $metrics)
     {
         $this->metrics = $metrics;
     }
 
     /**
-     * @param UsersInterface $users
      * @return View
+     * @throws AuthorizationException
      */
-    public function index(UsersInterface $users): View
+    public function index(): View
     {
-        $metricOrders = Metrics::ORDERS;
-        $metricSeller = Metrics::SELLER;
-        $from = now()->subYear()->format('Y-m-d');
-        $until = now()->format('Y-m-d');
-        $month = date('m');
-        $year = date('Y');
-        $firstMonth = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
-        DB::unprepared("call orders_metrics_generate('$firstMonth', '$until', '$metricSeller', 'admin_id')");
-        DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricOrders', 'none')");
-        DB::unprepared("call categories_metrics_generate('$firstMonth', '$until')");
+        $this->authorize('viewAmy', Metric::class);
 
-        return view('admin.stats', [
-            'metricsGeneral'  => $this->metrics->getMetricsAllOrders(),
-            'metricsSeller'   => $this->metrics->getMetricsAdminOrders(),
-            'metricsCategory' => $this->metrics->getMetricsCategory(),
-            'pendingShipment' => $this->metrics->getpendingShipmentOrders(),
-            'usersCount'      => $users->index()->count()
-        ]);
+        $data = $this->metrics->homeMetrics();
+        return view('admin.stats', $data);
+    }
+
+    public function reports(ReportRequest $request): RedirectResponse
+    {
+        $this->metrics->reports($request);
+
+        return redirect(route('admin.home'))->with('success', __('We\'ll send the report to your email when it\'s ready.'));
     }
 }

@@ -34,7 +34,12 @@ export default {
         labels: function () {
             let ids = []
             this.metrics.forEach(metric => {
-                ids.push(metric.measurable.name)
+                if(metric.measurable) {
+                    ids.push(metric.measurable.name)
+                } else {
+                    ids.push('Online')
+                }
+
             })
             return ids
         },
@@ -45,7 +50,6 @@ export default {
     },
 
     mounted() {
-        console.log(this.metrics)
         let ctx = document.getElementById('sellersChart');
         new Chart(ctx, {
             type: 'horizontalBar',
@@ -77,7 +81,7 @@ export default {
                     }],
                     xAxes: [{
                         scaleLabel: {
-                            display: true,
+                            display: false,
                             labelString: 'Ventas',
                         },
                         stacked: true,
