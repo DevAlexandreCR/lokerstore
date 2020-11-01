@@ -4,7 +4,9 @@
 namespace App\Constants;
 
 
-class Logs
+use MyCLabs\Enum\Enum;
+
+class Logs extends Enum
 {
     public const CHANNEL_PAYMENTS = 'payments';
     public const CHANNEL_USERS = 'users';

@@ -30,8 +30,6 @@ class DeleteErrorsImportsTable implements ShouldQueue
      */
     public function handle(): void
     {
-        foreach (ErrorImport::all() as $error) {
-            $error->forceDelete();
-        }
+        ErrorImport::truncate();
     }
 }

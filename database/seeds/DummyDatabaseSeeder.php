@@ -13,6 +13,7 @@ class DummyDatabaseSeeder extends Seeder
     {
         $this->call(
             [
+                AdminSeeder::class,
                 ProductSeeder::class,
                 UserSeeder::class,
                 StockSeeder::class,

@@ -25,6 +25,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin
 // Routes admin management
 Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
+    Route::post('/reports', 'HomeController@reports')->name('admin.reports');
     Route::resource('users', 'UserController')->except(['create', 'store']);
 
     Route::resource('products', 'ProductController')->except(['show']);

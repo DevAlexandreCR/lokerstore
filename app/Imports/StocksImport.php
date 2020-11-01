@@ -99,13 +99,14 @@ class StocksImport implements ShouldQueue, OnEachRow, WithChunkReading, WithStar
     {
         return [
             '*.0' => ['integer', 'min:0'],
-            '*.1' => ['required', 'string', 'exists:products,name'],
-            '*.2' => ['required', 'integer', 'exists:colors,id'],
-            '*.3' => ['required', 'string', 'max:255'],
-            '*.4' => ['required', 'integer', 'exists:sizes,id'],
-            '*.5' => ['required', 'string', 'exists:type_sizes,name'],
-            '*.6' => ['required', 'max:10'],
-            '*.7' => ['required', 'integer', 'min:1']
+            '*.1' => ['integer', 'min:0', 'max:100000', 'exists:products,reference'],
+            '*.2' => ['required', 'string', ],
+            '*.3' => ['required', 'integer', 'exists:colors,id'],
+            '*.4' => ['required', 'string', 'max:255'],
+            '*.5' => ['required', 'integer', 'exists:sizes,id'],
+            '*.6' => ['required', 'string', 'exists:type_sizes,name'],
+            '*.7' => ['required', 'max:10'],
+            '*.8' => ['required', 'integer', 'min:0']
         ];
     }
 

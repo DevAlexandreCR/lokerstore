@@ -2,7 +2,9 @@
 
 namespace App\Constants;
 
-class Payments
+use MyCLabs\Enum\Enum;
+
+class Payments extends Enum
 {
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_ACCEPTED = 'APPROVED';

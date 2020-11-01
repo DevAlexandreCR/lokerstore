@@ -13,7 +13,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'description', 'price', 'stock', 'id_category', 'is_active'
+        'reference', 'name', 'description', 'cost', 'price', 'stock', 'id_category', 'is_active'
     ];
 
     /**
@@ -177,8 +177,9 @@ class Product extends Model
         if (empty($search)) return null;
 
         return $query
-                ->where('name', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%');
+            ->where('reference', 'like', '%' . $search . '%')
+            ->orwhere('name', 'like', '%' . $search . '%')
+            ->orWhere('description', 'like', '%' . $search . '%');
     }
 
     /**

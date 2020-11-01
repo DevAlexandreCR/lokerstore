@@ -4,13 +4,19 @@
 namespace App\Constants;
 
 
-class Permissions
+use MyCLabs\Enum\Enum;
+
+class Permissions extends Enum
 {
     //users
     public const VIEW_USERS = 'view users';
     public const EDIT_USERS = 'edit users';
     public const DELETE_USERS = 'delete users';
     public const CREATE_USERS = 'create users';
+
+    //home metrics
+    public const VIEW_HOME = 'view home';
+    public const CREATE_METRICS = 'create metrics';
 
     //admins
     public const VIEW_ADMINS = 'view admins';
@@ -119,7 +125,9 @@ class Permissions
             self::VIEW_TAGS,
             self::EDIT_TAGS,
             self::CREATE_TAGS,
-            self::DELETE_TAGS
+            self::DELETE_TAGS,
+            self::VIEW_HOME,
+            self::CREATE_METRICS
         );
     }
 
@@ -144,6 +152,7 @@ class Permissions
             self::CREATE_PAYMENTS,
             self::VIEW_CART,
             self::EDIT_CART,
+            self::VIEW_HOME
         );
     }
 }

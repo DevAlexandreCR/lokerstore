@@ -1,13 +1,25 @@
+import Vue from 'vue'
+window.Vue = Vue
 import './bootstrap'
 import router from './router'
 import VuePaginate from 'vue-paginate'
+import EmptyCartComponent from './components/EmptyCartComponent'
+import EmptyOrdersComponent from './components/EmptyOrdersComponent'
+import Error404Component from './components/Error404Component'
+import BannerComponent from './components/BannerComponent'
+import OrdersMetric from "./admin-components/charts/OrdersMetric";
+import SellersMetric from "./admin-components/charts/SellersMetric";
+import CategoryMetric from "./admin-components/charts/CategoryMetric";
+import SalesPercentComponent from "./admin-components/SalesPercentComponent";
 
-window.Vue = require('vue');
-
-Vue.component('banner-component', require('./components/BannerComponent.vue').default)
-Vue.component('error404-component', require('./components/Error404Component.vue').default)
-Vue.component('empty-cart-component', require('./components/EmptyCartComponent.vue').default)
-Vue.component('empty-orders-component', require('./components/EmptyOrdersComponent.vue').default)
+Vue.component('banner-component', BannerComponent)
+Vue.component('error404-component', Error404Component)
+Vue.component('empty-cart-component', EmptyCartComponent)
+Vue.component('empty-orders-component', EmptyOrdersComponent)
+Vue.component('orders-metric', OrdersMetric)
+Vue.component('sellers-metric', SellersMetric)
+Vue.component('category-metric', CategoryMetric)
+Vue.component('sales-percent-component', SalesPercentComponent)
 
 Vue.use(VuePaginate)
 

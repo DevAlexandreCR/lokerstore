@@ -77,10 +77,12 @@ class ApiProductControllerTest extends TestCase
         $response = $this->postJson(route('api.products.store'), [
             'api_token'     => $this->admin->api_token,
             'id_category'   => $category,
+            'reference'     => 1111,
             'name'          => 'new product',
             'description'   => 'This product is amazing and great for you',
             'tags'          => ['Hombre'],
-            'price'         => 25000,
+            'cost'          => 25000,
+            'price'         => 40000,
             'stocks'        => [
                 0 => [
                     'color' => $color1,
@@ -113,12 +115,14 @@ class ApiProductControllerTest extends TestCase
                 ],
                 'product' => [
                     'id_category'   => $category,
+                    'reference'     =>  1111,
                     'name'          => 'new product',
                     'description'   => 'This product is amazing and great for you',
                 ]
             ]);
 
         $this->assertDatabaseHas('products', [
+            'reference'     =>  1111,
             'name'          => 'new product',
             'description'   => 'This product is amazing and great for you',
         ]);
@@ -133,10 +137,12 @@ class ApiProductControllerTest extends TestCase
         $response = $this->putJson(route('api.products.update', $product->id),[
             'api_token'     => $this->admin->api_token,
             'id_category'   => $category,
+            'reference'     =>  1111,
             'name'          => 'Update product',
             'description'   => 'This product is amazing and great for you, but were updated',
             'tags'          => ['Mujer'],
-            'price'         => 25000,
+            'cost'          => 25000,
+            'price'         => 40000,
         ] );
 
         $response
@@ -148,6 +154,7 @@ class ApiProductControllerTest extends TestCase
                 ],
                 'product' => [
                     'id_category'   => $category,
+                    'reference'     =>  1111,
                     'name'          => 'Update product',
                     'description'   => 'This product is amazing and great for you, but were updated',
                 ]
@@ -155,6 +162,7 @@ class ApiProductControllerTest extends TestCase
 
         $this->assertDatabaseHas('products', [
             'id_category'   => $category,
+            'reference'     =>  1111,
             'name'          => 'Update product',
             'description'   => 'This product is amazing and great for you, but were updated',
         ]);

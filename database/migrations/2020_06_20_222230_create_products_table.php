@@ -11,14 +11,16 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('reference')->unique();
             $table->string('name');
             $table->string('description');
             $table->integer('stock')->default(0)->unsigned();
             $table->unsignedBigInteger('id_category');
+            $table->decimal('cost', 8, 2);
             $table->decimal('price', 8, 2);
             $table->foreign('id_category')->references('id')->on('categories');
             $table->softDeletes();
@@ -31,7 +33,7 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }

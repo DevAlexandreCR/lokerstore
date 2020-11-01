@@ -19,7 +19,7 @@ class CreateTablePayments extends Migration
             $table->id();
             $table->string('request_id')->nullable();
             $table->string('process_url')->nullable();
-            $table->string('status')->default(PlaceToPay::PENDING);
+            $table->enum('status', Payments::getAllStatus())->default(PlaceToPay::PENDING);
             $table->string('reference')->nullable();
             $table->string('method')->nullable();
             $table->string('last_digit')->nullable();

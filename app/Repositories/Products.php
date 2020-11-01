@@ -100,7 +100,7 @@ class Products implements ProductsInterface
     public function create(array $data = []): ?Product
     {
         $product = $this->product->updateOrCreate([
-            'name' => $data['name']
+            'reference' => $data['reference']
         ], $data);
 
         $tags = array();

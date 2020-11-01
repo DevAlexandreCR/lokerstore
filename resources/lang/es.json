@@ -8,6 +8,8 @@
     "Name": "Nombre",
     "Lastname": "Apellido",
     "Status": "Estado",
+    "Cost": "Costo",
+    "Reference": "Referencia",
     "Enabled": "Habilitado",
     "Disabled": "Inhabilitado",
     "Success!": "Hecho!",
@@ -232,5 +234,12 @@
     "Row": "Fila",
     "Field": "Campo",
     "Value": "Valor",
-    "Category id": "ID Categoría"
+    "Category id": "ID Categoría",
+    "Sales": "Ventas",
+    "Sellers": "Vendedores",
+    "Trend products": "Productos en tendencia",
+    "Generate report sales": "Generar reporte de ventas",
+    "From": "Desde",
+    "Until": "Hasta",
+    "We'll send the report to your email when it's ready.": "Te enviaremos el reporte a tu correo cuando esté listo."
 }

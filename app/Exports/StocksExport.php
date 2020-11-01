@@ -41,7 +41,7 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
     {
         return [
             $stock->id,
-            $stock->product->name,
+            $stock->product->reference,
             $stock->color->id,
             $stock->color->name,
             $stock->size->id,

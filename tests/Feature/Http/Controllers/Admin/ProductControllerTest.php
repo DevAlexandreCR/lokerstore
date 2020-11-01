@@ -83,9 +83,11 @@ class ProductControllerTest extends TestCase
     {
         $response = $this->actingAs($this->admin, 'admin')->post(route('products.store'),
         [
+            'reference'     =>  1111,
             'name'          =>  'new product',
             'description'   =>  'new description at product incoming',
             'stock'         =>  0,
+            'cost'         =>  1000,
             'price'         =>  2000,
             'id_category'   => Category::all()->random()->id,
             'tags'          => [Tag::all()->random()->id],
@@ -115,16 +117,18 @@ class ProductControllerTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->put(route('products.update', [
             'product' =>  $product->id
         ]), [
+            'reference'     =>  1111,
             'name'          => 'mi nuevo super producto',
             'description'   => $product->description,
-            'price'         => 1000,
+            'cost'          => 1000,
+            'price'         => 2000,
             'id_category'   => $product->id_category,
             'tags'          => $product->tags->pluck('id')->toArray()
         ]);
 
         $response
             ->assertRedirect(route('products.edit', ['product' => $product->id]))
-            ->assertSessionHas('product-updated')
+            ->assertSessionHas('success')
             ->assertStatus(302);
         $this->assertDatabaseHas('products', ['name' => 'mi nuevo super producto']);
     }
@@ -141,7 +145,7 @@ class ProductControllerTest extends TestCase
         ]));
 
         $response->assertRedirect(route('products.index'))
-            ->assertSessionHas('product-deleted')
+            ->assertSessionHas('success')
             ->assertStatus(302);
     }
 }

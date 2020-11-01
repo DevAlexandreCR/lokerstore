@@ -52,12 +52,14 @@
             <table class="table table-sm table-striped table-condensed table-hover table-secondary table-responsive-xl">
                 <thead>
                 <tr>
-                    <th>{{__('Id')}}</th>
+                    <th>{{__('#')}}</th>
                     <th>{{__('Created at')}}</th>
+                    <th>{{__('Reference')}}</th>
                     <th>{{__('Category')}}</th>
                     <th>{{__('Name')}}</th>
                     <th>{{__('Description')}}</th>
                     <th>{{__('Stock')}}</th>
+                    <th>{{__('Cost')}}</th>
                     <th>{{__('Price')}}</th>
                     <th>{{__('Tags')}}</th>
                     <th>{{__('Status')}}</th>
@@ -69,12 +71,14 @@
                     <tr class="@if(!$product->is_active) text-muted @endif">
                         <td scope="row">{{ $key }}</td>
                         <td>{{ $product->created_at->format('d-m-yy') }}</td>
+                        <td>{{ $product->reference }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->getDescription()}}...</td>
                         <td>
                             <a  href="{{route('stocks.create', $product)}}"><span class="badge badge-link badge-pill"><ion-icon name="navigate-circle-outline"></ion-icon>{{ $product->stock }}</span></a>
                         </td>
+                        <td>{{ $product->cost }}</td>
                         <td>{{ $product->price }}</td>
                         <td>
                             <div class="btn-group">

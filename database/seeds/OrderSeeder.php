@@ -1,14 +1,18 @@
 <?php
 
-use App\Constants\Payments;
+    use App\Constants\Orders;
+    use App\Constants\Payments;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payer;
 use App\Models\Payment;
 use Illuminate\Database\Seeder;
+use Illuminate\Foundation\Testing\WithFaker;
 
-class OrderSeeder extends Seeder
+    class OrderSeeder extends Seeder
 {
+    use WithFaker;
+
     /**
      * Run the database seeds.
      *
@@ -31,6 +35,8 @@ class OrderSeeder extends Seeder
                 factory(Payer::class)->create([
                     'payment_id' => $payment->id
                 ]);
+                $order->status = $this->makeFaker('es')->randomElement([Orders::STATUS_SENT, Orders::STATUS_PENDING_SHIPMENT]);
+                $order->save();
             }
         });
     }

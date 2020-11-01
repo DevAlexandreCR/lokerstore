@@ -10,8 +10,10 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Order::class, function (Faker $faker) {
     return [
-        'user_id' => User::all()->random()->id,
-        'amount' => 0,
-        'status' => Orders::STATUS_PENDING_PAY
+        'user_id'    => User::all()->random()->id,
+        'admin_id'   => null,
+        'amount'     => 0,
+        'status'     => Orders::STATUS_PENDING_PAY,
+        'created_at' => $faker->dateTimeBetween('-6 months', 'now')
     ];
 });

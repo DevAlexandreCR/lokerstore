@@ -11,7 +11,6 @@ use App\Imports\ProductsImport;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Queue;
-use App\Jobs\NotifyAdminsAfterCompleteExport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -52,6 +51,7 @@ class ExcelControllerTest extends TestCase
             return true;
         });
     }
+
     public function testAnAdminAuthenticatedWithPermissionsCanImportProducts(): void
     {
         $this->withoutExceptionHandling();

@@ -33,7 +33,7 @@ class Users implements UsersInterface
 
     public function index()
     {
-        // TODO: Implement index() method.
+        return $this->users::all('id');
     }
 
     public function store(Request $request)
