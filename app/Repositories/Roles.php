@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Constants\Admins;
 use App\Interfaces\RoleInterface;
 use Illuminate\Database\Eloquent\Model;

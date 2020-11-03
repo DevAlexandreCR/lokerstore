@@ -3,7 +3,6 @@
 
 namespace App\Decorators;
 
-
 use App\Interfaces\PermissionInterface;
 use App\Repositories\Permissions;
 use Illuminate\Database\Eloquent\Model;

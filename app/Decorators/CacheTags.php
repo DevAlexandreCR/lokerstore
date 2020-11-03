@@ -11,7 +11,6 @@ use App\Http\Requests\Admin\Tags\IndexRequest;
 
 class CacheTags implements TagsInterface
 {
-
     protected Tags $tags;
 
     public function __construct(Tags $tags)
@@ -50,7 +49,7 @@ class CacheTags implements TagsInterface
     public function search(IndexRequest $request)
     {
         $search = $request->get('search', null);
-        return Cache::tags(['tags'])->rememberForever($search, function () use ($request){
+        return Cache::tags(['tags'])->rememberForever($search, function () use ($request) {
             return $this->tags->search($request);
         });
     }

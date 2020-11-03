@@ -50,7 +50,7 @@ class ProductRequestHelper
     {
         $newArray = [];
 
-        if (is_string($data)){
+        if (is_string($data)) {
             $newArray[0] = $data;
         } else {
             $newArray = $data;

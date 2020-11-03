@@ -38,7 +38,7 @@ class CreateAdmin extends Command
         $name = $this->ask('What is your name?');
         $email = $this->ask('What is your email address?');
 
-        if ( !$this->checkEmail($email) ) {
+        if (!$this->checkEmail($email)) {
             $this->error('Write a valid email address.');
         }
         $password = $this->secret('Write password: ');
@@ -56,7 +56,6 @@ class CreateAdmin extends Command
         } else {
             $this->error('password verification failed');
         }
-
     }
 
     public function checkEmail(string $email): bool

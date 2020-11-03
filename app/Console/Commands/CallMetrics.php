@@ -45,7 +45,7 @@ class CallMetrics extends Command
         $until = now()->format('Y-m-d');
         $month = date('m');
         $year = date('Y');
-        $firstMonth = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+        $firstMonth = date('Y-m-d', mktime(0, 0, 0, $month, 1, $year));
         DB::unprepared("call orders_metrics_generate('$firstMonth', '$until', '$metricSeller', 'admin_id')");
         DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricOrders', 'none')");
         DB::unprepared("call categories_metrics_generate('$firstMonth', '$until')");

@@ -21,6 +21,7 @@ class TestDatabaseSeeder extends Seeder
                 SizeSeeder::class,
                 ColorSeeder::class,
                 TestProductSeeder::class
-            ]);
+            ]
+        );
     }
 }

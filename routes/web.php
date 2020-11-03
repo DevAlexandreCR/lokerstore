@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 // add route to run command to links heroku
-Route::get('/artisan/storage', function() {
+Route::get('/artisan/storage', function () {
     $command = 'storage:link';
     Artisan::call($command);
     return Artisan::output();
@@ -54,4 +54,3 @@ Route::middleware(['auth', 'verified', 'user-can'])
         Route::post('orders/resend', 'OrderController@resend')->name('user.order.resend');
         Route::post('orders/reverse', 'OrderController@reverse')->name('user.order.reverse');
     });
-

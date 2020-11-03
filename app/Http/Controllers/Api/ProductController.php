@@ -46,8 +46,8 @@ class ProductController extends Controller
                 'code'    => 200
             ],
             'product' => ProductResource::collection(
-           $this->apiProducts->show($product)
-        )]);
+                $this->apiProducts->show($product)
+            )]);
     }
 
     /**

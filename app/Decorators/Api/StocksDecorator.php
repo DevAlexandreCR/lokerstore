@@ -3,7 +3,6 @@
 
 namespace App\Decorators\Api;
 
-
 use App\Models\Size;
 use App\Models\Color;
 use App\Models\Stock;

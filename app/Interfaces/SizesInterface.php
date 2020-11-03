@@ -2,7 +2,6 @@
 
 namespace App\Interfaces;
 
-interface  SizesInterface extends RepositoryInterface
+interface SizesInterface extends RepositoryInterface
 {
-
 }

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Categories implements CategoryInterface
 {
-
     protected Category $category;
 
     public function __construct(Category $category)

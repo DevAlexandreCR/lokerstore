@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 
 class DeletePhotoAction
 {
-
     public function execute(?array $idsPhotos): void
     {
         if (empty($idsPhotos)) {
@@ -15,7 +14,6 @@ class DeletePhotoAction
         }
 
         foreach ($idsPhotos as $id) {
-
             $name = $this->deletePhoto($id);
 
             $this->deleteImage($name);

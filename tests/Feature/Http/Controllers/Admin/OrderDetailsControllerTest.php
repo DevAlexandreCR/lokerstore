@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Admin;
 
 use AdminSeeder;
+use App\Models\Order;
 use App\Constants\Admins;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
@@ -30,17 +31,16 @@ class OrderDetailsControllerTest extends TestCase
             TestDatabaseSeeder::class,
             UserSeeder::class,
             StockSeeder::class,
-            AdminSeeder::class,
-            OrderSeeder::class
+            AdminSeeder::class
         ]);
-
+        factory(Order::class, 2)->create();
+        factory(OrderDetail::class, 5)->create();
         $this->admin = factory(Admin::class)->create();
         $this->admin->assignRole(Roles::ADMIN);
     }
 
     public function testAnAdminCanUpdateAnOrderDetail(): void
     {
-        $this->withoutExceptionHandling();
         $stock = factory(Stock::class)->create([
             'quantity' => 20
         ]);
@@ -51,11 +51,13 @@ class OrderDetailsControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($this->admin, Admins::GUARDED)
-            ->patch(route('order_details.update', $detail->id),
-        [
+            ->patch(
+                route('order_details.update', $detail->id),
+                [
             'stock_id' => $detail->stock_id,
             'quantity' => 3
-        ]);
+        ]
+            );
 
         $response
             ->assertStatus(302)

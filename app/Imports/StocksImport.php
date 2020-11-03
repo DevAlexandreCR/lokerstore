@@ -15,10 +15,15 @@ use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class StocksImport implements ShouldQueue, OnEachRow, WithChunkReading, WithStartRow, SkipsOnFailure, WithValidation,
+class StocksImport implements
+    ShouldQueue,
+    OnEachRow,
+    WithChunkReading,
+    WithStartRow,
+    SkipsOnFailure,
+    WithValidation,
     SkipsOnError
 {
-
     private StocksInterface $stocks;
 
     public function __construct(StocksInterface $stocks)
@@ -47,8 +52,7 @@ class StocksImport implements ShouldQueue, OnEachRow, WithChunkReading, WithStar
      */
     public function onFailure(Failure ...$failures): void
     {
-        foreach($failures as $failure) {
-
+        foreach ($failures as $failure) {
             ErrorImport::create([
                 'import'    => 'stocks',
                 'row'       => $failure->row(),

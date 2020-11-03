@@ -20,7 +20,13 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize, WithStyles, WithTitle,
+class StocksExport implements
+    FromCollection,
+    WithMapping,
+    WithHeadings,
+    ShouldAutoSize,
+    WithStyles,
+    WithTitle,
     WithEvents
 {
     use RegistersEventListeners;

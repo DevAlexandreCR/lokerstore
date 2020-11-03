@@ -35,6 +35,11 @@ npm install
 - php artisan db:seed --class=DummyDatabaseSeeder
 - php artisan serve
 ```
+ To generate metrics with previous fake data installed
+```bash
+- php artisan metrics:start
+```
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

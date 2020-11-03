@@ -22,8 +22,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class SizesExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStyles,
-    ShouldAutoSize, WithColumnWidths, WithCustomStartCell, WithEvents
+class SizesExport implements
+    FromCollection,
+    WithTitle,
+    WithHeadings,
+    WithMapping,
+    WithStyles,
+    ShouldAutoSize,
+    WithColumnWidths,
+    WithCustomStartCell,
+    WithEvents
 {
     use RegistersEventListeners;
 
@@ -67,7 +75,7 @@ class SizesExport implements FromCollection, WithTitle, WithHeadings, WithMappin
                 '--->'
             ]
         ];
-        $typeSize->sizes()->each( function ($size)  {
+        $typeSize->sizes()->each(function ($size) {
             $this->sizes[] = [
                 null,
                 null,

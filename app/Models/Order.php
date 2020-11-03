@@ -67,8 +67,8 @@ class Order extends Model
      */
     public function scopeUserEmail($query, string $email = null)
     {
-        if ($email){
-            return $query->whereHas('user', function($query) use ($email) {
+        if ($email) {
+            return $query->whereHas('user', function ($query) use ($email) {
                 $query->where('email', 'like', '%' . $email . '%');
             });
         }
@@ -81,8 +81,7 @@ class Order extends Model
      */
     public function getStatus(): string
     {
-        switch ($this->status)
-        {
+        switch ($this->status) {
             case Orders::STATUS_PENDING_PAY:
                 return __('Pending payment');
             case Orders::STATUS_PENDING_SHIPMENT:
@@ -107,7 +106,7 @@ class Order extends Model
      */
     public function getAmount(): string
     {
-        return round($this->amount, 0,  PHP_ROUND_HALF_UP) . 'COP';
+        return round($this->amount, 0, PHP_ROUND_HALF_UP) . 'COP';
     }
 
     /**

@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Metric;
 use App\Interfaces\MetricsInterface;
 use App\Http\Requests\Admin\Reports\ReportRequest;

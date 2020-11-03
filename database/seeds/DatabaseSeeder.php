@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
                 SizeSeeder::class,
                 ColorSeeder::class,
                 TagSeeder::class
-            ]);
+            ]
+        );
     }
 }

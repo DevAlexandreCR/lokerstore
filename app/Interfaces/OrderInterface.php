@@ -2,7 +2,6 @@
 
 namespace App\Interfaces;
 
-
 use App\Http\Requests\Web\Orders\UpdateRequest;
 
 interface OrderInterface extends RepositoryInterface

@@ -21,7 +21,6 @@ class StatsControllerTest extends TestCase
         $this->seed([
             TestDatabaseSeeder::class,
         ]);
-
         $this->admin = factory(Admin::class)->create();
         $this->admin->assignRole(Roles::ADMIN);
     }

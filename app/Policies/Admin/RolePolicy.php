@@ -57,5 +57,4 @@ class RolePolicy
     {
         return $admin->hasPermissionTo(Permissions::DELETE_ROLES, Admins::GUARDED);
     }
-
 }

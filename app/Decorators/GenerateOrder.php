@@ -42,7 +42,7 @@ class GenerateOrder implements OrderInterface
 
         $this->orderDetails->create($order->id);
 
-        $order->orderDetails->each(function ($detail) use($order){
+        $order->orderDetails->each(function ($detail) use ($order) {
             $order->amount += $detail->total_price;
         });
 
@@ -66,24 +66,20 @@ class GenerateOrder implements OrderInterface
     public function responseHandler($response, Order $order): RedirectResponse
     {
         $status = $response->status->status;
-        switch ($status)
-        {
+        switch ($status) {
             case PlaceToPay::OK:
                 $requestId = $response->requestId;
                 $processUrl = $response->processUrl;
                 $this->payments->create($order->id, $requestId, $processUrl);
                 return redirect()->away($processUrl)->send();
-            case PlaceToPay::PENDING;
+            case PlaceToPay::PENDING:
                 $message = __('Your payment is not processed yet, this may take a few minutes');
                 break;
             case PlaceToPay::APPROVED:
-                if ($response->status->message === PlaceToPay::MESSAGE_REVERSED)
-                {
+                if ($response->status->message === PlaceToPay::MESSAGE_REVERSED) {
                     $this->payments->setStatus($order->payment, Pay::STATUS_CANCELED);
                     $message = __('Your payment has been reversed success');
-                }
-                else
-                {
+                } else {
                     $this->payments->setStatus($order->payment, $status);
                     $this->payments->setDataPayment($order->payment, $response);
                     $message = __('Your payment has been success');
@@ -97,7 +93,7 @@ class GenerateOrder implements OrderInterface
                 $this->payments->setStatus($order->payment, Pay::FAILED);
                 $message = $response->status->message;
         }
-        return redirect()->to( route('user.order.show', [auth()->id(), $order->refresh()->id]))
+        return redirect()->to(route('user.order.show', [auth()->id(), $order->refresh()->id]))
             ->with('message', $message);
     }
 
@@ -109,7 +105,7 @@ class GenerateOrder implements OrderInterface
     public function getRequestInformation(int $order_id): RedirectResponse
     {
         $order = $this->orders->find($order_id);
-        $response = $this->sendRequest( PlaceToPay::GET_REQUEST_INFORMATION, $order);
+        $response = $this->sendRequest(PlaceToPay::GET_REQUEST_INFORMATION, $order);
 
         return $this->responseHandler($response, $order);
     }
@@ -119,7 +115,7 @@ class GenerateOrder implements OrderInterface
         $order_id = $request->get('order_id', null);
         $order = $this->orders->find($order_id);
 
-        $response = $this->sendRequest( PlaceToPay::CREATE_REQUEST, $order);
+        $response = $this->sendRequest(PlaceToPay::CREATE_REQUEST, $order);
 
         return $this->responseHandler($response, $order);
     }
@@ -128,14 +124,14 @@ class GenerateOrder implements OrderInterface
     {
         $order_id = $request->get('order_id', null);
         $order = $this->orders->find($order_id);
-        if($order->status === OrderConstants::STATUS_PENDING_SHIPMENT){
+        if ($order->status === OrderConstants::STATUS_PENDING_SHIPMENT) {
             $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
             return $this->responseHandler($response, $order);
         }
 
         $this->orders->cancel($request);
 
-        return redirect()->to( route('user.order.show', [auth()->id(), $order_id]))
+        return redirect()->to(route('user.order.show', [auth()->id(), $order_id]))
         ->with('message', 'Order has been canceled success');
     }
 }

@@ -54,8 +54,7 @@ class QueryStatusPayment implements ShouldQueue
         $status = $response->status->status;
         logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payment ' . $this->order->payment->id .
                     ' is ' . $status . ' in P2P');
-        switch ($status)
-        {
+        switch ($status) {
             case PlaceToPay::APPROVED:
                 $payments->setStatus($this->order->payment, $status);
                 $payments->setDataPayment($this->order->payment, $response);

@@ -10,7 +10,6 @@ use App\Http\Requests\Admin\Tags\IndexRequest;
 
 class Tags implements TagsInterface
 {
-
     protected Tag $tag;
 
     public function __construct(Tag $tag)

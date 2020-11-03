@@ -33,7 +33,8 @@ class Payments
                'request_id' => $request_id,
                'process_url' => $process_url,
                'status' => Pay::STATUS_PENDING
-            ]);
+            ]
+        );
     }
 
     /**
@@ -67,7 +68,8 @@ class Payments
                 'name'          => $payer->name,
                 'last_name'     => $payer->surname,
                 'phone'         => $payer->mobile,
-            ]);
+            ]
+        );
         return $payment->update([
             'reference'  => $pay->internalReference,
             'method'     => $pay->paymentMethodName,

@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Policies;
 
+use App\Models\Payment;
 use App\Constants\Admins;
 use App\Constants\Orders;
+use App\Models\OrderDetail;
 use App\Constants\Permissions;
 use App\Models\Admin\Admin;
 use App\Models\Order;
@@ -29,10 +31,10 @@ class OrdersPolicyTest extends TestCase
         $this->seed([
             TestDatabaseSeeder::class,
             UserSeeder::class,
-            StockSeeder::class,
-            OrderSeeder::class
+            StockSeeder::class
         ]);
-
+        factory(Order::class, 2)->create();
+        factory(OrderDetail::class, 5)->create();
         $this->admin = factory(Admin::class)->create();
     }
 
@@ -74,6 +76,9 @@ class OrdersPolicyTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $id = Order::all()->random()->id;
+        factory(Payment::class)->create([
+            'order_id' => $id
+        ]);
         $role = factory(Role::class)->create();
 
         $role->syncPermissions([
@@ -88,11 +93,13 @@ class OrdersPolicyTest extends TestCase
             ->get(route('orders.index'))->assertStatus(200);
 
         $this->actingAs($this->admin, Admins::GUARDED)
-            ->put(route('orders.update', $id),
+            ->put(
+                route('orders.update', $id),
                 [
                     'status'          =>  Orders::STATUS_PENDING_SHIPMENT,
                     'amount'   =>  10000,
-                ])->assertStatus(302);
+                ]
+            )->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)
             ->delete(route('orders.destroy', $id))->assertStatus(302);

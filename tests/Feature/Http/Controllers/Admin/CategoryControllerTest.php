@@ -61,11 +61,13 @@ class CategoryControllerTest extends TestCase
     {
         $category = factory(Category::class)->create();
         $response = $this->actingAs($this->admin, 'admin')
-                            ->put(route('category.update', ['category' => $category]),
-                            [
+                            ->put(
+                                route('category.update', ['category' => $category]),
+                                [
                                 'name' => 'category updated',
                                 'id_parent' => null
-                            ]);
+                            ]
+                            );
         $response
             ->assertStatus(302)
             ->assertSessionHas('success');

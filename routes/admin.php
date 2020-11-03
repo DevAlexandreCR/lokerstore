@@ -67,5 +67,3 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
         ->name('index', 'products.export')
         ->name('store', 'products.import');
 });
-
-

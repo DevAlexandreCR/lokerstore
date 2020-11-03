@@ -68,6 +68,4 @@ class Admin extends Authenticatable
     {
         return $this->hasRole(Roles::ADMIN);
     }
-
-
 }

@@ -80,8 +80,10 @@ class UserController extends Controller
     {
         $this->users->update($request, $user);
 
-        return redirect( route('users.show',
-            ['user' => $user]))
+        return redirect(route(
+            'users.show',
+            ['user' => $user]
+        ))
             ->with('user-updated', 'User has been updated success');
     }
 

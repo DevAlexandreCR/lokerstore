@@ -48,12 +48,11 @@ class CategoryControllerTest extends TestCase
             'id_parent' => null
         ]);
 
-        $response = $this->json('GET', route('categories.show',['category' => $category->id]));
+        $response = $this->json('GET', route('categories.show', ['category' => $category->id]));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => ['id', 'name', 'id_parent']
         ]);
     }
-
 }

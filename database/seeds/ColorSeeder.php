@@ -12,7 +12,7 @@ class ColorSeeder extends Seeder
      */
     public function run()
     {
-        $namecolors = 
+        $namecolors =
         [
             'WHITE'    => '#FFFFFF',
             'SILVER'   => '#C0C0C0',

@@ -64,7 +64,6 @@ class AdminControllerTest extends TestCase
             'password' => Hash::check('12345678', '12345678'),
             'is_active' => 1
         ]);
-
     }
 
     public function testShow(): void
@@ -112,5 +111,4 @@ class AdminControllerTest extends TestCase
             'email' => $admin2->email
         ]);
     }
-
 }

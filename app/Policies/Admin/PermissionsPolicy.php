@@ -47,5 +47,4 @@ class PermissionsPolicy
     {
         return $admin->hasPermissionTo(Permissions::DELETE_PERMISSIONS);
     }
-
 }

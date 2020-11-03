@@ -20,8 +20,14 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 
-class ColorsExport extends DefaultValueBinder implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStyles,
-    ShouldAutoSize, WithCustomValueBinder
+class ColorsExport extends DefaultValueBinder implements
+    FromCollection,
+    WithTitle,
+    WithHeadings,
+    WithMapping,
+    WithStyles,
+    ShouldAutoSize,
+    WithCustomValueBinder
 {
 
     /**
@@ -75,7 +81,7 @@ class ColorsExport extends DefaultValueBinder implements FromCollection, WithTit
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->setSelectedCells('A1:E1' );
+        $sheet->setSelectedCells('A1:E1');
         $sheet->getStyle($sheet->getSelectedCells())->getFill()->setFillType(Fill::FILL_SOLID);
         $sheet->getStyle($sheet->getSelectedCells())->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle($sheet->getSelectedCells())->getFont()->setColor(new Colors(Colors::COLOR_WHITE));
@@ -110,6 +116,6 @@ class ColorsExport extends DefaultValueBinder implements FromCollection, WithTit
             $cell->getStyle()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         }
 
-        return parent::bindValue($cell,  $value);
+        return parent::bindValue($cell, $value);
     }
 }

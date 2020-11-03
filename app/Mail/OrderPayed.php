@@ -32,5 +32,4 @@ class OrderPayed extends Mailable
             ->subject('Pago aprobado')
             ->markdown('emails.orders.payed');
     }
-
 }

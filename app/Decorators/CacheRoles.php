@@ -3,7 +3,6 @@
 
 namespace App\Decorators;
 
-
 use App\Interfaces\RoleInterface;
 use App\Repositories\Roles;
 use Illuminate\Database\Eloquent\Model;

@@ -25,8 +25,7 @@ class DisableProductIfStockIsEmpty
     {
         $product = $event->product;
 
-        if ($product->stock === 0 && $product->is_active)
-        {
+        if ($product->stock === 0 && $product->is_active) {
             $this->enableOrDisableProductAction->execute($product, false);
         }
     }

@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CallMetrics;
+use App\Console\Commands\CreateAdmin;
 use App\Console\Commands\QueryPayments;
 use Illuminate\Console\Scheduling\Schedule;
+use App\Console\Commands\AddMetricCategories;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -15,6 +18,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         QueryPayments::class,
+        CallMetrics::class,
+        CreateAdmin::class,
+        AddMetricCategories::class
     ];
 
     /**
@@ -26,6 +32,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('payments:query')->everyThirtyMinutes();
+        $schedule->command('category:metric')->cron('0 0 * * *'); // execute every days at 12:00 am
     }
 
     /**
@@ -33,7 +40,7 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 

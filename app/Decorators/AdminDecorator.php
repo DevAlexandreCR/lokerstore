@@ -3,7 +3,6 @@
 
 namespace App\Decorators;
 
-
 use App\Interfaces\AdminInterface;
 use App\Repositories\Admins;
 use Illuminate\Database\Eloquent\Model;

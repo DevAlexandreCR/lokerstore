@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheApiProducts implements ApiProductsInterface
 {
-
     protected ApiProducts $apiProducts;
 
     public function __construct(ApiProducts $apiProducts)

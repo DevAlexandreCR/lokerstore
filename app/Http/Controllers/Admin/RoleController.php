@@ -31,7 +31,7 @@ class RoleController extends Controller
      */
     public function index(PermissionInterface $permissions): View
     {
-        $this->authorize( 'index', Role::class);
+        $this->authorize('index', Role::class);
 
         return view('admin.roles.index', [
             'roles' => $this->roles->index(),

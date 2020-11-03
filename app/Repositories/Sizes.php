@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class Sizes implements SizesInterface
 {
-
     protected Size $size;
 
     public function __construct(Size $size)

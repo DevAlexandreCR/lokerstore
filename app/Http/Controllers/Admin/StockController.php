@@ -46,7 +46,7 @@ class StockController extends Controller
     public function create(Product $product, ColorsInterface $colors, TypeSizesInterface $sizes) : View
     {
         return view('admin.stocks.index', [
-            'product' => $product->load( 'stocks','stocks.color', 'stocks.size', 'stocks.size.type'),
+            'product' => $product->load('stocks', 'stocks.color', 'stocks.size', 'stocks.size.type'),
             'colors' => $colors->index(),
             'type_sizes' => $sizes->all()
         ]);

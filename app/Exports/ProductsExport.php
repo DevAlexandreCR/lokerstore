@@ -27,8 +27,17 @@ use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\WithPreCalculateFormulas;
 
-class ProductsExport extends DefaultValueBinder implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize,
-    WithStyles, WithCustomValueBinder, WithMultipleSheets, WithTitle, WithColumnWidths, WithEvents
+class ProductsExport extends DefaultValueBinder implements
+    FromCollection,
+    WithMapping,
+    WithHeadings,
+    ShouldAutoSize,
+    WithStyles,
+    WithCustomValueBinder,
+    WithMultipleSheets,
+    WithTitle,
+    WithColumnWidths,
+    WithEvents
 {
     use Exportable;
     use RegistersEventListeners;
@@ -102,7 +111,7 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             $cell->getStyle()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         }
 
-        return parent::bindValue($cell,  $value);
+        return parent::bindValue($cell, $value);
     }
 
     /**

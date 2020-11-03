@@ -24,8 +24,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStyles,
-    ShouldAutoSize, WithColumnWidths, WithCustomStartCell, WithEvents
+class CategoriesExport implements
+    FromCollection,
+    WithTitle,
+    WithHeadings,
+    WithMapping,
+    WithStyles,
+    ShouldAutoSize,
+    WithColumnWidths,
+    WithCustomStartCell,
+    WithEvents
 {
     use RegistersEventListeners;
 
@@ -44,7 +52,6 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
      */
     public function headings(): array
     {
-
         return [
             trans('ID'),
             trans('Name'),
@@ -70,7 +77,7 @@ class CategoriesExport  implements FromCollection, WithTitle, WithHeadings, With
                 '--->'
             ]
         ];
-        $category->children()->each( function ($subCategory)  {
+        $category->children()->each(function ($subCategory) {
             $this->subCategories[] = [
                 null,
                 null,

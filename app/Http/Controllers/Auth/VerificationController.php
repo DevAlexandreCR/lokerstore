@@ -47,7 +47,7 @@ class VerificationController extends Controller
     {
         $cart = Cart::where('user_id', auth()->id())->first();
 
-        if (!$cart){
+        if (!$cart) {
             Cart::create([
                 'user_id' => auth()->id()
             ]);

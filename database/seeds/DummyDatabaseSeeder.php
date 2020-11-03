@@ -18,6 +18,14 @@ class DummyDatabaseSeeder extends Seeder
                 UserSeeder::class,
                 StockSeeder::class,
                 OrderSeeder::class
-            ]);
+            ]
+        );
+
+        \App\Models\Order::all()->each(function ($order) {
+            if ($order->payment->status === \App\Constants\Payments::STATUS_ACCEPTED) {
+                $order->status = \App\Constants\Orders::STATUS_SENT;
+                $order->save();
+            }
+        });
     }
 }

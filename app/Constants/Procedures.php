@@ -3,7 +3,6 @@
 
 namespace App\Constants;
 
-
 class Procedures
 {
     public const ORDER_PROCEDURE = <<<'EOT'
@@ -18,12 +17,18 @@ BEGIN
         	WHEN p_field = 'admin_id' THEN admin_id
     	END
     	as measurable_id,
-        `status`,
+        CASE
+        	WHEN `status` = 'canceled' THEN 'canceled'
+        	WHEN `status` = 'rejected' THEN 'canceled'
+        	WHEN `status` = 'sent' 	   THEN 'sent'
+    	END
+    	as status,
         COUNT(*) as total,
         p_type as metric,
         SUM(`amount`) as amount
         FROM orders
     WHERE `created_at` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
+    AND (`status` = 'sent' OR `status` = 'canceled' OR `status` = 'rejected')
     GROUP BY `date`, `measurable_id`, `status`, `metric`;
     COMMIT;
 END
@@ -45,6 +50,7 @@ BEGIN
         LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
         LEFT OUTER JOIN products ON stocks.product_id = products.id
     WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'sent'
+    AND `status` = 'sent'
     GROUP BY `date`, `measurable_id`, `status`, `metric`;
     COMMIT;
 END

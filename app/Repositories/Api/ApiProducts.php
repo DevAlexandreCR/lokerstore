@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class ApiProducts implements ApiProductsInterface
 {
-
     protected Product $product;
 
     public function __construct(Product $product)

@@ -11,12 +11,13 @@ use App\Models\Stock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use TestDatabaseSeeder;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class StockControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    private $admin;
+    use DatabaseMigrations;
+    private Admin $admin;
 
     protected function setUp(): void
     {
@@ -24,14 +25,13 @@ class StockControllerTest extends TestCase
         $this->seed([
             TestDatabaseSeeder::class
         ]);
-        $this->withoutExceptionHandling();
         $this->admin = factory(Admin::class)->create();
         $this->admin->assignRole(Roles::ADMIN);
     }
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->admin, 'admin')->post( route('stocks.store') , [
+        $response = $this->actingAs($this->admin, 'admin')->post(route('stocks.store'), [
             'product_id'    => $product_id = Product::all()->random()->id,
             'color_id'      => $color_id = Color::all()->random()->id,
             'size_id'      => $size_id = Size::all()->random()->id,
@@ -40,17 +40,21 @@ class StockControllerTest extends TestCase
 
         $response
                 ->assertStatus(302);
-        $this->assertDatabaseHas('stocks',
-        [
+        $this->assertDatabaseHas(
+            'stocks',
+            [
             'product_id' => $product_id,
             'color_id' => $color_id,
             'size_id' => $size_id
-        ]);
+        ]
+        );
 
-        $this->assertDatabaseHas('products',
-        [
+        $this->assertDatabaseHas(
+            'products',
+            [
             'stock' => 3
-        ]);
+        ]
+        );
     }
 
     public function testUpdate(): void
@@ -59,24 +63,28 @@ class StockControllerTest extends TestCase
             'quantity' => 5
         ]);
 
-        $response = $this->actingAs($this->admin, 'admin')->put( route('stocks.update', $stock->id) , [
+        $response = $this->actingAs($this->admin, 'admin')->put(route('stocks.update', $stock->id), [
             'quantity' => 0
         ]);
 
         $response
                 ->assertStatus(302);
-        $this->assertDatabaseHas('stocks',
-        [
+        $this->assertDatabaseHas(
+            'stocks',
+            [
             'id' => $stock->id,
             'quantity' => 0
-        ]);
+        ]
+        );
 
-        $this->assertDatabaseHas('products',
-        [
+        $this->assertDatabaseHas(
+            'products',
+            [
             'id' => $stock->product_id,
             'stock' => 0,
             'is_active' => 0
-        ]);
+        ]
+        );
     }
 
     public function testDestroy(): void
@@ -85,23 +93,27 @@ class StockControllerTest extends TestCase
             'quantity' => 5
         ]);
 
-        $response = $this->actingAs($this->admin, 'admin')->delete( route('stocks.destroy', $stock));
+        $response = $this->actingAs($this->admin, 'admin')->delete(route('stocks.destroy', $stock));
 
         $response
                 ->assertStatus(302);
-        $this->assertDatabaseMissing('stocks',
-        [
+        $this->assertDatabaseMissing(
+            'stocks',
+            [
             'id' => $stock->id,
             'product_id' => $stock->product_id,
             'quantity' => 5
-        ]);
+        ]
+        );
 
-        $this->assertDatabaseHas('products',
-        [
+        $this->assertDatabaseHas(
+            'products',
+            [
             'id' => $stock->product_id,
             'stock' => 0,
             'is_active' => 0
-        ]);
+        ]
+        );
     }
 
     public function testAddStocksRepeated(): void
@@ -118,7 +130,7 @@ class StockControllerTest extends TestCase
             ]
         );
 
-        $response = $this->actingAs($this->admin, 'admin')->post( route('stocks.store') , [
+        $response = $this->actingAs($this->admin, 'admin')->post(route('stocks.store'), [
             'product_id' => $product_id,
             'color_id' => $color_id,
             'size_id' => $size_id,
@@ -127,17 +139,21 @@ class StockControllerTest extends TestCase
 
         $response
             ->assertStatus(302);
-        $this->assertDatabaseHas('stocks',
+        $this->assertDatabaseHas(
+            'stocks',
             [
                 'product_id' => $product_id,
                 'color_id' => $color_id,
                 'size_id' => $size_id,
                 'quantity' => 6
-            ]);
+            ]
+        );
 
-        $this->assertDatabaseHas('products',
+        $this->assertDatabaseHas(
+            'products',
             [
                 'stock' => 6
-            ]);
+            ]
+        );
     }
 }

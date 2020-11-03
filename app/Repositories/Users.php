@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Http\Requests\Admin\Users\IndexRequest;
 use App\Interfaces\UsersInterface;
 use App\Models\User;

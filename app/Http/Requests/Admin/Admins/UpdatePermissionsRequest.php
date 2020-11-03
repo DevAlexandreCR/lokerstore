@@ -16,7 +16,6 @@ class UpdatePermissionsRequest extends FormRequest
     public function authorize(): bool
     {
         return Gate::allows('update', Auth::user());
-
     }
 
     /**

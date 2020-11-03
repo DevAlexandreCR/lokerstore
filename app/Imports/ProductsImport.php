@@ -18,8 +18,15 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, WithChunkReading, WithStartRow,
-    SkipsOnError, SkipsOnFailure, WithValidation
+class ProductsImport implements
+    ShouldQueue,
+    OnEachRow,
+    WithMultipleSheets,
+    WithChunkReading,
+    WithStartRow,
+    SkipsOnError,
+    SkipsOnFailure,
+    WithValidation
 {
     use Importable;
 
@@ -94,8 +101,7 @@ class ProductsImport implements ShouldQueue, OnEachRow, WithMultipleSheets, With
      */
     public function onFailure(Failure ...$failures): void
     {
-        foreach($failures as $failure) {
-
+        foreach ($failures as $failure) {
             ErrorImport::create([
                 'import'    => 'products',
                 'row'       => $failure->row(),

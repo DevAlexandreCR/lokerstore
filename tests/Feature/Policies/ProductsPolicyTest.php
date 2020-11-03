@@ -100,8 +100,9 @@ class ProductsPolicyTest extends TestCase
             ->get(route('products.index'))->assertStatus(200);
 
         $this->actingAs($this->admin, Admins::GUARDED)
-            ->put(route('products.update', $id),
-            [
+            ->put(
+                route('products.update', $id),
+                [
                 'name'          =>  'new product',
                 'description'   =>  'new description at product incoming',
                 'stock'         =>  0,
@@ -109,7 +110,8 @@ class ProductsPolicyTest extends TestCase
                 'id_category'   => Category::all()->random()->id,
                 'tags'          => [Tag::all()->random()->id],
                 'Photos'        => [$this->faker->file(storage_path('app/public/photos'))]
-            ])->assertStatus(302);
+            ]
+            )->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)
             ->put(route('products.set_active', $id))->assertStatus(302);

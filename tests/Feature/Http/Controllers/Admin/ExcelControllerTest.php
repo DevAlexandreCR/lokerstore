@@ -47,7 +47,7 @@ class ExcelControllerTest extends TestCase
 
         Excel::assertStored('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports');
 
-        Excel::assertQueued('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports',function(ProductsExport $export) {
+        Excel::assertQueued('/products_\d{4}-\d{2}-\d{2}.xlsx/', 'exports', function (ProductsExport $export) {
             return true;
         });
     }
@@ -70,9 +70,8 @@ class ExcelControllerTest extends TestCase
         $response
             ->assertStatus(302);
 
-        Excel::assertQueued($file->getFilename(), 'imports', function(ProductsImport $import) {
+        Excel::assertQueued($file->getFilename(), 'imports', function (ProductsImport $import) {
             return true;
         });
     }
-
 }

@@ -55,7 +55,7 @@ class Product extends Model
     {
         return $this
                     ->belongsToMany(Size::class, 'stocks')
-                    ->with(['colors' => function($query) {
+                    ->with(['colors' => function ($query) {
                         $query->wherePivot('product_id', $this->id);
                     }]);
     }
@@ -67,11 +67,13 @@ class Product extends Model
      */
     public function scopeByCategory($query, $category)
     {
-        if (empty($category)) return null;
+        if (empty($category)) {
+            return null;
+        }
 
         $id = $this->getIdCategory($category);
 
-        return $query->whereHas('category', function($query) use ($category, $id) {
+        return $query->whereHas('category', function ($query) use ($category, $id) {
             $query
                 ->where('name', $category)
                 ->orWhere('id_parent', $id);
@@ -85,7 +87,9 @@ class Product extends Model
      */
     public function scopePrice($query, $price)
     {
-        if (!$price) return null;
+        if (!$price) {
+            return null;
+        }
 
         $price = $this->splitPrice($price);
 
@@ -110,10 +114,12 @@ class Product extends Model
      */
     public function scopeColors($query, $colors)
     {
-        if (empty($colors)) return null;
+        if (empty($colors)) {
+            return null;
+        }
 
         return $query->whereHas('stocks', function ($query) use ($colors) {
-                    $query->whereIn('color_id', $colors);
+            $query->whereIn('color_id', $colors);
         });
     }
 
@@ -124,7 +130,9 @@ class Product extends Model
      */
     public function scopeSizes($query, $sizes)
     {
-        if (empty($sizes)) return null;
+        if (empty($sizes)) {
+            return null;
+        }
 
         return $query->whereHas('stocks', function ($query) use ($sizes) {
             $query->whereIn('size_id', $sizes);
@@ -160,9 +168,11 @@ class Product extends Model
      */
     public function scopeWithTags($query, $tags)
     {
-        if (empty($tags)) return null;
+        if (empty($tags)) {
+            return null;
+        }
 
-        return $query->whereHas('tags', function($query) use ($tags) {
+        return $query->whereHas('tags', function ($query) use ($tags) {
             $query->whereIn('name', $tags);
         });
     }
@@ -174,7 +184,9 @@ class Product extends Model
      */
     public function scopeSearch($query, $search)
     {
-        if (empty($search)) return null;
+        if (empty($search)) {
+            return null;
+        }
 
         return $query
             ->where('reference', 'like', '%' . $search . '%')
@@ -187,7 +199,7 @@ class Product extends Model
      */
     public function getStatus(): string
     {
-        if ($this->is_active){
+        if ($this->is_active) {
             return __('Enabled');
         }
 
@@ -199,7 +211,7 @@ class Product extends Model
      */
     public function getPrice(): string
     {
-       return round($this->price, 0,  PHP_ROUND_HALF_UP) . 'COP';
+        return round($this->price, 0, PHP_ROUND_HALF_UP) . 'COP';
     }
 
     /**
@@ -207,14 +219,14 @@ class Product extends Model
      */
     public function getDescription()
     {
-        return substr($this->description, 0 , 30);
+        return substr($this->description, 0, 30);
     }
 
     public static function boot(): void
     {
         parent::boot();
 
-        static::deleting(function($product) {
+        static::deleting(function ($product) {
             $photos = $product->photos();
 
             foreach ($photos as $photo) {
@@ -235,5 +247,4 @@ class Product extends Model
     {
         return Category::where('name', $category)->firstOrFail()->id;
     }
-
 }

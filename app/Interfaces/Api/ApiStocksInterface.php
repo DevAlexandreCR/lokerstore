@@ -3,7 +3,6 @@
 
 namespace App\Interfaces\Api;
 
-
 use App\Models\Stock;
 use App\Http\Requests\Api\Stocks\UpdateRequest;
 
