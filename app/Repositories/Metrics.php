@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Models\Metric;
+use Illuminate\Support\Facades\DB;
 use App\Interfaces\MetricsInterface;
 use App\Http\Requests\Admin\Reports\ReportRequest;
 
@@ -41,7 +42,7 @@ class Metrics implements MetricsInterface
      */
     public function homeMetrics(): array
     {
-        // TODO: Implement homeMetrics() method.
+        return [];
     }
 
     /**
@@ -50,6 +51,12 @@ class Metrics implements MetricsInterface
      */
     public function reports(ReportRequest $request)
     {
-        // TODO: Implement reports() method.
+        $from = $request->get('from', null);
+        $until = $request->get('to', null);
+
+        return [
+            'monthly' => DB::select("call generate_general_report('$from', '$until')"),
+            'categories' => DB::select("call generate_categories_report('$from', '$until')")
+        ];
     }
 }

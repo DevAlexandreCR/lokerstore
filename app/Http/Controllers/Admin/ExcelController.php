@@ -26,7 +26,12 @@ class ExcelController extends Controller
     {
         $fileName = 'products_' . now()->format('Y-m-d') .'.xlsx';
         (new ProductsExport($products))->queue($fileName, 'exports')->chain([
-            new NotifyAdminsAfterCompleteExport($request->user(Admins::GUARDED), $fileName)
+            new NotifyAdminsAfterCompleteExport(
+                $request->user(Admins::GUARDED),
+                $fileName,
+                trans('Products'),
+                trans('Products exported successfully')
+            )
         ]);
 
         return back()->with('success', __('Exporting products... we\'ll send you an email when the download is available'));

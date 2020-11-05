@@ -2,11 +2,14 @@
 
 namespace App\Decorators;
 
+use App\Constants\Admins;
 use App\Repositories\Metrics;
+use App\Exports\ReportsExport;
 use App\Constants\metrics as MetricsConstants;
 use App\Interfaces\UsersInterface;
 use Illuminate\Support\Facades\DB;
 use App\Interfaces\MetricsInterface;
+use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Http\Requests\Admin\Reports\ReportRequest;
 
 class MetricsDecorator implements MetricsInterface
@@ -35,17 +38,18 @@ class MetricsDecorator implements MetricsInterface
 
     /**
      * @param ReportRequest $request
-     * @return mixed
+     * @return void
      */
-    public function reports(ReportRequest $request)
+    public function reports(ReportRequest $request): void
     {
-        $metricOrders = MetricsConstants::ORDERS;
-        $metricSeller = MetricsConstants::SELLER;
-        $from = $request->get('from', null);
-        $until = $request->get('to', null);
-
-        DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricSeller', 'admin_id')");
-        DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricOrders', 'none')");
-        DB::unprepared("call categories_metrics_generate('$from', '$until')");
+        $fileName = 'report_' . now()->getTimestamp() .'.xlsx';
+        (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports')->chain([
+            new NotifyAdminsAfterCompleteExport(
+                $request->user(Admins::GUARDED),
+                $fileName,
+                trans('Reports'),
+                trans('Reports generated successfully')
+            )
+        ]);
     }
 }

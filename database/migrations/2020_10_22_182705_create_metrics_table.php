@@ -24,11 +24,6 @@ class CreateMetricsTable extends Migration
             $table->decimal('amount', 10, 2)->nullable();
             $table->timestamps();
         });
-
-        DB::unprepared('DROP PROCEDURE IF EXISTS orders_metrics_generate');
-        DB::unprepared('DROP PROCEDURE IF EXISTS categories_metrics_generate');
-        DB::unprepared(\App\Constants\Procedures::ORDER_PROCEDURE);
-        DB::unprepared(\App\Constants\Procedures::CATEGORIES_PROCEDURE);
     }
 
     /**
@@ -38,8 +33,6 @@ class CreateMetricsTable extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS orders_metrics_generate');
-        DB::unprepared('DROP PROCEDURE IF EXISTS categories_metrics_generate');
         Schema::dropIfExists('metrics');
     }
 }
