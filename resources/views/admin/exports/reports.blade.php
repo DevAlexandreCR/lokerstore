@@ -1,10 +1,14 @@
 <table class="table">
     <thead>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
     <tr>
-        <th>{{trans('Month')}}</th>
-        <th>{{trans('Total man')}}</th>
-        <th>{{trans('Total woman')}}</th>
-        <th>{{trans('Total monthly sold')}}</th>
+        <th>{{trans('Date')}}</th>
+        <th>{{trans('Clothing\'s man')}}</th>
+        <th>{{trans('Clothing\'s woman')}}</th>
+        <th>{{trans('Total sold')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -13,18 +17,26 @@
             <td>{{ $key}}</td>
             <td>{{ $metric->amount }}</td>
             <td>{{ $metric->totalF }}</td>
-            <td>{{ $metric->total }}</td>
+            <td>{{ $metric->amount +  $metric->totalF}}</td>
         </tr>
     @endforeach
+    <tr>
+        <td>{{trans('Totals')}}</td>
+        <td>{{$totalMan}}</td>
+        <td>{{$totalWoman}}</td>
+        <td>{{$totalSold}}</td>
+    </tr>
     </tbody>
 </table>
 
 <table class="table">
     <thead>
+    <tr></tr>
+    <tr></tr>
     <tr>
-        <th>{{trans('Month')}}</th>
+        <th>{{trans('Date')}}</th>
         <th>{{trans('Category')}}</th>
-        <th>{{trans('Amount')}}</th>
+        <th>{{trans('Monthly sale')}}</th>
     </tr>
     </thead>
     <tbody>

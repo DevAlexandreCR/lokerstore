@@ -27,4 +27,10 @@ interface MetricsInterface
      * @return mixed
      */
     public function reports(ReportRequest $request);
+
+    /**
+     * @param string $date
+     * @return mixed
+     */
+    public function monthlyReport(string $date);
 }

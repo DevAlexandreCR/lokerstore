@@ -241,5 +241,12 @@
     "Generate report sales": "Generar reporte de ventas",
     "From": "Desde",
     "Until": "Hasta",
-    "We'll send the report to your email when it's ready.": "Te enviaremos el reporte a tu correo cuando esté listo."
+    "We'll send the report to your email when it's ready.": "Te enviaremos el reporte a tu correo cuando esté listo.",
+    "Clothing's woman": "Ropa de mujer",
+    "Clothing's man": "Ropa de hombre",
+    "Monthly sale": "Venta mensual",
+    "Totals": "Totales",
+    "Total sold": "Total vendido",
+    "General sales report": "Reporte general de ventas",
+    "Category more sold for month": "Categoría mas vendida por mes"
 }

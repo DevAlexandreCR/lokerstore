@@ -59,4 +59,13 @@ class Metrics implements MetricsInterface
             'categories' => DB::select("call generate_categories_report('$from', '$until')")
         ];
     }
+
+    /**
+     * @param string $date
+     * @return mixed
+     */
+    public function monthlyReport(string $date)
+    {
+        return DB::select("call generate_monthly_report('$date')");
+    }
 }

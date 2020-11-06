@@ -7,6 +7,7 @@ use App\Console\Commands\CreateAdmin;
 use App\Console\Commands\QueryPayments;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\AddMetricCategories;
+use App\Console\Commands\GenerateMonthlyReport;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -20,7 +21,8 @@ class Kernel extends ConsoleKernel
         QueryPayments::class,
         CallMetrics::class,
         CreateAdmin::class,
-        AddMetricCategories::class
+        AddMetricCategories::class,
+        GenerateMonthlyReport::class
     ];
 
     /**

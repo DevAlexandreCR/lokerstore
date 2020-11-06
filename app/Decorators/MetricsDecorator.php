@@ -2,14 +2,10 @@
 
 namespace App\Decorators;
 
-use App\Constants\Admins;
 use App\Repositories\Metrics;
 use App\Exports\ReportsExport;
-use App\Constants\metrics as MetricsConstants;
 use App\Interfaces\UsersInterface;
-use Illuminate\Support\Facades\DB;
 use App\Interfaces\MetricsInterface;
-use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Http\Requests\Admin\Reports\ReportRequest;
 
 class MetricsDecorator implements MetricsInterface
@@ -43,13 +39,22 @@ class MetricsDecorator implements MetricsInterface
     public function reports(ReportRequest $request): void
     {
         $fileName = 'report_' . now()->getTimestamp() .'.xlsx';
-        (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports')->chain([
-            new NotifyAdminsAfterCompleteExport(
-                $request->user(Admins::GUARDED),
-                $fileName,
-                trans('Reports'),
-                trans('Reports generated successfully')
-            )
-        ]);
+        (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports');//->chain([
+//            new NotifyAdminsAfterCompleteExport(
+//                $request->user(Admins::GUARDED),
+//                $fileName,
+//                trans('Reports'),
+//                trans('Reports generated successfully')
+//            )
+//        ]);
+    }
+
+    /**
+     * @param string $date
+     * @return mixed
+     */
+    public function monthlyReport(string $date)
+    {
+        return $this->metrics->monthlyReport($date);
     }
 }
