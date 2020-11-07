@@ -6,10 +6,7 @@ use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use App\Repositories\Metrics;
 use Illuminate\Console\Command;
-use Spatie\Permission\Models\Role;
-use App\Interfaces\MetricsInterface;
 use App\Exports\MonthlyReportsExport;
-use Illuminate\Database\Eloquent\Builder;
 use App\Jobs\NotifyAdminsAfterCompleteExport;
 
 class GenerateMonthlyReport extends Command
@@ -21,7 +18,8 @@ class GenerateMonthlyReport extends Command
      */
     protected $signature = "report:monthly
                                 {date=last : Year and month to report}
-                                {admin=admin : Admin to send report}";
+                                {--status : Status to query orders}
+                                {--admin : Admin to send report}";
 
     /**
      * The console command description.
@@ -57,14 +55,14 @@ class GenerateMonthlyReport extends Command
             $this->date = (string)$this->argument('date');
         }
 
-        if ($this->argument('admin') === 'admin'){
+        if (!$this->option('admin')){
             Admin::all()->each(function ($admin){
                 if ($admin->hasRole(Roles::ADMIN)){
                     $this->admin = $admin;
                 }
             });
         } else {
-            $this->admin = Admin::find($this->argument('admin'));
+            $this->admin = Admin::find($this->option('admin'));
         }
 
 
@@ -74,7 +72,7 @@ class GenerateMonthlyReport extends Command
         }
 
         $fileName = 'report_monthly_' . now()->getTimestamp() .'.xlsx';
-        (new MonthlyReportsExport($metrics->monthlyReport($this->date)))->queue($fileName, 'exports')->chain([
+        (new MonthlyReportsExport($metrics, $this->date))->queue($fileName, 'exports')->chain([
             new NotifyAdminsAfterCompleteExport(
                 $this->admin,
                 $fileName,

@@ -35,4 +35,30 @@ class Orders
             self::STATUS_SUCCESS => __('Completo'),
         ];
     }
+
+    /**
+     * @param string $status
+     * @return string
+     */
+    public static function getTranslatedStatus(string $status): string
+    {
+        switch ($status) {
+            case Orders::STATUS_PENDING_PAY:
+                return __('Pending payment');
+            case Orders::STATUS_PENDING_SHIPMENT:
+                return __('Pending shipment');
+            case Orders::STATUS_CANCELED:
+                return __('Canceled');
+            case Orders::STATUS_REJECTED:
+                return __('Payment rejected');
+            case Orders::STATUS_SENT:
+                return __('Sent');
+            case Orders::STATUS_SUCCESS:
+                return __('Complete');
+            case Orders::STATUS_FAILED:
+                return __('Failed');
+            default:
+                return __('');
+        }
+    }
 }

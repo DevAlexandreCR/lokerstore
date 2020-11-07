@@ -96,4 +96,43 @@ BEGIN
     ORDER BY `date` ASC;
 END
 EOT;
+
+    public const GENERATE_MONTHLY_REPORT = <<<'EOT'
+CREATE PROCEDURE generate_monthly_report(p_year_month date, p_status varchar(20))
+BEGIN
+	START TRANSACTION;
+	SELECT DATE(orders.created_at) as date,
+		DAYNAME(orders.created_at) as day_sale,
+		orders.id as num_order,
+		orders.status as status,
+		admins.name as seller,
+		payers.name as payer,
+		payers.email as email_payer,
+		payers.phone as phone_payer,
+  		categories.name as category_name,
+  		products.reference as reference,
+  		products.name as product_name,
+  		products.cost as cost,
+  		products.price as price,
+  		order_details.quantity as quantity,
+  		products.price * order_details.quantity as price_sale,
+  		orders.amount as paid,
+  		payments.`method` as `method`
+	FROM orders
+	    LEFT OUTER JOIN payments ON payments.order_id = orders.id
+	    LEFT OUTER JOIN payers ON payments.order_id = payers.id
+  		LEFT OUTER JOIN order_details ON order_details.order_id = orders.id
+  		LEFT OUTER JOIN admins ON orders.admin_id = admins.id
+  		LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
+        LEFT OUTER JOIN products ON stocks.product_id = products.id
+        LEFT OUTER JOIN categories ON products.id_category = categories.id
+		WHERE YEAR(orders.created_at) = YEAR(p_year_month) AND MONTH(orders.created_at) = MONTH(p_year_month)
+		AND
+		CASE
+			WHEN p_status IS NULL THEN orders.status != 'sent'
+			ELSE orders.status = p_status COLLATE utf8_unicode_ci
+		END
+    ORDER BY `date`;
+END
+EOT;
 }

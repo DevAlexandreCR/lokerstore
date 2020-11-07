@@ -2,10 +2,13 @@
 
 namespace App\Decorators;
 
+use App\Constants\Admins;
 use App\Repositories\Metrics;
 use App\Exports\ReportsExport;
 use App\Interfaces\UsersInterface;
 use App\Interfaces\MetricsInterface;
+use Illuminate\Support\Facades\Artisan;
+use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Http\Requests\Admin\Reports\ReportRequest;
 
 class MetricsDecorator implements MetricsInterface
@@ -39,22 +42,27 @@ class MetricsDecorator implements MetricsInterface
     public function reports(ReportRequest $request): void
     {
         $fileName = 'report_' . now()->getTimestamp() .'.xlsx';
-        (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports');//->chain([
-//            new NotifyAdminsAfterCompleteExport(
-//                $request->user(Admins::GUARDED),
-//                $fileName,
-//                trans('Reports'),
-//                trans('Reports generated successfully')
-//            )
-//        ]);
+        (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports')->chain([
+            new NotifyAdminsAfterCompleteExport(
+                $request->user(Admins::GUARDED),
+                $fileName,
+                trans('Reports'),
+                trans('Reports generated successfully')
+            )
+        ]);
     }
 
     /**
      * @param string $date
+     * @param string $status
      * @return mixed
      */
-    public function monthlyReport(string $date)
+    public function monthlyReport(string $date, string $status = '')
     {
-        return $this->metrics->monthlyReport($date);
+        return Artisan::call('report:monthly', [
+            'date' => $date . '-01',
+            'status' => $status,
+            'admin' => auth()->id()
+        ]);
     }
 }

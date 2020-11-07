@@ -71,6 +71,12 @@ return [
             'username' => env('DB_TEST_USERNAME', 'root'),
             'password' => env('DB_TEST_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
+            'modes' => [
+                'STRICT_ALL_TABLES',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_ZERO_DATE',
+                'NO_ZERO_IN_DATE'
+            ],
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

@@ -56,7 +56,7 @@ class ExcelControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $file = new UploadedFile(
-            storage_path('app/public/imports/products.xlsx'),
+            base_path('tests/stubs/imports/products.xlsx'),
             'products.xlsx',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             null,

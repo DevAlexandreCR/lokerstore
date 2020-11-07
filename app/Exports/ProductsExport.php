@@ -144,12 +144,14 @@ class ProductsExport extends DefaultValueBinder implements
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:K1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('A1:K1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
-        $sheet->getStyle('A1:K1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle('A1:K1')->getFill()->setStartColor(new Color('E75858'));
-        $sheet->getStyle('A1:K1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A1:K1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A1:K1')->getFill()
+            ->setFillType(Fill::FILL_SOLID)->setStartColor(new Color('E75858'));
+        $sheet->getStyle('A1:K1')->getBorders()
+            ->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+        $sheet->getStyle('A1:K1')->getFont()
+            ->setColor(new Color(Color::COLOR_WHITE));
+        $sheet->getStyle('A1:K1')->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         return [

@@ -62,10 +62,11 @@ class Metrics implements MetricsInterface
 
     /**
      * @param string $date
+     * @param string $status
      * @return mixed
      */
-    public function monthlyReport(string $date)
+    public function monthlyReport(string $date, string $status = '')
     {
-        return DB::select("call generate_monthly_report('$date')");
+        return DB::select("call generate_monthly_report('$date', '$status')");
     }
 }
