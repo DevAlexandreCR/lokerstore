@@ -20,7 +20,7 @@ BEGIN
         CASE
         	WHEN `status` = 'canceled' THEN 'canceled'
         	WHEN `status` = 'rejected' THEN 'canceled'
-        	WHEN `status` = 'sent' 	   THEN 'sent'
+        	WHEN `status` = 'completed' THEN 'completed'
     	END
     	as status,
         COUNT(*) as total,
@@ -28,7 +28,11 @@ BEGIN
         SUM(`amount`) as amount
         FROM orders
     WHERE `created_at` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
-    AND (`status` = 'sent' OR `status` = 'canceled' OR `status` = 'rejected')
+    AND
+		CASE
+			WHEN p_type = 'admins' THEN `status` = 'completed'
+			ELSE (`status` = 'completed' OR `status` = 'canceled' OR `status` = 'rejected')
+		END
     GROUP BY `date`, `measurable_id`, `status`, `metric`;
     COMMIT;
 END
@@ -49,8 +53,8 @@ BEGIN
         LEFT OUTER JOIN order_details ON orders.id = order_details.order_id
         LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
         LEFT OUTER JOIN products ON stocks.product_id = products.id
-    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'sent'
-    AND `status` = 'sent'
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
+    AND `status` = 'completed'
     GROUP BY `date`, `measurable_id`, `status`, `metric`;
     COMMIT;
 END
@@ -70,8 +74,8 @@ BEGIN
   		LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
         LEFT OUTER JOIN products ON stocks.product_id = products.id
         LEFT OUTER JOIN categories ON products.id_category = categories.id
-    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'sent'
-    GROUP BY MONTH(`date`), `product_name`
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'completed'
+    GROUP BY MONTH(date), `product_name`
     ORDER BY `date`;
 END
 EOT;
@@ -80,19 +84,34 @@ EOT;
 CREATE PROCEDURE generate_general_report(p_from date, p_until date)
 BEGIN
     START TRANSACTION;
-        SELECT DATE(orders.created_at) as date,
+        SELECT DATE(orders.created_at) as `date`,
       	tags.name as gender,
-        orders.status,
-        SUM(orders.amount) as amount,
-        COUNT(*) as total
+        status,
+        SUM(order_details.total_price) as amount,
+        SUM(order_details.quantity) as total_products_sold
         FROM orders
         LEFT OUTER JOIN order_details ON orders.id = order_details.order_id
         LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
         LEFT OUTER JOIN products ON stocks.product_id = products.id
         LEFT OUTER JOIN product_tag ON product_tag.product_id = products.id
         LEFT OUTER JOIN tags ON product_tag.tag_id = tags.id
-    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'sent'
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'completed'
     GROUP BY MONTH(`date`), `gender`
+    ORDER BY `date` ASC;
+END
+EOT;
+
+    public const GENERATE_GENERAL_REPORT_UNCOMPLETED = <<<'EOT'
+CREATE PROCEDURE generate_general_report_uncompleted(p_from date, p_until date)
+BEGIN
+    START TRANSACTION;
+        SELECT DATE(orders.created_at) as date,
+        status,
+        SUM(orders.amount) as amount,
+        COUNT(*) as orders_total
+        FROM orders
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` != 'completed'
+    GROUP BY MONTH(`date`), `status`
     ORDER BY `date` ASC;
 END
 EOT;
@@ -129,7 +148,7 @@ BEGIN
 		WHERE YEAR(orders.created_at) = YEAR(p_year_month) AND MONTH(orders.created_at) = MONTH(p_year_month)
 		AND
 		CASE
-			WHEN p_status IS NULL THEN orders.status != 'sent'
+			WHEN p_status = '' THEN orders.status != 'completed'
 			ELSE orders.status = p_status COLLATE utf8_unicode_ci
 		END
     ORDER BY `date`;

@@ -30,7 +30,8 @@ class MetricsDecorator implements MetricsInterface
             'metricsGeneral'  => $this->metrics->getMetricsAllOrders(),
             'metricsSeller'   => $this->metrics->getMetricsAdminOrders(),
             'metricsCategory' => $this->metrics->getMetricsCategory(),
-            'pendingShipment' => $this->metrics->getpendingShipmentOrders(),
+            'pendingShipment' => $this->metrics->getPendingShipmentOrders(),
+            'percentMetrics' => $this->metrics->getPercentMetrics(),
             'usersCount'      => $this->users->index()->count()
         ];
     }
@@ -61,8 +62,8 @@ class MetricsDecorator implements MetricsInterface
     {
         return Artisan::call('report:monthly', [
             'date' => $date . '-01',
-            'status' => $status,
-            'admin' => auth()->id()
+            '--status' => $status,
+            '--admin' => auth()->id()
         ]);
     }
 }

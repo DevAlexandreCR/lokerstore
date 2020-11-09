@@ -32,9 +32,14 @@ class Metrics implements MetricsInterface
         return $this->metrics->categorymoreSoldMetrics()->get();
     }
 
-    public function getpendingShipmentOrders()
+    public function getPendingShipmentOrders()
     {
         return $this->metrics->pendingShipmentOrders()->get()->count();
+    }
+
+    public function getPercentMetrics()
+    {
+        return $this->metrics->percentMetrics()->get();
     }
 
     /**
@@ -56,7 +61,8 @@ class Metrics implements MetricsInterface
 
         return [
             'monthly' => DB::select("call generate_general_report('$from', '$until')"),
-            'categories' => DB::select("call generate_categories_report('$from', '$until')")
+            'categories' => DB::select("call generate_categories_report('$from', '$until')"),
+            'uncompleted' => DB::select("call generate_general_report_uncompleted('$from', '$until')")
         ];
     }
 

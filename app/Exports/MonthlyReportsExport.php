@@ -66,7 +66,9 @@ class MonthlyReportsExport implements FromCollection,
     public static function afterSheet(AfterSheet $event): void
     {
         $colDimension = self::stylizeGrid($event);
-
+        if((int)$colDimension < 3) {
+            return;
+        }
         $sheet = $event->getSheet()->getDelegate();
         $colIterator = $sheet->getColumnIterator('L', 'P');
 

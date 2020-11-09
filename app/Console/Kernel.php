@@ -35,6 +35,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('payments:query')->everyThirtyMinutes();
         $schedule->command('category:metric')->cron('0 0 * * *'); // execute every days at 12:00 am
+        $schedule->command('report:monthly')->cron('0 0 1 * *'); // execute every first day of month
     }
 
     /**

@@ -29,9 +29,8 @@ class AddMetricCategories extends Command
     public function handle(): void
     {
         $until = now()->format('Y-m-d');
-        $month = date('m');
-        $year = date('Y');
-        $firstDayOfMonth = date('Y-m-d', mktime(0, 0, 0, $month, 1, $year));
+        $firstDayOfMonth = now()->subMonth()->format('Y-m-d');
+
         DB::unprepared("call categories_metrics_generate('$firstDayOfMonth', '$until')");
 
         $this->info('Metrics updated successfully!');

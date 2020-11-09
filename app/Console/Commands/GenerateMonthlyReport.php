@@ -39,7 +39,7 @@ class GenerateMonthlyReport extends Command
      */
     public function __construct()
     {
-        $this->date = now()->format('Y-m');
+        $this->date = now()->subMonth()->format('Y-m-d');
         parent::__construct();
     }
 

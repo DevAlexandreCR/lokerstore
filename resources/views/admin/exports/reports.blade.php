@@ -8,6 +8,7 @@
         <th>{{trans('Date')}}</th>
         <th>{{trans('Clothing\'s man')}}</th>
         <th>{{trans('Clothing\'s woman')}}</th>
+        <th>{{trans('Status')}}</th>
         <th>{{trans('Total sold')}}</th>
     </tr>
     </thead>
@@ -17,6 +18,7 @@
             <td>{{ $key}}</td>
             <td>{{ $metric->amount }}</td>
             <td>{{ $metric->totalF }}</td>
+            <td>{{ $metric->status }}</td>
             <td>{{ $metric->amount +  $metric->totalF}}</td>
         </tr>
     @endforeach
@@ -26,6 +28,27 @@
         <td>{{$totalWoman}}</td>
         <td>{{$totalSold}}</td>
     </tr>
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <th>{{trans('Date')}}</th>
+        <th>{{trans('Status')}}</th>
+        <th>{{trans('Total')}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($uncompleted as $key => $metric)
+        <tr>
+            <td>{{ $key}}</td>
+            <td>{{ $metric->status }}</td>
+            <td>{{ $metric->amount }}</td>
+        </tr>
+    @endforeach
     </tbody>
 </table>
 

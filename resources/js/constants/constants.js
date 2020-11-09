@@ -9,6 +9,8 @@ class Constants {
     static ORDER_STATUS_PAID = 'pending_shipment'
     static ORDER_STATUS_SENT = 'sent'
     static ORDER_STATUS_REJECTED = 'rejected'
+    static ORDER_STATUS_CANCELED = 'canceled'
+    static ORDER_STATUS_COMPLETED = 'completed'
 }
 
 export default Constants

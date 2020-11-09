@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+    use App\Constants\Orders;
+    use Illuminate\Database\Seeder;
 
 class DummyDatabaseSeeder extends Seeder
 {
+    use \Illuminate\Foundation\Testing\WithFaker;
     /**
      * Seed dummy items to database.
      *
@@ -20,12 +22,12 @@ class DummyDatabaseSeeder extends Seeder
                 OrderSeeder::class
             ]
         );
-
-        \App\Models\Order::all()->each(function ($order) {
-            if ($order->payment->status === \App\Constants\Payments::STATUS_ACCEPTED) {
-                $order->status = \App\Constants\Orders::STATUS_SENT;
-                $order->save();
-            }
+        \App\Models\Order::all()->each(function ($order){
+            $order->status = $this->makeFaker(config('app.locale'))->randomElement([
+                Orders::STATUS_CANCELED,
+                Orders::STATUS_SUCCESS
+            ]);
+            $order->save();
         });
     }
 }

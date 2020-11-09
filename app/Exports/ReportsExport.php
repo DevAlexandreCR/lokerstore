@@ -95,9 +95,10 @@ class ReportsExport extends DefaultValueBinder implements
             if ($orders->has($month)) {
                 $o = $orders->get($month);
                 $o->genderF = $order->gender;
-                $o->totalF = $order->amount;
+                $o->totalF = $order->amount ?? 0;
                 $orders->put($month, $o);
             } else {
+                $order->totalF = 0;
                 $orders->put($month, $order);
             }
         }

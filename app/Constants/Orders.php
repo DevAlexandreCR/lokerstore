@@ -8,7 +8,7 @@ class Orders
     public const STATUS_PENDING_SHIPMENT = 'pending_shipment';
     public const STATUS_SENT = 'sent';
     public const STATUS_REJECTED = 'rejected';
-    public const STATUS_SUCCESS = 'complete';
+    public const STATUS_SUCCESS = 'completed';
     public const STATUS_CANCELED = 'canceled';
     public const STATUS_FAILED = 'failed';
 
@@ -43,22 +43,22 @@ class Orders
     public static function getTranslatedStatus(string $status): string
     {
         switch ($status) {
-            case Orders::STATUS_PENDING_PAY:
-                return __('Pending payment');
-            case Orders::STATUS_PENDING_SHIPMENT:
-                return __('Pending shipment');
-            case Orders::STATUS_CANCELED:
-                return __('Canceled');
-            case Orders::STATUS_REJECTED:
-                return __('Payment rejected');
-            case Orders::STATUS_SENT:
-                return __('Sent');
-            case Orders::STATUS_SUCCESS:
-                return __('Complete');
-            case Orders::STATUS_FAILED:
-                return __('Failed');
+            case self::STATUS_PENDING_PAY:
+                return trans('Pending payment');
+            case self::STATUS_PENDING_SHIPMENT:
+                return trans('Pending shipment');
+            case self::STATUS_CANCELED:
+                return trans('Canceled');
+            case self::STATUS_REJECTED:
+                return trans('Payment rejected');
+            case self::STATUS_SENT:
+                return trans('Sent');
+            case self::STATUS_SUCCESS:
+                return trans('Complete');
+            case self::STATUS_FAILED:
+                return trans('Failed');
             default:
-                return __('');
+                return '';
         }
     }
 }
