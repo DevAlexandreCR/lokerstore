@@ -54,7 +54,7 @@ class Orders
             case self::STATUS_SENT:
                 return trans('Sent');
             case self::STATUS_SUCCESS:
-                return trans('Complete');
+                return trans('Completed');
             case self::STATUS_FAILED:
                 return trans('Failed');
             default:

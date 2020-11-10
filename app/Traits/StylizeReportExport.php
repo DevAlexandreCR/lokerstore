@@ -3,7 +3,6 @@
 
 namespace App\Traits;
 
-
 use App\Constants\Dates;
 use App\Constants\Orders;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -120,7 +119,7 @@ trait StylizeReportExport
         $dimensions = $sheet->calculateWorksheetDimension();
         $arrayDim = explode(':', $dimensions);
         $colDimension = str_split('0' . $arrayDim[1], 2)[1];
-        if((int)$colDimension < 3) {
+        if ((int)$colDimension < 3) {
             return 0;
         }
         $rowIterator = $sheet->getRowIterator(2, $colDimension);

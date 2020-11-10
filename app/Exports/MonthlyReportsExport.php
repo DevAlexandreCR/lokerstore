@@ -21,7 +21,8 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class MonthlyReportsExport implements FromCollection,
+class MonthlyReportsExport implements
+    FromCollection,
     WithTitle,
     WithHeadings,
     WithMapping,
@@ -48,7 +49,7 @@ class MonthlyReportsExport implements FromCollection,
     */
     public function collection(): Collection
     {
-        return collect($this->metrics->monthlyReport($this->date, Orders::STATUS_SENT));
+        return collect($this->metrics->monthlyReport($this->date, Orders::STATUS_SUCCESS));
     }
 
     /**
@@ -66,7 +67,7 @@ class MonthlyReportsExport implements FromCollection,
     public static function afterSheet(AfterSheet $event): void
     {
         $colDimension = self::stylizeGrid($event);
-        if((int)$colDimension < 3) {
+        if ((int)$colDimension < 3) {
             return;
         }
         $sheet = $event->getSheet()->getDelegate();
@@ -77,9 +78,9 @@ class MonthlyReportsExport implements FromCollection,
         $totalPriceSale = 0;
         $totalPaid = 0;
         $totalProductsSold = 0;
-        foreach ($colIterator as $col){
-            foreach ($col->getCellIterator(2) as $cell){
-                switch($col->getColumnIndex()){
+        foreach ($colIterator as $col) {
+            foreach ($col->getCellIterator(2) as $cell) {
+                switch ($col->getColumnIndex()) {
                     case 'L':
                         $totalCost += $cell->getValue();
                         break;
@@ -93,9 +94,9 @@ class MonthlyReportsExport implements FromCollection,
                         $totalPriceSale += $cell->getValue();
                         break;
                     case 'P':
-                        if($cell->getRow() > 2){
-                            if($sheet->getCell('C' . $cell->getRow())->getValue() ===
-                                $sheet->getCell('C' . ($cell->getRow() - 1))->getValue()){
+                        if ($cell->getRow() > 2) {
+                            if ($sheet->getCell('C' . $cell->getRow())->getValue() ===
+                                $sheet->getCell('C' . ($cell->getRow() - 1))->getValue()) {
                                 break;
                             }
                             $totalPaid += $cell->getValue();

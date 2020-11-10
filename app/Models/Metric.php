@@ -72,7 +72,7 @@ class Metric extends Model
         return $query
             ->select('date', 'metric', 'amount', 'status')
             ->where('metric', Metrics::ORDERS)
-            ->whereDate('date','>=', now()->subMonth()->format('Y-m') . '-01')
+            ->whereDate('date', '>=', now()->subMonth()->format('Y-m') . '-01')
             ->whereIn('status', [
                 Orders::STATUS_PENDING_SHIPMENT,
                 Orders::STATUS_SUCCESS,

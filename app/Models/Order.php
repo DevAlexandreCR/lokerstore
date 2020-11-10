@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Constants\Orders;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -39,19 +40,22 @@ class Order extends Model
     /**
      * @param $query
      * @param string|null $status
-     * @return mixed
+     * @return Builder|null
      */
-    public function scopeStatus($query, string $status = null)
+    public function scopeStatus(Builder $query, string $status = null): ?Builder
     {
-        return $query->where('status', $status ?: Orders::STATUS_PENDING_SHIPMENT);
+        if (!$status) {
+            return null;
+        }
+        return $query->where('status', $status);
     }
 
     /**
-     * @param $query
+     * @param Builder $query
      * @param string|null $date
-     * @return |null
+     * @return Builder|null
      */
-    public function scopeDate($query, string $date = null)
+    public function scopeDate(Builder $query, string $date = null): ?Builder
     {
         if ($date) {
             return $query->whereDate('created_at', $date);
@@ -63,9 +67,9 @@ class Order extends Model
     /**
      * @param $query
      * @param string|null $email
-     * @return |null
+     * @return Builder|null
      */
-    public function scopeUserEmail($query, string $email = null)
+    public function scopeUserEmail(Builder $query, string $email = null): ?Builder
     {
         if ($email) {
             return $query->whereHas('user', function ($query) use ($email) {

@@ -22,7 +22,7 @@ class DummyDatabaseSeeder extends Seeder
                 OrderSeeder::class
             ]
         );
-        \App\Models\Order::all()->each(function ($order){
+        \App\Models\Order::all()->each(function ($order) {
             $order->status = $this->makeFaker(config('app.locale'))->randomElement([
                 Orders::STATUS_CANCELED,
                 Orders::STATUS_SUCCESS

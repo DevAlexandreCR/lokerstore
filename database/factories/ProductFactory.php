@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
+
 $factory->define(Product::class, function (Faker $faker) {
     $cost = $faker->randomFloat(2, 15000, 100000);
     return [

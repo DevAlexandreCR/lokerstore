@@ -39,7 +39,9 @@ class ReportsExport extends DefaultValueBinder implements
 
     private array $metrics;
     private float $totalMan = 0;
+    private float $totalManPercent = 0;
     private float $totalWoman = 0;
+    private float $totalWomanPercent = 0;
     private float $totalSold = 0;
 
     public function __construct(array $metrics)
@@ -53,8 +55,11 @@ class ReportsExport extends DefaultValueBinder implements
             'categories' => $this->reorderCategories(),
             'monthly' => $this->reorderMonthly(),
             'totalMan' => $this->totalMan,
+            'totalManPercent' => $this->totalManPercent,
+            'totalWomanPercent' => $this->totalWomanPercent,
             'totalWoman' => $this->totalWoman,
             'totalSold' => $this->totalSold,
+            'uncompleted' => $this->reorderUncompleted()
         ]);
     }
 
@@ -81,6 +86,22 @@ class ReportsExport extends DefaultValueBinder implements
     }
 
     /**
+     * @return Collection
+     */
+    public function reorderUncompleted(): Collection
+    {
+        $uncompleted = new Collection();
+        $metrics = collect($this->metrics);
+        foreach ($metrics->get('uncompleted') as $order) {
+            $date = explode('-', $order->date);
+            $month = $date[0] . '-' . $date[1];
+            $order->date = $month;
+            $uncompleted->push($order);
+        }
+        return $uncompleted;
+    }
+
+    /**
      * Reorder list of orders to report
      * @return Collection
      */
@@ -103,11 +124,17 @@ class ReportsExport extends DefaultValueBinder implements
             }
         }
 
-        foreach ($orders->all() as $order) {
+        foreach ($orders->all() as $key => $order) {
+            $tSold = $order->totalF + $order->amount;
+            $order->totalFPercent = $order->totalF / $tSold;
+            $order->amountPercent = $order->amount / $tSold;
             $this->totalMan += $order->amount;
             $this->totalWoman += $order->totalF;
+            $orders->put($key, $order);
         }
         $this->totalSold = $this->totalMan + $this->totalWoman;
+        $this->totalManPercent = $this->totalMan  / $this->totalSold;
+        $this->totalWomanPercent = $this->totalWoman  / $this->totalSold;
 
         return $orders;
     }
@@ -118,9 +145,11 @@ class ReportsExport extends DefaultValueBinder implements
     public function columnFormats(): array
     {
         return [
-            'B' => NumberFormat::FORMAT_CURRENCY_USD,
+            'B' => NumberFormat::FORMAT_PERCENTAGE_00,
             'C' => NumberFormat::FORMAT_CURRENCY_USD,
-            'D' => NumberFormat::FORMAT_CURRENCY_USD,
+            'D' => NumberFormat::FORMAT_PERCENTAGE_00,
+            'E' => NumberFormat::FORMAT_CURRENCY_USD,
+            'G' => NumberFormat::FORMAT_CURRENCY_USD,
         ];
     }
 
@@ -149,14 +178,14 @@ class ReportsExport extends DefaultValueBinder implements
      */
     public function styles(Worksheet $sheet): void
     {
-        $sheet->mergeCells('A1:E4');
+        $sheet->mergeCells('A1:G4');
         $sheet->getCell('A1')->setValue(trans('General sales report'));
-        $sheet->getStyle('A1:E4')->getFont()->setBold(true)->setSize(14);
-        $sheet->getStyle('A5:D5')->getFill()->setFillType(Fill::FILL_SOLID)
+        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
+        $sheet->getStyle('A5:G5')->getFill()->setFillType(Fill::FILL_SOLID)
             ->setStartColor(new Color(Color::COLOR_RED));
-        $sheet->getStyle('A5:D5')->getFont()->setBold(true)->setSize(12)
+        $sheet->getStyle('A5:G5')->getFont()->setBold(true)->setSize(12)
             ->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle('A5:D5')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A5:G5')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)
             ->setVertical(Alignment::VERTICAL_CENTER);
     }
@@ -168,9 +197,14 @@ class ReportsExport extends DefaultValueBinder implements
     {
         $sheet = $event->sheet->getDelegate();
         foreach ($sheet->getRowIterator() as $row) {
-            foreach ($row->getCellIterator('A', 'A') as $cell) {
+            foreach ($row->getCellIterator('A', 'B') as $cell) {
                 if ($cell->getValue() === trans('Totals')) {
-                    self::setHeadersTableCategories($sheet, $row->getRowIndex());
+                    $sheet->getStyle('A' . $row->getRowIndex() . ':G' . $row->getRowIndex())
+                        ->getFont()->setBold(true);
+                    self::setHeadersTables($sheet, $row->getRowIndex(), trans('Category more sold for month'));
+                }
+                if ($cell->getValue() === trans('Status')) {
+                    self::setHeadersTables($sheet, $row->getRowIndex() - 4, trans('Uncompleted orders'));
                 }
             }
         }
@@ -180,11 +214,12 @@ class ReportsExport extends DefaultValueBinder implements
      * Customize headers of tables of sheet
      * @param Worksheet $sheet
      * @param int $row
+     * @param string $tableName
      */
-    public static function setHeadersTableCategories(Worksheet $sheet, int $row): void
+    public static function setHeadersTables(Worksheet $sheet, int $row, string $tableName): void
     {
         try {
-            $sheet->getCell('A' . ($row + 2))->setValue(trans('Category more sold for month'));
+            $sheet->getCell('A' . ($row + 2))->setValue($tableName);
             $sheet->mergeCells('A' . ($row + 2) . ':C' . ($row + 3));
         } catch (Exception $e) {
             logger()->error($e->getMessage());
@@ -194,7 +229,6 @@ class ReportsExport extends DefaultValueBinder implements
             ->setBold(true)->setSize(12);
         $sheet->getStyle('A' . ($row + 2))->getAlignment()
             ->setVertical(Alignment::VERTICAL_CENTER)->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A' . $row . ':D' . $row)->getFont()->setBold(true);
         $sheet->getStyle('A' . ($row + 4) . ':C' . ($row + 4))
             ->getFont()->setBold(true)->setColor(new Color(Color::COLOR_WHITE));
         $sheet->getStyle('A' . ($row + 4) . ':C' . ($row + 4))->getFill()

@@ -51,13 +51,13 @@ class GenerateMonthlyReport extends Command
      */
     public function handle(Metrics $metrics): int
     {
-        if($this->argument('date') !== 'last'){
+        if ($this->argument('date') !== 'last') {
             $this->date = (string)$this->argument('date');
         }
 
-        if (!$this->option('admin')){
-            Admin::all()->each(function ($admin){
-                if ($admin->hasRole(Roles::ADMIN)){
+        if (!$this->option('admin')) {
+            Admin::all()->each(function ($admin) {
+                if ($admin->hasRole(Roles::ADMIN)) {
                     $this->admin = $admin;
                 }
             });
@@ -66,7 +66,7 @@ class GenerateMonthlyReport extends Command
         }
 
 
-        if (!$this->admin){
+        if (!$this->admin) {
             logger()->info(trans('No admin to send report, abort export'));
             return 0;
         }

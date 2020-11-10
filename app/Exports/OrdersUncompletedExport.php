@@ -17,7 +17,8 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class OrdersUncompletedExport implements FromCollection,
+class OrdersUncompletedExport implements
+    FromCollection,
     WithTitle,
     WithHeadings,
     WithMapping,
