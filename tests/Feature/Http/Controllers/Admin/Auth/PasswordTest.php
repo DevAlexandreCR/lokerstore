@@ -11,7 +11,7 @@ class PasswordTest extends TestCase
 {
     use RefreshDatabase;
     
-    public function testSendLinkResetPassword() 
+    public function testSendLinkResetPassword()
     {
         // $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();

@@ -19,7 +19,7 @@ class StockSeeder extends Seeder
         $products = Product::all();
 
         foreach ($products as $key => $product) {
-            factory(Stock::class, random_int(1,5))->create([
+            factory(Stock::class, random_int(1, 5))->create([
                 'product_id' => $product->id
             ]);
         }

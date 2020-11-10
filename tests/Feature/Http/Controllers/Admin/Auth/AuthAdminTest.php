@@ -11,7 +11,7 @@ class AuthAdminTest extends TestCase
 {
     use RefreshDatabase;
     
-    public function testLoginAdmin() 
+    public function testLoginAdmin()
     {
         $admin = factory(Admin::class)->create([
             'password' => bcrypt($password = 'secret'),
@@ -27,7 +27,7 @@ class AuthAdminTest extends TestCase
         $response->assertSessionHasNoErrors();
     }
 
-    public function testHomeAdminNotAuthenticated() 
+    public function testHomeAdminNotAuthenticated()
     {
         $response = $this->get('admin/');
 

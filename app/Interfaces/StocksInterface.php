@@ -3,7 +3,6 @@
 
 namespace App\Interfaces;
 
-
 interface StocksInterface extends RepositoryInterface
 {
     /**

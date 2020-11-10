@@ -12,10 +12,10 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <label for="datetime" class="mr-1 btn-block">{{__('From')}}</label>
-                        <input class="form-control d-block mr-sm-2" type="date" name="from"
+                        <input class="form-control d-block mr-sm-2" type="date" name="from" required
                                id="datetime">
                         <label for="datetime2" class="mr-1 btn-block">{{__('Until')}}</label>
-                        <input class="form-control d-block mr-sm-2" type="date" name="to"
+                        <input class="form-control d-block mr-sm-2" type="date" name="to" required
                                id="datetime2">
                     </div>
                 </div>

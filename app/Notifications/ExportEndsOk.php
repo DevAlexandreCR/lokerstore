@@ -11,15 +11,21 @@ class ExportEndsOk extends Notification
     use Queueable;
 
     private string $fileName;
+    private string $export;
+    private string $message;
 
     /**
      * Create a new notification instance.
      *
      * @param string $fileName
+     * @param string $export
+     * @param string $message
      */
-    public function __construct(string $fileName)
+    public function __construct(string $fileName, string $export, string $message)
     {
         $this->fileName = $fileName;
+        $this->export = $export;
+        $this->message = $message;
     }
 
     /**
@@ -43,8 +49,8 @@ class ExportEndsOk extends Notification
     {
         return (new MailMessage)
                     ->attach(storage_path('app/public/exports/') . $this->fileName)
-                    ->subject(trans('Products'))
-                    ->line(trans('Products exported successfully'))
+                    ->subject($this->export)
+                    ->line($this->message)
                     ->action(trans('Download'), asset('/exports/' . $this->fileName))
                     ->line(trans('Good bye'));
     }

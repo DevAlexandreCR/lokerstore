@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::middleware('auth:api')
         ->prefix('/products')
-        ->group(function() {
+        ->group(function () {
             Route::put('/stocks/{stock}', 'StockController@update')
                 ->name('api.stocks.update');
 
@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
             Route::delete('/photos', 'PhotosController@destroy')
                 ->name('api.photos.destroy');
-    });
+        });
 
     Route::middleware('auth:api')
         ->apiResource('products', 'ProductController')
@@ -47,4 +47,3 @@ use Illuminate\Support\Facades\Route;
     Route::get('/type_sizes', 'TypeSizeController@index')->name('api.type_sizes.index');
 
     Route::get('/tags', 'ColorController@index')->name('api.tags.index');
-

@@ -72,7 +72,7 @@ class AuthUserTest extends TestCase
         $response->assertRedirect('email/verify');
 
         //quitamos password y password_confirmation del array
-        array_splice($user,4, 2);
+        array_splice($user, 4, 2);
 
         $this->assertDatabaseHas('users', ['email' => $user['email']]);
     }
@@ -88,7 +88,7 @@ class AuthUserTest extends TestCase
             'is_active' => false
         ]);
 
-        $response = $this->actingAs($user)->get( route('index'));
+        $response = $this->actingAs($user)->get(route('index'));
 
         $response->assertRedirect('/disabled-user');
     }

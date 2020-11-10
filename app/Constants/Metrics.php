@@ -3,7 +3,6 @@
 
 namespace App\Constants;
 
-
 use MyCLabs\Enum\Enum;
 
 class Metrics extends Enum

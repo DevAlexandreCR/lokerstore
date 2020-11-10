@@ -18,7 +18,9 @@ trait Authentication
             $nonce = mt_rand();
         }
 
-        if ($decode) return base64_encode($nonce);
+        if ($decode) {
+            return base64_encode($nonce);
+        }
 
         return $nonce;
     }

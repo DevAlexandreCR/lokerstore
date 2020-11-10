@@ -1937,13 +1937,13 @@ __webpack_require__.r(__webpack_exports__);
     salesLastMonth: function salesLastMonth() {
       var _metrics;
 
-      var metrics = this.filterMetrics(_constants_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ORDER_STATUS_SENT);
+      var metrics = this.filterMetrics();
       return (_metrics = metrics[metrics.length - 2]) !== null && _metrics !== void 0 ? _metrics : 0;
     },
     salesThisMonth: function salesThisMonth() {
       var _metrics2;
 
-      var metrics = this.filterMetrics(_constants_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ORDER_STATUS_SENT);
+      var metrics = this.filterMetrics();
       return (_metrics2 = metrics[metrics.length - 1]) !== null && _metrics2 !== void 0 ? _metrics2 : 0;
     },
     salesThisMonthString: function salesThisMonthString() {
@@ -1966,19 +1966,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    filterMetrics: function filterMetrics(status) {
-      var sends = this.metrics.filter(function (metric) {
-        return metric.status === status;
-      });
+    filterMetrics: function filterMetrics() {
       var metrics = [];
-      sends.forEach(function (metric) {
+      this.metrics.forEach(function (metric) {
         var _metrics$date;
 
         var date = new Date(metric.date).getMonth();
         var total = (_metrics$date = metrics[date]) !== null && _metrics$date !== void 0 ? _metrics$date : 0;
         metrics[date] = total + parseInt(metric.amount);
       });
-      return metrics;
+      return metrics.filter(function (metric) {
+        return metric !== null;
+      });
     }
   }
 });
@@ -2106,6 +2105,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     labels: function labels() {
+      var today = new Date();
+      var currentMonth = today.toLocaleString('default', {
+        month: 'long'
+      });
       var months = [];
       this.metrics.forEach(function (metric) {
         var date = new Date(metric.date);
@@ -2117,13 +2120,28 @@ __webpack_require__.r(__webpack_exports__);
           months.push(month);
         }
       });
+
+      if (!months.includes(currentMonth)) {
+        this.metrics.push({
+          date: today,
+          amount: 0,
+          status: 'sent'
+        });
+        this.metrics.push({
+          date: today,
+          amount: 0,
+          status: 'canceled'
+        });
+        months.push(currentMonth);
+      }
+
       return months;
     },
-    dataSent: function dataSent() {
-      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_SENT);
+    dataPaid: function dataPaid() {
+      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_COMPLETED);
     },
     dataRejected: function dataRejected() {
-      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_REJECTED);
+      return this.filterMetric(_constants_constants__WEBPACK_IMPORTED_MODULE_1__["default"].ORDER_STATUS_CANCELED);
     }
   },
   mounted: function mounted() {
@@ -2134,7 +2152,7 @@ __webpack_require__.r(__webpack_exports__);
         labels: this.labels,
         datasets: [{
           label: 'Ventas',
-          data: this.dataSent,
+          data: this.dataPaid,
           backgroundColor: ['rgba(155, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)'],
           borderColor: ['rgba(155, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(7, 12, 12, 1)', 'rgba(13, 12, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)', 'rgba(225, 159, 143, 1)'],
           borderWidth: 3
@@ -111584,6 +111602,10 @@ _defineProperty(Constants, "ORDER_STATUS_PAID", 'pending_shipment');
 _defineProperty(Constants, "ORDER_STATUS_SENT", 'sent');
 
 _defineProperty(Constants, "ORDER_STATUS_REJECTED", 'rejected');
+
+_defineProperty(Constants, "ORDER_STATUS_CANCELED", 'canceled');
+
+_defineProperty(Constants, "ORDER_STATUS_COMPLETED", 'completed');
 
 /* harmony default export */ __webpack_exports__["default"] = (Constants);
 

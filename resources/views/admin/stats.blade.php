@@ -2,19 +2,30 @@
 
 @section('main')
 <div class="content">
-    <div class="btn-group float-md-right" role="group" aria-label="Basic example">
-        <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#generateReport">{{trans('Generate report sales')}}</button>
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#generateReport"><ion-icon size="large" name="download"></ion-icon></button>
+    <div class="btn-group dropleft float-md-right">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{trans('Generate report sales')}}
+        </button>
+        <div class="dropdown-menu shadow">
+            <div class="btn-group  m-2" role="group" aria-label="Basic example">
+                <button class="btn btn-outline-dark " data-toggle="modal" data-target="#generateReport">{{trans('General report')}}</button>
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#generateReport"><ion-icon  name="download"></ion-icon></button>
+            </div>
+            <div class="btn-group m-2" role="group" aria-label="Basic example">
+                <button class="btn btn-outline-dark" data-toggle="modal" data-target="#generateMonthlyReport">{{trans('Monthly report')}}</button>
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#generateMonthlyReport"><ion-icon  name="download"></ion-icon></button>
+            </div>
+        </div>
     </div>
     <div class="row justify-content-center py-2">
         <div class="flag flag-blue ml-md-3 shadow-sm mb-3 text-right">
             <div class="card-body d-inline-flex text-right">
-                <h5 class="title text-black-50 text-right">{{trans('Pending shipment')}}:  {{$pendingShipment}}
+                <h5 class="title text-black-50 texth-right">{{trans('Pending shipment')}}:  {{$pendingShipment}}
                 </h5>
                 <ion-icon class="ml-4 text-muted" size="large" name="file-tray-stacked"></ion-icon>
             </div>
         </div>
-        <sales-percent-component :metrics="{{$metricsGeneral->toJson()}}"></sales-percent-component>
+        <sales-percent-component :metrics="{{$percentMetrics->toJson()}}"></sales-percent-component>
         <div class="flag flag-red ml-sm-2 shadow-sm mb-3 text-right">
             <div class="card-body d-inline-flex">
                 <h5 class="title text-black-50  text-left">{{trans('Users')}}:  {{$usersCount}}
@@ -73,4 +84,5 @@
 </div>
 
 @include('admin.generate-reports-modal')
+@include('admin.generate-monthly_reports-modal')
 @endsection

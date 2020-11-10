@@ -24,8 +24,8 @@ class CacheProducts implements ProductsInterface
     {
         $query = $this->convertQueryToString($request);
 
-        return Cache::tags('products')->rememberForever($query, function () use ($request){
-           return $this->products->query($request);
+        return Cache::tags('products')->rememberForever($query, function () use ($request) {
+            return $this->products->query($request);
         });
     }
 
@@ -80,7 +80,7 @@ class CacheProducts implements ProductsInterface
     private function convertQueryToString(IndexRequest $request): string
     {
         $category = $request->get('category', null);
-        $tags = implode(',', $request->get('tags', []) );
+        $tags = implode(',', $request->get('tags', []));
         $search = $request->get('search', null);
         $page = $request->get('page', 1);
 

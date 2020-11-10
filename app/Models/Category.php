@@ -17,7 +17,7 @@ class Category extends Model
 
     public function metrics(): MorphMany
     {
-        return $this->morphMany(Metric::class, 'measurable',Metrics::CATEGORIES);
+        return $this->morphMany(Metric::class, 'measurable', Metrics::CATEGORIES);
     }
 
     public function products(): HasMany

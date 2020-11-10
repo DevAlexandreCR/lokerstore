@@ -20,7 +20,7 @@ class OrderDetailObserver
 
         $order = $orderDetail->order;
         $order->amount = 0;
-        $order->orderDetails->each(function ($detail) use($order){
+        $order->orderDetails->each(function ($detail) use ($order) {
             $order->amount += $detail->total_price;
         });
 
@@ -53,7 +53,7 @@ class OrderDetailObserver
         $order = $orderDetail->order;
         $order->amount = 0;
 
-        $order->orderDetails->each(function ($detail) use($order){
+        $order->orderDetails->each(function ($detail) use ($order) {
             $order->amount += $detail->total_price;
         });
         $order->save();

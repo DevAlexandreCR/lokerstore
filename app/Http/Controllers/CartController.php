@@ -19,10 +19,12 @@ class CartController extends Controller
      */
     public function show(User $user, Carts $carts): View
     {
-        return view('web.users.cart.show',
-        [
+        return view(
+            'web.users.cart.show',
+            [
             'cart' => $carts->getCart($user->id)
-        ]);
+        ]
+        );
     }
 
     /**

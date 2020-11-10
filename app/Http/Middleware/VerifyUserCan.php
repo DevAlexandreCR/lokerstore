@@ -19,7 +19,7 @@ class VerifyUserCan
         $user = $request->route()->parameter('user');
         $order = $request->route()->parameter('order');
 
-        if ($user->id === auth()->id()){
+        if ($user->id === auth()->id()) {
             if ($order && $order->user_id !== $user->id) {
                 abort(403);
             }

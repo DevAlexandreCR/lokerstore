@@ -3,11 +3,13 @@
 namespace Tests\Feature\Http\Controllers\Admin;
 
 use AdminSeeder;
+use App\Models\Payment;
 use App\Constants\Admins;
 use App\Constants\Orders;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use OrderSeeder;
@@ -29,10 +31,10 @@ class OrdersControllerTest extends TestCase
         $this->seed([
             TestDatabaseSeeder::class,
             UserSeeder::class,
-            StockSeeder::class,
-            OrderSeeder::class
+            StockSeeder::class
         ]);
-
+        factory(Order::class, 2)->create();
+        factory(OrderDetail::class, 5)->create();
         $this->admin = factory(Admin::class)->create();
         $this->admin->assignRole(Roles::ADMIN);
         $this->withoutExceptionHandling();
@@ -64,10 +66,12 @@ class OrdersControllerTest extends TestCase
     {
         $id = Order::all()->random()->id;
 
-        $response = $this->actingAs($this->admin, Admins::GUARDED)->patch(route('orders.update', $id),
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->patch(
+            route('orders.update', $id),
             [
                 'status' => Orders::STATUS_CANCELED
-            ]);
+            ]
+        );
 
         $response
             ->assertStatus(302)
@@ -97,6 +101,9 @@ class OrdersControllerTest extends TestCase
     public function testAnAdminCanQueryAnOrderToP2P(): void
     {
         $order = Order::all()->random();
+        factory(Payment::class)->create([
+            'order_id' => $order->id
+        ]);
 
         $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.verify', $order->id));
 
@@ -107,7 +114,9 @@ class OrdersControllerTest extends TestCase
     public function testAnAdminCanReverseAPurchase(): void
     {
         $order = Order::all()->random();
-
+        factory(Payment::class)->create([
+            'order_id' => $order->id
+        ]);
         $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.reverse', $order->id));
 
         $response

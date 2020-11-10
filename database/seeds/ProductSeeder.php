@@ -16,17 +16,15 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         factory(Product::class, 100)->create();
-        $tags = Tag::all();
 
-        Product::inRandomOrder()->each(function ($product) use ($tags) {
-
+        Product::inRandomOrder()->each(function ($product) {
             $product->tags()->attach(
-                $tags->random(random_int(1,  2))->pluck('id')->toArray()
+                Tag::all()->random()->id
             );
 
-//            factory(Photo::class, random_int(1, 2))->create([
-//                'product_id' => $product->id
-//            ]);
+            factory(Photo::class)->create([
+                'product_id' => $product->id
+            ]);
         });
     }
 }

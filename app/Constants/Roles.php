@@ -3,7 +3,6 @@
 
 namespace App\Constants;
 
-
 class Roles
 {
     public const EMPLOYEE = 'Employee';

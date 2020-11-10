@@ -35,6 +35,15 @@ npm install
 - php artisan db:seed --class=DummyDatabaseSeeder
 - php artisan serve
 ```
+ To execute schedule tasks like query payments, query metrics and automatics reports
+```bash
+- php artisan schedule:run
+```
+ To generate metrics with previous fake data installed
+```bash
+- php artisan metrics:start
+```
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

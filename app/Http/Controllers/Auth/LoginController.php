@@ -99,5 +99,4 @@ class LoginController extends Controller
                     ? new Response('', 204)
                     : redirect(RouteServiceProvider::HOME);
     }
-
 }

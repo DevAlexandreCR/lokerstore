@@ -45,10 +45,16 @@ class OrdersController extends Controller
     public function show(Order $order): View
     {
         return view('admin.orders.show', [
-            'order' => $order->load('orderDetails',
-                'payment', 'payment.payer', 'orderDetails.stock',
-                'orderDetails.stock.product', 'orderDetails.stock.product.photos',
-                'orderDetails.stock.color','orderDetails.stock.size')
+            'order' => $order->load(
+                'orderDetails',
+                'payment',
+                'payment.payer',
+                'orderDetails.stock',
+                'orderDetails.stock.product',
+                'orderDetails.stock.product.photos',
+                'orderDetails.stock.color',
+                'orderDetails.stock.size'
+            )
         ]);
     }
 

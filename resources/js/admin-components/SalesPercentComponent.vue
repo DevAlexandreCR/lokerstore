@@ -27,12 +27,12 @@ export default {
 
     computed:{
         salesLastMonth: function () {
-            let metrics = this.filterMetrics(Constants.ORDER_STATUS_SENT)
+            let metrics = this.filterMetrics()
             return metrics[metrics.length - 2] ?? 0
         },
 
         salesThisMonth: function () {
-            let metrics = this.filterMetrics(Constants.ORDER_STATUS_SENT)
+            let metrics = this.filterMetrics()
             return metrics[metrics.length - 1] ?? 0
         },
 
@@ -59,15 +59,17 @@ export default {
     },
 
     methods: {
-        filterMetrics(status) {
-            let sends = this.metrics.filter(metric => metric.status === status)
+        filterMetrics() {
             let metrics = []
-            sends.forEach(metric => {
+            this.metrics.forEach(metric => {
                 let date = new Date(metric.date).getMonth()
                 let total = metrics[date] ?? 0
                 metrics[date] = total + parseInt(metric.amount)
             })
-            return metrics
+
+            return metrics.filter(metric => {
+                return metric !== null
+            })
         }
     }
 }

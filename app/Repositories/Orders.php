@@ -36,7 +36,6 @@ class Orders implements OrderInterface
             ->userEmail($email)
             ->date($date)
             ->paginate(15);
-
     }
 
     public function index()
@@ -101,8 +100,7 @@ class Orders implements OrderInterface
      */
     public function getStatusFromStatusPayment(string $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case PlaceToPay::FAILED:
                 return OrderConstants::STATUS_FAILED;
             case PlaceToPay::REJECTED:

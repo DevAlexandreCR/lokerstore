@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Product::class, function (Faker $faker) {
-    $cost = $faker->randomFloat(2, 20000, 200000);
+    $cost = $faker->randomFloat(2, 15000, 100000);
     return [
         'reference' => $faker->unique()->numberBetween(1000, 9999),
         'name' => $faker->firstName,

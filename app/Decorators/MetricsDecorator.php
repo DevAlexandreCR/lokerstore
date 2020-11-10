@@ -2,11 +2,13 @@
 
 namespace App\Decorators;
 
+use App\Constants\Admins;
 use App\Repositories\Metrics;
-use App\Constants\metrics as MetricsConstants;
+use App\Exports\ReportsExport;
 use App\Interfaces\UsersInterface;
-use Illuminate\Support\Facades\DB;
 use App\Interfaces\MetricsInterface;
+use Illuminate\Support\Facades\Artisan;
+use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Http\Requests\Admin\Reports\ReportRequest;
 
 class MetricsDecorator implements MetricsInterface
@@ -28,24 +30,40 @@ class MetricsDecorator implements MetricsInterface
             'metricsGeneral'  => $this->metrics->getMetricsAllOrders(),
             'metricsSeller'   => $this->metrics->getMetricsAdminOrders(),
             'metricsCategory' => $this->metrics->getMetricsCategory(),
-            'pendingShipment' => $this->metrics->getpendingShipmentOrders(),
+            'pendingShipment' => $this->metrics->getPendingShipmentOrders(),
+            'percentMetrics' => $this->metrics->getPercentMetrics(),
             'usersCount'      => $this->users->index()->count()
         ];
     }
 
     /**
      * @param ReportRequest $request
+     * @return void
+     */
+    public function reports(ReportRequest $request): void
+    {
+        $fileName = 'report_' . now()->getTimestamp() .'.xlsx';
+        (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports')->chain([
+            new NotifyAdminsAfterCompleteExport(
+                $request->user(Admins::GUARDED),
+                $fileName,
+                trans('Reports'),
+                trans('Reports generated successfully')
+            )
+        ]);
+    }
+
+    /**
+     * @param string $date
+     * @param string $status
      * @return mixed
      */
-    public function reports(ReportRequest $request)
+    public function monthlyReport(string $date, string $status = '')
     {
-        $metricOrders = MetricsConstants::ORDERS;
-        $metricSeller = MetricsConstants::SELLER;
-        $from = $request->get('from', null);
-        $until = $request->get('to', null);
-
-        DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricSeller', 'admin_id')");
-        DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricOrders', 'none')");
-        DB::unprepared("call categories_metrics_generate('$from', '$until')");
+        return Artisan::call('report:monthly', [
+            'date' => $date . '-01',
+            '--status' => $status,
+            '--admin' => auth()->id()
+        ]);
     }
 }

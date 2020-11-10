@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class SavePhotoAction
 {
-
     public function execute(int $id_product, ?array $images): void
     {
         if (empty($images)) {
@@ -17,7 +16,6 @@ class SavePhotoAction
         }
 
         foreach ($images as $image) {
-
             $name = $this->saveImage($image);
 
             $this->savePhoto($id_product, $name);

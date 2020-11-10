@@ -25,10 +25,18 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Concerns\WithPreCalculateFormulas;
 
-class ProductsExport extends DefaultValueBinder implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize,
-    WithStyles, WithCustomValueBinder, WithMultipleSheets, WithTitle, WithColumnWidths, WithEvents
+class ProductsExport extends DefaultValueBinder implements
+    FromCollection,
+    WithMapping,
+    WithHeadings,
+    ShouldAutoSize,
+    WithStyles,
+    WithCustomValueBinder,
+    WithMultipleSheets,
+    WithTitle,
+    WithColumnWidths,
+    WithEvents
 {
     use Exportable;
     use RegistersEventListeners;
@@ -102,7 +110,7 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
             $cell->getStyle()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         }
 
-        return parent::bindValue($cell,  $value);
+        return parent::bindValue($cell, $value);
     }
 
     /**
@@ -136,12 +144,14 @@ class ProductsExport extends DefaultValueBinder implements FromCollection, WithM
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:K1')->getFill()->setFillType(Fill::FILL_SOLID);
-        $sheet->getStyle('A1:K1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
-        $sheet->getStyle('A1:K1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle('A1:K1')->getFill()->setStartColor(new Color('E75858'));
-        $sheet->getStyle('A1:K1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A1:K1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A1:K1')->getFill()
+            ->setFillType(Fill::FILL_SOLID)->setStartColor(new Color('E75858'));
+        $sheet->getStyle('A1:K1')->getBorders()
+            ->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+        $sheet->getStyle('A1:K1')->getFont()
+            ->setColor(new Color(Color::COLOR_WHITE));
+        $sheet->getStyle('A1:K1')->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         return [

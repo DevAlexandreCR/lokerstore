@@ -69,17 +69,21 @@ class ProductController extends Controller
      * @param SizesInterface $sizes
      * @return View
      */
-    public function create(TagsInterface $tags, CategoryInterface $categories, ColorsInterface $colors,
-                            SizesInterface $sizes): View
-    {
+    public function create(
+        TagsInterface $tags,
+        CategoryInterface $categories,
+        ColorsInterface $colors,
+        SizesInterface $sizes
+    ): View {
         $categories = $categories->index();
         $tags = $tags->index();
         $colors = $colors->index();
         $sizes = $sizes->index();
 
-        return view('admin.products.create',
-                    compact('categories', 'tags', 'sizes', 'colors')
-                );
+        return view(
+            'admin.products.create',
+            compact('categories', 'tags', 'sizes', 'colors')
+        );
     }
 
     /**
@@ -125,7 +129,9 @@ class ProductController extends Controller
     {
         $categories = $categories->index();
         $tags = Tag::all();
-        return view('admin.products.edit', [
+        return view(
+            'admin.products.edit',
+            [
             'product'   => $product
             ],
             compact('categories', 'tags')
@@ -143,7 +149,7 @@ class ProductController extends Controller
     {
         $product = $this->products->update($request, $product);
 
-        return redirect( route('products.edit', ['product' => $product]))
+        return redirect(route('products.edit', ['product' => $product]))
             ->with('success', trans('Product has been updated success'));
     }
 
@@ -158,7 +164,7 @@ class ProductController extends Controller
     {
         $this->products->setActive($request, $product);
 
-        return redirect( route('products.index'))
+        return redirect(route('products.index'))
                 ->with('seccess', trans('Your product has been update successfully'));
     }
 
@@ -171,7 +177,7 @@ class ProductController extends Controller
     {
         $this->products->destroy($product);
 
-        return redirect( route('products.index'))
+        return redirect(route('products.index'))
                 ->with('success', trans('Product has been deleted success'));
     }
 }

@@ -31,7 +31,7 @@ class AdminPermissionsControllerTest extends TestCase
 
     public function testUpdatePermissionsToAdmin(): void
     {
-        $response = $this->actingAs($this->admin, 'admin')->put(route('update-permissions',$this->admin->id), [
+        $response = $this->actingAs($this->admin, 'admin')->put(route('update-permissions', $this->admin->id), [
             'permissions' => [
                 Permissions::VIEW_ORDERS
             ]

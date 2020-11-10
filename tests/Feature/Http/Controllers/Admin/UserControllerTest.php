@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
-
     use RefreshDatabase;
 
     private $admin;
@@ -89,10 +88,12 @@ class UserControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($this->admin, 'admin')->put(route('users.update', $user),
+        $response = $this->actingAs($this->admin, 'admin')->put(
+            route('users.update', $user),
             [
                 'email' => 'elnuevoemail@nada.com'
-            ]);
+            ]
+        );
 
         $response
             ->assertRedirect(route('users.show', $user))
@@ -135,7 +136,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $query = 'jos';
-        $response = $this->actingAs($this->admin, 'admin')->get( route('users.index', ['search' => $query]));
+        $response = $this->actingAs($this->admin, 'admin')->get(route('users.index', ['search' => $query]));
 
         $response
             ->assertStatus(200)
@@ -163,7 +164,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $query = 'martha';
-        $response = $this->actingAs($this->admin, 'admin')->get( route('users.index', ['search' => $query]));
+        $response = $this->actingAs($this->admin, 'admin')->get(route('users.index', ['search' => $query]));
 
         $response
             ->assertViewHas('user_not_found');

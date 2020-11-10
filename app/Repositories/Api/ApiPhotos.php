@@ -3,7 +3,6 @@
 
 namespace App\Repositories\Api;
 
-
 use App\Models\Photo;
 use App\Interfaces\Api\ApiPhotosInterface;
 use App\Http\Requests\Api\Photos\StoreRequest;

@@ -78,22 +78,26 @@ class CartControllerTest extends TestCase
             'quantity' => 5
         ]);
 
-        $response = $this->actingAs($user)->post(route('cart.add', $user),
+        $response = $this->actingAs($user)->post(
+            route('cart.add', $user),
             [
                 'product_id' => $stock->product_id,
                 'size_id' => $stock->size->id,
                 'color_id' => $stock->color->id,
                 'quantity' => 2
-            ]);
+            ]
+        );
 
         $response->assertStatus(302);
 
-        $this->assertDatabaseHas('cart_stock',
-        [
+        $this->assertDatabaseHas(
+            'cart_stock',
+            [
             'cart_id' => $user->cart->id,
             'stock_id' => $stock->id,
             'quantity' => 2
-        ]);
+        ]
+        );
     }
     public function testAnuserCanRemoveitemToCart(): void
     {
@@ -111,16 +115,20 @@ class CartControllerTest extends TestCase
 
         $user->cart->stocks()->attach($stock->id, ['quantity' => 2]);
 
-        $response = $this->actingAs($user)->delete(route('cart.remove',
-            [ $user, $stock ]));
+        $response = $this->actingAs($user)->delete(route(
+            'cart.remove',
+            [ $user, $stock ]
+        ));
 
         $response->assertStatus(302);
 
-        $this->assertDatabaseMissing('cart_stock',
+        $this->assertDatabaseMissing(
+            'cart_stock',
             [
                 'cart_id' => $user->cart->id,
                 'stock_id' => $stock->id,
                 'quantity' => 2
-            ]);
+            ]
+        );
     }
 }

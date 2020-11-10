@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Colors implements ColorsInterface
 {
-
     protected Color $color;
 
     public function __construct(Color $color)

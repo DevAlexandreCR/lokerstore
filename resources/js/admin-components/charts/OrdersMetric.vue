@@ -40,6 +40,8 @@ export default {
 
     computed: {
         labels: function () {
+            let today = new Date()
+            let currentMonth = today.toLocaleString('default', { month: 'long' })
             let months = []
             this.metrics.forEach(metric => {
                 let date = new Date(metric.date)
@@ -48,15 +50,28 @@ export default {
                     months.push(month)
                 }
             })
+            if(!months.includes(currentMonth)){
+                this.metrics.push({
+                    date: today,
+                    amount: 0,
+                    status:'sent'
+                })
+                this.metrics.push({
+                    date: today,
+                    amount: 0,
+                    status:'canceled'
+                })
+                months.push(currentMonth)
+            }
             return months
         },
 
-        dataSent: function () {
-            return this.filterMetric(Constants.ORDER_STATUS_SENT)
+        dataPaid: function () {
+            return this.filterMetric(Constants.ORDER_STATUS_COMPLETED)
         },
 
         dataRejected: function () {
-            return this.filterMetric(Constants.ORDER_STATUS_REJECTED)
+            return this.filterMetric(Constants.ORDER_STATUS_CANCELED)
         }
     },
 
@@ -68,7 +83,7 @@ export default {
                 labels: this.labels,
                 datasets: [{
                     label: 'Ventas',
-                    data: this.dataSent,
+                    data: this.dataPaid,
                     backgroundColor: [
                         'rgba(155, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

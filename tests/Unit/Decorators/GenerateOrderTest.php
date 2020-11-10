@@ -13,7 +13,6 @@ use PHPUnit\Framework\TestCase;
 
 class GenerateOrderTest extends TestCase
 {
-
     protected $orders;
     protected $orderDetails;
     protected $payments;
@@ -59,5 +58,4 @@ class GenerateOrderTest extends TestCase
 
         self::assertNotNull($order);
     }
-
 }

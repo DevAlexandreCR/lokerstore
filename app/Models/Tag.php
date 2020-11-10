@@ -33,5 +33,4 @@ class Tag extends Model
         return $query
             ->where('name', $search);
     }
-
 }

@@ -81,8 +81,9 @@ class ProductControllerTest extends TestCase
      */
     public function testStore(): void
     {
-        $response = $this->actingAs($this->admin, 'admin')->post(route('products.store'),
-        [
+        $response = $this->actingAs($this->admin, 'admin')->post(
+            route('products.store'),
+            [
             'reference'     =>  1111,
             'name'          =>  'new product',
             'description'   =>  'new description at product incoming',
@@ -92,7 +93,8 @@ class ProductControllerTest extends TestCase
             'id_category'   => Category::all()->random()->id,
             'tags'          => [Tag::all()->random()->id],
             'photos'        => [$this->faker->file(storage_path('app/public/photos'))]
-        ]);
+        ]
+        );
 
         $response
             ->assertStatus(302);

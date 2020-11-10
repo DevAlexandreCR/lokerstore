@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
 use Illuminate\Support\Facades\Hash;

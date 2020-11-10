@@ -29,9 +29,9 @@ class HomeControllerTest extends TestCase
      */
     public function testIndex(): void
     {
-        $response = $this->get( route('index') );
+        $response = $this->get(route('index'));
 
-        $response->assertRedirect( route('home'));
+        $response->assertRedirect(route('home'));
     }
 
     /**
@@ -50,7 +50,7 @@ class HomeControllerTest extends TestCase
         $cart->user_id = $user->id;
         $cart->save();
 
-        $response = $this->actingAs($user)->get( route('home') );
+        $response = $this->actingAs($user)->get(route('home'));
 
         $response
             ->assertStatus(200);
@@ -64,16 +64,16 @@ class HomeControllerTest extends TestCase
         $cart = new Cart();
         $cart->user_id = $user->id;
         $cart->save();
-        $response = $this->actingAs($user)->get( route('index') );
+        $response = $this->actingAs($user)->get(route('index'));
 
-        $response->assertRedirect( route('home'));
+        $response->assertRedirect(route('home'));
     }
 
     public function testRedirectIfAuthenticatedAdmin(): void
     {
         $admin = factory(Admin::class)->create();
-        $response = $this->actingAs($admin, 'admin')->get( route('index') );
+        $response = $this->actingAs($admin, 'admin')->get(route('index'));
 
-        $response->assertRedirect( route('admin.home'));
+        $response->assertRedirect(route('admin.home'));
     }
 }

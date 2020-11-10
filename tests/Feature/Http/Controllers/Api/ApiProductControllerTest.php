@@ -134,7 +134,7 @@ class ApiProductControllerTest extends TestCase
 
         $category = Category::all()->random()->id;
 
-        $response = $this->putJson(route('api.products.update', $product->id),[
+        $response = $this->putJson(route('api.products.update', $product->id), [
             'api_token'     => $this->admin->api_token,
             'id_category'   => $category,
             'reference'     =>  1111,
@@ -143,7 +143,7 @@ class ApiProductControllerTest extends TestCase
             'tags'          => ['Mujer'],
             'cost'          => 25000,
             'price'         => 40000,
-        ] );
+        ]);
 
         $response
             ->assertStatus(200)

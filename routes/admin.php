@@ -26,6 +26,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin
 Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
     Route::post('/reports', 'HomeController@reports')->name('admin.reports');
+    Route::post('/monthly_report', 'HomeController@monthlyReport')->name('admin.monthly_report');
     Route::resource('users', 'UserController')->except(['create', 'store']);
 
     Route::resource('products', 'ProductController')->except(['show']);
@@ -67,5 +68,3 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
         ->name('index', 'products.export')
         ->name('store', 'products.import');
 });
-
-

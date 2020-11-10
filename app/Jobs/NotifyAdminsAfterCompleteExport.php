@@ -19,17 +19,23 @@ class NotifyAdminsAfterCompleteExport implements ShouldQueue
      */
     private Admin $admin;
     private string $fileName;
+    private string $export;
+    private string $message;
 
     /**
      * Create a new job instance.
      *
      * @param Admin $admin
      * @param string $fileName
+     * @param string $export
+     * @param string $message
      */
-    public function __construct(Admin $admin, string $fileName)
+    public function __construct(Admin $admin, string $fileName, string $export, string $message)
     {
         $this->admin = $admin;
         $this->fileName = $fileName;
+        $this->export = $export;
+        $this->message = $message;
     }
 
     /**
@@ -39,6 +45,6 @@ class NotifyAdminsAfterCompleteExport implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->admin->notify(new ExportEndsOk($this->fileName));
+        $this->admin->notify(new ExportEndsOk($this->fileName, $this->export, $this->message));
     }
 }

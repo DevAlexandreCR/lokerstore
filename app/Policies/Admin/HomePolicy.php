@@ -32,5 +32,4 @@ class HomePolicy
     {
         return $admin->hasPermissionTo(Permissions::CREATE_METRICS);
     }
-
 }

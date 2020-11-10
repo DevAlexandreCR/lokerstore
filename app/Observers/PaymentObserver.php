@@ -3,7 +3,10 @@
 namespace App\Observers;
 
 use App\Models\Payment;
+use App\Constants\Payments;
 use App\Repositories\Orders;
+use App\Actions\Metrics\AddMetricOrders;
+use App\Actions\Metrics\AddMetricSellers;
 
 class PaymentObserver
 {
@@ -31,5 +34,4 @@ class PaymentObserver
         $status = $this->orders->getStatusFromStatusPayment($payment->status);
         $this->orders->setStatus($payment->order_id, $status);
     }
-
 }

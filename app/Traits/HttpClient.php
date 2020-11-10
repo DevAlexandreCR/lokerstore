@@ -27,25 +27,29 @@ trait HttpClient
     public function sendRequest(string $method, Order $order)
     {
         try {
-            switch ($method)
-            {
+            switch ($method) {
                 case PlaceToPay::CREATE_REQUEST:
-                    return  Http::asJson()->post(config('placetopay.baseUrl') . $this->endPoint,
-                            $this->data($order)
-                        )->object();
+                    return  Http::asJson()->post(
+                        config('placetopay.baseUrl') . $this->endPoint,
+                        $this->data($order)
+                    )->object();
                 case PlaceToPay::GET_REQUEST_INFORMATION:
-                    return Http::post(config('placetopay.baseUrl') . $this->endPoint .
+                    return Http::post(
+                        config('placetopay.baseUrl') . $this->endPoint .
                         $order->payment->request_id,
                         [
                             'auth' => $this->getAuth()
-                        ])->object();
+                        ]
+                    )->object();
                 case PlaceToPay::REVERSE_REQUEST:
-                    return Http::post(config('placetopay.baseUrl') . $this->reverseEndPoint,
+                    return Http::post(
+                        config('placetopay.baseUrl') . $this->reverseEndPoint,
                         [
                             'auth' => $this->getAuth(),
                             'internalReference' => $order->payment->reference
 
-                        ])->object();
+                        ]
+                    )->object();
                 default:
                     return json_encode([
                         'status' => [
@@ -97,6 +101,5 @@ trait HttpClient
             'ipAddress' => request()->getClientIp(),
             'userAgent' => request()->header('User-Agent')
         ];
-
     }
 }

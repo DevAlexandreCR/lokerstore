@@ -50,25 +50,31 @@ class OrderControllerTest extends TestCase
     public function testStore(): void
     {
         $response = $this->actingAs($this->user)
-            ->post(route('user.order.store', $this->user),
-            [
+            ->post(
+                route('user.order.store', $this->user),
+                [
                 'user_id' => $this->user->id
-            ]);
+            ]
+            );
 
         $redirectUrl = $response->headers->get('Location');
         $response
             ->assertStatus(302)
             ->assertRedirect($redirectUrl);
 
-        $this->assertDatabaseHas('orders',
+        $this->assertDatabaseHas(
+            'orders',
             [
                 'user_id' => $this->user->id
-            ]);
+            ]
+        );
 
-        $this->assertDatabaseHas('stocks',
+        $this->assertDatabaseHas(
+            'stocks',
             [
                 'quantity' => 3
-            ]);
+            ]
+        );
     }
 
     public function testGetStatusPaymentApproved(): void
@@ -84,21 +90,25 @@ class OrderControllerTest extends TestCase
             'request_id' => 367394
         ]);
         $response = $this->actingAs($this->user)
-            ->post(route('user.order.status', [$this->user->id]),
-            [
+            ->post(
+                route('user.order.status', [$this->user->id]),
+                [
                 'order_id' => $order->id
-            ]);
+            ]
+            );
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('user.order.show', [$this->user->id, $order->id]))
             ->assertSessionHas('message');
 
-        $this->assertDatabaseHas('orders',
+        $this->assertDatabaseHas(
+            'orders',
             [
                 'id' => $order->id,
                 'status' => Orders::STATUS_PENDING_SHIPMENT
-            ]);
+            ]
+        );
     }
 
     public function testGetStatusPaymentPending(): void
@@ -114,21 +124,25 @@ class OrderControllerTest extends TestCase
             'request_id' => 367478
         ]);
         $response = $this->actingAs($this->user)
-            ->post(route('user.order.status', [$this->user->id]),
+            ->post(
+                route('user.order.status', [$this->user->id]),
                 [
                     'order_id' => $order->id
-                ]);
+                ]
+            );
 
         $response
             ->assertStatus(302)
             ->assertRedirect(route('user.order.show', [$this->user->id, $order->id]))
             ->assertSessionHas('message');
 
-        $this->assertDatabaseHas('orders',
+        $this->assertDatabaseHas(
+            'orders',
             [
                 'id' => $order->id,
 //                'status' => Orders::STATUS_PENDING_PAY
-            ]);
+            ]
+        );
     }
 
     public function testAllStocksHasRestoredWhenOrderCanceled(): void
@@ -148,10 +162,12 @@ class OrderControllerTest extends TestCase
         $order->status = Orders::STATUS_CANCELED;
         $order->save();
 
-        $this->assertDatabaseHas('stocks',
+        $this->assertDatabaseHas(
+            'stocks',
             [
                 'id'       => $this->stock->id,
                 'quantity' => 5
-            ]);
+            ]
+        );
     }
 }

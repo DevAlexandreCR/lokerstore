@@ -3,14 +3,12 @@
 
 namespace App\Decorators;
 
-
 use App\Repositories\TypeSizes;
 use Illuminate\Support\Facades\Cache;
 use App\Interfaces\TypeSizesInterface;
 
 class CacheTypeSizes implements TypeSizesInterface
 {
-
     protected TypeSizes $typeSizes;
 
     public function __construct(TypeSizes $typeSizes)

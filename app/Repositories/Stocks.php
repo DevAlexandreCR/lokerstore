@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Stock;
 use App\Models\Product;
 use Illuminate\Http\Request;

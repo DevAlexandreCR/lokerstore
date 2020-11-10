@@ -20,7 +20,13 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 
-class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldAutoSize, WithStyles, WithTitle,
+class StocksExport implements
+    FromCollection,
+    WithMapping,
+    WithHeadings,
+    ShouldAutoSize,
+    WithStyles,
+    WithTitle,
     WithEvents
 {
     use RegistersEventListeners;
@@ -82,10 +88,10 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:H1')->getFill()->setFillType(Fill::FILL_SOLID);
+        $sheet->getStyle('A1:H1')->getFill()
+            ->setFillType(Fill::FILL_SOLID)->setStartColor(new Color('8C8C8C'));
         $sheet->getStyle('A1:H1')->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
         $sheet->getStyle('A1:H1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-        $sheet->getStyle('A1:H1')->getFill()->setStartColor(new Color('8C8C8C'));
         $sheet->getStyle('A1:H1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('G2:G10000')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:H1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
@@ -101,7 +107,10 @@ class StocksExport implements FromCollection, WithMapping, WithHeadings, ShouldA
         ];
     }
 
-    public static function afterSheet(AfterSheet $event)
+    /**
+     * @param AfterSheet $event
+     */
+    public static function afterSheet(AfterSheet $event): void
     {
         $workSheet = $event->getSheet()->getDelegate();
         $rowIterator = $event->getSheet()->getDelegate()->getRowIterator(2, 1000);

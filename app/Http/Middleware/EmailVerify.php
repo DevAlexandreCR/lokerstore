@@ -16,7 +16,7 @@ class EmailVerify
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->hasVerifiedEmail()){
+        if (!$request->user()->hasVerifiedEmail()) {
             return redirect()->route('home');
         }
         return $next($request);

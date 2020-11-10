@@ -59,19 +59,15 @@ class OrderDecorator
     public function responseHandler($response, Order $order): RedirectResponse
     {
         $status = $response->status->status;
-        switch ($status)
-        {
-            case PlaceToPay::PENDING;
+        switch ($status) {
+            case PlaceToPay::PENDING:
                 $message = __('Payment pending');
                 break;
             case PlaceToPay::APPROVED:
-                if ($response->status->message === PlaceToPay::MESSAGE_REVERSED)
-                {
+                if ($response->status->message === PlaceToPay::MESSAGE_REVERSED) {
                     $this->payments->setStatus($order->payment, Pay::STATUS_CANCELED);
                     $message = __('Payment been reversed success');
-                }
-                else
-                {
+                } else {
                     $this->payments->setStatus($order->payment, $status);
                     $this->payments->setDataPayment($order->payment, $response);
                     $message = __('Payment has been success');
@@ -84,7 +80,7 @@ class OrderDecorator
             default:
                 $message = $response->status->message;
         }
-        return redirect()->to( route('orders.show', $order->id))
+        return redirect()->to(route('orders.show', $order->id))
             ->with('success', $message);
     }
 }
