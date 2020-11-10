@@ -37,7 +37,7 @@ class ReportsExport extends DefaultValueBinder implements
     use Exportable;
     use RegistersEventListeners;
 
-    private array $metrics;
+    private Collection $metrics;
     private float $totalMan = 0;
     private float $totalManPercent = 0;
     private float $totalWoman = 0;
@@ -46,7 +46,7 @@ class ReportsExport extends DefaultValueBinder implements
 
     public function __construct(array $metrics)
     {
-        $this->metrics = $metrics;
+        $this->metrics = collect($metrics);
     }
 
     public function view(): View
@@ -59,7 +59,8 @@ class ReportsExport extends DefaultValueBinder implements
             'totalWomanPercent' => $this->totalWomanPercent,
             'totalWoman' => $this->totalWoman,
             'totalSold' => $this->totalSold,
-            'uncompleted' => $this->reorderUncompleted()
+            'uncompleted' => $this->reorderUncompleted(),
+            'stocks' => $this->metrics->get('stocks')
         ]);
     }
 
@@ -70,8 +71,8 @@ class ReportsExport extends DefaultValueBinder implements
     public function reorderCategories(): Collection
     {
         $categories = new Collection();
-        $collection = collect($this->metrics);
-        foreach ($collection->get('categories') as $category) {
+
+        foreach ($this->metrics->get('categories') as $category) {
             $date = explode('-', $category->date);
             $month = $date[0] . '-' . $date[1];
             if ($categories->has($month)) {
@@ -91,8 +92,7 @@ class ReportsExport extends DefaultValueBinder implements
     public function reorderUncompleted(): Collection
     {
         $uncompleted = new Collection();
-        $metrics = collect($this->metrics);
-        foreach ($metrics->get('uncompleted') as $order) {
+        foreach ($this->metrics->get('uncompleted') as $order) {
             $date = explode('-', $order->date);
             $month = $date[0] . '-' . $date[1];
             $order->date = $month;
@@ -108,9 +108,8 @@ class ReportsExport extends DefaultValueBinder implements
     public function reorderMonthly(): Collection
     {
         $orders = new Collection();
-        $collection = collect($this->metrics);
 
-        foreach ($collection->get('monthly') as $order) {
+        foreach ($this->metrics->get('monthly') as $order) {
             $date = explode('-', $order->date);
             $month = $date[0] . '-' . $date[1];
             if ($orders->has($month)) {
@@ -192,6 +191,7 @@ class ReportsExport extends DefaultValueBinder implements
 
     /**
      * @param AfterSheet $event
+     * @throws Exception
      */
     public static function afterSheet(AfterSheet $event): void
     {
@@ -201,10 +201,11 @@ class ReportsExport extends DefaultValueBinder implements
                 if ($cell->getValue() === trans('Totals')) {
                     $sheet->getStyle('A' . $row->getRowIndex() . ':G' . $row->getRowIndex())
                         ->getFont()->setBold(true);
-                    self::setHeadersTables($sheet, $row->getRowIndex(), trans('Category more sold for month'));
-                }
-                if ($cell->getValue() === trans('Status')) {
-                    self::setHeadersTables($sheet, $row->getRowIndex() - 4, trans('Uncompleted orders'));
+                    self::setHeadersTables($sheet, $row->getRowIndex());
+                } else if ($cell->getValue() === trans('Status')) {
+                    self::setHeadersTables($sheet, $row->getRowIndex() - 4);
+                } else if ($cell->getColumn() === 'A' && $cell->getValue() === trans('Category')) {
+                    self::customizeTableStock($sheet, $row->getRowIndex());
                 }
             }
         }
@@ -214,16 +215,11 @@ class ReportsExport extends DefaultValueBinder implements
      * Customize headers of tables of sheet
      * @param Worksheet $sheet
      * @param int $row
-     * @param string $tableName
+     * @throws Exception
      */
-    public static function setHeadersTables(Worksheet $sheet, int $row, string $tableName): void
+    public static function setHeadersTables(Worksheet $sheet, int $row): void
     {
-        try {
-            $sheet->getCell('A' . ($row + 2))->setValue($tableName);
-            $sheet->mergeCells('A' . ($row + 2) . ':C' . ($row + 3));
-        } catch (Exception $e) {
-            logger()->error($e->getMessage());
-        }
+        $sheet->mergeCells('A' . ($row + 2) . ':C' . ($row + 3));
 
         $sheet->getStyle('A' . ($row + 2))->getFont()
             ->setBold(true)->setSize(12);
@@ -233,6 +229,30 @@ class ReportsExport extends DefaultValueBinder implements
             ->getFont()->setBold(true)->setColor(new Color(Color::COLOR_WHITE));
         $sheet->getStyle('A' . ($row + 4) . ':C' . ($row + 4))->getFill()
             ->setFillType(Fill::FILL_SOLID)->setStartColor(new Color(Color::COLOR_RED));
+    }
+
+    /**
+     * Customize headers of tables of sheet
+     * @param Worksheet $sheet
+     * @param int $row
+     * @throws Exception
+     */
+    public static function customizeTableStock(Worksheet $sheet, int $row): void
+    {
+        $sheet->mergeCells('A' . ($row - 2) . ':E' . ($row - 1));
+        $sheet->getStyle('A' . ($row - 2))->getFont()
+            ->setBold(true)->setSize(12);
+        $sheet->getStyle('A' . ($row - 2))->getAlignment()
+            ->setVertical(Alignment::VERTICAL_CENTER)->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('B' . $row . ':D1000')->getNumberFormat()
+            ->setFormatCode(NumberFormat::FORMAT_CURRENCY_USD);
+        $sheet->getStyle('E' . $row . ':E1000')->getNumberFormat()
+            ->setFormatCode(NumberFormat::FORMAT_NUMBER);
+        $sheet->getStyle('A' . $row . ':E' . $row)
+            ->getFont()->setBold(true)->setColor(new Color(Color::COLOR_WHITE));
+        $sheet->getStyle('A' . $row . ':E' . $row)
+            ->getFill()->setFillType(Fill::FILL_SOLID)
+            ->setStartColor(new Color(Color::COLOR_RED));
     }
 
     /**

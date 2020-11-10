@@ -119,6 +119,7 @@ trait StylizeReportExport
         $dimensions = $sheet->calculateWorksheetDimension();
         $arrayDim = explode(':', $dimensions);
         $colDimension = str_split('0' . $arrayDim[1], 2)[1];
+        $rowDimension = str_split($arrayDim[1])[0];
         if ((int)$colDimension < 3) {
             return 0;
         }
@@ -126,10 +127,11 @@ trait StylizeReportExport
 
         foreach ($rowIterator as $row) {
             $index = $row->getRowIndex();
+            $dim = $rowDimension . $row->getRowIndex();
             if ($index % 2 === 1) {
-                $sheet->getStyle('A' . $index . ':Q' . $index)
+                $sheet->getStyle('A' . $index . ':' . $dim)
                     ->getFill()->setFillType(Fill::FILL_SOLID);
-                $sheet->getStyle('A' . $index . ':Q' . $index)
+                $sheet->getStyle('A' . $index . ':' . $dim)
                     ->getFill()->setStartColor(new Color('F2F2F2'));
             }
         }

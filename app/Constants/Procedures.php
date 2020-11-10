@@ -154,4 +154,21 @@ BEGIN
     ORDER BY `date`;
 END
 EOT;
+
+    public const STOCK_REPORT = <<<'EOT'
+CREATE PROCEDURE stock_report()
+BEGIN
+    START TRANSACTION;
+        SELECT
+        categories.name,
+        SUM(products.cost * stocks.quantity) as cost,
+        SUM(products.price * stocks.quantity) as amount,
+        SUM(products.price * stocks.quantity) - SUM(products.cost * stocks.quantity) as  dif,
+        SUM(stocks.quantity) as quantity
+        FROM stocks
+        LEFT OUTER JOIN products ON stocks.product_id = products.id
+        LEFT OUTER JOIN categories ON products.id_category = categories.id
+    GROUP BY categories.name;
+END
+EOT;
 }

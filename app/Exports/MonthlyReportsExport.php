@@ -128,7 +128,8 @@ class MonthlyReportsExport implements
     {
         return [
             $this,
-            new OrdersUncompletedExport($this->metrics, $this->date)
+            new OrdersUncompletedExport($this->metrics, $this->date),
+            new StockReport(collect($this->metrics->getStockReport()))
         ];
     }
 }

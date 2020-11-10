@@ -40,7 +40,9 @@
 
 <table class="table">
     <thead>
-    <tr></tr>
+    <tr>
+        <th>{{ trans('Category more sold for month') }}</th>
+    </tr>
     <tr></tr>
     <tr>
         <th>{{trans('Date')}}</th>
@@ -61,7 +63,9 @@
 
 <table class="table">
     <thead>
-    <tr></tr>
+    <tr>
+        <th>{{ trans('Uncompleted orders') }}</th>
+    </tr>
     <tr></tr>
     <tr>
         <th>{{trans('Date')}}</th>
@@ -75,6 +79,33 @@
             <td>{{ $metric->date }}</td>
             <td>{{ \App\Constants\Orders::getTranslatedStatus($metric->status) }}</td>
             <td>{{ $metric->amount }}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ trans('Stock report') }}</th>
+    </tr>
+    <tr></tr>
+    <tr>
+        <th>{{trans('Category')}}</th>
+        <th>{{trans('Cost')}}</th>
+        <th>{{trans('Price')}}</th>
+        <th>{{trans('Difference')}}</th>
+        <th>{{trans('Quantity')}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($stocks as $stock)
+        <tr>
+            <td>{{ $stock->name }}</td>
+            <td>{{ $stock->cost }}</td>
+            <td>{{ $stock->amount }}</td>
+            <td>{{ $stock->dif }}</td>
+            <td>{{ $stock->quantity }}</td>
         </tr>
     @endforeach
     </tbody>
