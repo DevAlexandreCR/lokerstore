@@ -34,16 +34,12 @@ class ApiPhotosControllerTest extends TestCase
 
     public function testAnAdminAuthenticatedCanStorePhotos(): void
     {
-        Storage::fake('public_photos');
-
         $product = factory(Product::class)->create();
-        $file = UploadedFile::fake()->image('test.jpeg')->mimeType('image/jpeg');
-        $file2 = UploadedFile::fake()->image('test2.jpeg')->mimeType('image/jpeg');
 
         $response = $this->postJson(route('api.photos.store'), [
             'api_token'  => $this->admin->api_token,
             'product_id' => $product->id,
-            'photos'     => [$file, $file2]
+            'photos'     => [0, 1]
         ]);
 
         $response
@@ -59,8 +55,6 @@ class ApiPhotosControllerTest extends TestCase
 
     public function testAnAdminAuthenticatedCanDeleteAPhoto(): void
     {
-        Storage::fake('public_photos');
-
         $product = Product::all()->random();
 
         $photo = factory(Photo::class)->create([

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Admin\Photos;
+namespace App\Http\Requests\Admin\Excel;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PhotoRequest extends FormRequest
+class ImagesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class PhotoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('create', Product::class);;
+        return Gate::allows('create', Product::class);
     }
 
     /**
@@ -26,8 +26,7 @@ class PhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'file_path.*' => ['image','mimes:jpeg,png,jpg,gif' ,'max:2048']
+            'images.*' => ['image','mimes:jpeg,png,jpg,gif' ,'max:2048']
         ];
     }
 }

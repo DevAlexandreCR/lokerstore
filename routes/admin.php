@@ -67,4 +67,5 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
         ->only('index', 'store')
         ->name('index', 'products.export')
         ->name('store', 'products.import');
+    Route::post('products/images', 'ExcelController@images')->name('products.import_images');
 });

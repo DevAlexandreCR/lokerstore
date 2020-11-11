@@ -10,7 +10,8 @@
                         <a class="btn btn-link text-decoration-none" data-toggle="modal" onclick="modal({{json_encode($filters)}}, true)" data-target="#sortModal">{{__('Filter and sort')}}</a>
                     </div>
                     <a type="button" class="btn btn-blue" data-toggle="modal" data-target="#importModal">{{trans('Import')}}<ion-icon class="ml-2" name="cloud-upload"></ion-icon></a>
-                    <a href="{{ route('products.export') }}" type="button" class="btn btn-primary">{{trans('Export')}}<ion-icon class="ml-2" name="download"></ion-icon></ion-icon></a>
+                    <a href="{{ route('products.export') }}" type="button" class="btn btn-primary">{{trans('Export')}}<ion-icon class="ml-2" name="download"></ion-icon></a>
+                    <a type="button" class="btn btn-success" data-toggle="modal" data-target="#importImages">{{trans('Images')}}<ion-icon class="ml-2" name="cloud-upload"></ion-icon></a>
                 </div>
                 <div class="col-sm-4 form-inline my-2 my-lg-0 justify-content-end">
                     <input class="form-control form-control-sm mr-sm-2" name="search" type="search" placeholder="{{__('Search')}}" aria-label="Search">
@@ -244,6 +245,7 @@
 </div>
 
     @include('admin.products.importModal')
+    @include('admin.products.import_images')
 
 @endsection
 

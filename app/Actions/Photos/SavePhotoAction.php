@@ -9,16 +9,27 @@ use Illuminate\Support\Facades\Storage;
 
 class SavePhotoAction
 {
-    public function execute(int $id_product, ?array $images): void
+    /**
+     * @param int $id_product
+     * @param array|UploadedFile|null $images
+     */
+    public static function execute(int $id_product, $images): void
     {
         if (empty($images)) {
             return;
         }
 
-        foreach ($images as $image) {
-            $name = $this->saveImage($image);
+        if(is_object($images)){
+            $name = self::saveImage($images);
 
-            $this->savePhoto($id_product, $name);
+            self::savePhoto($id_product, $name);
+            return;
+        }
+
+        foreach ($images as $image) {
+            $name = self::saveImage($image);
+
+            self::savePhoto($id_product, $name);
         }
     }
 
@@ -28,9 +39,9 @@ class SavePhotoAction
      * @param UploadedFile $image
      * @return string
      */
-    private function saveImage(UploadedFile $image): string
+    private static function saveImage(UploadedFile $image): string
     {
-        $name = time() . '_' . $image->getClientOriginalName();
+        $name = $image->getClientOriginalName();
         $img = Image::make($image)->fit(540, 480)->encode('jpg', 75);
         Storage::disk('public_photos')->put($name, $img);
 
@@ -44,7 +55,7 @@ class SavePhotoAction
      * @param string $name
      * @return void
      */
-    private function savePhoto(int $id_product, string $name): void
+    private static function savePhoto(int $id_product, string $name): void
     {
         $photo = new Photo;
         $photo->product_id = $id_product;

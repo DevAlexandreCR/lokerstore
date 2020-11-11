@@ -18,8 +18,7 @@ class PhotosDecorator implements ApiPhotosInterface
      */
     public function store(StoreRequest $request): void
     {
-        $savePhotoAction = new SavePhotoAction();
-        $savePhotoAction->execute($request->get('product_id'), $request->file('photos'));
+        SavePhotoAction::execute($request->get('product_id'), $request->file('photos'));
 
         Cache::tags(['products', 'api.products'])->flush();
     }

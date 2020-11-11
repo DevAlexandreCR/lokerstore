@@ -76,6 +76,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'test' => [
+            'driver' => 'local',
+            'root' => base_path('tests/stubs/photos'),
+            'url' => env('APP_URL').'tests/stubs/photos',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

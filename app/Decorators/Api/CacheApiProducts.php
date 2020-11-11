@@ -74,8 +74,7 @@ class CacheApiProducts implements ApiProductsInterface
 
         Cache::tags(['products', 'api.products'])->flush();
 
-        $savePhotoAction = new SavePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('photos'));
+        SavePhotoAction::execute($product->id, $request->file('photos'));
 
         return $product;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Product;
 use App\Constants\Admins;
+use App\Jobs\ImportImages;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use App\Interfaces\StocksInterface;
@@ -10,10 +12,12 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\ProductsInterface;
 use Illuminate\Http\RedirectResponse;
 use App\Jobs\DeleteErrorsImportsTable;
+use App\Actions\Photos\SavePhotoAction;
 use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Jobs\NotifyAdminsAfterCompleteImport;
 use App\Http\Requests\Admin\Excel\ExportRequest;
 use App\Http\Requests\Admin\Excel\ImportRequest;
+use App\Http\Requests\Admin\Excel\ImagesRequest;
 
 class ExcelController extends Controller
 {
@@ -50,5 +54,34 @@ class ExcelController extends Controller
             new DeleteErrorsImportsTable()
         ]);
         return back()->with('success', __('Importing products... we\'ll send you an email when the import is ended'));
+    }
+
+    public function images(ImagesRequest $request): RedirectResponse
+    {
+        return $this->saveImages($request->file('images'));
+    }
+
+    /**
+     * @param array $images
+     * @return RedirectResponse
+     */
+    public function saveImages(array $images): RedirectResponse
+    {
+        $errors = array();
+        $saved = 0;
+        foreach ($images as $image) {
+            $name = $image->getClientOriginalName();
+            $array = explode('_',$name);
+            $product = Product::where('reference', $array[0])->first();
+            if ($product){
+                $saved ++;
+                SavePhotoAction::execute($product->id, $image);
+            } else {
+                $errors[] = $array[0] .  trans(' Reference not found');
+            }
+        }
+        return redirect()->route('products.index')
+            ->with('success', $saved . trans(' Images imported successfully'))
+            ->withErrors($errors);
     }
 }

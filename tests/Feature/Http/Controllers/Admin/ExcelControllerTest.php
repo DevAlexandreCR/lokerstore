@@ -5,12 +5,14 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use TestDatabaseSeeder;
 use App\Constants\Roles;
 use App\Constants\Admins;
+use App\Jobs\ImportImages;
 use App\Models\Admin\Admin;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -73,5 +75,26 @@ class ExcelControllerTest extends TestCase
         Excel::assertQueued($file->getFilename(), 'imports', function (ProductsImport $import) {
             return true;
         });
+    }
+
+    public function testAnAdminAuthenticatedWithPermissionsCanImportImages(): void
+    {
+        $this->withoutExceptionHandling();
+
+        Storage::fake('test');
+
+        $file = UploadedFile::fake()->image('test.jpeg')->mimeType('image/jpeg');
+        $file2 = UploadedFile::fake()->image('test2.jpeg')->mimeType('image/jpeg');
+
+        $response = $this->actingAs($this->admin, Admins::GUARDED)
+            ->post(route('products.import_images'), [
+                'images' => [$file, $file2],
+            ]);
+
+        $response
+            ->assertStatus(302);
+
+        Queue::assertPushed(ImportImages::class);
+        Storage::assertExists(storage_path('app/public/photos/' . $file->getClientOriginalName()));
     }
 }

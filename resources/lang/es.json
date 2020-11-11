@@ -270,5 +270,7 @@
     "Saturday": "Sábado",
     "Sunday": "Domingo",
     "Difference": "Diferencia",
-    "Stock report": "Reporte de inventario"
+    "Stock report": "Reporte de inventario",
+    " Images imported successfully": " Imágenes importadas correctamente",
+    " Reference not found": " Referencia no existe"
 }

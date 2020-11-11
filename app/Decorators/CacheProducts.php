@@ -35,8 +35,7 @@ class CacheProducts implements ProductsInterface
 
         Cache::tags(['products', 'api.products'])->flush();
 
-        $savePhotoAction = new SavePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('photos'));
+        SavePhotoAction::execute($product->id, $request->file('photos'));
 
         return $product;
     }
@@ -46,9 +45,8 @@ class CacheProducts implements ProductsInterface
         $product = $this->products->update($request, $product);
 
         Cache::tags(['products', 'api.products'])->flush();
-        $savePhotoAction = new SavePhotoAction();
         $deletePhotoAction = new DeletePhotoAction();
-        $savePhotoAction->execute($product->id, $request->file('photos'));
+        SavePhotoAction::execute($product->id, $request->file('photos'));
         $deletePhotoAction->execute($request->get('delete_photos'));
 
         return $product;
