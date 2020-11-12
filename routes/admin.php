@@ -22,6 +22,8 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.update');
 
+Route::get('test-api', 'HomeController@testApi')->name('admin.test_api');
+
 // Routes admin management
 Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.home');

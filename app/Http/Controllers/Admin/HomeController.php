@@ -53,4 +53,9 @@ class HomeController extends Controller
 
         return redirect(route('admin.home'))->with('success', __('We\'ll send the report to your email when it\'s ready.'));
     }
+
+    public function testApi(): View
+    {
+        return view('admin.test_api.test_api');
+    }
 }

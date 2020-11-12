@@ -84,6 +84,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product): JsonResponse
     {
+        $this->authorize('delete', $product);
         $this->apiProducts->destroy($product);
 
         return response()->json([

@@ -3,7 +3,9 @@
 
 namespace App\Decorators\Api;
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
+use App\Actions\Photos\Base64ToImage;
 use App\Actions\Photos\SavePhotoAction;
 use App\Actions\Photos\DeletePhotoAction;
 use App\Interfaces\Api\ApiPhotosInterface;
@@ -16,11 +18,20 @@ class PhotosDecorator implements ApiPhotosInterface
      * @param StoreRequest $request
      * @return mixed
      */
-    public function store(StoreRequest $request): void
+    public function store(StoreRequest $request)
     {
-        SavePhotoAction::execute($request->get('product_id'), $request->file('photos'));
+        $product = Product::findOrFail($request->get('product_id'));
+
+        foreach ($request->get('photos') as $image) {
+            $name = $product->reference . '_' . time() . '.jpg';
+            $outputFile = storage_path('app/public/photos/') . $name;
+            Base64ToImage::execute($image, $outputFile);
+            SavePhotoAction::savePhoto($product->id, $name);
+        }
 
         Cache::tags(['products', 'api.products'])->flush();
+
+        return $product->photos;
     }
 
     /**

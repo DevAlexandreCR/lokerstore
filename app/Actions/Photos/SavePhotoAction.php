@@ -26,10 +26,12 @@ class SavePhotoAction
             return;
         }
 
-        foreach ($images as $image) {
-            $name = self::saveImage($image);
+        if(is_array($images)) {
+            foreach ($images as $image) {
+                $name = self::saveImage($image);
 
-            self::savePhoto($id_product, $name);
+                self::savePhoto($id_product, $name);
+            }
         }
     }
 
@@ -55,7 +57,7 @@ class SavePhotoAction
      * @param string $name
      * @return void
      */
-    private static function savePhoto(int $id_product, string $name): void
+    public static function savePhoto(int $id_product, string $name): void
     {
         $photo = new Photo;
         $photo->product_id = $id_product;

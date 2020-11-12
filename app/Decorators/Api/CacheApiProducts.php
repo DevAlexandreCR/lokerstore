@@ -8,6 +8,7 @@ use App\Models\Color;
 use App\Models\Stock;
 use App\Models\Product;
 use App\Models\TypeSize;
+use App\Actions\Photos\Base64ToImage;
 use App\Actions\Photos\SavePhotoAction;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\Admin\Products\IndexRequest;
@@ -72,9 +73,14 @@ class CacheApiProducts implements ApiProductsInterface
             ]);
         }
 
-        Cache::tags(['products', 'api.products'])->flush();
+        foreach ($request->get('photos') as $image) {
+            $name = $product->reference . '_' . time() . '.jpg';
+            $outputFile = storage_path('app/public/photos/') . $name;
+            Base64ToImage::execute($image, $outputFile);
+            SavePhotoAction::savePhoto($product->id, $name);
+        }
 
-        SavePhotoAction::execute($product->id, $request->file('photos'));
+        Cache::tags(['products', 'api.products'])->flush();
 
         return $product;
     }

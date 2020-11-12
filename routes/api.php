@@ -46,4 +46,4 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/type_sizes', 'TypeSizeController@index')->name('api.type_sizes.index');
 
-    Route::get('/tags', 'ColorController@index')->name('api.tags.index');
+    Route::get('/tags', 'TagController@index')->name('api.tags.index');

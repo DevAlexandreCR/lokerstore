@@ -5,8 +5,7 @@ namespace App\Http\Requests\Api\Products;
 use App\Models\Product;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+
 
 class StoreRequest extends FormRequest
 {
@@ -48,28 +47,5 @@ class StoreRequest extends FormRequest
             }
         }
         return $rules;
-    }
-
-    protected function failedValidation(Validator $validator): void
-    {
-        throw new HttpResponseException(response()->json([
-            'status' => [
-                'status' => 'failed',
-                'reason' => 'The given data was invalid',
-                'code'   => 422,
-            ],
-            'errors' => $validator->errors()->all()
-        ], 422));
-    }
-
-    protected function failedAuthorization(): void
-    {
-        throw new HttpResponseException(response()->json([
-            'status' => [
-                'status' => 'failed',
-                'reason' => 'User is not authorized',
-                'code'   => 403,
-            ]
-        ], 403));
     }
 }

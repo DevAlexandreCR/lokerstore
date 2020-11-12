@@ -4,7 +4,10 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Auth\Access\AuthorizationException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
@@ -55,7 +58,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if (strpos($request->path(), 'api') !== false) {
+        if ($request->expectsJson() && strpos($request->path(), 'api') !== false) {
             if ($exception instanceof ModelNotFoundException) {
                 return response()->json([
                     'status' => [
@@ -64,7 +67,9 @@ class Handler extends ExceptionHandler
                         'code'    => 404
                     ]
                 ], 404);
-            } elseif ($exception instanceof NotFoundHttpException) {
+            }
+
+            if ($exception instanceof NotFoundHttpException) {
                 return response()->json([
                     'status' => [
                         'status' => 'failed',
@@ -72,6 +77,16 @@ class Handler extends ExceptionHandler
                         'code'    => 404
                     ]
                 ], 404);
+            }
+
+            if ($exception instanceof UnauthorizedException) {
+                return response()->json([
+                    'status' => [
+                        'status' => 'failed',
+                        'message' => 'User is authenticated',
+                        'code'    => 401
+                    ]
+                ], 401);
             }
         }
         return parent::render($request, $exception);
