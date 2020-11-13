@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Carts;
 use App\Http\Requests\Web\Cart\AddCartRequest;
 use App\Http\Requests\Web\Cart\UpdateRequest;
 use App\Models\Stock;
 use App\Models\User;
+use App\Repositories\Carts;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -22,7 +22,7 @@ class CartController extends Controller
         return view(
             'web.users.cart.show',
             [
-            'cart' => $carts->getCart($user->id)
+            'cart' => $carts->getCart($user->id),
         ]
         );
     }

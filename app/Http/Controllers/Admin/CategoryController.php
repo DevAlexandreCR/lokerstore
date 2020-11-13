@@ -28,7 +28,7 @@ class CategoryController extends Controller
     public function index(): View
     {
         return view('admin.category.index', [
-            'categories' => $this->categories->index()
+            'categories' => $this->categories->index(),
         ]);
     }
 
@@ -64,8 +64,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param Category $category
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(Category $category): RedirectResponse
     {

@@ -33,7 +33,7 @@ class StoreRequest extends FormRequest
             'price'         => ['required', 'numeric'],
             'id_category'   => ['required', 'integer'],
             'tags'          => ['required', 'array'],
-            'photos'        => ['required', 'array']
+            'photos'        => ['required', 'array'],
         ];
     }
 }

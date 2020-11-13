@@ -54,11 +54,12 @@ trait Authentication
     {
         $seed = $this->getSeed();
         $nonce = $this->getNonce(false);
+
         return [
             'login'     => config('placetopay.authId'),
             'tranKey'   => $this->tranKey($nonce, $seed),
             'nonce'     => base64_encode($nonce),
-            'seed'      => $seed
+            'seed'      => $seed,
         ];
     }
 }

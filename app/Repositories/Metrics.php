@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Repositories;
 
+use App\Http\Requests\Admin\Reports\ReportRequest;
+use App\Interfaces\MetricsInterface;
 use App\Models\Metric;
 use Illuminate\Support\Facades\DB;
-use App\Interfaces\MetricsInterface;
-use App\Http\Requests\Admin\Reports\ReportRequest;
 
 class Metrics implements MetricsInterface
 {
@@ -63,7 +62,7 @@ class Metrics implements MetricsInterface
             'monthly' => DB::select("call generate_general_report('$from', '$until')"),
             'categories' => DB::select("call generate_categories_report('$from', '$until')"),
             'uncompleted' => DB::select("call generate_general_report_uncompleted('$from', '$until')"),
-            'stocks' => DB::select("call stock_report()")
+            'stocks' => DB::select("call stock_report()"),
         ];
     }
 

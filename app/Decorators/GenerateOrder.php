@@ -2,15 +2,15 @@
 
 namespace App\Decorators;
 
+use App\Constants\Orders as OrderConstants;
+use App\Constants\Payments as Pay;
 use App\Constants\PlaceToPay;
 use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use App\Repositories\OrderDetails;
 use App\Repositories\Orders;
-use App\Constants\Orders as OrderConstants;
 use App\Repositories\Payments;
-use App\Constants\Payments as Pay;
 use App\Traits\HttpClient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
@@ -40,7 +40,7 @@ class GenerateOrder implements OrderInterface
     {
         $order = $this->orders->store($request);
 
-        $this->orderDetails->create($order->id);
+        $this->orderDetails->createFromUser($order->id);
 
         $order->orderDetails->each(function ($detail) use ($order) {
             $order->amount += $detail->total_price;
@@ -71,6 +71,7 @@ class GenerateOrder implements OrderInterface
                 $requestId = $response->requestId;
                 $processUrl = $response->processUrl;
                 $this->payments->create($order->id, $requestId, $processUrl);
+
                 return redirect()->away($processUrl)->send();
             case PlaceToPay::PENDING:
                 $message = __('Your payment is not processed yet, this may take a few minutes');
@@ -93,6 +94,7 @@ class GenerateOrder implements OrderInterface
                 $this->payments->setStatus($order->payment, Pay::FAILED);
                 $message = $response->status->message;
         }
+
         return redirect()->to(route('user.order.show', [auth()->id(), $order->refresh()->id]))
             ->with('message', $message);
     }
@@ -126,6 +128,7 @@ class GenerateOrder implements OrderInterface
         $order = $this->orders->find($order_id);
         if ($order->status === OrderConstants::STATUS_PENDING_SHIPMENT) {
             $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
+
             return $this->responseHandler($response, $order);
         }
 

@@ -78,7 +78,7 @@ return [
 
         'test' => [
             'driver' => 'local',
-            'root' => base_path('tests/stubs/photos'),
+            'root' => base_path(),
             'url' => env('APP_URL').'tests/stubs/photos',
             'visibility' => 'public',
         ],

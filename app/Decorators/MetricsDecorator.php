@@ -3,13 +3,13 @@
 namespace App\Decorators;
 
 use App\Constants\Admins;
-use App\Repositories\Metrics;
 use App\Exports\ReportsExport;
-use App\Interfaces\UsersInterface;
-use App\Interfaces\MetricsInterface;
-use Illuminate\Support\Facades\Artisan;
-use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Http\Requests\Admin\Reports\ReportRequest;
+use App\Interfaces\MetricsInterface;
+use App\Interfaces\UsersInterface;
+use App\Jobs\NotifyAdminsAfterCompleteExport;
+use App\Repositories\Metrics;
+use Illuminate\Support\Facades\Artisan;
 
 class MetricsDecorator implements MetricsInterface
 {
@@ -32,7 +32,7 @@ class MetricsDecorator implements MetricsInterface
             'metricsCategory' => $this->metrics->getMetricsCategory(),
             'pendingShipment' => $this->metrics->getPendingShipmentOrders(),
             'percentMetrics' => $this->metrics->getPercentMetrics(),
-            'usersCount'      => $this->users->index()->count()
+            'usersCount'      => $this->users->index()->count(),
         ];
     }
 
@@ -49,7 +49,7 @@ class MetricsDecorator implements MetricsInterface
                 $fileName,
                 trans('Reports'),
                 trans('Reports generated successfully')
-            )
+            ),
         ]);
     }
 
@@ -63,7 +63,7 @@ class MetricsDecorator implements MetricsInterface
         return Artisan::call('report:monthly', [
             'date' => $date . '-01',
             '--status' => $status,
-            '--admin' => auth()->id()
+            '--admin' => auth()->id(),
         ]);
     }
 }

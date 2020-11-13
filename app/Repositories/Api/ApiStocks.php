@@ -1,11 +1,10 @@
 <?php
 
-
 namespace App\Repositories\Api;
 
-use App\Models\Stock;
-use App\Interfaces\Api\ApiStocksInterface;
 use App\Http\Requests\Api\Stocks\UpdateRequest;
+use App\Interfaces\Api\ApiStocksInterface;
+use App\Models\Stock;
 
 class ApiStocks implements ApiStocksInterface
 {

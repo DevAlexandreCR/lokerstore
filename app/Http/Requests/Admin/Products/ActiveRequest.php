@@ -25,7 +25,7 @@ class ActiveRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'is_active' => ['required', 'boolean']
+            'is_active' => ['required', 'boolean'],
         ];
     }
 }

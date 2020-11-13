@@ -2,27 +2,27 @@
 
 namespace App\Exports;
 
-use Illuminate\View\View;
 use Illuminate\Support\Collection;
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
-use PhpOffice\PhpSpreadsheet\Exception;
-use Maatwebsite\Excel\Concerns\FromView;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\DefaultValueBinder;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\WithTitle;
+use Illuminate\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithStartRow;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\DefaultValueBinder;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ReportsExport extends DefaultValueBinder implements
     FromView,
@@ -60,7 +60,7 @@ class ReportsExport extends DefaultValueBinder implements
             'totalWoman' => $this->totalWoman,
             'totalSold' => $this->totalSold,
             'uncompleted' => $this->reorderUncompleted(),
-            'stocks' => $this->metrics->get('stocks')
+            'stocks' => $this->metrics->get('stocks'),
         ]);
     }
 
@@ -83,6 +83,7 @@ class ReportsExport extends DefaultValueBinder implements
                 $categories->put($month, $category);
             }
         }
+
         return $categories;
     }
 
@@ -98,6 +99,7 @@ class ReportsExport extends DefaultValueBinder implements
             $order->date = $month;
             $uncompleted->push($order);
         }
+
         return $uncompleted;
     }
 
@@ -172,8 +174,8 @@ class ReportsExport extends DefaultValueBinder implements
 
     /**
      * @param Worksheet $sheet
-     * @return mixed
      * @throws Exception
+     * @return mixed
      */
     public function styles(Worksheet $sheet): void
     {
@@ -202,9 +204,9 @@ class ReportsExport extends DefaultValueBinder implements
                     $sheet->getStyle('A' . $row->getRowIndex() . ':G' . $row->getRowIndex())
                         ->getFont()->setBold(true);
                     self::setHeadersTables($sheet, $row->getRowIndex());
-                } else if ($cell->getValue() === trans('Status')) {
+                } elseif ($cell->getValue() === trans('Status')) {
                     self::setHeadersTables($sheet, $row->getRowIndex() - 4);
-                } else if ($cell->getColumn() === 'A' && $cell->getValue() === trans('Category')) {
+                } elseif ($cell->getColumn() === 'A' && $cell->getValue() === trans('Category')) {
                     self::customizeTableStock($sheet, $row->getRowIndex());
                 }
             }

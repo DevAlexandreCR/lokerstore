@@ -50,8 +50,8 @@ class PermissionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Permission $permission
-     * @return RedirectResponse
      * @throws AuthorizationException
+     * @return RedirectResponse
      */
     public function destroy(Permission $permission): RedirectResponse
     {

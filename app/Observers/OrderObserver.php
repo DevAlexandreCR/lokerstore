@@ -2,12 +2,12 @@
 
 namespace App\Observers;
 
+use App\Actions\Metrics\AddMetricOrders;
+use App\Actions\Metrics\AddMetricSellers;
 use App\Constants\Logs;
 use App\Constants\Orders;
 use App\Jobs\SendEmailUsers;
 use App\Models\Order;
-use App\Actions\Metrics\AddMetricOrders;
-use App\Actions\Metrics\AddMetricSellers;
 
 class OrderObserver
 {
@@ -25,7 +25,7 @@ class OrderObserver
                 Orders::STATUS_SUCCESS,
                 Orders::STATUS_SENT,
                 Orders::STATUS_REJECTED,
-                Orders::STATUS_CANCELED
+                Orders::STATUS_CANCELED,
             ], true)) {
             AddMetricOrders::execute($order);
             if ($status === Orders::STATUS_SENT || $status === Orders::STATUS_SUCCESS) {

@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Photos;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class PhotoRequest extends FormRequest
 {
@@ -15,7 +15,8 @@ class PhotoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('create', Product::class);;
+        return Gate::allows('create', Product::class);
+        ;
     }
 
     /**
@@ -27,7 +28,7 @@ class PhotoRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'file_path.*' => ['image','mimes:jpeg,png,jpg,gif' ,'max:2048']
+            'file_path.*' => ['image','mimes:jpeg,png,jpg,gif' ,'max:2048'],
         ];
     }
 }

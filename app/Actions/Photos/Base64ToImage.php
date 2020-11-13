@@ -12,13 +12,13 @@ class Base64ToImage
      */
     public static function execute(string $base64String, $outputFile)
     {
-            $file = fopen($outputFile, "wb");
+        $file = fopen($outputFile, "wb");
 
-            $data = explode(',', $base64String);
+        $data = explode(',', $base64String);
 
-            fwrite($file, base64_decode($data[1]));
-            fclose($file);
+        fwrite($file, base64_decode($data[1]));
+        fclose($file);
 
-            return $outputFile;
+        return $outputFile;
     }
 }

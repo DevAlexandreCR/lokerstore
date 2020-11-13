@@ -47,12 +47,14 @@ class OrderDecorator
     public function verify(Order $order): RedirectResponse
     {
         $response = $this->sendRequest(PlaceToPay::GET_REQUEST_INFORMATION, $order);
+
         return $this->responseHandler($response, $order);
     }
 
     public function reverse(Order $order): RedirectResponse
     {
         $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
+
         return $this->responseHandler($response, $order);
     }
 
@@ -80,6 +82,7 @@ class OrderDecorator
             default:
                 $message = $response->status->message;
         }
+
         return redirect()->to(route('orders.show', $order->id))
             ->with('success', $message);
     }

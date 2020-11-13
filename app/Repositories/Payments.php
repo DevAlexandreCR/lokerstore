@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Constants\Payments as Pay;
 use App\Models\Payer;
 use App\Models\Payment;
-use App\Constants\Payments as Pay;
 
 class Payments
 {
@@ -27,12 +27,12 @@ class Payments
     {
         return $this->payment->updateOrCreate(
             [
-               'order_id' => $order_id
+               'order_id' => $order_id,
             ],
             [
                'request_id' => $request_id,
                'process_url' => $process_url,
-               'status' => Pay::STATUS_PENDING
+               'status' => Pay::STATUS_PENDING,
             ]
         );
     }
@@ -45,7 +45,7 @@ class Payments
     public function setStatus(Payment $payment, string $status): bool
     {
         return $payment->update([
-            'status' => $status
+            'status' => $status,
         ]);
     }
 
@@ -70,10 +70,11 @@ class Payments
                 'phone'         => $payer->mobile,
             ]
         );
+
         return $payment->update([
             'reference'  => $pay->internalReference,
             'method'     => $pay->paymentMethodName,
-            'last_digit' => $last_digit
+            'last_digit' => $last_digit,
         ]);
     }
 }

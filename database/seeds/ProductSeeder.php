@@ -10,8 +10,8 @@ class ProductSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
      * @throws Exception
+     * @return void
      */
     public function run(): void
     {
@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
             );
 
             factory(Photo::class)->create([
-                'product_id' => $product->id
+                'product_id' => $product->id,
             ]);
         });
     }

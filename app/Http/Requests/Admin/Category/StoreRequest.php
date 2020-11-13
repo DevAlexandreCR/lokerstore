@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:30', 'unique:categories'],
-            'id_parent' => ['nullable', 'integer']
+            'id_parent' => ['nullable', 'integer'],
         ];
     }
 }

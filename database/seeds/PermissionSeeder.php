@@ -1,8 +1,8 @@
 <?php
 
 use App\Constants\Admins;
-use Illuminate\Database\Seeder;
 use App\Constants\Permissions;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
@@ -17,7 +17,7 @@ class PermissionSeeder extends Seeder
         foreach (Permissions::getAllPermissions() as $permission) {
             Permission::create([
                 'name' => $permission,
-                'guard_name' => Admins::GUARDED
+                'guard_name' => Admins::GUARDED,
             ]);
         }
     }

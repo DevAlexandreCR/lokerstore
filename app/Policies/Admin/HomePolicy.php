@@ -2,9 +2,8 @@
 
 namespace App\Policies\Admin;
 
-use App\models\Metric;
-use App\Models\Admin\Admin;
 use App\Constants\Permissions;
+use App\Models\Admin\Admin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class HomePolicy

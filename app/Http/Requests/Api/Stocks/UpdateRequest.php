@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\Stocks;
 
-use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Api\Products\StoreRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateRequest extends StoreRequest
 {
@@ -28,7 +28,7 @@ class UpdateRequest extends StoreRequest
             'color'     => 'required|string|exists:colors,name',
             'type_size' => 'required|string|exists:type_sizes,name',
             'size'      => 'required|string|exists:sizes,name',
-            'quantity'  => 'required|integer|min:1'
+            'quantity'  => 'required|integer|min:1',
         ];
     }
 }

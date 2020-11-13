@@ -4,8 +4,6 @@ namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
 use PermissionSeeder;
 use RoleSeeder;
 use Tests\TestCase;
@@ -20,7 +18,7 @@ class AuthUserTest extends TestCase
 
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
     }
 
@@ -34,12 +32,12 @@ class AuthUserTest extends TestCase
     {
         $user = factory(User::class)->create([
             'password' => bcrypt($password = 'secret'),
-            'is_active' => false
+            'is_active' => false,
         ]);
 
         $response = $this->post('/login', [
             'email' => $user->email,
-            'password' => $password
+            'password' => $password,
         ]);
 
         $response->assertSessionHasErrors('email');
@@ -85,7 +83,7 @@ class AuthUserTest extends TestCase
     public function testUserDisabledIndex()
     {
         $user = factory(User::class)->create([
-            'is_active' => false
+            'is_active' => false,
         ]);
 
         $response = $this->actingAs($user)->get(route('index'));

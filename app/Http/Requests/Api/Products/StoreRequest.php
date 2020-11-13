@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Api\Products;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Gate;
 
 class StoreRequest extends FormRequest
 {
@@ -46,6 +45,7 @@ class StoreRequest extends FormRequest
                 $rules['stocks.' . $key . '.quantity'] = 'required|integer|min:1';
             }
         }
+
         return $rules;
     }
 }

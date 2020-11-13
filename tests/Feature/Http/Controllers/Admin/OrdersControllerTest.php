@@ -2,17 +2,16 @@
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
-use AdminSeeder;
-use App\Models\Payment;
 use App\Constants\Admins;
 use App\Constants\Orders;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Payment;
+use App\Models\Stock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use OrderSeeder;
 use StockSeeder;
 use TestDatabaseSeeder;
 use Tests\TestCase;
@@ -31,7 +30,7 @@ class OrdersControllerTest extends TestCase
         $this->seed([
             TestDatabaseSeeder::class,
             UserSeeder::class,
-            StockSeeder::class
+            StockSeeder::class,
         ]);
         factory(Order::class, 2)->create();
         factory(OrderDetail::class, 5)->create();
@@ -62,6 +61,62 @@ class OrdersControllerTest extends TestCase
             ->assertViewHas('order');
     }
 
+    public function testAnAdminCanSeeTheViewToCreateOrders(): void
+    {
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->get(
+            route('orders.create')
+        );
+
+        $response
+            ->assertStatus(200)
+            ->assertViewIs('admin.orders.create')
+            ->assertViewHas('products');
+    }
+
+    public function testAnAdminCanCreateAnOrder(): void
+    {
+        $stock = Stock::all()->random();
+        $stock1 = Stock::all()->random();
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->post(
+            route('orders.store', [
+                'amount'        => 50000,
+                'details'       => [
+                    [
+                        'stock_id' => $stock->id,
+                        'quantity' => 1,
+                    ],
+                    [
+                        'stock_id' => $stock1->id,
+                        'quantity' => 1,
+                    ],
+                ],
+                'method'        => '',
+                'document'      =>  '1000000',
+                'document_type' => 'CC',
+                'name'          => 'new payer',
+                'last_name'     => 'Ramirez',
+                'email'         => 'payer@example.com',
+                'phone'         => '3103103100',
+            ])
+        );
+
+        $response
+            ->assertStatus(302)
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('orders', [
+            'admin_id' => $this->admin->id,
+        ]);
+        $this->assertDatabaseHas('order_details', [
+            'stock_id' => $stock->id,
+            'quantity' => 1,
+        ]);
+        $this->assertDatabaseHas('order_details', [
+            'stock_id' => $stock1->id,
+            'quantity' => 1,
+        ]);
+    }
+
     public function testAnAdminCanUpdateAnOrder(): void
     {
         $id = Order::all()->random()->id;
@@ -69,7 +124,7 @@ class OrdersControllerTest extends TestCase
         $response = $this->actingAs($this->admin, Admins::GUARDED)->patch(
             route('orders.update', $id),
             [
-                'status' => Orders::STATUS_CANCELED
+                'status' => Orders::STATUS_CANCELED,
             ]
         );
 
@@ -79,7 +134,7 @@ class OrdersControllerTest extends TestCase
 
         $this->assertDatabaseHas('orders', [
             'id' => $id,
-            'status' => Orders::STATUS_CANCELED
+            'status' => Orders::STATUS_CANCELED,
         ]);
     }
 
@@ -94,7 +149,7 @@ class OrdersControllerTest extends TestCase
             ->assertRedirect(route('orders.index'));
 
         $this->assertDatabaseMissing('orders', [
-            'id' => $id
+            'id' => $id,
         ]);
     }
 
@@ -102,7 +157,7 @@ class OrdersControllerTest extends TestCase
     {
         $order = Order::all()->random();
         factory(Payment::class)->create([
-            'order_id' => $order->id
+            'order_id' => $order->id,
         ]);
 
         $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.verify', $order->id));
@@ -115,7 +170,7 @@ class OrdersControllerTest extends TestCase
     {
         $order = Order::all()->random();
         factory(Payment::class)->create([
-            'order_id' => $order->id
+            'order_id' => $order->id,
         ]);
         $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.reverse', $order->id));
 

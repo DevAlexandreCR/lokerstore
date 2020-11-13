@@ -17,7 +17,6 @@ trait HttpClient
     private string $endPoint = 'api/session/';
     private string $reverseEndPoint = 'api/reverse/';
 
-
     /**
      * send request to placetopay api
      * @param string $method
@@ -38,7 +37,7 @@ trait HttpClient
                         config('placetopay.baseUrl') . $this->endPoint .
                         $order->payment->request_id,
                         [
-                            'auth' => $this->getAuth()
+                            'auth' => $this->getAuth(),
                         ]
                     )->object();
                 case PlaceToPay::REVERSE_REQUEST:
@@ -46,7 +45,7 @@ trait HttpClient
                         config('placetopay.baseUrl') . $this->reverseEndPoint,
                         [
                             'auth' => $this->getAuth(),
-                            'internalReference' => $order->payment->reference
+                            'internalReference' => $order->payment->reference,
 
                         ]
                     )->object();
@@ -93,13 +92,13 @@ trait HttpClient
                 'description' => 'user ' . $order->user->email . ' pay order ' . $order->id,
                 'amount' => [
                     'currency' => 'COP',
-                    'total' => $order->amount
-                ]
+                    'total' => $order->amount,
+                ],
             ],
             'expiration' => $expiration,
             'returnUrl' => route('user.order.show', [auth()->id(), $order->id]),
             'ipAddress' => request()->getClientIp(),
-            'userAgent' => request()->header('User-Agent')
+            'userAgent' => request()->header('User-Agent'),
         ];
     }
 }

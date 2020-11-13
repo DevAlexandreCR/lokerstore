@@ -3,7 +3,6 @@
 namespace Tests\Unit\Decorators;
 
 use App\Decorators\GenerateOrder;
-use App\Models\Order;
 use App\Repositories\OrderDetails;
 use App\Repositories\Orders;
 use App\Repositories\Payments;
@@ -54,7 +53,7 @@ class GenerateOrderTest extends TestCase
         $this->orders->shouldReceive('store')->with($request)->once();
         $this->orders->store($request);
         $order = $this->orderDetails->shouldReceive('create')->with(1)->once();
-        $this->orderDetails->create(1);
+        $this->orderDetails->createFromUser(1);
 
         self::assertNotNull($order);
     }

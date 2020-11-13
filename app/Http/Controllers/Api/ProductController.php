@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Http\Requests\Api\Products\StoreRequest;
 use App\Http\Requests\Api\Products\UpdateRequest;
-use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Http\Resources\ProductResource;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Models\Product;
@@ -43,11 +43,11 @@ class ProductController extends Controller
             'status' => [
                 'status' => 'OK',
                 'message' => 'Product was found',
-                'code'    => 200
+                'code'    => 200,
             ],
             'product' => ProductResource::collection(
                 $this->apiProducts->show($product)
-            )]);
+            ), ]);
     }
 
     /**
@@ -62,9 +62,9 @@ class ProductController extends Controller
             'status' => [
                 'status' => 'OK',
                 'message' => 'Product was created successfully',
-                'code'    => 200
+                'code'    => 200,
             ],
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -76,9 +76,9 @@ class ProductController extends Controller
             'status' => [
                 'status'  => 'OK',
                 'message' => 'Product was updated successfully',
-                'code'    => 200
+                'code'    => 200,
             ],
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -91,8 +91,8 @@ class ProductController extends Controller
             'status' => [
                 'status' => 'OK',
                 'message' => 'Product was deleted successfully',
-                'code'    => 200
-            ]
+                'code'    => 200,
+            ],
         ]);
     }
 }

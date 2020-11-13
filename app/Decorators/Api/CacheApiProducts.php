@@ -2,18 +2,18 @@
 
 namespace App\Decorators\Api;
 
-use App\Models\Tag;
-use App\Models\Size;
-use App\Models\Color;
-use App\Models\Stock;
-use App\Models\Product;
-use App\Models\TypeSize;
 use App\Actions\Photos\Base64ToImage;
 use App\Actions\Photos\SavePhotoAction;
-use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\Api\ApiProductsInterface;
+use App\Models\Color;
+use App\Models\Product;
+use App\Models\Size;
+use App\Models\Stock;
+use App\Models\Tag;
+use App\Models\TypeSize;
 use App\Repositories\Api\ApiProducts;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -34,6 +34,7 @@ class CacheApiProducts implements ApiProductsInterface
     public function query(IndexRequest $request)
     {
         $query = $this->convertQueryToString($request);
+
         return Cache::tags('api.products')->rememberForever($query, function () use ($request) {
             return $this->apiProducts->query($request);
         });
@@ -69,7 +70,7 @@ class CacheApiProducts implements ApiProductsInterface
                 'product_id' => $product->id,
                 'color_id' => $color_id,
                 'size_id' => $size_id,
-                'quantity' => $stock['quantity']
+                'quantity' => $stock['quantity'],
             ]);
         }
 

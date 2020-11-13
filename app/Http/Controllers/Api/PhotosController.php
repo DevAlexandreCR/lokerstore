@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Interfaces\Api\ApiPhotosInterface;
-use App\Http\Requests\Api\Photos\StoreRequest;
 use App\Http\Requests\Api\Photos\DestroyRequest;
+use App\Http\Requests\Api\Photos\StoreRequest;
+use App\Interfaces\Api\ApiPhotosInterface;
+use Illuminate\Http\JsonResponse;
 
 class PhotosController extends Controller implements ApiPhotosInterface
 {
@@ -29,9 +29,9 @@ class PhotosController extends Controller implements ApiPhotosInterface
             'status' => [
                 'status'  => 'OK',
                 'message' => 'Photo saved successfully',
-                'code'    => 200
+                'code'    => 200,
             ],
-            'photo' => $photo
+            'photo' => $photo,
         ]);
     }
 
@@ -47,8 +47,8 @@ class PhotosController extends Controller implements ApiPhotosInterface
             'status' => [
                 'status'  => 'OK',
                 'message' => 'Photo removed successfully',
-                'code'    => 200
-            ]
+                'code'    => 200,
+            ],
         ]);
     }
 }

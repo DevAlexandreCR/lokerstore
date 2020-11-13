@@ -1,13 +1,12 @@
 <?php
 
-
 namespace App\Repositories;
 
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Admins implements AdminInterface
 {
@@ -33,7 +32,7 @@ class Admins implements AdminInterface
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
-            'is_active' => true
+            'is_active' => true,
         ]);
     }
 

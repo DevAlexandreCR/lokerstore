@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Factory;
 
     $factory->define(Tag::class, function (Faker $faker) {
         return [
-        'name' => $faker->unique()->firstName
+        'name' => $faker->unique()->firstName,
     ];
     });

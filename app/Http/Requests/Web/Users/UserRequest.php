@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'password'  => ['string', 'min:8', 'confirmed'],
             'phone'     => ['string', 'regex:/(3)[0-9]{9}/','numeric'],
             'address'   => ['string', 'min:10'],
-            'is_active' => ['boolean']
+            'is_active' => ['boolean'],
         ];
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-
 namespace App\Decorators;
 
+use App\Interfaces\TypeSizesInterface;
 use App\Repositories\TypeSizes;
 use Illuminate\Support\Facades\Cache;
-use App\Interfaces\TypeSizesInterface;
 
 class CacheTypeSizes implements TypeSizesInterface
 {

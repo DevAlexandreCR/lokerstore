@@ -4,8 +4,6 @@ namespace App\Notifications;
 
 use App\Models\ErrorImport;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -36,7 +34,7 @@ class ImportEnds extends Notification
             ->subject(trans('Products saved'))
             ->markdown('emails.excel.imports', [
                 'failures' => ErrorImport::all(),
-                'name'     => $notifiable->name
+                'name'     => $notifiable->name,
             ]);
     }
 

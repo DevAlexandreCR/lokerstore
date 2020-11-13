@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         return view('web.show', [
             'product' => $product->load('stocks', 'stocks.color', 'stocks.size'),
-            'sizes' => $product->sizes()->get()->unique()
+            'sizes' => $product->sizes()->get()->unique(),
         ]);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Admin\Orders;
 
-use App\Models\Order;
 use App\Constants\Orders;
-use Illuminate\Validation\Rule;
+use App\Models\Order;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class indexRequest extends FormRequest
 {
@@ -30,7 +30,7 @@ class indexRequest extends FormRequest
         return [
             'email'     =>  ['string', 'max:50', 'nullable'],
             'status'    =>  ['string', Rule::in(Orders::getAllStatus()), 'nullable'],
-            'date'      =>  ['date', 'nullable']
+            'date'      =>  ['date', 'nullable'],
         ];
     }
 }

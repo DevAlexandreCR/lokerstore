@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Decorators\OrderDecorator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Orders\indexRequest;
+use App\Http\Requests\Admin\Orders\StoreRequest;
 use App\Http\Requests\Admin\Orders\UpdateRequest;
 use App\Models\Order;
+use App\Repositories\Products;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -32,8 +34,20 @@ class OrdersController extends Controller
             'orders' => $this->orders->index($request),
             'email' => $request->get('email'),
             'date' => $request->get('date'),
-            'status' => $request->get('status')
+            'status' => $request->get('status'),
         ]);
+    }
+
+    public function create(Products $products): View
+    {
+        return view('admin.orders.create', [
+            'products' => $products->getForOrders(),
+        ]);
+    }
+
+    public function store(StoreRequest $request): RedirectResponse
+    {
+        return back()->with('success', __('Order created successfully'));
     }
 
     /**
@@ -54,7 +68,7 @@ class OrdersController extends Controller
                 'orderDetails.stock.product.photos',
                 'orderDetails.stock.color',
                 'orderDetails.stock.size'
-            )
+            ),
         ]);
     }
 

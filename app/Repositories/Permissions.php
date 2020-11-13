@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories;
 
 use App\Constants\Admins;
@@ -31,7 +30,7 @@ class Permissions implements PermissionInterface
     {
         $this->permission::create([
             'name'       => $request->get('name'),
-            'guard_name' => Admins::GUARDED
+            'guard_name' => Admins::GUARDED,
         ]);
     }
 

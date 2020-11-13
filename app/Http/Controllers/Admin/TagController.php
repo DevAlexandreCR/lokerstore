@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Interfaces\TagsInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Tags\IndexRequest;
 use App\Http\Requests\Admin\Tags\StoreAndUpdateRequest;
+use App\Interfaces\TagsInterface;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -28,7 +28,7 @@ class TagController extends Controller
     public function index(IndexRequest $request) : View
     {
         return view('admin.tags.index', [
-            'tags' => $this->tags->search($request)
+            'tags' => $this->tags->search($request),
         ]);
     }
 
@@ -64,8 +64,8 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param Tag $tag
-     * @return RedirectResponse
      * @throws \Exception
+     * @return RedirectResponse
      */
     public function destroy(Tag $tag) : RedirectResponse
     {

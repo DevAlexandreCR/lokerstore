@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'status' => ['string', Rule::in(Orders::getAllStatus())],
-            'amount' => ['numeric']
+            'amount' => ['numeric'],
         ];
     }
 }

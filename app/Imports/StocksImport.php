@@ -2,18 +2,18 @@
 
 namespace App\Imports;
 
-use Throwable;
-use Maatwebsite\Excel\Row;
-use App\Models\ErrorImport;
 use App\Interfaces\StocksInterface;
-use Maatwebsite\Excel\Concerns\OnEachRow;
-use Maatwebsite\Excel\Validators\Failure;
+use App\Models\ErrorImport;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
-use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Row;
+use Maatwebsite\Excel\Validators\Failure;
+use Throwable;
 
 class StocksImport implements
     ShouldQueue,
@@ -42,7 +42,7 @@ class StocksImport implements
             'product_name' => $rows[1],
             'color_id'     => $rows[2],
             'size_id'      => $rows[4],
-            'quantity'     => $rows[7]
+            'quantity'     => $rows[7],
         ]);
     }
 
@@ -58,7 +58,7 @@ class StocksImport implements
                 'row'       => $failure->row(),
                 'attribute' => $failure->attribute(),
                 'value'     => implode(', ', $failure->values()),
-                'errors'    => implode(', ', $failure->errors())
+                'errors'    => implode(', ', $failure->errors()),
             ]);
         }
     }
@@ -92,7 +92,7 @@ class StocksImport implements
             '4' => 'Size ID',
             '5' => 'Type-Size',
             '6' => 'Size',
-            '7' => 'Stock'
+            '7' => 'Stock',
         ];
     }
 
@@ -104,13 +104,13 @@ class StocksImport implements
         return [
             '*.0' => ['integer', 'min:0'],
             '*.1' => ['integer', 'min:0', 'max:100000', 'exists:products,reference'],
-            '*.2' => ['required', 'string', ],
+            '*.2' => ['required', 'string'],
             '*.3' => ['required', 'integer', 'exists:colors,id'],
             '*.4' => ['required', 'string', 'max:255'],
             '*.5' => ['required', 'integer', 'exists:sizes,id'],
             '*.6' => ['required', 'string', 'exists:type_sizes,name'],
             '*.7' => ['required', 'max:10'],
-            '*.8' => ['required', 'integer', 'min:0']
+            '*.8' => ['required', 'integer', 'min:0'],
         ];
     }
 

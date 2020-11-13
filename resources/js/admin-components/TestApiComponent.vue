@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row row-cols-2 py-4">
+        <div class="row py-4">
             <div class="col-sm-5">
                 <h3>Peticiones</h3>
                 <label for="api_token">Api token</label>

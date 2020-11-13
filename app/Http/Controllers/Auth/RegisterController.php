@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -58,7 +57,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string', 'regex:/(3)[0-9]{9}/'],
-            'address' => ['required', 'string', 'min:10']
+            'address' => ['required', 'string', 'min:10'],
         ]);
     }
 
@@ -76,10 +75,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
-            'address' => $data['address']
+            'address' => $data['address'],
         ]);
     }
-
 
     /**
      * Sobreescribimos las dos funciones del Trait RegistersUsers para
@@ -95,7 +93,6 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
-
 
         if ($response = $this->registered($request, $user)) {
             return $response;

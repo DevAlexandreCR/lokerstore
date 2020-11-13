@@ -2,15 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\Tag;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\Admin\Products\ActiveRequest;
 use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\ProductsInterface;
 use App\Models\Product;
+use App\Models\Tag;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Products implements ProductsInterface
 {
@@ -93,6 +92,11 @@ class Products implements ProductsInterface
         return $this->product::all();
     }
 
+    public function getForOrders()
+    {
+        return $this->product::with('stocks')->get();
+    }
+
     /**
      * @param array $data
      * @return Product|null
@@ -100,10 +104,10 @@ class Products implements ProductsInterface
     public function create(array $data = []): ?Product
     {
         $product = $this->product->updateOrCreate([
-            'reference' => $data['reference']
+            'reference' => $data['reference'],
         ], $data);
 
-        $tags = array();
+        $tags = [];
         $tagsNames = explode(', ', $data['tags']);
         foreach ($tagsNames as $tag) {
             $tagDB = Tag::where('name', $tag)->first();

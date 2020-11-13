@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
@@ -10,8 +9,8 @@ class TestProductSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
      * @throws Exception
+     * @return void
      */
     public function run(): void
     {

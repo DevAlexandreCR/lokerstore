@@ -20,7 +20,7 @@ class TestDatabaseSeeder extends Seeder
                 TypeSizeSeeder::class,
                 SizeSeeder::class,
                 ColorSeeder::class,
-                TestProductSeeder::class
+                TestProductSeeder::class,
             ]
         );
     }

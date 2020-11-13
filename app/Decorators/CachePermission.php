@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Decorators;
 
 use App\Interfaces\PermissionInterface;

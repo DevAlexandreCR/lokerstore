@@ -21,7 +21,7 @@ class Authenticate extends Middleware
                     'status' => 'failed',
                     'reason' => 'User is not authenticated',
                     'code'   => 401,
-                ]
+                ],
             ], 401));
         }
 

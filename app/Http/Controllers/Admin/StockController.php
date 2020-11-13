@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Interfaces\ColorsInterface;
 use App\Http\Controllers\Controller;
-use App\Interfaces\TypeSizesInterface;
 use App\Http\Requests\Admin\Stocks\StoreRequest;
 use App\Http\Requests\Admin\Stocks\UpdateRequest;
+use App\Interfaces\ColorsInterface;
+use App\Interfaces\TypeSizesInterface;
 use App\Models\Product;
 use App\Models\Stock;
 use Exception;
@@ -22,7 +22,6 @@ class StockController extends Controller
         $this->authorizeResource(Stock::class, 'stock');
         $this->stock = $stock;
     }
-
 
     /**
      * @param StoreRequest $request
@@ -48,7 +47,7 @@ class StockController extends Controller
         return view('admin.stocks.index', [
             'product' => $product->load('stocks', 'stocks.color', 'stocks.size', 'stocks.size.type'),
             'colors' => $colors->index(),
-            'type_sizes' => $sizes->all()
+            'type_sizes' => $sizes->all(),
         ]);
     }
 
@@ -68,8 +67,8 @@ class StockController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param Stock $stock
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(Stock $stock): RedirectResponse
     {

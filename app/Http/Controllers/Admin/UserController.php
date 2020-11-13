@@ -33,13 +33,13 @@ class UserController extends Controller
         if ($users->count() > 0) {
             return view('admin.users.index', [
                 'users' => $users,
-                'user_found' => "Mostrando resultados para: $search"
+                'user_found' => "Mostrando resultados para: $search",
             ]);
         }
 
         return view('admin.users.index', [
             'users' => $users,
-            'user_not_found' => "No se encontraron resultados para $search"
+            'user_not_found' => "No se encontraron resultados para $search",
         ]);
     }
 
@@ -52,7 +52,7 @@ class UserController extends Controller
     public function show(User $user) : View
     {
         return view('admin.users.show', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         return view('admin.users.edit', [
             'user' => $user,
-            'input_name' => $request->input('input_name') // variable que le dice a la vista cual input mostrar
+            'input_name' => $request->input('input_name'), // variable que le dice a la vista cual input mostrar
         ]);
     }
 

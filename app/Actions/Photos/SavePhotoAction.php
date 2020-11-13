@@ -4,8 +4,8 @@ namespace App\Actions\Photos;
 
 use App\Models\Photo;
 use Illuminate\Http\UploadedFile;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class SavePhotoAction
 {
@@ -19,14 +19,15 @@ class SavePhotoAction
             return;
         }
 
-        if(is_object($images)){
+        if (is_object($images)) {
             $name = self::saveImage($images);
 
             self::savePhoto($id_product, $name);
+
             return;
         }
 
-        if(is_array($images)) {
+        if (is_array($images)) {
             foreach ($images as $image) {
                 $name = self::saveImage($image);
 

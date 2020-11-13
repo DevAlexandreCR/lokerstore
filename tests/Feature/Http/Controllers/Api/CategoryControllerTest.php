@@ -12,7 +12,7 @@ class CategoryControllerTest extends TestCase
     use RefreshDatabase;
 
     private $categories = [
-        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
+        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest',
     ];
     /**
      * test get all categories api
@@ -24,7 +24,7 @@ class CategoryControllerTest extends TestCase
         foreach ($this->categories as $cat) {
             factory(Category::class)->create([
                 'name' => $cat,
-                'id_parent' => null
+                'id_parent' => null,
             ]);
         }
 
@@ -45,14 +45,14 @@ class CategoryControllerTest extends TestCase
     {
         $category = factory(Category::class)->create([
             'name' => 'category',
-            'id_parent' => null
+            'id_parent' => null,
         ]);
 
         $response = $this->json('GET', route('categories.show', ['category' => $category->id]));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            'data' => ['id', 'name', 'id_parent']
+            'data' => ['id', 'name', 'id_parent'],
         ]);
     }
 }

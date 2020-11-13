@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Stocks\UpdateRequest;
+use App\Interfaces\Api\ApiStocksInterface;
 use App\Models\Stock;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use App\Interfaces\Api\ApiStocksInterface;
-use App\Http\Requests\Api\Stocks\UpdateRequest;
 
 class StockController extends Controller
 {
@@ -25,9 +25,9 @@ class StockController extends Controller
             'status' => [
                 'status'  => 'OK',
                 'message' => 'Stock was updated successfully',
-                'code'    => 200
+                'code'    => 200,
             ],
-            'stock' => $stock
+            'stock' => $stock,
         ]);
     }
 }

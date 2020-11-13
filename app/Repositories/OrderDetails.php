@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\OrderDetailInterface;
 use App\Models\OrderDetail;
+use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 
 class OrderDetails implements OrderDetailInterface
@@ -19,7 +20,7 @@ class OrderDetails implements OrderDetailInterface
      * @param int $order_id
      * @return mixed|void
      */
-    public function create(int $order_id)
+    public function createFromUser(int $order_id)
     {
         $cart = Auth::user()->cart;
 
@@ -29,10 +30,30 @@ class OrderDetails implements OrderDetailInterface
                 'stock_id' => $stock->id,
                 'quantity' => $stock->pivot->quantity,
                 'unit_price' => $stock->product->price,
-                'total_price' => $stock->product->price * $stock->pivot->quantity
+                'total_price' => $stock->product->price * $stock->pivot->quantity,
             ]);
         });
 
         $cart->emptyCart();
+    }
+
+    /**
+     * Create detail to to order from admin Controller
+     * @param int $order_id
+     * @param int $stock_id
+     * @param int $quantity
+     * @return mixed
+     */
+    public function createFromAdmin(int $order_id, int $stock_id, int $quantity): void
+    {
+        $stock = Stock::findOrFail($stock_id);
+
+        $this->orderDetail->create([
+            'order_id' => $order_id,
+            'stock_id' => $stock->id,
+            'quantity' => $quantity,
+            'unit_price' => $stock->product->price,
+            'total_price' => $stock->product->price * $stock->pivot->quantity,
+        ]);
     }
 }

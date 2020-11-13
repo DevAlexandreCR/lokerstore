@@ -26,7 +26,7 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'search' => ['string', 'max: 50']
+            'search' => ['string', 'max: 50'],
         ];
     }
 }

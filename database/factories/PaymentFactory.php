@@ -16,6 +16,6 @@ $factory->define(Payment::class, function (Faker $faker) {
         'request_id' => $faker->randomNumber(6),
         'reference' => $faker->bankAccountNumber,
         'method' => $faker->creditCardType,
-        'last_digit' => '********' . $faker->randomNumber(4)
+        'last_digit' => '********' . $faker->randomNumber(4),
     ];
 });

@@ -1,13 +1,12 @@
 <?php
 
-
 namespace App\Repositories;
 
-use App\Models\Stock;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Interfaces\StocksInterface;
+use App\Models\Product;
+use App\Models\Stock;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Stocks implements StocksInterface
 {
@@ -64,6 +63,7 @@ class Stocks implements StocksInterface
 
         $product = Product::where('name', $productName)->first();
         $data['product_id'] = $product->id;
+
         return $this->stocks->create($data);
     }
 }

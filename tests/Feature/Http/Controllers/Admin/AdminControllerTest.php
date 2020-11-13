@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use PermissionSeeder;
 use RoleSeeder;
@@ -23,7 +22,7 @@ class AdminControllerTest extends TestCase
         $this->withoutExceptionHandling();
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
         $this->admin = factory(Admin::class)->create();
         $this->admin->syncRoles(Roles::ADMIN);
@@ -50,7 +49,7 @@ class AdminControllerTest extends TestCase
             'name' => 'employee 1',
             'email' => 'employee1@example.com',
             'password' => '12345678',
-            'is_active' => true
+            'is_active' => true,
         ]);
 
         $response
@@ -62,7 +61,7 @@ class AdminControllerTest extends TestCase
             'name' => 'employee 1',
             'email' => 'employee1@example.com',
             'password' => Hash::check('12345678', '12345678'),
-            'is_active' => 1
+            'is_active' => 1,
         ]);
     }
 
@@ -91,7 +90,7 @@ class AdminControllerTest extends TestCase
         $this->assertDatabaseHas('admins', [
             'name' => 'admin updated',
             'email' => $this->admin->email,
-            'is_active' => 1
+            'is_active' => 1,
         ]);
     }
 
@@ -108,7 +107,7 @@ class AdminControllerTest extends TestCase
         $this->assertDatabaseMissing('admins', [
             'id' => $admin2->id,
             'name' => $admin2->name,
-            'email' => $admin2->email
+            'email' => $admin2->email,
         ]);
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Constants\Orders;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -47,6 +47,7 @@ class Order extends Model
         if (!$status) {
             return null;
         }
+
         return $query->where('status', $status);
     }
 

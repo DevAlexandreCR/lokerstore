@@ -15,6 +15,6 @@ $factory->define(Payer::class, function (Faker $faker) {
         'name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->email,
-        'phone' => $faker->phoneNumber
+        'phone' => $faker->phoneNumber,
     ];
 });

@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
             'id_category'   => ['required', 'integer'],
             'tags'          => ['required', 'array'],
             'delete_photos' => ['array'],
-            'photos'        => ['array']
+            'photos'        => ['array'],
         ];
     }
 }

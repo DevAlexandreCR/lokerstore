@@ -15,7 +15,7 @@ class StoreRequest extends Request
     {
         return [
             'product_id' => ['required', 'integer', 'exists:products,id'],
-            'photos'     => ['required', 'array']
+            'photos'     => ['required', 'array'],
         ];
     }
 }

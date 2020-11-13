@@ -14,6 +14,6 @@ $factory->define(Stock::class, function (Faker $faker) {
         'product_id' => Product::all()->random()->id,
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
-        'quantity'    => random_int(30, 50)
+        'quantity'    => random_int(30, 50),
     ];
 });

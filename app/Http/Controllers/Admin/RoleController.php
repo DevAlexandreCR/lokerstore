@@ -26,8 +26,8 @@ class RoleController extends Controller
      * Display a listing of the resource.
      *
      * @param PermissionInterface $permissions
-     * @return View
      * @throws AuthorizationException
+     * @return View
      */
     public function index(PermissionInterface $permissions): View
     {
@@ -70,8 +70,8 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Role $role
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(Role $role): RedirectResponse
     {

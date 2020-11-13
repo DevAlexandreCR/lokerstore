@@ -6,7 +6,6 @@ use App\Constants\Admins;
 use App\Constants\Permissions;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PermissionSeeder;
 use RoleSeeder;
 use Spatie\Permission\Models\Permission;
@@ -25,17 +24,16 @@ class PermissionsPolicyTest extends TestCase
 
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
         $this->admin = factory(Admin::class)->create();
     }
-
 
     public function testAdminWithoutPermissionCannotCreatePermissions(): void
     {
         $response = $this->actingAs($this->admin, Admins::GUARDED)
             ->post(route('permissions.store'), [
-                'name' => 'test permission'
+                'name' => 'test permission',
             ]);
 
         $response->assertStatus(403);
@@ -46,7 +44,7 @@ class PermissionsPolicyTest extends TestCase
         $id = Permission::all()->random()->id;
         $response = $this->actingAs($this->admin, Admins::GUARDED)
             ->put(route('permissions.update', $id), [
-                'name' => 'update permission'
+                'name' => 'update permission',
             ]);
 
         $response->assertStatus(403);
@@ -77,14 +75,14 @@ class PermissionsPolicyTest extends TestCase
 
         $this->actingAs($this->admin, Admins::GUARDED)
             ->put(route('permissions.update', $id), [
-                'name' => 'updated permission'
+                'name' => 'updated permission',
             ])->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)
             ->delete(route('permissions.destroy', $id))->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)->post(route('permissions.store', $id), [
-            'name' => 'test role'
+            'name' => 'test role',
         ])->assertStatus(302);
     }
 }

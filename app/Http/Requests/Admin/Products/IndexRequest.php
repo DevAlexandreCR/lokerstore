@@ -31,7 +31,7 @@ class IndexRequest extends FormRequest
             'sizes'         => ['nullable', 'array'],
             'colors'        => ['nullable', 'array'],
             'search'        => ['nullable', 'string'],
-            'orderBy'       => ['nullable', 'string']
+            'orderBy'       => ['nullable', 'string'],
         ];
     }
 

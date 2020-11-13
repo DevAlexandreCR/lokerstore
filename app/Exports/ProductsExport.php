@@ -2,29 +2,29 @@
 
 namespace App\Exports;
 
-use App\Models\Product;
 use App\Interfaces\ProductsInterface;
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\WithTitle;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ProductsExport extends DefaultValueBinder implements
     FromCollection,
@@ -72,7 +72,7 @@ class ProductsExport extends DefaultValueBinder implements
             trans('Enabled'),
             'ID ' . trans('Category'),
             trans('Category'),
-            trans('Tags')
+            trans('Tags'),
         ];
     }
     /**
@@ -83,6 +83,7 @@ class ProductsExport extends DefaultValueBinder implements
     {
         $tags = $product->tags()->pluck('name')->toArray();
         $tagsString = implode(', ', $tags);
+
         return [
             $product->id,
             $product->reference,
@@ -92,10 +93,10 @@ class ProductsExport extends DefaultValueBinder implements
 //            '=SUMIFS(Stocks!H:H,Stocks!B:B,B:B)',
             $product->cost,
             $product->price,
-            ($product->is_active)? 'Si' : 'No',
+            ($product->is_active) ? 'Si' : 'No',
             $product->category->id,
             $product->category->name,
-            $tagsString
+            $tagsString,
         ];
     }
 
@@ -123,7 +124,7 @@ class ProductsExport extends DefaultValueBinder implements
             new StocksExport(),
             new CategoriesExport(),
             new ColorsExport(),
-            new SizesExport()
+            new SizesExport(),
         ];
     }
 
@@ -134,7 +135,7 @@ class ProductsExport extends DefaultValueBinder implements
     {
         return [
             'D' => 90,
-            'F' => 10
+            'F' => 10,
         ];
     }
 
@@ -158,9 +159,9 @@ class ProductsExport extends DefaultValueBinder implements
             1    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 13
+                    'size' => 13,
                 ],
-            ]
+            ],
         ];
     }
 

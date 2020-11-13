@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Actions\Metrics;
 
-use App\Models\Order;
-use App\Models\Metric;
-use App\Constants\Orders;
 use App\Constants\Metrics;
+use App\Constants\Orders;
+use App\Models\Metric;
+use App\Models\Order;
 
 class AddMetricOrders
 {
@@ -21,7 +20,7 @@ class AddMetricOrders
             'date'   => $date,
             'metric' => Metrics::ORDERS,
             'status' => $status,
-            'measurable_id' => null
+            'measurable_id' => null,
         ]);
         $metric->amount = $metric->amount ?? 0 + (float)$order->amount;
         $metric->total = $metric->total ?? 0 + 1;

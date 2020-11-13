@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories;
 
 use App\Http\Requests\Admin\Users\IndexRequest;
@@ -25,6 +24,7 @@ class Users implements UsersInterface
     public function search(IndexRequest $request)
     {
         $search =  $request->get('search');
+
         return $this->users
             ->search($search)
             ->paginate(15);

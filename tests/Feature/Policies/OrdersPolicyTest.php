@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Policies;
 
-use App\Models\Payment;
 use App\Constants\Admins;
 use App\Constants\Orders;
-use App\Models\OrderDetail;
 use App\Constants\Permissions;
 use App\Models\Admin\Admin;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Payment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use OrderSeeder;
 use Spatie\Permission\Models\Role;
 use StockSeeder;
 use TestDatabaseSeeder;
@@ -31,7 +30,7 @@ class OrdersPolicyTest extends TestCase
         $this->seed([
             TestDatabaseSeeder::class,
             UserSeeder::class,
-            StockSeeder::class
+            StockSeeder::class,
         ]);
         factory(Order::class, 2)->create();
         factory(OrderDetail::class, 5)->create();
@@ -77,7 +76,7 @@ class OrdersPolicyTest extends TestCase
         $this->withoutExceptionHandling();
         $id = Order::all()->random()->id;
         factory(Payment::class)->create([
-            'order_id' => $id
+            'order_id' => $id,
         ]);
         $role = factory(Role::class)->create();
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Decorators;
 
 use App\Http\Requests\Admin\Users\IndexRequest;
@@ -22,11 +21,11 @@ class CacheUsers implements UsersInterface
     public function search(IndexRequest $request)
     {
         $search =  $request->get('search');
+
         return Cache::tags('users')->rememberForever($search, function () use ($request) {
             return $this->users->search($request);
         });
     }
-
 
     public function index()
     {

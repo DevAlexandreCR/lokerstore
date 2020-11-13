@@ -6,7 +6,6 @@ use App\Constants\Permissions;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PermissionSeeder;
 use RoleSeeder;
 use Tests\TestCase;
@@ -23,7 +22,7 @@ class AdminPermissionsControllerTest extends TestCase
         $this->withoutExceptionHandling();
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
         $this->admin = factory(Admin::class)->create();
         $this->admin->syncRoles(Roles::ADMIN);
@@ -33,8 +32,8 @@ class AdminPermissionsControllerTest extends TestCase
     {
         $response = $this->actingAs($this->admin, 'admin')->put(route('update-permissions', $this->admin->id), [
             'permissions' => [
-                Permissions::VIEW_ORDERS
-            ]
+                Permissions::VIEW_ORDERS,
+            ],
         ]);
 
         $response
@@ -50,8 +49,8 @@ class AdminPermissionsControllerTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->put(route('admins.update', $this->admin->id), [
             'roles' => [
                 Roles::ADMIN,
-                Roles::EMPLOYEE
-            ]
+                Roles::EMPLOYEE,
+            ],
         ]);
 
         $response

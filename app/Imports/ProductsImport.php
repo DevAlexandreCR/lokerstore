@@ -2,21 +2,21 @@
 
 namespace App\Imports;
 
-use Throwable;
-use Maatwebsite\Excel\Row;
-use App\Models\ErrorImport;
-use App\Interfaces\StocksInterface;
 use App\Interfaces\ProductsInterface;
-use Maatwebsite\Excel\Concerns\OnEachRow;
-use Maatwebsite\Excel\Validators\Failure;
-use Maatwebsite\Excel\Concerns\Importable;
+use App\Interfaces\StocksInterface;
+use App\Models\ErrorImport;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
-use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Row;
+use Maatwebsite\Excel\Validators\Failure;
+use Throwable;
 
 class ProductsImport implements
     ShouldQueue,
@@ -55,7 +55,7 @@ class ProductsImport implements
             'price'       => $rows[5],
             'is_active'   => $rows[6] === 'Si' ? 1 : 0,
             'id_category' => $rows[7],
-            'tags'        => $rows[8]
+            'tags'        => $rows[8],
         ]);
     }
 
@@ -66,7 +66,7 @@ class ProductsImport implements
     {
         return [
             $this,
-            new StocksImport($this->stocks)
+            new StocksImport($this->stocks),
         ];
     }
 
@@ -107,7 +107,7 @@ class ProductsImport implements
                 'row'       => $failure->row(),
                 'attribute' => $failure->attribute(),
                 'value'     => implode(', ', $failure->values()),
-                'errors'    => implode(', ', $failure->errors())
+                'errors'    => implode(', ', $failure->errors()),
             ]);
         }
     }
@@ -146,7 +146,7 @@ class ProductsImport implements
             '5' => 'Enabled',
             '6' => 'Category id',
             '7' => 'Category',
-            '8' => 'Tags'
+            '8' => 'Tags',
         ];
     }
 }

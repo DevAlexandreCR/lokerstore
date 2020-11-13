@@ -3,7 +3,6 @@
 namespace App\Policies\Admin;
 
 use App\Constants\Permissions;
-use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Spatie\Permission\Models\Permission;
@@ -11,7 +10,6 @@ use Spatie\Permission\Models\Permission;
 class PermissionsPolicy
 {
     use HandlesAuthorization;
-
 
     /**
      * Determine whether the user can create models.

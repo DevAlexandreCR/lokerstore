@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Constants\Roles;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
@@ -49,7 +48,7 @@ class VerificationController extends Controller
 
         if (!$cart) {
             Cart::create([
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
             ]);
         }
     }

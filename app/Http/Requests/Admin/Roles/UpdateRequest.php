@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name'        => ['string', 'max:20', 'unique:roles'],
-            'permissions' => ['array']
+            'permissions' => ['array'],
         ];
     }
 }

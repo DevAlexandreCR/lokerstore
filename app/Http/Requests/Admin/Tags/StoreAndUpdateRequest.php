@@ -24,7 +24,7 @@ class StoreAndUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:15', 'unique:tags']
+            'name' => ['required', 'string', 'min:3', 'max:15', 'unique:tags'],
         ];
     }
 }

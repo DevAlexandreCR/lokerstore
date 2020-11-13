@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
-use App\Constants\Admins;
-use App\Jobs\ImportImages;
-use App\Exports\ProductsExport;
-use App\Imports\ProductsImport;
-use App\Interfaces\StocksInterface;
-use App\Http\Controllers\Controller;
-use App\Interfaces\ProductsInterface;
-use Illuminate\Http\RedirectResponse;
-use App\Jobs\DeleteErrorsImportsTable;
 use App\Actions\Photos\SavePhotoAction;
+use App\Constants\Admins;
+use App\Exports\ProductsExport;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Excel\ExportRequest;
+use App\Http\Requests\Admin\Excel\ImagesRequest;
+use App\Http\Requests\Admin\Excel\ImportRequest;
+use App\Imports\ProductsImport;
+use App\Interfaces\ProductsInterface;
+use App\Interfaces\StocksInterface;
+use App\Jobs\DeleteErrorsImportsTable;
 use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Jobs\NotifyAdminsAfterCompleteImport;
-use App\Http\Requests\Admin\Excel\ExportRequest;
-use App\Http\Requests\Admin\Excel\ImportRequest;
-use App\Http\Requests\Admin\Excel\ImagesRequest;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 
 class ExcelController extends Controller
 {
@@ -35,7 +34,7 @@ class ExcelController extends Controller
                 $fileName,
                 trans('Products'),
                 trans('Products exported successfully')
-            )
+            ),
         ]);
 
         return back()->with('success', __('Exporting products... we\'ll send you an email when the download is available'));
@@ -51,8 +50,9 @@ class ExcelController extends Controller
     {
         (new ProductsImport($products, $stocks))->queue($request->file('file'), 'imports')->chain([
             new NotifyAdminsAfterCompleteImport($request->user(Admins::GUARDED)),
-            new DeleteErrorsImportsTable()
+            new DeleteErrorsImportsTable(),
         ]);
+
         return back()->with('success', __('Importing products... we\'ll send you an email when the import is ended'));
     }
 
@@ -67,19 +67,20 @@ class ExcelController extends Controller
      */
     public function saveImages(array $images): RedirectResponse
     {
-        $errors = array();
+        $errors = [];
         $saved = 0;
         foreach ($images as $image) {
             $name = $image->getClientOriginalName();
-            $array = explode('_',$name);
+            $array = explode('_', $name);
             $product = Product::where('reference', $array[0])->first();
-            if ($product){
+            if ($product) {
                 $saved ++;
                 SavePhotoAction::execute($product->id, $image);
             } else {
                 $errors[] = $array[0] .  trans(' Reference not found');
             }
         }
+
         return redirect()->route('products.index')
             ->with('success', $saved . trans(' Images imported successfully'))
             ->withErrors($errors);

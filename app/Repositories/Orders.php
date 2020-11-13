@@ -3,14 +3,14 @@
 namespace App\Repositories;
 
 use App\Constants\Orders as OrderConstants;
+use App\Constants\Payments;
 use App\Constants\PlaceToPay;
+use App\Http\Requests\Admin\Orders\indexRequest;
 use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
-use App\Constants\Payments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\Orders\indexRequest;
 
 class Orders implements OrderInterface
 {
@@ -30,6 +30,7 @@ class Orders implements OrderInterface
         $email = $request->get('email');
         $date = $request->get('date');
         $status = $request->get('status');
+
         return $this->order::with(['user'])
             ->orderBy('created_at', 'desc')
             ->status($status)
@@ -90,7 +91,7 @@ class Orders implements OrderInterface
     {
         $order = $this->find($order_id);
         $order->update([
-            'status' => $status
+            'status' => $status,
         ]);
     }
 
