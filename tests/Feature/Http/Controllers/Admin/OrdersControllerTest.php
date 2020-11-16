@@ -5,11 +5,13 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Constants\Admins;
 use App\Constants\Orders;
 use App\Constants\Roles;
+use App\Constants\Payers;
 use App\Models\Admin\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Stock;
+use App\Constants\Payments;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use StockSeeder;
@@ -89,14 +91,7 @@ class OrdersControllerTest extends TestCase
                         'stock_id' => $stock1->id,
                         'quantity' => 1,
                     ],
-                ],
-                'method'        => '',
-                'document'      =>  '1000000',
-                'document_type' => 'CC',
-                'name'          => 'new payer',
-                'last_name'     => 'Ramirez',
-                'email'         => 'payer@example.com',
-                'phone'         => '3103103100',
+                ]
             ])
         );
 

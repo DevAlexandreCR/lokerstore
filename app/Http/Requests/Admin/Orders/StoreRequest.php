@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Admin\Orders;
 
 use App\Models\Order;
+use App\Constants\Payers;
+use App\Constants\Payments;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
@@ -28,13 +31,6 @@ class StoreRequest extends FormRequest
         $rules = [
             'amount'        => ['required', 'numeric', 'min:0'],
             'details'       => ['required', 'array'],
-            'method'        => ['required', 'string'],
-            'document'      => ['string', 'min:5'],
-            'document_type' => ['string'],
-            'name'          => ['string'],
-            'last_name'     => ['string'],
-            'email'         => ['string', 'email'],
-            'phone'         => ['string', 'regex:/(3)[0-9]{9}/'],
         ];
 
         if ($this->get('details')) {

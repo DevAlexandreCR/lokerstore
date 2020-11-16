@@ -53,7 +53,7 @@ class OrderDetails implements OrderDetailInterface
             'stock_id' => $stock->id,
             'quantity' => $quantity,
             'unit_price' => $stock->product->price,
-            'total_price' => $stock->product->price * $stock->pivot->quantity,
+            'total_price' => $stock->product->price * $quantity,
         ]);
     }
 }

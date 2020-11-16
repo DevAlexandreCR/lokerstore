@@ -13,6 +13,7 @@ use App\Traits\HttpClient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Orders\StoreRequest;
 
 class OrderDecorator
 {
@@ -29,21 +30,55 @@ class OrderDecorator
         $this->payments = $payments;
     }
 
+    /**
+     * @param indexRequest $request
+     * @return mixed
+     */
     public function index(IndexRequest $request)
     {
         return $this->orders->query($request);
     }
 
+    /**
+     * @param StoreRequest $request
+     * @return Order
+     */
+    public function store(StoreRequest $request): Order
+    {
+        $request->merge([
+            'admin_id' => auth()->id(),
+        ]);
+        $order = $this->orders->store($request);
+
+        foreach ($request->get('details', []) as $detail) {
+            $this->orderDetails->createFromAdmin($order->id, $detail['stock_id'], $detail['quantity']);
+        }
+
+        return $order;
+    }
+
+    /**
+     * @param Request $request
+     * @param Model $model
+     */
     public function update(Request $request, Model $model): void
     {
         $this->orders->update($request, $model);
     }
 
+    /**
+     * @param Model $model
+     */
     public function destroy(Model $model): void
     {
         $this->orders->destroy($model);
     }
 
+    /**
+     * @param Order $order
+     * @return RedirectResponse
+     * @throws \JsonException
+     */
     public function verify(Order $order): RedirectResponse
     {
         $response = $this->sendRequest(PlaceToPay::GET_REQUEST_INFORMATION, $order);
@@ -51,6 +86,11 @@ class OrderDecorator
         return $this->responseHandler($response, $order);
     }
 
+    /**
+     * @param Order $order
+     * @return RedirectResponse
+     * @throws \JsonException
+     */
     public function reverse(Order $order): RedirectResponse
     {
         $response = $this->sendRequest(PlaceToPay::REVERSE_REQUEST, $order);
@@ -58,6 +98,11 @@ class OrderDecorator
         return $this->responseHandler($response, $order);
     }
 
+    /**
+     * @param $response
+     * @param Order $order
+     * @return RedirectResponse
+     */
     public function responseHandler($response, Order $order): RedirectResponse
     {
         $status = $response->status->status;

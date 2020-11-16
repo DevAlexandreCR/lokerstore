@@ -94,7 +94,12 @@ class Products implements ProductsInterface
 
     public function getForOrders()
     {
-        return $this->product::with('stocks')->get();
+        return $this->product::with(
+            'stocks',
+            'category',
+            'stocks.size',
+            'stocks.color'
+        )->get();
     }
 
     /**

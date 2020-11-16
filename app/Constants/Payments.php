@@ -14,6 +14,10 @@ class Payments extends Enum
     public const PENDING_VALIDATION = 'PENDING_VALIDATION';
     public const REFUNDED = 'REFUNDED';
 
+    public const METHOD_CASH = 'cash';
+    public const METHOD_CREDIT = 'credit';
+    public const METHOD_CARD = 'credit_card';
+
     public static function getAllStatus(): array
     {
         return [
@@ -24,6 +28,15 @@ class Payments extends Enum
             self::FAILED,
             self::PENDING_VALIDATION,
             self::REFUNDED,
+        ];
+    }
+
+    public static function getMethods(): array
+    {
+        return [
+            self::METHOD_CASH,
+            self::METHOD_CARD,
+            self::METHOD_CREDIT
         ];
     }
 }

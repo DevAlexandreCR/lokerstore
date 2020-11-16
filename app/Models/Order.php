@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'status', 'amount'];
+    protected $fillable = ['user_id', 'admin_id', 'status', 'amount'];
 
     /**
      * @return BelongsTo

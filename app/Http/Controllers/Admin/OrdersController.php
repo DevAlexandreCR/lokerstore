@@ -45,9 +45,13 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function store(StoreRequest $request): RedirectResponse
+    public function store(StoreRequest $request, OrderDecorator $orders): RedirectResponse
     {
-        return back()->with('success', __('Order created successfully'));
+        $order = $orders->store($request);
+
+        return redirect(route('orders.show', [
+            'order' => $order
+        ]))->with('success', __('Order created successfully'));
     }
 
     /**

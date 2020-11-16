@@ -11392,6 +11392,11 @@ a.text-dark:focus {
   overflow-y: auto;
 }
 
+.active-autocomplete {
+  background-color: #2b2a2a;
+  font-weight: bold;
+}
+
 ::-webkit-scrollbar {
   width: 15px;
 }
