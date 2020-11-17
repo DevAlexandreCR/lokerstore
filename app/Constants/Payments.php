@@ -16,7 +16,7 @@ class Payments extends Enum
 
     public const METHOD_CASH = 'cash';
     public const METHOD_CREDIT = 'credit';
-    public const METHOD_CARD = 'credit_card';
+    public const METHOD_CARD = 'credit card';
 
     public static function getAllStatus(): array
     {
@@ -35,8 +35,7 @@ class Payments extends Enum
     {
         return [
             self::METHOD_CASH,
-            self::METHOD_CARD,
-            self::METHOD_CREDIT
+            self::METHOD_CARD
         ];
     }
 }

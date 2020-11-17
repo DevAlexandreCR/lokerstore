@@ -35,7 +35,7 @@ class StoreRequest extends FormRequest
 
         if ($this->get('details')) {
             foreach ($this->get('details') as $key => $val) {
-                $rules['details.' . $key . '.stock_id'] = 'required|string|exists:stocks,id';
+                $rules['details.' . $key . '.stock_id'] = 'required|numeric|exists:stocks,id';
                 $rules['details.' . $key . '.quantity'] = 'required|numeric|min:0';
             }
         }

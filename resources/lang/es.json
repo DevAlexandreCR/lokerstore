@@ -272,5 +272,7 @@
     "Difference": "Diferencia",
     "Stock report": "Reporte de inventario",
     " Images imported successfully": " Imágenes importadas correctamente",
-    " Reference not found": " Referencia no existe"
+    " Reference not found": " Referencia no existe",
+    "cash": "Efectivo",
+    "credit card": "Tarjeta de crédito"
 }

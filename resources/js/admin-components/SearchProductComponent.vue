@@ -8,22 +8,22 @@
                 <label for="productsFound">Detalle del producto</label>
                 <table class="table table-condensed table-sm table-borderless" id="productsFound">
                     <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Categoría</th>
-                            <th>Stock</th>
-                            <th>Costo</th>
-                            <th>Precio</th>
-                        </tr>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Stock</th>
+                        <th>Costo</th>
+                        <th>Precio</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr v-if="productFound">
-                            <td>{{productFound.name}}</td>
-                            <td>{{productFound.category.name}}</td>
-                            <td>{{productFound.stock}}</td>
-                            <td>{{productFound.cost | price}}</td>
-                            <td>{{productFound.price | price}}</td>
-                        </tr>
+                    <tr v-if="productFound">
+                        <td>{{ productFound.name }}</td>
+                        <td>{{ productFound.category.name }}</td>
+                        <td>{{ productFound.stock }}</td>
+                        <td>{{ productFound.cost | price }}</td>
+                        <td>{{ productFound.price | price }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -40,11 +40,13 @@
                     </thead>
                     <tbody v-if="productFound">
                     <tr v-for="stock in productFound.stocks" :key="stock.id">
-                        <td>{{stock.size.name}}</td>
-                        <td class="text-lowercase">{{stock.color.name}}</td>
-                        <td>{{stock.quantity}}</td>
+                        <td>{{ stock.size.name }}</td>
+                        <td class="text-lowercase">{{ stock.color.name }}</td>
+                        <td>{{ stock.quantity }}</td>
                         <td>
-                            <button class="btn btn-success btn-sm" v-on:click="addProduct(stock.id)"><ion-icon name="add-outline"></ion-icon></button>
+                            <button class="btn btn-success btn-sm" v-on:click="addProduct(stock.id)">
+                                <ion-icon name="add-outline"></ion-icon>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

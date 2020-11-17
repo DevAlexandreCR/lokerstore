@@ -31,117 +31,38 @@
     </div>
     <div class="container-fluid my-2">
         <div class="row">
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-header"><h5>{{__('User data')}}</h5></div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>{{__('Name')}}:</th>
-                                <td class="text-right">{{$order->user->name}}</td>
-                            </tr>
-                            <tr>
-                                <th>{{__('Email')}}:</th>
-                                <td class="text-right">{{$order->user->email}}</td>
-                            </tr>
-                            <tr>
-                                <th>{{__('Phone')}}:</th>
-                                <td class="text-right">{{$order->user->phone}}</td>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card">
-                    <div class="card-header"><h5>{{__('Order details')}}</h5></div>
-                    <div class="card-body">
-                        <table class="table table-hover table-sm table-responsive-md">
-                            <thead>
-                            <tr class="text-left">
-                                <th>{{__('Id')}}</th>
-                                <th>{{__('Product')}}</th>
-                                <th>{{__('Stock')}}</th>
-                                <th>{{__('Price')}}</th>
-                                <th>{{__('Amount')}}</th>
-                                <th>{{__('Actions')}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($order->orderDetails as $detail)
-                                <tr>
-                                    <td>{{$detail->id}}</td>
-                                    <td>{{$detail->stock->product->name}}</td>
-                                    <td>{{$detail->quantity}}</td>
-                                    <td>{{$detail->unit_price}}</td>
-                                    <td>{{$detail->total_price}}</td>
-                                    <td>
-                                        <div class="btn-group btn-block btn-group-sm text-center">
-                                            <form action="{{route('order_details.destroy', $detail->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button @if($order->status !== \App\Constants\Orders::STATUS_PENDING_PAY)
-                                                            disabled
-                                                        @endif
-                                                        type="submit" class="btn btn-sm btn-danger mx-2">
-                                                    <ion-icon name="trash"></ion-icon>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <hr>
-                        <div class="row justify-content-end">
-                            <div class="col-md-3">
-                                <strong>{{__('Amount')}}: </strong> {{$order->getAmount()}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-header"><h5>{{__('Update order')}}</h5></div>
-                    <form action="{{route('orders.update', $order->id)}}" method="post">
-                        @csrf
-                        @method('PUT')
+            @if($order->user)
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-header"><h5>{{__('User data')}}</h5></div>
                         <div class="card-body">
-                            @if($order->status === \App\Constants\Orders::STATUS_PENDING_PAY || $order->status === \App\Constants\Orders::STATUS_REJECTED)
-                                <div class="form-group">
-                                    <label for="amount">{{__('Price')}}</label>
-                                    <input class="form-control" type="number" id="amount" name="amount" value="{{$order->amount}}">
-                                </div>
-                            @endif
-                                <label for="status">{{__('Status')}}</label>
-                                <select name="status" class="form-control mb-2">
-                                    @foreach($order->getAllStatus() as $key => $value)
-                                        <option value="{{$key}}" @if($order->status === $key) selected @endif>{{$value}}</option>
-                                    @endforeach
-                                </select>
-                            @if($order->status === 'pending_pay')
-                                <a href="{{route('orders.verify', $order->id)}}" class="btn btn-block btn-sm btn-dark">{{__('Verify payment')}}</a>
-                            @endif
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>{{__('Name')}}:</th>
+                                    <td class="text-right">{{$order->user->name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('Email')}}:</th>
+                                    <td class="text-right">{{$order->user->email}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('Phone')}}:</th>
+                                    <td class="text-right">{{$order->user->phone}}</td>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-primary btn-sm">{{__('Save')}}</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-        @if($order->status === 'pending_shipment' || $order->status === 'sent' || $order->status === 'canceled')
-            <div class="row my-2">
-                <div class="container">
+            @endif
+            <div class="@if($order->user) col-xl-6 @else col-xl-9 @endif">
+                @if($order->status === 'pending_shipment' || $order->status === 'sent' || optional($order->payment)->payer)
                     <div class="card">
                         <div class="card-header"><h5>{{__('Payment')}}</h5></div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="container">
                                     <h6>{{__('Payer data')}}</h6>
                                     @if($order->payment->payer)
                                         <div class="row row-cols-2">
@@ -157,7 +78,8 @@
                                                 {{__('Document')}}
                                             </div>
                                             <div class="col-sm-6 text-muted text-left">
-                                                {{$order->payment->payer->document_type}} : {{$order->payment->payer->document}}
+                                                {{$order->payment->payer->document_type}}
+                                                : {{$order->payment->payer->document}}
                                             </div>
                                         </div>
                                         <div class="row row-cols-2">
@@ -195,38 +117,128 @@
                                         <hr>
                                     @endif
                                 </div>
-                                <div class="col-lg-6">
-                                    <h6>{{__('Status')}}</h6>
-                                    @switch($order->payment->status)
-                                        @case('FAILED')
-                                        <p><small>{{session('message')}}</small></p>
-                                        <p><small>{{__('Payment has failed, please retry')}}</small></p>
-                                        @break
-                                        @case('PENDING')
-                                        <p>{{$order->getStatus()}}</p>
-                                        <form action="{{route('orders.verify', $order->id)}}" method="get">
-                                            @csrf
-                                            <button type="submit" class="btn btn-block btn-sm btn-dark">{{__('Verify payment')}}</button>
-                                        </form>
-                                        @break
-                                        @case('APPROVED')
-                                        <br>
-                                        <form action="{{route('orders.reverse', $order->id)}}" method="get">
-                                            @csrf
-                                            <button type="submit" class="btn btn-block btn-sm btn-danger">{{__('Cancel Purchase')}}</button>
-                                        </form>
-                                        @break
-                                        @case('REJECTED')
-                                        <p><small>{{__('Payment has been rejected')}}</small></p>
-                                        @break
-                                    @endswitch
-                                </div>
                             </div>
                         </div>
                     </div>
+                @else
+                    @include('admin.orders.addPayment')
+                @endif
+            </div>
+            <div class="col-xl-3">
+                <div class="card">
+                    <div class="card-header"><h5>{{__('Update order')}}</h5></div>
+                    <form action="{{route('orders.update', $order->id)}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="card-body">
+                            @if($order->status === \App\Constants\Orders::STATUS_PENDING_PAY || $order->status === \App\Constants\Orders::STATUS_REJECTED)
+                                <div class="form-group">
+                                    <label for="amount">{{__('Price')}}</label>
+                                    <input class="form-control" type="number" id="amount" name="amount"
+                                           value="{{$order->amount}}">
+                                </div>
+                            @endif
+                            <label for="status">{{__('Status')}}</label>
+                            <select name="status" class="form-control mb-2">
+                                @foreach($order->getAllStatus() as $key => $value)
+                                    <option value="{{$key}}"
+                                            @if($order->status === $key) selected @endif>{{$value}}</option>
+                                @endforeach
+                            </select>
+                            @if($order->status === 'pending_pay' && $order->payment && $order->payment->requesId)
+                                <a href="{{route('orders.verify', $order->id)}}"
+                                   class="btn btn-block btn-sm btn-dark">{{__('Verify payment')}}</a>
+                            @endif
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">{{__('Save')}}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        @endif
+        </div>
+        <div class="row py-4">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">{{trans('Order details')}}</div>
+                    <div class="card-body">
+                        <table class="table table-condensed table-sm table-responsive-sm" id="selectedProducts">
+                            <thead>
+                            <tr>
+                                <th>{{trans('Product')}}</th>
+                                <th>{{trans('Name')}}</th>
+                                <th>{{trans('Size')}}</th>
+                                <th>{{trans('Color')}}</th>
+                                <th>{{trans('Quantity')}}</th>
+                                <th>{{trans('Price')}}</th>
+                                <th>{{trans('Total')}}</th>
+                                <th>{{trans('Remove')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($order->orderDetails as $key => $detail)
+                                <tr>
+                                    <td>{{ $detail->stock->product->reference }}</td>
+                                    <td>{{ $detail->stock->product->name }}</td>
+                                    <td>{{ $detail->stock->size->name }}</td>
+                                    <td class="text-lowercase">{{ $detail->stock->color->name }}</td>
+                                    <td>{{ $detail->quantity }}</td>
+                                    <td>{{ $detail->unit_price }}</td>
+                                    <td>{{ $detail->total_price}}</td>
+                                    <td>
+                                        <div class="btn-group btn-block btn-group-sm text-center">
+                                            <form action="{{route('order_details.destroy', $detail->id)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    @if($order->status !== \App\Constants\Orders::STATUS_PENDING_PAY)
+                                                    disabled
+                                                    @endif
+                                                    type="submit" class="btn btn-sm btn-danger mx-2">
+                                                    <ion-icon name="trash"></ion-icon>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-price float-left">{{trans('SubTotal')}}</td>
+                                <td>{{ $order->amount - $order->amount / 1.19 }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-price float-left">{{trans('Tax')}}</td>
+                                <td>{{ $order->amount / 1.19 }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-price float-left">{{trans('Amount')}}</td>
+                                <td class="">{{ $order->amount }}</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

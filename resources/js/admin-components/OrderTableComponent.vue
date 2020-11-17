@@ -18,62 +18,74 @@
                     </thead>
                     <tbody>
                     <tr v-for="(product, index) in selectedProducts" :key="index">
-                        <td>{{product.reference}}</td>
-                        <td>{{product.name}}</td>
-                        <td>{{product.stock.size.name}}</td>
-                        <td class="text-lowercase">{{product.stock.color.name}}</td>
-                        <td>{{product.quantity}}</td>
-                        <td>{{product.price | price}}</td>
-                        <td>{{product.quantity * product.price | price}}</td>
+                        <td>{{ product.reference }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.stock.size.name }}</td>
+                        <td class="text-lowercase">{{ product.stock.color.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.price | price }}</td>
+                        <td>{{ product.quantity * product.price | price }}</td>
                         <td>
-                            <button type="button" v-on:click="removeAll(index)" class="btn btn-danger btn-sm"><ion-icon name="trash"></ion-icon></button>
-                            <button v-show="product.quantity > 1" v-on:click="remove(index)" type="button" class="btn btn-dark btn-sm"><ion-icon name="remove-circle"></ion-icon></button>
+                            <button type="button" v-on:click="removeAll(index)" class="btn btn-danger btn-sm">
+                                <ion-icon name="trash"></ion-icon>
+                            </button>
+                            <button v-show="product.quantity > 1" v-on:click="remove(index)" type="button"
+                                    class="btn btn-dark btn-sm">
+                                <ion-icon name="remove-circle"></ion-icon>
+                            </button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr v-show="selectedProducts.length > 0">
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="text-price float-left">Subtotal</td>
-                        <td class="">{{subTotal | price}}</td>
+                        <td class="">{{ subTotal | price }}</td>
                         <td></td>
                     </tr>
-                    <tr>
+                    <tr v-show="selectedProducts.length > 0">
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="text-price float-left">Impuesto</td>
-                        <td class="">{{iva | price}}</td>
+                        <td class="">{{ iva | price }}</td>
                         <td></td>
                     </tr>
-                    <tr>
+                    <tr v-show="selectedProducts.length > 0">
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td class="text-price float-left">Total</td>
-                        <td class="">{{total | price}}</td>
+                        <td class="">{{ total | price }}</td>
                         <td></td>
                     </tr>
                     </tbody>
                 </table>
+                <div class="text-center" v-show="selectedProducts.length > 0">
+                    <button type="button" class="btn btn-dark btn-sm btn-block" data-toggle="modal" data-target="#confirmOrder">
+                        Guardar
+                    </button>
+                </div>
             </div>
         </div>
+        <confirm-order-component :products="selectedProducts" :total="total"></confirm-order-component>
     </div>
 </template>
 
 <script>
 
 import NumberFormat from "../constants/NumberFormat";
+import ConfirmOrderComponent from "./ConfirmOrderComponent";
 
 export default {
     name: 'order-table-component',
-
+    components: {ConfirmOrderComponent},
     data() {
         return {
             subTotal: 0,
@@ -113,13 +125,13 @@ export default {
             this.calculateTotals()
         },
 
-        calculateTotals(){
+        calculateTotals() {
             this.subTotal = 0
             this.selectedProducts.forEach(product => {
                 let total = product.price * product.quantity
                 this.subTotal += total
             })
-            this.iva = this.subTotal * 0.19
+            this.iva = this.subTotal * process.env.MIX_TAX ?? 0
             this.total = this.iva + this.subTotal
         }
     },

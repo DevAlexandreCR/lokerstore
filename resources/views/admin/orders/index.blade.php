@@ -71,7 +71,7 @@
                         <td>{{$order->created_at}}</td>
                         <td>{{$order->getStatus()}}</td>
                         <td>{{$order->amount}}</td>
-                        <td>{{$order->user->email}}</td>
+                        <td>{{$order->user->email ?? '--'}}</td>
                         <td>
                             <div class="btn-group btn-block btn-group-sm text-center">
                                 <form action="{{route('orders.destroy', $order->id)}}" method="post">

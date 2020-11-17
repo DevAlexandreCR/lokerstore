@@ -76,6 +76,11 @@ export default {
                 this.open = true
                 this.current = 0
             }
+
+            if (!value) {
+                this.open = false
+            }
+
             this.$emit('input', value)
         },
 
