@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Api\Photos;
 
+use App\Http\Requests\Api\Products\StoreRequest as Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\Api\Products\StoreRequest as Request;
 
 class DestroyRequest extends Request
 {
@@ -27,7 +27,7 @@ class DestroyRequest extends Request
     {
         return [
             'photos'    => ['required', 'array'],
-            'photos.*'  => ['required', 'integer', 'exists:photos,id']
+            'photos.*'  => ['required', 'integer', 'exists:photos,id'],
         ];
     }
 }

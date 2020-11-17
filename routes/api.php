@@ -33,11 +33,8 @@ use Illuminate\Support\Facades\Route;
         ->name('destroy', 'api.products.destroy')
         ->name('update', 'api.products.update');
 
-
     Route::get('/products', 'ProductController@index')->name('api.index');
     Route::get('/products/{product}', 'ProductController@show')->name('api.show');
-
-
 
     Route::get('/categories', 'CategoryController@index')->name('categories.index');
     Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');

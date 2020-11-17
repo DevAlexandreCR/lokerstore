@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Reports;
 
 use App\Models\Metric;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class MonthlyRequest extends FormRequest
 {
@@ -26,7 +26,7 @@ class MonthlyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => ['required', 'date', 'date_format:Y-m']
+            'date' => ['required', 'date', 'date_format:Y-m'],
         ];
     }
 }

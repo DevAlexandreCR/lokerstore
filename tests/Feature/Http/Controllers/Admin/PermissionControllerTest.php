@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PermissionSeeder;
 use RoleSeeder;
 use Spatie\Permission\Models\Permission;
@@ -23,7 +22,7 @@ class PermissionControllerTest extends TestCase
 
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
 
         $this->admin = factory(Admin::class)->create();
@@ -34,7 +33,7 @@ class PermissionControllerTest extends TestCase
     {
         $response = $this->actingAs($this->admin, 'admin')->post(route('permissions.store'), [
             'name' => 'new Permission',
-            'guard_name'   => 'admin'
+            'guard_name'   => 'admin',
         ]);
 
         $response
@@ -44,7 +43,7 @@ class PermissionControllerTest extends TestCase
             ->assertSessionDoesntHaveErrors();
 
         $this->assertDatabaseHas('permissions', [
-            'name' => 'new Permission'
+            'name' => 'new Permission',
         ]);
     }
 
@@ -52,10 +51,10 @@ class PermissionControllerTest extends TestCase
     {
         $permission = Permission::create([
             'name' => 'new Permission',
-            'guard_name' => 'admin'
+            'guard_name' => 'admin',
         ]);
         $response = $this->actingAs($this->admin, 'admin')->put(route('permissions.update', $permission->id), [
-            'name' => 'new Permission updated'
+            'name' => 'new Permission updated',
         ]);
 
         $response
@@ -66,7 +65,7 @@ class PermissionControllerTest extends TestCase
 
         $this->assertDatabaseHas('permissions', [
             'id' => $permission->id,
-            'name' => 'new Permission updated'
+            'name' => 'new Permission updated',
         ]);
     }
 
@@ -74,7 +73,7 @@ class PermissionControllerTest extends TestCase
     {
         $permission = Permission::create([
             'name' => 'new Permission',
-            'guard_name' => 'admin'
+            'guard_name' => 'admin',
         ]);
         $response = $this->actingAs($this->admin, 'admin')->delete(route('permissions.destroy', $permission->id));
 
@@ -86,7 +85,7 @@ class PermissionControllerTest extends TestCase
 
         $this->assertDatabaseMissing('permissions', [
             'id' => $permission->id,
-            'name' => 'new Permission'
+            'name' => 'new Permission',
         ]);
     }
 }

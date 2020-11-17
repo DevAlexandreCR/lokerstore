@@ -23,6 +23,7 @@ class VerifyUserCan
             if ($order && $order->user_id !== $user->id) {
                 abort(403);
             }
+
             return $next($request);
         }
 

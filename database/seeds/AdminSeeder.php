@@ -1,9 +1,7 @@
 <?php
 
-use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {

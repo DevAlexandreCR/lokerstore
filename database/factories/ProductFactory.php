@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Product::class, function (Faker $faker) {
     $cost = $faker->randomFloat(2, 15000, 100000);
+
     return [
         'reference' => $faker->unique()->numberBetween(1000, 9999),
         'name' => $faker->firstName,
@@ -17,6 +18,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'cost' => $cost,
         'price' => $faker->randomFloat(2, $cost, $cost + $cost * 0.5),
         'id_category' => Category::subCategories()->random()->id,
-        'created_at' => $faker->dateTimeBetween('-30 days', 'now')
+        'created_at' => $faker->dateTimeBetween('-30 days', 'now'),
     ];
 });

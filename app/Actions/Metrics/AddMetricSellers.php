@@ -1,11 +1,10 @@
 <?php
 
-
 namespace App\Actions\Metrics;
 
-use App\Models\Order;
-use App\Models\Metric;
 use App\Constants\Metrics;
+use App\Models\Metric;
+use App\Models\Order;
 use Illuminate\Support\Facades\Date;
 
 class AddMetricSellers
@@ -16,7 +15,7 @@ class AddMetricSellers
         $metric = Metric::firstorCreate([
             'date'   => $date,
             'metric' => Metrics::SELLER,
-            'measurable_id' => $order->admin_id
+            'measurable_id' => $order->admin_id,
         ]);
         $metric->status = $order->status;
         $metric->amount = $metric->amount ?? 0 + (float)$order->amount;

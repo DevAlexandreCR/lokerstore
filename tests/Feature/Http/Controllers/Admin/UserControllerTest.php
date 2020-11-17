@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PermissionSeeder;
 use RoleSeeder;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
@@ -91,7 +90,7 @@ class UserControllerTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->put(
             route('users.update', $user),
             [
-                'email' => 'elnuevoemail@nada.com'
+                'email' => 'elnuevoemail@nada.com',
             ]
         );
 
@@ -128,11 +127,11 @@ class UserControllerTest extends TestCase
         factory(User::class, 30)->create();
         factory(User::class)->create([
             'name' => 'jose',
-            'email' => 'jose@gmail.com'
+            'email' => 'jose@gmail.com',
         ]);
         factory(User::class)->create([
             'name' => 'jose manuel',
-            'email' => 'josefina@gmail.com'
+            'email' => 'josefina@gmail.com',
         ]);
 
         $query = 'jos';
@@ -156,11 +155,11 @@ class UserControllerTest extends TestCase
     {
         factory(User::class)->create([
             'name' => 'jose',
-            'email' => 'jose@gmail.com'
+            'email' => 'jose@gmail.com',
         ]);
         factory(User::class)->create([
             'name' => 'jose manuel',
-            'email' => 'josefina@gmail.com'
+            'email' => 'josefina@gmail.com',
         ]);
 
         $query = 'martha';

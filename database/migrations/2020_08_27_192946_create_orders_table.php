@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('SET NULL');
             $table->foreignId('admin_id')->nullable()->constrained()->onDelete('SET NULL');
             $table->unsignedDecimal('amount', 10)->default(0);
             $table->enum('status', Orders::getAllStatus())->default(Orders::STATUS_PENDING_PAY);

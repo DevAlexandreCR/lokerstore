@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="col-lg-6 text-name text-sm-center">{{product.name}}</div>
                 <div class="col-lg-6"><p class="text-price">
-                    <span class="text-old-price">${{ product.price | oldPrice }}</span>
-                    <strong>${{ product.price | price }}</strong></p>
+                    <span class="text-old-price">{{ product.price | oldPrice }}</span>
+                    <strong>{{ product.price | price }}</strong></p>
                 </div>
             </div>
             <div class="row container">
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+
+import NumberFormat from "../constants/NumberFormat";
 
 export default {
     name: 'product-component',
@@ -38,11 +40,15 @@ export default {
         showProduct(id) {
             window.location.assign(`/products/${id}`)
         },
+
+        formatPrice(price) {
+            return NumberFormat.format(price)
+        }
     },
 
     filters: {
         price: function (value) {
-            return Math.round(value)
+            return NumberFormat.format(value)
         },
 
         truncate: function (value) {
@@ -52,7 +58,7 @@ export default {
         oldPrice: function (value) {
             value = parseFloat(value)
             let oldPrice = value + value * 0.1
-            return Math.ceil(oldPrice)
+            return NumberFormat.format(oldPrice)
         }
     }
 }

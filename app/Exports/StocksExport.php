@@ -4,21 +4,20 @@ namespace App\Exports;
 
 use App\Models\Stock;
 use Illuminate\Support\Collection;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Concerns\WithTitle;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use PhpOffice\PhpSpreadsheet\Cell\DataType;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class StocksExport implements
     FromCollection,
@@ -32,8 +31,8 @@ class StocksExport implements
     use RegistersEventListeners;
 
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection(): Collection
     {
         return Stock::all();
@@ -53,7 +52,7 @@ class StocksExport implements
             $stock->size->id,
             $stock->size->type->name,
             $stock->size->name,
-            $stock->quantity
+            $stock->quantity,
         ];
     }
 
@@ -101,9 +100,9 @@ class StocksExport implements
             1    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 13
+                    'size' => 13,
                 ],
-            ]
+            ],
         ];
     }
 

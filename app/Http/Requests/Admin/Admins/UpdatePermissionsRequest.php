@@ -26,7 +26,7 @@ class UpdatePermissionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'permissions' => ['array']
+            'permissions' => ['array'],
         ];
     }
 }

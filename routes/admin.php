@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,8 +55,7 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
         ->name('update-permissions');
 
     Route::resource('orders', 'OrdersController')
-        ->names('orders')
-        ->only('index', 'show', 'destroy', 'update');
+        ->names('orders');
     Route::get('orders/{order}/verify', 'OrdersController@verify')->name('orders.verify');
     Route::get('orders/{order}/reverse', 'OrdersController@reverse')->name('orders.reverse');
 
@@ -70,4 +68,6 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
         ->name('index', 'products.export')
         ->name('store', 'products.import');
     Route::post('products/images', 'ExcelController@images')->name('products.import_images');
+
+    Route::post('payments/store', 'PaymentsController@store')->name('payments.store');
 });

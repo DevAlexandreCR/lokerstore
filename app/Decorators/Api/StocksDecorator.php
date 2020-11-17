@@ -1,15 +1,14 @@
 <?php
 
-
 namespace App\Decorators\Api;
 
-use App\Models\Size;
+use App\Http\Requests\Api\Stocks\UpdateRequest;
+use App\Interfaces\Api\ApiStocksInterface;
 use App\Models\Color;
+use App\Models\Size;
 use App\Models\Stock;
 use App\Models\TypeSize;
 use App\Repositories\Api\ApiStocks;
-use App\Interfaces\Api\ApiStocksInterface;
-use App\Http\Requests\Api\Stocks\UpdateRequest;
 
 class StocksDecorator implements ApiStocksInterface
 {
@@ -35,7 +34,7 @@ class StocksDecorator implements ApiStocksInterface
         $request->merge([
             'color_id' => $color_id,
             'size_id' => $size_id,
-            'quantity' => $quantity
+            'quantity' => $quantity,
         ]);
 
         return $this->stocks->update($request, $stock);

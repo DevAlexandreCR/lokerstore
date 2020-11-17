@@ -17,11 +17,11 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             'name' => Roles::ADMIN,
-            'guard_name' => Admins::GUARDED
+            'guard_name' => Admins::GUARDED,
             ]);
         $roleEmployee = Role::create([
             'name' => Roles::EMPLOYEE,
-            'guard_name' => Admins::GUARDED
+            'guard_name' => Admins::GUARDED,
             ]);
 
         foreach (Permissions::getEmployePermissions() as $permission) {

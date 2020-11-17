@@ -4,23 +4,23 @@ namespace App\Exports;
 
 use App\Models\TypeSize;
 use Illuminate\Support\Collection;
-use PhpOffice\PhpSpreadsheet\Exception;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\WithTitle;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class SizesExport implements
     FromCollection,
@@ -37,8 +37,8 @@ class SizesExport implements
 
     private array $sizes;
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection(): Collection
     {
         return TypeSize::all();
@@ -72,8 +72,8 @@ class SizesExport implements
             [
                 $typeSize->id,
                 $typeSize->name,
-                '--->'
-            ]
+                '--->',
+            ],
         ];
         $typeSize->sizes()->each(function ($size) {
             $this->sizes[] = [
@@ -82,16 +82,17 @@ class SizesExport implements
                 null,
                 $size->id,
                 $size->name,
-                $size->type->id
+                $size->type->id,
             ];
         });
+
         return array_merge($row, $this->sizes);
     }
 
     /**
      * @param Worksheet $sheet
-     * @return array
      * @throws Exception
+     * @return array
      */
     public function styles(Worksheet $sheet): array
     {
@@ -110,19 +111,20 @@ class SizesExport implements
         optional($sheet->getRowDimension(1))->setRowHeight(30);
         $sheet->getProtection()->setPassword(config('app.name'));
         $sheet->getProtection()->setSheet(true);
+
         return [
             1    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 13
+                    'size' => 13,
                 ],
             ],
             2    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 13
+                    'size' => 13,
                 ],
-            ]
+            ],
         ];
     }
 
@@ -140,7 +142,7 @@ class SizesExport implements
     public function columnWidths(): array
     {
         return [
-            'C' => 5
+            'C' => 5,
         ];
     }
 

@@ -16,8 +16,8 @@ use App\Models\Product;
 use App\Models\Tag;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -55,8 +55,8 @@ class ProductController extends Controller
                 'category'  => $category,
                 'tags'      => $tagsFilter,
                 'search'    => $search,
-                'orderBy'   => $orderBy
-            ]
+                'orderBy'   => $orderBy,
+            ],
         ]);
     }
 
@@ -105,8 +105,8 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @param Product $product
-     * @return View
      * @throws AuthorizationException
+     * @return View
      */
     public function active(Request $request, Product $product): View
     {
@@ -114,7 +114,7 @@ class ProductController extends Controller
 
         return view('admin.products.active', [
             'product'   => $product,
-            'input_name'=> $request->get('input_name')
+            'input_name'=> $request->get('input_name'),
         ]);
     }
 
@@ -129,10 +129,11 @@ class ProductController extends Controller
     {
         $categories = $categories->index();
         $tags = Tag::all();
+
         return view(
             'admin.products.edit',
             [
-            'product'   => $product
+            'product'   => $product,
             ],
             compact('categories', 'tags')
         );
@@ -170,8 +171,8 @@ class ProductController extends Controller
 
     /**
      * @param Product $product
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(Product $product): RedirectResponse
     {

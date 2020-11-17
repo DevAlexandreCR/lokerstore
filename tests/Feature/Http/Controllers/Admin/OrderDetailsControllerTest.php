@@ -3,15 +3,14 @@
 namespace Tests\Feature\Http\Controllers\Admin;
 
 use AdminSeeder;
-use App\Models\Order;
 use App\Constants\Admins;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
+use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Stock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use OrderSeeder;
 use StockSeeder;
 use TestDatabaseSeeder;
 use Tests\TestCase;
@@ -31,7 +30,7 @@ class OrderDetailsControllerTest extends TestCase
             TestDatabaseSeeder::class,
             UserSeeder::class,
             StockSeeder::class,
-            AdminSeeder::class
+            AdminSeeder::class,
         ]);
         factory(Order::class, 2)->create();
         factory(OrderDetail::class, 5)->create();
@@ -42,12 +41,12 @@ class OrderDetailsControllerTest extends TestCase
     public function testAnAdminCanUpdateAnOrderDetail(): void
     {
         $stock = factory(Stock::class)->create([
-            'quantity' => 20
+            'quantity' => 20,
         ]);
 
         $detail = factory(OrderDetail::class)->create([
             'stock_id' => $stock->id,
-            'quantity' => 5
+            'quantity' => 5,
         ]);
 
         $response = $this->actingAs($this->admin, Admins::GUARDED)
@@ -55,7 +54,7 @@ class OrderDetailsControllerTest extends TestCase
                 route('order_details.update', $detail->id),
                 [
             'stock_id' => $detail->stock_id,
-            'quantity' => 3
+            'quantity' => 3,
         ]
             );
 
@@ -66,12 +65,12 @@ class OrderDetailsControllerTest extends TestCase
 
         $this->assertDatabaseHas('order_details', [
             'id' => $detail->id,
-            'quantity' => 3
+            'quantity' => 3,
         ]);
 
         $this->assertDatabaseHas('stocks', [
             'id' => $detail->stock_id,
-            'quantity' => 17
+            'quantity' => 17,
         ]);
     }
 
@@ -91,11 +90,11 @@ class OrderDetailsControllerTest extends TestCase
             ->assertSessionHas('success');
 
         $this->assertDatabaseMissing('order_details', [
-            'id' => $id
+            'id' => $id,
         ]);
         $this->assertDatabaseHas('orders', [
             'id' => $detail->order_id,
-            'amount' => $amountOrder - $amount
+            'amount' => $amountOrder - $amount,
         ]);
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use App\Constants\Roles;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -20,12 +19,12 @@ class UserSeeder extends Seeder
             'lastname' => 'client',
             'email' => 'user@gmail.com',
             'password' => Hash::make('12345678'),
-            'is_active' => true
+            'is_active' => true,
         ]);
 
         factory(User::class, 30)->create()->each(function (User $user) {
             factory(Cart::class)->create([
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]);
         });
     }

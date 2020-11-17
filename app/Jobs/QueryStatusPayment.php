@@ -4,9 +4,9 @@ namespace App\Jobs;
 
 use App\Constants\Logs;
 use App\Constants\Payments;
-use App\Repositories\Payments as Pay;
 use App\Constants\PlaceToPay;
 use App\Models\Order;
+use App\Repositories\Payments as Pay;
 use App\Traits\HttpClient;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

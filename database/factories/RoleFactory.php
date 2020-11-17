@@ -10,6 +10,6 @@ use Spatie\Permission\Models\Role;
 $factory->define(Role::class, function (Faker $faker) {
     return [
         'name' => $faker->word(),
-        'guard_name' => Admins::GUARDED
+        'guard_name' => Admins::GUARDED,
     ];
 });

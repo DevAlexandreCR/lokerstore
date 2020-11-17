@@ -26,7 +26,7 @@ class AdminController extends Controller
     {
         return view('admin.admins.index', [
             'admins' => $this->admins->index(),
-            'roles' => Role::pluck('name', 'id')
+            'roles' => Role::pluck('name', 'id'),
         ]);
     }
 

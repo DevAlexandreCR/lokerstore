@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ return array(
     */
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
     'orientation' => 'portrait',
-    'defines' => array(
+    'defines' => [
         /**
          * The location of the DOMPDF font directory
          *
@@ -83,8 +83,7 @@ return array(
          *
          * Valid settings are 'PDFLib', 'CPDF' (the bundled R&OS PDF class), 'GD' and
          * 'auto'. 'auto' will look for PDFLib and use it if found, or if not it will
-         * fall back on CPDF. 'GD' renders PDFs to graphic files. {@link
-         * Canvas_Factory} ultimately determines which rendering class to instantiate
+         * fall back on CPDF. 'GD' renders PDFs to graphic files. {@link * Canvas_Factory} ultimately determines which rendering class to instantiate
          * based on this setting.
          *
          * Both PDFLib & CPDF rendering backends provide sufficient rendering
@@ -238,7 +237,6 @@ return array(
          * Use the more-than-experimental HTML5 Lib parser
          */
         "enable_html5_parser" => false,
-    ),
+    ],
 
-
-);
+];

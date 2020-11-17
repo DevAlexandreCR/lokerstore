@@ -3,10 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Payment;
-use App\Constants\Payments;
 use App\Repositories\Orders;
-use App\Actions\Metrics\AddMetricOrders;
-use App\Actions\Metrics\AddMetricSellers;
 
 class PaymentObserver
 {

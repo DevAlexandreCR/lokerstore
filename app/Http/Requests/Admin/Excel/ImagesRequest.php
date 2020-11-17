@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Excel;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ImagesRequest extends FormRequest
 {
@@ -26,7 +26,7 @@ class ImagesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images.*' => ['image','mimes:jpeg,png,jpg,gif' ,'max:2048']
+            'images.*' => ['image','mimes:jpeg,png,jpg,gif' ,'max:2048'],
         ];
     }
 }

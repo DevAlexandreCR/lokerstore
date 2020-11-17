@@ -21,6 +21,7 @@ Auth::routes(['verify' => true]);
 Route::get('/artisan/storage', function () {
     $command = 'storage:link';
     Artisan::call($command);
+
     return Artisan::output();
 });
 

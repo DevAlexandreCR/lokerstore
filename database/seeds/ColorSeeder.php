@@ -33,7 +33,7 @@ class ColorSeeder extends Seeder
         foreach ($namecolors as $name => $code) {
             factory(Color::class)->create([
                 'name' => $name,
-                'code' => $code
+                'code' => $code,
             ]);
         }
     }

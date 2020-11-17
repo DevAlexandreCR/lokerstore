@@ -49,7 +49,7 @@ class CreateAdmin extends Command
                 'name'      => $name,
                 'email'     => $email,
                 'password'  => Hash::make($password),
-                'is_active' => true
+                'is_active' => true,
                 ]);
             $admin->assignRole(Roles::ADMIN);
             $this->info('Admin created successfully... bye!');
@@ -62,6 +62,7 @@ class CreateAdmin extends Command
     {
         $find1 = strpos($email, '@');
         $find2 = strpos($email, '.');
+
         return ($find1 !== false && $find2 !== false && $find2 > $find1);
     }
 }

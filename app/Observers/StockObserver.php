@@ -17,6 +17,7 @@ class StockObserver
         if ($stockExist !== null) {
             $stockExist->quantity += $stock->quantity;
             $stockExist->save();
+
             return false;
         }
 

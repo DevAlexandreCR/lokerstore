@@ -4,22 +4,22 @@ namespace App\Exports;
 
 use App\Constants\Orders;
 use App\Repositories\Metrics;
-use Illuminate\Support\Collection;
 use App\Traits\StylizeReportExport;
-use PhpOffice\PhpSpreadsheet\Exception;
-use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Concerns\WithTitle;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class MonthlyReportsExport implements
     FromCollection,
@@ -45,8 +45,8 @@ class MonthlyReportsExport implements
         $this->date = $date;
     }
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection(): Collection
     {
         return collect($this->metrics->monthlyReport($this->date, Orders::STATUS_SUCCESS));
@@ -129,7 +129,7 @@ class MonthlyReportsExport implements
         return [
             $this,
             new OrdersUncompletedExport($this->metrics, $this->date),
-            new StockReport(collect($this->metrics->getStockReport()))
+            new StockReport(collect($this->metrics->getStockReport())),
         ];
     }
 }

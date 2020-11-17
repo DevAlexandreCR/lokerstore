@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PermissionSeeder;
 use RoleSeeder;
 use Spatie\Permission\Models\Permission;
@@ -25,7 +24,7 @@ class RoleControllerTest extends TestCase
 
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
 
         $this->admin = factory(Admin::class)->create();
@@ -50,7 +49,7 @@ class RoleControllerTest extends TestCase
     public function testStore(): void
     {
         $response = $this->actingAs($this->admin, 'admin')->post(route('roles.store'), [
-            'name' => 'new Role'
+            'name' => 'new Role',
         ]);
 
         $response
@@ -60,7 +59,7 @@ class RoleControllerTest extends TestCase
             ->assertSessionDoesntHaveErrors();
 
         $this->assertDatabaseHas('roles', [
-            'name' => 'new Role'
+            'name' => 'new Role',
         ]);
     }
 
@@ -68,10 +67,10 @@ class RoleControllerTest extends TestCase
     {
         $role = Role::create([
             'name' => 'new Role',
-            'guard_name' => 'admin'
+            'guard_name' => 'admin',
         ]);
         $response = $this->actingAs($this->admin, 'admin')->put(route('roles.update', $role->id), [
-            'name' => 'new Role updated'
+            'name' => 'new Role updated',
         ]);
 
         $response
@@ -82,7 +81,7 @@ class RoleControllerTest extends TestCase
 
         $this->assertDatabaseHas('roles', [
             'id' => $role->id,
-            'name' => 'new Role updated'
+            'name' => 'new Role updated',
         ]);
     }
 
@@ -90,7 +89,7 @@ class RoleControllerTest extends TestCase
     {
         $role = Role::create([
             'name' => 'new Role',
-            'guard_name' => 'admin'
+            'guard_name' => 'admin',
         ]);
         $response = $this->actingAs($this->admin, 'admin')->delete(route('roles.destroy', $role->id));
 
@@ -102,7 +101,7 @@ class RoleControllerTest extends TestCase
 
         $this->assertDatabaseMissing('roles', [
             'id' => $role->id,
-            'name' => 'new Role'
+            'name' => 'new Role',
         ]);
     }
 
@@ -110,18 +109,18 @@ class RoleControllerTest extends TestCase
     {
         $role = Role::create([
             'name' => 'new Role',
-            'guard_name' => 'admin'
+            'guard_name' => 'admin',
         ]);
 
         $permission = Permission::create([
             'name' => 'permission',
-            'guard_name' => 'admin'
+            'guard_name' => 'admin',
         ]);
 
         $response = $this->actingAs($this->admin, 'admin')->put(route('roles.update', $role->id), [
             'permissions' => [
-                'name' => $permission->name
-            ]
+                'name' => $permission->name,
+            ],
         ]);
 
         $response

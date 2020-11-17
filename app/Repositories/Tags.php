@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\Admin\Tags\IndexRequest;
 use App\Interfaces\TagsInterface;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\Tags\IndexRequest;
 
 class Tags implements TagsInterface
 {
@@ -59,6 +59,7 @@ class Tags implements TagsInterface
     public function search(IndexRequest $request)
     {
         $search = $request->get('search', null);
+
         return $this->tag
             ->search($search)
             ->with('products')

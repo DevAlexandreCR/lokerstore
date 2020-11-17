@@ -44,7 +44,7 @@ class OrderController extends Controller
     public function index(User $user): View
     {
         return view('web.users.orders.index', [
-            'orders' => $user->orders
+            'orders' => $user->orders,
         ]);
     }
 
@@ -77,7 +77,7 @@ class OrderController extends Controller
                     'orderDetails.stock.product.photos',
                     'orderDetails.stock.color',
                     'orderDetails.stock.size'
-                )
+                ),
             ]
         );
     }

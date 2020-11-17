@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payer extends Model
 {
-    protected $fillable = ['payment_id', 'document', 'document_type', 'name', 'email', 'last_name', 'phone'];
+    protected $fillable = ['document', 'document_type', 'name', 'email', 'last_name', 'phone'];
 
     /**
      * @return BelongsTo

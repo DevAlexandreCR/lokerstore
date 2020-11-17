@@ -16,7 +16,7 @@ class TypeSizeSeeder extends Seeder
 
         foreach ($types as $type) {
             factory(TypeSize::class)->create([
-                'name' => $type
+                'name' => $type,
             ]);
         }
     }

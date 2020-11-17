@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Interfaces\Api;
 
-use App\Http\Requests\Api\Photos\StoreRequest;
 use App\Http\Requests\Api\Photos\DestroyRequest;
+use App\Http\Requests\Api\Photos\StoreRequest;
 
 interface ApiPhotosInterface
 {

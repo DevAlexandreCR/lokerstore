@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\TypeSize;
 use App\Interfaces\TypeSizesInterface;
+use App\Models\TypeSize;
 
 class TypeSizes implements TypeSizesInterface
 {

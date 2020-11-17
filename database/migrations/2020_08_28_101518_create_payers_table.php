@@ -11,11 +11,10 @@ class CreatePayersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('payers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('payment_id')->constrained()->cascadeOnDelete();
             $table->string('document')->nullable();
             $table->string('document_type')->nullable();
             $table->string('name')->nullable();
@@ -31,7 +30,7 @@ class CreatePayersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('payers');
     }

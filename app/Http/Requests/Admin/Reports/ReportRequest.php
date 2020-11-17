@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Reports;
 
 use App\Models\Metric;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ReportRequest extends FormRequest
 {
@@ -27,7 +27,7 @@ class ReportRequest extends FormRequest
     {
         return [
             'from' => ['required', 'date', 'date_format:Y-m-d'],
-            'to'   => ['required', 'date', 'date_format:Y-m-d']
+            'to'   => ['required', 'date', 'date_format:Y-m-d'],
         ];
     }
 }

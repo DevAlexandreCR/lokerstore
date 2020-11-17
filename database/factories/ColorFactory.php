@@ -9,6 +9,6 @@ use Illuminate\Support\Str;
 $factory->define(Color::class, function (Faker $faker) {
     return [
         'name' => Str::random(3),
-        'code' => $faker->hexColor
+        'code' => $faker->hexColor,
     ];
 });

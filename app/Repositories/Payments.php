@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Constants\Payments as Pay;
 use App\Models\Payer;
 use App\Models\Payment;
-use App\Constants\Payments as Pay;
 
 class Payments
 {
@@ -27,12 +27,30 @@ class Payments
     {
         return $this->payment->updateOrCreate(
             [
-               'order_id' => $order_id
+               'order_id' => $order_id,
             ],
             [
                'request_id' => $request_id,
                'process_url' => $process_url,
-               'status' => Pay::STATUS_PENDING
+               'status' => Pay::STATUS_PENDING,
+            ]
+        );
+    }
+
+    /**
+     * @param int $order_id
+     * @param string $method
+     * @return Payment
+     */
+    public function createFromAdmin(int $order_id, string $method): Payment
+    {
+        return $this->payment->updateOrCreate(
+            [
+                'order_id' => $order_id,
+            ],
+            [
+                'method' => $method,
+                'status' => Pay::STATUS_ACCEPTED,
             ]
         );
     }
@@ -45,7 +63,7 @@ class Payments
     public function setStatus(Payment $payment, string $status): bool
     {
         return $payment->update([
-            'status' => $status
+            'status' => $status,
         ]);
     }
 
@@ -59,9 +77,8 @@ class Payments
         $pay = $data->payment[0];
         $payer = $data->request->payer;
         $last_digit = $data->payment[0]->processorFields[0]->value;
-        $this->payer->create(
+        $dbPayer = $this->payer->create(
             [
-                'payment_id'    => $payment->id,
                 'document'      => $payer->document,
                 'document_type' => $payer->documentType,
                 'email'         => $payer->email,
@@ -70,10 +87,12 @@ class Payments
                 'phone'         => $payer->mobile,
             ]
         );
+
         return $payment->update([
+            'payer_id'   => $dbPayer->id,
             'reference'  => $pay->internalReference,
             'method'     => $pay->paymentMethodName,
-            'last_digit' => $last_digit
+            'last_digit' => $last_digit,
         ]);
     }
 }

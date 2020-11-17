@@ -31,8 +31,8 @@ class OrderDetailsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param OrderDetail $detail
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(OrderDetail $detail): RedirectResponse
     {

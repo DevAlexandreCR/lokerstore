@@ -19,6 +19,7 @@ class EmailVerify
         if (!$request->user()->hasVerifiedEmail()) {
             return redirect()->route('home');
         }
+
         return $next($request);
     }
 }

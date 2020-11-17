@@ -13,10 +13,10 @@ class TagSeeder extends Seeder
     public function run(): void
     {
         factory(Tag::class)->create([
-            'name' => 'Hombre'
+            'name' => 'Hombre',
         ]);
         factory(Tag::class)->create([
-            'name' => 'Mujer'
+            'name' => 'Mujer',
         ]);
     }
 }

@@ -23,8 +23,13 @@
         </div>
     @endif
     <div class="row m-2 p-4 shadow-sm bg-secondary">
-        <div class="col-md-2 col-sm-6">
-            <strong class="d-none ml-2 d-sm-block text-muted navbar-brand">{{__('Orders')}}</strong>
+        <div class="col-md-2 col-sm-6 d-inline">
+            <div class="form-inline">
+                <strong class="d-none ml-2 d-sm-block text-muted navbar-brand">{{__('Orders')}}</strong>
+                <a href="{{route('orders.create')}}" type="button" class="btn btn-dark d-inline float-left" aria-expanded="false">
+                    +
+                </a>
+            </div>
         </div>
         <div class="col-md-10 col-sm-6 justify-content-end">
             <form class="form-inline justify-content-end my-2 my-lg-0" method="GET" action="{{route('orders.index')}}">
@@ -71,7 +76,7 @@
                         <td>{{$order->created_at}}</td>
                         <td>{{$order->getStatus()}}</td>
                         <td>{{$order->amount}}</td>
-                        <td>{{$order->user->email}}</td>
+                        <td>{{$order->user->email ?? '--'}}</td>
                         <td>
                             <div class="btn-group btn-block btn-group-sm text-center">
                                 <form action="{{route('orders.destroy', $order->id)}}" method="post">

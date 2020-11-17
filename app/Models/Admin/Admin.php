@@ -5,8 +5,8 @@ namespace App\Models\Admin;
 use App\Constants\Admins;
 use App\Constants\Roles;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
@@ -21,7 +21,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_active'
+        'name', 'email', 'password', 'is_active',
     ];
 
     /**

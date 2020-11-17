@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Repositories\Api;
 
-use App\Models\Photo;
-use App\Interfaces\Api\ApiPhotosInterface;
-use App\Http\Requests\Api\Photos\StoreRequest;
 use App\Http\Requests\Api\Photos\DestroyRequest;
+use App\Http\Requests\Api\Photos\StoreRequest;
+use App\Interfaces\Api\ApiPhotosInterface;
+use App\Models\Photo;
 
 class ApiPhotos implements ApiPhotosInterface
 {

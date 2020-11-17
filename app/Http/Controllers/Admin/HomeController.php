@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Metric;
-use App\Interfaces\MetricsInterface;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\View\View;
-use App\Http\Requests\Admin\Reports\ReportRequest;
-use Illuminate\Auth\Access\AuthorizationException;
 use App\Http\Requests\Admin\Reports\MonthlyRequest;
+use App\Http\Requests\Admin\Reports\ReportRequest;
+use App\Interfaces\MetricsInterface;
+use App\Models\Metric;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -21,14 +21,15 @@ class HomeController extends Controller
     }
 
     /**
-     * @return View
      * @throws AuthorizationException
+     * @return View
      */
     public function index(): View
     {
         $this->authorize('viewAmy', Metric::class);
 
         $data = $this->metrics->homeMetrics();
+
         return view('admin.stats', $data);
     }
 

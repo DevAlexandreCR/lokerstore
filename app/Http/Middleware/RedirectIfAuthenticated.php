@@ -33,6 +33,7 @@ class RedirectIfAuthenticated
                              */
                             session(['verify_email' => __('Please check your email to complete registration')]);
                         }
+
                         return redirect(RouteServiceProvider::HOME);
                     }
                     break;

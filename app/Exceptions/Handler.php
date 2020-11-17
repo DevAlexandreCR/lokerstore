@@ -3,15 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Auth\AuthenticationException;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Auth\Access\AuthorizationException;
-use Spatie\Permission\Exceptions\UnauthorizedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
+use Illuminate\Http\Request;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -38,9 +36,9 @@ class Handler extends ExceptionHandler
      * Report or log an exception.
      *
      * @param Throwable $exception
+     * @throws Exception|Throwable
      * @return void
      *
-     * @throws Exception|Throwable
      */
     public function report(Throwable $exception)
     {
@@ -52,9 +50,9 @@ class Handler extends ExceptionHandler
      *
      * @param  Request  $request
      * @param Throwable $exception
+     * @throws Throwable
      * @return Response
      *
-     * @throws Throwable
      */
     public function render($request, Throwable $exception)
     {
@@ -64,8 +62,8 @@ class Handler extends ExceptionHandler
                     'status' => [
                         'status' => 'failed',
                         'message' => 'Product not found',
-                        'code'    => 404
-                    ]
+                        'code'    => 404,
+                    ],
                 ], 404);
             }
 
@@ -74,8 +72,8 @@ class Handler extends ExceptionHandler
                     'status' => [
                         'status' => 'failed',
                         'message' => 'Route not found',
-                        'code'    => 404
-                    ]
+                        'code'    => 404,
+                    ],
                 ], 404);
             }
 
@@ -84,11 +82,12 @@ class Handler extends ExceptionHandler
                     'status' => [
                         'status' => 'failed',
                         'message' => 'User is authenticated',
-                        'code'    => 401
-                    ]
+                        'code'    => 401,
+                    ],
                 ], 401);
             }
         }
+
         return parent::render($request, $exception);
     }
 }

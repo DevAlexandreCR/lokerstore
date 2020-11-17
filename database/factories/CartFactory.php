@@ -9,6 +9,6 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Cart::class, function (Faker $faker) {
     return [
-        'user_id' => User::all()->random()->id
+        'user_id' => User::all()->random()->id,
     ];
 });

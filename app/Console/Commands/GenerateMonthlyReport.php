@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Constants\Roles;
+use App\Exports\MonthlyReportsExport;
+use App\Jobs\NotifyAdminsAfterCompleteExport;
 use App\Models\Admin\Admin;
 use App\Repositories\Metrics;
 use Illuminate\Console\Command;
-use App\Exports\MonthlyReportsExport;
-use App\Jobs\NotifyAdminsAfterCompleteExport;
 
 class GenerateMonthlyReport extends Command
 {
@@ -65,9 +65,9 @@ class GenerateMonthlyReport extends Command
             $this->admin = Admin::find($this->option('admin'));
         }
 
-
         if (!$this->admin) {
             logger()->info(trans('No admin to send report, abort export'));
+
             return 0;
         }
 
@@ -78,7 +78,7 @@ class GenerateMonthlyReport extends Command
                 $fileName,
                 trans('Reports'),
                 trans('Reports generated successfully')
-            )
+            ),
         ]);
 
         logger()->info(trans('Report monthly sent successfully'));

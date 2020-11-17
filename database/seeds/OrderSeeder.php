@@ -12,8 +12,8 @@ use Illuminate\Database\Seeder;
         /**
          * Run the database seeds.
          *
-         * @return void
          * @throws Exception
+         * @return void
          */
         public function run(): void
         {
@@ -21,14 +21,15 @@ use Illuminate\Database\Seeder;
 
             $orders->each(function ($order) {
                 factory(OrderDetail::class, random_int(1, 3))->create([
-                    'order_id' => $order->id
-                ]);
-                $payment = factory(Payment::class)->create([
                     'order_id' => $order->id,
-                    'status'   => Payments::STATUS_ACCEPTED
                 ]);
-                factory(Payer::class)->create([
-                    'payment_id' => $payment->id
+
+                $payer = factory(Payer::class)->create();
+
+                factory(Payment::class)->create([
+                    'order_id' => $order->id,
+                    'status'   => Payments::STATUS_ACCEPTED,
+                    'payer_id' => $payer->id,
                 ]);
             });
         }

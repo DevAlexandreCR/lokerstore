@@ -2,18 +2,18 @@
 
 namespace App\Providers;
 
-use App\Models\Admin\Admin;
-use App\Observers\AdminObserver;
 use App\Events\OnProductUpdateEvent;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Listeners\DisableProductIfStockIsEmpty;
 use App\Listeners\SetStockProduct;
+use App\Models\Admin\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\User;
+use App\Observers\AdminObserver;
 use App\Observers\OrderDetailObserver;
 use App\Observers\OrderObserver;
 use App\Observers\PaymentObserver;
@@ -36,11 +36,11 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         OnStockCreatedOrUpdatedEvent::class => [
-            SetStockProduct::class
+            SetStockProduct::class,
         ],
         OnProductUpdateEvent::class => [
-            DisableProductIfStockIsEmpty::class
-        ]
+            DisableProductIfStockIsEmpty::class,
+        ],
     ];
 
     /**

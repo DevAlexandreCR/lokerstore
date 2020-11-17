@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Constants;
 
 use MyCLabs\Enum\Enum;
@@ -77,11 +76,9 @@ class Permissions extends Enum
     public const CREATE_TAGS = 'create tags';
     public const DELETE_TAGS = 'delete  tags';
 
-
-
     public static function getAllPermissions(): array
     {
-        return array(
+        return [
             self::VIEW_USERS,
             self::EDIT_USERS,
             self::DELETE_USERS,
@@ -126,13 +123,13 @@ class Permissions extends Enum
             self::CREATE_TAGS,
             self::DELETE_TAGS,
             self::VIEW_HOME,
-            self::CREATE_METRICS
-        );
+            self::CREATE_METRICS,
+        ];
     }
 
     public static function getEmployePermissions(): array
     {
-        return array(
+        return [
             self::VIEW_USERS,
             self::EDIT_USERS,
             self::CREATE_USERS,
@@ -151,7 +148,7 @@ class Permissions extends Enum
             self::CREATE_PAYMENTS,
             self::VIEW_CART,
             self::EDIT_CART,
-            self::VIEW_HOME
-        );
+            self::VIEW_HOME,
+        ];
     }
 }

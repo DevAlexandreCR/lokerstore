@@ -2,10 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Constants\Admins;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EnabledUser
 {
@@ -25,6 +23,7 @@ class EnabledUser
         if ($request->user($guard) && ! $request->user($guard)->is_active) {
             return  redirect('/disabled-user');
         }
+
         return $next($request);
     }
 }

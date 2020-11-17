@@ -2,10 +2,10 @@
 
 namespace App\Interfaces\Api;
 
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Collection;
 use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\RepositoryInterface;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 
 interface ApiProductsInterface extends RepositoryInterface
 {

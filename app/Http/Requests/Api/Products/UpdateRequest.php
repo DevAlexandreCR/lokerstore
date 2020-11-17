@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api\Products;
 
-use App\Models\Product;
 use Illuminate\Support\Facades\Gate;
 
 class UpdateRequest extends StoreRequest

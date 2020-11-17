@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Constants\Orders;
 use App\Constants\Metrics;
-use Illuminate\Database\Eloquent\Model;
+use App\Constants\Orders;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Metric extends Model
@@ -35,7 +35,7 @@ class Metric extends Model
             ->where('metric', Metrics::SELLER)
             ->whereIn('status', [
                 Orders::STATUS_SUCCESS,
-                Orders::STATUS_SENT
+                Orders::STATUS_SENT,
             ])
             ->groupBy('measurable_id', 'status', 'metric')
             ->orderBy('amount', 'desc')
@@ -52,7 +52,7 @@ class Metric extends Model
             ->where('metric', Metrics::CATEGORIES)
             ->whereIn('status', [
                 Orders::STATUS_SUCCESS,
-                Orders::STATUS_SENT
+                Orders::STATUS_SENT,
             ])
             ->groupBy('measurable_id', 'status', 'metric')
             ->orderBy('total', 'desc')
@@ -76,7 +76,7 @@ class Metric extends Model
             ->whereIn('status', [
                 Orders::STATUS_PENDING_SHIPMENT,
                 Orders::STATUS_SUCCESS,
-                Orders::STATUS_SENT
+                Orders::STATUS_SENT,
             ])
             ->orderBy('date');
     }

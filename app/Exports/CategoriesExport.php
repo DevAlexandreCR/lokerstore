@@ -4,25 +4,23 @@ namespace App\Exports;
 
 use App\Models\Category;
 use Illuminate\Support\Collection;
-use PhpOffice\PhpSpreadsheet\Exception;
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Concerns\WithTitle;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use PhpOffice\PhpSpreadsheet\Cell\DataType;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class CategoriesExport implements
     FromCollection,
@@ -40,8 +38,8 @@ class CategoriesExport implements
     private array $subCategories;
 
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection(): Collection
     {
         return Category::primaries();
@@ -74,8 +72,8 @@ class CategoriesExport implements
             [
                 $category->id,
                 $category->name,
-                '--->'
-            ]
+                '--->',
+            ],
         ];
         $category->children()->each(function ($subCategory) {
             $this->subCategories[] = [
@@ -87,13 +85,14 @@ class CategoriesExport implements
                $subCategory->id_parent,
             ];
         });
+
         return array_merge($row, $this->subCategories);
     }
 
     /**
      * @param Worksheet $sheet
-     * @return array
      * @throws Exception
+     * @return array
      */
     public function styles(Worksheet $sheet): array
     {
@@ -119,15 +118,15 @@ class CategoriesExport implements
             1    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 13
+                    'size' => 13,
                 ],
             ],
             2    => [
                 'font' => [
                     'bold' => true,
-                    'size' => 13
+                    'size' => 13,
                 ],
-            ]
+            ],
         ];
     }
 
@@ -145,7 +144,7 @@ class CategoriesExport implements
     public function columnWidths(): array
     {
         return [
-            'C' => 20
+            'C' => 20,
         ];
     }
 

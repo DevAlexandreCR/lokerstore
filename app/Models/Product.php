@@ -13,7 +13,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'reference', 'name', 'description', 'cost', 'price', 'stock', 'id_category', 'is_active'
+        'reference', 'name', 'description', 'cost', 'price', 'stock', 'id_category', 'is_active',
     ];
 
     /**

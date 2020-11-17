@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories;
 
 use App\Constants\Admins;
@@ -8,7 +7,6 @@ use App\Interfaces\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use function GuzzleHttp\Promise\all;
 
 class Roles implements RoleInterface
 {
@@ -32,7 +30,7 @@ class Roles implements RoleInterface
     {
         $this->role::create([
             'name'       => $request->get('name'),
-            'guard_name' => Admins::GUARDED
+            'guard_name' => Admins::GUARDED,
         ]);
     }
 

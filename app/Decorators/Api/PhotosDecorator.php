@@ -1,16 +1,15 @@
 <?php
 
-
 namespace App\Decorators\Api;
 
+use App\Actions\Photos\Base64ToImage;
+use App\Actions\Photos\DeletePhotoAction;
+use App\Actions\Photos\SavePhotoAction;
+use App\Http\Requests\Api\Photos\DestroyRequest;
+use App\Http\Requests\Api\Photos\StoreRequest;
+use App\Interfaces\Api\ApiPhotosInterface;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
-use App\Actions\Photos\Base64ToImage;
-use App\Actions\Photos\SavePhotoAction;
-use App\Actions\Photos\DeletePhotoAction;
-use App\Interfaces\Api\ApiPhotosInterface;
-use App\Http\Requests\Api\Photos\StoreRequest;
-use App\Http\Requests\Api\Photos\DestroyRequest;
 
 class PhotosDecorator implements ApiPhotosInterface
 {

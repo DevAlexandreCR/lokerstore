@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin\Excel;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ImportRequest extends FormRequest
 {
@@ -26,7 +26,7 @@ class ImportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file', 'max:2000']
+            'file' => ['required', 'file', 'max:2000'],
         ];
     }
 }
