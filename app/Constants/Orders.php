@@ -36,6 +36,15 @@ class Orders
         ];
     }
 
+    public static function statusesPaid(): array
+    {
+        return [
+            self::STATUS_PENDING_SHIPMENT,
+            self::STATUS_SENT,
+            self::STATUS_SUCCESS
+        ];
+    }
+
     /**
      * @param string $status
      * @return string

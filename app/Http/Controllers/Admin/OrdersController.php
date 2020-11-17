@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Payer;
 use App\Decorators\OrderDecorator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Orders\indexRequest;
@@ -73,6 +74,7 @@ class OrdersController extends Controller
                 'orderDetails.stock.color',
                 'orderDetails.stock.size'
             ),
+            'payers' => Payer::all()
         ]);
     }
 

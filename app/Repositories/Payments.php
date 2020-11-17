@@ -38,6 +38,24 @@ class Payments
     }
 
     /**
+     * @param int $order_id
+     * @param string $method
+     * @return Payment
+     */
+    public function createFromAdmin(int $order_id, string $method): Payment
+    {
+        return $this->payment->updateOrCreate(
+            [
+                'order_id' => $order_id,
+            ],
+            [
+                'method' => $method,
+                'status' => Pay::STATUS_ACCEPTED,
+            ]
+        );
+    }
+
+    /**
      * @param Payment $payment
      * @param string $status
      * @return bool
@@ -59,9 +77,8 @@ class Payments
         $pay = $data->payment[0];
         $payer = $data->request->payer;
         $last_digit = $data->payment[0]->processorFields[0]->value;
-        $this->payer->create(
+        $dbPayer = $this->payer->create(
             [
-                'payment_id'    => $payment->id,
                 'document'      => $payer->document,
                 'document_type' => $payer->documentType,
                 'email'         => $payer->email,
@@ -72,6 +89,7 @@ class Payments
         );
 
         return $payment->update([
+            'payer_id'   => $dbPayer->id,
             'reference'  => $pay->internalReference,
             'method'     => $pay->paymentMethodName,
             'last_digit' => $last_digit,

@@ -1,9 +1,10 @@
 <template>
     <div style="position:relative" v-bind:class="{'open':openSuggestion}">
-        <label for="searchProduct">Producto</label>
+        <label for="searchProduct">{{ nameLabel }}</label>
         <input
-            class="form-control"
+            :class="styles"
             type="number"
+            :name="nameInput"
             id="searchProduct"
             :value="value"
             @input="updateValue($event.target.value)"
@@ -49,13 +50,31 @@ export default {
             type: Array,
             required: true,
         },
+
+        nameInput: {
+            type: String,
+            default: 'reference',
+            required: true
+        },
+
+        nameLabel: {
+            type: String,
+            default: 'products',
+            required: true
+        },
+
+        styles: {
+            type: String,
+            required: true,
+            default: 'form-control'
+        }
     },
 
     computed: {
 
         matches () {
             return this.suggestions.filter((obj) => {
-                return obj.reference.toString().indexOf(this.value) >= 0
+                if (obj.reference) return obj.reference.toString().indexOf(this.value) >= 0
             })
         },
 

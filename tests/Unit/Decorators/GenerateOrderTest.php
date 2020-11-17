@@ -52,7 +52,7 @@ class GenerateOrderTest extends TestCase
 
         $this->orders->shouldReceive('store')->with($request)->once();
         $this->orders->store($request);
-        $order = $this->orderDetails->shouldReceive('create')->with(1)->once();
+        $order = $this->orderDetails->shouldReceive('createFromUser')->with(1)->once();
         $this->orderDetails->createFromUser(1);
 
         self::assertNotNull($order);

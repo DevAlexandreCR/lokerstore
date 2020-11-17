@@ -35,7 +35,8 @@ class Payments extends Enum
     {
         return [
             self::METHOD_CASH,
-            self::METHOD_CARD
+            self::METHOD_CARD,
+            self::METHOD_CREDIT
         ];
     }
 }

@@ -1899,6 +1899,141 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/AddPaymentComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/AddPaymentComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_Payments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/Payments */ "./resources/js/constants/Payments.js");
+/* harmony import */ var _constants_Payers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/Payers */ "./resources/js/constants/Payers.js");
+/* harmony import */ var _Autocomplete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Autocomplete */ "./resources/js/admin-components/Autocomplete.vue");
+/* harmony import */ var _constants_NumberFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants/NumberFormat */ "./resources/js/constants/NumberFormat.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'add-payment-component',
+  components: {
+    Autocomplete: _Autocomplete__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      methods: _constants_Payments__WEBPACK_IMPORTED_MODULE_0__["Payments"].all(),
+      documentTypes: _constants_Payers__WEBPACK_IMPORTED_MODULE_1__["Payers"].all(),
+      suggestions: [],
+      selection: '',
+      payer: {},
+      token: $('meta[name="csrf-token"]').attr('content'),
+      url: "http://localhost" + '/admin/payments/store'
+    };
+  },
+  props: {
+    payers: {
+      type: Array,
+      "default": [],
+      required: true
+    },
+    orderId: {
+      type: Number,
+      required: true
+    },
+    amount: {
+      type: Number,
+      "default": 0,
+      required: true
+    }
+  },
+  methods: {
+    selectPayer: function selectPayer(payer) {
+      this.payer = payer;
+    }
+  },
+  filters: {
+    price: function price(_price) {
+      return _constants_NumberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].format(_price);
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.payers.forEach(function (payer) {
+      payer.reference = payer.document;
+      payer.name = "".concat(payer.name, " ").concat(payer.last_name);
+
+      _this.suggestions.push(payer);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/Autocomplete.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/Autocomplete.vue?vue&type=script&lang=js& ***!
@@ -1908,6 +2043,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -1952,6 +2088,21 @@ __webpack_require__.r(__webpack_exports__);
     suggestions: {
       type: Array,
       required: true
+    },
+    nameInput: {
+      type: String,
+      "default": 'reference',
+      required: true
+    },
+    nameLabel: {
+      type: String,
+      "default": 'products',
+      required: true
+    },
+    styles: {
+      type: String,
+      required: true,
+      "default": 'form-control'
     }
   },
   computed: {
@@ -1959,7 +2110,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       return this.suggestions.filter(function (obj) {
-        return obj.reference.toString().indexOf(_this.value) >= 0;
+        if (obj.reference) return obj.reference.toString().indexOf(_this.value) >= 0;
       });
     },
     openSuggestion: function openSuggestion() {
@@ -2385,6 +2536,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Autocomplete__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Autocomplete */ "./resources/js/admin-components/Autocomplete.vue");
 /* harmony import */ var _constants_NumberFormat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/NumberFormat */ "./resources/js/constants/NumberFormat.js");
+//
 //
 //
 //
@@ -93158,6 +93310,226 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/AddPaymentComponent.vue?vue&type=template&id=706f5e0a&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/AddPaymentComponent.vue?vue&type=template&id=706f5e0a& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [_vm._v("Agregar Pago")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("form", { attrs: { action: _vm.url, method: "post" } }, [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token", id: "csrf-token" },
+          domProps: { value: _vm.token }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("div", { staticClass: "form-group form-row" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-7", attrs: { for: "selectMethod" } },
+                [_vm._v("Método de pago")]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control col-sm-5 form-control-sm",
+                  attrs: { id: "selectMethod", name: "method" }
+                },
+                _vm._l(_vm.methods, function(method) {
+                  return _c("option", { domProps: { value: method } }, [
+                    _vm._v(_vm._s(method))
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group form-row" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-8", attrs: { for: "selectType" } },
+                [_vm._v("Tipo de documento")]
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass: "form-control col-sm-4 form-control-sm",
+                  attrs: { id: "selectType", name: "document_type" }
+                },
+                _vm._l(_vm.documentTypes, function(type) {
+                  return _c("option", { domProps: { value: type } }, [
+                    _vm._v(_vm._s(type))
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("autocomplete", {
+                  attrs: {
+                    suggestions: _vm.suggestions,
+                    "name-input": "document",
+                    "name-label": "Documento",
+                    styles: "form-control form-control-sm"
+                  },
+                  on: { select: _vm.selectPayer },
+                  model: {
+                    value: _vm.selection,
+                    callback: function($$v) {
+                      _vm.selection = $$v
+                    },
+                    expression: "selection"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c("div", { staticClass: "form-group form-row" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-2", attrs: { for: "namePayer" } },
+                [_vm._v("Nombre")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control col-sm-4 form-control-sm",
+                attrs: {
+                  type: "text",
+                  name: "name",
+                  id: "namePayer",
+                  placeholder: "Pepito"
+                },
+                domProps: { value: _vm.payer.name }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "col-sm-2", attrs: { for: "lastNamePayer" } },
+                [_vm._v("Apellido")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control col-sm-4 form-control-sm",
+                attrs: {
+                  type: "text",
+                  name: "lastName",
+                  id: "lastNamePayer",
+                  placeholder: "Perez"
+                },
+                domProps: { value: _vm.payer.last_name }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group form-row" }, [
+              _c(
+                "label",
+                { staticClass: "col-sm-2", attrs: { for: "emailPayer" } },
+                [_vm._v("E-mail")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control col-sm-4 form-control-sm",
+                attrs: {
+                  type: "email",
+                  id: "emailPayer",
+                  name: "email",
+                  placeholder: "client@example.com"
+                },
+                domProps: { value: _vm.payer.email }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "col-sm-2", attrs: { for: "phonePayer" } },
+                [_vm._v("Teléfono")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control col-sm-4 form-control-sm",
+                attrs: {
+                  type: "text",
+                  id: "phonePayer",
+                  name: "phone",
+                  placeholder: "3103100000"
+                },
+                domProps: { value: _vm.payer.phone }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group text-center align-bottom" }, [
+              _c(
+                "label",
+                { staticClass: "title", attrs: { for: "amountOrder" } },
+                [_vm._v("Total a pagar")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control form-control-sm text-center",
+                attrs: { type: "text", disabled: "", id: "amountOrder" },
+                domProps: { value: _vm._f("price")(_vm.amount) }
+              })
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "order_id" },
+              domProps: { value: _vm.orderId }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "amount" },
+              domProps: { value: _vm.amount }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "btn-group btn-block mx-xl-5" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-success btn-sm", attrs: { type: "submit" } },
+        [_vm._v("Guardar pago")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/Autocomplete.vue?vue&type=template&id=5eb216d5&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin-components/Autocomplete.vue?vue&type=template&id=5eb216d5& ***!
@@ -93180,11 +93552,13 @@ var render = function() {
       staticStyle: { position: "relative" }
     },
     [
-      _c("label", { attrs: { for: "searchProduct" } }, [_vm._v("Producto")]),
+      _c("label", { attrs: { for: "searchProduct" } }, [
+        _vm._v(_vm._s(_vm.nameLabel))
+      ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", id: "searchProduct" },
+        class: _vm.styles,
+        attrs: { type: "number", name: _vm.nameInput, id: "searchProduct" },
         domProps: { value: _vm.value },
         on: {
           input: function($event) {
@@ -93788,7 +94162,12 @@ var render = function() {
         { staticClass: "col-md-2" },
         [
           _c("autocomplete", {
-            attrs: { suggestions: _vm.products },
+            attrs: {
+              suggestions: _vm.products,
+              "name-input": "reference",
+              "name-label": "Productos",
+              styles: "form-control"
+            },
             on: { select: _vm.selectProduct },
             model: {
               value: _vm.selection,
@@ -112249,6 +112628,75 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin-components/AddPaymentComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/admin-components/AddPaymentComponent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddPaymentComponent_vue_vue_type_template_id_706f5e0a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddPaymentComponent.vue?vue&type=template&id=706f5e0a& */ "./resources/js/admin-components/AddPaymentComponent.vue?vue&type=template&id=706f5e0a&");
+/* harmony import */ var _AddPaymentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddPaymentComponent.vue?vue&type=script&lang=js& */ "./resources/js/admin-components/AddPaymentComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddPaymentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddPaymentComponent_vue_vue_type_template_id_706f5e0a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddPaymentComponent_vue_vue_type_template_id_706f5e0a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin-components/AddPaymentComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/AddPaymentComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/admin-components/AddPaymentComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPaymentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddPaymentComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/AddPaymentComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPaymentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin-components/AddPaymentComponent.vue?vue&type=template&id=706f5e0a&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/admin-components/AddPaymentComponent.vue?vue&type=template&id=706f5e0a& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPaymentComponent_vue_vue_type_template_id_706f5e0a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AddPaymentComponent.vue?vue&type=template&id=706f5e0a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin-components/AddPaymentComponent.vue?vue&type=template&id=706f5e0a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPaymentComponent_vue_vue_type_template_id_706f5e0a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPaymentComponent_vue_vue_type_template_id_706f5e0a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/admin-components/Autocomplete.vue":
 /*!********************************************************!*\
   !*** ./resources/js/admin-components/Autocomplete.vue ***!
@@ -112950,8 +113398,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_components_SalesPercentComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin-components/SalesPercentComponent */ "./resources/js/admin-components/SalesPercentComponent.vue");
 /* harmony import */ var _admin_components_TestApiComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin-components/TestApiComponent */ "./resources/js/admin-components/TestApiComponent.vue");
 /* harmony import */ var _views_admin_views_CreateOrder__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./views/admin-views/CreateOrder */ "./resources/js/views/admin-views/CreateOrder.vue");
+/* harmony import */ var _admin_components_AddPaymentComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./admin-components/AddPaymentComponent */ "./resources/js/admin-components/AddPaymentComponent.vue");
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
+
 
 
 
@@ -112975,6 +113425,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('category-metric', _admin_c
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('sales-percent-component', _admin_components_SalesPercentComponent__WEBPACK_IMPORTED_MODULE_11__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('test-api-component', _admin_components_TestApiComponent__WEBPACK_IMPORTED_MODULE_12__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-order', _views_admin_views_CreateOrder__WEBPACK_IMPORTED_MODULE_13__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('add-payment-component', _admin_components_AddPaymentComponent__WEBPACK_IMPORTED_MODULE_14__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_paginate__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.ignoredElements = [/^ion-/];
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
@@ -113890,6 +114341,104 @@ var Format = /*#__PURE__*/function () {
 }();
 
 
+
+/***/ }),
+
+/***/ "./resources/js/constants/Payers.js":
+/*!******************************************!*\
+  !*** ./resources/js/constants/Payers.js ***!
+  \******************************************/
+/*! exports provided: Payers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Payers", function() { return Payers; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Payers = function Payers() {
+  _classCallCheck(this, Payers);
+};
+
+_defineProperty(Payers, "DOCUMENT_TYPE_CC", 'CC');
+
+_defineProperty(Payers, "DOCUMENT_TYPE_AS", 'AS');
+
+_defineProperty(Payers, "DOCUMENT_TYPE_CE", 'CE');
+
+_defineProperty(Payers, "DOCUMENT_TYPE_PA", 'PA');
+
+_defineProperty(Payers, "DOCUMENT_TYPE_RC", 'RC');
+
+_defineProperty(Payers, "DOCUMENT_TYPE_TI", 'TI');
+
+_defineProperty(Payers, "all", function () {
+  return [Payers.DOCUMENT_TYPE_CC, Payers.DOCUMENT_TYPE_AS, Payers.DOCUMENT_TYPE_CE, Payers.DOCUMENT_TYPE_PA, Payers.DOCUMENT_TYPE_RC, Payers.DOCUMENT_TYPE_TI];
+});
+
+/***/ }),
+
+/***/ "./resources/js/constants/Payments.js":
+/*!********************************************!*\
+  !*** ./resources/js/constants/Payments.js ***!
+  \********************************************/
+/*! exports provided: Payments */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Payments", function() { return Payments; });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Payments = /*#__PURE__*/function (_Array) {
+  _inherits(Payments, _Array);
+
+  var _super = _createSuper(Payments);
+
+  function Payments() {
+    _classCallCheck(this, Payments);
+
+    return _super.apply(this, arguments);
+  }
+
+  return Payments;
+}( /*#__PURE__*/_wrapNativeSuper(Array));
+
+_defineProperty(Payments, "METHOD_CASH", 'cash');
+
+_defineProperty(Payments, "METHOD_CARD", 'credit card');
+
+_defineProperty(Payments, "METHOD_CREDIT", 'credit');
+
+_defineProperty(Payments, "all", function () {
+  return [Payments.METHOD_CASH, Payments.METHOD_CARD, Payments.METHOD_CREDIT];
+});
 
 /***/ }),
 

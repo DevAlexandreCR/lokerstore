@@ -13,6 +13,7 @@ import CategoryMetric from "./admin-components/charts/CategoryMetric";
 import SalesPercentComponent from "./admin-components/SalesPercentComponent";
 import TestApiComponent from "./admin-components/TestApiComponent";
 import CreateOrder from "./views/admin-views/CreateOrder";
+import AddPaymentComponent from "./admin-components/AddPaymentComponent";
 
 Vue.component('banner-component', BannerComponent)
 Vue.component('error404-component', Error404Component)
@@ -24,6 +25,7 @@ Vue.component('category-metric', CategoryMetric)
 Vue.component('sales-percent-component', SalesPercentComponent)
 Vue.component('test-api-component', TestApiComponent)
 Vue.component('create-order', CreateOrder)
+Vue.component('add-payment-component', AddPaymentComponent)
 
 Vue.use(VuePaginate)
 

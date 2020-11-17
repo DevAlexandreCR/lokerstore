@@ -2,7 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <autocomplete :suggestions="products" v-model="selection" v-on:select="selectProduct"></autocomplete>
+                <autocomplete :suggestions="products" v-model="selection" v-on:select="selectProduct"
+                              :name-input="'reference'" :name-label="'Productos'" :styles="'form-control'"></autocomplete>
             </div>
             <div class="col-md-5">
                 <label for="productsFound">Detalle del producto</label>

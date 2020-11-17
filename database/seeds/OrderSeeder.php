@@ -23,12 +23,13 @@ use Illuminate\Database\Seeder;
                 factory(OrderDetail::class, random_int(1, 3))->create([
                     'order_id' => $order->id,
                 ]);
-                $payment = factory(Payment::class)->create([
+
+                $payer = factory(Payer::class)->create();
+
+                factory(Payment::class)->create([
                     'order_id' => $order->id,
                     'status'   => Payments::STATUS_ACCEPTED,
-                ]);
-                factory(Payer::class)->create([
-                    'payment_id' => $payment->id,
+                    'payer_id' => $payer->id,
                 ]);
             });
         }

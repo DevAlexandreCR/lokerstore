@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Payer::class, function (Faker $faker) {
     return [
-        'payment_id' => Payment::all()->random()->id,
         'document'   => $faker->bankAccountNumber,
         'document_type' => 'CC',
         'name' => $faker->firstName,

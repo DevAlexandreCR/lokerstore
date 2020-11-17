@@ -29,7 +29,7 @@
             </div>
         @endif
     </div>
-    <div class="container-fluid my-2">
+    <div class="container">
         <div class="row">
             @if($order->user)
                 <div class="col-xl-3">
@@ -57,16 +57,24 @@
                 </div>
             @endif
             <div class="@if($order->user) col-xl-6 @else col-xl-9 @endif">
-                @if($order->status === 'pending_shipment' || $order->status === 'sent' || optional($order->payment)->payer)
+                @if(in_array($order->status, \App\Constants\Orders::statusesPaid(), true))
                     <div class="card">
                         <div class="card-header"><h5>{{__('Payment')}}</h5></div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="container">
                                     <h6>{{__('Payer data')}}</h6>
+                                    <div class="row row-cols-2">
+                                        <div class="col-sm-6 text-price text-left">
+                                            {{__('Payment method')}}
+                                        </div>
+                                        <div class="col-sm-6 text-muted text-left">
+                                            {{$order->payment->method}}
+                                        </div>
+                                    </div>
                                     @if($order->payment->payer)
                                         <div class="row row-cols-2">
-                                            <div class="col-sm-6 text-muted text-left">
+                                            <div class="col-sm-6 text-price text-left">
                                                 {{__('Name')}}
                                             </div>
                                             <div class="col-sm-6 text-muted text-left">
@@ -74,7 +82,7 @@
                                             </div>
                                         </div>
                                         <div class="row row-cols-2">
-                                            <div class="col-sm-6 text-muted text-left">
+                                            <div class="col-sm-6 text-price text-left">
                                                 {{__('Document')}}
                                             </div>
                                             <div class="col-sm-6 text-muted text-left">
@@ -83,7 +91,7 @@
                                             </div>
                                         </div>
                                         <div class="row row-cols-2">
-                                            <div class="col-sm-6 text-muted text-left">
+                                            <div class="col-sm-6 text-price text-left">
                                                 {{__('Email')}}
                                             </div>
                                             <div class="col-sm-6 text-muted text-left">
@@ -91,7 +99,7 @@
                                             </div>
                                         </div>
                                         <div class="row row-cols-2">
-                                            <div class="col-sm-6 text-muted text-left">
+                                            <div class="col-sm-6 text-price text-left">
                                                 {{__('Phone')}}
                                             </div>
                                             <div class="col-sm-6 text-muted text-left">
@@ -99,29 +107,23 @@
                                             </div>
                                         </div>
                                         <div class="row row-cols-2">
-                                            <div class="col-sm-6 text-muted text-left">
-                                                {{__('Payment method')}}
-                                            </div>
-                                            <div class="col-sm-6 text-muted text-left">
-                                                {{$order->payment->method}}
-                                            </div>
-                                        </div>
-                                        <div class="row row-cols-2">
-                                            <div class="col-sm-6 text-muted text-left">
+                                            <div class="col-sm-6 text-price text-left">
                                                 {{__('Last digit')}}
                                             </div>
                                             <div class="col-sm-6 text-muted text-left">
-                                                {{$order->payment->last_digit}}
+                                                {{$order->payment->last_digit ?? '****'}}
                                             </div>
                                         </div>
                                         <hr>
+                                    @else
+                                        <h4>{{ trans('No Payer') }}</h4>
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 @else
-                    @include('admin.orders.addPayment')
+                    <add-payment-component :payers="{{ $payers }}" :amount="{{ $order->amount }}" :order-id="{{ $order->id }}"></add-payment-component>
                 @endif
             </div>
             <div class="col-xl-3">
@@ -133,9 +135,9 @@
                         <div class="card-body">
                             @if($order->status === \App\Constants\Orders::STATUS_PENDING_PAY || $order->status === \App\Constants\Orders::STATUS_REJECTED)
                                 <div class="form-group">
-                                    <label for="amount">{{__('Price')}}</label>
-                                    <input class="form-control" type="number" id="amount" name="amount"
-                                           value="{{$order->amount}}">
+                                    <label for="amountOrder">{{__('Price')}}</label>
+                                    <input class="form-control" type="number" min="0" id="amountOrder" name="amount"
+                                           value="{{ $order->amount }}">
                                 </div>
                             @endif
                             <label for="status">{{__('Status')}}</label>
@@ -157,12 +159,13 @@
                 </div>
             </div>
         </div>
+        <hr>
         <div class="row py-4">
             <div class="container">
                 <div class="card">
                     <div class="card-header">{{trans('Order details')}}</div>
                     <div class="card-body">
-                        <table class="table table-condensed table-sm table-responsive-sm" id="selectedProducts">
+                        <table class="table table-condensed table-sm table-responsive-md" id="selectedProducts">
                             <thead>
                             <tr>
                                 <th>{{trans('Product')}}</th>
