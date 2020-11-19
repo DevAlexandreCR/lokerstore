@@ -2,8 +2,8 @@
 
 @section('main')
 <div class="content">
-    <a href="{{route('orders.create')}}" type="button" class="btn btn-dark float-left" aria-expanded="false">
-        {{trans('Add Sell')}}
+    <a href="{{route('orders.create')}}" type="button" class="btn btn-dark fab float-left" aria-expanded="false">
+        <ion-icon size="large" class="add" name="add"></ion-icon>
     </a>
     <div class="btn-group dropleft float-md-right">
         <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -93,9 +93,9 @@
                 <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Retry payment')}}</button>
             </form>
         @break
-        @case('complete')
+        @case('completed')
             <p><small>{{__('Buy completed')}}</small></p>
-            <form action="{{route('user.order.status', $order->user_id)}}" method="post">d
+            <form action="{{route('user.order.status', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
                 <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Buy again')}}</button>

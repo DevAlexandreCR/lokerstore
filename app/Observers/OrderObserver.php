@@ -37,7 +37,9 @@ class OrderObserver
             case Orders::STATUS_PENDING_SHIPMENT:
                 logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payment ' . $order->payment->id .
                 ' has been success');
-                SendEmailUsers::dispatch($order);
+                if ($order->user) {
+                    SendEmailUsers::dispatch($order);
+                }
                 break;
             case Orders::STATUS_CANCELED:
                 logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Order ' . $order->id .

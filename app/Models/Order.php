@@ -88,21 +88,21 @@ class Order extends Model
     {
         switch ($this->status) {
             case Orders::STATUS_PENDING_PAY:
-                return __('Pending payment');
+                return trans('orders.statuses.pending_pay');
             case Orders::STATUS_PENDING_SHIPMENT:
-                return __('Pending shipment');
+                return trans('orders.statuses.pending_shipment');
             case Orders::STATUS_CANCELED:
-                return __('Canceled');
+                return trans('orders.statuses.canceled');
                 case Orders::STATUS_REJECTED:
-            return __('Payment rejected');
+            return __('orders.statuses.rejected');
             case Orders::STATUS_SENT:
-                return __('Sent');
+                return trans('orders.statuses.sent');
             case Orders::STATUS_SUCCESS:
-                return __('Complete');
+                return trans('orders.statuses.completed');
             case Orders::STATUS_FAILED:
-                return __('Failed');
+                return trans('orders.statuses.failed');
             default:
-                return __('');
+                return trans('');
         }
     }
 
@@ -120,11 +120,11 @@ class Order extends Model
     public function getAllStatus(): array
     {
         return [
-            Orders::STATUS_CANCELED => __('Canceled'),
-            Orders::STATUS_PENDING_PAY => __('Pending payment'),
-            Orders::STATUS_PENDING_SHIPMENT => __('Pending shipment'),
-            Orders::STATUS_SENT => __('Sent'),
-            Orders::STATUS_SUCCESS => __('Completo'),
+            Orders::STATUS_CANCELED         => trans('orders.statuses.canceled'),
+            Orders::STATUS_PENDING_PAY      => trans('orders.statuses.pending_pay'),
+            Orders::STATUS_PENDING_SHIPMENT => trans('orders.statuses.pending_shipment'),
+            Orders::STATUS_SENT             => trans('orders.statuses.sent'),
+            Orders::STATUS_SUCCESS          => trans('orders.statuses.completed'),
         ];
     }
 }

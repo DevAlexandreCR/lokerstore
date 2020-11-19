@@ -53,7 +53,7 @@
                                 <th class="align-middle">{{$detail->quantity}}</th>
                                 <th class="align-middle"><span class="badge badge-color-{{strtolower($detail->stock->color->name)}}">.</span></th>
                                 <th class="align-middle">{{$detail->stock->size->name}}</th>
-                                <th class="align-middle">{{$detail->total_price}}</th>
+                                <th class="align-middle">$ {{number_format($detail->total_price, 2, ',', '.')}}</th>
                             </tr>
                             @endforeach
                             </tbody>
@@ -65,7 +65,7 @@
                                 {{__('Order amount')}}:
                             </div>
                             <div class="col-sm-3 font-weight-bold">
-                                {{$order->amount}}
+                                $ {{number_format($order->amount, 2, ',', '.')}}
                             </div>
                         </div>
                     </div>
@@ -74,10 +74,10 @@
             <div class="col-lg-4">
                 <div class="card my-2 my-lg-0">
                     <div class="card-header">
-                        {{$order->getStatus()}}
+                        {{\App\Constants\Orders::getTranslatedStatus($order->status)}}
                     </div>
                     <div class="card-body">
-                        <x-statusPayment :order="$order"></x-statusPayment>
+                        <x-status-payment :order="$order"/>
                     </div>
                     <div class="card-footer">
                         <a href="{{route('user.orders.index', [$order->user_id])}}" class="btn btn-block btn-sm btn-outline-dark my-2">{{__('Back')}}</a>

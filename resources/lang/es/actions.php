@@ -1,0 +1,25 @@
+<?php
+return [
+    "apply" => "Aplicar",
+    "back" => "Volver",
+    "cancel" => "Cancelar",
+    "choose_category" => "Escoger categoría",
+    "clear_filter" => "Limpiar filtros",
+    "disable" => "Deshabilitar",
+    "disabled" => "Inhabilitado",
+    "enable" => "Habilitar",
+    "enabled" => "Habilitado",
+    "error" => "Error!",
+    "export" => "Exportar",
+    "filter" => "Filtrar y ordenar",
+    "import" => "Importar",
+    "order" => "Ordenar por",
+    "remove" => "Eliminar",
+    "save" => "Guardar",
+    "save_changes" => "Guardar cambios",
+    "search" => "Buscar",
+    "success" => "Hecho!",
+    "update" => "Actualizar",
+    "view" => "Ver",
+    "view_all" => "Ver todos"
+];

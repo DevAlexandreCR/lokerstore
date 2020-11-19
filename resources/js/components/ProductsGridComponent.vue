@@ -1,6 +1,6 @@
 <template>
     <div class="mt-1">
-        <div class="row">
+        <div class="row row-cols-sm-2">
             <div class="col-8">
                 <div class="container">
                     <div class="form-inline pt-4 pl-2">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 pt-4">
+            <div class="col-sm-4 pt-4">
                 <paginate-links v-if="products.length > 0"
                                 for="products"
                                 :classes="{
@@ -29,7 +29,7 @@
         </div>
         <paginate v-if="products.length > 0" name="products" :list="products" :per="15" class="">
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-sm-6  my-2" v-for="product in paginated('products')" :key="product.name">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6  my-2" v-for="product in paginated('products')" :key="product.name">
                     <product-component :product="product"></product-component>
                 </div>
             </div>

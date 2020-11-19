@@ -39,11 +39,11 @@
                         <div class="row">
                             <div class="col">
                                 <p><strong>{{__('Cost')}}</strong></p>
-                                <p>{{$product->cost}}</p>
+                                <p>$ {{number_format($product->cost, 2, ',', '.')}}</p>
                             </div>
                             <div class="col">
                                 <p><strong>{{__('Price')}}</strong></p>
-                                <p>{{$product->getPrice()}}</p>
+                                <p>$ {{number_format($product->price, 2, ',', '.')}}</p>
                             </div>
                             <div class="col">
                                 <p><strong>{{__('Status')}}</strong></p>

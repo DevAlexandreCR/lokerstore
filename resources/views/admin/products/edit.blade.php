@@ -46,7 +46,8 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <input type="name" class="form-control  @error('reference') is-invalid @enderror" id="name"
+                                <input type="name" class="form-control  @error('reference') is-invalid @enderror"
+                                       id="name"
                                        required placeholder="{{__('0000')}}"
                                        name="reference" aria-describedby="nameHelp" value="{{ $product->reference}}">
                                 @error('reference')
@@ -91,10 +92,15 @@
                     <div class="row">
                         <div class="col-sm-2 ml-2">
                             <div class="form-group">
-                                <label for="price">{{trans('Cost')}}</label>
-                                <input type="number" class="form-control  @error('cost') is-invalid @enderror"
-                                       id="cost" required placeholder="{{trans('Cost')}}"
-                                       name="cost" aria-describedby="priceHelp" value="{{ $product->cost }}">
+                                <label for="cost">{{trans('Cost')}}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                    </div>
+                                    <input type="number" class="form-control  @error('cost') is-invalid @enderror"
+                                           id="cost" required placeholder="{{trans('Cost')}}"
+                                           name="cost" aria-describedby="priceHelp" value="{{ $product->cost }}">
+                                </div>
                                 @error('cost')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -105,9 +111,14 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="price">{{trans('Price')}}</label>
-                                <input type="number" class="form-control  @error('price') is-invalid @enderror"
-                                       id="price" required placeholder="{{trans('Price')}}"
-                                       name="price" aria-describedby="priceHelp" value="{{ $product->price }}">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                    </div>
+                                    <input type="number" class="form-control  @error('price') is-invalid @enderror"
+                                           id="price" required placeholder="{{trans('Price')}}"
+                                           name="price" aria-describedby="priceHelp" value="{{ $product->price }}">
+                                </div>
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -166,7 +177,7 @@
                                 </div>
                             </div>
                             @error('category')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

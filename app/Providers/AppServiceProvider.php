@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Constants\Metrics;
 use App\Decorators\AdminDecorator;
+use Illuminate\Support\Facades\Blade;
+use App\View\Components\StatusPayment;
 use App\Decorators\Api\CacheApiProducts;
 use App\Decorators\Api\PhotosDecorator;
 use App\Decorators\Api\StocksDecorator;

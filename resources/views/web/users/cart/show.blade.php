@@ -64,8 +64,8 @@
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <label class="col-7 font-weight-bold mt-2">{{__('Subtotal')}}: </label>
-                                        <input id="inputunit" class="form-control-plaintext col-5"
+                                        <label class="col-6 font-weight-bold mt-2">{{__('Subtotal')}}: </label>
+                                        <input id="inputunit" class="form-control-plaintext text-price col-6"
                                                value="{{$cart->getSubTotalFromProduct($stock)}}">
                                     </div>
                                 </div>

@@ -211,7 +211,7 @@ class Product extends Model
      */
     public function getPrice(): string
     {
-        return round($this->price, 0, PHP_ROUND_HALF_UP) . 'COP';
+        return number_format($this->price, 2, ',', '.') . 'COP';
     }
 
     /**

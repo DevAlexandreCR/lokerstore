@@ -17,9 +17,9 @@
                         @forelse($orders as $order)
                             <tr>
                                 <td>{{$order->created_at}}</td>
-                                <td>{{$order->getStatus()}}</td>
+                                <td>{{\App\Constants\Orders::getTranslatedStatus($order->status)}}</td>
                                 <td>
-                                    {{$order->amount}}
+                                    $ {{number_format($order->amount, 2, ',', '.')}}
                                 </td>
                                 <td class="text-center">
                                     <div class="btn btn-group">
