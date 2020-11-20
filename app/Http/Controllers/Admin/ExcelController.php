@@ -32,8 +32,11 @@ class ExcelController extends Controller
             new NotifyAdminsAfterCompleteExport(
                 $request->user(Admins::GUARDED),
                 $fileName,
-                trans('Products'),
-                trans('Products exported successfully')
+                trans_choice('products.product', 2, ['product_count' => '']),
+                trans('messages.crud', [
+                    'resource' => trans_choice('products.product', 2, ['product_count' => '']),
+                    'status' => trans('fields.exported')
+                ])
             ),
         ]);
 
@@ -53,7 +56,7 @@ class ExcelController extends Controller
             new DeleteErrorsImportsTable(),
         ]);
 
-        return back()->with('success', __('Importing products... we\'ll send you an email when the import is ended'));
+        return back()->with('success', trans('messages.importing'));
     }
 
     public function images(ImagesRequest $request): RedirectResponse
@@ -77,12 +80,15 @@ class ExcelController extends Controller
                 $saved ++;
                 SavePhotoAction::execute($product->id, $image);
             } else {
-                $errors[] = $array[0] .  trans(' Reference not found');
+                $errors[] = $array[0] .  trans('messages.not_found', ['resource' => trans('products.reference')]);
             }
         }
 
         return redirect()->route('products.index')
-            ->with('success', $saved . trans(' Images imported successfully'))
+            ->with('success', $saved . ' ' .trans('messages.crud', [
+                    'resource' => trans('fields.images'),
+                    'status' => trans('fields.imported')
+                ]))
             ->withErrors($errors);
     }
 }

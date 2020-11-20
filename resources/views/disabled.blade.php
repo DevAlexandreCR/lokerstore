@@ -5,15 +5,14 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            {{__('Usuario inhabilitado')}}
+            {{trans('users.messages.disabled')}}
         </div>
         <div class="card-body">
-            <h4 class="card-title">{{__('Comunicate con nosotros')}}</h4>
-            <p class="card-text">{{__('Lamentamos informarte que tu usuario ha sido bloqueado 
-            para más información escríbemos a support@lokerstore.com')}}</p>
+            <h4 class="card-title">{{trans('users.messages.contact_us')}}</h4>
+            <p class="card-text">{{trans('users.messages.contact') . config('app.support')}}</p>
         </div>
         <div class="card-footer text-muted">
-            {{__('support@lokerstore.com')}}
+            {{config('app.support')}}
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
             <form action="{{route('products.import')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="importModal">{{trans('Import')}}</h5>
+                    <h5 class="modal-title" id="importModal">{{trans('actions.import')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Close')}}</button>
-                    <button type="submit" class="btn btn-primary">{{trans('Submit')}}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.close')}}</button>
+                    <button type="submit" class="btn btn-primary">{{trans('actions.submit')}}</button>
                 </div>
             </form>
         </div>

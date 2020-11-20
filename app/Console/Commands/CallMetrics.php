@@ -48,6 +48,9 @@ class CallMetrics extends Command
         DB::unprepared("call orders_metrics_generate('$from', '$until', '$metricOrders', 'none')");
         DB::unprepared("call categories_metrics_generate('$firstMonth', '$until')");
 
-        $this->info('Metrics updated successfully!');
+        $this->info(trans('messages.crud', [
+            'resource' => trans('fields.metrics'),
+            'status' => trans('fields.updated')
+        ]));
     }
 }

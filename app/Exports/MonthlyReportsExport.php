@@ -57,7 +57,7 @@ class MonthlyReportsExport implements
      */
     public function title(): string
     {
-        return trans('Monthly report');
+        return trans('reports.monthly');
     }
 
     /**

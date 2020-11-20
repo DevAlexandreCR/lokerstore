@@ -4,7 +4,7 @@
         <form action="{{route('category.store')}}" method="post">
             @csrf
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">{{__('Add category')}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel">{{trans('products.add_category')}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -12,14 +12,14 @@
             <div class="modal-body">
                 <div class="form-group">
                     <input type="number" hidden name="id_parent" value="{{null}}">
-                    <label for="exampleInputEmail1">{{__('Name')}}</label>
+                    <label for="exampleInputEmail1">{{trans('users.name')}}</label>
                     <input type="text" class="form-control" id="inputName" name="name" aria-describedby="namelHelp" value="{{ old('name') }}">
-                    <small id="nameHelp" class="form-text text-muted">{{__('The name must be unique')}}</small>
+                    <small id="nameHelp" class="form-text text-muted">{{trans('products.category_unique')}}</small>
                   </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Discard')}}</button>
-            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.cancel')}}</button>
+            <button type="submit" class="btn btn-primary">{{trans('actions.save')}}</button>
             </div>
         </form>
       </div>

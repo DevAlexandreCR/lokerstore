@@ -61,7 +61,9 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'status' => [
                         'status' => 'failed',
-                        'message' => 'Product not found',
+                        'message' => trans('messages.not_found', [
+                            'resource' => trans_choice('products.product', 1, ['product_count' => ''])
+                        ]),
                         'code'    => 404,
                     ],
                 ], 404);
@@ -71,7 +73,7 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'status' => [
                         'status' => 'failed',
-                        'message' => 'Route not found',
+                        'message' => trans('fields.route'),
                         'code'    => 404,
                     ],
                 ], 404);
@@ -81,7 +83,7 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'status' => [
                         'status' => 'failed',
-                        'message' => 'User is authenticated',
+                        'message' => trans('http_errors.unauthenticated'),
                         'code'    => 401,
                     ],
                 ], 401);

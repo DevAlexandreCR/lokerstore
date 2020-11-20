@@ -50,12 +50,12 @@ class SizesExport implements
     public function headings(): array
     {
         return [
-            trans('ID'),
-            trans('Name'),
+            trans('fields.id'),
+            trans('fields.name'),
             null,
-            trans('ID'),
-            trans('Name'),
-            'ID' . trans('Type-Size'),
+            trans('fields.id'),
+            trans('fields.name'),
+            'ID' . trans('fields.type_size'),
 
         ];
     }

@@ -262,6 +262,6 @@ class ReportsExport extends DefaultValueBinder implements
      */
     public function title(): string
     {
-        return trans('General sales report');
+        return trans('reports.sales');
     }
 }

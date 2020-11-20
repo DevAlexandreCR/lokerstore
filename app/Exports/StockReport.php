@@ -50,11 +50,11 @@ class StockReport implements
     public function headings(): array
     {
         return [
-            trans('Category'),
-            trans('Cost'),
-            trans('Price'),
-            trans('Difference'),
-            trans('Quantity'),
+            trans('products.category'),
+            trans('products.cost'),
+            trans('products.price'),
+            trans('fields.dif'),
+            trans('fields.quantity'),
         ];
     }
 
@@ -75,7 +75,7 @@ class StockReport implements
      */
     public function title(): string
     {
-        return trans('Stock report');
+        return trans('reports.stock');
     }
 
     /**

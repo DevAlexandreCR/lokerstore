@@ -4,21 +4,21 @@
             <form action="{{route('products.import_images')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">{{trans('Import images')}}</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">{{trans('products.messages.import_images')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <label for="images" class="mr-1 btn-block">{{__('Choose images')}}</label>
+                        <label for="images" class="mr-1 btn-block">{{__('products.choose_images')}}</label>
                         <input class="form-control d-block mr-sm-2" type="file" name="images[]" multiple
                                id="images" accept="image/x-png, image/gif, image/jpeg">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Close')}}</button>
-                    <button type="submit" class="btn btn-primary">{{trans('Submit')}}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.close')}}</button>
+                    <button type="submit" class="btn btn-primary">{{trans('actions.submit')}}</button>
                 </div>
             </form>
         </div>

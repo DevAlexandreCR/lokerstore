@@ -12,14 +12,14 @@
             <div class="modal-body">
                 <div class="form-group">
                     <input type="number" name="id_parent" hidden value="{{$category->id}}">
-                    <label for="InputEmail1">{{__('Name sub-category')}}</label>
+                    <label for="InputEmail1">{{trans('products.sub_category')}}</label>
                     <input type="text" class="form-control" id="inputName" name="name" aria-describedby="namelHelp" value="{{ old('name') }}">
-                    <small id="nameHelp" class="form-text text-muted">{{__('The name must be unique')}}</small>
+                    <small id="nameHelp" class="form-text text-muted">{{trans('products.category_unique')}}</small>
                   </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Cancel')}}</button>
-            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.cancel')}}</button>
+            <button type="submit" class="btn btn-primary">{{trans('actions.save')}}</button>
             </div>
         </form>
       </div>

@@ -42,7 +42,7 @@ class ProductController extends Controller
         return response()->json([
             'status' => [
                 'status' => 'OK',
-                'message' => 'Product was found',
+                'message' => trans('messages.found', ['search' => $product->name]),
                 'code'    => 200,
             ],
             'product' => ProductResource::collection(
@@ -61,7 +61,10 @@ class ProductController extends Controller
         return response()->json([
             'status' => [
                 'status' => 'OK',
-                'message' => 'Product was created successfully',
+                'message' => trans('messages.crud', [
+                    'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                    'status' => trans('fields.created')
+                ]),
                 'code'    => 200,
             ],
             'product' => $product,
@@ -75,7 +78,10 @@ class ProductController extends Controller
         return response()->json([
             'status' => [
                 'status'  => 'OK',
-                'message' => 'Product was updated successfully',
+                'message' => trans('messages.crud', [
+                    'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                    'status' => trans('fields.updated')
+                ]),
                 'code'    => 200,
             ],
             'product' => $product,
@@ -90,7 +96,10 @@ class ProductController extends Controller
         return response()->json([
             'status' => [
                 'status' => 'OK',
-                'message' => 'Product was deleted successfully',
+                'message' => trans('messages.crud', [
+                    'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                    'status' => trans('fields.deleted')
+                ]),
                 'code'    => 200,
             ],
         ]);

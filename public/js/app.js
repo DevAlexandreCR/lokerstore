@@ -3438,12 +3438,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'empty-cart-component',
+  data: function data() {
+    return {
+      url: "http://localhost" + '/home/show?'
+    };
+  },
   components: {
     LottieAnimation: lottie_vuejs_src_LottieAnimation_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     back: function back() {
-      window.history.back();
+      window.location.href = this.url;
     }
   }
 });
@@ -4563,7 +4569,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     },
     sendQuery: function sendQuery(query) {
       var reload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      $('#collapseFilters').collapse('hide');
+      // $('#collapseFilters').collapse('hide')
       this.$router.push({
         name: 'showcase',
         query: query
@@ -96018,7 +96024,7 @@ var render = function() {
     "div",
     { staticClass: "mt-1" },
     [
-      _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "row row-cols-sm-2" }, [
         _c("div", { staticClass: "col-8" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "form-inline pt-4 pl-2" }, [
@@ -96079,7 +96085,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-4 pt-4" },
+          { staticClass: "col-sm-4 pt-4" },
           [
             _vm.products.length > 0
               ? _c("paginate-links", {
@@ -96116,7 +96122,7 @@ var render = function() {
                     "div",
                     {
                       key: product.name,
-                      staticClass: "col-xl-3 col-lg-4 col-sm-6  my-2"
+                      staticClass: "col-xl-3 col-lg-4 col-md-4 col-sm-6  my-2"
                     },
                     [_c("product-component", { attrs: { product: product } })],
                     1
@@ -96541,7 +96547,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "col-md-3 col-lg-2 container collapse navbar-collapse",
+          staticClass: "col-sm-3 col-lg-2 container collapse navbar-collapse",
           attrs: { id: "collapseFilters" }
         },
         [

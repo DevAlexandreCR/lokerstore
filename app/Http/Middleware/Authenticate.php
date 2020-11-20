@@ -18,8 +18,8 @@ class Authenticate extends Middleware
         if ($request->expectsJson() || strpos($request->path(), 'api/products') !== false) {
             abort(response()->json([
                 'status' => [
-                    'status' => 'failed',
-                    'reason' => 'User is not authenticated',
+                    'status' => trans('http_errors.unauthenticated'),
+                    'reason' => trans(''),
                     'code'   => 401,
                 ],
             ], 401));

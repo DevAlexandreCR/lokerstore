@@ -9,39 +9,39 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{__('Success!')}}</strong> {{ session('success') }}
+                    <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
                 </div>
             </div>
         @endif
         <div class="row my-4">
             <div class="col-lg-6">
-                <h4>{{__('User data')}}</h4>
+                <h4>{{trans('users.data')}}</h4>
                 <form action="{{route('admins.update', $admin->id)}}" method="post">
                     @csrf
                     @method('PUT')
                     <table class="table table-responsive-sm">
                         <thead>
                         <tr>
-                            <th class="align-middle">{{__('Name')}}:</th>
+                            <th class="align-middle">{{trans('users.name')}}:</th>
                             <td><input class="form-control" type="text" name="name" id="name" value="{{$admin->name}}"></td>
                         </tr>
                         <tr>
-                            <th class="align-middle">{{__('Email address')}}:</th>
+                            <th class="align-middle">{{trans('users.email')}}:</th>
                             <td>
                                 <input class="form-control" type="email" name="email" value="{{$admin->email}}" id="email" autocomplete="nope">
                             </td>
                         </tr>
                         <tr>
-                            <th class="align-middle">{{__('Status')}}:</th>
+                            <th class="align-middle">{{trans('fields.status')}}:</th>
                             <td>
                                 <select class="form-control" type="text" name="is_active" id="is_active">
-                                    <option value="0" @if (!$admin->is_active) selected @endif>{{__('Disabled')}}</option>
-                                    <option value="1" @if ($admin->is_active) selected @endif>{{__('Enabled')}}</option>
+                                    <option value="0" @if (!$admin->is_active) selected @endif>{{trans('actions.disabled')}}</option>
+                                    <option value="1" @if ($admin->is_active) selected @endif>{{trans('actions.enabled')}}</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th class="align-top">{{__('Roles')}}:</th>
+                            <th class="align-top">{{trans('Roles')}}:</th>
                             <td>
                                 <ul>
                                     @foreach($roles as $key => $role)
@@ -56,16 +56,16 @@
                         </tr>
                         </thead>
                     </table>
-                        <button type="submit" class="btn btn-success btn-block my-3">{{__('Update user')}}</button>
+                        <button type="submit" class="btn btn-success btn-block my-3">{{trans('users.update')}}</button>
                 </form>
             </div>
             <div class="col-lg-6">
-                <h3>{{__('Permissions')}}</h3>
+                <h3>{{trans_choice('roles.permission', 2, ['permission_count' => ''])}}</h3>
                 <div class="tab-content" id="v-pills-tabContent">
                     @if($admin->hasRole('Administrator'))
                         <div class="jumbotron">
-                            <h1 >{{__('Administrator')}}</h1>
-                            <p class="lead">{{__('The user have all permissions')}}</p>
+                            <h1 >{{trans('roles.admin')}}</h1>
+                            <p class="lead">{{trans('roles.messages.all')}}</p>
                         </div>
                     @else
                         <form action="{{route('update-permissions', $admin->id)}}" method="post">
@@ -75,9 +75,9 @@
                                 @foreach ($permissions as $id => $name)
                                     <li class="list-group-item-action text-right">
                                         @foreach($admin->roles as $role)
-                                            @if($role->hasPermissionTo($name)) {{__('Permission from role')}}:  @endif
+                                            @if($role->hasPermissionTo($name)) {{trans('roles.messages.permission_form_rol')}}:  @endif
                                         @endforeach
-                                        <label for="perm{{$id}}">{{$name}}</label>
+                                        <label for="perm{{$id}}">{{trans($name)}}</label>
                                         <input class="nv-check-box" type="checkbox" id="perm{{$id}}" name="permissions[]" value="{{$id}}"
                                                @if($admin->hasPermissionTo($name)) checked @endif
                                                 @foreach($admin->roles as $role)
@@ -87,7 +87,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <button type="submit" class="btn btn-block btn-success">{{__('Update permissions')}}</button>
+                            <button type="submit" class="btn btn-block btn-success">{{trans('roles.update')}}</button>
                         </form>
                     @endif
                 </div>

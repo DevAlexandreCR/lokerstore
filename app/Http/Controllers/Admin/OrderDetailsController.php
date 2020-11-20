@@ -22,9 +22,10 @@ class OrderDetailsController extends Controller
     {
         $detail->update($request->all());
 
-        return redirect()
-            ->route('orders.show', $detail->order_id)
-            ->with('success', __('Detail updated successfully'));
+        return redirect()->route('orders.show', $detail->order_id)->with('success', trans('messages.crud', [
+                'resource' => trans('orders.details'),
+                'status' => trans('fields.updated')
+            ]));
     }
 
     /**
@@ -38,8 +39,9 @@ class OrderDetailsController extends Controller
     {
         $detail->delete();
 
-        return redirect()
-            ->route('orders.show', $detail->order_id)
-            ->with('success', __('Detail removed successfully'));
+        return redirect()->route('orders.show', $detail->order_id)->with('success', trans('messages.crud', [
+                'resource' => trans('orders.details'),
+                'status' => trans('fields.updated')
+            ]));
     }
 }

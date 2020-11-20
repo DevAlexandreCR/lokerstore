@@ -37,7 +37,7 @@ class Cart extends Model
             $price += $stock->product->price*$stock->pivot->quantity;
         }
 
-        return round($price, 0, PHP_ROUND_HALF_UP) . 'COP';
+        return number_format($price, 2, ',', '.') . 'COP';
     }
 
     public function emptyCart(): void
@@ -49,6 +49,6 @@ class Cart extends Model
     {
         $price = $stock->product->price * $stock->pivot->quantity;
 
-        return round($price, 0, PHP_ROUND_HALF_UP) . 'COP';
+        return number_format($price, 2, ',', '.') . 'COP';
     }
 }

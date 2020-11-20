@@ -53,7 +53,10 @@ class AdminController extends Controller
     {
         $this->admins->store($request);
 
-        return redirect()->route('admins.index')->with('success', __('Admins has been created success'));
+        return redirect()->route('admins.index')->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.created')
+        ]));
     }
 
     /**
@@ -67,7 +70,10 @@ class AdminController extends Controller
     {
         $this->admins->update($request, $admin);
 
-        return redirect()->route('admins.show', $admin->id)->with('success', __('User has been updated success'));
+        return redirect()->route('admins.show', $admin->id)->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -79,6 +85,9 @@ class AdminController extends Controller
     {
         $this->admins->destroy($admin);
 
-        return redirect()->route('admins.index')->with('success', __('Admins has been remove success'));
+        return redirect()->route('admins.index')->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

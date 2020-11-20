@@ -1,0 +1,36 @@
+<?php
+return [
+    "add_category" => "Agregar categoría",
+    "added" => "Producto agregado al carrito",
+    "category" => "Categoría",
+    "category_unique" => "El nombre de la categoría debe ser único",
+    "choose_color" => "Seleccionar color",
+    "choose_images" => "Escoger imágenes",
+    "choose_size" => "Seleccionar talla",
+    "color" => "Color",
+    "cost" => "Costo",
+    "description" => "Descripción",
+    "messages" => [
+        "add_description" => "Agregar descripción del producto",
+        "add_images" => "Agregar imágenes",
+        "add_stock" => "Éste valor se agregará automáticamente",
+        "add_tags" => "Agregar etiquetas",
+        "disable" => "Ésta acción inhabilitará el producto",
+        "import_images" => "Importar imágenes",
+        "no_tags_added" => "Debes agregar al menos una etiqueta",
+        "remove" => "Ésta acción eliminará el producto",
+        "remove_category" => "Ésta acción eliminará la categoría y sus productos",
+        "remove_tag" => "Ésta acción eliminará la etiqueta",
+        "ups" => "Ups!"
+    ],
+    "name" => "Nombre del producto",
+    "new" => "Agregar un producto nuevo",
+    "price" => "Precio",
+    "product" => ":product_count Producto |:product_count Productos",
+    "quantity" => "Cantidad",
+    "reference" => "Referencia",
+    "size" => "Talla",
+    "stock" => "Stock",
+    "sub_category" => "SubCategoría",
+    "update" => "Actualizar producto"
+];

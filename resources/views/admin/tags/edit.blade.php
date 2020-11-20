@@ -14,16 +14,16 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="inputName{{$tag->id}}">{{__('Name tag')}}</label>
+                            <label for="inputName{{$tag->id}}">{{trans('fields.name')}}</label>
                             <input type="text" class="form-control" id="inputName{{$tag->id}}" name="name" aria-describedby="namelHelp" value="{{ $tag->name }}">
-                            <small id="nameHelp" class="form-text text-muted">{{__('The name must be unique')}}</small>
+                            <small id="nameHelp" class="form-text text-muted">{{trans('messages.unique', ['field' => trans('fields.name')])}}</small>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Discard')}}</button>
-            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.cancel')}}</button>
+            <button type="submit" class="btn btn-primary">{{trans('actions.save')}}</button>
             </div>
         </form>
       </div>

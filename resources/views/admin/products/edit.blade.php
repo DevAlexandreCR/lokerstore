@@ -8,14 +8,14 @@
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <strong>{{__('Success!')}}</strong> {{ __(session('success')) }}
+                <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
             </div>
         </div>
     @endif
     <div class="container py-3">
         <div class="card shadow">
             <div class="modal-header bg-light">
-                <h5 class="modal-title">{{ __('Update product') }}</h5>
+                <h5 class="modal-title">{{ trans('products.update') }}</h5>
                 <a href="{{ route('products.index') }}" class="btn btn-link">
                     <ion-icon name="return-up-back-outline"></ion-icon>
                 </a>
@@ -27,12 +27,12 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Name')}} </h6>
+                            <h6 class="card-title"> {{trans('products.name')}} </h6>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <input type="name" class="form-control  @error('name') is-invalid @enderror" id="name"
-                                       required placeholder="{{__('Name')}}"
+                                       required placeholder="{{trans('products.name')}}"
                                        name="name" aria-describedby="nameHelp" value="{{ $product->name}}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -42,12 +42,13 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Reference')}} </h6>
+                            <h6 class="card-title"> {{trans('products.reference')}} </h6>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <input type="name" class="form-control  @error('reference') is-invalid @enderror" id="name"
-                                       required placeholder="{{__('0000')}}"
+                                <input type="name" class="form-control  @error('reference') is-invalid @enderror"
+                                       id="name"
+                                       required placeholder="0000"
                                        name="reference" aria-describedby="nameHelp" value="{{ $product->reference}}">
                                 @error('reference')
                                 <span class="invalid-feedback" role="alert">
@@ -57,7 +58,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Stock')}} </h6>
+                            <h6 class="card-title"> {{trans('products.stock')}} </h6>
                         </div>
                         <div class="col-sm-2">
                             <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock"
@@ -72,13 +73,13 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Description')}} </h6>
+                            <h6 class="card-title"> {{trans('products.description')}} </h6>
                         </div>
                         <div class="col">
                             <div class="form-group">
                 <textarea type="textarea"
                           class="form-control user-select-all  @error('description') is-invalid @enderror"
-                          id="description" required placeholder="{{__('Add product description...')}}"
+                          id="description" required placeholder="{{trans('products.messages.add_description')}}"
                           name="description" aria-describedby="descriptionHelp">{{ $product->description }}</textarea>
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -91,10 +92,15 @@
                     <div class="row">
                         <div class="col-sm-2 ml-2">
                             <div class="form-group">
-                                <label for="price">{{trans('Cost')}}</label>
-                                <input type="number" class="form-control  @error('cost') is-invalid @enderror"
-                                       id="cost" required placeholder="{{trans('Cost')}}"
-                                       name="cost" aria-describedby="priceHelp" value="{{ $product->cost }}">
+                                <label for="cost">{{trans('products.cost')}}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                    </div>
+                                    <input type="number" class="form-control  @error('cost') is-invalid @enderror"
+                                           id="cost" required placeholder="{{trans('products.cost')}}"
+                                           name="cost" aria-describedby="priceHelp" value="{{ $product->cost }}">
+                                </div>
                                 @error('cost')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -104,10 +110,15 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <label for="price">{{trans('Price')}}</label>
-                                <input type="number" class="form-control  @error('price') is-invalid @enderror"
-                                       id="price" required placeholder="{{trans('Price')}}"
-                                       name="price" aria-describedby="priceHelp" value="{{ $product->price }}">
+                                <label for="price">{{trans('products.price')}}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                    </div>
+                                    <input type="number" class="form-control  @error('price') is-invalid @enderror"
+                                           id="price" required placeholder="{{trans('products.price')}}"
+                                           name="price" aria-describedby="priceHelp" value="{{ $product->price }}">
+                                </div>
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -116,7 +127,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Category')}} </h6>
+                            <h6 class="card-title"> {{trans('products.category')}} </h6>
                         </div>
                         <div class="col">
                             <div class="col">
@@ -166,7 +177,7 @@
                                 </div>
                             </div>
                             @error('category')
-                                <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -175,12 +186,12 @@
                     <hr>
                     <div class="row">
                         <div class="container text-center">
-                            <h6>{{__('Add tags')}}</h6>
+                            <h6>{{trans('products.messages.add_tags')}}</h6>
                         </div>
                         <div class="container">
                             @error('tags')
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one tag')}}
+                                <strong>{{trans('products.messages.ups')}}</strong> {{trans('products.messages.no_tags_added')}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -203,7 +214,7 @@
                     <hr>
                     <div class="row" id="imgContainer">
                         <div class="container text-center">
-                            <h6>{{__('Add images')}}</h6>
+                            <h6>{{trans('products.messages.add_images')}}</h6>
                         </div>
                         <div class="col increment">
                             <div class="card m-3" style="width: 18rem;" id="card-img">
@@ -248,7 +259,7 @@
                     <div class="row " id="save">
                         <div class="container">
                             <button type="submit"
-                                    class="btn btn-success btn-block btn-sm">{{__('Save product')}}</button>
+                                    class="btn btn-success btn-block btn-sm">{{trans('actions.save_changes')}}</button>
                             <br>
                         </div>
                     </div>

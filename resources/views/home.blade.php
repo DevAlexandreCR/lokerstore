@@ -6,14 +6,14 @@
         <div class="container py-2">
             @if (session('resent'))
                 <div class="alert alert-success" role="alert">
-                    {{ __('A fresh verification link has been sent to your email address.') }}
+                    {{ trans('A fresh verification link has been sent to your email address.') }}
                 </div>
             @endif
             <div class="alert alert-dismissible alert-warning fade show" role="alert">
-                <strong>{{ __('Before proceeding, please check your email for a verification link.') }}</strong>
+                <strong>{{ trans('passwords.link_verify') }}</strong>
                 <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                     @csrf
-                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('Verify Email Address') }}</button>.
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ trans('passwords.email_verify') }}</button>.
                 </form>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

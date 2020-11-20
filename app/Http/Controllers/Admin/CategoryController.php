@@ -42,8 +42,10 @@ class CategoryController extends Controller
         $this->categories->store($request);
 
         return redirect()
-                    ->back()
-                    ->with('success', __('Category has been created success'));
+                    ->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('products.category'),
+                        'status' => trans('fields.created')
+                    ]));
     }
 
     /**
@@ -56,9 +58,10 @@ class CategoryController extends Controller
     {
         $this->categories->update($request, $category);
 
-        return redirect()
-                    ->back()
-                    ->with('success', __('Category has been updated success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('products.category'),
+                        'status' => trans('fields.updated')
+                    ]));
     }
 
     /**
@@ -72,7 +75,9 @@ class CategoryController extends Controller
         $this->categories->destroy($category);
 
         return redirect()
-                    ->back()
-                    ->with('success', __('Category has been deleted success'));
+                    ->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('products.category'),
+                        'status' => trans('fields.deleted')
+                    ]));
     }
 }

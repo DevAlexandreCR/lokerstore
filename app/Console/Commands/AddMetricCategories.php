@@ -33,6 +33,9 @@ class AddMetricCategories extends Command
 
         DB::unprepared("call categories_metrics_generate('$firstDayOfMonth', '$until')");
 
-        $this->info('Metrics updated successfully!');
+        $this->info(trans('messages.crud', [
+            'resource' => trans('fields.metrics'),
+            'status' => trans('fields.updated')
+        ]));
     }
 }

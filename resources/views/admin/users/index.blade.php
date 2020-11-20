@@ -4,8 +4,8 @@
       <div class="row m-2 p-4 shadow-sm bg-secondary">
           <div class="col justify-content-end">
               <form class="form-inline justify-content-end my-2 my-lg-0" method="GET" action="{{route('users.index')}}">
-                  <input class="form-control form-control-sm mr-sm-2" type="search" name="search" placeholder="{{__('Search')}}" aria-label="Search" required>
-                  <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">{{__('Search')}}</button>
+                  <input class="form-control form-control-sm mr-sm-2" type="search" name="search" placeholder="{{trans('actions.search')}}" aria-label="Search" required>
+                  <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">{{trans('actions.search')}}</button>
               </form>
           </div>
       </div>
@@ -17,31 +17,31 @@
               <span aria-hidden="true">&times;</span>
               <span class="sr-only">Close</span>
             </button>
-            <strong>{{__('Success!')}}</strong> {{ session('user-deleted') }}
+            <strong>{{trans('actions.success')}}</strong> {{ session('user-deleted') }}
           </div>
         </div>
 
         @endif
         @if (!empty($user_not_found))
         <div class="container" role="alert">
-        <strong>{{ $user_not_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{__('See all')}}</a>
+        <strong>{{ $user_not_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{trans('actions.view_all')}}</a>
         </div>
         @elseif(!empty($user_found))
         <div class="container" role="alert">
-          <strong>{{ $user_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{__('See all')}}</a>
+          <strong>{{ $user_found }}</strong> <a class="btn btn-sm btn-link" href="{{route('users.index')}}">{{trans('actions.view_all')}}</a>
           </div>
         @endif
       <div class="container">
         <table id="table_id" class="table table-sm table-responsive-md table-striped table-condensed table-hover table-secondary">
           <thead>
             <tr>
-              <th>{{__('Id')}}</th>
-              <th>{{__('Name')}}</th>
-              <th>{{__('Lastname')}}</th>
-              <th>{{__('E-Mail Address')}}</th>
-              <th>{{__('Phone')}}</th>
-              <th>{{__('Status')}}</th>
-              <th style="text-align: center">{{__('View')}}</th>
+              <th>{{trans('fields.id')}}</th>
+              <th>{{trans('users.name')}}</th>
+              <th>{{trans('users.last_name')}}</th>
+              <th>{{trans('users.email')}}</th>
+              <th>{{trans('users.phone')}}</th>
+              <th>{{trans('fields.status')}}</th>
+              <th style="text-align: center">{{trans('fields.actions')}}</th>
             </tr>
           </thead>
             <tbody>
@@ -54,11 +54,11 @@
                       <td>{{ $user->phone }}</td>
                       @if ($user->is_active)
                       <td>
-                        <span class="badge badge-info"> {{ __('Enabled') }}</span>
+                        <span class="badge badge-info"> {{ trans('actions.enabled') }}</span>
                       </td>
                       @else
                       <td class="text-muted">
-                        <span class="badge badge-danger"> {{ __('Disabled') }}</span>
+                        <span class="badge badge-danger"> {{ trans('actions.disabled') }}</span>
                       </td>
                       @endif
                       <td>
@@ -68,21 +68,21 @@
                           <a type="button" class="btn btn-link"
                           data-toggle="tooltip"
                           data-placement="top"
-                          title="{{__('View')}}"
+                          title="{{trans('actions.view')}}"
                           href="{{route('users.show', ['user' => $user])}}">
                           <ion-icon name="eye"></ion-icon>
                           </a>
                           <a type="button" class="btn btn-link"
                           data-toggle="tooltip"
                           data-placement="top"
-                          title="@if($user->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
+                          title="@if($user->is_active) {{trans('actions.disable')}} @else{{trans('actions.enable')}} @endif"
                           href="{{ route('users.edit', ['user' => $user, 'input_name' => 'is_active'])}}">
                           <ion-icon name="power"></ion-icon>
                           </a>
                           <a type="button" class="btn btn-link"
                           data-toggle="tooltip"
                           data-placement="top"
-                          title="{{__('Remove')}}"
+                          title="{{trans('actions.remove')}}"
                           href="{{route('users.edit', ['user' => $user, 'input_name' => 'delete'])}}">
                           <ion-icon name="trash"></ion-icon>
                           </a>
@@ -94,6 +94,6 @@
         </table>
       </div>
       <div class="container text-center">
-          {{ $users->links() }}<strong> {{__('Users')}}: </strong>{{ $users->count()}}
+          {{ $users->links() }}<strong> {{trans_choice('users.user', $users->count(), ['user_count' => $users->count()])}} </strong>
       </div>
 @endsection

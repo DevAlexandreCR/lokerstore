@@ -24,7 +24,10 @@ class StockController extends Controller
         return response()->json([
             'status' => [
                 'status'  => 'OK',
-                'message' => 'Stock was updated successfully',
+                'message' => trans('messages.crud', [
+                    'resource' => trans('products.stock'),
+                    'status' => trans('fields.updated')
+                ]),
                 'code'    => 200,
             ],
             'stock' => $stock,

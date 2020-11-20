@@ -13,11 +13,11 @@
                         @csrf
                         @method('PUT')
                         <div id="alertDisable" class="alert alert-danger" role="alert">
-                            <strong>{{__('This action will disable the user')}}</strong>
+                            <strong>{{trans('users.messages.disable')}}</strong>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h6 class="card-title">{{__('Status')}}</h6>
+                                <h6 class="card-title">{{trans('fields.status')}}</h6>
                             </div>
                             <div class="col">
                                 <p class="card-text"></p>

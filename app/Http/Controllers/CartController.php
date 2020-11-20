@@ -43,7 +43,7 @@ class CartController extends Controller
 
         $user->cart->stocks()->attach($stock->id, ['quantity' => $quantity]);
 
-        return redirect()->back()->with('success', __('Product Added to cart'));
+        return redirect()->back()->with('success', trans('products.added'));
     }
 
     /**
@@ -59,7 +59,7 @@ class CartController extends Controller
         $user->cart->stocks()->detach($stock_id);
         $user->cart->stocks()->attach($stock_id, ['quantity'=> $quantity]);
 
-        return redirect()->back()->with('success', __('Product Added to cart'));
+        return redirect()->back()->with('success', trans('products.added'));
     }
 
     /**
@@ -71,6 +71,6 @@ class CartController extends Controller
     {
         $user->cart->stocks()->detach($stock->id);
 
-        return redirect()->back()->with('success', __('Product removed to cart'));
+        return redirect()->back()->with('success', trans('products.added'));
     }
 }

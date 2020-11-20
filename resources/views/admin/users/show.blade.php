@@ -9,7 +9,7 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <strong>{{__('Success!')}}</strong> {{ __(session('user-updated')) }}
+    <strong>{{trans('actions.success')}}</strong> {{ session('user-updated') }}
   </div>
 </div>
 
@@ -18,7 +18,7 @@
 <div class="container py-3">
   <div class="card shadow">
     <div class="modal-header bg-light">
-      <h5 class="modal-title font-weight-bold text-muted">{{ __('User info') }}</h5>
+      <h5 class="modal-title font-weight-bold text-muted">{{ trans('users.data') }}</h5>
       <a href="{{ route('users.index') }}" class="btn btn-link"><ion-icon name="return-up-back-outline"></ion-icon></a>
     </div>
     <form action="{{route('users.update', ['user' => $user])}}" method="POST">
@@ -27,7 +27,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('Name and lastname')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('users.full_name')}} </h6>
           </div>
           <div class="col-sm-9">
           <div class="form-row">
@@ -54,7 +54,7 @@
         </div>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('E-Mail Address')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('users.email')}} </h6>
           </div>
           <div class="col-sm-9">
           <div class="form-group">
@@ -70,7 +70,7 @@
         </div>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('Phone')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('users.phone')}} </h6>
           </div>
           <div class="col">
             <div class="form-group">
@@ -86,7 +86,7 @@
         </div>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('Address')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('users.address')}} </h6>
           </div>
           <div class="col">
             <div class="form-group">
@@ -102,7 +102,7 @@
         </div>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('Registration date')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('users.registration')}} </h6>
           </div>
           <div class="col-sm-7">
           <p class="card-text">{{ $user->created_at->format('d-m-Y') }}</p>
@@ -114,13 +114,13 @@
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('Status')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('fields.status')}} </h6>
           </div>
           <div class="col-4 col-sm-7">
             @if ($user->is_active)
-            <p class="card-text">{{__('Enabled')}}</p>
+            <p class="card-text">{{trans('actions.enabled')}}</p>
             @else
-            <p class="card-text">{{__('Disabled')}}</p>
+            <p class="card-text">{{trans('actions.disabled')}}</p>
             @endif
           </div>
           <div class="col-sm-1">
@@ -132,13 +132,13 @@
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{__('User verified')}} </h6>
+            <h6 class="card-title text-left font-weight-bold text-muted ml-0 ml-sm-2"> {{trans('users.verified')}} </h6>
           </div>
           <div class="col-3 col-sm-7">
             @if ($user->email_verified_at === null)
-            <p class="card-text">{{__('No')}}</p>
+            <p class="card-text">{{trans('messages.no')}}</p>
             @else
-            <p class="card-text">{{__('Yes')}}</p>
+            <p class="card-text">{{trans('messages.yes')}}</p>
             @endif
           </div>
           <div class="col-2 col-sm-2">
@@ -148,8 +148,8 @@
         <hr>
         <div class="row d-none" id="save">
           <div class="container">
-             <button type="submit" class="btn btn-primary btn-block btn-sm">{{__('Save Changes')}}</button>
-             <a href="" class="btn btn-danger btn-block btn-sm">{{__('Cancel')}}</a>
+             <button type="submit" class="btn btn-primary btn-block btn-sm">{{trans('actions.save_changes')}}</button>
+             <a href="" class="btn btn-danger btn-block btn-sm">{{trans('actions.cancel')}}</a>
              <br>
           </div>
         </div>

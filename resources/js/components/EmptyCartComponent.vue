@@ -15,13 +15,19 @@
 import LottieAnimation from 'lottie-vuejs/src/LottieAnimation.vue'
 
 export default {
+    name: 'empty-cart-component',
+    data() {
+        return {
+            url: process.env.MIX_APP_URL + '/home/show?'
+        }
+    },
     components: {
         LottieAnimation
     },
 
     methods: {
         back() {
-            window.history.back()
+            window.location.href = this.url
         }
     }
 }

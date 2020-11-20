@@ -28,11 +28,11 @@ class Orders
     public static function getClientStatus(): array
     {
         return [
-            self::STATUS_CANCELED => __('Canceled'),
-            self::STATUS_PENDING_PAY => __('Pending payment'),
-            self::STATUS_PENDING_SHIPMENT => __('Pending shipment'),
-            self::STATUS_SENT => __('Sent'),
-            self::STATUS_SUCCESS => __('Completo'),
+            self::STATUS_CANCELED         => trans('orders.statuses.canceled'),
+            self::STATUS_PENDING_PAY      => trans('orders.statuses.pending_pay'),
+            self::STATUS_PENDING_SHIPMENT => trans('orders.statuses.pending_shipment'),
+            self::STATUS_SENT             => trans('orders.statuses.sent'),
+            self::STATUS_SUCCESS          => trans('orders.statuses.completed'),
         ];
     }
 
@@ -53,19 +53,19 @@ class Orders
     {
         switch ($status) {
             case self::STATUS_PENDING_PAY:
-                return trans('Pending payment');
+                return trans('orders.statuses.pending_pay');
             case self::STATUS_PENDING_SHIPMENT:
-                return trans('Pending shipment');
+                return trans('orders.statuses.pending_shipment');
             case self::STATUS_CANCELED:
-                return trans('Canceled');
+                return trans('orders.statuses.canceled');
             case self::STATUS_REJECTED:
-                return trans('Payment rejected');
+                return trans('orders.statuses.rejected');
             case self::STATUS_SENT:
-                return trans('Sent');
+                return trans('orders.statuses.sent');
             case self::STATUS_SUCCESS:
-                return trans('Completed');
+                return trans('orders.statuses.completed');
             case self::STATUS_FAILED:
-                return trans('Failed');
+                return trans('orders.statuses.failed');
             default:
                 return '';
         }

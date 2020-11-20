@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{__('Success!')}}</strong> {{ session('success') }}
+                    <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
                 </div>
             </div>
         @endif
@@ -22,25 +22,25 @@
                             <span aria-hidden="true">&times;</span>
                             <span class="sr-only">Close</span>
                         </button>
-                        <strong>{{__('Error!')}}</strong> {{ $error }}
+                        <strong>{{trans('actions.error')}}</strong> {{ $error }}
                     </div>
                 </div>
             @endforeach
 
         @endif
         <div class="row p-5">
-            <button type="button" data-toggle="modal" data-target="#addEmployee" class="btn btn-primary">{{__('Add employee')}}</button>
+            <button type="button" data-toggle="modal" data-target="#addEmployee" class="btn btn-primary">{{trans('users.add_employee')}}</button>
         </div>
         <div class="row">
             <table id="table_id" class="table table-sm table-responsive-sm table-striped table-condensed table-hover table-secondary">
                 <thead>
                 <tr>
-                    <th>{{__('Id')}}</th>
-                    <th>{{__('Name')}}</th>
-                    <th>{{__('E-Mail Address')}}</th>
-                    <th>{{__('Status')}}</th>
-                    <th>{{__('Role')}}</th>
-                    <th>{{__('View')}}</th>
+                    <th>{{trans('fields.id')}}</th>
+                    <th>{{trans('users.name')}}</th>
+                    <th>{{trans('users.email')}}</th>
+                    <th>{{trans('fields.status')}}</th>
+                    <th>{{trans('fields.role')}}</th>
+                    <th>{{trans('fields.actions')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,7 +66,7 @@
                                 <a type="button" class="btn btn-link"
                                    data-toggle="tooltip"
                                    data-placement="top"
-                                   title="{{__('View')}}"
+                                   title="{{trans('actions.view')}}"
                                     href="{{ route('admins.show', $admin->id)}}">
                                     <ion-icon name="eye"></ion-icon>
                                 </a>
@@ -75,7 +75,7 @@
                                    data-target="#enableEmployee"
                                    data-placement="top"
                                    data-admin="{{ $admin }}"
-                                   title="@if($admin->is_active) {{__('Disable')}} @else{{__('Enable')}} @endif"
+                                   title="@if($admin->is_active) {{trans('actions.disable')}} @else{{trans('actions.disable')}} @endif"
                                    >
                                     <ion-icon name="power"></ion-icon>
                                 </a>
@@ -84,7 +84,7 @@
                                    data-target="#removeEmployee"
                                    data-admin="{{ $admin }}"
                                    data-placement="top"
-                                   title="{{__('Remove')}}"
+                                   title="{{trans('actions.remove')}}"
                                    >
                                     <ion-icon name="trash"></ion-icon>
                                 </a>

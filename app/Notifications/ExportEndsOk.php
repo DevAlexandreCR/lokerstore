@@ -51,8 +51,8 @@ class ExportEndsOk extends Notification
                     ->attach(storage_path('app/public/exports/') . $this->fileName)
                     ->subject($this->export)
                     ->line($this->message)
-                    ->action(trans('Download'), asset('/exports/' . $this->fileName))
-                    ->line(trans('Good bye'));
+                    ->action(trans('actions.download'), asset('/exports/' . $this->fileName))
+                    ->line(trans('messages.bye'));
     }
 
     /**

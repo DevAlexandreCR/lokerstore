@@ -41,7 +41,7 @@
             </a>
         </div>
         <div class="row">
-            <div class="col-md-3 col-lg-2 container collapse navbar-collapse" id="collapseFilters">
+            <div class="col-sm-3 col-lg-2 container collapse navbar-collapse" id="collapseFilters">
                 <filters-component @sendQuery="sendQuery" :query="query" @setSearch="setSearch" :search="search"></filters-component>
             </div>
             <div class="col-sm-9 col-lg-10">
@@ -142,7 +142,7 @@
             },
 
             sendQuery(query, reload = false) {
-                $('#collapseFilters').collapse('hide')
+                // $('#collapseFilters').collapse('hide')
                 this.$router.push({name: 'showcase', query: query}).catch(()=>{})
                 this.loading = true
                 if (reload) location.reload()

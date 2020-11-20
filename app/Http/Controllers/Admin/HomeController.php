@@ -41,7 +41,7 @@ class HomeController extends Controller
     {
         $this->metrics->reports($request);
 
-        return redirect(route('admin.home'))->with('success', __('We\'ll send the report to your email when it\'s ready.'));
+        return redirect(route('admin.home'))->with('success', trans('messages.reporting'));
     }
 
     /**
@@ -52,7 +52,7 @@ class HomeController extends Controller
     {
         $this->metrics->monthlyReport($request->get('date'));
 
-        return redirect(route('admin.home'))->with('success', __('We\'ll send the report to your email when it\'s ready.'));
+        return redirect(route('admin.home'))->with('success', trans('messages.reporting'));
     }
 
     public function testApi(): View
