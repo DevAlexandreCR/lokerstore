@@ -31,7 +31,10 @@ class StockController extends Controller
     {
         $this->stock->create($request->all());
 
-        return back()->with('success', __('Your product has been update successfully'));
+        return back()->with('success', trans('messages.crud', [
+            'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -61,7 +64,10 @@ class StockController extends Controller
     {
         $stock->update($request->all());
 
-        return back()->with('success', __('Your product has been update successfully'));
+        return back()->with('success', trans('messages.crud', [
+            'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -74,6 +80,9 @@ class StockController extends Controller
     {
         $stock->delete();
 
-        return back()->with('success', __('Your product has been update successfully'));
+        return back()->with('success', trans('messages.crud', [
+            'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

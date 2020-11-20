@@ -31,7 +31,7 @@ class ImportEnds extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
-            ->subject(trans('Products saved'))
+            ->subject(trans('reports.products_imported'))
             ->markdown('emails.excel.imports', [
                 'failures' => ErrorImport::all(),
                 'name'     => $notifiable->name,

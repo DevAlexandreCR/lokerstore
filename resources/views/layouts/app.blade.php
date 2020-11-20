@@ -23,84 +23,98 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow" id="nav-app">
-            <div class="container">
-                @if (Auth::guard('admin')->check())
+<div id="app">
+    <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow" id="nav-app">
+        <div class="container">
+            @if (Auth::guard('admin')->check())
                 <a class="navbar-brand" href="{{ url('/admin') }}">
                     {{ config('app.name') }}
                 </a>
-                @else
+            @else
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name') }}
                 </a>
-                @endif
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            @endif
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="{{ trans('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @auth('admin')
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin.logout') }}"
-                                    onclick="event.preventDefault();
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @auth('admin')
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                   onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                    {{ trans('fields.logout') }}
+                                </a>
 
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @else
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @else
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ trans('fields.login') }}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="{{route('home', 'show?tags=Mujer')}}">{{__('Mujer')}}</a>
+                                <a class="nav-link" href="{{route('home', 'show?tags=Mujer')}}">{{trans('fields.woman')}}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="{{route('home', 'show?tags=Hombre')}}">{{__('Hombre')}}</a>
+                                <a class="nav-link" href="{{route('home', 'show?tags=Hombre')}}">{{trans('fields.man')}}</a>
                             </li>
                             <li class="nav-item d-sm-none">
-                                <a class="nav-link" href="{{route('home', 'show?')}}">{{__('See all')}}</a>
+                                <a class="nav-link" href="{{route('home', 'show?')}}">{{trans('actions.view_all')}}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ trans('actions.register') }}</a>
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="{{route('home', 'show?tags=Mujer')}}">{{trans('fields.woman')}}</a>
+                            </li>
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="{{route('home', 'show?tags=Hombre')}}">{{trans('fields.man')}}</a>
+                            </li>
+                            <li class="nav-item d-sm-none">
+                                <a class="nav-link" href="{{route('home', 'show?')}}">{{trans('actions.view_all')}}</a>
+                            </li>
                             <li class="nav-item dropdown">
-                                <button id="navbarDropdown" class="nav-link btn  btn-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <button id="navbarDropdown" class="nav-link btn  btn-link" href="#" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <ion-icon size="small" name="person-circle-outline"></ion-icon>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a href="{{route('user.profile', auth()->id())}}" class="dropdown-item btn">
-                                        {{ __('My Account') }}
+                                        {{ trans('users.account') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                                       onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ trans('fields.logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -114,17 +128,17 @@
                                 </button>
                             </form>
                         @endguest
-                        @endauth
+                    @endauth
 
-                    </ul>
-                </div>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-0 min-vh-100" >
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-0 min-vh-100">
+        @yield('content')
+    </main>
+</div>
 </body>
 <footer style="z-index: 100">
     @yield('footer', View::make('footer'))

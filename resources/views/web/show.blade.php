@@ -9,8 +9,8 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{__('Success!')}}</strong> {{ __(session('success')) }}
-                    <a href="{{route('cart.show', auth()->id())}}">{{__('Show cart')}}</a>
+                    <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
+                    <a href="{{route('cart.show', auth()->id())}}">{{trans('users.show_cart')}}</a>
                 </div>
             </div>
         @endif
@@ -44,7 +44,7 @@
                                         <span aria-hidden="true">&times;</span>
                                         <span class="sr-only">Close</span>
                                     </button>
-                                    <strong>{{__('Error!')}}</strong> {{ $error }}
+                                    <strong>{{trans('actions.error')}}</strong> {{ $error }}
                                 </div>
                             </div>
                         @endforeach
@@ -69,7 +69,7 @@
                                 @endforeach
                                 <select class="form-control" name="size_id"
                                         onchange="document.getElementById(`show${this.value.replace('/', '')}`).click()">
-                                    <option value="none">{{__('Choose size')}}</option>
+                                    <option value="none">{{trans('products.choose_size')}}</option>
                                     @foreach ($sizes as $key => $size)
                                         <option value="{{$size->id}}">{{$size->name}}</option>
                                     @endforeach
@@ -83,7 +83,7 @@
                                 @foreach ($sizes as $key => $size)
                                     <div class="tab-pane fade" id="show{{str_replace('/', '', $size->name)}}"
                                          role="tabpanel" aria-labelledby="show{{$size->id}}">
-                                        <label class="mr-md-5 font-weight-bold">{{__('Choose color')}}: </label>
+                                        <label class="mr-md-5 font-weight-bold">{{trans('products.choose_color')}}: </label>
                                         @foreach ($size->colors as $color)
                                             <div class="form-check d-inline-block">
                                                 <input class="form-check-input" type="radio" name="color_id"
@@ -91,7 +91,7 @@
                                                        onchange="setMaxQuantityToInput({{$color->pivot->quantity}})">
                                                 <label class="form-check-label mt-1" for="exampleRadios1">
                                                     <span
-                                                        class="badge bg-{{strtolower($color->name)}}">{{strtolower(__($color->name))}}</span>
+                                                        class="badge bg-{{strtolower($color->name)}}">{{strtolower(trans($color->name))}}</span>
                                                 </label>
                                             </div>
                                         @endforeach
@@ -100,7 +100,7 @@
                             </div>
                             <small class="text-small text-danger" id="quantitySmall"></small>
                             <div id="div-quant" class="input-group">
-                                <label class="mr-md-5 font-weight-bold mt-2">{{__('Stock')}}: </label>
+                                <label class="mr-md-5 font-weight-bold mt-2">{{trans('products.stock')}}: </label>
                                 <div class="input-group-prepend">
                                     <button class="btn btn-link btn-sm" onclick="less('quantityInput')" type="button"
                                             id="button-addon1">
@@ -121,17 +121,17 @@
                         <div class="modal-footer">
                             <input type="hidden" value="{{$product->id}}" name="product_id">
                             @guest()
-                                <small class="text-muted">{{__('Login to add products to cart')}}</small>
+                                <small class="text-muted">{{trans('users.messages.cart_no_login')}}</small>
                             @endguest
                             @if($product->stocks->count() === 0)
-                                <small class="text-muted text-danger">{{__('Producto Agotado')}}</small>
+                                <small class="text-muted text-danger">{{trans('users.messages.no_product')}}</small>
                                 <button type="button" disabled
-                                        class="btn btn-primary btn-block">{{__('Add to cart')}}</button>
+                                        class="btn btn-primary btn-block">{{trans('users.add_to_cart')}}</button>
                             @else
-                                <button type="submit" class="btn btn-primary btn-block">{{__('Add to cart')}}</button>
+                                <button type="submit" class="btn btn-primary btn-block">{{trans('users.add_to_cart')}}</button>
                             @endif
                             <button class="btn btn-light btn-block" type="button"
-                                    onclick="goBack()">{{__('Back')}}</button>
+                                    onclick="goBack()">{{trans('actions.back')}}</button>
                         </div>
                     </form>
                 </div>

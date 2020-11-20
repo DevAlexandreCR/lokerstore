@@ -44,5 +44,19 @@
     "view admins": "ver personal",
     "create admins": "crear personal",
     "delete admins": "borrar personal",
-    "edit admins": "editar personal"
+    "edit admins": "editar personal",
+    "WHITE"   : "BLANCO",
+    "SILVER"  : "PLATA",
+    "GRAY"    : "GRIS",
+    "BLACK"   : "NEGRO",
+    "RED"     : "ROJO",
+    "MAROON"  : "MARRON",
+    "YELLOW"  : "AMARILLO",
+    "LIME"    : "LIMA",
+    "GREEN"   : "VERDE",
+    "AQUA"    : "AGUA",
+    "BLUE"    : "AZUL",
+    "FUCHSIA" : "FUCSIA",
+    "PURPLE"  : "MORADO",
+    "PINK"    : "ROSA"
 }

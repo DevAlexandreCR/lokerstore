@@ -18,7 +18,9 @@ return [
         "sent" => "Sent"
     ],
     "subtotal" => "Sub-Total",
+    "summary" => "Order summary",
     "tax" => "Tax",
     "total" => "Total",
-    "update" => "Update order"
+    "update" => "Update order",
+    "view" => "View order"
 ];

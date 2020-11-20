@@ -52,7 +52,10 @@ class OrdersController extends Controller
 
         return redirect(route('orders.show', [
             'order' => $order
-        ]))->with('success', __('Order created successfully'));
+        ]))->with('success', trans('messages.crud', [
+            'resource' => trans_choice('orders.orders', 1, ['orders_count' => '']),
+            'status' => trans('fields.created')
+        ]));
     }
 
     /**
@@ -89,9 +92,10 @@ class OrdersController extends Controller
     {
         $this->orders->update($request, $order);
 
-        return redirect()
-            ->route('orders.show', $order->id)
-            ->with('success', __('Order updated successfully'));
+        return redirect()->route('orders.show', $order->id)->with('success', trans('messages.crud', [
+            'resource' => trans_choice('orders.orders', 1, ['orders_count' => '']),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -104,14 +108,16 @@ class OrdersController extends Controller
     {
         $this->orders->destroy($order);
 
-        return redirect()
-            ->route('orders.index')
-            ->with('success', __('Order removed successfully'));
+        return redirect()->route('orders.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('orders.orders', 1, ['orders_count' => '']),
+            'status' => trans('fields.deleted')
+        ]));
     }
 
     /**
      * @param Order $order
      * @return RedirectResponse
+     * @throws \JsonException
      */
     public function verify(Order $order): RedirectResponse
     {
@@ -121,6 +127,7 @@ class OrdersController extends Controller
     /**
      * @param Order $order
      * @return RedirectResponse
+     * @throws \JsonException
      */
     public function reverse(Order $order): RedirectResponse
     {

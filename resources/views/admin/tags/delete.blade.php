@@ -12,12 +12,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <strong><p>{{__('This action will remove the tag')}}</p></strong>
+                    <strong><p>{{trans('products.messages.remove_tag')}}</p></strong>
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">{{__('Discard')}}</button>
-              <button type="submit" class="btn btn-danger">{{__('Remove')}}</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal">{{trans('actions.cancel')}}</button>
+              <button type="submit" class="btn btn-danger">{{trans('actions.remove')}}</button>
             </div>
         </form>
       </div>

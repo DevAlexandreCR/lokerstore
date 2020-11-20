@@ -49,7 +49,10 @@ class RoleController extends Controller
     {
         $this->roles->store($request);
 
-        return redirect()->route('roles.index')->with('success', __('Role has been created successfully'));
+        return redirect()->route('roles.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('roles.role', 1, ['role_count' => '']),
+            'status' => trans('fields.created')
+        ]));
     }
 
     /**
@@ -63,7 +66,10 @@ class RoleController extends Controller
     {
         $this->roles->update($request, $role);
 
-        return redirect()->route('roles.index')->with('success', __('Role has been updated successfully'));
+        return redirect()->route('roles.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('roles.role', 1, ['role_count' => '']),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -79,6 +85,9 @@ class RoleController extends Controller
 
         $this->roles->destroy($role);
 
-        return redirect()->route('roles.index')->with('success', __('Role has been removed successfully'));
+        return redirect()->route('roles.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('roles.role', 1, ['role_count' => '']),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

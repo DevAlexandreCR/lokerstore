@@ -2,34 +2,34 @@
     @switch($order->status)
         @case('failed')
             <p><small>{{session('message')}}</small></p>
-            <p><small>{{__('Payment has failed, please retry')}}</small></p>
+            <p><small>{{trans('payment.messages.failed')}}</small></p>
             <form action="{{route('user.order.resend', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Retry payment')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-success">{{trans('payment.retry')}}</button>
             </form>
         @break
         @case('pending_pay')
-            <p><small>{{__('Payments may take a few minutes to be approved, if you have already paid please check later')}}</small></p>
+            <p><small>{{trans('payment.messages.pending')}}</small></p>
             <form action="{{route('user.order.status', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-dark">{{__('Verify payment')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-dark">{{trans('payment.verify')}}</button>
             </form>
-            <p><small>{{__('Or you can retry the payment again')}}</small></p>
-                <a class="btn btn-success btn-sm btn-block" href="{{$order->payment->process_url}}">{{__('Retry payment')}}</a>
+            <p><small>{{trans('payment.messages.retry_again')}}</small></p>
+                <a class="btn btn-success btn-sm btn-block" href="{{$order->payment->process_url}}">{{trans('payment.retry')}}</a>
                 <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
                     @csrf
                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                    <button type="submit" class="btn btn-block btn-sm btn-danger my-4">{{__('Cancel Purchase')}}</button>
+                    <button type="submit" class="btn btn-block btn-sm btn-danger my-4">{{trans('payment.cancel')}}</button>
                 </form>
         @break
         @case('pending_shipment')
-            <p><small>{{__('We are preparing your order, usually this takes one to two working days')}}</small></p>
-                <h3>{{__('Payer data')}}</h3>
+            <p><small>{{trans('payment.messages.preparing')}}</small></p>
+                <h3>{{trans('payer.data')}}</h3>
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('Name')}}
+                        {{trans('users.full_name')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->payment->payer->getFullName()}}
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('Document')}}
+                        {{trans('payer.document')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->payment->payer->document_type}} : {{$order->payment->payer->document}}
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('Email')}}
+                        {{trans('users.email')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->payment->payer->email}}
@@ -53,7 +53,7 @@
                 </div>
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('Phone')}}
+                        {{trans('users.phone')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->payment->payer->phone}}
@@ -61,7 +61,7 @@
                 </div>
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('Payment method')}}
+                        {{trans('payment.method')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->payment->method}}
@@ -69,7 +69,15 @@
                 </div>
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('Last digit')}}
+                        {{trans('products.reference')}}
+                    </div>
+                    <div class="col-sm-6 text-muted text-left">
+                        {{$order->payment->reference}}
+                    </div>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="col-sm-6 text-muted text-left">
+                        {{trans('payment.last_digit')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->payment->last_digit}}
@@ -79,35 +87,29 @@
             <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-danger">{{__('Cancel Purchase')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-danger">{{trans('payment.cancel')}}</button>
             </form>
         @break
         @case('sent')
-            <p><small>{{__('Your order has been shipped')}}</small></p>
+            <p><small>{{trans('payment.messages.shipped')}}</small></p>
         @break
         @case('rejected')
-            <p><small>{{__('Your transaction  has been declined, you can try another payment method')}}</small></p>
+            <p><small>{{trans('payment.messages.rejected')}}</small></p>
             <form action="{{route('user.order.resend', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Retry payment')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-success">{{trans('payment.retry')}}</button>
             </form>
         @break
         @case('completed')
-            <p><small>{{__('Buy completed')}}</small></p>
-            <form action="{{route('user.order.status', $order->user_id)}}" method="post">
-                @csrf
-                <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-success">{{__('Buy again')}}</button>
-            </form>
+            <p><small>{{trans('orders.statuses.completed')}}</small></p>
         @break
         @case('canceled')
-            <p><small>{{__('Buy canceled')}}</small></p>
-            <p><small class="text-muted">{{__('Order has been canceled success')}}</small></p>
+            <p><small>{{trans('orders.statuses.canceled')}}</small></p>
             @if($order->payment->payer)
                 <div class="row row-cols-2">
                     <div class="col-sm-6 text-muted text-left">
-                        {{__('We give you back')}}
+                        {{trans('payment.messages.back')}}
                     </div>
                     <div class="col-sm-6 text-muted text-left">
                         {{$order->amount}}
@@ -115,7 +117,7 @@
                 </div>
             <div class="row row-cols-2">
                 <div class="col-sm-6 text-muted text-left">
-                    {{__('Payment method')}}
+                    {{trans('payment.method')}}
                 </div>
                 <div class="col-sm-6 text-muted text-left">
                     {{$order->payment->method}}
@@ -123,7 +125,15 @@
             </div>
             <div class="row row-cols-2">
                 <div class="col-sm-6 text-muted text-left">
-                    {{__('Last digit')}}
+                    {{trans('products.reference')}}
+                </div>
+                <div class="col-sm-6 text-muted text-left">
+                    {{$order->payment->reference}}
+                </div>
+            </div>
+            <div class="row row-cols-2">
+                <div class="col-sm-6 text-muted text-left">
+                    {{trans('payment.last_digit')}}
                 </div>
                 <div class="col-sm-6 text-muted text-left">
                     {{$order->payment->last_digit}}

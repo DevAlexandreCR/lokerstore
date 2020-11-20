@@ -28,6 +28,9 @@ class AdminPermissionsController extends Controller
         $admin->syncPermissions($request->permissions);
 
         return redirect()->route('admins.show', $admin->id)
-            ->with('success', __('Permissions has been updated success'));
+            ->with('success', trans('messages.crud', [
+                'resource' => trans_choice('roles.permission', 1, ['permission_count' => '']),
+                'status' => trans('fields.updated')
+            ]));
     }
 }

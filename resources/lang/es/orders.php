@@ -18,7 +18,9 @@ return [
         "sent" => "Enviada"
     ],
     "subtotal" => "Sub-Total",
+    "summary" => "Resumen de la orden",
     "tax" => "Impuesto",
     "total" => "Total",
-    "update" => "Actualizar orden"
+    "update" => "Actualizar orden",
+    "view" => "Ver pedido"
 ];

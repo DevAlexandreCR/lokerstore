@@ -2,24 +2,24 @@
 # Hola {{$name}}
 
 @if(count($failures) === 0)
-{{trans('Products imported successfully')}}
+{{trans('reports.products_imported)}}
 @else
-{{trans('Products imported with errors')}}<br>
-{{trans('Errores')}}: {{count($failures)}}
+{{trans('reports.imported_errors')}}<br>
+{{trans('fields.errors')}}: {{count($failures)}}
 @endif
 
 @component('mail::button', ['url' => route('products.index')])
-{{trans('View')}} {{trans('Products')}}
+{{trans('actions.view')}} {{trans_choice('products.product', 2, ['product_count' => ''])}}
 @endcomponent
 
 @if(count($failures) > 0)
 <table class="table">
         <thead>
         <tr>
-            <th>{{trans('Import')}}</th>
-            <th>{{trans('Row')}}</th>
-            <th>{{trans('Field')}}</th>
-            <th>{{trans('Errors')}}</th>
+            <th>{{trans('actions.import')}}</th>
+            <th>{{trans('fields.row')}}</th>
+            <th>{{trans('fields.field')}}</th>
+            <th>{{trans('fields.errors')}}</th>
         </tr>
         </thead>
         <tbody>

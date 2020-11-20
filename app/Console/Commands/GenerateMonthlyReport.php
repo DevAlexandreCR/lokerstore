@@ -66,7 +66,7 @@ class GenerateMonthlyReport extends Command
         }
 
         if (!$this->admin) {
-            logger()->info(trans('No admin to send report, abort export'));
+            logger()->info(trans('reports.no_admin'));
 
             return 0;
         }
@@ -76,12 +76,12 @@ class GenerateMonthlyReport extends Command
             new NotifyAdminsAfterCompleteExport(
                 $this->admin,
                 $fileName,
-                trans('Reports'),
-                trans('Reports generated successfully')
+                trans('reports.report'),
+                trans('reports.generated')
             ),
         ]);
 
-        logger()->info(trans('Report monthly sent successfully'));
+        logger()->info(trans('reports.sent'));
 
         return 0;
     }

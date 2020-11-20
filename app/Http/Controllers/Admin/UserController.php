@@ -33,13 +33,13 @@ class UserController extends Controller
         if ($users->count() > 0) {
             return view('admin.users.index', [
                 'users' => $users,
-                'user_found' => "Mostrando resultados para: $search",
+                'user_found' => trans('messages.found', ['search' => $search]),
             ]);
         }
 
         return view('admin.users.index', [
             'users' => $users,
-            'user_not_found' => "No se encontraron resultados para $search",
+            'user_not_found' => trans('messages.search_not_found', ['search' => $search]),
         ]);
     }
 
@@ -84,7 +84,10 @@ class UserController extends Controller
             'users.show',
             ['user' => $user]
         ))
-            ->with('user-updated', 'User has been updated success');
+            ->with('user-updated', trans('messages.crud', [
+                'resource' => trans_choice('users.user', 1, ['user_count' => '']),
+                'status' => trans('fields.updated')
+            ]));
     }
 
     /**
@@ -96,6 +99,9 @@ class UserController extends Controller
     {
         $this->users->destroy($user);
 
-        return redirect("admin/users")->with('user-deleted', "User has been deleted success");
+        return redirect("admin/users")->with('user-deleted', trans('messages.crud', [
+            'resource' => trans_choice('users.user', 1, ['user_count' => '']),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

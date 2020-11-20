@@ -29,7 +29,10 @@ class PermissionController extends Controller
     {
         $this->permission->store($request);
 
-        return redirect()->route('roles.index')->with('success', __('Permission has been created successfully'));
+        return redirect()->route('roles.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('roles.permission', 1, ['permission_count' => '']),
+            'status' => trans('fields.created')
+        ]));
     }
 
     /**
@@ -43,7 +46,10 @@ class PermissionController extends Controller
     {
         $this->permission->update($request, $permission);
 
-        return redirect()->route('roles.index')->with('success', __('Permission has been created successfully'));
+        return redirect()->route('roles.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('roles.permission', 1, ['permission_count' => '']),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -59,6 +65,9 @@ class PermissionController extends Controller
 
         $this->permission->destroy($permission);
 
-        return redirect()->route('roles.index')->with('success', __('Permission has been removed successfully'));
+        return redirect()->route('roles.index')->with('success', trans('messages.crud', [
+            'resource' => trans_choice('roles.permission', 1, ['permission_count' => '']),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

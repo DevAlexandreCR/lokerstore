@@ -41,9 +41,10 @@ class TagController extends Controller
     {
         $this->tags->store($request);
 
-        return redirect()
-                    ->back()
-                    ->with('success', __('Tag has been created success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('fields.tags'),
+                        'status' => trans('fields.created')
+                    ]));
     }
 
     /**
@@ -56,9 +57,10 @@ class TagController extends Controller
     {
         $this->tags->update($request, $tag);
 
-        return redirect()
-                    ->back()
-                    ->with('success', __('Tag has been updated success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+            'resource' => trans('fields.tags'),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
@@ -71,8 +73,9 @@ class TagController extends Controller
     {
         $this->tags->destroy($tag);
 
-        return redirect()
-                ->back()
-                ->with('success', __('Tag has been remove success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+            'resource' => trans('fields.tags'),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

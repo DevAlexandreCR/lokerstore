@@ -63,16 +63,16 @@ class ProductsExport extends DefaultValueBinder implements
     {
         return [
             'Id',
-            trans('Reference'),
-            trans('Name'),
-            trans('Description'),
-            trans('Stock'),
-            trans('Cost'),
-            trans('Price'),
-            trans('Enabled'),
-            'ID ' . trans('Category'),
-            trans('Category'),
-            trans('Tags'),
+            trans('products.reference'),
+            trans('products.name'),
+            trans('products.description'),
+            trans('products.stock'),
+            trans('products.cost'),
+            trans('products.price'),
+            trans('actions.enable'),
+            'ID ' . trans('products.category'),
+            trans('products.category'),
+            trans('fields.tags'),
         ];
     }
     /**
@@ -93,7 +93,7 @@ class ProductsExport extends DefaultValueBinder implements
 //            '=SUMIFS(Stocks!H:H,Stocks!B:B,B:B)',
             $product->cost,
             $product->price,
-            ($product->is_active) ? 'Si' : 'No',
+            ($product->is_active) ? trans('messages.yes') : trans('messages.no'),
             $product->category->id,
             $product->category->name,
             $tagsString,

@@ -18,7 +18,7 @@ class CheckBeforeLoginAdmin
     public function handle(Request $request, Closure $next)
     {
         if (auth()->user()) {
-            return Redirect::back()->withErrors(['logout-web' => __('You must log out of the user before logging in as administrator')]);
+            return Redirect::back()->withErrors(['logout-web' => trans('users.logout_before')]);
         }
 
         return $next($request);

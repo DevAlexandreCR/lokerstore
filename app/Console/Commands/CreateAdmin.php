@@ -35,14 +35,14 @@ class CreateAdmin extends Command
 
     public function makeUser(): void
     {
-        $name = $this->ask('What is your name?');
-        $email = $this->ask('What is your email address?');
+        $name = $this->ask(trans('users.create_admin.name'));
+        $email = $this->ask(trans('users.create_admin.email'));
 
         if (!$this->checkEmail($email)) {
-            $this->error('Write a valid email address.');
+            $this->error(trans('users.create_admin.email_invalid'));
         }
-        $password = $this->secret('Write password: ');
-        $passwordVerify = $this->secret('Repeat password verification: ');
+        $password = $this->secret(trans('users.create_admin.password'));
+        $passwordVerify = $this->secret(trans('users.create_admin.repeat_pass'));
 
         if ($password === $passwordVerify) {
             $admin = Admin::create([
@@ -52,9 +52,9 @@ class CreateAdmin extends Command
                 'is_active' => true,
                 ]);
             $admin->assignRole(Roles::ADMIN);
-            $this->info('Admin created successfully... bye!');
+            $this->info(trans('users.create_admin.ok'));
         } else {
-            $this->error('password verification failed');
+            $this->error(trans('users.create_admin.pass_failed'));
         }
     }
 

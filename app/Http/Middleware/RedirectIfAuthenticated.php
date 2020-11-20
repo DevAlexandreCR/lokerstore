@@ -24,10 +24,10 @@ class RedirectIfAuthenticated
                         return redirect(RouteServiceProvider::ADMIN_HOME);
                     }
                     break;
-       
+
             default:
                     if (Auth::check()) {
-                        if (Auth::user()->email_verified_at == null) {
+                        if (Auth::user()->email_verified_at === null) {
                             /**
                              * si el usuario no ha verificado su email se carga la variable de sesion
                              */

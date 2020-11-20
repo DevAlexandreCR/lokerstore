@@ -28,7 +28,7 @@ class OrderPayed extends Mailable
         return $this
             ->from('payments@lokerstore.com', 'LokerStore')
             ->to($this->order->user->email)
-            ->subject('Pago aprobado')
+            ->subject(trans('payment.messages.pay_accepted'))
             ->markdown('emails.orders.payed');
     }
 }

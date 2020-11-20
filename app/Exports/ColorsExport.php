@@ -43,11 +43,11 @@ class ColorsExport extends DefaultValueBinder implements
     public function headings(): array
     {
         return [
-            trans('Id'),
-            trans('Name'),
-            trans('Translate'),
-            trans('Code'),
-            trans('Color'),
+            trans('fields.id'),
+            trans('fields.name'),
+            trans('fields.translate'),
+            trans('products.reference'),
+            trans('products.color'),
         ];
     }
 
@@ -56,7 +56,7 @@ class ColorsExport extends DefaultValueBinder implements
      */
     public function title(): string
     {
-        return trans('Colors');
+        return trans('products.color');
     }
 
     /**

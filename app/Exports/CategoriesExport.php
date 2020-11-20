@@ -51,12 +51,12 @@ class CategoriesExport implements
     public function headings(): array
     {
         return [
-            trans('ID'),
-            trans('Name'),
+            trans('fields.id'),
+            trans('fields.name'),
             null,
-            trans('ID'),
-            trans('Name'),
-            trans('Category'),
+            trans('fields.id'),
+            trans('fields.name'),
+            trans('products.category'),
         ];
     }
 

@@ -74,21 +74,21 @@ class GenerateOrder implements OrderInterface
 
                 return redirect()->away($processUrl)->send();
             case PlaceToPay::PENDING:
-                $message = __('Your payment is not processed yet, this may take a few minutes');
+                $message = trans('payment.messages.pending_recent');
                 break;
             case PlaceToPay::APPROVED:
                 if ($response->status->message === PlaceToPay::MESSAGE_REVERSED) {
                     $this->payments->setStatus($order->payment, Pay::STATUS_CANCELED);
-                    $message = __('Your payment has been reversed success');
+                    $message = trans('payment.messages.reversed');
                 } else {
                     $this->payments->setStatus($order->payment, $status);
                     $this->payments->setDataPayment($order->payment, $response);
-                    $message = __('Your payment has been success');
+                    $message = trans('payment.messages.pay_accepted');
                 }
                 break;
             case PlaceToPay::REJECTED:
                 $this->payments->setStatus($order->payment, $status);
-                $message = __('Your payment has been rejected');
+                $message = trans('payment.messages.rejected');
                 break;
             default:
                 $this->payments->setStatus($order->payment, Pay::FAILED);
@@ -135,6 +135,6 @@ class GenerateOrder implements OrderInterface
         $this->orders->cancel($request);
 
         return redirect()->to(route('user.order.show', [auth()->id(), $order_id]))
-        ->with('message', 'Order has been canceled success');
+        ->with('message', trans('payment.messages.canceled'));
     }
 }

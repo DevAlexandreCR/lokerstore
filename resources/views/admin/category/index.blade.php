@@ -6,7 +6,7 @@
     <div class="container-fluid my-2 p-4 m-2 shadow-sm bg-secondary round">
         <div class="row">
             <div class="col">
-                <button class="btn btn-blue" type="button" data-toggle="modal" data-target="#addCategory">{{__('Add category')}}</button>
+                <button class="btn btn-blue" type="button" data-toggle="modal" data-target="#addCategory">{{trans('products.add_category')}}</button>
             </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <strong>{{__('Error')}}</strong> {{$message}}
+        <strong>{{trans('Error')}}</strong> {{$message}}
     </div>
 @enderror
 
@@ -27,7 +27,7 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <strong>{{__('Success!')}}</strong> {{session('success')}}
+        <strong>{{trans('actions.success')}}</strong> {{session('success')}}
     </div>
 @endif
 <div class="row justify-content-around pb-4">

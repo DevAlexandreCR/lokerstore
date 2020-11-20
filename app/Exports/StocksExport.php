@@ -63,13 +63,13 @@ class StocksExport implements
     {
         return [
             'Id',
-            trans('Product'),
-            trans('Color id'),
-            trans('Color'),
-            trans('Size') . 'id',
-            trans('Type-Size'),
-            trans('Size'),
-            trans('Stock'),
+            trans('fields.product'),
+            trans('fields.color_id'),
+            trans('products.color'),
+            trans('fields.size_id'),
+            trans('fields.type_size'),
+            trans('products.size'),
+            trans('products.stock'),
         ];
     }
 

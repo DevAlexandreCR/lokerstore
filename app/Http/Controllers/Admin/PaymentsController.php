@@ -13,6 +13,9 @@ class PaymentsController extends Controller
     {
         $payments->createFromAdmin($request);
 
-        return back()->with('success', trans('Payment created successfully'));
+        return back()->with('success', trans('messages.crud', [
+            'resource' => trans('payment.payment'),
+            'status' => trans('fields.created')
+        ]));
     }
 }

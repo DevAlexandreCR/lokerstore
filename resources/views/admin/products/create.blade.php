@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <strong>{{__('Success!')}}</strong> {{ __(session('success')) }}
+                <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
             </div>
         </div>
 
@@ -18,7 +18,7 @@
     <div class="container py-3">
         <div class="card shadow">
             <div class="modal-header bg-light">
-                <h5 class="modal-title">{{ __('Add new product') }}</h5>
+                <h5 class="modal-title">{{ trans('products.new') }}</h5>
                 <a href="{{ route('products.index') }}" class="btn btn-link">
                     <ion-icon name="return-up-back-outline"></ion-icon>
                 </a>
@@ -28,12 +28,12 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Name')}} </h6>
+                            <h6 class="card-title"> {{trans('products.name')}} </h6>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <input type="name" class="form-control  @error('name') is-invalid @enderror" id="name"
-                                       required placeholder="{{__('Name')}}"
+                                       required placeholder="{{trans('products.name')}}"
                                        name="name" aria-describedby="nameHelp" value="{{ old('name')}}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -43,12 +43,12 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Reference')}} </h6>
+                            <h6 class="card-title"> {{trans('products.reference')}} </h6>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <input type="name" class="form-control  @error('reference') is-invalid @enderror" id="name"
-                                       required placeholder="{{__('0000')}}"
+                                       required placeholder="0000"
                                        name="reference" aria-describedby="nameHelp" value="{{ old('reference')}}">
                                 @error('reference')
                                 <span class="invalid-feedback" role="alert">
@@ -58,11 +58,11 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Stock')}} </h6>
+                            <h6 class="card-title"> {{trans('products.stock')}} </h6>
                         </div>
                         <div class="col-sm-2">
                             <input type="number" class="form-control  @error('stock') is-invalid @enderror" id="stock"
-                                   disabled placeholder="{{ __('This value will be added automatically') }}"
+                                   disabled placeholder="0"
                                    name="stock" aria-describedby="lastnameHelp">
                             @error('stock')
                             <span class="invalid-feedback" role="alert">
@@ -73,12 +73,12 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
-                            <h6 class="card-title"> {{__('Description')}} </h6>
+                            <h6 class="card-title"> {{trans('products.description')}} </h6>
                         </div>
                         <div class="col">
                             <div class="form-group">
             <textarea type="textarea" class="form-control  @error('description') is-invalid @enderror" id="description"
-                      required placeholder="{{__('Add product description...')}}"
+                      required placeholder="{{trans('products.messages.add_description')}}"
                       name="description" aria-describedby="descriptionHelp">{{ old('description') }}</textarea>
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -89,10 +89,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 ml-2">
-                            <div class="form-group">
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                </div>
                                 <input type="number" class="form-control  @error('cost') is-invalid @enderror"
-                                       id="cost" required placeholder="{{trans('Cost')}}"
+                                       id="cost" required placeholder="{{trans('products.cost')}}"
                                        name="cost" aria-describedby="priceHelp" value="{{ old('cost') }}">
                                 @error('cost')
                                     <span class="invalid-feedback" role="alert">
@@ -101,10 +104,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
+                        <div class="col-sm-2 my-2 my-sm-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                </div>
                                 <input type="number" class="form-control  @error('price') is-invalid @enderror"
-                                       id="price" required placeholder="{{trans('Price')}}"
+                                       id="price" required placeholder="{{trans('products.price')}}"
                                        name="price" aria-describedby="priceHelp" value="{{ old('price') }}">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
@@ -114,7 +120,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2 text-center">
-                            <h6> {{__('Category')}} </h6>
+                            <h6> {{trans('products.category')}} </h6>
                         </div>
                         <div class="col">
                             <div class="row">
@@ -132,7 +138,7 @@
                                         <select class="form-control"
                                                 onchange="document.getElementById(this.value).click()">
                                             <option value="Choose_category">
-                                                {{__('Choose category')}}
+                                                {{trans('actions.choose_category')}}
                                             </option>
                                             @foreach ($categories as $key => $category)
                                                 <a class="nav-link" id="{{$category->id}}" data-toggle="tab"
@@ -155,7 +161,7 @@
                                                 <select class="form-control"
                                                         onchange="setCategory(this.value, 'id_category')">
                                                     <option value="Choose_category">
-                                                        {{__('Choose category')}}
+                                                        {{trans('actions.choose_category')}}
                                                     </option>
                                                     @foreach ($category->children as $key => $sub)
                                                         <option value="{{$sub->id}}">{{$sub->name}}</option>
@@ -178,12 +184,12 @@
                     <hr>
                     <div class="row">
                         <div class="container text-center">
-                            <h6>{{__('Add tags')}}</h6>
+                            <h6>{{trans('products.messages.add_tags')}}</h6>
                         </div>
                         <div class="container">
                             @error('tags')
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{__('Whoops!')}}</strong> {{__('You must add at least one tag')}}
+                                <strong>{{trans('Whoops!')}}</strong> {{trans('products.messages.no_tags_added')}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -206,7 +212,7 @@
                     <hr>
                     <div class="row" id="imgContainer">
                         <div class="container text-center">
-                            <h6>{{__('Add images')}}</h6>
+                            <h6>{{trans('products.messages.add_images')}}</h6>
                         </div>
                         <div class="col increment">
                             <div class="card m-3" style="width: 18rem;" id="card-img">
@@ -252,7 +258,7 @@
                     <div class="row " id="save">
                         <div class="container">
                             <button type="submit"
-                                    class="btn btn-success btn-block btn-sm">{{__('Save product')}}</button>
+                                    class="btn btn-success btn-block btn-sm">{{trans('actions.save')}}</button>
                             <br>
                         </div>
                     </div>

@@ -14,12 +14,12 @@
                 <div class="row">
                     @if ($category->id_parent)
                         <div class="col-4">
-                            <label for="id_parent">{{__('Name category')}}</label>
+                            <label for="id_parent">{{trans('products.category')}}</label>
                             <select class="form-control" name="id_parent" id="id_parent">
                                 @foreach ($categories as $key => $cat)
-                                    <option value="{{$cat->id}}" 
-                                    @if ($cat->id == $category->id_parent)     
-                                    selected                      
+                                    <option value="{{$cat->id}}"
+                                    @if ($cat->id == $category->id_parent)
+                                    selected
                                     @endif>{{$cat->name}}</option>
                                 @endforeach
                             </select>
@@ -29,16 +29,16 @@
                     @endif
                     <div class="col">
                         <div class="form-group">
-                            <label for="inputName{{$category->id}}">{{__('Name sub-category')}}</label>
+                            <label for="inputName{{$category->id}}">{{trans('products.sub_category')}}</label>
                             <input type="text" class="form-control" id="inputName{{$category->id}}" name="name" aria-describedby="namelHelp" value="{{ $category->name }}">
-                            <small id="nameHelp" class="form-text text-muted">{{__('The name must be unique')}}</small>
+                            <small id="nameHelp" class="form-text text-muted">{{trans('products.category_unique')}}</small>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Cancel')}}</button>
-            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.cancel')}}</button>
+            <button type="submit" class="btn btn-primary">{{trans('actions.save_changes')}}</button>
             </div>
         </form>
       </div>
