@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Web;
 
+use App\Models\Payer;
 use App\Constants\Orders;
 use App\Models\Cart;
 use App\Models\Order;
@@ -38,6 +39,7 @@ class OrderControllerTest extends TestCase
         $this->stock = factory(Stock::class)->create([
             'quantity' => 5,
         ]);
+        factory(Payer::class)->create();
 
         $this->user->cart->stocks()->attach($this->stock->id, ['quantity' => 2]);
     }

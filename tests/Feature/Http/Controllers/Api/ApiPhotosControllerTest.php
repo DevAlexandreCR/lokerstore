@@ -45,7 +45,10 @@ class ApiPhotosControllerTest extends TestCase
             ->assertJsonFragment([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Photo saved successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans('fields.images'),
+                        'status' => trans('fields.created')
+                    ]),
                     'code'    => 200,
                 ],
             ]);
@@ -71,7 +74,10 @@ class ApiPhotosControllerTest extends TestCase
             ->assertJsonFragment([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Photo removed successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans('fields.images'),
+                        'status' => trans('fields.deleted')
+                    ]),
                     'code'    => 200,
                 ],
             ]);

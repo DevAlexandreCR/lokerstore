@@ -5,13 +5,13 @@
     <tr></tr>
     <tr></tr>
     <tr>
-        <th>{{trans('Date')}}</th>
-        <th>{{'% ' . trans('Man')}}</th>
-        <th>{{trans('Clothing\'s man')}}</th>
-        <th>{{'% ' . trans('Woman')}}</th>
-        <th>{{trans('Clothing\'s woman')}}</th>
-        <th>{{trans('Status')}}</th>
-        <th>{{trans('Total sold')}}</th>
+        <th>{{trans('orders.date')}}</th>
+        <th>{{'% ' . trans('fields.man')}}</th>
+        <th>{{trans('reports.clothing_man')}}</th>
+        <th>{{'% ' . trans('fields.woman')}}</th>
+        <th>{{trans('reports.clothing_woman')}}</th>
+        <th>{{trans('fields.status')}}</th>
+        <th>{{trans('reports.total_sold')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
         </tr>
     @endforeach
     <tr>
-        <td>{{trans('Totals')}}</td>
+        <td>{{trans('orders.total')}}</td>
         <td>{{$totalManPercent}}</td>
         <td>{{$totalMan}}</td>
         <td>{{$totalWomanPercent}}</td>
@@ -41,13 +41,13 @@
 <table class="table">
     <thead>
     <tr>
-        <th>{{ trans('Category more sold for month') }}</th>
+        <th>{{ trans('reports.category_most_sold') }}</th>
     </tr>
     <tr></tr>
     <tr>
-        <th>{{trans('Date')}}</th>
-        <th>{{trans('Category')}}</th>
-        <th>{{trans('Monthly sale')}}</th>
+        <th>{{trans('orders.date')}}</th>
+        <th>{{trans('products.category')}}</th>
+        <th>{{trans('reports.monthly_sale')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -64,13 +64,13 @@
 <table class="table">
     <thead>
     <tr>
-        <th>{{ trans('Uncompleted orders') }}</th>
+        <th>{{ trans('reports.uncompleted') }}</th>
     </tr>
     <tr></tr>
     <tr>
-        <th>{{trans('Date')}}</th>
-        <th>{{trans('Status')}}</th>
-        <th>{{trans('Total')}}</th>
+        <th>{{trans('orders.date')}}</th>
+        <th>{{trans('fields.status')}}</th>
+        <th>{{trans('orders.total')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -87,15 +87,15 @@
 <table class="table">
     <thead>
     <tr>
-        <th>{{ trans('Stock report') }}</th>
+        <th>{{ trans('reports.stock') }}</th>
     </tr>
     <tr></tr>
     <tr>
-        <th>{{trans('Category')}}</th>
-        <th>{{trans('Cost')}}</th>
-        <th>{{trans('Price')}}</th>
-        <th>{{trans('Difference')}}</th>
-        <th>{{trans('Quantity')}}</th>
+        <th>{{trans('products.category')}}</th>
+        <th>{{trans('products.cost')}}</th>
+        <th>{{trans('products.price')}}</th>
+        <th>{{trans('fields.dif')}}</th>
+        <th>{{trans('fields.quantity')}}</th>
     </tr>
     </thead>
     <tbody>

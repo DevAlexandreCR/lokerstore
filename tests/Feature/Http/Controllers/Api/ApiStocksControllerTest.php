@@ -50,7 +50,10 @@ class ApiStocksControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status'  => 'OK',
-                    'message' => 'Stock was updated successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans('products.stock'),
+                        'status' => trans('fields.updated')
+                    ]),
                 ],
                 'stock' => [
                     'product_id' => $stock->product->id,

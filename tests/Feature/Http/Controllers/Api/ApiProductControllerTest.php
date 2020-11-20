@@ -58,7 +58,7 @@ class ApiProductControllerTest extends TestCase
             ->assertJsonFragment([
             'status' => [
                 'status' => 'OK',
-                'message' => 'Product was found',
+                'message' => trans('messages.found', ['search' => $product->name]),
                 'code'    => 200,
             ],
         ]);
@@ -110,7 +110,10 @@ class ApiProductControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Product was created successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                        'status' => trans('fields.created')
+                    ]),
                 ],
                 'product' => [
                     'id_category'   => $category,
@@ -149,7 +152,10 @@ class ApiProductControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Product was updated successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                        'status' => trans('fields.updated')
+                    ]),
                 ],
                 'product' => [
                     'id_category'   => $category,
@@ -180,7 +186,10 @@ class ApiProductControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Product was deleted successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                        'status' => trans('fields.deleted')
+                    ]),
                 ],
             ]);
         $this->assertDatabaseMissing('products', [

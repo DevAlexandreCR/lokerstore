@@ -1,7 +1,10 @@
 <?php
 return [
     "Sellers" => "Sellers",
+    "category_most_sold" => "Category more sold for month",
     "choose" => "Choose month",
+    "clothing_man" => "Clothing's man",
+    "clothing_woman" => "Clothing's woman",
     "from" => "From",
     "generate" => "Generate report",
     "generate_monthly_report" => "Generate monthly report",
@@ -9,12 +12,15 @@ return [
     "generated" => "Reports successfully generated.",
     "imported_errors" => "Products imported with some errors",
     "monthly" => "Monthly report",
+    "monthly_sale" => "Monthly sale",
     "no_admin" => "No admin to send report, abort export.",
     "products_imported" => "Products imported successfully",
     "report" => "Report",
     "sales" => "Sales",
     "sent" => "Report success sent.",
     "stock" => "Stock report",
+    "total_sold" => "Total sold",
     "trend" => "Trend products",
+    "uncompleted" => "Uncompleted orders",
     "until" => "Until"
 ];

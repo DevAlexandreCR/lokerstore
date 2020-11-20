@@ -1,7 +1,10 @@
 <?php
 return [
     "Sellers" => "Vendedores",
+    "category_most_sold" => "Categoría más vendida por mes",
     "choose" => "Seleccionar mes",
+    "clothing_man" => "Ropa de hombre",
+    "clothing_woman" => "Ropa de mujer",
     "from" => "Desde",
     "generate" => "Generar reporte",
     "generate_monthly_report" => "Generar reporte mensual",
@@ -9,12 +12,15 @@ return [
     "generated" => "Teporte generado satisfactoriamente.",
     "imported_errors" => "Productos importados con algunos errores",
     "monthly" => "Reporte mensual",
+    "monthly_sale" => "Venta mensual",
     "no_admin" => "No hay administrador para enviar el reporte, finalizando tarea.",
     "products_imported" => "Productos importados correctamente",
     "report" => "Reporte",
     "sales" => "Ventas",
     "sent" => "Reporte enviado satisfactoriamente.",
     "stock" => "Reporte de stock",
+    "total_sold" => "Total vendido",
     "trend" => "Productos en tendencia",
+    "uncompleted" => "Órdenes incompletas",
     "until" => "Hasta"
 ];
