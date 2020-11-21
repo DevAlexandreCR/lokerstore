@@ -28,6 +28,7 @@ return [
     "name" => "Product name",
     "new" => "Add new product",
     "price" => "Price",
+    "price_sale" => "Price sale",
     "product" => ":product_count Product |:product_count Products",
     "quantity" => "Quantity",
     "reference" => "Reference",

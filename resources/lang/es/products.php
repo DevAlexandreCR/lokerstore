@@ -28,6 +28,7 @@ return [
     "name" => "Nombre del producto",
     "new" => "Agregar un producto nuevo",
     "price" => "Precio",
+    "price_sale" => "Precio de venta",
     "product" => ":product_count Producto |:product_count Productos",
     "quantity" => "Cantidad",
     "reference" => "Referencia",

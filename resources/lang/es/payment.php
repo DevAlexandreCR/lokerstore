@@ -20,6 +20,7 @@ return [
         "shipped" => "Tu orden ha sido enviada."
     ],
     "method" => "Método de pago",
+    "paid" => "Pagado",
     "pay" => "Procesar pago",
     "payment" => "Pago",
     "retry" => "Intentar de nuevo",

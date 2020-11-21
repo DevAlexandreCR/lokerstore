@@ -20,6 +20,7 @@ return [
         "shipped" => "Your order has been shipped."
     ],
     "method" => "Method",
+    "paid" => "Paid",
     "pay" => "Proceed to payment",
     "payment" => "Payment",
     "retry" => "Retry",

@@ -31,6 +31,7 @@ return [
     "route" => "Ruta no encontrada",
     "row" => "Fila",
     "search" => "Búsqueda",
+    "seller" => "Vendedor",
     "size_id" => "Talla id",
     "staff" => "Personal",
     "status" => "Estado",

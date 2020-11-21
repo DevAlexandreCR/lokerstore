@@ -106,7 +106,7 @@ class MonthlyReportsExport implements
             }
         }
         $colDimension ++;
-        $sheet->setCellValue('K' . $colDimension, trans('Totals'));
+        $sheet->setCellValue('K' . $colDimension, trans('orders.total'));
         $sheet->setCellValue('L' . $colDimension, $totalCost);
         $sheet->setCellValue('M' . $colDimension, $totalPrice);
         $sheet->setCellValue('N' . $colDimension, $totalProductsSold);

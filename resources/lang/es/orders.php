@@ -4,6 +4,7 @@ return [
     "date" => "Fecha",
     "details" => "Detalles de la orden",
     "empty" => "Nada por aquí!.",
+    "no" => "Orden No.",
     "orders" => ":orders_count Orden |:orders_count Órdenes ",
     "search" => "Buscar",
     "search_user" => "Buscar usuario",

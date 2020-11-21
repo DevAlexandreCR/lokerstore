@@ -31,6 +31,7 @@ return [
     "route" => "Route not found",
     "row" => "Row",
     "search" => "Search",
+    "seller" => "Seller",
     "size_id" => "Size id",
     "staff" => "Staff",
     "status" => "Status",

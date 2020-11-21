@@ -4,6 +4,7 @@ return [
     "date" => "Date",
     "details" => "Order details",
     "empty" => "Nothing here!.",
+    "no" => "Order No.",
     "orders" => ":orders_count Order |:orders_count Orders ",
     "search" => "Search",
     "search_user" => "Search user",
