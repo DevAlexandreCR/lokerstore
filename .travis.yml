@@ -9,7 +9,7 @@ cache:
         - ~/.npm
         - vendor
 php:
-    - '7.4'
+    - 7.4
 git:
     depth: 3
 before_install:

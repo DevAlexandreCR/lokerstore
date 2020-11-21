@@ -76,6 +76,7 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "test": "phpunit --stop-on-error --stop-on-failure --testdox"
     }
 }
