@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
+use App\Constants\ImageBase64;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -58,7 +59,7 @@ class ApiProductControllerTest extends TestCase
             ->assertJsonFragment([
             'status' => [
                 'status' => 'OK',
-                'message' => 'Product was found',
+                'message' => trans('messages.found', ['search' => $product->name]),
                 'code'    => 200,
             ],
         ]);
@@ -71,7 +72,6 @@ class ApiProductControllerTest extends TestCase
         $color1 = Color::all()->random()->name;
         $size2 = Size::all()->random();
         $color2 = Color::all()->random()->name;
-        $file = UploadedFile::fake()->image('test.jpeg')->mimeType('image/jpeg');
 
         $response = $this->postJson(route('api.products.store'), [
             'api_token'     => $this->admin->api_token,
@@ -101,7 +101,7 @@ class ApiProductControllerTest extends TestCase
                 ],
             ],
             'photos' => [
-                $file,
+                ImageBase64::IMAGE64,
             ],
         ]);
 
@@ -110,7 +110,10 @@ class ApiProductControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Product was created successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                        'status' => trans('fields.created')
+                    ]),
                 ],
                 'product' => [
                     'id_category'   => $category,
@@ -149,7 +152,10 @@ class ApiProductControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Product was updated successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                        'status' => trans('fields.updated')
+                    ]),
                 ],
                 'product' => [
                     'id_category'   => $category,
@@ -180,7 +186,10 @@ class ApiProductControllerTest extends TestCase
             ->assertJson([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Product was deleted successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                        'status' => trans('fields.deleted')
+                    ]),
                 ],
             ]);
         $this->assertDatabaseMissing('products', [

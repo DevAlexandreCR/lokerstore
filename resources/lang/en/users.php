@@ -17,7 +17,9 @@ return [
     ],
     "data" => "User data",
     "email" => "E-Mail",
+    "empty_cart" => "Empty cart.",
     "full_name" => "Full name",
+    "go_shopping" => "Go shopping...",
     "last_name" => "Last name",
     "logout_before" => "You must log out of the user before logging in as administrator.",
     "messages" => [

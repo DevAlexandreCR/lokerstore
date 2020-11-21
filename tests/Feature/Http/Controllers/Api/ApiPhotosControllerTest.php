@@ -6,6 +6,7 @@ use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use App\Models\Photo;
 use App\Models\Product;
+use App\Constants\ImageBase64;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use TestDatabaseSeeder;
@@ -37,7 +38,7 @@ class ApiPhotosControllerTest extends TestCase
         $response = $this->postJson(route('api.photos.store'), [
             'api_token'  => $this->admin->api_token,
             'product_id' => $product->id,
-            'photos'     => ['base64,djkjfjjkvkfvkfkvkskdkvcsk=', 'base64,djkjfjjkvkfvkfkvkskdkvcsk='],
+            'photos'     => [ImageBase64::IMAGE64],
         ]);
 
         $response
@@ -45,7 +46,10 @@ class ApiPhotosControllerTest extends TestCase
             ->assertJsonFragment([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Photo saved successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans('fields.images'),
+                        'status' => trans('fields.created')
+                    ]),
                     'code'    => 200,
                 ],
             ]);
@@ -71,7 +75,10 @@ class ApiPhotosControllerTest extends TestCase
             ->assertJsonFragment([
                 'status' => [
                     'status' => 'OK',
-                    'message' => 'Photo removed successfully',
+                    'message' => trans('messages.crud', [
+                        'resource' => trans('fields.images'),
+                        'status' => trans('fields.deleted')
+                    ]),
                     'code'    => 200,
                 ],
             ]);

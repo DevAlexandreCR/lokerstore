@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
+use App\Models\Payer;
 use App\Constants\Admins;
 use App\Constants\Orders;
 use App\Constants\Roles;
-use App\Constants\Payers;
 use App\Models\Admin\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Stock;
-use App\Constants\Payments;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use StockSeeder;
@@ -151,11 +150,12 @@ class OrdersControllerTest extends TestCase
     public function testAnAdminCanQueryAnOrderToP2P(): void
     {
         $order = Order::all()->random();
+        factory(Payer::class)->create();
         factory(Payment::class)->create([
             'order_id' => $order->id,
         ]);
 
-        $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.verify', $order->id));
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->get( route('orders.verify', $order->id));
 
         $response
             ->assertStatus(302);
@@ -164,6 +164,7 @@ class OrdersControllerTest extends TestCase
     public function testAnAdminCanReverseAPurchase(): void
     {
         $order = Order::all()->random();
+        factory(Payer::class)->create();
         factory(Payment::class)->create([
             'order_id' => $order->id,
         ]);

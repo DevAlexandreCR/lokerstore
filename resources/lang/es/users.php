@@ -17,7 +17,9 @@ return [
     ],
     "data" => "Datos del usuario",
     "email" => "Correo Electrónico",
+    "empty_cart" => "Carrito vacío.",
     "full_name" => "Nombre completo",
+    "go_shopping" => "Ir de compras...",
     "last_name" => "Apellido",
     "logout_before" => "Debes cerrar sesión de usuario antes de iniciar sesión como administrador.",
     "messages" => [

@@ -12,10 +12,7 @@ import Constants from "../../constants/constants"
 export default {
     name: 'orders-metric',
     data()  {
-        return {
-            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-                'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-        }
+        return {}
     },
     props: {
         metrics: {
@@ -82,7 +79,7 @@ export default {
             data: {
                 labels: this.labels,
                 datasets: [{
-                    label: 'Ventas',
+                    label: this.__('reports.sales'),
                     data: this.dataPaid,
                     backgroundColor: [
                         'rgba(155, 99, 132, 0.2)',
@@ -109,7 +106,7 @@ export default {
                     ],
                     borderWidth: 3
                 },{
-                    label: 'Ventas Canceladas',
+                    label: this.__('reports.sales_canceled'),
                     data: this.dataRejected,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

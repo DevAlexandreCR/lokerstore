@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Policies;
 
+use App\Models\Payer;
 use App\Constants\Admins;
 use App\Constants\Orders;
 use App\Constants\Permissions;
@@ -32,6 +33,7 @@ class OrdersPolicyTest extends TestCase
             UserSeeder::class,
             StockSeeder::class,
         ]);
+        factory(Payer::class)->create();
         factory(Order::class, 2)->create();
         factory(OrderDetail::class, 5)->create();
         $this->admin = factory(Admin::class)->create();

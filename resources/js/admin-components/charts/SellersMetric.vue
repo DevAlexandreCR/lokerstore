@@ -56,7 +56,7 @@ export default {
             data: {
                 labels: this.labels,
                 datasets: [{
-                    label: 'Mejor vendedor',
+                    label: this.__('reports.best_seller'),
                     data: this.dataSells,
                     backgroundColor: [
                         'rgba(15, 99, 12, 1)',
@@ -82,7 +82,7 @@ export default {
                     xAxes: [{
                         scaleLabel: {
                             display: false,
-                            labelString: 'Ventas',
+                            labelString: this.__('reports.sales'),
                         },
                         stacked: true,
                         ticks: {

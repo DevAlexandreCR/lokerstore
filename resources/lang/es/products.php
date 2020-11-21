@@ -10,6 +10,8 @@ return [
     "color" => "Color",
     "cost" => "Costo",
     "description" => "Descripción",
+    "details" => "Detalles del producto",
+    "found" => ":product_found productos encontrados",
     "messages" => [
         "add_description" => "Agregar descripción del producto",
         "add_images" => "Agregar imágenes",
@@ -31,6 +33,7 @@ return [
     "reference" => "Referencia",
     "size" => "Talla",
     "stock" => "Stock",
+    "stock_available" => "Stock disponible",
     "sub_category" => "SubCategoría",
     "update" => "Actualizar producto"
 ];

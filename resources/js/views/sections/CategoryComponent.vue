@@ -48,7 +48,9 @@
         },
 
         props: {
-            category: {},
+            category: {
+                required: true
+            },
             products: {
                     type: Array,
                     default: () => []

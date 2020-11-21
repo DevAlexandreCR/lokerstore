@@ -23,12 +23,6 @@ import NumberFormat from "../constants/NumberFormat";
 export default {
     name: 'product-component',
 
-    data() {
-        return {
-
-        }
-    },
-
     props: {
         product: {
             type: Object,

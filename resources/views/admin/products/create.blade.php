@@ -15,6 +15,22 @@
 
     @endif
 
+    @if ( $errors->any() )
+
+        @foreach ($errors->all() as $error)
+            <div class="container align-self-start col-4 py-2">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>{{trans('actions.error')}}</strong> {{ $error }}
+                </div>
+            </div>
+        @endforeach
+
+    @endif
+
     <div class="container py-3">
         <div class="card shadow">
             <div class="modal-header bg-light">
@@ -47,7 +63,7 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <input type="name" class="form-control  @error('reference') is-invalid @enderror" id="name"
+                                <input type="number" class="form-control  @error('reference') is-invalid @enderror" id="name"
                                        required placeholder="0000"
                                        name="reference" aria-describedby="nameHelp" value="{{ old('reference')}}">
                                 @error('reference')
@@ -135,7 +151,7 @@
                                                href="#{{$category->name}}"
                                                role="tab" aria-controls="{{$category->name}}" aria-selected="false"></a>
                                         @endforeach
-                                        <select class="form-control"
+                                        <select class="form-control" name="id_category"
                                                 onchange="document.getElementById(this.value).click()">
                                             <option value="Choose_category">
                                                 {{trans('actions.choose_category')}}

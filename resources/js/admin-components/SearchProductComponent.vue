@@ -3,18 +3,18 @@
         <div class="row">
             <div class="col-md-2">
                 <autocomplete :suggestions="products" v-model="selection" v-on:select="selectProduct"
-                              :name-input="'reference'" :name-label="'Productos'" :styles="'form-control'"></autocomplete>
+                              :name-input="'reference'" :name-label="__('fields.products')" :styles="'form-control'"></autocomplete>
             </div>
             <div class="col-md-5">
-                <label for="productsFound">Detalle del producto</label>
+                <label for="productsFound">{{ __('products.details') }}</label>
                 <table class="table table-condensed table-sm table-borderless" id="productsFound">
                     <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Categoría</th>
-                        <th>Stock</th>
-                        <th>Costo</th>
-                        <th>Precio</th>
+                        <th>{{ __('fields.product') }}</th>
+                        <th>{{ __('products.category') }}</th>
+                        <th>{{ __('products.stock') }}</th>
+                        <th>{{ __('products.cost') }}</th>
+                        <th>{{ __('products.price') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,14 +29,14 @@
                 </table>
             </div>
             <div class="col-md-5">
-                <label for="productFoundStocks">Stock disponible</label>
+                <label for="productFoundStocks">{{ __('products.stock_available') }}</label>
                 <table class="table table-condensed table-sm table-borderless" id="productFoundStocks">
                     <thead>
                     <tr>
-                        <th>Talla</th>
-                        <th>Color</th>
-                        <th>Cantidad</th>
-                        <th>Agregar</th>
+                        <th>{{ __('products.size') }}</th>
+                        <th>{{ __('products.color') }}</th>
+                        <th>{{ __('products.quantity') }}</th>
+                        <th>{{ __('actions.add') }}</th>
                     </tr>
                     </thead>
                     <tbody v-if="productFound">

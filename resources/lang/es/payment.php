@@ -1,5 +1,7 @@
 <?php
 return [
+    "add" => "Agregar pago",
+    "apply_discount" => "Aplicar descuento",
     "cancel" => "Cancelar compra",
     "continue" => "Continuar comprando",
     "last_digit" => "Terminada en ",

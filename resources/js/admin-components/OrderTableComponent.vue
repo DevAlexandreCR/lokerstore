@@ -1,19 +1,19 @@
 <template>
     <div class="container">
         <div class="card">
-            <div class="card-header">Delalles de la orden</div>
+            <div class="card-header">{{ __('orders.details') }}</div>
             <div class="card-body">
                 <table class="table table-condensed table-sm" id="selectedProducts">
                     <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Nombre</th>
-                        <th>Talla</th>
-                        <th>Color</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Total</th>
-                        <th>Quitar</th>
+                        <th>{{ __('fields.products') }}</th>
+                        <th>{{ __('fields.name') }}</th>
+                        <th>{{ __('products.size') }}</th>
+                        <th>{{ __('products.color') }}</th>
+                        <th>{{ __('products.quantity') }}</th>
+                        <th>{{ __('products.price') }}</th>
+                        <th>{{ __('orders.total') }}</th>
+                        <th>{{ __('actions.quit') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-price float-left">Subtotal</td>
+                        <td class="text-price float-left">{{ __('orders.subtotal') }}</td>
                         <td class="">{{ subTotal | price }}</td>
                         <td></td>
                     </tr>
@@ -51,7 +51,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-price float-left">Impuesto</td>
+                        <td class="text-price float-left">{{ __('orders.tax') }}</td>
                         <td class="">{{ iva | price }}</td>
                         <td></td>
                     </tr>
@@ -61,7 +61,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-price float-left">Total</td>
+                        <td class="text-price float-left">{{ __('orders.amount') }}</td>
                         <td class="">{{ total | price }}</td>
                         <td></td>
                     </tr>

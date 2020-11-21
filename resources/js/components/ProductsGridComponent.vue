@@ -4,14 +4,14 @@
             <div class="col-8">
                 <div class="container">
                     <div class="form-inline pt-4 pl-2">
-                        <label class="text-small" for="exampleFormControlSelect1">Ordenar por: </label>
+                        <label class="text-small" for="exampleFormControlSelect1">{{ __('actions.order') }}</label>
                         <select class="form-control form-control-sm ml-2 mr-2" id="exampleFormControlSelect1" v-on:change="orderBy($event)">
-                            <option selected value="0">Ordenar por </option>
-                            <option value="1">Menor Precio</option>
-                            <option value="2">Mayor Precio</option>
-                            <option value="3">Nombre</option>
+                            <option selected value="0">{{ __('actions.order') }}</option>
+                            <option value="1">{{ __('actions.min_price') }}</option>
+                            <option value="2">{{ __('actions.max_price') }}</option>
+                            <option value="3">{{ __('fields.name') }}</option>
                         </select>
-                        <small class="text-small" for="exampleFormControlSelect1"> Encontrados {{products.length}} productos </small>
+                        <small class="text-small" for="exampleFormControlSelect1"> {{ __('products.found', { product_found: products.length }) }} </small>
                     </div>
                 </div>
             </div>

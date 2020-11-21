@@ -2449,7 +2449,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/constants */ "./resources/js/constants/constants.js");
 //
 //
 //
@@ -2465,7 +2464,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'sales-percent-component',
   props: {
@@ -3099,9 +3097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'orders-metric',
   data: function data() {
-    return {
-      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    };
+    return {};
   },
   props: {
     metrics: {
@@ -3175,13 +3171,13 @@ __webpack_require__.r(__webpack_exports__);
       data: {
         labels: this.labels,
         datasets: [{
-          label: 'Ventas',
+          label: this.__('reports.sales'),
           data: this.dataPaid,
           backgroundColor: ['rgba(155, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)'],
           borderColor: ['rgba(155, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(7, 12, 12, 1)', 'rgba(13, 12, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(13, 102, 255, 1)', 'rgba(153, 12, 25, 1)', 'rgba(25, 59, 4, 1)', 'rgba(225, 159, 143, 1)'],
           borderWidth: 3
         }, {
-          label: 'Ventas Canceladas',
+          label: this.__('reports.sales_canceled'),
           data: this.dataRejected,
           backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
           borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
@@ -3282,7 +3278,7 @@ __webpack_require__.r(__webpack_exports__);
       data: {
         labels: this.labels,
         datasets: [{
-          label: 'Mejor vendedor',
+          label: this.__('reports.best_seller'),
           data: this.dataSells,
           backgroundColor: ['rgba(15, 99, 12, 1)', 'rgba(54, 162, 235, 1)', 'rgba(200, 26, 16, 1)', 'rgba(55, 20, 96, 1)', 'rgba(0, 255, 1, 1)']
         }]
@@ -3302,7 +3298,7 @@ __webpack_require__.r(__webpack_exports__);
           xAxes: [{
             scaleLabel: {
               display: false,
-              labelString: 'Ventas'
+              labelString: this.__('reports.sales')
             },
             stacked: true,
             ticks: {
@@ -3484,12 +3480,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'empty-orders-component',
+  data: function data() {
+    return {
+      url: "http://localhost" + '/home/show?'
+    };
+  },
   components: {
     LottieAnimation: lottie_vuejs_src_LottieAnimation_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     back: function back() {
-      window.history.back();
+      window.location.href = this.url;
     }
   }
 });
@@ -3851,7 +3852,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       this.max = "500000";
       this.hasFiltersActive = false;
       var reload = false;
-      console.log(this.query.search);
 
       if (this.query.search != null) {
         reload = true;
@@ -3970,10 +3970,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     filter: {
       type: String,
-      "default": 'Mujer'
+      required: true
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -4045,9 +4044,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'product-component',
-  data: function data() {
-    return {};
-  },
   props: {
     product: {
       type: Object,
@@ -4725,7 +4721,9 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   props: {
-    category: {},
+    category: {
+      required: true
+    },
     products: {
       type: Array,
       "default": function _default() {
@@ -36282,6 +36280,794 @@ if ( typeof noGlobal === "undefined" ) {
 
 return jQuery;
 } );
+
+
+/***/ }),
+
+/***/ "./node_modules/lang.js/src/lang.js":
+/*!******************************************!*\
+  !*** ./node_modules/lang.js/src/lang.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ *  Lang.js for Laravel localization in JavaScript.
+ *
+ *  @version 1.1.12
+ *  @license MIT https://github.com/rmariuzzo/Lang.js/blob/master/LICENSE
+ *  @site    https://github.com/rmariuzzo/Lang.js
+ *  @author  Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+
+(function(root, factory) {
+    'use strict';
+
+    if (true) {
+        // AMD support.
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else {}
+
+}(this, function() {
+    'use strict';
+
+    function inferLocale() {
+        if (typeof document !== 'undefined' && document.documentElement) {
+            return document.documentElement.lang;
+        }
+    };
+
+    function convertNumber(str) {
+        if (str === '-Inf') {
+            return -Infinity;
+        } else if (str === '+Inf' || str === 'Inf' || str === '*') {
+            return Infinity;
+        }
+        return parseInt(str, 10);
+    }
+
+    // Derived from: https://github.com/symfony/translation/blob/460390765eb7bb9338a4a323b8a4e815a47541ba/Interval.php
+    var intervalRegexp = /^({\s*(\-?\d+(\.\d+)?[\s*,\s*\-?\d+(\.\d+)?]*)\s*})|([\[\]])\s*(-Inf|\*|\-?\d+(\.\d+)?)\s*,\s*(\+?Inf|\*|\-?\d+(\.\d+)?)\s*([\[\]])$/;
+    var anyIntervalRegexp = /({\s*(\-?\d+(\.\d+)?[\s*,\s*\-?\d+(\.\d+)?]*)\s*})|([\[\]])\s*(-Inf|\*|\-?\d+(\.\d+)?)\s*,\s*(\+?Inf|\*|\-?\d+(\.\d+)?)\s*([\[\]])/;
+
+    // Default options //
+
+    var defaults = {
+        locale: 'en'/** The default locale if not set. */
+    };
+
+    // Constructor //
+
+    var Lang = function(options) {
+        options = options || {};
+        this.locale = options.locale || inferLocale() || defaults.locale;
+        this.fallback = options.fallback;
+        this.messages = options.messages;
+    };
+
+    // Methods //
+
+    /**
+     * Set messages source.
+     *
+     * @param messages {object} The messages source.
+     *
+     * @return void
+     */
+    Lang.prototype.setMessages = function(messages) {
+        this.messages = messages;
+    };
+
+    /**
+     * Get the current locale.
+     *
+     * @return {string} The current locale.
+     */
+    Lang.prototype.getLocale = function() {
+        return this.locale || this.fallback;
+    };
+
+    /**
+     * Set the current locale.
+     *
+     * @param locale {string} The locale to set.
+     *
+     * @return void
+     */
+    Lang.prototype.setLocale = function(locale) {
+        this.locale = locale;
+    };
+
+    /**
+     * Get the fallback locale being used.
+     *
+     * @return void
+     */
+    Lang.prototype.getFallback = function() {
+        return this.fallback;
+    };
+
+    /**
+     * Set the fallback locale being used.
+     *
+     * @param fallback {string} The fallback locale.
+     *
+     * @return void
+     */
+    Lang.prototype.setFallback = function(fallback) {
+        this.fallback = fallback;
+    };
+
+    /**
+     * This method act as an alias to get() method.
+     *
+     * @param key {string} The key of the message.
+     * @param locale {string} The locale of the message
+     *
+     * @return {boolean} true if the given key is defined on the messages source, otherwise false.
+     */
+    Lang.prototype.has = function(key, locale) {
+        if (typeof key !== 'string' || !this.messages) {
+            return false;
+        }
+
+        return this._getMessage(key, locale) !== null;
+    };
+
+    /**
+     * Get a translation message.
+     *
+     * @param key {string} The key of the message.
+     * @param replacements {object} The replacements to be done in the message.
+     * @param locale {string} The locale to use, if not passed use the default locale.
+     *
+     * @return {string} The translation message, if not found the given key.
+     */
+    Lang.prototype.get = function(key, replacements, locale) {
+        if (!this.has(key, locale)) {
+            return key;
+        }
+
+        var message = this._getMessage(key, locale);
+        if (message === null) {
+            return key;
+        }
+
+        if (replacements) {
+            message = this._applyReplacements(message, replacements);
+        }
+
+        return message;
+    };
+
+    /**
+     * This method act as an alias to get() method.
+     *
+     * @param key {string} The key of the message.
+     * @param replacements {object} The replacements to be done in the message.
+     *
+     * @return {string} The translation message, if not found the given key.
+     */
+    Lang.prototype.trans = function(key, replacements) {
+        return this.get(key, replacements);
+    };
+
+    /**
+     * Gets the plural or singular form of the message specified based on an integer value.
+     *
+     * @param key {string} The key of the message.
+     * @param count {number} The number of elements.
+     * @param replacements {object} The replacements to be done in the message.
+     * @param locale {string} The locale to use, if not passed use the default locale.
+     *
+     * @return {string} The translation message according to an integer value.
+     */
+    Lang.prototype.choice = function(key, number, replacements, locale) {
+        // Set default values for parameters replace and locale
+        replacements = typeof replacements !== 'undefined'
+            ? replacements
+            : {};
+
+        // The count must be replaced if found in the message
+        replacements.count = number;
+
+        // Message to get the plural or singular
+        var message = this.get(key, replacements, locale);
+
+        // Check if message is not null or undefined
+        if (message === null || message === undefined) {
+            return message;
+        }
+
+        // Separate the plural from the singular, if any
+        var messageParts = message.split('|');
+
+        // Get the explicit rules, If any
+        var explicitRules = [];
+
+        for (var i = 0; i < messageParts.length; i++) {
+            messageParts[i] = messageParts[i].trim();
+
+            if (anyIntervalRegexp.test(messageParts[i])) {
+                var messageSpaceSplit = messageParts[i].split(/\s/);
+                explicitRules.push(messageSpaceSplit.shift());
+                messageParts[i] = messageSpaceSplit.join(' ');
+            }
+        }
+
+        // Check if there's only one message
+        if (messageParts.length === 1) {
+            // Nothing to do here
+            return message;
+        }
+
+        // Check the explicit rules
+        for (var j = 0; j < explicitRules.length; j++) {
+            if (this._testInterval(number, explicitRules[j])) {
+                return messageParts[j];
+            }
+        }
+
+        locale = locale || this._getLocale(key);
+        var pluralForm = this._getPluralForm(number, locale);
+
+        return messageParts[pluralForm];
+    };
+
+    /**
+     * This method act as an alias to choice() method.
+     *
+     * @param key {string} The key of the message.
+     * @param count {number} The number of elements.
+     * @param replacements {object} The replacements to be done in the message.
+     *
+     * @return {string} The translation message according to an integer value.
+     */
+    Lang.prototype.transChoice = function(key, count, replacements) {
+        return this.choice(key, count, replacements);
+    };
+
+    /**
+     * Parse a message key into components.
+     *
+     * @param key {string} The message key to parse.
+     * @param key {string} The message locale to parse
+     * @return {object} A key object with source and entries properties.
+     */
+    Lang.prototype._parseKey = function(key, locale) {
+        if (typeof key !== 'string' || typeof locale !== 'string') {
+            return null;
+        }
+
+        var segments = key.split('.');
+        var source = segments[0].replace(/\//g, '.');
+
+        return {
+            source: locale + '.' + source,
+            sourceFallback: this.getFallback() + '.' + source,
+            entries: segments.slice(1)
+        };
+    };
+
+    /**
+     * Returns a translation message. Use `Lang.get()` method instead, this methods assumes the key exists.
+     *
+     * @param key {string} The key of the message.
+     * @param locale {string} The locale of the message
+     *
+     * @return {string} The translation message for the given key.
+     */
+    Lang.prototype._getMessage = function(key, locale) {
+        locale = locale || this.getLocale();
+        
+        key = this._parseKey(key, locale);
+
+        // Ensure message source exists.
+        if (this.messages[key.source] === undefined && this.messages[key.sourceFallback] === undefined) {
+            return null;
+        }
+
+        // Get message from default locale.
+        var message = this.messages[key.source];
+        var entries = key.entries.slice();
+        var subKey = entries.join('.');
+        message = message !== undefined ? this._getValueInKey(message, subKey) : undefined;
+
+
+        // Get message from fallback locale.
+        if (typeof message !== 'string' && this.messages[key.sourceFallback]) {
+            message = this.messages[key.sourceFallback];
+            entries = key.entries.slice();
+            subKey = '';
+            while (entries.length && message !== undefined) {
+                var subKey = !subKey ? entries.shift() : subKey.concat('.', entries.shift());
+                if (message[subKey]) {
+                    message = message[subKey]
+                    subKey = '';
+                }
+            }
+        }
+
+        if (typeof message !== 'string') {
+            return null;
+        }
+
+        return message;
+    };
+
+    Lang.prototype._getValueInKey = function(obj, str) {
+        // If the full key exists just return the value
+        if (typeof obj[str] === 'string') {
+            return obj[str]
+        }
+
+        str = str.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+        str = str.replace(/^\./, '');           // strip a leading dot
+
+        var parts = str.split('.');
+
+        for (var i = 0, n = parts.length; i < n; ++i) {
+            var currentKey = parts.slice(0, i + 1).join('.');
+            var restOfTheKey = parts.slice(i + 1, parts.length).join('.')
+            
+            if (obj[currentKey]) {
+                return this._getValueInKey(obj[currentKey], restOfTheKey)
+            }
+        }
+
+        return obj;
+    };
+
+    /**
+     * Return the locale to be used between default and fallback.
+     * @param {String} key
+     * @return {String}
+     */
+    Lang.prototype._getLocale = function(key) {
+        key = this._parseKey(key, this.locale)
+        if (this.messages[key.source]) {
+            return this.locale;
+        }
+        if (this.messages[key.sourceFallback]) {
+            return this.fallback;
+        }
+        return null;
+    };
+
+    /**
+     * Find a message in a translation tree using both dotted keys and regular ones
+     *
+     * @param pathSegments {array} An array of path segments such as ['family', 'father']
+     * @param tree {object} The translation tree
+     */
+    Lang.prototype._findMessageInTree = function(pathSegments, tree) {
+        while (pathSegments.length && tree !== undefined) {
+            var dottedKey = pathSegments.join('.');
+            if (tree[dottedKey]) {
+                tree = tree[dottedKey];
+                break;
+            }
+
+            tree = tree[pathSegments.shift()]
+        }
+
+        return tree;
+    };
+
+    /**
+     * Sort replacement keys by length in descending order.
+     *
+     * @param a {string} Replacement key
+     * @param b {string} Sibling replacement key
+     * @return {number}
+     * @private
+     */
+    Lang.prototype._sortReplacementKeys = function(a, b) {
+        return b.length - a.length;
+    };
+
+    /**
+     * Apply replacements to a string message containing placeholders.
+     *
+     * @param message {string} The text message.
+     * @param replacements {object} The replacements to be done in the message.
+     *
+     * @return {string} The string message with replacements applied.
+     */
+    Lang.prototype._applyReplacements = function(message, replacements) {
+        var keys = Object.keys(replacements).sort(this._sortReplacementKeys);
+
+        keys.forEach(function(replace) {
+            message = message.replace(new RegExp(':' + replace, 'gi'), function (match) {
+                var value = replacements[replace];
+
+                // Capitalize all characters.
+                var allCaps = match === match.toUpperCase();
+                if (allCaps) {
+                    return value.toUpperCase();
+                }
+
+                // Capitalize first letter.
+                var firstCap = match === match.replace(/\w/i, function(letter) {
+                    return letter.toUpperCase();
+                });
+                if (firstCap) {
+                    return value.charAt(0).toUpperCase() + value.slice(1);
+                }
+
+                return value;
+            })
+        });
+        return message;
+    };
+
+    /**
+     * Checks if the given `count` is within the interval defined by the {string} `interval`
+     *
+     * @param  count     {int}    The amount of items.
+     * @param  interval  {string} The interval to be compared with the count.
+     * @return {boolean}          Returns true if count is within interval; false otherwise.
+     */
+    Lang.prototype._testInterval = function(count, interval) {
+        /**
+         * From the Symfony\Component\Translation\Interval Docs
+         *
+         * Tests if a given number belongs to a given math interval.
+         *
+         * An interval can represent a finite set of numbers:
+         *
+         *  {1,2,3,4}
+         *
+         * An interval can represent numbers between two numbers:
+         *
+         *  [1, +Inf]
+         *  ]-1,2[
+         *
+         * The left delimiter can be [ (inclusive) or ] (exclusive).
+         * The right delimiter can be [ (exclusive) or ] (inclusive).
+         * Beside numbers, you can use -Inf and +Inf for the infinite.
+         */
+
+        if (typeof interval !== 'string') {
+            throw 'Invalid interval: should be a string.';
+        }
+
+        interval = interval.trim();
+
+        var matches = interval.match(intervalRegexp);
+        if (!matches) {
+            throw 'Invalid interval: ' + interval;
+        }
+
+        if (matches[2]) {
+            var items = matches[2].split(',');
+            for (var i = 0; i < items.length; i++) {
+                if (parseInt(items[i], 10) === count) {
+                    return true;
+                }
+            }
+        } else {
+            // Remove falsy values.
+            matches = matches.filter(function(match) {
+                return !!match;
+            });
+
+            var leftDelimiter = matches[1];
+            var leftNumber = convertNumber(matches[2]);
+            if (leftNumber === Infinity) {
+                leftNumber = -Infinity;
+            }
+            var rightNumber = convertNumber(matches[3]);
+            var rightDelimiter = matches[4];
+
+            return (leftDelimiter === '[' ? count >= leftNumber : count > leftNumber)
+                && (rightDelimiter === ']' ? count <= rightNumber : count < rightNumber);
+        }
+
+        return false;
+    };
+
+    /**
+     * Returns the plural position to use for the given locale and number.
+     *
+     * The plural rules are derived from code of the Zend Framework (2010-09-25),
+     * which is subject to the new BSD license (http://framework.zend.com/license/new-bsd).
+     * Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+     *
+     * @param {Number} count
+     * @param {String} locale
+     * @return {Number}
+     */
+    Lang.prototype._getPluralForm = function(count, locale) {
+        switch (locale) {
+            case 'az':
+            case 'bo':
+            case 'dz':
+            case 'id':
+            case 'ja':
+            case 'jv':
+            case 'ka':
+            case 'km':
+            case 'kn':
+            case 'ko':
+            case 'ms':
+            case 'th':
+            case 'tr':
+            case 'vi':
+            case 'zh':
+                return 0;
+
+            case 'af':
+            case 'bn':
+            case 'bg':
+            case 'ca':
+            case 'da':
+            case 'de':
+            case 'el':
+            case 'en':
+            case 'eo':
+            case 'es':
+            case 'et':
+            case 'eu':
+            case 'fa':
+            case 'fi':
+            case 'fo':
+            case 'fur':
+            case 'fy':
+            case 'gl':
+            case 'gu':
+            case 'ha':
+            case 'he':
+            case 'hu':
+            case 'is':
+            case 'it':
+            case 'ku':
+            case 'lb':
+            case 'ml':
+            case 'mn':
+            case 'mr':
+            case 'nah':
+            case 'nb':
+            case 'ne':
+            case 'nl':
+            case 'nn':
+            case 'no':
+            case 'om':
+            case 'or':
+            case 'pa':
+            case 'pap':
+            case 'ps':
+            case 'pt':
+            case 'so':
+            case 'sq':
+            case 'sv':
+            case 'sw':
+            case 'ta':
+            case 'te':
+            case 'tk':
+            case 'ur':
+            case 'zu':
+                return (count == 1)
+                    ? 0
+                    : 1;
+
+            case 'am':
+            case 'bh':
+            case 'fil':
+            case 'fr':
+            case 'gun':
+            case 'hi':
+            case 'hy':
+            case 'ln':
+            case 'mg':
+            case 'nso':
+            case 'xbr':
+            case 'ti':
+            case 'wa':
+                return ((count === 0) || (count === 1))
+                    ? 0
+                    : 1;
+
+            case 'be':
+            case 'bs':
+            case 'hr':
+            case 'ru':
+            case 'sr':
+            case 'uk':
+                return ((count % 10 == 1) && (count % 100 != 11))
+                    ? 0
+                    : (((count % 10 >= 2) && (count % 10 <= 4) && ((count % 100 < 10) || (count % 100 >= 20)))
+                        ? 1
+                        : 2);
+
+            case 'cs':
+            case 'sk':
+                return (count == 1)
+                    ? 0
+                    : (((count >= 2) && (count <= 4))
+                        ? 1
+                        : 2);
+
+            case 'ga':
+                return (count == 1)
+                    ? 0
+                    : ((count == 2)
+                        ? 1
+                        : 2);
+
+            case 'lt':
+                return ((count % 10 == 1) && (count % 100 != 11))
+                    ? 0
+                    : (((count % 10 >= 2) && ((count % 100 < 10) || (count % 100 >= 20)))
+                        ? 1
+                        : 2);
+
+            case 'sl':
+                return (count % 100 == 1)
+                    ? 0
+                    : ((count % 100 == 2)
+                        ? 1
+                        : (((count % 100 == 3) || (count % 100 == 4))
+                            ? 2
+                            : 3));
+
+            case 'mk':
+                return (count % 10 == 1)
+                    ? 0
+                    : 1;
+
+            case 'mt':
+                return (count == 1)
+                    ? 0
+                    : (((count === 0) || ((count % 100 > 1) && (count % 100 < 11)))
+                        ? 1
+                        : (((count % 100 > 10) && (count % 100 < 20))
+                            ? 2
+                            : 3));
+
+            case 'lv':
+                return (count === 0)
+                    ? 0
+                    : (((count % 10 == 1) && (count % 100 != 11))
+                        ? 1
+                        : 2);
+
+            case 'pl':
+                return (count == 1)
+                    ? 0
+                    : (((count % 10 >= 2) && (count % 10 <= 4) && ((count % 100 < 12) || (count % 100 > 14)))
+                        ? 1
+                        : 2);
+
+            case 'cy':
+                return (count == 1)
+                    ? 0
+                    : ((count == 2)
+                        ? 1
+                        : (((count == 8) || (count == 11))
+                            ? 2
+                            : 3));
+
+            case 'ro':
+                return (count == 1)
+                    ? 0
+                    : (((count === 0) || ((count % 100 > 0) && (count % 100 < 20)))
+                        ? 1
+                        : 2);
+
+            case 'ar':
+                return (count === 0)
+                    ? 0
+                    : ((count == 1)
+                        ? 1
+                        : ((count == 2)
+                            ? 2
+                            : (((count % 100 >= 3) && (count % 100 <= 10))
+                                ? 3
+                                : (((count % 100 >= 11) && (count % 100 <= 99))
+                                    ? 4
+                                    : 5))));
+
+            default:
+                return 0;
+        }
+    };
+
+    return Lang;
+
+}));
+
+
+/***/ }),
+
+/***/ "./node_modules/laravel-vue-lang/dist/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/laravel-vue-lang/dist/index.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Lang = exports.default = void 0;
+const lang_js_1 = __importDefault(__webpack_require__(/*! lang.js */ "./node_modules/lang.js/src/lang.js"));
+/*
+|--------------------------------------------------------------------------
+| Helpers
+|--------------------------------------------------------------------------
+*/
+/**
+ * Determines if the given locale and domain combination is ignored.
+ */
+function shouldIgnore(ignore, locale, domain) {
+    for (let [ignoreLocale, ignoreDomains] of Object.entries(ignore)) {
+        if (locale === ignoreLocale && ignoreDomains.includes(domain)) {
+            return true;
+        }
+    }
+    return false;
+}
+/**
+ * Imports translations from the configured alias.
+ */
+function importTranslations({ ignore, globalTranslationsKey }) {
+    const catalogue = {};
+    const files = __webpack_require__("./resources/lang sync recursive \\.(php|json)$");
+    files.keys().forEach((file) => {
+        var _a, _b;
+        // Find localization files at the root directory
+        const [isGlobal, rootLocale] = (_a = /\.\/([A-Za-z0-9-_]+).(?:php|json)/.exec(file)) !== null && _a !== void 0 ? _a : [];
+        if (isGlobal) {
+            catalogue[`${rootLocale}.${globalTranslationsKey}`] = files(file);
+            return;
+        }
+        // Find localization files in a /lang/ directory
+        const [isScoped, locale, domain] = (_b = /\.\/([A-Za-z0-9-_]+)\/([A-Za-z0-9-_]+).(?:php|json)/.exec(file)) !== null && _b !== void 0 ? _b : [];
+        if (!ignore || !shouldIgnore(ignore, locale, domain)) {
+            catalogue[`${locale}.${domain}`] = files(file);
+        }
+    });
+    return catalogue;
+}
+/**
+ * Adds localization to Vue.
+ */
+const Lang = {
+    install: (Vue, options = {}) => {
+        var _a;
+        // Defines default options
+        options = Object.assign({ globalTranslationsKey: '__global__' }, options);
+        // Creates the Lang.js object
+        const i18n = new lang_js_1.default(Object.assign({ fallback: document.documentElement.lang || navigator.language, messages: (_a = options === null || options === void 0 ? void 0 : options.messages) !== null && _a !== void 0 ? _a : importTranslations(options) }, options));
+        // Defines a global translation function
+        const __ = (key, ...args) => {
+            // Non-global translations
+            if (key.match(/^[\w-]+(?:\.[\w-]+)+$/)) {
+                return i18n.get(key, ...args);
+            }
+            // Global translations
+            const result = i18n.get(`${options.globalTranslationsKey}.${key}`, ...args);
+            return result.startsWith(options.globalTranslationsKey)
+                ? result.substr(options.globalTranslationsKey.length + 1)
+                : result;
+        };
+        Vue.mixin({
+            methods: {
+                $lang: () => i18n,
+                __,
+            },
+        });
+    },
+};
+exports.default = Lang;
+exports.Lang = Lang;
 
 
 /***/ }),
@@ -93332,7 +94118,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [_vm._v("Agregar Pago")]),
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v(_vm._s(_vm.__("payment.add")))
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("form", { attrs: { action: _vm.url, method: "post" } }, [
@@ -93347,7 +94135,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-7", attrs: { for: "selectMethod" } },
-                [_vm._v("Método de pago")]
+                [_vm._v(_vm._s(_vm.__("payment.method")))]
               ),
               _vm._v(" "),
               _c(
@@ -93395,7 +94183,7 @@ var render = function() {
                   attrs: {
                     suggestions: _vm.suggestions,
                     "name-input": "document",
-                    "name-label": "Documento",
+                    "name-label": _vm.__("payer.document"),
                     styles: "form-control form-control-sm"
                   },
                   on: { select: _vm.selectPayer },
@@ -93417,7 +94205,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-2", attrs: { for: "namePayer" } },
-                [_vm._v("Nombre")]
+                [_vm._v(_vm._s(_vm.__("fields.name")))]
               ),
               _vm._v(" "),
               _c("input", {
@@ -93434,7 +94222,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-2", attrs: { for: "lastNamePayer" } },
-                [_vm._v("Apellido")]
+                [_vm._v(_vm._s(_vm.__("users.last_name")))]
               ),
               _vm._v(" "),
               _c("input", {
@@ -93453,7 +94241,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-2", attrs: { for: "emailPayer" } },
-                [_vm._v("E-mail")]
+                [_vm._v(_vm._s(_vm.__("users.email")))]
               ),
               _vm._v(" "),
               _c("input", {
@@ -93470,7 +94258,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "col-sm-2", attrs: { for: "phonePayer" } },
-                [_vm._v("Teléfono")]
+                [_vm._v(_vm._s(_vm.__("users.phone")))]
               ),
               _vm._v(" "),
               _c("input", {
@@ -93489,7 +94277,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "title", attrs: { for: "amountOrder" } },
-                [_vm._v("Total a pagar")]
+                [_vm._v(_vm._s(_vm.__("orders.amount")))]
               ),
               _vm._v(" "),
               _c("input", {
@@ -93510,26 +94298,22 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "btn-group btn-block mx-xl-5" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-sm",
+                attrs: { type: "submit" }
+              },
+              [_vm._v(_vm._s(_vm.__("actions.save")))]
+            )
+          ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "btn-group btn-block mx-xl-5" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success btn-sm", attrs: { type: "submit" } },
-        [_vm._v("Guardar pago")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -93678,20 +94462,26 @@ var render = function() {
     [
       _c("div", { staticClass: "modal-dialog" }, [
         _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "modal-header" }, [
+            _c("h5", { staticClass: "modal-title" }, [
+              _vm._v(_vm._s(_vm.__("orders.messages.save")))
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _c("table", { staticClass: "table table-condensed table-sm" }, [
               _c("thead", [
                 _c("tr", [
-                  _c("th", [_vm._v("Precio total")]),
+                  _c("th", [_vm._v(_vm._s(_vm.__("orders.amount")))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm._f("price")(_vm.total)))])
                 ]),
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { staticClass: "align-middle" }, [
-                    _vm._v("Aplicar descuento")
+                    _vm._v(_vm._s(_vm.__("payment.apply_discount")))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "align-middle" }, [
@@ -93718,7 +94508,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tr", [
-                  _c("th", [_vm._v("Total a pagar")]),
+                  _c("th", [_vm._v(_vm._s(_vm.__("orders.amount")))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm._f("price")(_vm.amount)))])
                 ])
@@ -93733,7 +94523,7 @@ var render = function() {
                 staticClass: "btn btn-secondary",
                 attrs: { type: "button", "data-dismiss": "modal" }
               },
-              [_vm._v("Cerrar")]
+              [_vm._v(_vm._s(_vm.__("actions.close")))]
             ),
             _vm._v(" "),
             _c(
@@ -93756,24 +94546,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [
-        _vm._v("¿Desea guardar la órden?")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
   function() {
     var _vm = this
@@ -93818,7 +94602,7 @@ var render = function() {
     [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
-          _vm._v("Delalles de la orden")
+          _vm._v(_vm._s(_vm.__("orders.details")))
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
@@ -93829,7 +94613,25 @@ var render = function() {
               attrs: { id: "selectedProducts" }
             },
             [
-              _vm._m(0),
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v(_vm._s(_vm.__("fields.products")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("fields.name")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("products.size")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("products.color")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("products.quantity")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("products.price")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("orders.total")))]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(_vm.__("actions.quit")))])
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -93928,7 +94730,7 @@ var render = function() {
                       _c("td"),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-price float-left" }, [
-                        _vm._v("Subtotal")
+                        _vm._v(_vm._s(_vm.__("orders.subtotal")))
                       ]),
                       _vm._v(" "),
                       _c("td", {}, [
@@ -93963,7 +94765,7 @@ var render = function() {
                       _c("td"),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-price float-left" }, [
-                        _vm._v("Impuesto")
+                        _vm._v(_vm._s(_vm.__("orders.tax")))
                       ]),
                       _vm._v(" "),
                       _c("td", {}, [_vm._v(_vm._s(_vm._f("price")(_vm.iva)))]),
@@ -93996,7 +94798,7 @@ var render = function() {
                       _c("td"),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-price float-left" }, [
-                        _vm._v("Total")
+                        _vm._v(_vm._s(_vm.__("orders.amount")))
                       ]),
                       _vm._v(" "),
                       _c("td", {}, [
@@ -94050,32 +94852,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Producto")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Talla")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Color")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Cantidad")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Precio")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Total")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Quitar")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -94103,7 +94880,7 @@ var render = function() {
     [
       _c("div", { staticClass: "card-body" }, [
         _c("small", { staticClass: "text-black-50 " }, [
-          _vm._v("ventas mes pasado: "),
+          _vm._v(_vm._s(_vm.__("reports.sales_last_month"))),
           _c("strong", [_vm._v(_vm._s(_vm.salesLastMonthString))])
         ]),
         _vm._v(" "),
@@ -94132,7 +94909,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("small", { staticClass: "text-black-50 float-left mb-2" }, [
-          _vm._v("ventas este mes: "),
+          _vm._v(_vm._s(_vm.__("reports.sales_this_month"))),
           _c("strong", [_vm._v(_vm._s(_vm.salesThisMonthString))])
         ])
       ])
@@ -94171,7 +94948,7 @@ var render = function() {
             attrs: {
               suggestions: _vm.products,
               "name-input": "reference",
-              "name-label": "Productos",
+              "name-label": _vm.__("fields.products"),
               styles: "form-control"
             },
             on: { select: _vm.selectProduct },
@@ -94189,7 +94966,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-5" }, [
         _c("label", { attrs: { for: "productsFound" } }, [
-          _vm._v("Detalle del producto")
+          _vm._v(_vm._s(_vm.__("products.details")))
         ]),
         _vm._v(" "),
         _c(
@@ -94199,7 +94976,19 @@ var render = function() {
             attrs: { id: "productsFound" }
           },
           [
-            _vm._m(0),
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v(_vm._s(_vm.__("fields.product")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("products.category")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("products.stock")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("products.cost")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("products.price")))])
+              ])
+            ]),
             _vm._v(" "),
             _c("tbody", [
               _vm.productFound
@@ -94226,7 +95015,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-5" }, [
         _c("label", { attrs: { for: "productFoundStocks" } }, [
-          _vm._v("Stock disponible")
+          _vm._v(_vm._s(_vm.__("products.stock_available")))
         ]),
         _vm._v(" "),
         _c(
@@ -94236,7 +95025,17 @@ var render = function() {
             attrs: { id: "productFoundStocks" }
           },
           [
-            _vm._m(1),
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v(_vm._s(_vm.__("products.size")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("products.color")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("products.quantity")))]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.__("actions.add")))])
+              ])
+            ]),
             _vm._v(" "),
             _vm.productFound
               ? _c(
@@ -94277,42 +95076,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Producto")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Categoría")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Stock")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Costo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Precio")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Talla")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Color")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Cantidad")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Agregar")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -94337,9 +95101,11 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row py-4" }, [
       _c("div", { staticClass: "col-sm-5" }, [
-        _c("h3", [_vm._v("Peticiones")]),
+        _c("h3", [_vm._v(_vm._s(_vm.__("api.requests")))]),
         _vm._v(" "),
-        _c("label", { attrs: { for: "api_token" } }, [_vm._v("Api token")]),
+        _c("label", { attrs: { for: "api_token" } }, [
+          _vm._v(_vm._s(_vm.__("api.token")))
+        ]),
         _vm._v(" "),
         _c("textarea", {
           directives: [
@@ -94372,7 +95138,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("label", { staticClass: "mt-2", attrs: { for: "product" } }, [
-          _vm._v("Id de producto")
+          _vm._v(_vm._s(_vm.__("api.id_product")))
         ]),
         _vm._v(" "),
         _c("input", {
@@ -94407,7 +95173,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("label", { staticClass: "mt-4", attrs: { for: "methods" } }, [
-          _vm._v("Opciones")
+          _vm._v(_vm._s(_vm.__("api.options")))
         ]),
         _vm._v(" "),
         _c(
@@ -94423,37 +95189,47 @@ var render = function() {
           },
           [
             _c("option", { attrs: { value: "" } }, [
-              _vm._v("Escoger una opción")
+              _vm._v(_vm._s(_vm.__("api.choose_option")))
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "list" } }, [_vm._v("Listar")]),
+            _c("option", { attrs: { value: "list" } }, [
+              _vm._v(_vm._s(_vm.__("api.list")))
+            ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "show" } }, [_vm._v("Ver")]),
+            _c("option", { attrs: { value: "show" } }, [
+              _vm._v(_vm._s(_vm.__("api.view")))
+            ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "store" } }, [_vm._v("Crear")]),
+            _c("option", { attrs: { value: "store" } }, [
+              _vm._v(_vm._s(_vm.__("api.create")))
+            ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "update" } }, [
-              _vm._v("Actualizar")
+              _vm._v(_vm._s(_vm.__("api.update")))
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "delete" } }, [_vm._v("Eliminar")]),
+            _c("option", { attrs: { value: "delete" } }, [
+              _vm._v(_vm._s(_vm.__("api.delete")))
+            ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "image" } }, [
-              _vm._v("Enviar imagenes")
+              _vm._v(_vm._s(_vm.__("api.send_images")))
             ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "categories" } }, [
-              _vm._v("Ver categorías")
+              _vm._v(_vm._s(_vm.__("api.view_category")))
             ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "tags" } }, [
-              _vm._v("Ver Etiquetas")
+              _vm._v(_vm._s(_vm.__("api.view_tags")))
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "sizes" } }, [_vm._v("Ver Tallas")]),
+            _c("option", { attrs: { value: "sizes" } }, [
+              _vm._v(_vm._s(_vm.__("api.view_sizes")))
+            ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "colors" } }, [
-              _vm._v("Ver Colores")
+              _vm._v(_vm._s(_vm.__("api.view_colors")))
             ])
           ]
         ),
@@ -94473,7 +95249,7 @@ var render = function() {
           },
           [
             _c("label", { staticClass: "mt-4", attrs: { for: "images" } }, [
-              _vm._v("Agregar imagenes")
+              _vm._v(_vm._s(_vm.__("api.add_images")))
             ]),
             _vm._v(" "),
             _c("input", {
@@ -94511,7 +95287,15 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(1)
+      _c("div", { staticClass: "col-sm-7" }, [
+        _c("h3", [_vm._v(_vm._s(_vm.__("api.response")))]),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "container p-2",
+          staticStyle: { "max-height": "700px", overflow: "auto" },
+          attrs: { id: "response" }
+        })
+      ])
     ])
   ])
 }
@@ -94524,20 +95308,6 @@ var staticRenderFns = [
       _c("div", {
         staticClass: "pre pre-scrollable p-2 my-2",
         attrs: { id: "request" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-7" }, [
-      _c("h3", [_vm._v("Respuesta")]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "container p-2",
-        staticStyle: { "max-height": "700px", overflow: "auto" },
-        attrs: { id: "response" }
       })
     ])
   }
@@ -94844,8 +95614,8 @@ var render = function() {
               }
             },
             [
-              _vm._v("Carrito vacío... "),
-              _c("strong", [_vm._v("ir de compras")])
+              _vm._v(_vm._s(_vm.__("users.empty_cart")) + " "),
+              _c("strong", [_vm._v(_vm._s(_vm.__("users.go_shopping")))])
             ]
           )
         ])
@@ -94898,8 +95668,8 @@ var render = function() {
                 }
               },
               [
-                _vm._v("Aún no tienes compras... "),
-                _c("strong", [_vm._v("empezar ahora")])
+                _vm._v(_vm._s(_vm.__("orders.empty")) + " "),
+                _c("strong", [_vm._v(_vm._s(_vm.__("users.go_shopping")))])
               ]
             )
           ])
@@ -94935,7 +95705,20 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "container text-center" }, [
+        _c("p", { staticClass: "text-primary d-inline-block" }, [
+          _vm._v(_vm._s(_vm.__("http_errors.404")))
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-link btn-sm font-weight-bold",
+            attrs: { href: "/home" }
+          },
+          [_vm._v(_vm._s(_vm.__("actions.back")))]
+        )
+      ]),
       _vm._v(" "),
       _c("lottie-animation", {
         staticClass: "container",
@@ -94945,27 +95728,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container text-center" }, [
-      _c("p", { staticClass: "text-primary d-inline-block" }, [
-        _vm._v("No encontramos lo que buscas")
-      ]),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-link btn-sm font-weight-bold",
-          attrs: { href: "/home" }
-        },
-        [_vm._v("Volver")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -95050,7 +95813,9 @@ var render = function() {
         staticClass: "card border-primary my-2"
       },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h6", [_vm._v(_vm._s(_vm.__("fields.filters")))])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("ul", { staticClass: "nav nav-list" }, [
@@ -95059,7 +95824,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "container text-center text-price" },
-                    [_vm._v("Busqueda")]
+                    [_vm._v(_vm._s(_vm.__("fields.search")))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -95097,7 +95862,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "container text-center text-price" },
-                    [_vm._v("Categoria")]
+                    [_vm._v(_vm._s(_vm.__("products.category")))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -95139,7 +95904,7 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "container text-center text-price" },
-                      [_vm._v("Tallas")]
+                      [_vm._v(_vm._s(_vm.__("products.size")))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.sizesSelected, function(size) {
@@ -95191,7 +95956,7 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "container text-center text-price" },
-                      [_vm._v("Colores")]
+                      [_vm._v(_vm._s(_vm.__("products.color")))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.colorsSelected, function(color) {
@@ -95253,7 +96018,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "container text-center text-price" },
-                    [_vm._v("Precio")]
+                    [_vm._v(_vm._s(_vm.__("products.price")))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -95302,14 +96067,16 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Limpiar filtros")]
+            [_vm._v(_vm._s(_vm.__("actions.clean_filters")))]
           )
         ])
       ]
     ),
     _vm._v(" "),
     _c("div", { staticClass: "card border-primary my-2" }, [
-      _vm._m(1),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h6", [_vm._v(_vm._s(_vm.__("fields.categories")))])
+      ]),
       _vm._v(" "),
       _vm.categories
         ? _c(
@@ -95382,7 +96149,9 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card border-primary my-2" }, [
-      _vm._m(2),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h6", [_vm._v(_vm._s(_vm.__("products.price")))])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body card-filter" }, [
         _c("div", { staticClass: "row rows-2" }, [
@@ -95474,13 +96243,15 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Aplicar")]
+          [_vm._v(_vm._s(_vm.__("actions.apply")))]
         )
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card border-primary my-2" }, [
-      _vm._m(3),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h6", [_vm._v(_vm._s(_vm.__("products.color")))])
+      ]),
       _vm._v(" "),
       _vm.colors
         ? _c(
@@ -95584,13 +96355,15 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Aplicar")]
+          [_vm._v(_vm._s(_vm.__("actions.apply")))]
         )
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card border-primary my-2" }, [
-      _vm._m(4),
+      _c("div", { staticClass: "card-header" }, [
+        _c("h6", [_vm._v(_vm._s(_vm.__("products.size")))])
+      ]),
       _vm._v(" "),
       _vm.type_sizes
         ? _c(
@@ -95766,54 +96539,13 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Aplicar")]
+          [_vm._v(_vm._s(_vm.__("actions.apply")))]
         )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h6", [_vm._v("Filtros")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h6", [_vm._v("Categorias")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h6", [_vm._v("Precio")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h6", [_vm._v("Colores")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h6", [_vm._v("Tallas")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -95844,7 +96576,7 @@ var render = function() {
         "traslate-up",
         "card-gender",
         "shadow-sm",
-        _vm.filter == "Mujer" ? "bg-gender-w" : "bg-gender-m"
+        _vm.filter === _vm.__("fields.woman") ? "bg-gender-w" : "bg-gender-m"
       ]
     },
     [
@@ -95862,7 +96594,7 @@ var render = function() {
               {
                 staticClass: "btn btn-secondary",
                 attrs: {
-                  to: { name: "showcase", query: { tags: [_vm.filter] } }
+                  to: { name: "showcase", query: { tags: [this.filter] } }
                 }
               },
               [_vm._v("ver mas")]
@@ -95897,7 +96629,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "container text-center" }, [
+      _c("p", { staticClass: "text-primary d-inline-block" }, [
+        _vm._v(_vm._s(_vm.__("http_errors.404")))
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-link btn-sm font-weight-bold" }, [
+        _vm._v(_vm._s(_vm.__("actions.back")))
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -95912,22 +96652,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container text-center" }, [
-      _c("p", { staticClass: "text-primary d-inline-block" }, [
-        _vm._v("No encontramos lo que buscas")
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-link btn-sm font-weight-bold" }, [
-        _vm._v("Volver")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -96034,7 +96759,7 @@ var render = function() {
                   staticClass: "text-small",
                   attrs: { for: "exampleFormControlSelect1" }
                 },
-                [_vm._v("Ordenar por: ")]
+                [_vm._v(_vm._s(_vm.__("actions.order")))]
               ),
               _vm._v(" "),
               _c(
@@ -96050,18 +96775,20 @@ var render = function() {
                 },
                 [
                   _c("option", { attrs: { selected: "", value: "0" } }, [
-                    _vm._v("Ordenar por ")
+                    _vm._v(_vm._s(_vm.__("actions.order")))
                   ]),
                   _vm._v(" "),
                   _c("option", { attrs: { value: "1" } }, [
-                    _vm._v("Menor Precio")
+                    _vm._v(_vm._s(_vm.__("actions.min_price")))
                   ]),
                   _vm._v(" "),
                   _c("option", { attrs: { value: "2" } }, [
-                    _vm._v("Mayor Precio")
+                    _vm._v(_vm._s(_vm.__("actions.max_price")))
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "3" } }, [_vm._v("Nombre")])
+                  _c("option", { attrs: { value: "3" } }, [
+                    _vm._v(_vm._s(_vm.__("fields.name")))
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -96073,9 +96800,13 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    " Encontrados " +
-                      _vm._s(_vm.products.length) +
-                      " productos "
+                    " " +
+                      _vm._s(
+                        _vm.__("products.found", {
+                          product_found: _vm.products.length
+                        })
+                      ) +
+                      " "
                   )
                 ]
               )
@@ -96212,7 +96943,7 @@ var render = function() {
       { staticClass: "container w-75" },
       [
         _c("span", { staticClass: "spinner-border spinner-border-sm" }),
-        _vm._v("\n        Cargando...\n        "),
+        _vm._v("\n        " + _vm._s(_vm.__("actions.loading")) + "\n        "),
         _c("lottie-animation", {
           staticClass: "container",
           attrs: { path: "assets/lottie/loading.json" }
@@ -96266,7 +96997,10 @@ var render = function() {
                         staticClass: "nav-link",
                         attrs: {
                           exact: "",
-                          to: { name: "showcase", query: { tags: ["Mujer"] } }
+                          to: {
+                            name: "showcase",
+                            query: { tags: [_vm.__("fields.woman")] }
+                          }
                         }
                       },
                       [_vm._v("Mujer")]
@@ -96285,7 +97019,10 @@ var render = function() {
                         staticClass: "nav-link",
                         attrs: {
                           exact: "",
-                          to: { name: "showcase", query: { tags: ["Hombre"] } }
+                          to: {
+                            name: "showcase",
+                            query: { tags: [_vm.__("fields.man")] }
+                          }
                         }
                       },
                       [_vm._v("Hombre")]
@@ -96308,8 +97045,7 @@ var render = function() {
                       staticClass: "form-control",
                       attrs: {
                         type: "text",
-                        placeholder:
-                          "Buscar por nombre, marca, categoria, etc...",
+                        placeholder: _vm.__("actions.search_by"),
                         "aria-label": "Search",
                         "aria-describedby": "btn-search"
                       },
@@ -96336,7 +97072,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Buscar")]
+                        [_vm._v(_vm._s(_vm.__("actions.search")))]
                       )
                     ])
                   ])
@@ -96371,14 +97107,22 @@ var render = function() {
             _c(
               "div",
               { staticClass: "col-md-6 first" },
-              [_c("gender-component", { attrs: { filter: "Mujer" } })],
+              [
+                _c("gender-component", {
+                  attrs: { filter: _vm.__("fields.woman") }
+                })
+              ],
               1
             ),
             _vm._v(" "),
             _c(
               "div",
               { staticClass: "col-md-6" },
-              [_c("gender-component", { attrs: { filter: "Hombre" } })],
+              [
+                _c("gender-component", {
+                  attrs: { filter: _vm.__("fields.man") }
+                })
+              ],
               1
             )
           ]),
@@ -96439,12 +97183,16 @@ var render = function() {
             {
               class: [
                 "nav-link",
-                { "router-link-exact-active": _vm.query.tags.includes("Mujer") }
+                {
+                  "router-link-exact-active": _vm.query.tags.includes(
+                    _vm.__("fields.woman")
+                  )
+                }
               ],
               attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.setTag("Mujer")
+                  _vm.setTag(_vm.__("fields.woman"))
                 }
               }
             },
@@ -96459,13 +97207,15 @@ var render = function() {
               class: [
                 "nav-link",
                 {
-                  "router-link-exact-active": _vm.query.tags.includes("Hombre")
+                  "router-link-exact-active": _vm.query.tags.includes(
+                    _vm.__("fields.man")
+                  )
                 }
               ],
               attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.setTag("Hombre")
+                  _vm.setTag(_vm.__("fields.man"))
                 }
               }
             },
@@ -96506,7 +97256,7 @@ var render = function() {
               staticClass: "form-control",
               attrs: {
                 type: "text",
-                placeholder: "Buscar por nombre, marca, categoria, etc...",
+                placeholder: _vm.__("actions.search_by"),
                 "aria-label": "Search",
                 "aria-describedby": "btn-search"
               },
@@ -96533,7 +97283,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Buscar")]
+                [_vm._v(_vm._s(_vm.__("actions.search")))]
               )
             ])
           ])
@@ -113340,7 +114090,6 @@ var url = "".concat("http://localhost", "/api/");
 
 var getProducts = function getProducts() {
   var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  console.log('get products...');
   return axios.get("".concat(url, "products"), {
     params: query
   }).then(function (res) {
@@ -113349,21 +114098,18 @@ var getProducts = function getProducts() {
 };
 
 var getCategories = function getCategories() {
-  console.log('get categories...');
   return axios.get("".concat(url, "categories")).then(function (res) {
     return res.data;
   });
 };
 
 var getColors = function getColors() {
-  console.log('get colors...');
   return axios.get("".concat(url, "colors")).then(function (res) {
     return res.data;
   });
 };
 
 var getSizes = function getSizes() {
-  console.log('get sizes...');
   return axios.get("".concat(url, "type_sizes")).then(function (res) {
     return res.data;
   });
@@ -113405,8 +114151,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_components_TestApiComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin-components/TestApiComponent */ "./resources/js/admin-components/TestApiComponent.vue");
 /* harmony import */ var _views_admin_views_CreateOrder__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./views/admin-views/CreateOrder */ "./resources/js/views/admin-views/CreateOrder.vue");
 /* harmony import */ var _admin_components_AddPaymentComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./admin-components/AddPaymentComponent */ "./resources/js/admin-components/AddPaymentComponent.vue");
+/* harmony import */ var laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! laravel-vue-lang */ "./node_modules/laravel-vue-lang/dist/index.js");
+/* harmony import */ var laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15__);
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
+
 
 
 
@@ -113433,6 +114182,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('test-api-component', _admi
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-order', _views_admin_views_CreateOrder__WEBPACK_IMPORTED_MODULE_13__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('add-payment-component', _admin_components_AddPaymentComponent__WEBPACK_IMPORTED_MODULE_14__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_paginate__WEBPACK_IMPORTED_MODULE_3___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15__["Lang"], {
+  locale: "es",
+  fallback: 'en',
+  ignore: {
+    en: ['validation']
+  }
+});
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.ignoredElements = [/^ion-/];
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
@@ -114872,6 +115628,458 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PromotionsComponent_vue_vue_type_template_id_c1be0caa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/lang sync recursive \\.(php|json)$":
+/*!*******************************************!*\
+  !*** ./resources/lang sync \.(php|json)$ ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./en/actions.php": "./resources/lang/en/actions.php",
+	"./en/api.php": "./resources/lang/en/api.php",
+	"./en/auth.php": "./resources/lang/en/auth.php",
+	"./en/fields.php": "./resources/lang/en/fields.php",
+	"./en/http_errors.php": "./resources/lang/en/http_errors.php",
+	"./en/messages.php": "./resources/lang/en/messages.php",
+	"./en/months.php": "./resources/lang/en/months.php",
+	"./en/orders.php": "./resources/lang/en/orders.php",
+	"./en/pagination.php": "./resources/lang/en/pagination.php",
+	"./en/passwords.php": "./resources/lang/en/passwords.php",
+	"./en/payer.php": "./resources/lang/en/payer.php",
+	"./en/payment.php": "./resources/lang/en/payment.php",
+	"./en/products.php": "./resources/lang/en/products.php",
+	"./en/reports.php": "./resources/lang/en/reports.php",
+	"./en/roles.php": "./resources/lang/en/roles.php",
+	"./en/users.php": "./resources/lang/en/users.php",
+	"./en/validation.php": "./resources/lang/en/validation.php",
+	"./es.json": "./resources/lang/es.json",
+	"./es/actions.php": "./resources/lang/es/actions.php",
+	"./es/api.php": "./resources/lang/es/api.php",
+	"./es/auth.php": "./resources/lang/es/auth.php",
+	"./es/fields.php": "./resources/lang/es/fields.php",
+	"./es/http_errors.php": "./resources/lang/es/http_errors.php",
+	"./es/messages.php": "./resources/lang/es/messages.php",
+	"./es/months.php": "./resources/lang/es/months.php",
+	"./es/orders.php": "./resources/lang/es/orders.php",
+	"./es/pagination.php": "./resources/lang/es/pagination.php",
+	"./es/passwords.php": "./resources/lang/es/passwords.php",
+	"./es/payer.php": "./resources/lang/es/payer.php",
+	"./es/payment.php": "./resources/lang/es/payment.php",
+	"./es/products.php": "./resources/lang/es/products.php",
+	"./es/reports.php": "./resources/lang/es/reports.php",
+	"./es/roles.php": "./resources/lang/es/roles.php",
+	"./es/users.php": "./resources/lang/es/users.php",
+	"./es/validation.php": "./resources/lang/es/validation.php"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/lang sync recursive \\.(php|json)$";
+
+/***/ }),
+
+/***/ "./resources/lang/en/actions.php":
+/*!***************************************!*\
+  !*** ./resources/lang/en/actions.php ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add":"Add","apply":"Apply","back":"Back","cancel":"Discard","choose_category":"Choose category","clean_filters":"Clean filters","clear_filter":"Clear filters","close":"Close","disable":"Disable","disabled":"Disabled","download":"Download","enable":"Enable","enabled":"Enabled","error":"Error!","export":"Export","filter":"Filter and sort","import":"Import","loading":"Loading...","max_price":"Maximum price","min_price":"Minimum price","order":"Order by:","quit":"Remove","register":"Register","remove":"Remove","save":"Save","save_changes":"Save changes","search":"Search","search_by":"Search by name, category, mark, etc...","submit":"Submit","success":"Success!","toggle":"Toggle navigation","update":"Update","view":"View","view_all":"View all"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/api.php":
+/*!***********************************!*\
+  !*** ./resources/lang/en/api.php ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add_images":"Add images","choose_option":"Choose option","create":"Create product","delete":"Delete product","id_product":"Id product","list":"List","options":"Options","requests":"Requests","response":"Response","send_images":"Send images","token":"Api token","update":"Update product","view":"View product","view_category":"View categories","view_colors":"View colors","view_sizes":"View sizes","view_tags":"View tags"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/auth.php":
+/*!************************************!*\
+  !*** ./resources/lang/en/auth.php ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"failed":"These credentials do not match our records.","throttle":"Too many login attempts. Please try again in :seconds seconds."};
+
+/***/ }),
+
+/***/ "./resources/lang/en/fields.php":
+/*!**************************************!*\
+  !*** ./resources/lang/en/fields.php ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"actions":"Actions","amount":"Amount","categories":"Categories","color_id":"Color id","created":"created","created_at":"Created at","deleted":"deleted","dif":"difference","errors":"Errors","exported":"exported","field":"Field","filters":"Filters","forgot":"Forgot your password?","home":"Home","id":"Id","images":"Images","imported":"imported","login":"Login","logout":"Logout","man":"Man","metrics":"Metrics","name":"Name","only_support":"Login only supports","product":"Product","products":"Products","quantity":"Quantity","remember":"Remember me","role":"Role","route":"Route not found","row":"Row","search":"Search","size_id":"Size id","staff":"Staff","status":"Status","tags":"Tags","translate":"Translate","type_size":"Type Size","updated":"updated","user":"User","woman":"Woman"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/http_errors.php":
+/*!*******************************************!*\
+  !*** ./resources/lang/en/http_errors.php ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"404":"Route not found!","unauthenticated":"User in not authenticated","unauthorized":"User is not authorized"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/messages.php":
+/*!****************************************!*\
+  !*** ./resources/lang/en/messages.php ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"bye":"Bye bye!","crud":":resource has been successfully :status ","exporting":"Exporting products... we'll send you an email when the download is available","found":"Show results for: :search","hello":"Hello!","importing":"Importing products... we'll send you an email when the import is ended","lost":"Oops! Are you lost?","no":"No","not_found":" :resource not found","not_recent":"Less recent","not_result":"Not results found","recent":"Most recent","regards":"Regards","reporting":"We'll send the report to your email when it's ready.","search_not_found":"not results found for: :search","thanks":"Thank you for buy in us store","unique":"The :field must be unique","yes":"Yes"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/months.php":
+/*!**************************************!*\
+  !*** ./resources/lang/en/months.php ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"april":"April","august":"August","december":"December","february":"February","january":"January","july":"July","june":"June","march":"March","may":"May","november":"November","october":"October","september":"September"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/orders.php":
+/*!**************************************!*\
+  !*** ./resources/lang/en/orders.php ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"amount":"Amount","date":"Date","details":"Order details","empty":"Nothing here!.","orders":":orders_count Order |:orders_count Orders ","search":"Search","search_user":"Search user","see":"See all orders","status":"Status","statuses":{"canceled":"Canceled","completed":"Completed","failed":"Failed","pending_pay":"Pending Pay","pending_shipment":"Pending Shipment","rejected":"Rejected","save":"Do you want to save order?","sent":"Sent"},"subtotal":"Sub-Total","summary":"Order summary","tax":"Tax","total":"Total","update":"Update order","view":"View order"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/pagination.php":
+/*!******************************************!*\
+  !*** ./resources/lang/en/pagination.php ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"next":"Next &raquo;","previous":"&laquo; Previous"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/passwords.php":
+/*!*****************************************!*\
+  !*** ./resources/lang/en/passwords.php ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"confirm":"Confirm Password","email_confirm":"Verify Your Email Address","email_request_another":"click here to request another","email_resend":"A fresh verification link has been sent to your email address.","email_sent":"A fresh verification link has been sent to your email address.","email_verify":"Verify Email Address","expire":"This password reset link will expire in :count minutes.","link_verify":"Before proceeding, please check your email for a verification link.","not_receive":"If you did not receive the email","not_request":"If you did not request a password reset, no further action is required.","receiving":"You are receiving this email because we received a password reset request for your account.","request_confirm":"Please confirm your password before continuing.","reset":"Your password has been reset!","reset_notify":"Reset Password Notification","resetting":"Reset Password","send":"Send Password Reset Link","sent":"We have emailed your password reset link!","throttled":"Please wait before retrying.","token":"This password reset token is invalid.","user":"We can't find a user with that email address."};
+
+/***/ }),
+
+/***/ "./resources/lang/en/payer.php":
+/*!*************************************!*\
+  !*** ./resources/lang/en/payer.php ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"data":"Payer data","document":"Document","no_data":"No payer data","payer":"Payer"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/payment.php":
+/*!***************************************!*\
+  !*** ./resources/lang/en/payment.php ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add":"Add payment","apply_discount":"Apply discount","cancel":"Cancel purchase","continue":"Continue shopping","last_digit":"Last digits","messages":{"back":"We give you back","buy_again":"Buy Again","canceled":"Order has been success canceled.","failed":"Payment has failed, please retry","pay_accepted":"Your payment has been accepted","pending":"Payments may take a few minutes to be approved, if you have already paid please check later.","pending_recent":"Your payment is not processed yet, this may take a few minutes.","preparing":"We are preparing your order, usually this takes one to two working days.","rejected":"Your transaction  has been declined, you can try another payment method.","retry_again":"Or you can retry the payment again.","reversed":"Your payment has been reversed success.","shipped":"Your order has been shipped."},"method":"Method","pay":"Proceed to payment","payment":"Payment","retry":"Retry","verify":"Verify payment"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/products.php":
+/*!****************************************!*\
+  !*** ./resources/lang/en/products.php ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add_category":"Add category","added":"Product added to cart","category":"Category","category_unique":"The category name must be unique","choose_color":"Choose color","choose_images":"Choose images","choose_size":"Choose size","color":"Color","cost":"Cost","description":"Description","details":"Product details","found":":product_found products found","messages":{"add_description":"Add product description","add_images":"Add images","add_stock":"This value will be added automatically","add_tags":"Add tags","disable":"This action will disable product","import_images":"Import images","no_tags_added":"You must add at least one tag","remove":"This action will remove product","remove_category":"This action will remove the category and its products","remove_tag":"This action will remove the tag","ups":"Woops!"},"name":"Product name","new":"Add new product","price":"Price","product":":product_count Product |:product_count Products","quantity":"Quantity","reference":"Reference","size":"Size","stock":"Stock","stock_available":"Stock available","sub_category":"Sub-Category","update":"Update product"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/reports.php":
+/*!***************************************!*\
+  !*** ./resources/lang/en/reports.php ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"Sellers":"Sellers","best_seller":"Best seller","category_most_sold":"Category more sold for month","choose":"Choose month","clothing_man":"Clothing's man","clothing_woman":"Clothing's woman","from":"From","generate":"Generate report","generate_monthly_report":"Generate monthly report","generate_report_sales":"Generate sales report","generated":"Reports successfully generated.","imported_errors":"Products imported with some errors","monthly":"Monthly report","monthly_sale":"Monthly sale","no_admin":"No admin to send report, abort export.","products_imported":"Products imported successfully","report":"Report","sales":"Sales","sales_canceled":"Sales canceled","sales_last_month":"Sales last month: ","sales_this_month":"Sales this month: ","sent":"Report success sent.","stock":"Stock report","total_sold":"Total sold","trend":"Trend products","uncompleted":"Uncompleted orders","until":"Until"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/roles.php":
+/*!*************************************!*\
+  !*** ./resources/lang/en/roles.php ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add":"Add role","admin":"Super admin","messages":{"all":"The user has all permissions","permission_form_rol":"Permission from role"},"permission":":permission_count Permission |:permission_count Permissions","remove":"Remove rol","role":":role_count Role |:role_count Roles","update":"Update permissions","view_permissions":"View permissions"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/users.php":
+/*!*************************************!*\
+  !*** ./resources/lang/en/users.php ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"account":"My account","add_employee":"Add employee","add_to_cart":"Add to cart","address":"Address","admin":"Administrator","cart":"Shopping cart","create_admin":{"email":"What is your email address?","email_invalid":"Write a valid email address.","name":"What is your name?","ok":"Admin created successfully... bye!","pass_failed":"Password verification failed","password":"Password: ","repeat_pass":"Confirm password"},"data":"User data","email":"E-Mail","empty_cart":"Empty cart.","full_name":"Full name","go_shopping":"Go shopping...","last_name":"Last name","logout_before":"You must log out of the user before logging in as administrator.","messages":{"cart_no_login":"Login to add products to cart","contact":"We regret to inform you that your user has been\nfor more information write to us at: ","contact_us":"Contact us","disable":"This action will disable the user","disabled":"User disabled","no_product":"Product sold","remove":"This action will delete the user"},"name":"Name","password":"Password","phone":"Phone","profile":"Profile","registration":"Registration date","show_cart":"Show cart","update":"Update user","user":":user_count User  |:user_count Users ","verified":"User verified"};
+
+/***/ }),
+
+/***/ "./resources/lang/en/validation.php":
+/*!******************************************!*\
+  !*** ./resources/lang/en/validation.php ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"accepted":"The :attribute must be accepted.","active_url":"The :attribute is not a valid URL.","after":"The :attribute must be a date after :date.","after_or_equal":"The :attribute must be a date after or equal to :date.","alpha":"The :attribute may only contain letters.","alpha_dash":"The :attribute may only contain letters, numbers, dashes and underscores.","alpha_num":"The :attribute may only contain letters and numbers.","array":"The :attribute must be an array.","attributes":{"address":"","age":"","amount":"","body":"","category":"","city":"","color_id":"","colors":"","content":"","cost":"","country":"","date":"","day":"","delete_photos":"","description":"","details":"","document_type":"document type","email":"","excerpt":"","file":"","file_path":"","first_name":"","from":"","gender":"","hour":"","id_category":"","id_parent":"","images":"","is_active":"","last_name":"","message":"","method":"","minute":"","mobile":"","month":"","name":"","orderBy":"","order_id":"","password":"","password_confirmation":"","permissions":"","phone":"","photos":"","price":"","product":"product_id","quantity":"","reference":"","role":"","roles":"","search":"","second":"","sex":"","sizes":"","status":"","subject":"","tags":"","terms":"","time":"","title":"","to":"","username":"","year":""},"before":"The :attribute must be a date before :date.","before_or_equal":"The :attribute must be a date before or equal to :date.","between":{"array":"The :attribute must have between :min and :max items.","file":"The :attribute must be between :min and :max kilobytes.","numeric":"The :attribute must be between :min and :max.","string":"The :attribute must be between :min and :max characters."},"boolean":"The :attribute field must be true or false.","confirmed":"The :attribute confirmation does not match.","custom":{"attribute-name":{"rule-name":"custom-message"},"email":{"unique":""},"password":{"min":""}},"date":"The :attribute is not a valid date.","date_equals":"The :attribute must be a date equal to :date.","date_format":"The :attribute does not match the format :format.","different":"The :attribute and :other must be different.","digits":"The :attribute must be :digits digits.","digits_between":"The :attribute must be between :min and :max digits.","dimensions":"The :attribute has invalid image dimensions.","distinct":"The :attribute field has a duplicate value.","email":"The :attribute must be a valid email address.","ends_with":"The :attribute must end with one of the following: :values.","exists":"The selected :attribute is invalid.","file":"The :attribute must be a file.","filled":"The :attribute field must have a value.","gt":{"array":"The :attribute must have more than :value items.","file":"The :attribute must be greater than :value kilobytes.","numeric":"The :attribute must be greater than :value.","string":"The :attribute must be greater than :value characters."},"gte":{"array":"The :attribute must have :value items or more.","file":"The :attribute must be greater than or equal :value kilobytes.","numeric":"The :attribute must be greater than or equal :value.","string":"The :attribute must be greater than or equal :value characters."},"image":"The :attribute must be an image.","in":"The selected :attribute is invalid.","in_array":"The :attribute field does not exist in :other.","integer":"The :attribute must be an integer.","ip":"The :attribute must be a valid IP address.","ipv4":"The :attribute must be a valid IPv4 address.","ipv6":"The :attribute must be a valid IPv6 address.","json":"The :attribute must be a valid JSON string.","lt":{"array":"The :attribute must have less than :value items.","file":"The :attribute must be less than :value kilobytes.","numeric":"The :attribute must be less than :value.","string":"The :attribute must be less than :value characters."},"lte":{"array":"The :attribute must not have more than :value items.","file":"The :attribute must be less than or equal :value kilobytes.","numeric":"The :attribute must be less than or equal :value.","string":"The :attribute must be less than or equal :value characters."},"max":{"array":"The :attribute may not have more than :max items.","file":"The :attribute may not be greater than :max kilobytes.","numeric":"The :attribute may not be greater than :max.","string":"The :attribute may not be greater than :max characters."},"mimes":"The :attribute must be a file of type: :values.","mimetypes":"The :attribute must be a file of type: :values.","min":{"array":"The :attribute must have at least :min items.","file":"The :attribute must be at least :min kilobytes.","numeric":"The :attribute must be at least :min.","string":"The :attribute must be at least :min characters."},"not_in":"The selected :attribute is invalid.","not_regex":"The :attribute format is invalid.","numeric":"The :attribute must be a number.","password":"The password is incorrect.","present":"The :attribute field must be present.","regex":"The :attribute format is invalid.","required":"The :attribute field is required.","required_if":"The :attribute field is required when :other is :value.","required_unless":"The :attribute field is required unless :other is in :values.","required_with":"The :attribute field is required when :values is present.","required_with_all":"The :attribute field is required when :values are present.","required_without":"The :attribute field is required when :values is not present.","required_without_all":"The :attribute field is required when none of :values are present.","same":"The :attribute and :other must match.","size":{"array":"The :attribute must contain :size items.","file":"The :attribute must be :size kilobytes.","numeric":"The :attribute must be :size.","string":"The :attribute must be :size characters."},"starts_with":"The :attribute must start with one of the following: :values.","string":"The :attribute must be a string.","timezone":"The :attribute must be a valid zone.","unique":"The :attribute has already been taken.","uploaded":"The :attribute failed to upload.","url":"The :attribute format is invalid.","uuid":"The :attribute must be a valid UUID."};
+
+/***/ }),
+
+/***/ "./resources/lang/es.json":
+/*!********************************!*\
+  !*** ./resources/lang/es.json ***!
+  \********************************/
+/*! exports provided: view users, create users, delete users, edit users, view orders, create orders, delete orders, edit orders, view roles, create roles, delete roles, edit roles, view products, create products, delete products, edit products, view permissions, create permissions, delete permissions, edit permissions, view categories, create categories, delete categories, edit categories, view tags, create tags, delete tags, edit tags, view home, create metrics, view payments, create payments, delete payments, edit payments, view cart, create cart, delete cart, edit cart, view stocks, create stocks, delete stocks, edit stocks, view admins, create admins, delete admins, edit admins, WHITE, SILVER, GRAY, BLACK, RED, MAROON, YELLOW, LIME, GREEN, AQUA, BLUE, FUCHSIA, PURPLE, PINK, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"view users\":\"ver usuarios\",\"create users\":\"crear usuarios\",\"delete users\":\"borrar usuarios\",\"edit users\":\"editar usuarios\",\"view orders\":\"ver órdenes\",\"create orders\":\"crear órdenes\",\"delete orders\":\"borrar órdenes\",\"edit orders\":\"editar órdenes\",\"view roles\":\"ver roles\",\"create roles\":\"crear roles\",\"delete roles\":\"borrar roles\",\"edit roles\":\"editar roles\",\"view products\":\"ver productos\",\"create products\":\"crear productos\",\"delete products\":\"borrar productos\",\"edit products\":\"editar productos\",\"view permissions\":\"ver permisos\",\"create permissions\":\"crear permisos\",\"delete permissions\":\"borrar permisos\",\"edit permissions\":\"editar permisos\",\"view categories\":\"ver categorías\",\"create categories\":\"crear categorías\",\"delete categories\":\"borrar categorías\",\"edit categories\":\"editar categorías\",\"view tags\":\"ver etiquetas\",\"create tags\":\"crear etiquetas\",\"delete tags\":\"borrar etiquetas\",\"edit tags\":\"editar etiquetas\",\"view home\":\"ver inicio\",\"create metrics\":\"crear métricas\",\"view payments\":\"ver pagos\",\"create payments\":\"crear pagos\",\"delete payments\":\"borrar pagos\",\"edit payments\":\"editar pagos\",\"view cart\":\"ver carrito\",\"create cart\":\"crear carrito\",\"delete cart\":\"borrar carrito\",\"edit cart\":\"editar carrito\",\"view stocks\":\"ver stocks\",\"create stocks\":\"crear stocks\",\"delete stocks\":\"borrar stocks\",\"edit stocks\":\"editar stocks\",\"view admins\":\"ver personal\",\"create admins\":\"crear personal\",\"delete admins\":\"borrar personal\",\"edit admins\":\"editar personal\",\"WHITE\":\"BLANCO\",\"SILVER\":\"PLATA\",\"GRAY\":\"GRIS\",\"BLACK\":\"NEGRO\",\"RED\":\"ROJO\",\"MAROON\":\"MARRON\",\"YELLOW\":\"AMARILLO\",\"LIME\":\"LIMA\",\"GREEN\":\"VERDE\",\"AQUA\":\"AGUA\",\"BLUE\":\"AZUL\",\"FUCHSIA\":\"FUCSIA\",\"PURPLE\":\"MORADO\",\"PINK\":\"ROSA\"}");
+
+/***/ }),
+
+/***/ "./resources/lang/es/actions.php":
+/*!***************************************!*\
+  !*** ./resources/lang/es/actions.php ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add":"Agregar","apply":"Aplicar","back":"Volver","cancel":"Cancelar","choose_category":"Escoger categoría","clean_filters":"Limpiar filtros","clear_filter":"Limpiar filtros","close":"Cerrar","disable":"Inhabilitar","disabled":"Inhabilitado","download":"Descargar","enable":"Habilitar","enabled":"Habilitado","error":"Error!","export":"Exportar","filter":"Filtrar y ordenar","import":"Importar","loading":"Cargando...","max_price":"Mayor  precio","min_price":"Menor precio","order":"Ordenar por:","quit":"Quitar","register":"Registrar","remove":"Eliminar","save":"Guardar","save_changes":"Guardar cambios","search":"Buscar","search_by":"Buscar por nombre, marca, categoria, etc...","submit":"Enviar","success":"Hecho!","toggle":"Abrir navegación","update":"Actualizar","view":"Ver","view_all":"Ver todos"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/api.php":
+/*!***********************************!*\
+  !*** ./resources/lang/es/api.php ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add_images":"Agregar imágenes","choose_option":"Escoger una opción","create":"Crear producto","delete":"Eliminar producto","id_product":"Id de producto","list":"Listar","options":"Opciones","requests":"Peticiones","response":"Respuesta","send_images":"Enviar imágenes","token":"Api token","update":"Actualizar producto","view":"Ver producto","view_category":"Ver categorías","view_colors":"Ver colores","view_sizes":"Ver tallas","view_tags":"Ver etiquetas"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/auth.php":
+/*!************************************!*\
+  !*** ./resources/lang/es/auth.php ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"failed":"Estas credenciales no coinciden con nuestros registros, o el usuario ha sido inhabilitado","throttle":"Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos."};
+
+/***/ }),
+
+/***/ "./resources/lang/es/fields.php":
+/*!**************************************!*\
+  !*** ./resources/lang/es/fields.php ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"actions":"Acciones","amount":"Valor total","categories":"Categorías","color_id":"Color id","created":"creado","created_at":"Creado el","deleted":"eliminado","dif":"Diferencia","errors":"Errores","exported":"exportado","field":"Campo","filters":"Filtros","forgot":"¿ Olvidaste tu contraseña ?","home":"Inicio","id":"Id","images":"Imágenes","imported":"importado","login":"Iniciar sesión","logout":"Cerrar sesión","man":"Hombre","metrics":"Métricas","name":"Nombre","only_support":"Acceso solo para colaboradores","product":"Producto","products":"Productos","quantity":"Cantidad","remember":"Recuérdame","role":"Rol","route":"Ruta no encontrada","row":"Fila","search":"Búsqueda","size_id":"Talla id","staff":"Personal","status":"Estado","tags":"Etiquetas","translate":"Traducción","type_size":"Tipo de talla","updated":"actualizado","user":"Usuario","woman":"Mujer"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/http_errors.php":
+/*!*******************************************!*\
+  !*** ./resources/lang/es/http_errors.php ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"404":"No encontramos lo que buscas!","unauthenticated":"El usuario no está autenticado","unauthorized":"El usuario no está autorizado"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/messages.php":
+/*!****************************************!*\
+  !*** ./resources/lang/es/messages.php ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"bye":"Adiós!","crud":":resource ha sido :status satisfactoriamente ","exporting":"Exportando productos... te enviaremos un correo electrónico cuando esté disponible la descarga","found":"Mostrando resultados para: :search","hello":"Hola!","importing":"Importando productos... te enviaremos un correo electrónico cuando la importación haya terminado","lost":"Oh! ¿ Estás perdido ?","no":"No","not_found":" :resource no encontrado","not_recent":"Menos recientes","not_result":"No se encontraron resultados","recent":"Más recientes","regards":"Saludos","reporting":"Te enviaremos el reporte a tu correo electrónico cuando esté listo.","search_not_found":"No se encontraron resultados para: :search","thanks":"Gracias por comprar en nuestra tienda,","unique":"El :field debe ser único","yes":"Si"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/months.php":
+/*!**************************************!*\
+  !*** ./resources/lang/es/months.php ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"april":"Abril","august":"Agosto","december":"Diciembre","february":"Febrero","january":"Enero","july":"Julio","june":"Junio","march":"Marzo","may":"Mayo","november":"Noviembre","october":"Octubre","september":"Septiembre"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/orders.php":
+/*!**************************************!*\
+  !*** ./resources/lang/es/orders.php ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"amount":"Valor total","date":"Fecha","details":"Detalles de la orden","empty":"Nada por aquí!.","orders":":orders_count Orden |:orders_count Órdenes ","search":"Buscar","search_user":"Buscar usuario","see":"Ver todas las órdenes","status":"Estado","statuses":{"canceled":"Cancelada","completed":"Completada","failed":"Fallida","pending_pay":"Pago pendiente","pending_shipment":"Envío pendiente","rejected":"Rechazada","save":"¿Desea guardar la orden?","sent":"Enviada"},"subtotal":"Sub-Total","summary":"Resumen de la orden","tax":"Impuesto","total":"Total","update":"Actualizar orden","view":"Ver pedido"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/pagination.php":
+/*!******************************************!*\
+  !*** ./resources/lang/es/pagination.php ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"next":"Siguiente &raquo;","previous":"&laquo; Anterior"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/passwords.php":
+/*!*****************************************!*\
+  !*** ./resources/lang/es/passwords.php ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"confirm":"Confirmar contraseña","email_confirm":"Confirma tu correo electrónico","email_request_another":"pulsa aquí para que te enviemos otro","email_resend":"Se ha enviado un nuevo enlace de verificación a tu correo electrónico.","email_sent":"Se ha enviado un nuevo enlace de verificación a tu correo electrónico.","email_verify":"Verificar correo electrónico","expire":"Este enlace para restablecer la contraseña caduca en :count minutos.","link_verify":"Antes de poder continuar, por favor, confirma tu correo electrónico con el enlace que te hemos enviado.","not_receive":"Si no has recibido el correo electrónico","not_request":"Si no has solicitado un cambio de contraseña, puedes ignorar o eliminar este correo electrónico.","receiving":"Estás recibiendo este correo porque se ha solicitado un cambio de contraseña para tu cuenta.","request_confirm":"Por favor confirme su contraseña antes de continuar.","reset":"¡Tu contraseña ha sido restablecida!","reset_notify":"Aviso para restablecer contraseña","resetting":"Restablecer contraseña","send":"Enviar enlace para restablecer contraseña","sent":"¡Te hemos enviado por correo el enlace para restablecer tu contraseña!","throttled":"Por favor espera antes de intentar de nuevo.","token":"El token de recuperación de contraseña es inválido.","user":"No podemos encontrar ningún usuario con ese correo electrónico."};
+
+/***/ }),
+
+/***/ "./resources/lang/es/payer.php":
+/*!*************************************!*\
+  !*** ./resources/lang/es/payer.php ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"data":"Datos del pagador","document":"Documento","no_data":"Sin datos del pagador","payer":"Pagador"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/payment.php":
+/*!***************************************!*\
+  !*** ./resources/lang/es/payment.php ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add":"Agregar pago","apply_discount":"Aplicar descuento","cancel":"Cancelar compra","continue":"Continuar comprando","last_digit":"Terminada en ","messages":{"back":"Te devolvimos","buy_again":"Comprar de nuevo","canceled":"La Orden ha sido cancelada satisfactoriamente. ","failed":"El proceso del pago ha fallado, por favor inténtelo nuevamente","pay_accepted":"Tu pago ha sido aceptado","pending":"Los pagos pueden tardarce unos minutos en ser aprobados, si ya pagaste por favor verifica mas tarde.","pending_recent":"Tu pago aún no ha sido procesado, ésto puede tomar unos minutos","preparing":"Estamos preparando tu pedido, normalmente esto tarde uno o dos días hábiles","rejected":"Tu transacción ha sido rechazada, puedes intentar con otro método de pago.","retry_again":"O puedes reintentar el pago nuevamente.","reversed":"Tu pago a sido devuelto satisfactoriamente.","shipped":"Tu orden ha sido enviada."},"method":"Método de pago","pay":"Procesar pago","payment":"Pago","retry":"Intentar de nuevo","verify":"Verificar pago"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/products.php":
+/*!****************************************!*\
+  !*** ./resources/lang/es/products.php ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add_category":"Agregar categoría","added":"Producto agregado al carrito","category":"Categoría","category_unique":"El nombre de la categoría debe ser único","choose_color":"Seleccionar color","choose_images":"Escoger imágenes","choose_size":"Seleccionar talla","color":"Color","cost":"Costo","description":"Descripción","details":"Detalles del producto","found":":product_found productos encontrados","messages":{"add_description":"Agregar descripción del producto","add_images":"Agregar imágenes","add_stock":"Éste valor se agregará automáticamente","add_tags":"Agregar etiquetas","disable":"Ésta acción inhabilitará el producto","import_images":"Importar imágenes","no_tags_added":"Debes agregar al menos una etiqueta","remove":"Ésta acción eliminará el producto","remove_category":"Ésta acción eliminará la categoría y sus productos","remove_tag":"Ésta acción eliminará la etiqueta","ups":"Ups!"},"name":"Nombre del producto","new":"Agregar un producto nuevo","price":"Precio","product":":product_count Producto |:product_count Productos","quantity":"Cantidad","reference":"Referencia","size":"Talla","stock":"Stock","stock_available":"Stock disponible","sub_category":"SubCategoría","update":"Actualizar producto"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/reports.php":
+/*!***************************************!*\
+  !*** ./resources/lang/es/reports.php ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"Sellers":"Vendedores","best_seller":"Mejor vendedor","category_most_sold":"Categoría más vendida por mes","choose":"Seleccionar mes","clothing_man":"Ropa de hombre","clothing_woman":"Ropa de mujer","from":"Desde","generate":"Generar reporte","generate_monthly_report":"Generar reporte mensual","generate_report_sales":"Generar reporte de ventas","generated":"Teporte generado satisfactoriamente.","imported_errors":"Productos importados con algunos errores","monthly":"Reporte mensual","monthly_sale":"Venta mensual","no_admin":"No hay administrador para enviar el reporte, finalizando tarea.","products_imported":"Productos importados correctamente","report":"Reporte","sales":"Ventas","sales_canceled":"Ventas canceladas","sales_last_month":"Ventas mes pasado: ","sales_this_month":"Ventas éste mes: ","sent":"Reporte enviado satisfactoriamente.","stock":"Reporte de stock","total_sold":"Total vendido","trend":"Productos en tendencia","uncompleted":"Órdenes incompletas","until":"Hasta"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/roles.php":
+/*!*************************************!*\
+  !*** ./resources/lang/es/roles.php ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"add":"Agregar rol","admin":"Súper administrador","messages":{"all":"El usuario tiene todos los permisos","permission_form_rol":"Permiso desde rol"},"permission":":permission_count Permiso |:permission_count Permisos","remove":"Eliminar rol","role":":role_count Rol |:role_count Roles","update":"Actualizar permisos","view_permissions":"Ver permisos"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/users.php":
+/*!*************************************!*\
+  !*** ./resources/lang/es/users.php ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"account":"Mi cuenta","add_employee":"Agregar empleado","add_to_cart":"Agregar al carrito","address":"Dirección","admin":"Administrador","cart":"Carrito de compras","create_admin":{"email":"¿Cuál es tu correo electrónico?","email_invalid":"Escriba un correo electrónico válido.","name":"¿Cuál es su nombre?","ok":"Administrador creado satisfactoriamente... chao!","pass_failed":"Las contraseñas no coinciden","password":"Contraseña: ","repeat_pass":"Confirmar la contraseña"},"data":"Datos del usuario","email":"Correo Electrónico","empty_cart":"Carrito vacío.","full_name":"Nombre completo","go_shopping":"Ir de compras...","last_name":"Apellido","logout_before":"Debes cerrar sesión de usuario antes de iniciar sesión como administrador.","messages":{"cart_no_login":"Inicia sesión para agregar productos al carrito","contact":"Lamentamos informarte que tu usuario ha sido bloqueado\npara más información escríbenos a: ","contact_us":"Comunícate con nosotros","disable":"Ésta acción inhabilitará el usuario","disabled":"Usuario inhabilitado","no_product":"Producto agotado","remove":"Ésta acción eliminará el usuario"},"name":"Nombre","password":"Contraseña","phone":"Teléfono","profile":"Perfil","registration":"Fecha de registro","show_cart":"Ver carrito de compras","update":"Actualizar usuario","user":":user_count Usuario  |:user_count Usuarios","verified":"Usuario verificado"};
+
+/***/ }),
+
+/***/ "./resources/lang/es/validation.php":
+/*!******************************************!*\
+  !*** ./resources/lang/es/validation.php ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {"accepted":":attribute debe ser aceptado.","active_url":":attribute no es una URL válida.","after":":attribute debe ser una fecha posterior a :date.","after_or_equal":":attribute debe ser una fecha posterior o igual a :date.","alpha":":attribute sólo debe contener letras.","alpha_dash":":attribute sólo debe contener letras, números, guiones y guiones bajos.","alpha_num":":attribute sólo debe contener letras y números.","array":":attribute debe ser un conjunto.","attributes":{"address":"dirección","age":"edad","amount":"valor total","body":"contenido","category":"categoría","city":"ciudad","color_id":"color","colors":"colores","content":"contenido","cost":"costo","country":"país","date":"fecha","day":"día","delete_photos":"imágenes","description":"descripción","details":"detalles","document_type":"tipo de documento","email":"correo electrónico","excerpt":"extracto","file":"archivo","file_path":"ruta","first_name":"nombre","from":"desde","gender":"género","hour":"hora","id_category":"categoría","id_parent":"categoría","images":"imágenes","is_active":"habilitar","last_name":"apellido","message":"mensaje","method":"método de pago","minute":"minuto","mobile":"móvil","month":"mes","name":"nombre","orderBy":"ordenar por","order_id":"orden","password":"contraseña","password_confirmation":"confirmación de la contraseña","permissions":"permisos","phone":"teléfono","photos":"imágenes","price":"precio","product":"producto","quantity":"cantidad","reference":"Referencia","role":"rol","roles":"roles","search":"búsqueda","second":"segundo","sex":"sexo","sizes":"tallas","status":"estado","subject":"asunto","tags":"etiquetas","terms":"términos","time":"hora","title":"título","to":"hasta","username":"usuario","year":"año"},"before":":attribute debe ser una fecha anterior a :date.","before_or_equal":":attribute debe ser una fecha anterior o igual a :date.","between":{"array":":attribute tiene que tener entre :min - :max elementos.","file":":attribute debe pesar entre :min - :max kilobytes.","numeric":":attribute tiene que estar entre :min - :max.","string":":attribute tiene que tener entre :min - :max caracteres."},"boolean":"El campo :attribute debe tener un valor verdadero o falso.","confirmed":"La confirmación de :attribute no coincide.","custom":{"attribute-name":{"rule-name":""},"email":{"unique":"El :attribute ya ha sido registrado."},"password":{"min":"La :attribute debe contener más de :min caracteres"}},"date":":attribute no es una fecha válida.","date_equals":":attribute debe ser una fecha igual a :date.","date_format":":attribute no corresponde al formato :format.","different":":attribute y :other deben ser diferentes.","digits":":attribute debe tener :digits dígitos.","digits_between":":attribute debe tener entre :min y :max dígitos.","dimensions":"Las dimensiones de la imagen :attribute no son válidas.","distinct":"El campo :attribute contiene un valor duplicado.","email":":attribute no es un correo válido.","ends_with":"El campo :attribute debe finalizar con uno de los siguientes valores: :values","exists":":attribute es inválido.","file":"El campo :attribute debe ser un archivo.","filled":"El campo :attribute es obligatorio.","gt":{"array":"El campo :attribute debe tener más de :value elementos.","file":"El campo :attribute debe tener más de :value kilobytes.","numeric":"El campo :attribute debe ser mayor que :value.","string":"El campo :attribute debe tener más de :value caracteres."},"gte":{"array":"El campo :attribute debe tener como mínimo :value elementos.","file":"El campo :attribute debe tener como mínimo :value kilobytes.","numeric":"El campo :attribute debe ser como mínimo :value.","string":"El campo :attribute debe tener como mínimo :value caracteres."},"image":":attribute debe ser una imagen.","in":":attribute es inválido.","in_array":"El campo :attribute no existe en :other.","integer":":attribute debe ser un número entero.","ip":":attribute debe ser una dirección IP válida.","ipv4":":attribute debe ser un dirección IPv4 válida.","ipv6":":attribute debe ser un dirección IPv6 válida.","json":"El campo :attribute debe ser una cadena JSON válida.","lt":{"array":"El campo :attribute debe tener menos de :value elementos.","file":"El campo :attribute debe tener menos de :value kilobytes.","numeric":"El campo :attribute debe ser menor que :value.","string":"El campo :attribute debe tener menos de :value caracteres."},"lte":{"array":"El campo :attribute debe tener como máximo :value elementos.","file":"El campo :attribute debe tener como máximo :value kilobytes.","numeric":"El campo :attribute debe ser como máximo :value.","string":"El campo :attribute debe tener como máximo :value caracteres."},"max":{"array":":attribute no debe tener más de :max elementos.","file":":attribute no debe ser mayor que :max kilobytes.","numeric":":attribute no debe ser mayor que :max.","string":":attribute no debe ser mayor que :max caracteres."},"mimes":":attribute debe ser un archivo con formato: :values.","mimetypes":":attribute debe ser un archivo con formato: :values.","min":{"array":":attribute debe tener al menos :min elementos.","file":"El tamaño de :attribute debe ser de al menos :min kilobytes.","numeric":"El tamaño de :attribute debe ser de al menos :min.","string":":attribute debe contener al menos :min caracteres."},"not_in":":attribute es inválido.","not_regex":"El formato del campo :attribute no es válido.","numeric":":attribute debe ser numérico.","password":"La contraseña es incorrecta.","present":"El campo :attribute debe estar presente.","regex":"El formato de :attribute es inválido.","required":"El campo :attribute es obligatorio.","required_if":"El campo :attribute es obligatorio cuando :other es :value.","required_unless":"El campo :attribute es obligatorio a menos que :other esté en :values.","required_with":"El campo :attribute es obligatorio cuando :values está presente.","required_with_all":"El campo :attribute es obligatorio cuando :values están presentes.","required_without":"El campo :attribute es obligatorio cuando :values no está presente.","required_without_all":"El campo :attribute es obligatorio cuando ninguno de :values está presente.","same":":attribute y :other deben coincidir.","size":{"array":":attribute debe contener :size elementos.","file":"El tamaño de :attribute debe ser :size kilobytes.","numeric":"El tamaño de :attribute debe ser :size.","string":":attribute debe contener :size caracteres."},"starts_with":"El campo :attribute debe comenzar con uno de los siguientes valores: :values","string":"El campo :attribute debe ser una cadena de caracteres.","timezone":"El :attribute debe ser una zona válida.","unique":"El campo :attribute ya ha sido registrado.","uploaded":"Subir :attribute ha fallado.","url":"El formato :attribute es inválido.","uuid":"El campo :attribute debe ser un UUID válido."};
 
 /***/ }),
 
