@@ -15,9 +15,9 @@ git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
-    - pecl install php-gd
+    - sudo apt-get install php7.4-gd
 before_script:
-    - composer install --prefer-dist --optimize-autoloader
+    - composer install --no-interaction
     - npm install
 script:
     - php artisan migrate --force

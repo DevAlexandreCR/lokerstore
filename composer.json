@@ -37,7 +37,8 @@
         "nunomaduro/collision": "^4.1",
         "phpstan/phpstan": "^0.12.31",
         "phpunit/phpunit": "^8.5",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "config": {
         "optimize-autoloader": true,
@@ -78,6 +79,12 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "test": "phpunit --stop-on-error --stop-on-failure --testdox"
+        "test": "phpunit --stop-on-error --stop-on-failure --testdox",
+        "phpcs-check":  "phpcs --colors -s",
+        "phpcs-fix":  "phpcbf --colors -s",
+        "phpcs-auto-check": "@phpcs-check --standard=.phpcs.xml",
+        "phpcs-auto-fix": "@phpcs-fix --standard=.phpcs.xml",
+        "phpcs-auto-check-project": "phpcs --report=summary -p",
+        "phpcs-auto-fix-project": "phpcbf --report=summary -p"
     }
 }
