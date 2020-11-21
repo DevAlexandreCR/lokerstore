@@ -15,7 +15,7 @@ git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
-    - sudo apt-get install php7.4-gd
+    - sudo apt-get install php7.1-gd
 before_script:
     - composer install --no-interaction
     - npm install
