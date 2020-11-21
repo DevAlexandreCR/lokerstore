@@ -3,6 +3,7 @@ sudo: required
 dist: trusty
 services:
     - mysql
+
 cache:
     directories:
         - node_modules
@@ -14,6 +15,7 @@ git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
+    - pecl install ext-gd
 before_script:
     - composer install --prefer-dist --optimize-autoloader
     - npm install
