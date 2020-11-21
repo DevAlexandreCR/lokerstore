@@ -5,15 +5,15 @@
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
                         type="button"
-                        :class="['nav-link', { 'router-link-exact-active' : query.tags.includes('Mujer')}]"
-                        @click="setTag('Mujer')"
+                        :class="['nav-link', { 'router-link-exact-active' : query.tags.includes(__('fields.woman'))}]"
+                        @click="setTag(__('fields.woman'))"
                         >Mujer</div>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
                         type="button"
-                        :class="['nav-link', { 'router-link-exact-active' : query.tags.includes('Hombre')}]"
-                        @click="setTag('Hombre')"
+                        :class="['nav-link', { 'router-link-exact-active' : query.tags.includes(__('fields.man'))}]"
+                        @click="setTag(__('fields.man'))"
                         >Hombre</div>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
@@ -25,10 +25,10 @@
                 </div>
                 <div class="col">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..."
+                        <input type="text" class="form-control" :placeholder="__('actions.search_by')"
                         aria-label="Search" aria-describedby="btn-search" v-model="search">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" @click="setSearch(search)" type="button" id="btn-search">Buscar</button>
+                            <button class="btn btn-primary" @click="setSearch(search)" type="button" id="btn-search">{{ __('actions.search') }}</button>
                         </div>
                     </div>
                 </div>

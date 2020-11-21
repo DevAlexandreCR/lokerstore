@@ -2,12 +2,12 @@
     <div class="" id="accordion">
         <div class="card border-primary my-2" v-show="hasFiltersActive">
             <div class="card-header">
-                <h6>Filtros</h6>
+                <h6>{{ __('fields.filters') }}</h6>
             </div>
             <div class="card-body">
                 <ul class="nav nav-list">
                     <li class="nav-item my-1 w-100" v-if="query.search">
-                        <div class="container text-center text-price">Busqueda</div>
+                        <div class="container text-center text-price">{{ __('fields.search') }}</div>
                         <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">{{query.search}}
                             <a class="btn btn-link" @click="removeFilter(constants.filter_search)">
                                 <ion-icon name="close-outline"></ion-icon>
@@ -15,7 +15,7 @@
                         </span>
                     </li>
                     <li class="nav-item my-1 w-100" v-if="categorySelected">
-                        <div class="container text-center text-price">Categoria</div>
+                        <div class="container text-center text-price">{{ __('products.category') }}</div>
                         <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">{{categorySelected}}
                             <a class="btn btn-link" @click="removeFilter(constants.filter_category)">
                                 <ion-icon name="close-outline"></ion-icon>
@@ -23,7 +23,7 @@
                         </span>
                     </li>
                     <li class="nav-item my-1 w-100" v-if="sizesSelected.length > 0">
-                        <div class="container text-center text-price">Tallas</div>
+                        <div class="container text-center text-price">{{ __('products.size') }}</div>
                         <span v-for="size in sizesSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
                             {{getSizeName(size)}}
                             <a class="btn btn-link" @click="removeFilter(constants.filter_sizes, size)">
@@ -32,7 +32,7 @@
                         </span>
                     </li>
                     <li class="nav-item my-1 w-100" v-if="colorsSelected.length > 0">
-                        <div class="container text-center text-price">Colores</div>
+                        <div class="container text-center text-price">{{ __('products.color') }}</div>
                         <span v-for="color in colorsSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
                             <span v-if="getColorName(color)" :class="['badge', 'badge-color-' + getColorName(color).toLowerCase()]">
                                 .</span> {{getColorName(color)}}
@@ -42,7 +42,7 @@
                         </span>
                     </li>
                     <li class="nav-item my-1 w-100" v-if="priceRange">
-                        <div class="container text-center text-price">Precio</div>
+                        <div class="container text-center text-price">{{ __('products.price') }}</div>
                         <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
                             <small v-for="price in priceRange">{{price}}</small>
                             <a class="btn btn-link" @click="removeFilter(constants.filter_price)">
@@ -53,12 +53,12 @@
                 </ul>
             </div>
             <div class="card-footer text-center">
-                <button type="button" class="btn btn-primary btn-sm" @click="resetFilters()">Limpiar filtros</button>
+                <button type="button" class="btn btn-primary btn-sm" @click="resetFilters()">{{ __('actions.clean_filters') }}</button>
             </div>
         </div>
         <div class="card border-primary my-2">
           <div class="card-header">
-              <h6>Categorias</h6>
+              <h6>{{ __('fields.categories') }}</h6>
           </div>
           <div class="card-body" v-if="categories">
             <ul class="nav nav-list" v-for="category in categories" :key="category.id">
@@ -75,7 +75,7 @@
         </div>
         <div class="card border-primary my-2">
           <div class="card-header">
-              <h6>Precio</h6>
+              <h6>{{ __('products.price') }}</h6>
           </div>
           <div class="card-body card-filter">
               <div class="row rows-2">
@@ -94,12 +94,12 @@
               </div>
           </div>
           <div class="card-footer text-center">
-              <button type="button" class="btn btn-primary btn-sm" @click="sendQuery()">Aplicar</button>
+              <button type="button" class="btn btn-primary btn-sm" @click="sendQuery()">{{ __('actions.apply') }}</button>
           </div>
         </div>
         <div class="card border-primary my-2">
           <div class="card-header">
-              <h6>Colores</h6>
+              <h6>{{ __('products.color') }}</h6>
           </div>
           <div class="card-body  card-filter overflow-auto" v-if="colors">
             <ul class="list-group w-100" v-for="color in colors" :key="color.name">
@@ -121,12 +121,12 @@
             </ul>
           </div>
           <div class="card-footer text-center">
-              <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">Aplicar</button>
+              <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">{{ __('actions.apply') }}</button>
           </div>
         </div>
         <div class="card border-primary my-2">
           <div class="card-header">
-              <h6>Tallas</h6>
+              <h6>{{ __('products.size') }}</h6>
           </div>
           <div class="card-body" v-if="type_sizes">
             <ul class="nav nav-list" v-for="type in type_sizes" :key="type.name">
@@ -155,7 +155,7 @@
             </ul>
           </div>
             <div class="card-footer text-center">
-                <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">Aplicar</button>
+                <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">{{ __('actions.apply') }}</button>
             </div>
         </div>
     </div>
@@ -274,7 +274,6 @@ export default {
             this.max = process.env.MIX_MAX_PRICE_FILTER
             this.hasFiltersActive = false
             let reload = false
-            console.log(this.query.search)
             if (this.query.search != null) {
                 reload = true
                 this.search = null

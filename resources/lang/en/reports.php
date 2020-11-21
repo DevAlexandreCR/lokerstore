@@ -1,6 +1,7 @@
 <?php
 return [
     "Sellers" => "Sellers",
+    "best_seller" => "Best seller",
     "category_most_sold" => "Category more sold for month",
     "choose" => "Choose month",
     "clothing_man" => "Clothing's man",
@@ -17,6 +18,9 @@ return [
     "products_imported" => "Products imported successfully",
     "report" => "Report",
     "sales" => "Sales",
+    "sales_canceled" => "Sales canceled",
+    "sales_last_month" => "Sales last month: ",
+    "sales_this_month" => "Sales this month: ",
     "sent" => "Report success sent.",
     "stock" => "Stock report",
     "total_sold" => "Total sold",

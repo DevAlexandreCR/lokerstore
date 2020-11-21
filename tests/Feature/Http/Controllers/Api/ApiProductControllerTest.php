@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
+use App\Constants\ImageBase64;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -71,7 +72,6 @@ class ApiProductControllerTest extends TestCase
         $color1 = Color::all()->random()->name;
         $size2 = Size::all()->random();
         $color2 = Color::all()->random()->name;
-        $file = UploadedFile::fake()->image('test.jpeg')->mimeType('image/jpeg');
 
         $response = $this->postJson(route('api.products.store'), [
             'api_token'     => $this->admin->api_token,
@@ -101,7 +101,7 @@ class ApiProductControllerTest extends TestCase
                 ],
             ],
             'photos' => [
-                $file,
+                ImageBase64::IMAGE64,
             ],
         ]);
 

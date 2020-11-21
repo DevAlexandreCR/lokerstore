@@ -14,6 +14,7 @@ import SalesPercentComponent from "./admin-components/SalesPercentComponent";
 import TestApiComponent from "./admin-components/TestApiComponent";
 import CreateOrder from "./views/admin-views/CreateOrder";
 import AddPaymentComponent from "./admin-components/AddPaymentComponent";
+import { Lang } from 'laravel-vue-lang';
 
 Vue.component('banner-component', BannerComponent)
 Vue.component('error404-component', Error404Component)
@@ -28,6 +29,13 @@ Vue.component('create-order', CreateOrder)
 Vue.component('add-payment-component', AddPaymentComponent)
 
 Vue.use(VuePaginate)
+Vue.use(Lang, {
+    locale: process.env.MIX_APP_LOCALE,
+    fallback: 'en',
+    ignore: {
+        en: ['validation'],
+    },
+});
 
 Vue.config.ignoredElements = [/^ion-/]
 

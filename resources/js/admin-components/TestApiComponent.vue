@@ -2,32 +2,32 @@
     <div class="container">
         <div class="row py-4">
             <div class="col-sm-5">
-                <h3>Peticiones</h3>
-                <label for="api_token">Api token</label>
+                <h3>{{ __('api.requests') }}</h3>
+                <label for="api_token">{{ __('api.token') }}</label>
                 <textarea class="form-control btn-block" placeholder="Api token" @change="changeApiToken($event)"
                           type="text" name="api_token" id="api_token" v-model="api_token"></textarea>
-                <label for="product" class="mt-2">Id de producto</label>
+                <label for="product" class="mt-2">{{ __('api.id_product') }}</label>
                 <input class="form-control btn-block" placeholder="Id de producto"
                           type="number" name="product" id="product" v-model="product_id" min="0"
                 @change="changeProductId($event)">
 
-                <label class="mt-4" for="methods">Opciones</label>
+                <label class="mt-4" for="methods">{{ __('api.options') }}</label>
                 <select class="form-control" id="methods" @change="onSelectOption($event)">
-                    <option value="">Escoger una opción</option>
-                    <option value="list">Listar</option>
-                    <option value="show">Ver</option>
-                    <option value="store">Crear</option>
-                    <option value="update">Actualizar</option>
-                    <option value="delete">Eliminar</option>
-                    <option value="image">Enviar imagenes</option>
-                    <option value="categories">Ver categorías</option>
-                    <option value="tags">Ver Etiquetas</option>
-                    <option value="sizes">Ver Tallas</option>
-                    <option value="colors">Ver Colores</option>
+                    <option value="">{{ __('api.choose_option') }}</option>
+                    <option value="list">{{ __('api.list') }}</option>
+                    <option value="show">{{ __('api.view') }}</option>
+                    <option value="store">{{ __('api.create') }}</option>
+                    <option value="update">{{ __('api.update') }}</option>
+                    <option value="delete">{{ __('api.delete') }}</option>
+                    <option value="image">{{ __('api.send_images') }}</option>
+                    <option value="categories">{{ __('api.view_category') }}</option>
+                    <option value="tags">{{ __('api.view_tags') }}</option>
+                    <option value="sizes">{{ __('api.view_sizes') }}</option>
+                    <option value="colors">{{ __('api.view_colors') }}</option>
                 </select>
 
                 <div class="input_group" v-show="showImages">
-                    <label class="mt-4" for="images">Agregar imagenes</label>
+                    <label class="mt-4" for="images">{{ __('api.add_images') }}</label>
                     <input class="form-control d-block mr-sm-2" type="file" name="images[]" multiple
                            id="images" accept="image/x-png, image/gif, image/jpeg" @change="convertImagesToBase64($event)">
                 </div>
@@ -38,7 +38,7 @@
                 <button class="btn btn-success btn-block" type="button" @click="sendRequest(method)">Enviar</button>
             </div>
             <div class="col-sm-7">
-                <h3>Respuesta</h3>
+                <h3>{{ __('api.response') }}</h3>
                 <div id="response" class="container p-2" style="max-height: 700px; overflow: auto">
                 </div>
             </div>

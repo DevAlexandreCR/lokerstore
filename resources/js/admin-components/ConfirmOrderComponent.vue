@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">¿Desea guardar la órden?</h5>
+                    <h5 class="modal-title">{{ __('orders.messages.save') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -12,11 +12,11 @@
                     <table class="table table-condensed table-sm">
                         <thead>
                         <tr>
-                            <th>Precio total</th>
+                            <th>{{ __('orders.amount') }}</th>
                             <td>{{ total | price }}</td>
                         </tr>
                         <tr>
-                            <th class="align-middle">Aplicar descuento</th>
+                            <th class="align-middle">{{ __('payment.apply_discount') }}</th>
                             <td class="align-middle">
                                 <div class="input-group">
                                     <input type="number" class="form-control align-middle" placeholder="0" aria-label="Total"
@@ -30,14 +30,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Total a pagar</th>
+                            <th>{{ __('orders.amount') }}</th>
                             <td>{{ amount | price }}</td>
                         </tr>
                         </thead>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('actions.close') }}</button>
                     <button type="button" class="btn btn-primary" @click="sendRequest">Si</button>
                 </div>
             </div>

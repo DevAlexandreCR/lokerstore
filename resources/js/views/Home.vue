@@ -7,22 +7,22 @@
                     <router-link
                     class="nav-link"
                     exact
-                    :to="{name: 'showcase', query: { tags: ['Mujer'] }}"
+                    :to="{name: 'showcase', query: { tags: [__('fields.woman')] }}"
                     >Mujer</router-link>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <router-link
                     class="nav-link"
                     exact
-                    :to="{name: 'showcase', query: { tags: ['Hombre'] }}"
+                    :to="{name: 'showcase', query: { tags: [__('fields.man')] }}"
                     >Hombre</router-link>
                 </div>
                 <div class="col">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por nombre, marca, categoria, etc..."
+                        <input type="text" class="form-control" :placeholder="__('actions.search_by')"
                         aria-label="Search" aria-describedby="btn-search" v-model="search">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" @click="getProducts(search)" type="button" id="btn-search">Buscar</button>
+                            <button class="btn btn-primary" @click="getProducts(search)" type="button" id="btn-search">{{ __('actions.search') }}</button>
                         </div>
                     </div>
                 </div>
@@ -36,10 +36,10 @@
         <div class="container" v-show="isNotHomeRoute()">
         <div class="row">
             <div class="col-md-6 first">
-                <gender-component :filter="'Mujer'"></gender-component>
+                <gender-component :filter="__('fields.woman')"></gender-component>
             </div>
             <div class="col-md-6">
-                <gender-component :filter="'Hombre'"></gender-component>
+                <gender-component :filter="__('fields.man')"></gender-component>
             </div>
         </div>
         <br>

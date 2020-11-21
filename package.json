@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "chart.js": "^2.9.4",
+        "laravel-vue-lang": "^3.1.0",
         "lottie-vuejs": "^0.3.7",
         "vue-paginate": "^3.6.0"
     },

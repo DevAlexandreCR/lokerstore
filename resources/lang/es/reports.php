@@ -1,6 +1,7 @@
 <?php
 return [
     "Sellers" => "Vendedores",
+    "best_seller" => "Mejor vendedor",
     "category_most_sold" => "Categoría más vendida por mes",
     "choose" => "Seleccionar mes",
     "clothing_man" => "Ropa de hombre",
@@ -17,6 +18,9 @@ return [
     "products_imported" => "Productos importados correctamente",
     "report" => "Reporte",
     "sales" => "Ventas",
+    "sales_canceled" => "Ventas canceladas",
+    "sales_last_month" => "Ventas mes pasado: ",
+    "sales_this_month" => "Ventas éste mes: ",
     "sent" => "Reporte enviado satisfactoriamente.",
     "stock" => "Reporte de stock",
     "total_sold" => "Total vendido",

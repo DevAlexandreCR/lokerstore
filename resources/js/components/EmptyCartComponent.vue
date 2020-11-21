@@ -4,7 +4,7 @@
             <div class="container">
                 <img @click="back()" class="img-fluid" src="/assets/gifs/empty-cart.gif">
                 <div class="card-footer">
-                    <button class="btn btn-block" @click="back()">Carrito vacío... <strong>ir de compras</strong></button>
+                    <button class="btn btn-block" @click="back()">{{ __('users.empty_cart') }} <strong>{{ __('users.go_shopping') }}</strong></button>
                 </div>
             </div>
         </div>

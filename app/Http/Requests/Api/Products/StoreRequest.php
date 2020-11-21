@@ -35,6 +35,7 @@ class StoreRequest extends FormRequest
             'tags'          => ['required', 'array', 'exists:tags,name'],
             'stocks'        => ['required', 'array'],
             'photos'        => ['required', 'array', 'min:1'],
+            'photos.*'      => ['base64image']
         ];
         if ($this->get('stocks')) {
             foreach ($this->get('stocks') as $key => $val) {

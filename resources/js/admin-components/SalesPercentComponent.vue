@@ -1,7 +1,7 @@
 <template>
     <div class="flag flag-yellow ml-sm-2 shadow-sm mb-3 text-right">
         <div class="card-body">
-            <small class="text-black-50 ">ventas mes pasado: <strong>{{salesLastMonthString}}</strong></small>
+            <small class="text-black-50 ">{{ __('reports.sales_last_month') }}<strong>{{salesLastMonthString}}</strong></small>
             <div class="progress">
                 <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
                      :style="{'width': `${progress}%`}"
@@ -9,12 +9,11 @@
                     {{ `${progress}%` }}
                 </div>
             </div>
-            <small class="text-black-50 float-left mb-2">ventas este mes: <strong>{{salesThisMonthString}}</strong></small>
+            <small class="text-black-50 float-left mb-2">{{ __('reports.sales_this_month') }}<strong>{{salesThisMonthString}}</strong></small>
         </div>
     </div>
 </template>
 <script>
-import Constants from "../constants/constants";
 
 export default {
     name: 'sales-percent-component',
