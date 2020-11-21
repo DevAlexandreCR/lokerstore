@@ -15,7 +15,7 @@ git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
-    - pecl install ext-gd
+    - pecl install php-gd
 before_script:
     - composer install --prefer-dist --optimize-autoloader
     - npm install
