@@ -16,7 +16,7 @@ class TypeSizeController extends Controller
         $this->typeSizes = $typeSizes;
     }
 
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(TypeSizesResourse::collection(
             $this->typeSizes::with('sizes')->get(['id', 'name'])

@@ -26,7 +26,7 @@ class UserController extends Controller
      * @param IndexRequest $request
      * @return View
      */
-    public function index(IndexRequest $request) : View
+    public function index(IndexRequest $request): View
     {
         $users = $this->users->search($request);
         $search =  $request->get('search');
@@ -49,7 +49,7 @@ class UserController extends Controller
      * @param  User  $user
      * @return View
      */
-    public function show(User $user) : View
+    public function show(User $user): View
     {
         return view('admin.users.show', [
             'user' => $user,
@@ -62,7 +62,7 @@ class UserController extends Controller
      * @param User $user
      * @return View
      */
-    public function edit(UserRequest $request, User $user) : View
+    public function edit(UserRequest $request, User $user): View
     {
         return view('admin.users.edit', [
             'user' => $user,
@@ -76,7 +76,7 @@ class UserController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function update(UserRequest $request, User $user) : RedirectResponse
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
         $this->users->update($request, $user);
 
@@ -95,11 +95,11 @@ class UserController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function destroy(User $user) : RedirectResponse
+    public function destroy(User $user): RedirectResponse
     {
         $this->users->destroy($user);
 
-        return redirect("admin/users")->with('user-deleted', trans('messages.crud', [
+        return redirect('admin/users')->with('user-deleted', trans('messages.crud', [
             'resource' => trans_choice('users.user', 1, ['user_count' => '']),
             'status' => trans('fields.deleted')
         ]));

@@ -25,7 +25,7 @@ class TagController extends Controller
      * @param IndexRequest $request
      * @return View
      */
-    public function index(IndexRequest $request) : View
+    public function index(IndexRequest $request): View
     {
         return view('admin.tags.index', [
             'tags' => $this->tags->search($request),
@@ -37,7 +37,7 @@ class TagController extends Controller
      * @param StoreAndUpdateRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreAndUpdateRequest $request) : RedirectResponse
+    public function store(StoreAndUpdateRequest $request): RedirectResponse
     {
         $this->tags->store($request);
 
@@ -53,7 +53,7 @@ class TagController extends Controller
      * @param Tag $tag
      * @return RedirectResponse
      */
-    public function update(StoreAndUpdateRequest $request, Tag $tag) : RedirectResponse
+    public function update(StoreAndUpdateRequest $request, Tag $tag): RedirectResponse
     {
         $this->tags->update($request, $tag);
 
@@ -69,7 +69,7 @@ class TagController extends Controller
      * @throws \Exception
      * @return RedirectResponse
      */
-    public function destroy(Tag $tag) : RedirectResponse
+    public function destroy(Tag $tag): RedirectResponse
     {
         $this->tags->destroy($tag);
 

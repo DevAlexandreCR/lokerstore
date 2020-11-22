@@ -87,7 +87,7 @@ class CartControllerTest extends TestCase
             'cart_id' => $user->cart->id,
             'stock_id' => $stock->id,
             'quantity' => 2,
-        ]
+            ]
         );
     }
     public function testAnuserCanRemoveitemToCart(): void

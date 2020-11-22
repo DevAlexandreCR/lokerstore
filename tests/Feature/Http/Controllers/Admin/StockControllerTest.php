@@ -17,6 +17,7 @@ class StockControllerTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
+
     private Admin $admin;
 
     protected function setUp(): void
@@ -46,14 +47,14 @@ class StockControllerTest extends TestCase
             'product_id' => $product_id,
             'color_id' => $color_id,
             'size_id' => $size_id,
-        ]
+            ]
         );
 
         $this->assertDatabaseHas(
             'products',
             [
             'stock' => 3,
-        ]
+            ]
         );
     }
 
@@ -72,18 +73,18 @@ class StockControllerTest extends TestCase
         $this->assertDatabaseHas(
             'stocks',
             [
-            'id' => $stock->id,
-            'quantity' => 0,
-        ]
+                'id' => $stock->id,
+                'quantity' => 0,
+            ]
         );
 
         $this->assertDatabaseHas(
             'products',
             [
-            'id' => $stock->product_id,
-            'stock' => 0,
-            'is_active' => 0,
-        ]
+                'id' => $stock->product_id,
+                'stock' => 0,
+                'is_active' => 0,
+            ]
         );
     }
 
@@ -100,19 +101,19 @@ class StockControllerTest extends TestCase
         $this->assertDatabaseMissing(
             'stocks',
             [
-            'id' => $stock->id,
-            'product_id' => $stock->product_id,
-            'quantity' => 5,
-        ]
+                'id' => $stock->id,
+                'product_id' => $stock->product_id,
+                'quantity' => 5,
+            ]
         );
 
         $this->assertDatabaseHas(
             'products',
             [
-            'id' => $stock->product_id,
-            'stock' => 0,
-            'is_active' => 0,
-        ]
+                'id' => $stock->product_id,
+                'stock' => 0,
+                'is_active' => 0,
+            ]
         );
     }
 
@@ -121,14 +122,12 @@ class StockControllerTest extends TestCase
         $product_id = Product::all()->random()->id;
         $color_id = Color::all()->random()->id;
         $size_id = Size::all()->random()->id;
-        factory(Stock::class)->create(
-            [
+        factory(Stock::class)->create([
                 'product_id' => $product_id,
                 'color_id' => $color_id,
                 'size_id' => $size_id,
                 'quantity' => 3,
-            ]
-        );
+            ]);
 
         $response = $this->actingAs($this->admin, 'admin')->post(route('stocks.store'), [
             'product_id' => $product_id,

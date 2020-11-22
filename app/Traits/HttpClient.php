@@ -18,7 +18,7 @@ trait HttpClient
     private string $reverseEndPoint = 'api/reverse/';
 
     /**
-     * send request to placetopay api
+     * send request to placeToPay api
      * @param string $method
      * @param Order|Model $order
      * @return array[]|mixed

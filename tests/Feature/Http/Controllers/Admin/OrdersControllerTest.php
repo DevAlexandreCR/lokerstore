@@ -155,7 +155,7 @@ class OrdersControllerTest extends TestCase
             'order_id' => $order->id,
         ]);
 
-        $response = $this->actingAs($this->admin, Admins::GUARDED)->get( route('orders.verify', $order->id));
+        $response = $this->actingAs($this->admin, Admins::GUARDED)->get(route('orders.verify', $order->id));
 
         $response
             ->assertStatus(302);

@@ -22,7 +22,7 @@ class CategoryController extends Controller
      *
      * @return JsonResponse
      */
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(CategoryResource::collection($this->categories->index()));
     }

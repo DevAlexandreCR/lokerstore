@@ -19,7 +19,7 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndex() : void
+    public function testIndex(): void
     {
         foreach ($this->categories as $cat) {
             factory(Category::class)->create([
@@ -41,7 +41,7 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testShow() : void
+    public function testShow(): void
     {
         $category = factory(Category::class)->create([
             'name' => 'category',

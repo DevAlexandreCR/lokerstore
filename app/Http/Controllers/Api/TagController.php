@@ -15,7 +15,7 @@ class TagController extends Controller
         $this->tags = $tags;
     }
 
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json($this->tags::all()->toArray());
     }

@@ -102,7 +102,7 @@ class Product extends Model
      * @param string $price
      * @return array
      */
-    public function splitPrice(string $price) : array
+    public function splitPrice(string $price): array
     {
         return explode('-', $price);
     }

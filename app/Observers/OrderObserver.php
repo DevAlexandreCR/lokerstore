@@ -20,13 +20,7 @@ class OrderObserver
     public function updated(Order $order): void
     {
         $status = $order->status;
-        if (array_key_exists('status', $order->getChanges()) &&
-            in_array($status, [
-                Orders::STATUS_SUCCESS,
-                Orders::STATUS_SENT,
-                Orders::STATUS_REJECTED,
-                Orders::STATUS_CANCELED,
-            ], true)) {
+        if (array_key_exists('status', $order->getChanges()) && in_array($status, Orders::statusesPaid(), true)) {
             AddMetricOrders::execute($order);
             if ($status === Orders::STATUS_SENT || $status === Orders::STATUS_SUCCESS) {
                 AddMetricSellers::execute($order);

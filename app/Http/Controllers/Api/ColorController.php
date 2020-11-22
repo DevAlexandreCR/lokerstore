@@ -15,7 +15,7 @@ class ColorController extends Controller
         $this->colors = $colors;
     }
 
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json($this->colors->index());
     }

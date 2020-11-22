@@ -47,7 +47,7 @@ class ExportEndsOk extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->attach(storage_path('app/public/exports/') . $this->fileName)
                     ->subject($this->export)
                     ->line($this->message)

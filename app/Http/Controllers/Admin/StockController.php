@@ -27,7 +27,7 @@ class StockController extends Controller
      * @param StoreRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request) : RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $this->stock->create($request->all());
 
@@ -45,7 +45,7 @@ class StockController extends Controller
      * @param TypeSizesInterface $sizes
      * @return View
      */
-    public function create(Product $product, ColorsInterface $colors, TypeSizesInterface $sizes) : View
+    public function create(Product $product, ColorsInterface $colors, TypeSizesInterface $sizes): View
     {
         return view('admin.stocks.index', [
             'product' => $product->load('stocks', 'stocks.color', 'stocks.size', 'stocks.size.type'),

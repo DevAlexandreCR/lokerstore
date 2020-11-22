@@ -62,7 +62,7 @@ class Metrics implements MetricsInterface
             'monthly' => DB::select("call generate_general_report('$from', '$until')"),
             'categories' => DB::select("call generate_categories_report('$from', '$until')"),
             'uncompleted' => DB::select("call generate_general_report_uncompleted('$from', '$until')"),
-            'stocks' => DB::select("call stock_report()"),
+            'stocks' => DB::select('call stock_report()'),
         ];
     }
 
@@ -81,6 +81,6 @@ class Metrics implements MetricsInterface
      */
     public function getStockReport(): array
     {
-        return DB::select("call stock_report()");
+        return DB::select('call stock_report()');
     }
 }

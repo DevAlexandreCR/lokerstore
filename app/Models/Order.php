@@ -93,8 +93,8 @@ class Order extends Model
                 return trans('orders.statuses.pending_shipment');
             case Orders::STATUS_CANCELED:
                 return trans('orders.statuses.canceled');
-                case Orders::STATUS_REJECTED:
-            return __('orders.statuses.rejected');
+            case Orders::STATUS_REJECTED:
+                return __('orders.statuses.rejected');
             case Orders::STATUS_SENT:
                 return trans('orders.statuses.sent');
             case Orders::STATUS_SUCCESS:

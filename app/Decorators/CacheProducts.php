@@ -82,7 +82,7 @@ class CacheProducts implements ProductsInterface
         $search = $request->get('search', null);
         $page = $request->get('page', 1);
 
-        return '.page=' . $page . '$search=' . $search .'$category=' . $category . '$tags=' . $tags;
+        return '.page=' . $page . '$search=' . $search . '$category=' . $category . '$tags=' . $tags;
     }
 
     /**

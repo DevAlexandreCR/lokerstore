@@ -24,8 +24,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'stock_id'=> ['required', 'integer'],
-            'quantity'=> ['required', 'integer', 'min:1'],
+            'stock_id' => ['required', 'integer'],
+            'quantity' => ['required', 'integer', 'min:1'],
         ];
     }
 }

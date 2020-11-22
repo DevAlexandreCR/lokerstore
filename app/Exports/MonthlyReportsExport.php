@@ -95,8 +95,7 @@ class MonthlyReportsExport implements
                         break;
                     case 'P':
                         if ($cell->getRow() > 2) {
-                            if ($sheet->getCell('C' . $cell->getRow())->getValue() ===
-                                $sheet->getCell('C' . ($cell->getRow() - 1))->getValue()) {
+                            if ($sheet->getCell('C' . $cell->getRow())->getValue() === $sheet->getCell('C' . ($cell->getRow() - 1))->getValue()) {
                                 break;
                             }
                             $totalPaid += $cell->getValue();
@@ -105,7 +104,7 @@ class MonthlyReportsExport implements
                 }
             }
         }
-        $colDimension ++;
+        $colDimension++;
         $sheet->setCellValue('K' . $colDimension, trans('orders.total'));
         $sheet->setCellValue('L' . $colDimension, $totalCost);
         $sheet->setCellValue('M' . $colDimension, $totalPrice);

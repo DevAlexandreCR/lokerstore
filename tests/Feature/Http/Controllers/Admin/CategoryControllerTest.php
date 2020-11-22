@@ -66,7 +66,7 @@ class CategoryControllerTest extends TestCase
                                 [
                                 'name' => 'category updated',
                                 'id_parent' => null,
-                            ]
+                                ]
                             );
         $response
             ->assertStatus(302)

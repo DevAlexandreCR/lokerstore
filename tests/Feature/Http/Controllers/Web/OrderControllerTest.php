@@ -56,7 +56,7 @@ class OrderControllerTest extends TestCase
                 route('user.order.store', $this->user),
                 [
                 'user_id' => $this->user->id,
-            ]
+                ]
             );
 
         $redirectUrl = $response->headers->get('Location');
@@ -96,7 +96,7 @@ class OrderControllerTest extends TestCase
                 route('user.order.status', [$this->user->id]),
                 [
                 'order_id' => $order->id,
-            ]
+                ]
             );
 
         $response
@@ -142,7 +142,7 @@ class OrderControllerTest extends TestCase
             'orders',
             [
                 'id' => $order->id,
-//                'status' => Orders::STATUS_PENDING_PAY
+            //                'status' => Orders::STATUS_PENDING_PAY
             ]
         );
     }

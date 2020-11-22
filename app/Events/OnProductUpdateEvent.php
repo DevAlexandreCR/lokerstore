@@ -10,7 +10,9 @@ use Illuminate\Queue\SerializesModels;
 
 class OnProductUpdateEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public Product $product;
 

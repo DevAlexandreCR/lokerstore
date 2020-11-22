@@ -49,7 +49,7 @@ class ProductController extends Controller
 
         return view('admin.products.index', [
             'products'  => $products,
-            'categories'=> $categories,
+            'categories' => $categories,
             'tags'      => $tags->index(),
             'filters' => [
                 'category'  => $category,
@@ -117,7 +117,7 @@ class ProductController extends Controller
 
         return view('admin.products.active', [
             'product'   => $product,
-            'input_name'=> $request->get('input_name'),
+            'input_name' => $request->get('input_name'),
         ]);
     }
 

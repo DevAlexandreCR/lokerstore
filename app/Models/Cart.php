@@ -34,7 +34,7 @@ class Cart extends Model
         $price = 0;
         $stocks = $this->stocks()->get(['product_id']);
         foreach ($stocks as $stock) {
-            $price += $stock->product->price*$stock->pivot->quantity;
+            $price += $stock->product->price * $stock->pivot->quantity;
         }
 
         return number_format($price, 2, ',', '.') . 'COP';
