@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Payer;
 use App\Decorators\OrderDecorator;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Orders\indexRequest;
+use App\Http\Requests\Admin\Orders\IndexRequest;
 use App\Http\Requests\Admin\Orders\StoreRequest;
 use App\Http\Requests\Admin\Orders\UpdateRequest;
 use App\Models\Order;
@@ -26,7 +26,7 @@ class OrdersController extends Controller
     /**
      * Display a listing of the orders.
      *
-     * @param indexRequest $request
+     * @param IndexRequest $request
      * @return View
      */
     public function index(IndexRequest $request): View
