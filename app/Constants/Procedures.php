@@ -5,42 +5,42 @@ namespace App\Constants;
 class Procedures
 {
     public const ORDER_PROCEDURE = <<<'EOT'
-create procedure orders_metrics_generate(p_from date, p_until date, p_type varchar(255), p_field varchar(255))
-begin
+CREATE PROCEDURE orders_metrics_generate(p_from date, p_until date, p_type varchar(255), p_field varchar(255))
+BEGIN
     START TRANSACTION;
-    DELETE FROM `metrics` WHERE `metric` = p_type COLLATE utf8_unicode_ci
-    AND `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
-    INSERT INTO `metrics` (`date`, `measurable_id`, `status`, `total`, `metric`, `amount`)
-        SELECT DATE(`created_at`) AS date,
+    DELETE FROM metrics WHERE metric = p_type COLLATE utf8_unicode_ci
+    AND date BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
+    INSERT INTO metrics (date, measurable_id, status, total, metric, amount)
+        SELECT DATE(created_at) AS date,
         CASE
-        	WHEN p_field = 'none' THEN NULL
-        	WHEN p_field = 'admin_id' THEN admin_id
+        	WHEN p_field = "none" THEN NULL
+        	WHEN p_field = "admin_id" THEN admin_id
     	END
     	as measurable_id,
         CASE
-        	WHEN `status` = 'canceled' THEN 'canceled'
-        	WHEN `status` = 'rejected' THEN 'canceled'
-        	WHEN `status` = 'completed' THEN 'completed'
+        	WHEN status = "canceled" THEN "canceled"
+        	WHEN status = "rejected" THEN "canceled"
+        	WHEN status = "completed" THEN "completed"
     	END
     	as status,
         COUNT(*) as total,
         p_type as metric,
-        SUM(`amount`) as amount
+        SUM(amount) as amount
         FROM orders
-    WHERE `created_at` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
+    WHERE created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
     AND
 		CASE
-			WHEN p_type = 'admins' THEN `status` = 'completed'
-			ELSE (`status` = 'completed' OR `status` = 'canceled' OR `status` = 'rejected')
+			WHEN p_type = "admins" THEN status = "completed"
+			ELSE (status = "completed" OR status = "canceled" OR status = "rejected")
 		END
-    GROUP BY `date`, `measurable_id`, `status`, `metric`;
+    GROUP BY date, measurable_id, status, metric;
     COMMIT;
-end
+END
 EOT;
 
     public const CATEGORIES_PROCEDURE = <<<'EOT'
-create procedure categories_metrics_generate(p_from date, p_until date)
-begin
+CREATE PROCEDURE categories_metrics_generate(p_from date, p_until date)
+BEGIN
     START TRANSACTION;
     DELETE FROM metrics WHERE metric = "categories" COLLATE utf8_unicode_ci AND date BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
     INSERT INTO metrics (date, measurable_id, status, total, metric)
@@ -57,7 +57,7 @@ begin
     AND status = "completed"
     GROUP BY date, measurable_id, status, metric;
     COMMIT;
-end
+END
 EOT;
 
     public const GENERATE_CATEGORIES_REPORT = <<<'EOT'
@@ -74,9 +74,9 @@ BEGIN
   		LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
         LEFT OUTER JOIN products ON stocks.product_id = products.id
         LEFT OUTER JOIN categories ON products.id_category = categories.id
-    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'completed'
-    GROUP BY MONTH(date), `product_name`
-    ORDER BY `date`;
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND status = "completed"
+    GROUP BY MONTH(date), product_name
+    ORDER BY date;
 END
 EOT;
 
@@ -84,7 +84,7 @@ EOT;
 CREATE PROCEDURE generate_general_report(p_from date, p_until date)
 BEGIN
     START TRANSACTION;
-        SELECT DATE(orders.created_at) as `date`,
+        SELECT DATE(orders.created_at) as date,
       	tags.name as gender,
         status,
         SUM(order_details.total_price) as amount,
@@ -95,9 +95,9 @@ BEGIN
         LEFT OUTER JOIN products ON stocks.product_id = products.id
         LEFT OUTER JOIN product_tag ON product_tag.product_id = products.id
         LEFT OUTER JOIN tags ON product_tag.tag_id = tags.id
-    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` = 'completed'
-    GROUP BY MONTH(`date`), `gender`
-    ORDER BY `date` ASC;
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND status = "completed"
+    GROUP BY MONTH(date), gender
+    ORDER BY date ASC;
 END
 EOT;
 
@@ -110,9 +110,9 @@ BEGIN
         SUM(orders.amount) as amount,
         COUNT(*) as orders_total
         FROM orders
-    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND `status` != 'completed'
-    GROUP BY MONTH(`date`), `status`
-    ORDER BY `date` ASC;
+    WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY) AND status != "completed"
+    GROUP BY MONTH(date), status
+    ORDER BY date ASC;
 END
 EOT;
 
@@ -136,7 +136,7 @@ BEGIN
   		order_details.quantity as quantity,
   		products.price * order_details.quantity as price_sale,
   		orders.amount as paid,
-  		payments.`method` as `method`
+  		payments.method as method
 	FROM orders
 	    LEFT OUTER JOIN payments ON payments.order_id = orders.id
 	    LEFT OUTER JOIN payers ON payments.order_id = payers.id
@@ -148,10 +148,10 @@ BEGIN
 		WHERE YEAR(orders.created_at) = YEAR(p_year_month) AND MONTH(orders.created_at) = MONTH(p_year_month)
 		AND
 		CASE
-			WHEN p_status = '' THEN orders.status != 'completed'
+			WHEN p_status = "" THEN orders.status != "completed"
 			ELSE orders.status = p_status COLLATE utf8_unicode_ci
 		END
-    ORDER BY `date`;
+    ORDER BY date;
 END
 EOT;
 
