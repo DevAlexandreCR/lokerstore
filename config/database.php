@@ -101,6 +101,12 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
+            'modes' => [
+                'STRICT_ALL_TABLES',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_ZERO_DATE',
+                'NO_ZERO_IN_DATE',
+            ],
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
