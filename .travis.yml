@@ -17,7 +17,7 @@ before_install:
     - mysql -e 'create database testing;'
     - sudo apt-add-repository -y ppa:ondrej/php
     - sudo apt-get update
-    - sudo apt-get install -y php7.4-gd
+    - sudo apt-get install -y php-gd
     - sudo service apache2 restart
 before_script:
     - composer install --no-interaction
