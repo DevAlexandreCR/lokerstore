@@ -5,8 +5,8 @@ namespace App\Constants;
 class Procedures
 {
     public const ORDER_PROCEDURE = <<<'EOT'
-CREATE PROCEDURE `orders_metrics_generate` (p_from date, p_until date, p_type varchar(255), p_field varchar(255))
-BEGIN
+create procedure orders_metrics_generate(p_from date, p_until date, p_type varchar(255), p_field varchar(255))
+begin
     START TRANSACTION;
     DELETE FROM `metrics` WHERE `metric` = p_type COLLATE utf8_unicode_ci
     AND `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
@@ -35,12 +35,12 @@ BEGIN
 		END
     GROUP BY `date`, `measurable_id`, `status`, `metric`;
     COMMIT;
-END
+end
 EOT;
 
     public const CATEGORIES_PROCEDURE = <<<'EOT'
-CREATE PROCEDURE categories_metrics_generate(p_from date, p_until date)
-BEGIN
+create procedure categories_metrics_generate(p_from date, p_until date)
+begin
     START TRANSACTION;
     DELETE FROM metrics WHERE metric = "categories" COLLATE utf8_unicode_ci AND date BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
     INSERT INTO metrics (date, measurable_id, status, total, metric)
@@ -57,7 +57,7 @@ BEGIN
     AND status = "completed"
     GROUP BY date, measurable_id, status, metric;
     COMMIT;
-END
+end
 EOT;
 
     public const GENERATE_CATEGORIES_REPORT = <<<'EOT'
