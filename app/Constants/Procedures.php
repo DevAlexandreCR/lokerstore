@@ -42,9 +42,8 @@ EOT;
 CREATE PROCEDURE categories_metrics_generate(p_from date, p_until date)
 BEGIN
     START TRANSACTION;
-    DELETE FROM `metrics` WHERE `metric` = "categories" COLLATE utf8_unicode_ci
-    AND `date` BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
-    INSERT INTO `metrics` (`date`, `measurable_id`, `status`, `total`, `metric`)
+    DELETE FROM metrics WHERE metric = "categories" COLLATE utf8_unicode_ci AND date BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
+    INSERT INTO metrics (date, measurable_id, status, total, metric)
         SELECT DATE(orders.created_at) AS date,
       	products.id_category as measurable_id,
         orders.status as status,
@@ -55,8 +54,8 @@ BEGIN
         LEFT OUTER JOIN stocks ON order_details.stock_id = stocks.id
         LEFT OUTER JOIN products ON stocks.product_id = products.id
     WHERE orders.created_at BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY)
-    AND `status` = 'completed'
-    GROUP BY `date`, `measurable_id`, `status`, `metric`;
+    AND status = "completed"
+    GROUP BY date, measurable_id, status, metric;
     COMMIT;
 END
 EOT;
