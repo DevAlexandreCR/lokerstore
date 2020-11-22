@@ -14,10 +14,7 @@ git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
-    - mysql -e SET sql_mode = `STRICT_ALL_TABLES`;'
-    - mysql -e SET sql_mode = `HIGH_NOT_PRECEDENCE`;'
-    - mysql -e SET sql_mode = `NO_ZERO_DATE`;'
-    - mysql -e SET sql_mode = `NO_ZERO_IN_DATE`;'
+    - mysql -e SET sql_mode = "STRICT_ALL_TABLES,HIGH_NOT_PRECEDENCE,NO_ZERO_DATE,NO_ZERO_IN_DATE";'
 before_script:
     - composer install --no-interaction
     - npm install
