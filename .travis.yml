@@ -10,7 +10,7 @@ cache:
         - ~/.npm
         - vendor
 php:
-    - 7.3
+    - nightly
 git:
     depth: 3
 before_install:
