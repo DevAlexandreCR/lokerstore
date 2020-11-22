@@ -10,11 +10,14 @@ cache:
         - ~/.npm
         - vendor
 php:
-    - nightly
+    - 7.4
 git:
     depth: 3
 before_install:
     - mysql -e 'create database testing;'
+    - sudo apt-get update
+    - sudo apt-get install php7.4-gd
+    - sudo service apache2 restart
 before_script:
     - composer install --no-interaction
     - npm install
