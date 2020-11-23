@@ -91,6 +91,7 @@ class GenerateOrder implements OrderInterface
                 $message = trans('payment.messages.rejected');
                 break;
             default:
+                $this->payments->create($order->id, null, null);
                 $this->payments->setStatus($order->payment, Pay::FAILED);
                 $message = $response->status->message;
         }
