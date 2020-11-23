@@ -1,5 +1,4 @@
 language: php
-os: windows
 services:
     - mysql
 
