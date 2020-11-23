@@ -4,10 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTablePayers extends Migration
+class CreatePayersTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Create table payers
      *
      * @return void
      */
