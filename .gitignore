@@ -19,3 +19,5 @@ yarn-error.log
 /.idea/
 /public/vendor/
 /.vscode/
+/.env.production
+/reports/
