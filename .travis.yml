@@ -13,6 +13,7 @@ php:
 git:
     depth: 3
 before_install:
+    - cp .env.travis .env
     - mysql -e 'create database testing;'
 before_script:
     - composer install --no-interaction
