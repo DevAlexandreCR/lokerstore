@@ -71,11 +71,11 @@ return [
 
         'testing' => [
             'driver' => 'mysql',
-            'host' => env('DB_TEST_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_TEST_DATABASE', 'testing'),
-            'username' => env('DB_TEST_USERNAME', 'root'),
-            'password' => env('DB_TEST_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'testing'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'modes' => [
                 'STRICT_ALL_TABLES',
