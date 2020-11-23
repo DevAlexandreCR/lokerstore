@@ -26,7 +26,7 @@ class CreatePayersPaymentTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations of table payers.
      *
      * @return void
      */
