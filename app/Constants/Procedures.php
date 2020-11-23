@@ -42,7 +42,8 @@ EOT;
 CREATE PROCEDURE categories_metrics_generate(p_from date, p_until date)
 BEGIN
     START TRANSACTION;
-    DELETE FROM metrics WHERE metric = "categories" COLLATE utf8_unicode_ci AND date BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
+    DELETE FROM metrics WHERE metric = "categories" COLLATE utf8_unicode_ci
+    AND date BETWEEN p_from AND DATE_ADD(p_until, INTERVAL 1 DAY);
     INSERT INTO metrics (date, measurable_id, status, total, metric)
         SELECT DATE(orders.created_at) AS date,
       	products.id_category as measurable_id,
