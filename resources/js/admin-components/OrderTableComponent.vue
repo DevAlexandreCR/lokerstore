@@ -97,7 +97,7 @@ export default {
   props: {
     selectedProducts: {
       type: Array,
-      default: [],
+      default: () => [],
       required: true
     },
 

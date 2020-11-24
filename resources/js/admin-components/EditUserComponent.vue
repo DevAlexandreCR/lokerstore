@@ -151,6 +151,9 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   name: 'edit-user-component',
 
@@ -181,11 +184,10 @@ export default {
 
   methods: {
     startEditing (inputName) {
-      return inputName = !inputName
+      return !inputName
     },
 
     submit () {
-      console.log(this.updateUser)
       axios.put(this.user.id, {
         user: {
           name: this.updateUser.name,
@@ -195,15 +197,14 @@ export default {
           address: this.updateUser.address
         }
       })
-        .then(res => {
-          console.log(res.data)
-          this.editingName = false,
-          this.editingEmail = false,
-          this.editingPhone = false,
+        .then(() => {
+          this.editingName = false
+          this.editingEmail = false
+          this.editingPhone = false
           this.editingAddress = false
         })
         .catch(e => {
-          console.log(e)
+          alert(e.message)
         })
     }
   }

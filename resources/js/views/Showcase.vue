@@ -7,21 +7,21 @@
                         type="button"
                         :class="['nav-link', { 'router-link-exact-active' : query.tags.includes(__('fields.woman'))}]"
                         @click="setTag(__('fields.woman'))"
-                        >Mujer</div>
+                        >{{ __('fields.woman') }}</div>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
                         type="button"
                         :class="['nav-link', { 'router-link-exact-active' : query.tags.includes(__('fields.man'))}]"
                         @click="setTag(__('fields.man'))"
-                        >Hombre</div>
+                        >{{ __('fields.man') }}</div>
                 </div>
                 <div class="col-sm-2 d-none d-sm-block">
                     <div
                         type="button"
                         :class="['nav-link', { 'router-link-exact-active' : query.tags.length === 0}]"
                         @click="setTag(null)"
-                    >Todos</div>
+                    >{{ __('fields.all') }}</div>
                 </div>
                 <div class="col">
                     <div class="input-group">
@@ -37,7 +37,7 @@
         <div class="col-3">
             <a class="btn btn-sm btn-dark btn-block d-md-none" data-toggle="collapse" href="#collapseFilters" data-trigger="#collapseFilters" role="button" aria-expanded="false"
                aria-controls="collapseFilters">
-                Filtros
+              {{ __('fields.filters') }}
             </a>
         </div>
         <div class="row">
@@ -55,6 +55,7 @@
 import api from '../api.js'
 import FiltersComponent from '../components/FiltersComponent'
 import ProductsGridComponent from '../components/ProductsGridComponent'
+import $ from 'jquery'
 
 export default {
   name: 'showcase',
@@ -87,9 +88,10 @@ export default {
   methods: {
     buildQuery (data) {
       for (const key in data) {
+        // eslint-disable-next-line no-prototype-builtins
         if (data.hasOwnProperty(key)) {
           switch (key) {
-            case 'tags':
+            case 'tags': {
               const tags = []
               let array = []
               if (typeof data.tags === 'object') {
@@ -102,6 +104,7 @@ export default {
               })
               this.query.tags = tags
               break
+            }
             case 'category':
               this.query.category = data[key]
               break

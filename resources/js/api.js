@@ -1,4 +1,4 @@
-import Axios from 'axios'
+import axios from 'axios'
 
 const url = `${process.env.MIX_APP_URL}/api/`
 

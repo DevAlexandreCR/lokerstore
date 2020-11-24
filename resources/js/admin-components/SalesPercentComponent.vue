@@ -20,7 +20,7 @@ export default {
   props: {
     metrics: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
 

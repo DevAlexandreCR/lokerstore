@@ -1,6 +1,7 @@
 <?php
 return [
     "actions" => "Acciones",
+    "all" => "Todos",
     "amount" => "Valor total",
     "categories" => "Categorías",
     "color_id" => "Color id",

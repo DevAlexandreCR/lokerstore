@@ -62,7 +62,7 @@
             <div class="card shadow-sm bg-white mb-3">
                 <div class="card-header">{{trans('reports.sales')}}</div>
                 <div class="card-body bg-white">
-                    <orders-metric :metrics="{{ $metricsGeneral->toJson() }}"></orders-metric>
+                    <orders-metric :orders="{{ $metricsGeneral->toJson() }}"></orders-metric>
                 </div>
             </div>
         </div>

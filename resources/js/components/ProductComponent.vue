@@ -26,17 +26,13 @@ export default {
   props: {
     product: {
       type: Object,
-      default: {}
+      default: () => []
     }
   },
 
   methods: {
     showProduct (id) {
       window.location.assign(`/products/${id}`)
-    },
-
-    formatPrice (price) {
-      return NumberFormat.format(price)
     }
   },
 

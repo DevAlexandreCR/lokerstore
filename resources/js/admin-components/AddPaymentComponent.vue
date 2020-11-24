@@ -9,13 +9,13 @@
                         <div class="form-group form-row">
                             <label class="col-sm-7" for="selectMethod">{{ __('payment.method') }}</label>
                             <select class="form-control col-sm-5 form-control-sm" id="selectMethod" name="method">
-                                <option v-for="method in methods" :value="method">{{ method }}</option>
+                                <option v-for="(method, index) in methods" :key="index" :value="method">{{ method }}</option>
                             </select>
                         </div>
                         <div class="form-group form-row">
                             <label class="col-sm-8" for="selectType">Tipo de documento</label>
                             <select class="form-control col-sm-4 form-control-sm" id="selectType" name="document_type">
-                                <option v-for="type in documentTypes" :value="type">{{ type }}</option>
+                                <option v-for="(type,index) in documentTypes" :key="index" :value="type">{{ type }}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -62,10 +62,11 @@
 
 <script>
 
-import { Payments } from '../constants/Payments'
-import { Payers } from '../constants/Payers'
+import * as Payments from '../constants/Payments'
+import * as Payers from '../constants/Payers'
 import Autocomplete from './Autocomplete'
 import NumberFormat from '../constants/NumberFormat'
+import $ from 'jquery'
 
 export default {
   name: 'add-payment-component',
@@ -85,7 +86,7 @@ export default {
   props: {
     payers: {
       type: Array,
-      default: [],
+      default: () => [],
       required: true
     },
 

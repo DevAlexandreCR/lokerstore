@@ -39,7 +39,7 @@ Vue.use(Lang, {
 
 Vue.config.ignoredElements = [/^ion-/]
 
-const app = new Vue({
+new Vue({
   el: '#app',
   router
 })

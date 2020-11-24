@@ -31,9 +31,6 @@
 
 <script>
 export default {
-  name: 'banner',
-  mounted () {
-
-  }
+  name: 'banner'
 }
 </script>

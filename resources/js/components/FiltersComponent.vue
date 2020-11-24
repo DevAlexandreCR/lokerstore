@@ -24,7 +24,7 @@
                     </li>
                     <li class="nav-item my-1 w-100" v-if="sizesSelected.length > 0">
                         <div class="container text-center text-price">{{ __('products.size') }}</div>
-                        <span v-for="size in sizesSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
+                        <span v-for="size in sizesSelected" :key="size" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
                             {{getSizeName(size)}}
                             <a class="btn btn-link" @click="removeFilter(constants.filter_sizes, size)">
                                 <ion-icon name="close-outline"></ion-icon>
@@ -33,7 +33,7 @@
                     </li>
                     <li class="nav-item my-1 w-100" v-if="colorsSelected.length > 0">
                         <div class="container text-center text-price">{{ __('products.color') }}</div>
-                        <span v-for="color in colorsSelected" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
+                        <span v-for="color in colorsSelected" :key="color" class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
                             <span v-if="getColorName(color)" :class="['badge', 'badge-color-' + getColorName(color).toLowerCase()]">
                                 .</span> {{getColorName(color)}}
                             <a class="btn btn-link" @click="removeFilter(constants.filter_color, color)">
@@ -44,7 +44,7 @@
                     <li class="nav-item my-1 w-100" v-if="priceRange">
                         <div class="container text-center text-price">{{ __('products.price') }}</div>
                         <span class="badge badge-pill badge-link shadow-sm p-0 ml-2 pl-2">
-                            <small v-for="price in priceRange">{{price}}</small>
+                            <small v-for="(price, index) in priceRange" :key="index">{{price}}</small>
                             <a class="btn btn-link" @click="removeFilter(constants.filter_price)">
                                 <ion-icon name="close-outline"></ion-icon>
                             </a>
@@ -164,7 +164,7 @@
 <script>
 
 import api from '../api'
-import Constants from '../constants/constants'
+import * as Constants from '../constants/Constants'
 
 export default {
   name: 'filters',
@@ -273,9 +273,7 @@ export default {
       this.min = process.env.MIX_MIN_PRICE_FILTER
       this.max = process.env.MIX_MAX_PRICE_FILTER
       this.hasFiltersActive = false
-      let reload = false
       if (this.query.search != null) {
-        reload = true
         this.search = null
         this.query.search = null
         this.$emit('sendQuery', null, true)
@@ -284,13 +282,15 @@ export default {
       }
     },
 
-    getQuerySelecteds (query) {
+    getQuerySelected (query) {
       this.query = query
       this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = []
       this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = []
       this.query.category ? this.categorySelected = query.category : this.categorySelected = null
       this.query.tags ? this.tags = this.getArrayFilter(query.tags) : this.tags = []
-      this.query.price ? this.getPriceFromQuery(query.price) : null
+      if (query.price) {
+        this.query.price = this.getPriceFromQuery(query.price)
+      }
 
       this.hasFiltersActive = this.hasFilters()
     },
@@ -364,7 +364,7 @@ export default {
     this.getCategories()
     this.getColors()
     this.getSizes()
-    this.getQuerySelecteds(this.$route.query)
+    this.getQuerySelected(this.$route.query)
   }
 }
 </script>

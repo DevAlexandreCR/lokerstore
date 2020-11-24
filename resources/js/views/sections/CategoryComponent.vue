@@ -65,31 +65,23 @@ export default {
 
   computed: {
     selectedRandomProducts: function () {
-      var selectedRandomProducts = [] // selected random products
-      var max_selected = 0 // count max selected 4 products
-      var count = 0 // count iterations
-      while (max_selected < 5 && this.products.length > 0 && count < this.products.length) {
+      const selectedRandomProducts = [] // selected random products
+      let maxSelected = 0 // count max selected 4 products
+      let count = 0 // count iterations
+      while (maxSelected < 5 && this.products.length > 0 && count < this.products.length) {
         count++
-        var random = Math.floor(Math.random() * this.products.length)
-        var product = this.products[random]
+        const random = Math.floor(Math.random() * this.products.length)
+        const product = this.products[random]
         if (product.category.id_parent === this.category.id) {
           if (!selectedRandomProducts.includes(product)) {
             selectedRandomProducts.push(product)
-            max_selected++
+            maxSelected++
           }
         }
       }
 
       return selectedRandomProducts
     }
-  },
-
-  created () {
-
-  },
-
-  mounted () {
-
   }
 }
 </script>

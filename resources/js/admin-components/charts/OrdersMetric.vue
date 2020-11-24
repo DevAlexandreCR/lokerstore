@@ -1,5 +1,5 @@
 <template>
-    <div class="contaner-fluid">
+    <div class="container-fluid">
         <canvas id="ordersChart"></canvas>
     </div>
 </template>
@@ -7,17 +7,19 @@
 <script>
 
 import Chart from 'chart.js'
-import Constants from '../../constants/constants'
+import * as Constants from '../../constants/Constants'
 
 export default {
   name: 'orders-metric',
   data () {
-    return {}
+    return {
+      metrics: this.orders
+    }
   },
   props: {
-    metrics: {
+    orders: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
   methods: {
@@ -31,6 +33,18 @@ export default {
       })
       return metrics.filter(metric => {
         return metric !== null
+      })
+    },
+    addCurrentMonth (today) {
+      this.metrics.push({
+        date: today,
+        amount: 0,
+        status: 'sent'
+      })
+      this.metrics.push({
+        date: today,
+        amount: 0,
+        status: 'canceled'
       })
     }
   },
@@ -48,16 +62,7 @@ export default {
         }
       })
       if (!months.includes(currentMonth)) {
-        this.metrics.push({
-          date: today,
-          amount: 0,
-          status: 'sent'
-        })
-        this.metrics.push({
-          date: today,
-          amount: 0,
-          status: 'canceled'
-        })
+        this.addCurrentMonth(today)
         months.push(currentMonth)
       }
       return months

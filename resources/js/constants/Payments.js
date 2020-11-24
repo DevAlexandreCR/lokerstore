@@ -1,13 +1,11 @@
-export class Payments extends Array {
-    static METHOD_CASH = 'cash'
-    static METHOD_CARD = 'credit card'
-    static METHOD_CREDIT = 'credit'
+export const METHOD_CASH = 'cash'
+export const METHOD_CARD = 'credit card'
+export const METHOD_CREDIT = 'credit'
 
-    static all = () => {
-        return [
-            this.METHOD_CASH,
-            this.METHOD_CARD,
-            this.METHOD_CREDIT
-        ]
-    }
+export function all () {
+  return [
+    this.METHOD_CASH,
+    this.METHOD_CARD,
+    this.METHOD_CREDIT
+  ]
 }

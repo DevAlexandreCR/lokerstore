@@ -47,6 +47,8 @@
 </template>
 <script>
 
+import axios from 'axios'
+
 export default {
   name: 'test-api-component',
   data () {
@@ -292,8 +294,8 @@ export default {
 
     syntaxHighlight: function (json) {
       json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        var cls = 'number'
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+]?\d+)?)/g, function (match) {
+        let cls = 'number'
         if (/^"/.test(match)) {
           if (/:$/.test(match)) {
             cls = 'key'
@@ -314,7 +316,6 @@ export default {
         document.getElementById(div).removeChild(document.getElementById(div).firstElementChild)
       }
       document.getElementById(div).appendChild(document.createElement('pre')).innerHTML = json
-      document.body
     }
   }
 }

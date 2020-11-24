@@ -1,5 +1,5 @@
 <template>
-    <div class="contaner-fluid">
+    <div class="container-fluid">
         <canvas id="categoriesChart"></canvas>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   props: {
     metrics: {
       type: Array,
-      default: {}
+      default: () => []
     }
   },
   methods: {

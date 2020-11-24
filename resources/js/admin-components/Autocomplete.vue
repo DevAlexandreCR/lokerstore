@@ -15,6 +15,7 @@
         <ul class="list-group dropdown-menu shadow" v-show="open">
             <li class="list-group-item"
                 v-for="(suggestion, index) in matches"
+                :key="index"
                 v-bind:class="{'active-autocomplete text-white': isActive(index)}"
                 @click="suggestionClick(index)"
             >

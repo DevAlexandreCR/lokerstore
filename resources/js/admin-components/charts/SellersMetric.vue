@@ -1,5 +1,5 @@
 <template>
-    <div class="contaner-fluid">
+    <div class="container-fluid">
         <canvas id="sellersChart"></canvas>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   props: {
     metrics: {
       type: Array,
-      default: {}
+      default: () => []
     }
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
             stacked: true,
             ticks: {
               beginAtZero: true,
-              userCallback: function (value, index, values) {
+              userCallback: function (value) {
                 value = value.toString()
                 value = value.split(/(?=(?:...)*$)/)
                 value = value.join('.')

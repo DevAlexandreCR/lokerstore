@@ -47,6 +47,7 @@
 
 <script>
 import NumberFormat from '../constants/NumberFormat'
+import axios from 'axios'
 
 export default {
   name: 'confirm-order-component',
@@ -61,7 +62,7 @@ export default {
   props: {
     products: {
       type: Array,
-      default: [],
+      default: () => [],
       required: true
     },
     total: {
