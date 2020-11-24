@@ -32,64 +32,64 @@
 
 <script>
 
-    import CardCategoryComponent from '../../components/CardCategoryComponent'
+import CardCategoryComponent from '../../components/CardCategoryComponent'
 
-    export default {
+export default {
 
-        name: 'category',
+  name: 'category',
 
-        components: {
-            CardCategoryComponent
-        },
+  components: {
+    CardCategoryComponent
+  },
 
-        data() {
-            return {
-            }
-        },
-
-        props: {
-            category: {
-                required: true
-            },
-            products: {
-                    type: Array,
-                    default: () => []
-                }
-        },
-
-        methods: {
-            goToShowcase(filter) {
-                this.$router.push({name: 'showcase', query: { category: filter}})
-            }
-        },
-
-        computed: {
-            selectedRandomProducts: function()  {
-                var selectedRandomProducts = [] // selected random products
-                var max_selected = 0 // count max selected 4 products
-                var count = 0 // count iterations
-                while (max_selected < 5 && this.products.length > 0 && count < this.products.length) {
-                    count++
-                    var random = Math.floor(Math.random() * this.products.length);
-                    var product = this.products[random]
-                    if (product.category.id_parent === this.category.id) {
-                        if (! selectedRandomProducts.includes(product)) {
-                            selectedRandomProducts.push(product)
-                            max_selected++
-                        }
-                    }
-                }
-
-                return selectedRandomProducts
-            }
-        },
-
-        created() {
-
-        },
-
-        mounted() {
-
-        }
+  data () {
+    return {
     }
+  },
+
+  props: {
+    category: {
+      required: true
+    },
+    products: {
+      type: Array,
+      default: () => []
+    }
+  },
+
+  methods: {
+    goToShowcase (filter) {
+      this.$router.push({ name: 'showcase', query: { category: filter } })
+    }
+  },
+
+  computed: {
+    selectedRandomProducts: function () {
+      var selectedRandomProducts = [] // selected random products
+      var max_selected = 0 // count max selected 4 products
+      var count = 0 // count iterations
+      while (max_selected < 5 && this.products.length > 0 && count < this.products.length) {
+        count++
+        var random = Math.floor(Math.random() * this.products.length)
+        var product = this.products[random]
+        if (product.category.id_parent === this.category.id) {
+          if (!selectedRandomProducts.includes(product)) {
+            selectedRandomProducts.push(product)
+            max_selected++
+          }
+        }
+      }
+
+      return selectedRandomProducts
+    }
+  },
+
+  created () {
+
+  },
+
+  mounted () {
+
+  }
+}
 </script>

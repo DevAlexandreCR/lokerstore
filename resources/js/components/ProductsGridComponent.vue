@@ -53,83 +53,82 @@
 </template>
 
 <script>
-import ProductComponent from "./ProductComponent";
-import NotFoundProductsComponent from "./NotFoundProductsComponent";
-import SearchingComponent from "./searchingComponent";
+import ProductComponent from './ProductComponent'
+import NotFoundProductsComponent from './NotFoundProductsComponent'
+import SearchingComponent from './searchingComponent'
 export default {
-    name: 'products-grid',
-    components: {
-        SearchingComponent,
-        ProductComponent,
-        NotFoundProductsComponent
-    },
-    data() {
-        return {
-            paginate:['products']
-        }
-    },
+  name: 'products-grid',
+  components: {
+    SearchingComponent,
+    ProductComponent,
+    NotFoundProductsComponent
+  },
+  data () {
+    return {
+      paginate: ['products']
+    }
+  },
 
-    props: {
-        products: {
-            type: Array,
-            required: true,
-            default: () => []
-        },
-
-        loading: {
-            type: Boolean,
-            required: true,
-            default: false
-        }
+  props: {
+    products: {
+      type: Array,
+      required: true,
+      default: () => []
     },
 
-    methods: {
-        viewAll() {
-              this.$emit('sendQuery', null, true)
-        },
+    loading: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
+  },
 
-        orderBy(event) {
-            let value = event.target.value
-            switch (value) {
-                case '1':
-                    this.products.sort(function (a, b) {
+  methods: {
+    viewAll () {
+      this.$emit('sendQuery', null, true)
+    },
 
-                        if (parseFloat(a.price) > parseFloat(b.price)) {
-                            return 1;
-                        }
-                        if (parseFloat(a.price) < parseFloat(b.price)) {
-                            return -1;
-                        }
-                        // a must be equal to b
-                        return 0;
-                    });
-                    break
-                case '2':
-                    this.products.sort(function (a, b) {
-                        if (parseFloat(a.price) < parseFloat(b.price)) {
-                            return 1;
-                        }
-                        if (parseFloat(a.price) > parseFloat(b.price)) {
-                            return -1;
-                        }
-                        // a must be equal to b
-                        return 0;
-                    });
-                    break
-                case '3':
-                    this.products.sort(function (a, b) {
-                        if (a.name > b.name) {
-                            return 1;
-                        }
-                        if (a.name < b.name) {
-                            return -1;
-                        }
-                        // a must be equal to b
-                        return 0;
-                    });
-                    break
+    orderBy (event) {
+      const value = event.target.value
+      switch (value) {
+        case '1':
+          this.products.sort(function (a, b) {
+            if (parseFloat(a.price) > parseFloat(b.price)) {
+              return 1
             }
-        }
-    },
+            if (parseFloat(a.price) < parseFloat(b.price)) {
+              return -1
+            }
+            // a must be equal to b
+            return 0
+          })
+          break
+        case '2':
+          this.products.sort(function (a, b) {
+            if (parseFloat(a.price) < parseFloat(b.price)) {
+              return 1
+            }
+            if (parseFloat(a.price) > parseFloat(b.price)) {
+              return -1
+            }
+            // a must be equal to b
+            return 0
+          })
+          break
+        case '3':
+          this.products.sort(function (a, b) {
+            if (a.name > b.name) {
+              return 1
+            }
+            if (a.name < b.name) {
+              return -1
+            }
+            // a must be equal to b
+            return 0
+          })
+          break
+      }
+    }
+  }
 }
 </script>

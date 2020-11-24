@@ -4365,7 +4365,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     isNotHomeRoute: function isNotHomeRoute() {
-      return this.$router.history.current['path'] === '/home';
+      return this.$router.history.current.path === '/home';
     },
     getProducts: function getProducts() {
       var search = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -4520,24 +4520,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 array.forEach(function (tag) {
                   tags.push(tag);
                 });
-                _this.query['tags'] = tags;
+                _this.query.tags = tags;
                 break;
 
               case 'category':
-                _this.query['category'] = data[key];
+                _this.query.category = data[key];
                 break;
 
               case 'search':
-                _this.query['search'] = data[key];
+                _this.query.search = data[key];
                 _this.search = data[key];
                 break;
 
               case 'colors':
-                _this.query['colors'] = data[key];
+                _this.query.colors = data[key];
                 break;
 
               case 'price':
-                _this.query['price'] = data[key];
+                _this.query.price = data[key];
                 break;
 
               default:
@@ -114154,22 +114154,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! laravel-vue-lang */ "./node_modules/laravel-vue-lang/dist/index.js");
 /* harmony import */ var laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_lang__WEBPACK_IMPORTED_MODULE_15__);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('banner-component', _components_BannerComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('error404-component', _components_Error404Component__WEBPACK_IMPORTED_MODULE_6__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('empty-cart-component', _components_EmptyCartComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
@@ -115760,7 +115760,7 @@ module.exports = {"404":"Route not found!","unauthenticated":"User in not authen
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = {"bye":"Bye bye!","crud":":resource has been successfully :status ","exporting":"Exporting products... we'll send you an email when the download is available","found":"Show results for: :search","hello":"Hello!","importing":"Importing products... we'll send you an email when the import is ended","lost":"Oops! Are you lost?","no":"No","not_found":" :resource not found","not_recent":"Less recent","not_result":"Not results found","recent":"Most recent","regards":"Regards","reporting":"We'll send the report to your email when it's ready.","search_not_found":"not results found for: :search","thanks":"Thank you for buy in us store","unique":"The :field must be unique","yes":"Yes"};
+module.exports = {"bye":"Bye bye!","crud":":resource has been successfully :status ","exporting":"Exporting products... we'll send you an email when the download is available","found":"Show results for: :search","hello":"Hello!","importing":"Importing products... we'll send you an email when the import is ended","lost":"Oops! Are you lost?","no":"No","not_found":" :resource not found","not_recent":"Old","not_result":"Not results found","recent":"Recent","regards":"Regards","reporting":"We'll send the report to your email when it's ready.","search_not_found":"not results found for: :search","thanks":"Thank you for buy in us store","unique":"The :field must be unique","yes":"Yes"};
 
 /***/ }),
 
@@ -115958,7 +115958,7 @@ module.exports = {"404":"No encontramos lo que buscas!","unauthenticated":"El us
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = {"bye":"Adiós!","crud":":resource ha sido :status satisfactoriamente ","exporting":"Exportando productos... te enviaremos un correo electrónico cuando esté disponible la descarga","found":"Mostrando resultados para: :search","hello":"Hola!","importing":"Importando productos... te enviaremos un correo electrónico cuando la importación haya terminado","lost":"Oh! ¿ Estás perdido ?","no":"No","not_found":" :resource no encontrado","not_recent":"Menos recientes","not_result":"No se encontraron resultados","recent":"Más recientes","regards":"Saludos","reporting":"Te enviaremos el reporte a tu correo electrónico cuando esté listo.","search_not_found":"No se encontraron resultados para: :search","thanks":"Gracias por comprar en nuestra tienda,","unique":"El :field debe ser único","yes":"Si"};
+module.exports = {"bye":"Adiós!","crud":":resource ha sido :status satisfactoriamente ","exporting":"Exportando productos... te enviaremos un correo electrónico cuando esté disponible la descarga","found":"Mostrando resultados para: :search","hello":"Hola!","importing":"Importando productos... te enviaremos un correo electrónico cuando la importación haya terminado","lost":"Oh! ¿ Estás perdido ?","no":"No","not_found":" :resource no encontrado","not_recent":"Antiguos","not_result":"No se encontraron resultados","recent":"Recientes","regards":"Saludos","reporting":"Te enviaremos el reporte a tu correo electrónico cuando esté listo.","search_not_found":"No se encontraron resultados para: :search","thanks":"Gracias por comprar en nuestra tienda,","unique":"El :field debe ser único","yes":"Si"};
 
 /***/ }),
 

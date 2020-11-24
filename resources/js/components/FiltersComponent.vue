@@ -164,209 +164,207 @@
 <script>
 
 import api from '../api'
-import Constants from "../constants/constants";
+import Constants from '../constants/constants'
 
 export default {
-    name: 'filters',
+  name: 'filters',
 
-    data() {
-        return {
-            constants: {
-                filter_color: Constants.FILTER_COLORS,
-                filter_category: Constants.FILTER_CATEGORY,
-                filter_price: Constants.FILTER_PRICE,
-                filter_sizes: Constants.FILTER_SIZES,
-                filter_search: Constants.FILTER_SEARCH,
-            },
-            colors: {
-                type: Array,
-                default: []
-            },
-            categories: {
-                type: Array,
-                default: []
-            },
-            type_sizes: {
-                type: Array,
-                default: []
-            },
-            hasFiltersActive: false,
-            tags: [],
-            colorsSelected: [],
-            categorySelected: null,
-            sizesSelected: [],
-            priceRange: null,
-            min: process.env.MIX_MIN_PRICE_FILTER,
-            max: process.env.MIX_MAX_PRICE_FILTER
-        }
-    },
-
-    props: {
-        search: null,
-        query: {}
-    },
-
-    watch: {
-        min: function (val) {
-            this.priceRange = `${val}-${this.max}`
-        },
-        max: function (val) {
-            this.priceRange = `${this.min}-${val}`
-        }
-    },
-
-    methods: {
-        getCategories() {
-            api.getCategories().then(categories =>  {
-                this.categories = categories
-            })
-        },
-        getColors() {
-            api.getColors().then(colors =>  {
-                this.colors = colors
-            })
-        },
-
-        getColorName(id) {
-            if (this.colors.length > 0) {
-                let color = this.colors.find(color => color.id === parseInt(id))
-                return color.name.toLowerCase()
-            }
-        },
-
-        getSizes() {
-            api.getSizes().then(sizes =>  {
-                this.type_sizes = sizes
-            })
-        },
-
-        getSizeName(id) {
-            let name
-            if (this.type_sizes.length > 0){
-                this.type_sizes.forEach(type => {
-                    type.sizes.forEach(size => {
-                        if (size.id ===  parseInt(id)) {
-                            name = size.name
-                        }
-                    })
-                })
-            }
-            return name
-        },
-
-        selectCategory(name) {
-            this.categorySelected = name
-            this.sendQuery()
-        },
-
-        selectSizes(id) {
-            this.sizeSelected = id
-            this.sendQuery()
-        },
-
-        resetFilters() {
-            this.colorsSelected = []
-            this.categorySelected = null
-            this.sizesSelected = []
-            this.priceRange = null
-            this.tags = []
-            this.min = process.env.MIX_MIN_PRICE_FILTER
-            this.max = process.env.MIX_MAX_PRICE_FILTER
-            this.hasFiltersActive = false
-            let reload = false
-            if (this.query.search != null) {
-                reload = true
-                this.search = null
-                this.query.search = null
-                this.$emit('sendQuery', null, true)
-            } else {
-                this.sendQuery()
-            }
-
-
-        },
-
-        getQuerySelecteds(query) {
-            this.query = query
-            this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = []
-            this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = []
-            this.query.category ? this.categorySelected = query.category : this.categorySelected = null
-            this.query.tags ? this.tags = this.getArrayFilter(query.tags) : this.tags = []
-            this.query.price ? this.getPriceFromQuery(query.price) : null
-
-            this.hasFiltersActive = this.hasFilters()
-        },
-
-        getArrayFilter(data) {
-            let array = []
-            if (typeof data === 'object') array = data
-            else array.push(data)
-            return array
-        },
-
-        getPriceFromQuery(data) {
-            let array = data.split('-')
-            this.min = array[0]
-            this.max = array[1]
-        },
-
-        sendQuery() {
-            this.sizesSelected ? this.query.sizes = this.sizesSelected : this.query.sizes = null
-            this.colorsSelected ? this.query.colors = this.colorsSelected : this.query.colors = null
-            this.categorySelected ? this.query.category = this.categorySelected : this.query.category = null
-            this.priceRange ? this.query.price = this.priceRange : this.query.price = null
-            this.hasFiltersActive = this.hasFilters()
-            this.$emit('sendQuery', this.query)
-        },
-
-        hasFilters() {
-            if (this.colorsSelected.length > 0) return true
-            else if (this.sizesSelected.length > 0) return true
-            else if (this.categorySelected) return true
-            else if (this.query.search) return true
-            else if (this.min > process.env.MIX_MIN_PRICE_FILTER) return true
-            else return this.max < process.env.MIX_MAX_PRICE_FILTER;
-        },
-
-        removeFilter(key, id = null) {
-            switch (key) {
-                case Constants.FILTER_CATEGORY:
-                    this.categorySelected = null
-                    break
-                case Constants.FILTER_COLORS:
-                    this.removeItemFromArr(this.colorsSelected, id)
-                    break
-                case Constants.FILTER_PRICE:
-                    this.min = process.env.MIX_MIN_PRICE_FILTER
-                    this.max = process.env.MIX_MAX_PRICE_FILTER
-                    this.priceRange = null
-                    break
-                case Constants.FILTER_SIZES:
-                    this.removeItemFromArr(this.sizesSelected, id)
-                    break
-                case Constants.FILTER_SEARCH:
-                    this.query.search = null
-                    this.$emit('setSearch', null, true)
-                    break
-            }
-
-            this.sendQuery()
-        },
-
-        removeItemFromArr( arr, item ) {
-            let i = arr.indexOf(item);
-
-            if (i !== -1) {
-                arr.splice(i, 1);
-            }
-        }
-    },
-
-    created() {
-        this.getCategories()
-        this.getColors()
-        this.getSizes()
-        this.getQuerySelecteds(this.$route.query)
+  data () {
+    return {
+      constants: {
+        filter_color: Constants.FILTER_COLORS,
+        filter_category: Constants.FILTER_CATEGORY,
+        filter_price: Constants.FILTER_PRICE,
+        filter_sizes: Constants.FILTER_SIZES,
+        filter_search: Constants.FILTER_SEARCH
+      },
+      colors: {
+        type: Array,
+        default: []
+      },
+      categories: {
+        type: Array,
+        default: []
+      },
+      type_sizes: {
+        type: Array,
+        default: []
+      },
+      hasFiltersActive: false,
+      tags: [],
+      colorsSelected: [],
+      categorySelected: null,
+      sizesSelected: [],
+      priceRange: null,
+      min: process.env.MIX_MIN_PRICE_FILTER,
+      max: process.env.MIX_MAX_PRICE_FILTER
     }
+  },
+
+  props: {
+    search: null,
+    query: {}
+  },
+
+  watch: {
+    min: function (val) {
+      this.priceRange = `${val}-${this.max}`
+    },
+    max: function (val) {
+      this.priceRange = `${this.min}-${val}`
+    }
+  },
+
+  methods: {
+    getCategories () {
+      api.getCategories().then(categories => {
+        this.categories = categories
+      })
+    },
+    getColors () {
+      api.getColors().then(colors => {
+        this.colors = colors
+      })
+    },
+
+    getColorName (id) {
+      if (this.colors.length > 0) {
+        const color = this.colors.find(color => color.id === parseInt(id))
+        return color.name.toLowerCase()
+      }
+    },
+
+    getSizes () {
+      api.getSizes().then(sizes => {
+        this.type_sizes = sizes
+      })
+    },
+
+    getSizeName (id) {
+      let name
+      if (this.type_sizes.length > 0) {
+        this.type_sizes.forEach(type => {
+          type.sizes.forEach(size => {
+            if (size.id === parseInt(id)) {
+              name = size.name
+            }
+          })
+        })
+      }
+      return name
+    },
+
+    selectCategory (name) {
+      this.categorySelected = name
+      this.sendQuery()
+    },
+
+    selectSizes (id) {
+      this.sizeSelected = id
+      this.sendQuery()
+    },
+
+    resetFilters () {
+      this.colorsSelected = []
+      this.categorySelected = null
+      this.sizesSelected = []
+      this.priceRange = null
+      this.tags = []
+      this.min = process.env.MIX_MIN_PRICE_FILTER
+      this.max = process.env.MIX_MAX_PRICE_FILTER
+      this.hasFiltersActive = false
+      let reload = false
+      if (this.query.search != null) {
+        reload = true
+        this.search = null
+        this.query.search = null
+        this.$emit('sendQuery', null, true)
+      } else {
+        this.sendQuery()
+      }
+    },
+
+    getQuerySelecteds (query) {
+      this.query = query
+      this.query.colors ? this.colorsSelected = this.getArrayFilter(query.colors) : this.colorsSelected = []
+      this.query.sizes ? this.sizesSelected = this.getArrayFilter(query.sizes) : this.sizesSelected = []
+      this.query.category ? this.categorySelected = query.category : this.categorySelected = null
+      this.query.tags ? this.tags = this.getArrayFilter(query.tags) : this.tags = []
+      this.query.price ? this.getPriceFromQuery(query.price) : null
+
+      this.hasFiltersActive = this.hasFilters()
+    },
+
+    getArrayFilter (data) {
+      let array = []
+      if (typeof data === 'object') array = data
+      else array.push(data)
+      return array
+    },
+
+    getPriceFromQuery (data) {
+      const array = data.split('-')
+      this.min = array[0]
+      this.max = array[1]
+    },
+
+    sendQuery () {
+      this.sizesSelected ? this.query.sizes = this.sizesSelected : this.query.sizes = null
+      this.colorsSelected ? this.query.colors = this.colorsSelected : this.query.colors = null
+      this.categorySelected ? this.query.category = this.categorySelected : this.query.category = null
+      this.priceRange ? this.query.price = this.priceRange : this.query.price = null
+      this.hasFiltersActive = this.hasFilters()
+      this.$emit('sendQuery', this.query)
+    },
+
+    hasFilters () {
+      if (this.colorsSelected.length > 0) return true
+      else if (this.sizesSelected.length > 0) return true
+      else if (this.categorySelected) return true
+      else if (this.query.search) return true
+      else if (this.min > process.env.MIX_MIN_PRICE_FILTER) return true
+      else return this.max < process.env.MIX_MAX_PRICE_FILTER
+    },
+
+    removeFilter (key, id = null) {
+      switch (key) {
+        case Constants.FILTER_CATEGORY:
+          this.categorySelected = null
+          break
+        case Constants.FILTER_COLORS:
+          this.removeItemFromArr(this.colorsSelected, id)
+          break
+        case Constants.FILTER_PRICE:
+          this.min = process.env.MIX_MIN_PRICE_FILTER
+          this.max = process.env.MIX_MAX_PRICE_FILTER
+          this.priceRange = null
+          break
+        case Constants.FILTER_SIZES:
+          this.removeItemFromArr(this.sizesSelected, id)
+          break
+        case Constants.FILTER_SEARCH:
+          this.query.search = null
+          this.$emit('setSearch', null, true)
+          break
+      }
+
+      this.sendQuery()
+    },
+
+    removeItemFromArr (arr, item) {
+      const i = arr.indexOf(item)
+
+      if (i !== -1) {
+        arr.splice(i, 1)
+      }
+    }
+  },
+
+  created () {
+    this.getCategories()
+    this.getColors()
+    this.getSizes()
+    this.getQuerySelecteds(this.$route.query)
+  }
 }
 </script>

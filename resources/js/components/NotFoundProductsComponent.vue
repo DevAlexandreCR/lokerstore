@@ -16,11 +16,11 @@
 import LottieAnimation from 'lottie-vuejs/src/LottieAnimation.vue'
 
 export default {
-    components: {
-        LottieAnimation
-    },
-    data: () => ({
+  components: {
+    LottieAnimation
+  },
+  data: () => ({
 
-    })
-};
+  })
+}
 </script>

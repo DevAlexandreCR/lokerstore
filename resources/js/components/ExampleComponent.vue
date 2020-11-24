@@ -16,10 +16,10 @@
 </template>
 
 <script>
-    export default {
-        name: 'ej',
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+export default {
+  name: 'ej',
+  mounted () {
+    console.log('Component mounted.')
+  }
+}
 </script>

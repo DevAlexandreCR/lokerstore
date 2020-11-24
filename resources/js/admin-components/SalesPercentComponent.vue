@@ -16,60 +16,60 @@
 <script>
 
 export default {
-    name: 'sales-percent-component',
-    props: {
-        metrics: {
-            type: Array,
-            default: [],
-        }
-    },
-
-    computed:{
-        salesLastMonth: function () {
-            let metrics = this.filterMetrics()
-            return metrics[metrics.length - 2] ?? 0
-        },
-
-        salesThisMonth: function () {
-            let metrics = this.filterMetrics()
-            return metrics[metrics.length - 1] ?? 0
-        },
-
-        salesThisMonthString: function () {
-            let value = this.salesThisMonth
-            value = value.toString();
-            value = value.split(/(?=(?:...)*$)/);
-            value = value.join('.');
-            return '$' + value
-        },
-
-        salesLastMonthString: function () {
-            let value = this.salesLastMonth
-            value = value.toString();
-            value = value.split(/(?=(?:...)*$)/);
-            value = value.join('.');
-            return '$' + value
-        },
-
-        progress: function () {
-            let percent = this.salesThisMonth/this.salesLastMonth * 100
-            return Math.round(percent)
-        }
-    },
-
-    methods: {
-        filterMetrics() {
-            let metrics = []
-            this.metrics.forEach(metric => {
-                let date = new Date(metric.date).getMonth()
-                let total = metrics[date] ?? 0
-                metrics[date] = total + parseInt(metric.amount)
-            })
-
-            return metrics.filter(metric => {
-                return metric !== null
-            })
-        }
+  name: 'sales-percent-component',
+  props: {
+    metrics: {
+      type: Array,
+      default: []
     }
+  },
+
+  computed: {
+    salesLastMonth: function () {
+      const metrics = this.filterMetrics()
+      return metrics[metrics.length - 2] ?? 0
+    },
+
+    salesThisMonth: function () {
+      const metrics = this.filterMetrics()
+      return metrics[metrics.length - 1] ?? 0
+    },
+
+    salesThisMonthString: function () {
+      let value = this.salesThisMonth
+      value = value.toString()
+      value = value.split(/(?=(?:...)*$)/)
+      value = value.join('.')
+      return '$' + value
+    },
+
+    salesLastMonthString: function () {
+      let value = this.salesLastMonth
+      value = value.toString()
+      value = value.split(/(?=(?:...)*$)/)
+      value = value.join('.')
+      return '$' + value
+    },
+
+    progress: function () {
+      const percent = this.salesThisMonth / this.salesLastMonth * 100
+      return Math.round(percent)
+    }
+  },
+
+  methods: {
+    filterMetrics () {
+      const metrics = []
+      this.metrics.forEach(metric => {
+        const date = new Date(metric.date).getMonth()
+        const total = metrics[date] ?? 0
+        metrics[date] = total + parseInt(metric.amount)
+      })
+
+      return metrics.filter(metric => {
+        return metric !== null
+      })
+    }
+  }
 }
 </script>

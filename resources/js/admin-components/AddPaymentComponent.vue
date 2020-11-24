@@ -62,63 +62,63 @@
 
 <script>
 
-import {Payments} from "../constants/Payments";
-import {Payers} from "../constants/Payers";
-import Autocomplete from "./Autocomplete";
-import NumberFormat from "../constants/NumberFormat";
+import { Payments } from '../constants/Payments'
+import { Payers } from '../constants/Payers'
+import Autocomplete from './Autocomplete'
+import NumberFormat from '../constants/NumberFormat'
 
 export default {
-    name: 'add-payment-component',
-    components: {Autocomplete},
-    data() {
-        return {
-            methods: Payments.all(),
-            documentTypes: Payers.all(),
-            suggestions: [],
-            selection: '',
-            payer: {},
-            token: $('meta[name="csrf-token"]').attr('content'),
-            url: process.env.MIX_APP_URL + '/admin/payments/store'
-        }
-    },
-
-    props: {
-        payers: {
-            type: Array,
-            default: [],
-            required: true
-        },
-
-        orderId: {
-          type: Number,
-          required: true
-        },
-
-        amount: {
-            type: Number,
-            default: 0,
-            required: true
-        }
-    },
-
-    methods: {
-        selectPayer(payer) {
-            this.payer = payer
-        }
-    },
-
-    filters: {
-        price(price) {
-            return NumberFormat.format(price)
-        }
-    },
-
-    created() {
-        this.payers.forEach(payer => {
-            payer.reference = payer.document
-            payer.name = `${payer.name} ${payer.last_name}`
-            this.suggestions.push(payer)
-        })
+  name: 'add-payment-component',
+  components: { Autocomplete },
+  data () {
+    return {
+      methods: Payments.all(),
+      documentTypes: Payers.all(),
+      suggestions: [],
+      selection: '',
+      payer: {},
+      token: $('meta[name="csrf-token"]').attr('content'),
+      url: process.env.MIX_APP_URL + '/admin/payments/store'
     }
+  },
+
+  props: {
+    payers: {
+      type: Array,
+      default: [],
+      required: true
+    },
+
+    orderId: {
+      type: Number,
+      required: true
+    },
+
+    amount: {
+      type: Number,
+      default: 0,
+      required: true
+    }
+  },
+
+  methods: {
+    selectPayer (payer) {
+      this.payer = payer
+    }
+  },
+
+  filters: {
+    price (price) {
+      return NumberFormat.format(price)
+    }
+  },
+
+  created () {
+    this.payers.forEach(payer => {
+      payer.reference = payer.document
+      payer.name = `${payer.name} ${payer.last_name}`
+      this.suggestions.push(payer)
+    })
+  }
 }
 </script>
