@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@vue/cli-service": "^4.5.9",
         "chart.js": "^2.9.4",
         "laravel-vue-lang": "^3.1.0",
         "lottie-vuejs": "^0.3.7",

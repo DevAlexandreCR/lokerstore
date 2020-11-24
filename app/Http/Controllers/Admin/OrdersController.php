@@ -33,8 +33,9 @@ class OrdersController extends Controller
     {
         return view('admin.orders.index', [
             'orders' => $this->orders->index($request),
-            'email' => $request->get('email'),
-            'date' => $request->get('date'),
+            'email'  => $request->get('email'),
+            'from'   => $request->get('from'),
+            'until'  => $request->get('until'),
             'status' => $request->get('status'),
         ]);
     }

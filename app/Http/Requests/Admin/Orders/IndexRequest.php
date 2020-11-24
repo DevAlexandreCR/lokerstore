@@ -30,7 +30,8 @@ class IndexRequest extends FormRequest
         return [
             'email'     =>  ['string', 'max:50', 'nullable'],
             'status'    =>  ['string', Rule::in(Orders::getAllStatus()), 'nullable'],
-            'date'      =>  ['date', 'nullable'],
+            'from'      =>  ['date', 'nullable'],
+            'until'     =>  ['date', 'nullable'],
         ];
     }
 }

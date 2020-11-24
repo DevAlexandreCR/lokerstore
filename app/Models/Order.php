@@ -53,16 +53,21 @@ class Order extends Model
 
     /**
      * @param Builder $query
-     * @param string|null $date
+     * @param string|null $from
+     * @param string|null $until
      * @return Builder|null
      */
-    public function scopeDate(Builder $query, string $date = null): ?Builder
+    public function scopeDate(Builder $query, string $from = null, string $until = null): ?Builder
     {
-        if ($date) {
-            return $query->whereDate('created_at', $date);
+        if (!$from) {
+            $from = now()->subYear()->format('Y-m-d');
         }
 
-        return null;
+        if (!$until) {
+            $until = now()->format('Y-m-d');
+        }
+
+        return $query->whereBetween('created_at', [$from, $until]);
     }
 
     /**

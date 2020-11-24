@@ -28,14 +28,15 @@ class Orders implements OrderInterface
     public function query(indexRequest $request)
     {
         $email = $request->get('email');
-        $date = $request->get('date');
+        $from = $request->get('from');
+        $until = $request->get('until');
         $status = $request->get('status');
 
         return $this->order::with(['user'])
-            ->orderBy('created_at', 'desc')
             ->status($status)
             ->userEmail($email)
-            ->date($date)
+            ->date($from, $until)
+            ->orderBy('created_at', 'desc')
             ->paginate(15);
     }
 

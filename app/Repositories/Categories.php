@@ -57,6 +57,6 @@ class Categories implements CategoryInterface
      */
     public function all()
     {
-        return $this->category::all();
+        return $this->category::with('parent')->get(['name', 'id_parent']);
     }
 }

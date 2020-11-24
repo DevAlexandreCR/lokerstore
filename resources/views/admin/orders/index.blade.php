@@ -35,19 +35,21 @@
             <form class="form-inline justify-content-end my-2 my-lg-0" method="GET" action="{{route('orders.index')}}">
                 <label for="status" class="mr-1">{{trans('fields.status')}}</label>
                 <select name="status" class="form-control form-control-sm mr-sm-2">
+                    <option value="">{{ trans('api.choose_option') }}</option>
                     @foreach(\App\Constants\Orders::getClientStatus() as $key => $st)
                         <option value="{{$key}}"
                             @if($status === $key)
-                                selected
-                            @elseif($key === \App\Constants\Orders::STATUS_PENDING_SHIPMENT && !$status)
                                 selected
                             @endif
                         >{{$st}}</option>
                     @endforeach
                 </select>
-                <label for="datetime" class="mr-1">{{trans('orders.date')}}</label>
-                <input class="form-control form-control-sm mr-sm-2" type="date" name="date"
-                       id="datetime" placeholder="{{$date}}">
+                <label for="dateFrom" class="mr-1">{{trans('reports.from')}}</label>
+                <input class="form-control form-control-sm mr-sm-2" type="date" name="from"
+                       id="dateFrom" value="{{$from}}">
+                <label for="dateUnitl" class="mr-1">{{trans('reports.until')}}</label>
+                <input class="form-control form-control-sm mr-sm-2" type="date" name="until"
+                       id="dateUntil" value="{{$until}}">
                 <input class="form-control form-control-sm mr-sm-2" type="text" name="email"
                        aria-label="Search" placeholder="@if($email) {{$email}} @else {{trans('orders.search_user')}} @endif">
                 <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">{{trans('orders.search')}}</button>
@@ -101,6 +103,6 @@
         </table>
     </div>
     <div class="container form-inline justify-content-center">
-        {{ $orders->links() }}<strong class="mx-2"> {{trans_choice('orders.orders', $orders->count(), ['orders_count' => $orders->count()])}} </strong>
+        {{ $orders->withQueryString()->links() }}<strong class="mx-2"> {{trans_choice('orders.orders', $orders->count(), ['orders_count' => $orders->count()])}} </strong>
     </div>
 @endsection

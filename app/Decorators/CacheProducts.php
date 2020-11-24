@@ -81,8 +81,9 @@ class CacheProducts implements ProductsInterface
         $tags = implode(',', $request->get('tags', []));
         $search = $request->get('search', null);
         $page = $request->get('page', 1);
+        $orderBy = $request->get('orderBy', 'desc');
 
-        return '.page=' . $page . '$search=' . $search . '$category=' . $category . '$tags=' . $tags;
+        return 'orderBy=' . $orderBy . '.page=' . $page . '$search=' . $search . '$category=' . $category . '$tags=' . $tags;
     }
 
     /**
