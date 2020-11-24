@@ -22,7 +22,8 @@ class Product extends Model
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'id_category')->with('parent')->select(['id', 'name', 'id_parent']);
+        return $this->belongsTo(Category::class, 'id_category')
+            ->with('parent')->select(['id', 'name', 'id_parent']);
     }
 
     /**

@@ -27,7 +27,7 @@ class Category extends Model
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'id_parent');
+        return $this->belongsTo(__CLASS__, 'id_parent')->select('id', 'name', 'id_parent');
     }
 
     public function children(): HasMany

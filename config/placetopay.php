@@ -39,5 +39,5 @@ return [
     | This value is the secret key received from placetopay
     |
     */
-    'secretKey' => env('P2P_AUTH', '024h1IlD'),
+    'secretKey' => env('P2P_SECRET_KEY', '024h1IlD'),
 ];

@@ -128,7 +128,6 @@
         $('#removeEmployee').on('show.bs.modal', function (event) {
             let button = $(event.relatedTarget) // Button that triggered the modal
             let admin = button.data('admin')
-            console.log(admin)
             let modal = $(this)
             modal.find('.modal-title').text('Eliminar usuario ' + admin.email)
             modal.find('.modal-body p').text(admin.name)
