@@ -49,7 +49,7 @@
                   <div class="pre pre-scrollable p-2 mb-2" id="request">
                   </div>
                 </div>
-                <button class="btn btn-success btn-block" type="button" @click="sendRequest(method)">Enviar</button>
+                <button class="btn btn-success btn-block" type="button" @click="sendRequest(method)">{{ __('actions.submit') }}</button>
             </div>
             <div class="col-sm-7">
                 <h3>{{ __('api.response') }}</h3>

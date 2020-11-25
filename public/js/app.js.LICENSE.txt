@@ -5,10 +5,20 @@
   */
 
 /*!
-  * vue-router v3.4.3
-  * (c) 2020 Evan You
-  * @license MIT
-  */
+ *  Lang.js for Laravel localization in JavaScript.
+ *
+ *  @version 1.1.12
+ *  @license MIT https://github.com/rmariuzzo/Lang.js/blob/master/LICENSE
+ *  @site    https://github.com/rmariuzzo/Lang.js
+ *  @author  Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+
+/*!
+ * Chart.js v2.9.4
+ * https://www.chartjs.org
+ * (c) 2020 Chart.js Contributors
+ * Released under the MIT License
+ */
 
 /*!
  * Sizzle CSS Selector Engine v2.3.5
@@ -89,3 +99,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+//! moment.js
+
+//! moment.js locale configuration

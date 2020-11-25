@@ -85,7 +85,7 @@ Copy file `.env.example` in `.env` file and customize your environment to databa
 - This app use queued jobs to send emails to users about payments, to send emails to admins      
 about monthly reports, to generate customized reports, to query status payments to API PlaceToPay  
 and more, make sure to run `php artisan queue:work` 
-    #####Installing Supervisor  
+    ##### Installing Supervisor  
     Supervisor is a process monitor for the Linux operating system, and will automatically  
     restart your `queue:work` process if it fails. To install Supervisor on Ubuntu, you may use  
     the following command: `sudo apt-get install supervisor`  
@@ -95,6 +95,50 @@ and more, make sure to run `php artisan queue:work`
 ```bash
 - php artisan metrics:start
 ```
+
+## Api REST
+Manage your products through the REST API, with api token authentication  
+and legacy role or assignment permissions.
+
+- CRUD of products
+- Update stocks
+- Store and remove images
+- List categories
+- List colors
+- List tags
+    #### API authentication
+    All requests except method GET to list or show, needs `api_token` parameter  
+    on Headers or json data  
+    ##### Example headers:
+    ```js
+    let data = {
+      param1: 'param1',
+      param2: 'param2'
+    }
+    axios.post('http://localhost/admin/api/products', data, {
+      headers: {
+        Authorization: 'Bearer ' + your_api_token
+      }
+      }).then(res => {
+      console.log(res.data)
+    }).catch(err => {
+      console.log(err.message)
+    })
+    ```
+    ##### Example json data:  
+    ```js
+    data = {
+          api_token: 'your_api_token',
+          param1: 'param1',
+          param2: 'param2'
+    }
+    axios.post('http://localhost/admin/api/products', data).then(res => {
+      console.log(res.data)
+    }).catch(err => {
+      console.log(err.message)
+    })
+    ```
+    To test API run `php artisan serve` and go to `http://localhost/admin/test-api`
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
