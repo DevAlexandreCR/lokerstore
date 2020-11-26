@@ -180,7 +180,7 @@ class ReportsExport extends DefaultValueBinder implements
     public function styles(Worksheet $sheet): void
     {
         $sheet->mergeCells('A1:G4');
-        $sheet->getCell('A1')->setValue(trans('General sales report'));
+        $sheet->getCell('A1')->setValue(trans('reports.generate_report_sales'));
         $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
         $sheet->getStyle('A5:G5')->getFill()->setFillType(Fill::FILL_SOLID)
             ->setStartColor(new Color(Color::COLOR_RED));
@@ -200,13 +200,13 @@ class ReportsExport extends DefaultValueBinder implements
         $sheet = $event->sheet->getDelegate();
         foreach ($sheet->getRowIterator() as $row) {
             foreach ($row->getCellIterator('A', 'B') as $cell) {
-                if ($cell->getValue() === trans('Totals')) {
+                if ($cell->getValue() === trans('orders.total')) {
                     $sheet->getStyle('A' . $row->getRowIndex() . ':G' . $row->getRowIndex())
                         ->getFont()->setBold(true);
                     self::setHeadersTables($sheet, $row->getRowIndex());
-                } elseif ($cell->getValue() === trans('Status')) {
+                } elseif ($cell->getValue() === trans('fields.status')) {
                     self::setHeadersTables($sheet, $row->getRowIndex() - 4);
-                } elseif ($cell->getColumn() === 'A' && $cell->getValue() === trans('Category')) {
+                } elseif ($cell->getColumn() === 'A' && $cell->getValue() === trans('products.category')) {
                     self::customizeTableStock($sheet, $row->getRowIndex());
                 }
             }
