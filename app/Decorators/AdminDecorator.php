@@ -2,6 +2,7 @@
 
 namespace App\Decorators;
 
+use App\Models\Admin\Admin;
 use App\Interfaces\AdminInterface;
 use App\Repositories\Admins;
 use Illuminate\Database\Eloquent\Model;
@@ -34,5 +35,14 @@ class AdminDecorator implements AdminInterface
     public function destroy(Model $model)
     {
         $this->admins->destroy($model);
+    }
+
+    /**
+     * @param Admin $admin
+     * @return mixed
+     */
+    public function updateToken(Admin $admin): void
+    {
+        $this->admins->updateToken($admin);
     }
 }

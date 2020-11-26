@@ -202,10 +202,10 @@ class Product extends Model
     public function getStatus(): string
     {
         if ($this->is_active) {
-            return __('Enabled');
+            return trans('actions.enabled');
         }
 
-        return __('Disabled');
+        return trans('actions.disabled');
     }
 
     /**

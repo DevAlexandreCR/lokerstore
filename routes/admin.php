@@ -42,6 +42,7 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::resource('admins', 'AdminController')
         ->names('admins')
         ->except('edit', 'create');
+    Route::put('admin/admins/{admin}/token', 'AdminController@updateToken')->name('admins.update_token');
 
     Route::resource('roles', 'RoleController')
         ->names('roles')

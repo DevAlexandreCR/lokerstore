@@ -110,4 +110,20 @@ class AdminControllerTest extends TestCase
             'email' => $admin2->email,
         ]);
     }
+
+    public function testAnAdminCanUpdateApiTokenToEmployees():void
+    {
+        $admin2 = factory(Admin::class)->create();
+        $api_token = $admin2->api_token;
+        $response = $this->actingAs($this->admin, 'admin')->put(route('admins.update_token', $admin2->id));
+
+        $response
+            ->assertStatus(302)
+            ->assertRedirect(route('admins.show', $admin2->id))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseMissing('admins', [
+            'api_token' => $api_token
+        ]);
+    }
 }

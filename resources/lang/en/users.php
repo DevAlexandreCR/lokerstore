@@ -38,6 +38,7 @@ return [
     "registration" => "Registration date",
     "show_cart" => "Show cart",
     "update" => "Update user",
+    "update_token" => "Do you'll to generate a new API token?",
     "user" => ":user_count User  |:user_count Users ",
     "verified" => "User verified"
 ];
