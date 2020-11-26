@@ -2,6 +2,7 @@
 return [
     "add_category" => "Add category",
     "added" => "Product added to cart",
+    "all_inventory" => "Total inventory",
     "category" => "Category",
     "category_unique" => "The category name must be unique",
     "choose_color" => "Choose color",
@@ -12,6 +13,7 @@ return [
     "description" => "Description",
     "details" => "Product details",
     "found" => ":product_found products found",
+    "inventory" => "Inventory",
     "messages" => [
         "add_description" => "Add product description",
         "add_images" => "Add images",
