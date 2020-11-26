@@ -57,7 +57,7 @@ class TagControllerTest extends TestCase
             'tags',
             [
             'name' => 'new name',
-        ]
+            ]
         );
     }
 
@@ -78,7 +78,7 @@ class TagControllerTest extends TestCase
             'tags',
             [
             'name' => 'new tag',
-        ]
+            ]
         );
     }
 
@@ -96,7 +96,7 @@ class TagControllerTest extends TestCase
             'tags',
             [
             'id' => $tag->id,
-        ]
+            ]
         );
     }
 }

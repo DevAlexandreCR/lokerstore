@@ -17,7 +17,7 @@ use Illuminate\Database\Seeder;
          */
         public function run(): void
         {
-            $orders = factory(Order::class, 100)->create();
+            $orders = factory(Order::class, 1000)->create();
 
             $orders->each(function ($order) {
                 factory(OrderDetail::class, random_int(1, 3))->create([

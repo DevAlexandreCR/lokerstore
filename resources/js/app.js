@@ -1,5 +1,4 @@
 import Vue from 'vue'
-window.Vue = Vue
 import './bootstrap'
 import router from './router'
 import VuePaginate from 'vue-paginate'
@@ -7,14 +6,15 @@ import EmptyCartComponent from './components/EmptyCartComponent'
 import EmptyOrdersComponent from './components/EmptyOrdersComponent'
 import Error404Component from './components/Error404Component'
 import BannerComponent from './components/BannerComponent'
-import OrdersMetric from "./admin-components/charts/OrdersMetric";
-import SellersMetric from "./admin-components/charts/SellersMetric";
-import CategoryMetric from "./admin-components/charts/CategoryMetric";
-import SalesPercentComponent from "./admin-components/SalesPercentComponent";
-import TestApiComponent from "./admin-components/TestApiComponent";
-import CreateOrder from "./views/admin-views/CreateOrder";
-import AddPaymentComponent from "./admin-components/AddPaymentComponent";
-import { Lang } from 'laravel-vue-lang';
+import OrdersMetric from './admin-components/charts/OrdersMetric'
+import SellersMetric from './admin-components/charts/SellersMetric'
+import CategoryMetric from './admin-components/charts/CategoryMetric'
+import SalesPercentComponent from './admin-components/SalesPercentComponent'
+import TestApiComponent from './admin-components/TestApiComponent'
+import CreateOrder from './views/admin-views/CreateOrder'
+import AddPaymentComponent from './admin-components/AddPaymentComponent'
+import { Lang } from 'laravel-vue-lang'
+window.Vue = Vue
 
 Vue.component('banner-component', BannerComponent)
 Vue.component('error404-component', Error404Component)
@@ -30,16 +30,16 @@ Vue.component('add-payment-component', AddPaymentComponent)
 
 Vue.use(VuePaginate)
 Vue.use(Lang, {
-    locale: process.env.MIX_APP_LOCALE,
-    fallback: 'en',
-    ignore: {
-        en: ['validation'],
-    },
-});
+  locale: process.env.MIX_APP_LOCALE,
+  fallback: 'en',
+  ignore: {
+    en: ['validation']
+  }
+})
 
 Vue.config.ignoredElements = [/^ion-/]
 
-const app = new Vue({
-    el: '#app',
-    router
-});
+new Vue({
+  el: '#app',
+  router
+})

@@ -18,43 +18,39 @@
 
 <script>
 
-import NumberFormat from "../constants/NumberFormat";
+import NumberFormat from '../constants/NumberFormat'
 
 export default {
-    name: 'product-component',
+  name: 'product-component',
 
-    props: {
-        product: {
-            type: Object,
-            default: {}
-        }
-    },
-
-    methods: {
-        showProduct(id) {
-            window.location.assign(`/products/${id}`)
-        },
-
-        formatPrice(price) {
-            return NumberFormat.format(price)
-        }
-    },
-
-    filters: {
-        price: function (value) {
-            return NumberFormat.format(value)
-        },
-
-        truncate: function (value) {
-            return value.substring(0,50) + '...'
-        },
-
-        oldPrice: function (value) {
-            value = parseFloat(value)
-            let oldPrice = value + value * 0.1
-            return NumberFormat.format(oldPrice)
-        }
+  props: {
+    product: {
+      type: Object,
+      default: () => []
     }
+  },
+
+  methods: {
+    showProduct (id) {
+      window.location.assign(`/products/${id}`)
+    }
+  },
+
+  filters: {
+    price: function (value) {
+      return NumberFormat.format(value)
+    },
+
+    truncate: function (value) {
+      return value.substring(0, 50) + '...'
+    },
+
+    oldPrice: function (value) {
+      value = parseFloat(value)
+      const oldPrice = value + value * 0.1
+      return NumberFormat.format(oldPrice)
+    }
+  }
 }
 
 </script>

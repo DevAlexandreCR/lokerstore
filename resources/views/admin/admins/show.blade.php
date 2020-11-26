@@ -56,6 +56,16 @@
                         </tr>
                         </thead>
                     </table>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text font-weight-bold">{{ trans('api.token') }}</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" disabled>{{ $admin->api_token }}</textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-dark" type="button" data-target="#tokenModal" data-toggle="modal"
+                                    id="button-update-token">{{ trans('actions.update') }}</button>
+                        </div>
+                    </div>
                         <button type="submit" class="btn btn-success btn-block my-3">{{trans('users.update')}}</button>
                 </form>
             </div>
@@ -94,4 +104,6 @@
             </div>
         </div>
     </div>
+
+    @include('admin.admins.new_token_modal')
 @endsection

@@ -30,13 +30,11 @@ class Products implements ProductsInterface
         $tags = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
-
-        return $this->product
-            ->orderBy('created_at', $orderBy)
+        return $this->product::with('category', 'category.parent', 'photos', 'tags', 'stocks')
             ->byCategory($category)
             ->withTags($tags)
             ->search($search)
-            ->with('category', 'photos', 'tags', 'stocks')
+            ->orderBy('created_at', $orderBy)
             ->paginate(15);
     }
 

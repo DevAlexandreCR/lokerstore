@@ -16,7 +16,11 @@ use Illuminate\Queue\SerializesModels;
 
 class QueryStatusPayment implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, HttpClient;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use HttpClient;
 
     public Order $order;
 

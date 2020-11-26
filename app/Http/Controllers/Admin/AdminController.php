@@ -77,6 +77,23 @@ class AdminController extends Controller
     }
 
     /**
+     * Update current admin
+     *
+     * @param Admin $admin
+     * @return RedirectResponse
+     */
+    public function updateToken(Admin $admin): RedirectResponse
+    {
+        $this->admins->updateToken($admin);
+
+        return redirect()->route('admins.show', $admin->id)
+            ->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.updated')
+        ]));
+    }
+
+    /**
      *
      * @param Admin $admin
      * @return RedirectResponse

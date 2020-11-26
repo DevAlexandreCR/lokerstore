@@ -23,7 +23,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
 
     /**
@@ -43,7 +42,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function credentials(Request $request)
+    protected function credentials(Request $request): array
     {
         $credenctials = $request->only($this->username(), 'password');
 
@@ -76,7 +75,7 @@ class LoginController extends Controller
     /**
      * @return Guard
      */
-    protected function guard()
+    protected function guard(): Guard
     {
         return Auth::guard();
     }

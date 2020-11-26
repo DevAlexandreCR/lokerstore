@@ -12,19 +12,19 @@
 </template>
 
 <script>
-    export default {
-        name: 'gender',
+export default {
+  name: 'gender',
 
-        data() {
-           return{
-           }
-        },
-
-        props: {
-            filter: {
-                type: String,
-                required: true
-            }
-        }
+  data () {
+    return {
     }
+  },
+
+  props: {
+    filter: {
+      type: String,
+      required: true
+    }
+  }
+}
 </script>

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Order;
 use App\Interfaces\OrderDetailInterface;
 use App\Models\OrderDetail;
 use App\Models\Stock;
@@ -34,6 +35,12 @@ class OrderDetails implements OrderDetailInterface
             ]);
         });
 
+        $order = Order::findOrFail($order_id);
+        $order->amount = 0;
+        $order->orderDetails->each(function ($detail) use ($order) {
+            $order->amount += $detail->total_price;
+        });
+        $order->save();
         $cart->emptyCart();
     }
 

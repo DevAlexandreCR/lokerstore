@@ -42,7 +42,7 @@ class MetricsDecorator implements MetricsInterface
      */
     public function reports(ReportRequest $request): void
     {
-        $fileName = 'report_' . now()->getTimestamp() .'.xlsx';
+        $fileName = 'report_' . now()->getTimestamp() . '.xlsx';
         (new ReportsExport($this->metrics->reports($request)))->queue($fileName, 'exports')->chain([
             new NotifyAdminsAfterCompleteExport(
                 $request->user(Admins::GUARDED),

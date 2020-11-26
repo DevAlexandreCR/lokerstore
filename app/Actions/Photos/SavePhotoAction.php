@@ -60,7 +60,7 @@ class SavePhotoAction
      */
     public static function savePhoto(int $id_product, string $name): void
     {
-        $photo = new Photo;
+        $photo = new Photo();
         $photo->product_id = $id_product;
         $photo->name = $name;
 

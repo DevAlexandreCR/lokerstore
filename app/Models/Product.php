@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -21,7 +22,8 @@ class Product extends Model
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'id_category')->select(['id', 'name', 'id_parent']);
+        return $this->belongsTo(Category::class, 'id_category')
+            ->with('parent')->select(['id', 'name', 'id_parent']);
     }
 
     /**
@@ -73,7 +75,7 @@ class Product extends Model
 
         $id = $this->getIdCategory($category);
 
-        return $query->whereHas('category', function ($query) use ($category, $id) {
+        return $query->whereHas('category', function (Builder $query) use ($category, $id) {
             $query
                 ->where('name', $category)
                 ->orWhere('id_parent', $id);
@@ -102,7 +104,7 @@ class Product extends Model
      * @param string $price
      * @return array
      */
-    public function splitPrice(string $price) : array
+    public function splitPrice(string $price): array
     {
         return explode('-', $price);
     }
@@ -200,10 +202,10 @@ class Product extends Model
     public function getStatus(): string
     {
         if ($this->is_active) {
-            return __('Enabled');
+            return trans('actions.enabled');
         }
 
-        return __('Disabled');
+        return trans('actions.disabled');
     }
 
     /**

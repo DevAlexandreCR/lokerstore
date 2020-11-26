@@ -80,66 +80,66 @@
 
 <script>
 
-import NumberFormat from "../constants/NumberFormat";
-import ConfirmOrderComponent from "./ConfirmOrderComponent";
+import NumberFormat from '../constants/NumberFormat'
+import ConfirmOrderComponent from './ConfirmOrderComponent'
 
 export default {
-    name: 'order-table-component',
-    components: {ConfirmOrderComponent},
-    data() {
-        return {
-            subTotal: 0,
-            iva: 0,
-            total: 0,
-        }
-    },
-
-    props: {
-        selectedProducts: {
-            type: Array,
-            default: [],
-            required: true
-        },
-
-        count: {
-            type: Number,
-            default: 0,
-            required: true
-        }
-    },
-
-    watch: {
-        count() {
-            this.calculateTotals()
-        }
-    },
-
-    methods: {
-        removeAll(index) {
-            this.selectedProducts.splice(index, 1)
-            this.calculateTotals()
-        },
-
-        remove(index) {
-            this.selectedProducts[index].quantity -= 1
-            this.calculateTotals()
-        },
-
-        calculateTotals() {
-            this.subTotal = 0
-            this.selectedProducts.forEach(product => {
-                let total = product.price * product.quantity
-                this.subTotal += total
-            })
-            this.iva = this.subTotal * process.env.MIX_TAX ?? 0
-            this.total = this.iva + this.subTotal
-        }
-    },
-
-    filters: {
-        price(price) {
-            return NumberFormat.format(price)
-        }
+  name: 'order-table-component',
+  components: { ConfirmOrderComponent },
+  data () {
+    return {
+      subTotal: 0,
+      iva: 0,
+      total: 0
     }
+  },
+
+  props: {
+    selectedProducts: {
+      type: Array,
+      default: () => [],
+      required: true
+    },
+
+    count: {
+      type: Number,
+      default: 0,
+      required: true
+    }
+  },
+
+  watch: {
+    count () {
+      this.calculateTotals()
+    }
+  },
+
+  methods: {
+    removeAll (index) {
+      this.selectedProducts.splice(index, 1)
+      this.calculateTotals()
+    },
+
+    remove (index) {
+      this.selectedProducts[index].quantity -= 1
+      this.calculateTotals()
+    },
+
+    calculateTotals () {
+      this.subTotal = 0
+      this.selectedProducts.forEach(product => {
+        const total = product.price * product.quantity
+        this.subTotal += total
+      })
+      this.iva = this.subTotal * process.env.MIX_TAX ?? 0
+      this.total = this.iva + this.subTotal
+    }
+  },
+
+  filters: {
+    price (price) {
+      return NumberFormat.format(price)
+    }
+  }
 }
 </script>

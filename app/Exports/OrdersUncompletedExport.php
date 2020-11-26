@@ -52,7 +52,7 @@ class OrdersUncompletedExport implements
      */
     public function title(): string
     {
-        return trans('Uncompleted orders');
+        return trans('reports.uncompleted');
     }
 
     /**

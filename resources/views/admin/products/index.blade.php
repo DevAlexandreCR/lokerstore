@@ -172,7 +172,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-8">
-                        {{ $products->links() }}
+                        {{ $products->withQueryString()->links() }}
                     </div>
                     <div class="col-4">
                         <div class="row" style="float: right">
@@ -210,11 +210,11 @@
                                 </div>
                                 <div class="col">
                                     <select id="orderBy" class="form-control" name="orderBy">
-                                        <option>{{trans('messages.recent')}}</option>
+                                        <option value="desc">{{trans('messages.recent')}}</option>
                                         @if ($filters['orderBy'] === 'asc')
-                                            <option selected>{{trans('messages.not_recent')}}</option>
+                                            <option value="asc" selected>{{trans('messages.not_recent')}}</option>
                                         @else
-                                            <option>{{trans('messages.not_recent')}}</option>
+                                            <option value="asc">{{trans('messages.not_recent')}}</option>
                                         @endif
                                     </select>
                                 </div>

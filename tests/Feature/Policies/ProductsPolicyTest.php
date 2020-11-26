@@ -110,7 +110,7 @@ class ProductsPolicyTest extends TestCase
                 'id_category'   => Category::all()->random()->id,
                 'tags'          => [Tag::all()->random()->id],
                 'Photos'        => [$this->faker->file(storage_path('app/public/photos'))],
-            ]
+                ]
             )->assertStatus(302);
 
         $this->actingAs($this->admin, Admins::GUARDED)

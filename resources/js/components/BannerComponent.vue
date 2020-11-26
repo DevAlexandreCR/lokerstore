@@ -30,10 +30,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'banner',
-        mounted() {
-
-        }
-    }
+export default {
+  name: 'banner'
+}
 </script>

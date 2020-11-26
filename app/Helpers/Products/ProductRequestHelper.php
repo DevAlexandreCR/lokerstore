@@ -9,12 +9,13 @@ class ProductRequestHelper
         $newDataArray = $data;
         (array_key_exists('category', $data)) ? $newDataArray['category'] = $data['category'] :
             $newDataArray['category'] = null;
-        ($newDataArray['category'] === __("Choose category")) ? $newDataArray['category'] = null : null;
-        (array_key_exists('orderBy', $data) && $data['orderBy'] === __("Less recent")) ?
-            $newDataArray['orderBy'] = 'asc' : $newDataArray['orderBy'] = 'desc';
+        ($newDataArray['category'] === trans('actions.choose_category')) ? $newDataArray['category'] = null : null;
+        array_key_exists('orderBy', $data) ? $newDataArray['orderBy'] = $data['orderBy'] :
+            $newDataArray['orderBy'] = 'desc';
         (array_key_exists('search', $data)) ? $newDataArray['search'] = $data['search'] :
             $newDataArray['search'] = null;
-        (array_key_exists('tags', $data)) ? $newDataArray['tags'] = self::getArrayTags(self::getArrayData($data['tags'])) :
+        (array_key_exists('tags', $data)) ? $newDataArray['tags'] =
+            self::getArrayTags(self::getArrayData($data['tags'])) :
             $newDataArray['tags'] = null;
         (array_key_exists('colors', $data)) ? $newDataArray['colors'] = self::getArrayData($data['colors']) :
             $newDataArray['colors'] = null;

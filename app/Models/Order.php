@@ -53,16 +53,21 @@ class Order extends Model
 
     /**
      * @param Builder $query
-     * @param string|null $date
+     * @param string|null $from
+     * @param string|null $until
      * @return Builder|null
      */
-    public function scopeDate(Builder $query, string $date = null): ?Builder
+    public function scopeDate(Builder $query, string $from = null, string $until = null): ?Builder
     {
-        if ($date) {
-            return $query->whereDate('created_at', $date);
+        if (!$from) {
+            $from = now()->subYear()->format('Y-m-d');
         }
 
-        return null;
+        if (!$until) {
+            $until = date('c', strtotime('+1 days'));
+        }
+
+        return $query->whereBetween('created_at', [$from, $until]);
     }
 
     /**
@@ -93,8 +98,8 @@ class Order extends Model
                 return trans('orders.statuses.pending_shipment');
             case Orders::STATUS_CANCELED:
                 return trans('orders.statuses.canceled');
-                case Orders::STATUS_REJECTED:
-            return __('orders.statuses.rejected');
+            case Orders::STATUS_REJECTED:
+                return __('orders.statuses.rejected');
             case Orders::STATUS_SENT:
                 return trans('orders.statuses.sent');
             case Orders::STATUS_SUCCESS:

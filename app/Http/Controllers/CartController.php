@@ -23,7 +23,7 @@ class CartController extends Controller
             'web.users.cart.show',
             [
             'cart' => $carts->getCart($user->id),
-        ]
+            ]
         );
     }
 
@@ -57,7 +57,7 @@ class CartController extends Controller
         $quantity = $request->get('quantity', 1);
 
         $user->cart->stocks()->detach($stock_id);
-        $user->cart->stocks()->attach($stock_id, ['quantity'=> $quantity]);
+        $user->cart->stocks()->attach($stock_id, ['quantity' => $quantity]);
 
         return redirect()->back()->with('success', trans('products.added'));
     }

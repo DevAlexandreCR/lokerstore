@@ -20,8 +20,8 @@ class CreateStoreProcedureToReports extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS generate_general_report_uncompleted');
         DB::unprepared('DROP PROCEDURE IF EXISTS generate_monthly_report');
         DB::unprepared('DROP PROCEDURE IF EXISTS stock_report');
-        DB::unprepared(Procedures::ORDER_PROCEDURE);
         DB::unprepared(Procedures::CATEGORIES_PROCEDURE);
+        DB::unprepared(Procedures::ORDER_PROCEDURE);
         DB::unprepared(Procedures::GENERATE_CATEGORIES_REPORT);
         DB::unprepared(Procedures::GENERATE_GENERAL_REPORT);
         DB::unprepared(Procedures::GENERATE_GENERAL_REPORT_UNCOMPLETED);

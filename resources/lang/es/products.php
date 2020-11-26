@@ -2,6 +2,7 @@
 return [
     "add_category" => "Agregar categoría",
     "added" => "Producto agregado al carrito",
+    "all_inventory" => "Inventario total",
     "category" => "Categoría",
     "category_unique" => "El nombre de la categoría debe ser único",
     "choose_color" => "Seleccionar color",
@@ -12,6 +13,7 @@ return [
     "description" => "Descripción",
     "details" => "Detalles del producto",
     "found" => ":product_found productos encontrados",
+    "inventory" => "Inventario",
     "messages" => [
         "add_description" => "Agregar descripción del producto",
         "add_images" => "Agregar imágenes",
@@ -28,6 +30,7 @@ return [
     "name" => "Nombre del producto",
     "new" => "Agregar un producto nuevo",
     "price" => "Precio",
+    "price_sale" => "Precio de venta",
     "product" => ":product_count Producto |:product_count Productos",
     "quantity" => "Cantidad",
     "reference" => "Referencia",

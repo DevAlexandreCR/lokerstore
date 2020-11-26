@@ -1,24 +1,26 @@
 language: php
-sudo: required
-dist: trusty
 services:
     - mysql
+
 cache:
     directories:
         - node_modules
         - ~/.npm
         - vendor
 php:
-    - '7.4'
+    - 7.4
 git:
     depth: 3
 before_install:
+    - cp .env.travis .env
     - mysql -e 'create database testing;'
 before_script:
-    - composer install --prefer-dist --optimize-autoloader
+    - composer install --no-interaction
+    - php artisan migrate:refresh --seed --force
     - npm install
 script:
-    - php artisan migrate --force
+    - composer phpcs-auto-check-project
+    - npm run lint-check
     - php artisan test
 notifications:
     email:
@@ -32,15 +34,9 @@ notifications:
         bhHAAdWKXOh+Lpb8SaHx9tyCt002FhfYjQa/sSutkVN4CinGdDd5nXnAVLHNf7Bv58dSQ+29RFcgBMNNTF+03BULopY+Bt8s7R9ajEUTwihdYl9GUNqBtawj0/cFtRiiYAQEPyune/tfuz9Z4AU9X/HFuPeoqo618El8sLlI20lKZ+
         6UBXQFlwaE3SblPQQmB/eVisS6DsBN+rmQdpSK8YaiteBS/fwOS9hweMGOhFTZBQXRbK/P4coKeBBJkm2DAPv14Bfr1tXEfsvvmDUM3QwDUxmG8F770XeSa2T3+17LKKItEoldNTQQtg/3GPsAhipJJZxxja7NBw78cjZ5WymrvQ="
 deploy:
-    provider: heroku
+    provider: azure_web_apps
     skip_cleanup: true
     keep_history: true
-    api_key:
-        secure: "eCfnTcI+r8sijr0E50OfAPbUsF6OyEy2kW3+Dz2/oJ1WexxXaDCq8moSYOGBBhjGVazPFwSwW+d8pNWvJVBjdixsQIVtzzyHRWfTLR91gT9EqMk/c5Zu/+8cJPEPaipmmekv/
-        +YfSto7XUfqb2qb8rTn/hgrimPMDHiGMzC5H4kv3RRi4yBCrat61qlH+VO2wR0waYo5GdLtEWXTD3xwkM7ZbVPEFIP4vT/MgP56sRgFwmGJOcT+47tpQ2hj/SOThQ6huEWGqrnzh74pjF3iu
-        qZzRTDSoW9n8ZgyE00bSkq4NsDG2PKLz3RN3LiPCXqEGL+TOpewwLQc4gijn+zr65MeJ0rWd/XzTAhOM7PedPu30saFrx108VlWkq7qvd1VZDRpULMoxuB983RrdNv+OMO/DuhiKxihql4yb
-        T0kBGTKq7c7TzuEmTfEIbGLzVWEoOw7P8PARMxR1DcnNhOUZAkE0HHvXhiCJOwR1RUX0KEhv6GT2/gkqnzNmrA06K1JLVA1XaDLBffgrpM4543wgEqi71i9vzzYeMWPPeht0tNeWpxsQRXBM
-        2mJSZfm2usKFJaY+rSulzdI1KNmyoyJ7uzw1bUGNL88uRlX97CWQXftSyJDAxS/VJulbRhtJJPkpPdhHB5jB3o2fPAOUcnfO4u5IwPQvo04JEt1xufhZ48="
     strategy: git
     app: lokerstore
     on:

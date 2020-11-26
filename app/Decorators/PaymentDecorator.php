@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Decorators;
 
 use App\Models\Payer;
@@ -33,5 +32,4 @@ class PaymentDecorator
 
         return $payment;
     }
-
 }

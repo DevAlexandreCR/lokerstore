@@ -16,10 +16,10 @@ class GenerateMonthlyReport extends Command
      *
      * @var string
      */
-    protected $signature = "report:monthly
+    protected $signature = 'report:monthly
                                 {date=last : Year and month to report}
                                 {--status : Status to query orders}
-                                {--admin : Admin to send report}";
+                                {--admin : Admin to send report}';
 
     /**
      * The console command description.
@@ -71,7 +71,7 @@ class GenerateMonthlyReport extends Command
             return 0;
         }
 
-        $fileName = 'report_monthly_' . now()->getTimestamp() .'.xlsx';
+        $fileName = 'report_monthly_' . now()->getTimestamp() . '.xlsx';
         (new MonthlyReportsExport($metrics, $this->date))->queue($fileName, 'exports')->chain([
             new NotifyAdminsAfterCompleteExport(
                 $this->admin,

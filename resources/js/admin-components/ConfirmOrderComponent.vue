@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ __('orders.messages.save') }}</h5>
+                    <h5 class="modal-title">{{ __('orders.save') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,66 +46,66 @@
 </template>
 
 <script>
-import NumberFormat from "../constants/NumberFormat";
+import NumberFormat from '../constants/NumberFormat'
+import axios from 'axios'
 
 export default {
-    name: 'confirm-order-component',
-    data() {
-        return {
-            discount: 0,
-            amount: 0,
-            url: process.env.MIX_APP_URL + '/admin/orders'
-        }
-    },
-
-    props: {
-        products: {
-            type: Array,
-            default: [],
-            required: true
-        },
-        total: {
-            type: Number,
-            default: 0,
-            required: true
-        }
-    },
-
-    watch: {
-        total: function() {
-            this.amount = this.total - (this.total * this.discount / 100)
-        }
-    },
-
-    methods: {
-        applyDiscount(value) {
-            this.discount = value
-            this.amount = this.total - (this.total * this.discount / 100)
-        },
-
-        sendRequest() {
-            let data = {}
-            data.details = []
-            this.products.forEach(product => {
-                data.amount = Math.round(this.amount)
-                data.details.push({
-                    stock_id: product.stock.id,
-                    quantity: product.quantity
-                })
-            })
-            axios.post(this.url, data).then((res) => {
-                console.log(res.request.responseURL)
-                window.location.href = res.request.responseURL
-            }).catch(err =>{
-                console.log(err.response.data)
-            })
-        }
-    },
-
-    filters: {
-        price(price) {
-            return NumberFormat.format(price)
-        }
+  name: 'confirm-order-component',
+  data () {
+    return {
+      discount: 0,
+      amount: 0,
+      url: process.env.MIX_APP_URL + '/admin/orders'
     }
+  },
+
+  props: {
+    products: {
+      type: Array,
+      default: () => [],
+      required: true
+    },
+    total: {
+      type: Number,
+      default: 0,
+      required: true
+    }
+  },
+
+  watch: {
+    total: function () {
+      this.amount = this.total - (this.total * this.discount / 100)
+    }
+  },
+
+  methods: {
+    applyDiscount (value) {
+      this.discount = value
+      this.amount = this.total - (this.total * this.discount / 100)
+    },
+
+    sendRequest () {
+      const data = {}
+      data.details = []
+      this.products.forEach(product => {
+        data.amount = this.amount
+        data.details.push({
+          stock_id: product.stock.id,
+          quantity: product.quantity
+        })
+      })
+      axios.post(this.url, data).then((res) => {
+        window.location.href = res.request.responseURL
+      }).catch(err => {
+        alert(err.response.data)
+      })
+    }
+  },
+
+  filters: {
+    price (price) {
+      return NumberFormat.format(price)
+    }
+  }
 }
 </script>

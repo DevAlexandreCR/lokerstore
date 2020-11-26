@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Str;
 use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
 use Illuminate\Database\Eloquent\Model;
@@ -50,5 +51,16 @@ class Admins implements AdminInterface
     public function destroy(Model $model)
     {
         $this->admin::destroy($model->id);
+    }
+
+    /**
+     * @param Admin $admin
+     * @return void
+     */
+    public function updateToken(Admin $admin): void
+    {
+        $admin->update([
+            'api_token' => Str::random(60)
+        ]);
     }
 }

@@ -6,8 +6,10 @@ use App\Constants\Orders;
 use App\Repositories\Metrics;
 use App\Traits\StylizeReportExport;
 use Illuminate\Support\Collection;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -95,8 +97,7 @@ class MonthlyReportsExport implements
                         break;
                     case 'P':
                         if ($cell->getRow() > 2) {
-                            if ($sheet->getCell('C' . $cell->getRow())->getValue() ===
-                                $sheet->getCell('C' . ($cell->getRow() - 1))->getValue()) {
+                            if (self::getCell($sheet, $cell) === self::getCell($sheet, $cell, -1)) {
                                 break;
                             }
                             $totalPaid += $cell->getValue();
@@ -105,8 +106,8 @@ class MonthlyReportsExport implements
                 }
             }
         }
-        $colDimension ++;
-        $sheet->setCellValue('K' . $colDimension, trans('Totals'));
+        $colDimension++;
+        $sheet->setCellValue('K' . $colDimension, trans('orders.total'));
         $sheet->setCellValue('L' . $colDimension, $totalCost);
         $sheet->setCellValue('M' . $colDimension, $totalPrice);
         $sheet->setCellValue('N' . $colDimension, $totalProductsSold);
@@ -131,5 +132,10 @@ class MonthlyReportsExport implements
             new OrdersUncompletedExport($this->metrics, $this->date),
             new StockReport(collect($this->metrics->getStockReport())),
         ];
+    }
+
+    private static function getCell(Worksheet $sheet, Cell $cell, int $offset = 0)
+    {
+        return $sheet->getCell('C' . ($cell->getRow() - $offset))->getValue();
     }
 }

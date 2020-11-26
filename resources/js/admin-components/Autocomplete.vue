@@ -15,6 +15,7 @@
         <ul class="list-group dropdown-menu shadow" v-show="open">
             <li class="list-group-item"
                 v-for="(suggestion, index) in matches"
+                :key="index"
                 v-bind:class="{'active-autocomplete text-white': isActive(index)}"
                 @click="suggestionClick(index)"
             >
@@ -31,112 +32,112 @@
 
 export default {
 
-    name: 'autocomplete',
+  name: 'autocomplete',
 
-    data () {
-        return {
-            open: false,
-            current: 0
-        }
+  data () {
+    return {
+      open: false,
+      current: 0
+    }
+  },
+
+  props: {
+    value: {
+      type: String,
+      required: true
     },
 
-    props: {
-        value: {
-            type: String,
-            required: true,
-        },
-
-        suggestions: {
-            type: Array,
-            required: true,
-        },
-
-        nameInput: {
-            type: String,
-            default: 'reference',
-            required: true
-        },
-
-        nameLabel: {
-            type: String,
-            default: 'products',
-            required: true
-        },
-
-        styles: {
-            type: String,
-            required: true,
-            default: 'form-control'
-        }
+    suggestions: {
+      type: Array,
+      required: true
     },
 
-    computed: {
+    nameInput: {
+      type: String,
+      default: 'reference',
+      required: true
+    },
 
-        matches () {
-            return this.suggestions.filter((obj) => {
-                if (obj.reference) return obj.reference.toString().indexOf(this.value) >= 0
-            })
-        },
+    nameLabel: {
+      type: String,
+      default: 'products',
+      required: true
+    },
 
-        openSuggestion () {
-            return this.selection !== '' &&
+    styles: {
+      type: String,
+      required: true,
+      default: 'form-control'
+    }
+  },
+
+  computed: {
+
+    matches () {
+      return this.suggestions.filter((obj) => {
+        if (obj.reference) return obj.reference.toString().indexOf(this.value) >= 0
+      })
+    },
+
+    openSuggestion () {
+      return this.selection !== '' &&
                 this.matches.length !== 0 &&
                 this.open === true
-        }
+    }
 
+  },
+
+  methods: {
+
+    // Triggered the input event to cascade the updates to
+    // parent component
+    updateValue (value) {
+      if (this.open === false) {
+        this.open = true
+        this.current = 0
+      }
+
+      if (!value) {
+        this.open = false
+      }
+
+      this.$emit('input', value)
     },
 
-    methods: {
+    // When enter key pressed on the input
+    enter () {
+      this.$emit('input', this.matches[this.current].reference.toString())
+      this.$emit('select', this.matches[this.current])
+      this.open = false
+    },
 
-        // Triggered the input event to cascade the updates to
-        // parent component
-        updateValue (value) {
-            if (this.open === false) {
-                this.open = true
-                this.current = 0
-            }
+    // When up arrow pressed while suggestions are open
+    up (e) {
+      e.preventDefault()
+      if (this.current > 0) {
+        this.current--
+      }
+    },
 
-            if (!value) {
-                this.open = false
-            }
+    // When down arrow pressed while suggestions are open
+    down (e) {
+      e.preventDefault()
+      if (this.current < this.matches.length - 1) {
+        this.current++
+      }
+    },
 
-            this.$emit('input', value)
-        },
+    // For highlighting element
+    isActive (index) {
+      return index === this.current
+    },
 
-        // When enter key pressed on the input
-        enter () {
-            this.$emit('input', this.matches[this.current].reference.toString())
-            this.$emit('select', this.matches[this.current])
-            this.open = false
-        },
-
-        // When up arrow pressed while suggestions are open
-        up (e) {
-            e.preventDefault()
-            if (this.current > 0) {
-                this.current--
-            }
-        },
-
-        // When down arrow pressed while suggestions are open
-        down (e) {
-            e.preventDefault()
-            if (this.current < this.matches.length - 1) {
-                this.current++
-            }
-        },
-
-        // For highlighting element
-        isActive (index) {
-            return index === this.current
-        },
-
-        // When one of the suggestion is clicked
-        suggestionClick (index) {
-            this.$emit('input', this.matches[index].reference.toString())
-            this.$emit('select', this.matches[index])
-            this.open = false
-        }
+    // When one of the suggestion is clicked
+    suggestionClick (index) {
+      this.$emit('input', this.matches[index].reference.toString())
+      this.$emit('select', this.matches[index])
+      this.open = false
     }
+  }
 }
 </script>

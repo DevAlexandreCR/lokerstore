@@ -6,7 +6,7 @@
         <div class="container py-2">
             @if (session('resent'))
                 <div class="alert alert-success" role="alert">
-                    {{ trans('A fresh verification link has been sent to your email address.') }}
+                    {{ trans('passwords.email_resend') }}
                 </div>
             @endif
             <div class="alert alert-dismissible alert-warning fade show" role="alert">

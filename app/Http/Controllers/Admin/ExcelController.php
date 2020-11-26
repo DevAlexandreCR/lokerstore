@@ -27,7 +27,7 @@ class ExcelController extends Controller
      */
     public function index(ExportRequest $request, ProductsInterface $products): RedirectResponse
     {
-        $fileName = 'products_' . now()->format('Y-m-d') .'.xlsx';
+        $fileName = 'products_' . now()->format('Y-m-d') . '.xlsx';
         (new ProductsExport($products))->queue($fileName, 'exports')->chain([
             new NotifyAdminsAfterCompleteExport(
                 $request->user(Admins::GUARDED),
@@ -40,7 +40,7 @@ class ExcelController extends Controller
             ),
         ]);
 
-        return back()->with('success', __('Exporting products... we\'ll send you an email when the download is available'));
+        return back()->with('success', trans('messages.exporting'));
     }
 
     /**
@@ -49,8 +49,11 @@ class ExcelController extends Controller
      * @param StocksInterface $stocks
      * @return RedirectResponse
      */
-    public function store(ImportRequest $request, ProductsInterface $products, StocksInterface $stocks): RedirectResponse
-    {
+    public function store(
+        ImportRequest $request,
+        ProductsInterface $products,
+        StocksInterface $stocks
+    ): RedirectResponse {
         (new ProductsImport($products, $stocks))->queue($request->file('file'), 'imports')->chain([
             new NotifyAdminsAfterCompleteImport($request->user(Admins::GUARDED)),
             new DeleteErrorsImportsTable(),
@@ -77,15 +80,16 @@ class ExcelController extends Controller
             $array = explode('_', $name);
             $product = Product::where('reference', $array[0])->first();
             if ($product) {
-                $saved ++;
+                $saved++;
                 SavePhotoAction::execute($product->id, $image);
             } else {
-                $errors[] = $array[0] .  trans('messages.not_found', ['resource' => trans('products.reference')]);
+                $errors[] = $array[0] .
+                    trans('messages.not_found', ['resource' => trans('products.reference')]);
             }
         }
 
         return redirect()->route('products.index')
-            ->with('success', $saved . ' ' .trans('messages.crud', [
+            ->with('success', $saved . ' ' . trans('messages.crud', [
                     'resource' => trans('fields.images'),
                     'status' => trans('fields.imported')
                 ]))

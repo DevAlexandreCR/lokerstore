@@ -25,7 +25,7 @@
             </div>
         @endif
     </div>
-    <div class="container py-4">
+    <div class="container-fluid py-4">
         <div class="row">
             <div class="col-lg-8">
                 <div class="card card">
@@ -80,7 +80,7 @@
                         <x-status-payment :order="$order"/>
                     </div>
                     <div class="card-footer">
-                        <a href="{{route('user.orders.index', [$order->user_id])}}" class="btn btn-block btn-sm btn-outline-dark my-2">{{trans('actions.back')}}</a>
+                        <a href="{{route('home')}}" class="btn btn-block btn-sm btn-success my-2">{{trans('users.keep_buying')}}</a>
                     </div>
                 </div>
             </div>

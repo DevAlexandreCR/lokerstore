@@ -1,6 +1,7 @@
 <?php
 return [
     "actions" => "Acciones",
+    "all" => "Todos",
     "amount" => "Valor total",
     "categories" => "Categorías",
     "color_id" => "Color id",
@@ -31,6 +32,7 @@ return [
     "route" => "Ruta no encontrada",
     "row" => "Fila",
     "search" => "Búsqueda",
+    "seller" => "Vendedor",
     "size_id" => "Talla id",
     "staff" => "Personal",
     "status" => "Estado",

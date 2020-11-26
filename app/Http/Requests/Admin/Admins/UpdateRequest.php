@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name'      => ['string', 'max:50'],
-            'email'     => ['string', 'max:50', 'unique:admins'. $this ->id . ',id'],
+            'email'     => ['string', 'max:50', 'unique:admins' . $this ->id . ',id'],
             'password'  => ['string'],
             'status'    => ['boolean'],
             'roles'     => ['array'],

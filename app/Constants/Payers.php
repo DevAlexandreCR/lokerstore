@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Constants;
-
 
 use MyCLabs\Enum\Enum;
 
@@ -14,5 +12,4 @@ class Payers extends Enum
     public const DOCUMENT_TYPE_PA = 'PA';
     public const DOCUMENT_TYPE_RC = 'RC';
     public const DOCUMENT_TYPE_TI = 'TI';
-
 }

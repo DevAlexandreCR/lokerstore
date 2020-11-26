@@ -56,69 +56,66 @@
 
 <script>
 
-    import api from '../api.js'
-    import BannerComponent from '../components/BannerComponent'
-    import GenderComponent from '../components/GenderComponent'
-    import CategoryComponent from './sections/CategoryComponent'
-    import PromotionsComponent from './sections/PromotionsComponent'
+import api from '../api.js'
+import BannerComponent from '../components/BannerComponent'
+import GenderComponent from '../components/GenderComponent'
+import CategoryComponent from './sections/CategoryComponent'
+import PromotionsComponent from './sections/PromotionsComponent'
 
-    export default {
-        name: 'home',
+export default {
+  name: 'home',
 
-        data() {
-            return {
-                categories: {
-                    type: Array,
-                    default: () => []
-                },
-                products: {
-                    type: Array,
-                    default: () => []
-                },
-                search: null
-            }
-        },
-        components:
-        {
-            BannerComponent,
-            GenderComponent,
-            CategoryComponent,
-            PromotionsComponent
-        },
-
-        methods: {
-            isNotHomeRoute () {
-                return this.$router.history.current['path'] === '/home'
-            },
-
-            getProducts(search = null) {
-                this.products = []
-                var query = {}
-
-                if (search) {
-                    query = {
-                        search: search
-                    }
-                    this.$router.push({name: 'showcase', query: query}).catch((e)=>{console.log(e);})
-
-                }
-
-            }
-        },
-        created() {
-            this.getProducts()
-            api.getProducts().then(products => {
-                products.forEach(product => {
-                    this.products.push(product)
-                });
-            })
-            api.getCategories().then(categories => {
-                this.categories = categories
-            })
-
-        },
-        mounted() {
-
-        }
+  data () {
+    return {
+      categories: {
+        type: Array,
+        default: () => []
+      },
+      products: {
+        type: Array,
+        default: () => []
+      },
+      search: null
     }
+  },
+  components:
+        {
+          BannerComponent,
+          GenderComponent,
+          CategoryComponent,
+          PromotionsComponent
+        },
+
+  methods: {
+    isNotHomeRoute () {
+      return this.$router.history.current.path === '/home'
+    },
+
+    getProducts (search = null) {
+      this.products = []
+      var query = {}
+
+      if (search) {
+        query = {
+          search: search
+        }
+        this.$router.push({ name: 'showcase', query: query }).catch((e) => { console.log(e) })
+      }
+    }
+  },
+  created () {
+    this.getProducts()
+    api.getProducts().then(products => {
+      products.forEach(product => {
+        this.products.push(product)
+      })
+    })
+    api.getCategories().then(categories => {
+      this.categories = categories
+    })
+  },
+  mounted () {
+
+  }
+}
 </script>

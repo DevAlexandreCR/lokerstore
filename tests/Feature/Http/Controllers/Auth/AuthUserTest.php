@@ -62,7 +62,7 @@ class AuthUserTest extends TestCase
             'is_active' => true,
             'password' => '12345678',
             'password_confirmation' => '12345678',
-            "remember_token" => null,
+            'remember_token' => null,
           ];
 
         $response = $this->post('register', $user);

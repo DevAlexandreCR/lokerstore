@@ -8,7 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
-    protected $fillable = ['order_id', 'request_id', 'process_url', 'status', 'reference', 'method', 'last_digit', 'payer_id'];
+    protected $fillable = [
+        'order_id',
+        'request_id',
+        'process_url',
+        'status',
+        'reference',
+        'method',
+        'last_digit',
+        'payer_id'
+    ];
 
     /**
      * @return BelongsTo

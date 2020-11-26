@@ -19,11 +19,11 @@ class Payments
 
     /**
      * @param int $order_id
-     * @param int $request_id
-     * @param string $process_url
+     * @param int|null $request_id
+     * @param string|null $process_url
      * @return Payment
      */
-    public function create(int $order_id, int $request_id, string $process_url): Payment
+    public function create(int $order_id, int $request_id = null, string $process_url = null): Payment
     {
         return $this->payment->updateOrCreate(
             [

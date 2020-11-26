@@ -59,49 +59,49 @@
 
 <script>
 
-import Autocomplete from "./Autocomplete";
-import NumberFormat from "../constants/NumberFormat";
+import Autocomplete from './Autocomplete'
+import NumberFormat from '../constants/NumberFormat'
 
 export default {
-    name: 'search-product-component',
-    components: {Autocomplete},
-    data() {
-        return {
-            productFound: null,
-            selection: '',
-        }
-    },
-
-    props: {
-        products: {
-            type: Array,
-            default: []
-        }
-    },
-
-    methods: {
-        selectProduct(product) {
-            this.productFound = product
-        },
-
-        addProduct(stockSelected) {
-            let product = {}
-            let stock = this.productFound.stocks.filter(stock => {
-                return stock.id === stockSelected
-            })
-            product.stock = stock[0]
-            product.reference = this.productFound.reference
-            product.name = this.productFound.name
-            product.quantity = 1
-            product.price = this.productFound.price
-            this.$emit('add', product)
-        }
-    },
-
-    filters: {
-        price(price) {
-            return NumberFormat.format(price)
-        }
+  name: 'search-product-component',
+  components: { Autocomplete },
+  data () {
+    return {
+      productFound: null,
+      selection: ''
     }
+  },
+
+  props: {
+    products: {
+      type: Array,
+      default: () => []
+    }
+  },
+
+  methods: {
+    selectProduct (product) {
+      this.productFound = product
+    },
+
+    addProduct (stockSelected) {
+      const product = {}
+      const stock = this.productFound.stocks.filter(stock => {
+        return stock.id === stockSelected
+      })
+      product.stock = stock[0]
+      product.reference = this.productFound.reference
+      product.name = this.productFound.name
+      product.quantity = 1
+      product.price = this.productFound.price
+      this.$emit('add', product)
+    }
+  },
+
+  filters: {
+    price (price) {
+      return NumberFormat.format(price)
+    }
+  }
 }
 </script>

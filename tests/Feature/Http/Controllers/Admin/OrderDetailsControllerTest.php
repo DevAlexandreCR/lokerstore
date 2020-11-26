@@ -53,9 +53,9 @@ class OrderDetailsControllerTest extends TestCase
             ->patch(
                 route('order_details.update', $detail->id),
                 [
-            'stock_id' => $detail->stock_id,
-            'quantity' => 3,
-        ]
+                'stock_id' => $detail->stock_id,
+                'quantity' => 3,
+                ]
             );
 
         $response

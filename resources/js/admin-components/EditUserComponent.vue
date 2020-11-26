@@ -151,59 +151,62 @@
 </template>
 
 <script>
-    export default {
-        name: 'edit-user-component',
 
-        data () {
-            return {
-                editingName: false,
-                editingEmail: false,
-                editingPhone: false,
-                editingAddress: false,
-                updateUser: {
-                    'name': this.user.name,
-                    'lastname': this.user.lastname,
-                    'email': this.user.email,
-                    'phone': this.user.phone,
-                    'address': this.user.address
-                }
-            }
-        },
+import axios from 'axios'
 
-        props: {
-            user : {
-                default : {
-                    type: String,
-                    name: ''
-                }
-            }
-        },
+export default {
+  name: 'edit-user-component',
 
-        methods: {
-            startEditing(inputName) {
-               return inputName = !inputName
-            },
-
-            submit() {
-                console.log(this.updateUser);
-                axios.put(this.user.id, {user: {
-                    'name': this.updateUser.name,
-                    'lastname': this.updateUser.lastname,
-                    'email': this.updateUser.email,
-                    'phone': this.updateUser.phone,
-                    'address': this.updateUser.address,
-                    }})
-                .then(res =>{
-                    console.log(res.data);
-                    this.editingName = false,
-                    this.editingEmail = false,
-                    this.editingPhone = false,
-                    this.editingAddress = false
-                })
-                .catch(e => {
-                console.log(e);
-            })
-            }
-        }
+  data () {
+    return {
+      editingName: false,
+      editingEmail: false,
+      editingPhone: false,
+      editingAddress: false,
+      updateUser: {
+        name: this.user.name,
+        lastname: this.user.lastname,
+        email: this.user.email,
+        phone: this.user.phone,
+        address: this.user.address
+      }
     }
+  },
+
+  props: {
+    user: {
+      default: {
+        type: String,
+        name: ''
+      }
+    }
+  },
+
+  methods: {
+    startEditing (inputName) {
+      return !inputName
+    },
+
+    submit () {
+      axios.put(this.user.id, {
+        user: {
+          name: this.updateUser.name,
+          lastname: this.updateUser.lastname,
+          email: this.updateUser.email,
+          phone: this.updateUser.phone,
+          address: this.updateUser.address
+        }
+      })
+        .then(() => {
+          this.editingName = false
+          this.editingEmail = false
+          this.editingPhone = false
+          this.editingAddress = false
+        })
+        .catch(e => {
+          alert(e.message)
+        })
+    }
+  }
+}
 </script>
