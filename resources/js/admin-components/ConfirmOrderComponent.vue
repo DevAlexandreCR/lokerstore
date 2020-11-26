@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ __('orders.messages.save') }}</h5>
+                    <h5 class="modal-title">{{ __('orders.save') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -88,17 +88,16 @@ export default {
       const data = {}
       data.details = []
       this.products.forEach(product => {
-        data.amount = Math.round(this.amount)
+        data.amount = this.amount
         data.details.push({
           stock_id: product.stock.id,
           quantity: product.quantity
         })
       })
       axios.post(this.url, data).then((res) => {
-        console.log(res.request.responseURL)
         window.location.href = res.request.responseURL
       }).catch(err => {
-        console.log(err.response.data)
+        alert(err.response.data)
       })
     }
   },

@@ -64,7 +64,7 @@ class Order extends Model
         }
 
         if (!$until) {
-            $until = now()->format('Y-m-d');
+            $until = date('c', strtotime('+1 days'));
         }
 
         return $query->whereBetween('created_at', [$from, $until]);

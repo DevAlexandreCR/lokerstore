@@ -6,6 +6,7 @@ return [
     "empty" => "Nothing here!.",
     "no" => "Order No.",
     "orders" => ":orders_count Order |:orders_count Orders ",
+    "save" => "Do you want to save order?",
     "search" => "Search",
     "search_user" => "Search user",
     "see" => "See all orders",
@@ -17,7 +18,6 @@ return [
         "pending_pay" => "Pending Pay",
         "pending_shipment" => "Pending Shipment",
         "rejected" => "Rejected",
-        "save" => "Do you want to save order?",
         "sent" => "Sent"
     ],
     "subtotal" => "Sub-Total",

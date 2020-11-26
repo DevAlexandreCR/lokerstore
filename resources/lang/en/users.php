@@ -20,6 +20,7 @@ return [
     "empty_cart" => "Empty cart.",
     "full_name" => "Full name",
     "go_shopping" => "Go shopping...",
+    "keep_buying" => "Keep Buying",
     "last_name" => "Last name",
     "logout_before" => "You must log out of the user before logging in as administrator.",
     "messages" => [
