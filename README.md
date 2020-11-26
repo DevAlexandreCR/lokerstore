@@ -75,6 +75,7 @@ Copy file `.env.example` in `.env` file and customize your environment to databa
 - To test store with fake data
 ```bash
 - php artisan db:seed --class=DummyDatabaseSeeder
+- php artisan optimize:clear
 - php artisan serve
 ```
 - To execute schedule tasks like query payments, query metrics and automatics reports
