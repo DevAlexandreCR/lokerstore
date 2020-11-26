@@ -17,7 +17,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /.idea/
-/public/vendor/
 /.vscode/
 /.env.production
 /reports/
+/public/css/
+/public/js/
+/public/vendor/
