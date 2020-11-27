@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PermissionSeeder;
 use RoleSeeder;
@@ -167,5 +168,16 @@ class UserControllerTest extends TestCase
 
         $response
             ->assertViewHas('user_not_found');
+    }
+
+    public function testAnAdminCanSendEmailVerification(): void
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($this->admin, 'admin')->post(route('admin.user.verify', $user->id));
+
+        $response
+            ->assertStatus(302)
+            ->assertSessionHas('status');
     }
 }

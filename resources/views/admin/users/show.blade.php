@@ -28,16 +28,22 @@
 
     @endif
 
-    <div class="container py-3">
-        <div class="container d-inline-block my-2">
+    <div class="container py-2">
+        <div class="pb-2">
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf
                 <input type="hidden" name="email" value="{{ $user->email }}"/>
-                <button type="submit" class="btn btn-sm btn-info">{{ trans('passwords.send') }}</button>
+                <button type="submit" class="btn btn-sm btn-success">
+                    <ion-icon size="large" name="shield-checkmark-outline"></ion-icon>
+                </button>
+                {{ trans('passwords.send') }}
             </form>
-            <form class="d-inline" method="POST" action="{{ route('admin.user.verify', $user->id) }}">
+            <form method="POST" action="{{ route('admin.user.verify', $user->id) }}">
                 @csrf
-                <button type="submit" class="btn btn-dark btn-sm m-0 align-baseline">{{ trans('passwords.email_verify') }}</button>
+                <button type="submit" class="btn btn-dark btn-sm">
+                    <ion-icon size="large" name="mail-unread-outline"></ion-icon>
+                </button>
+                {{ trans('passwords.email_verify') }}
             </form>
         </div>
         <div class="card shadow">
@@ -64,8 +70,8 @@
                                            name="name" aria-describedby="nameHelp" value="{{ $user->name }}">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-6">
@@ -76,8 +82,8 @@
                                            value="{{ $user->lastname }}">
                                     @error('lastname')
                                     <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -95,8 +101,8 @@
                                        name="email" aria-describedby="emailHelp" value="{{ $user->email }}">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
