@@ -25,7 +25,7 @@
         <server name="MAIL_MAILER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
-        <server name="TELESCOPE_ENABLED" value="true"/>
+        <server name="TELESCOPE_ENABLED" value="false"/>
         <env name="FILESYSTEM_DRIVER" value="public_photos"/>
     </php>
 </phpunit>
