@@ -38,7 +38,8 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.cancel')}}</button>
-            <button type="submit" class="btn btn-primary">{{trans('actions.save_changes')}}</button>
+            <button type="submit" class="btn btn-primary"
+                    onclick="this.form.submit();this.disabled=true;">{{trans('actions.save_changes')}}</button>
             </div>
         </form>
       </div>

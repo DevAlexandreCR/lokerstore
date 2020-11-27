@@ -18,7 +18,8 @@
                     {{ trans('passwords.not_receive') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ trans('passwords.email_request_another') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline"
+                                onclick="this.form.submit();this.disabled=true;">{{ trans('passwords.email_request_another') }}</button>.
                     </form>
                 </div>
             </div>

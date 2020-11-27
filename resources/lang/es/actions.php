@@ -28,6 +28,7 @@ return [
     "save_changes" => "Guardar cambios",
     "search" => "Buscar",
     "search_by" => "Buscar por nombre, marca, categoria, etc...",
+    "sending" => "Enviando...",
     "submit" => "Enviar",
     "success" => "Hecho!",
     "toggle" => "Abrir navegación",

@@ -28,6 +28,7 @@ return [
     "save_changes" => "Save changes",
     "search" => "Search",
     "search_by" => "Search by name, category, mark, etc...",
+    "sending" => "Please wait...",
     "submit" => "Submit",
     "success" => "Success!",
     "toggle" => "Toggle navigation",

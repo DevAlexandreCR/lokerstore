@@ -6,7 +6,8 @@
             <form action="{{route('user.order.resend', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-success">{{trans('payment.retry')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-success"
+                        onclick="this.form.submit();this.disabled=true;">{{trans('payment.retry')}}</button>
             </form>
         @break
         @case('pending_pay')
@@ -14,14 +15,16 @@
             <form action="{{route('user.order.status', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-dark">{{trans('payment.verify')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-dark"
+                        onclick="this.form.submit();this.disabled=true;">{{trans('payment.verify')}}</button>
             </form>
             <p><small>{{trans('payment.messages.retry_again')}}</small></p>
                 <a class="btn btn-success btn-sm btn-block" href="{{$order->payment->process_url}}">{{trans('payment.retry')}}</a>
                 <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
                     @csrf
                     <input type="hidden" name="order_id" value="{{$order->id}}">
-                    <button type="submit" class="btn btn-block btn-sm btn-danger my-4">{{trans('payment.cancel')}}</button>
+                    <button type="submit" class="btn btn-block btn-sm btn-danger my-4"
+                            onclick="this.form.submit();this.disabled=true;">{{trans('payment.cancel')}}</button>
                 </form>
         @break
         @case('pending_shipment')
@@ -87,7 +90,8 @@
             <form action="{{route('user.order.reverse', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-danger">{{trans('payment.cancel')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-danger"
+                        onclick="this.form.submit();this.disabled=true;">{{trans('payment.cancel')}}</button>
             </form>
         @break
         @case('sent')
@@ -98,7 +102,8 @@
             <form action="{{route('user.order.resend', $order->user_id)}}" method="post">
                 @csrf
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-                <button type="submit" class="btn btn-block btn-sm btn-success">{{trans('payment.retry')}}</button>
+                <button type="submit" class="btn btn-block btn-sm btn-success"
+                        onclick="this.form.submit();this.disabled=true;">{{trans('payment.retry')}}</button>
             </form>
         @break
         @case('completed')

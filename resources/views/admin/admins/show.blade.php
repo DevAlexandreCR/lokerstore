@@ -66,7 +66,8 @@
                                     id="button-update-token">{{ trans('actions.update') }}</button>
                         </div>
                     </div>
-                        <button type="submit" class="btn btn-success btn-block my-3">{{trans('users.update')}}</button>
+                        <button type="submit" class="btn btn-success btn-block my-3"
+                                onclick="this.form.submit();this.disabled=true;">{{trans('users.update')}}</button>
                 </form>
             </div>
             <div class="col-lg-6">
@@ -97,7 +98,8 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            <button type="submit" class="btn btn-block btn-success">{{trans('roles.update')}}</button>
+                            <button type="submit" class="btn btn-block btn-success"
+                                    onclick="this.form.submit();this.disabled=true;">{{trans('roles.update')}}</button>
                         </form>
                     @endif
                 </div>

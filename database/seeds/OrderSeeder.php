@@ -17,7 +17,7 @@ use Illuminate\Database\Seeder;
          */
         public function run(): void
         {
-            $orders = factory(Order::class, 1000)->create();
+            $orders = factory(Order::class, 500)->create();
 
             $orders->each(function ($order) {
                 factory(OrderDetail::class, random_int(1, 3))->create([
@@ -31,6 +31,10 @@ use Illuminate\Database\Seeder;
                     'status'   => Payments::STATUS_ACCEPTED,
                     'payer_id' => $payer->id,
                 ]);
+                $order->orderDetails->each(function ($detail) use ($order) {
+                    $order->amount += $detail->total_price;
+                });
+                $order->save();
             });
         }
     }
