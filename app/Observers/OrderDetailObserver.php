@@ -43,11 +43,8 @@ class OrderDetailObserver
     public function deleted(OrderDetail $orderDetail): void
     {
         $order = $orderDetail->order;
-        $order->amount = 0;
+        $order->amount -= $orderDetail->total_price;
 
-        $order->orderDetails->each(function ($detail) use ($order) {
-            $order->amount += $detail->total_price;
-        });
         $order->save();
     }
 }

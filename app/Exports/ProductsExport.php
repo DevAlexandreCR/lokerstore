@@ -7,6 +7,8 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
@@ -34,6 +36,7 @@ class ProductsExport extends DefaultValueBinder implements
     WithStyles,
     WithCustomValueBinder,
     WithMultipleSheets,
+    WithColumnFormatting,
     WithTitle,
     WithColumnWidths,
     WithEvents
@@ -70,7 +73,7 @@ class ProductsExport extends DefaultValueBinder implements
             trans('products.cost'),
             trans('products.price'),
             trans('actions.enable'),
-            'ID ' . trans('products.category'),
+            'Id ' . trans('products.category'),
             trans('products.category'),
             trans('fields.tags'),
         ];
@@ -90,7 +93,6 @@ class ProductsExport extends DefaultValueBinder implements
             $product->name,
             $product->description,
             $product->stock,
-//            '=SUMIFS(Stocks!H:H,Stocks!B:B,B:B)',
             $product->cost,
             $product->price,
             ($product->is_active) ? trans('messages.yes') : trans('messages.no'),
@@ -153,6 +155,8 @@ class ProductsExport extends DefaultValueBinder implements
             ->setColor(new Color(Color::COLOR_WHITE));
         $sheet->getStyle('A1:K1')->getAlignment()
             ->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('F2:G1000')->getNumberFormat()
+            ->setFormatCode(NumberFormat::FORMAT_CURRENCY_USD);
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         return [
@@ -162,6 +166,7 @@ class ProductsExport extends DefaultValueBinder implements
                     'size' => 13,
                 ],
             ],
+
         ];
     }
 
@@ -170,7 +175,7 @@ class ProductsExport extends DefaultValueBinder implements
      */
     public function title(): string
     {
-        return trans('Products');
+        return trans('fields.products');
     }
 
     /**
@@ -190,5 +195,16 @@ class ProductsExport extends DefaultValueBinder implements
                     ->getFill()->setStartColor(new Color('FAE7E2'));
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function columnFormats(): array
+    {
+        return [
+            'F' => NumberFormat::FORMAT_CURRENCY_USD,
+            'G' => NumberFormat::FORMAT_CURRENCY_USD
+        ];
     }
 }

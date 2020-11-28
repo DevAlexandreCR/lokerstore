@@ -120,7 +120,8 @@
                                 </div>
                             </li>
                             <form action="{{route('cart.show', auth()->id())}}" method="GET">
-                                <button type="submit" class="nav-link btn btn-link">
+                                <button type="submit" class="nav-link btn btn-link"
+                                        onclick="this.form.submit();this.disabled=true;">
                                     <ion-icon size="small" name="cart-outline"></ion-icon>
                                     @if(auth()->user()->hasVerifiedEmail() && auth()->user()->cart->countProducts() > 0)
                                         <span class="badge bg-red">{{auth()->user()->cart->countProducts()}}</span>

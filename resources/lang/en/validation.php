@@ -25,6 +25,7 @@ return [
         "delete_photos" => "",
         "description" => "",
         "details" => "",
+        "document" => "",
         "document_type" => "document type",
         "email" => "",
         "excerpt" => "",

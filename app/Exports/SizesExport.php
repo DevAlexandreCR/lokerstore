@@ -55,7 +55,7 @@ class SizesExport implements
             null,
             trans('fields.id'),
             trans('fields.name'),
-            'ID' . trans('fields.type_size'),
+            'ID ' . trans('fields.type_size'),
 
         ];
     }
@@ -106,8 +106,8 @@ class SizesExport implements
         $sheet->getStyle('A1:F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:F2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         $sheet->getStyle('E2:E1000')->getFill()->setFillType(Fill::FILL_NONE);
-        optional($sheet->getCell('A1'))->setValue(trans('Type-Size'));
-        optional($sheet->getCell('D1'))->setValue(trans('Size'));
+        optional($sheet->getCell('A1'))->setValue(trans('fields.type_size'));
+        optional($sheet->getCell('D1'))->setValue(trans('products.size'));
         optional($sheet->getRowDimension(1))->setRowHeight(30);
         $sheet->getProtection()->setPassword(config('app.name'));
         $sheet->getProtection()->setSheet(true);
@@ -133,7 +133,7 @@ class SizesExport implements
      */
     public function title(): string
     {
-        return trans('Sizes');
+        return trans('products.size');
     }
 
     /**

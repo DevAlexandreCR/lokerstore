@@ -52,7 +52,8 @@
                         <input type="hidden" name="amount" :value="amount">
                     </div>
                     <div class="btn-group btn-block mx-xl-5">
-                        <button type="submit" class="btn btn-success btn-sm">{{ __('actions.save') }}</button>
+                        <button type="submit" class="btn btn-success btn-sm"
+                                onclick="this.form.submit();this.disabled=true;">{{ __('actions.save') }}</button>
                     </div>
                 </div>
             </form>

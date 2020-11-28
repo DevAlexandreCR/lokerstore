@@ -30,8 +30,8 @@
                 <div class="col-sm-4 form-inline my-2 my-lg-0 justify-content-end">
                     <input class="form-control form-control-sm mr-sm-2" name="search" type="search"
                            placeholder="{{trans('actions.search')}}" aria-label="Search">
-                    <button class="btn btn-outline-primary btn-sm my-2 my-sm-1" id="search"
-                            type="submit">{{trans('actions.search')}}</button>
+                    <button class="btn btn-outline-primary btn-sm my-2 my-sm-1" id="search" type="submit"
+                            onclick="this.form.submit();this.disabled=true;">{{trans('actions.search')}}</button>
                 </div>
             </div>
         </form>

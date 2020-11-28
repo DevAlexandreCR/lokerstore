@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{trans('actions.success')}}</strong> {{ $error }}
+                    <strong>{{trans('actions.error')}}</strong> {{ $error }}
                 </div>
             </div>
         @endforeach
@@ -159,7 +159,8 @@
                             @endif
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-primary btn-sm">{{trans('actions.save')}}</button>
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                    onclick="this.form.submit();this.disabled=true;">{{trans('actions.save')}}</button>
                         </div>
                     </form>
                 </div>
@@ -204,7 +205,8 @@
                                                     @if($order->status !== \App\Constants\Orders::STATUS_PENDING_PAY)
                                                     disabled
                                                     @endif
-                                                    type="submit" class="btn btn-sm btn-danger mx-2">
+                                                    type="submit" class="btn btn-sm btn-danger mx-2"
+                                                    onclick="this.form.submit();this.disabled=true;">
                                                     <ion-icon name="trash"></ion-icon>
                                                 </button>
                                             </form>

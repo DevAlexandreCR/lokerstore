@@ -104,4 +104,15 @@ class UserController extends Controller
             'status' => trans('fields.deleted')
         ]));
     }
+
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function resend(User $user): RedirectResponse
+    {
+        $user->sendEmailVerificationNotification();
+
+        return back()->with('status', trans('passwords.email_resend'));
+    }
 }

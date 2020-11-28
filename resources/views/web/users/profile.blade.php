@@ -147,7 +147,8 @@
                     <hr>
                     <div class="row d-none" id="save">
                         <div class="container">
-                            <button type="submit" class="btn btn-primary btn-block btn-sm">{{trans('actions.save_changes')}}</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-sm"
+                                    onclick="this.form.submit();this.disabled=true;">{{trans('actions.save_changes')}}</button>
                             <a href="" class="btn btn-danger btn-block btn-sm">{{trans('actions.cancel')}}</a>
                             <br>
                         </div>

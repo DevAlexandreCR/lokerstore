@@ -34,9 +34,10 @@ class QueryPayments extends Command
     {
         $pendingsOrders = $orderModel->where('status', Orders::STATUS_PENDING_PAY)->get();
         logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payments pendings: ' . $pendingsOrders->count());
-        $pendingsOrders->each(function ($model) use ($orderModel) {
-            $order = $orderModel->find($model->id);
-            dispatch(new QueryStatusPayment($order));
+        $pendingsOrders->each(function ($order) {
+            if ($order->user) {
+                dispatch(new QueryStatusPayment($order));
+            }
         });
     }
 }

@@ -28,7 +28,7 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testLoginNoActiveUser()
+    public function testLoginNoActiveUser(): void
     {
         $user = factory(User::class)->create([
             'password' => bcrypt($password = 'secret'),
@@ -50,7 +50,7 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testResgister()
+    public function testRegister(): void
     {
         $this->withoutExceptionHandling();
         $user = [
@@ -80,7 +80,7 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testUserDisabledIndex()
+    public function testUserDisabledIndex(): void
     {
         $user = factory(User::class)->create([
             'is_active' => false,

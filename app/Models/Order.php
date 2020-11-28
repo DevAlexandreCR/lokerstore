@@ -86,6 +86,14 @@ class Order extends Model
         return null;
     }
 
+    public function scopePendingShipmentOrders(Builder $query): Builder
+    {
+        return $query
+            ->select('id')
+            ->whereDate('created_at', '>', now()->subMonth())
+            ->where('status', Orders::STATUS_PENDING_SHIPMENT);
+    }
+
     /**
      * @return string
      */

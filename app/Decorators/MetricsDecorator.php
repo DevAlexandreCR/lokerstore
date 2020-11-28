@@ -14,26 +14,17 @@ use Illuminate\Support\Facades\Artisan;
 class MetricsDecorator implements MetricsInterface
 {
     private Metrics $metrics;
-    private UsersInterface $users;
 
-    public function __construct(Metrics $metrics, UsersInterface $users)
+    public function __construct(Metrics $metrics)
     {
         $this->metrics = $metrics;
-        $this->users = $users;
     }
     /**
      * @return array
      */
     public function homeMetrics(): array
     {
-        return [
-            'metricsGeneral'  => $this->metrics->getMetricsAllOrders(),
-            'metricsSeller'   => $this->metrics->getMetricsAdminOrders(),
-            'metricsCategory' => $this->metrics->getMetricsCategory(),
-            'pendingShipment' => $this->metrics->getPendingShipmentOrders(),
-            'percentMetrics' => $this->metrics->getPercentMetrics(),
-            'usersCount'      => $this->users->index()->count(),
-        ];
+        return $this->metrics->homeMetrics();
     }
 
     /**
@@ -47,8 +38,11 @@ class MetricsDecorator implements MetricsInterface
             new NotifyAdminsAfterCompleteExport(
                 $request->user(Admins::GUARDED),
                 $fileName,
-                trans('Reports'),
-                trans('Reports generated successfully')
+                trans('reports.report'),
+                trans('messages.crud', [
+                    'resource' => trans('reports.report'),
+                    'status' => trans('fields.created')
+                ])
             ),
         ]);
     }

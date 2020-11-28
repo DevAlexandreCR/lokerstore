@@ -52,7 +52,8 @@
                        id="dateUntil" value="{{$until}}">
                 <input class="form-control form-control-sm mr-sm-2" type="text" name="email"
                        aria-label="Search" placeholder="@if($email) {{$email}} @else {{trans('orders.search_user')}} @endif">
-                <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">{{trans('orders.search')}}</button>
+                <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit"
+                        onclick="this.form.submit();this.disabled=true;">{{trans('orders.search')}}</button>
             </form>
         </div>
     </div>
@@ -90,7 +91,8 @@
                                 </form>
                                 <form action="{{route('orders.show', $order->id)}}" method="get">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-blue">
+                                    <button type="submit" class="btn btn-sm btn-blue"
+                                            onclick="this.form.submit();this.disabled=true;">
                                         <ion-icon name="create"></ion-icon>
                                     </button>
                                 </form>

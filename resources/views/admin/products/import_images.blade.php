@@ -11,14 +11,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <label for="images" class="mr-1 btn-block">{{__('products.choose_images')}}</label>
+                        <label for="images" class="mr-1 btn-block">{{trans('products.choose_images')}}</label>
                         <input class="form-control d-block mr-sm-2" type="file" name="images[]" multiple
                                id="images" accept="image/x-png, image/gif, image/jpeg">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.close')}}</button>
-                    <button type="submit" class="btn btn-primary">{{trans('actions.submit')}}</button>
+                    <button type="submit" class="btn btn-primary"
+                            onclick="this.form.submit();this.disabled=true;">{{trans('actions.submit')}}</button>
                 </div>
             </form>
         </div>

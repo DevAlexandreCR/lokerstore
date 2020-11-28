@@ -28,7 +28,9 @@ Route::middleware(['auth:admin', 'enabled:admin'])->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.home');
     Route::post('/reports', 'HomeController@reports')->name('admin.reports');
     Route::post('/monthly_report', 'HomeController@monthlyReport')->name('admin.monthly_report');
+
     Route::resource('users', 'UserController')->except(['create', 'store']);
+    Route::post('users/verify/{user}', 'UserController@resend')->name('admin.user.verify');
 
     Route::resource('products', 'ProductController')->except(['show']);
     Route::get('products/active/{product}', 'ProductController@active')->name('products.active');
