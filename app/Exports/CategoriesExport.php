@@ -107,8 +107,8 @@ class CategoriesExport implements
         $sheet->getStyle('A1:F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:F2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
 
-        optional($sheet->getCell('A1'))->setValue(trans('Category'));
-        optional($sheet->getCell('D1'))->setValue('Sub-' . trans('Category'));
+        optional($sheet->getCell('A1'))->setValue(trans('products.category'));
+        optional($sheet->getCell('D1'))->setValue(trans('products.sub_category'));
         optional($sheet->getRowDimension(1))->setRowHeight(30);
 
         $sheet->getProtection()->setPassword(config('app.name'));
@@ -135,7 +135,7 @@ class CategoriesExport implements
      */
     public function title(): string
     {
-        return trans('Categories');
+        return trans('fields.categories');
     }
 
     /**

@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{trans('actions.success')}}</strong> {{ $error }}
+                    <strong>{{trans('actions.error')}}</strong> {{ $error }}
                 </div>
             </div>
         @endforeach

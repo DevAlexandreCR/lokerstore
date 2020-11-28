@@ -78,7 +78,7 @@ class StocksExport implements
      */
     public function title(): string
     {
-        return trans('Stocks');
+        return trans('products.inventory');
     }
 
     /**

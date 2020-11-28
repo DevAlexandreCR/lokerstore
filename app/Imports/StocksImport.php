@@ -39,7 +39,7 @@ class StocksImport implements
 
         $this->stocks->create([
             'id'           => $rows[0],
-            'product_name' => $rows[1],
+            'reference'    => $rows[1],
             'color_id'     => $rows[2],
             'size_id'      => $rows[4],
             'quantity'     => $rows[7],
@@ -54,7 +54,7 @@ class StocksImport implements
     {
         foreach ($failures as $failure) {
             ErrorImport::create([
-                'import'    => 'stocks',
+                'import'    => trans('products.inventory'),
                 'row'       => $failure->row(),
                 'attribute' => $failure->attribute(),
                 'value'     => implode(', ', $failure->values()),
@@ -85,14 +85,14 @@ class StocksImport implements
     public function customValidationAttributes(): array
     {
         return [
-            '0' => 'ID',
-            '1' => 'Product',
-            '2' => 'Color ID',
-            '3' => 'Color',
-            '4' => 'Size ID',
-            '5' => 'Type-Size',
-            '6' => 'Size',
-            '7' => 'Stock',
+            '0' => trans('fields.id'),
+            '1' => trans('fields.product'),
+            '2' => trans('fields.color_id'),
+            '3' => trans('products.colorr'),
+            '4' => trans('fields.size_id'),
+            '5' => trans('fields.type_size'),
+            '6' => trans('products.size'),
+            '7' => trans('fields.quantity'),
         ];
     }
 
@@ -104,13 +104,12 @@ class StocksImport implements
         return [
             '*.0' => ['integer', 'min:0'],
             '*.1' => ['integer', 'min:0', 'max:100000', 'exists:products,reference'],
-            '*.2' => ['required', 'string'],
-            '*.3' => ['required', 'integer', 'exists:colors,id'],
-            '*.4' => ['required', 'string', 'max:255'],
-            '*.5' => ['required', 'integer', 'exists:sizes,id'],
-            '*.6' => ['required', 'string', 'exists:type_sizes,name'],
-            '*.7' => ['required', 'max:10'],
-            '*.8' => ['required', 'integer', 'min:0'],
+            '*.2' => ['required', 'integer', 'exists:colors,id'],
+            '*.3' => ['required', 'string'],
+            '*.4' => ['required', 'integer', 'exists:sizes,id'],
+            '*.5' => ['required', 'string', 'exists:type_sizes,name'],
+            '*.6' => ['required', 'max:10'],
+            '*.7' => ['required', 'integer', 'min:0'],
         ];
     }
 

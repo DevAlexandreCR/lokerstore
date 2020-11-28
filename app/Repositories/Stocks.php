@@ -59,9 +59,9 @@ class Stocks implements StocksInterface
      */
     public function create(array $data)
     {
-        $productName = $data['product_name'];
+        $productRef = $data['reference'];
 
-        $product = Product::where('name', $productName)->first();
+        $product = Product::select('id')->where('reference', $productRef)->first();
         $data['product_id'] = $product->id;
 
         return $this->stocks->create($data);

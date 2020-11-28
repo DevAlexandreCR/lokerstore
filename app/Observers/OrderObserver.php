@@ -8,6 +8,8 @@ use App\Constants\Logs;
 use App\Constants\Orders;
 use App\Jobs\SendEmailUsers;
 use App\Models\Order;
+use App\Actions\Stocks\ReturnStockAction;
+use App\Actions\Metrics\RemoveMetricOrders;
 
 class OrderObserver
 {
@@ -20,12 +22,6 @@ class OrderObserver
     public function updated(Order $order): void
     {
         $status = $order->status;
-        if (array_key_exists('status', $order->getChanges()) && in_array($status, Orders::statusesPaid(), true)) {
-            AddMetricOrders::execute($order);
-            if ($status === Orders::STATUS_SENT || $status === Orders::STATUS_SUCCESS) {
-                AddMetricSellers::execute($order);
-            }
-        }
 
         switch ($status) {
             case Orders::STATUS_PENDING_SHIPMENT:
@@ -38,11 +34,15 @@ class OrderObserver
             case Orders::STATUS_CANCELED:
                 logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Order ' . $order->id .
                     ' has been canceled, updating stocks ...');
-                $order->orderDetails->each(function ($detail) {
-                    $stock = $detail->stock;
-                    $stock->quantity += $detail->quantity;
-                    $stock->save();
-                });
+                if ($order->getChanges()['status'] === Orders::STATUS_SUCCESS) {
+                    RemoveMetricOrders::execute($order);
+                }
+                ReturnStockAction::execute($order);
+                AddMetricOrders::execute($order);
+                break;
+            case Orders::STATUS_SUCCESS:
+                AddMetricSellers::execute($order);
+                AddMetricOrders::execute($order);
                 break;
         }
     }

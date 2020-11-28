@@ -23,7 +23,7 @@
     <div class="row justify-content-center py-2">
         <div class="flag flag-blue ml-md-3 shadow-sm mb-3 text-right">
             <div class="card-body d-inline-flex text-right">
-                <h5 class="title text-black-50 texth-right">{{trans('orders.statuses.pending_shipment')}}:  {{$pendingShipment}}
+                <h5 class="title text-black-50 text-right">{{trans('orders.statuses.pending_shipment')}}:  {{$pendingShipment}}
                 </h5>
                 <ion-icon class="ml-4 text-muted" size="large" name="file-tray-stacked"></ion-icon>
             </div>

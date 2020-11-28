@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\Order;
+use App\Interfaces\UsersInterface;
 use App\Http\Requests\Admin\Reports\ReportRequest;
 use App\Interfaces\MetricsInterface;
 use App\Models\Metric;
@@ -10,10 +12,12 @@ use Illuminate\Support\Facades\DB;
 class Metrics implements MetricsInterface
 {
     private Metric $metrics;
+    private UsersInterface $users;
 
-    public function __construct(Metric $metrics)
+    public function __construct(Metric $metrics, UsersInterface $users)
     {
         $this->metrics = $metrics;
+        $this->users = $users;
     }
 
     public function getMetricsAllOrders()
@@ -33,7 +37,7 @@ class Metrics implements MetricsInterface
 
     public function getPendingShipmentOrders()
     {
-        return $this->metrics->pendingShipmentOrders()->get()->count();
+        return Order::pendingShipmentOrders()->count();
     }
 
     public function getPercentMetrics()
@@ -46,7 +50,14 @@ class Metrics implements MetricsInterface
      */
     public function homeMetrics(): array
     {
-        return [];
+        return [
+            'metricsGeneral'  => $this->getMetricsAllOrders(),
+            'metricsSeller'   => $this->getMetricsAdminOrders(),
+            'metricsCategory' => $this->getMetricsCategory(),
+            'pendingShipment' => $this->getPendingShipmentOrders(),
+            'percentMetrics' => $this->getPercentMetrics(),
+            'usersCount'      => $this->users->index()->count(),
+        ];
     }
 
     /**

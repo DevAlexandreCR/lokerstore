@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Interfaces\ProductsInterface;
 use App\Interfaces\StocksInterface;
 use App\Models\ErrorImport;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -25,6 +26,7 @@ class ProductsImport implements
     WithChunkReading,
     WithStartRow,
     SkipsOnError,
+    WithTitle,
     SkipsOnFailure,
     WithValidation
 {
@@ -51,11 +53,11 @@ class ProductsImport implements
             'reference'   => $rows[1],
             'name'        => $rows[2],
             'description' => $rows[3],
-            'cost'        => $rows[4],
-            'price'       => $rows[5],
-            'is_active'   => $rows[6] === 'Si' ? 1 : 0,
-            'id_category' => $rows[7],
-            'tags'        => $rows[8],
+            'cost'        => $rows[5],
+            'price'       => $rows[6],
+            'is_active'   => $rows[7] === 'Si' ? 1 : 0,
+            'id_category' => $rows[8],
+            'tags'        => $rows[10],
         ]);
     }
 
@@ -103,7 +105,7 @@ class ProductsImport implements
     {
         foreach ($failures as $failure) {
             ErrorImport::create([
-                'import'    => 'products',
+                'import'    => trans('fields.products'),
                 'row'       => $failure->row(),
                 'attribute' => $failure->attribute(),
                 'value'     => implode(', ', $failure->values()),
@@ -118,17 +120,17 @@ class ProductsImport implements
     public function rules(): array
     {
         return [
-            '*.0'  => ['integer', 'min:0'],
-            '*.1'  => ['required','integer', 'min:1', 'max:100000'],
-            '*.2'  => ['required', 'string', 'max:100'],
-            '*.3'  => ['required', 'string', 'max:255'],
-            '*.4'  => ['required', 'string'],
-            '*.5'  => ['required', 'numeric', 'min:1000'],
-            '*.6'  => ['required', 'numeric', 'min:1000'],
-            '*.7'  => ['required', 'string', 'in:Si,No'],
-            '*.8'  => ['required', 'integer', 'exists:categories,id'],
-            '*.9'  => ['required', 'string', 'max:255'],
-            '*.10' => ['required', 'string', 'max:255'],
+            '0'  => ['integer', 'min:0'],
+            '1'  => ['required', 'integer', 'min:1', 'max:100000'],
+            '2'  => ['required', 'string', 'max:100'],
+            '3'  => ['required', 'string', 'max:255'],
+            '4'  => ['required', 'integer'],
+            '5'  => ['required', 'numeric', 'min:1000'],
+            '6'  => ['required', 'numeric', 'min:1000'],
+            '7'  => ['required', 'string', 'in:Si,No'],
+            '8'  => ['required', 'integer', 'exists:categories,id'],
+            '9'  => ['required', 'string', 'max:255'],
+            '10' => ['required', 'string', 'exists:tags,name'],
         ];
     }
 
@@ -138,15 +140,25 @@ class ProductsImport implements
     public function customValidationAttributes(): array
     {
         return [
-            '0' => 'ID',
-            '1' => 'Name',
-            '2' => 'Description',
-            '3' => 'Stock',
-            '4' => 'Price',
-            '5' => 'Enabled',
-            '6' => 'Category id',
-            '7' => 'Category',
-            '8' => 'Tags',
+            '0' => trans('fields.id'),
+            '1' => trans('products.reference'),
+            '2' => trans('products.name'),
+            '3' => trans('products.description'),
+            '4' => trans('products.stock'),
+            '5' => trans('products.cost'),
+            '6' => trans('products.price'),
+            '7' => trans('actions.enabled'),
+            '8' => 'Id ' . trans('products.category'),
+            '9' => trans('products.category'),
+            '10' => trans('fields.tags'),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function title(): string
+    {
+        return trans('fields.products');
     }
 }
