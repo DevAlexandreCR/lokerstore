@@ -70,6 +70,8 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
     5. Enter inside mysql container and create the testing database:
         ```bash
             - docker-compose exec mysql bash
+            - mysql -p
+            Enter password: your_passsword
             mysql> CREATE DATABASE testing;
             mysql> GRANT ALL ON testing.* TO 'your_user'@'%';
             mysql> exit
