@@ -25,6 +25,7 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
 
 - PHP 7.4+ `required`
 - Mysql 5.7+ `required`
+- Node 8+
 - Redis to cache, session and queued jobs  `optional`
 
 ## Installation
@@ -33,18 +34,72 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
 - Use the package manager [composer](https://getcomposer.org/download/) and [npm](https://nodejs.org/es/) to install.
 
 ```bash
+- cd lokerstore
 - composer install
 - npm install
 ```
 
+## Environment
+
+- ##### Install stack Linux, Apache, MySQL and PHP 
+    Look this tutorial to install your environment [(LAMP)](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04-es#paso-1-instalar-apache-y-actualizar-el-firewall)
+- ##### Docker - [laradock](http://laradock.io/)
+    1. Clone Laradock inside lokerstore project:  
+       ```bash
+       - git clone https://github.com/Laradock/laradock.git
+       ```  
+    2. Enter the laradock folder and rename env-example to .env.
+        ```bash
+           - cd laradock
+           - cp env-example .env 
+        ``` 
+    3. Open laradock’s .env file and set the following:
+       ```bash
+           WORKSPACE_INSTALL_SUPERVISOR=true
+           MYSQL_VERSION=latest
+           MYSQL_DATABASE=lokerstore
+           MYSQL_USER=your_user
+           MYSQL_PASSWORD=your_user_password
+           MYSQL_PORT=3306
+           MYSQL_ROOT_PASSWORD=your_root_password
+       ```
+    4. Run containers:
+        ```bash
+           - docker-compose up -d nginx mysql phpmyadmin redis workspace
+        ```
+    5. Enter inside mysql container and create the testing database:
+        ```bash
+            - docker-compose exec mysql bash
+            mysql> CREATE DATABASE testing;
+            mysql> GRANT ALL ON testing.* TO 'your_user'@'%';
+            mysql> exit
+        ```
+    6. Open lokerstore’s .env file and set the following:
+        ```bash
+            DB_HOST=mysql
+            REDIS_HOST=redis
+            QUEUE_CONNECTION=redis
+        ```  
 ## Configuration
 Copy file `.env.example` in `.env` file and customize your environment to database, mail, cache, etc.
 
+- In linux
 ```bash
 - cp .env.example .env
 ```
+- In windows
+```powershell
+- copy .env.example .env
+```
 - Environment variables.   
+ `DB_HOST` your database host 
+ `DB_DATABASE` your database name 
+ `DB_USERNAME` your database username 
+ `DB_PASSWORD` your database password 
  `APP_EMAIL_SUPPORT` email to show clients.   
+ `MAIL_HOST`  your mail host example `smtp.mailtrap.io`.   
+ `MAIL_USERNAME`  mail username.   
+ `MAIL_PASSWORD`  mail password.   
  `LOG_SLACK_WEBHOOK_URL` Url to webhook to slack notifications logs.   
  `P2P_BASE_URL` Url to payments gateway API [PlaceToPay](https://www.placetopay.com/web/)  
  `P2P_SECRET_KEY` Required to gateway authentication     
@@ -64,7 +119,8 @@ Copy file `.env.example` in `.env` file and customize your environment to databa
 - npm run prod 
 - php artisan storage:link
 ```
-- To test app
+- To test app  
+Make sure to create testing database en set vars inside `.env.testing`
 ```bash
 - cp .env.testing.example .env.testing
 - php artisan test
