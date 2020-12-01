@@ -59,6 +59,7 @@ Copy file `.env.example` in `.env` file and customize your environment to databa
 
 - Run scripts
 ```bash
+- php artisan key:generate
 - php artisan migrate --seed
 - npm run prod 
 - php artisan storage:link
