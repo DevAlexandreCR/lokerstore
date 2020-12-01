@@ -4,6 +4,8 @@ public/assets
 public/photos
 public/images
 public/storage
+public/exports
+public/imports
 /storage/*.key
 /vendor
 /reports

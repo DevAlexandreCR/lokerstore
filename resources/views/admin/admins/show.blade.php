@@ -41,7 +41,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="align-top">{{trans('Roles')}}:</th>
+                            <th class="align-top">{{ trans_choice('roles.role', 2, ['role_count' => '']) }}:</th>
                             <td>
                                 <ul>
                                     @foreach($roles as $key => $role)
