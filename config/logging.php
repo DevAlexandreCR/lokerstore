@@ -101,7 +101,7 @@ return [
         ],
 
         'payments' => [
-            'driver' => 'slack',
+            'driver' => env('LOG_CHANNEL', 'daily'),
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => config('app.name') . ' Payments',
             'level' => 'info',
@@ -109,7 +109,7 @@ return [
         ],
 
         'users' => [
-            'driver' => 'slack',
+            'driver' => env('LOG_CHANNEL', 'daily'),
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => config('app.name') . ' Users',
             'level' => 'info',
