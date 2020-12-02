@@ -56,7 +56,7 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
 - ##### Docker - [laradock](http://laradock.io/)
     1. Clone Laradock inside lokerstore project:  
        ```bash
-       - git clone https://github.com/Laradock/laradock.git
+       - git submodule add https://github.com/Laradock/laradock.git
        ```  
     2. Enter the laradock folder and rename env-example to .env.
         ```bash
