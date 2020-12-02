@@ -65,6 +65,7 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
         ``` 
     3. Open laradock’s .env file and set the following:
        ```bash
+           PHP_VERSION=7.4
            WORKSPACE_INSTALL_SUPERVISOR=true
            MYSQL_VERSION=latest
            MYSQL_DATABASE=default
