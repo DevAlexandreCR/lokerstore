@@ -93,12 +93,15 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
         ```bash
            - docker-compose exec workspace bash
            - chmod -R 777 /var/www
+           - composer install
+           - npm install      
         ```
     7. Open lokerstore’s .env file and set the following:
         ```bash
             DB_HOST=mysql
             REDIS_HOST=redis
             QUEUE_CONNECTION=redis
+            REDIS_CLIENT=phpredis
         ```  
 ## Configuration
 Copy file `.env.example` in `.env` file and customize your environment to database, mail, cache, etc.
