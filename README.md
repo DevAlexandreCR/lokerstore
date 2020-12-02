@@ -42,7 +42,17 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
 ## Environment
 
 - ##### Install stack Linux, Apache, MySQL and PHP 
-    Look this tutorial to install your environment [(LAMP)](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04-es#paso-1-instalar-apache-y-actualizar-el-firewall)
+    Look this tutorial to install your environment [(LAMP)](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04-es#paso-1-instalar-apache-y-actualizar-el-firewall)  
+    Open mysql and create databases to project, make sure CHARACTER SET utf8 COLLATE utf8_unicode_ci is added
+    ```bash
+        - mysql -p
+        Enter password: your_passsword
+        mysql> CREATE DATABASE lokerstore CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+        mysql> CREATE DATABASE testing CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+        mysql> GRANT ALL ON lokerstore.* TO 'your_user'@'%';
+        mysql> GRANT ALL ON testing.* TO 'your_user'@'%';
+        mysql> exit
+    ```
 - ##### Docker - [laradock](http://laradock.io/)
     1. Clone Laradock inside lokerstore project:  
        ```bash
@@ -57,7 +67,7 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
        ```bash
            WORKSPACE_INSTALL_SUPERVISOR=true
            MYSQL_VERSION=latest
-           MYSQL_DATABASE=lokerstore
+           MYSQL_DATABASE=default
            MYSQL_USER=your_user
            MYSQL_PASSWORD=your_user_password
            MYSQL_PORT=3306
@@ -67,12 +77,14 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
         ```bash
            - docker-compose up -d apache2 mysql redis workspace
         ```
-    5. Enter inside mysql container and create the testing database:  
+    5. Enter inside mysql container and create the testing and project database:  
         ```bash
             - docker-compose exec mysql bash
             - mysql -p
             Enter password: your_passsword
-            mysql> CREATE DATABASE testing;
+            mysql> CREATE DATABASE lokerstore CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+            mysql> CREATE DATABASE testing CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+            mysql> GRANT ALL ON lokerstore.* TO 'your_user'@'%';
             mysql> GRANT ALL ON testing.* TO 'your_user'@'%';
             mysql> exit
         ```
