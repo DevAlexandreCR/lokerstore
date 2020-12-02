@@ -75,7 +75,7 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
        ```
     4. Run containers:
         ```bash
-           - docker-compose up -d apache2 mysql redis workspace
+           - docker-compose up -d apache2 mysql redis
         ```
     5. Enter inside mysql container and create the testing and project database:  
         ```bash
@@ -91,7 +91,7 @@ LokerStore is an online store developed with PHP 7.4, Laravel 7+ and Vue 2.
     6. Enter inside workspace container and give permission:  
         ```bash
            - docker-compose exec workspace bash
-           - chmod -R 7777 /var/www
+           - chmod -R 777 /var/www
         ```
     7. Open lokerstore’s .env file and set the following:
         ```bash
