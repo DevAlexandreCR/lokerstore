@@ -5,8 +5,6 @@ namespace App\Providers;
 use App\Constants\Metrics;
 use App\Decorators\AdminDecorator;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Blade;
-use App\View\Components\StatusPayment;
 use App\Decorators\Api\CacheApiProducts;
 use App\Decorators\Api\PhotosDecorator;
 use App\Decorators\Api\StocksDecorator;
@@ -43,6 +41,8 @@ use App\Models\Order;
 use App\Repositories\Stocks;
 use App\Repositories\Users;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -89,5 +89,9 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Paginator::useBootstrap();
+
+        Queue::failing(function (JobFailed $event) {
+           dd($event);
+        });
     }
 }

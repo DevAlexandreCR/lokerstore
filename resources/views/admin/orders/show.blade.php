@@ -29,14 +29,14 @@
             </div>
         @endif
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             @if($order->user)
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <div class="card">
                         <div class="card-header"><h5>{{trans('users.data')}}</h5></div>
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table table-responsive">
                                 <thead>
                                 <tr>
                                     <th>{{trans('users.name')}}:</th>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             @endif
-            <div class="@if($order->user) col-xl-6 @else col-xl-9 @endif">
+            <div class="@if($order->user) col-xl-5 @else col-xl-9 @endif">
                 @if(in_array($order->status, \App\Constants\Orders::statusesPaid(), true))
                     <div class="card">
                         <div class="card-header"><h5>{{trans('payment.payment')}}</h5></div>
