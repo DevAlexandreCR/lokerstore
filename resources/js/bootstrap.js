@@ -28,9 +28,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 document.addEventListener('submit', function (e) {
   const input = $(e.target).find('button[type=submit]')
   input.attr('disabled', true)
-  input.addClass('rounded-circle')
-  input.html('<ion-icon size="small" name="reload"></ion-icon>')
-  $(input).find('ion-icon').addClass('validate')
+  input.addClass('validate')
 })
 
 /**
