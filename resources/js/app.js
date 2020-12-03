@@ -29,6 +29,7 @@ Vue.component('create-order', CreateOrder)
 Vue.component('add-payment-component', AddPaymentComponent)
 
 Vue.use(VuePaginate)
+
 Vue.use(Lang, {
   locale: process.env.MIX_APP_LOCALE,
   fallback: 'en',

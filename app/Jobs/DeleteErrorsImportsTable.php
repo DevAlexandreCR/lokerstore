@@ -16,6 +16,8 @@ class DeleteErrorsImportsTable implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
+    public bool $deleteWhenMissingModels = true;
+
     /**
      * Create a new job instance.
      *

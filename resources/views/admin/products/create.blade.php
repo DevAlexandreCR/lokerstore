@@ -274,8 +274,7 @@
                     <div class="row " id="save">
                         <div class="container">
                             <button type="submit"
-                                    class="btn btn-success btn-block btn-sm"
-                                    onclick="this.form.submit();this.disabled=true;">{{trans('actions.save')}}</button>
+                                    class="btn btn-success btn-block btn-sm">{{trans('actions.save')}}</button>
                             <br>
                         </div>
                     </div>
@@ -290,15 +289,15 @@
      * @argument input que posee la imagen
      * @argument div card donde se va a agregar la imagen
      */
-    var multiImgPreview = (input, div) => {
+    const multiImgPreview = (input, div) => {
         if (input.files) {
-            var filesAmount = input.files.length;
+            let filesAmount = input.files.length;
 
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+            for (let i = 0; i < filesAmount; i++) {
+                let reader = new FileReader();
 
                 reader.onload = function (event) {
-                    var img = div.getElementsByTagName('img')[0]
+                    let img = div.getElementsByTagName('img')[0]
                     img.classList.add('img-thumbnail')
                     img.src = event.target.result
                 }
@@ -311,7 +310,7 @@
      * Esta funcion agrega el valor del option a la category_id input
      * @argument value valor del option seleccionado
      */
-    var setCategory = (value, id) => {
+    const setCategory = (value, id) => {
         document.getElementById(id).value = value
     }
 
@@ -319,10 +318,10 @@
      * Esta funcion agrega la vista para una nueva imagen
      */
     const addPhoto = () => {
-        var divToClone = document.getElementById("clone").cloneNode(true)
+        let divToClone = document.getElementById("clone").cloneNode(true)
         divToClone.classList.remove("d-none")
         document.getElementById("imgContainer").appendChild(divToClone)
-        var input = divToClone.getElementsByTagName("input")[0]
+        let input = divToClone.getElementsByTagName("input")[0]
         input.addEventListener('change', function () {
             multiImgPreview(input, divToClone);
         })
@@ -338,10 +337,10 @@
      * Esta funcion agrega el listener del input de la primer imagen al iniciarse el DOM
      */
     document.addEventListener("DOMContentLoaded", () => {
-        var input = document.getElementById("imgContainer")
+        let input = document.getElementById("imgContainer")
             .getElementsByTagName("input")[0]
         input.addEventListener('change', () => {
-            var div = document.getElementById("card-img")
+            let div = document.getElementById("card-img")
             multiImgPreview(input, div)
         })
     });

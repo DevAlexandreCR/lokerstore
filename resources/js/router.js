@@ -2,7 +2,6 @@ import Router from 'vue-router'
 import Vue from 'vue'
 import Home from './views/Home'
 import Showcase from './views/Showcase'
-import ExampleComponent from './components/ExampleComponent'
 
 Vue.use(Router)
 
@@ -21,11 +20,6 @@ export default new Router({
           component: Showcase
         }
       ]
-    },
-    {
-      path: '/home/ej',
-      name: 'ej',
-      component: ExampleComponent
     }
   ]
 })

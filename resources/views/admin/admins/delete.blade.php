@@ -21,8 +21,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"
-                            onclick="this.form.submit();this.disabled=true;">{{trans('actions.remove')}}</button>
+                    <button type="submit" class="btn btn-primary">{{trans('actions.remove')}}</button>
                 </div>
             </form>
         </div>

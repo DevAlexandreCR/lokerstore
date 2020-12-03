@@ -28,6 +28,8 @@ class QueryStatusPayment implements ShouldQueue
 
     public int $maxExceptions = 3;
 
+    public bool $deleteWhenMissingModels = true;
+
     public function __construct(Order $order)
     {
         $this->order = $order;

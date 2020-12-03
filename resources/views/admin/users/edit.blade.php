@@ -87,8 +87,7 @@
                     </div>
                       <div class="col-sm-2">
                         <input type="hidden" name="is_active" value="0">
-                        <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="this.form.submit();this.disabled=true;">{{trans('actions.disable')}}</button>
+                        <button type="submit" class="btn btn-danger btn-sm">{{trans('actions.disable')}}</button>
                         </div>
                       @else
                       <div class="col">
@@ -96,8 +95,7 @@
                     </div>
                       <div class="col-sm-2">
                       <input type="hidden" name="is_active" value="1">
-                        <button type="submit" class="btn btn-primary btn-sm"
-                                onclick="this.form.submit();this.disabled=true;">{{trans('actions.enable')}}</button>
+                        <button type="submit" class="btn btn-primary btn-sm">{{trans('actions.enable')}}</button>
                         </div>
                       @endif
                   </div>
@@ -118,8 +116,7 @@
                 </div>
                 <div class="col-sm-2">
                   <input type="hidden" name="is_active" value="1">
-                  <button type="submit" class="btn btn-danger btn-block btn-sm"
-                          onclick="this.form.submit();this.disabled=true;">{{trans('actions.remove')}}</button>
+                  <button type="submit" class="btn btn-danger btn-block btn-sm">{{trans('actions.remove')}}</button>
                 </div>
                 </div>
               </form>
@@ -137,8 +134,7 @@
           @elseif ($input_name === 'is_active' || $input_name === 'delete')
                 <br>
           @else
-                <button type="submit" class="btn btn-primary"
-                        onclick="this.form.submit();this.disabled=true;">{{trans('actions.save_changes')}}</button>
+                <button type="submit" class="btn btn-primary">{{trans('actions.save_changes')}}</button>
           @endif
         </form>
       </div>

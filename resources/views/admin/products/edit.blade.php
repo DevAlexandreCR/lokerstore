@@ -259,8 +259,7 @@
                     <div class="row " id="save">
                         <div class="container">
                             <button type="submit"
-                                    class="btn btn-success btn-block btn-sm"
-                                    onclick="this.form.submit();this.disabled=true;">{{trans('actions.save_changes')}}</button>
+                                    class="btn btn-success btn-block btn-sm">{{trans('actions.save_changes')}}</button>
                             <br>
                         </div>
                     </div>

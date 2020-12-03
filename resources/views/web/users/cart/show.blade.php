@@ -35,8 +35,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="submit" class="btn  btn-sm btn-outline-danger"
-                                                        onclick="this.form.submit();this.disabled=true;">
+                                                <button type="submit" class="btn  btn-sm btn-outline-danger">
                                                     <ion-icon name="trash-outline"></ion-icon>
                                                     {{trans('actions.remove')}}
                                                 </button>
@@ -111,8 +110,7 @@
                             <form class="btn-block" action="{{route('user.order.store', [ 'user' => auth()->user()])}}" method="post">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{$cart->user_id}}">
-                                <button type="submit" class="btn btn-success btn-block"
-                                        onclick="this.form.submit();this.disabled=true;">{{trans('payment.pay')}}</button>
+                                <button type="submit" class="btn btn-success btn-block">{{trans('payment.pay')}}</button>
                             </form>
                             <a href="{{route('home')}}" type="button" class="btn btn-secondary">{{trans('payment.continue')}}</a>
                         </div>

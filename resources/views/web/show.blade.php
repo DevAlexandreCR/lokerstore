@@ -128,8 +128,7 @@
                                 <button type="button" disabled
                                         class="btn btn-primary btn-block">{{trans('users.add_to_cart')}}</button>
                             @else
-                                <button type="submit" class="btn btn-primary btn-block"
-                                        onclick="this.form.submit();this.disabled=true;">{{trans('users.add_to_cart')}}</button>
+                                <button type="submit" class="btn btn-primary btn-block">{{trans('users.add_to_cart')}}</button>
                             @endif
                             <button class="btn btn-light btn-block" type="button"
                                     onclick="goBack()">{{trans('actions.back')}}</button>

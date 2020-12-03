@@ -8,8 +8,10 @@ use App\Models\OrderDetail;
 use App\Models\Payer;
 use App\Models\Payment;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Queue;
 
-    class OrderSeeder extends Seeder
+class OrderSeeder extends Seeder
     {
         /**
          * Run the database seeds.
@@ -33,6 +35,7 @@ use Illuminate\Database\Seeder;
                     'status'   => Payments::STATUS_ACCEPTED,
                     'payer_id' => $payer->id,
                 ]);
+                Artisan::call('queue:clear');
                 $order->orderDetails->each(function ($detail) use ($order) {
                     $order->amount += $detail->total_price;
                 });

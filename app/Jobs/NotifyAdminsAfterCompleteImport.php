@@ -19,6 +19,8 @@ class NotifyAdminsAfterCompleteImport implements ShouldQueue
 
     private Admin $admin;
 
+    public bool $deleteWhenMissingModels = true;
+
     /**
      * Create a new job instance.
      *

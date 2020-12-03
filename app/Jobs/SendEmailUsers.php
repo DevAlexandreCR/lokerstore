@@ -20,6 +20,8 @@ class SendEmailUsers implements ShouldQueue
 
     protected Order $order;
 
+    public bool $deleteWhenMissingModels = true;
+
     public function __construct(Order $order)
     {
         $this->order = $order;

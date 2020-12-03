@@ -24,8 +24,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <input id="inputEnable" type="hidden" name="is_active">
-                                <button type="submit" class="btn btn-primary btn-sm"
-                                        onclick="this.form.submit();this.disabled=true;"></button>
+                                <button type="submit" class="btn btn-primary btn-sm"></button>
                             </div>
                         </div>
                     </form>

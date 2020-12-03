@@ -31,8 +31,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"
-                            onclick="this.form.submit();this.disabled=true;">{{trans('actions.save')}}</button>
+                    <button type="submit" class="btn btn-primary">{{trans('actions.save')}}</button>
                 </div>
             </form>
         </div>

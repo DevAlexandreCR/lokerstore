@@ -50,7 +50,6 @@
                             <input type="text" name="category" hidden value="{{$sub_category->name}}">
                             <button type="submit" class="btn btn-sm btn-blue"
                                     data-placement="top"
-                                    onclick="this.form.submit();this.disabled=true;"
                                     title="{{trans('actions.view')}}"
                                     data-target="tooltip"
                             >

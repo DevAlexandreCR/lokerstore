@@ -21,9 +21,14 @@ class NotifyAdminsAfterCompleteExport implements ShouldQueue
      * @var Admin
      */
     private Admin $admin;
+
     private string $fileName;
+
     private string $export;
+
     private string $message;
+
+    public bool $deleteWhenMissingModels = true;
 
     /**
      * Create a new job instance.
