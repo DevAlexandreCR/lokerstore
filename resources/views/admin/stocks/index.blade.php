@@ -78,15 +78,6 @@
                                         >
                                         <ion-icon name="create"></ion-icon>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-danger"
-                                        data-placement="top"
-                                        title="{{trans('actions.remove')}}"
-                                        data-toggle="modal"
-                                        data-target="#stockDelete{{$stock->id}}"
-                                        >
-                                        <ion-icon name="trash"></ion-icon>
-                                    </button>
-                                    @include('admin.stocks.delete', ['stock' => $stock])
                                     @include('admin.stocks.edit_form', [
                                         'stock' => $stock
                                         ])

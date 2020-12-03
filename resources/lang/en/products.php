@@ -1,6 +1,7 @@
 <?php
 return [
     "add_category" => "Add category",
+    "add_stock" => "Add stock for",
     "added" => "Product added to cart",
     "all_inventory" => "Total inventory",
     "category" => "Category",
@@ -12,6 +13,7 @@ return [
     "cost" => "Cost",
     "description" => "Description",
     "details" => "Product details",
+    "edit_stock" => "Edit stock",
     "found" => ":product_found products found",
     "inventory" => "Inventory",
     "messages" => [
