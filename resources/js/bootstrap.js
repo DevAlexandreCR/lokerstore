@@ -26,7 +26,6 @@ window.axios = require('axios')
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 document.addEventListener('submit', function (e) {
-  // e.preventDefault()
   const input = $(e.target).find('button[type=submit]')
   input.attr('disabled', true)
   input.addClass('rounded-circle')
