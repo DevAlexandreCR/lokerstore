@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use TestDatabaseSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
 
 class UserPoliciesTest extends TestCase

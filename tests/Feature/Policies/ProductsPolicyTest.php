@@ -11,7 +11,7 @@ use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
-use TestDatabaseSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
 
 class ProductsPolicyTest extends TestCase

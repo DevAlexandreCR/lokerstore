@@ -8,9 +8,9 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Stock;
+use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use TestDatabaseSeeder;
 use Tests\TestCase;
 
 class StockControllerTest extends TestCase

@@ -9,10 +9,9 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
 use App\Constants\ImageBase64;
+use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\UploadedFile;
-use TestDatabaseSeeder;
 use Tests\TestCase;
 
 class ApiProductControllerTest extends TestCase

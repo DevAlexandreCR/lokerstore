@@ -6,8 +6,8 @@ use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 
 class TagControllerTest extends TestCase

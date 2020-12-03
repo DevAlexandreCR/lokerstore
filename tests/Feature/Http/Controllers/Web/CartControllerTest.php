@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use TestDatabaseSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
 
 class CartControllerTest extends TestCase

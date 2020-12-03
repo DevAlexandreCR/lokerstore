@@ -7,9 +7,9 @@ use App\Models\Admin\Admin;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use TestDatabaseSeeder;
 use Tests\TestCase;
 
 class ProductControllerTest extends TestCase

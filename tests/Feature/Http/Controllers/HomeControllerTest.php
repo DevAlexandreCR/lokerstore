@@ -6,8 +6,8 @@ use App\Models\Admin\Admin;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 
 class HomeControllerTest extends TestCase

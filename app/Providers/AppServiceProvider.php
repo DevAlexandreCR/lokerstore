@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Constants\Metrics;
 use App\Decorators\AdminDecorator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use App\View\Components\StatusPayment;
 use App\Decorators\Api\CacheApiProducts;
@@ -86,5 +87,7 @@ class AppServiceProvider extends ServiceProvider
             Metrics::SELLER     => Admin::class,
             Metrics::ORDERS     => Order::class,
         ]);
+
+        Paginator::useBootstrap();
     }
 }

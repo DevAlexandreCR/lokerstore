@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Tag;

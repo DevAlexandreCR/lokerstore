@@ -13,10 +13,10 @@ use App\Models\Payment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
-use StockSeeder;
-use TestDatabaseSeeder;
+use Database\Seeders\StockSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
-use UserSeeder;
+use Database\Seeders\UserSeeder;
 
 class OrdersPolicyTest extends TestCase
 {

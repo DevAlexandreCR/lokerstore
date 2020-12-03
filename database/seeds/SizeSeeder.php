@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Size;
 use App\Models\TypeSize;
 use Illuminate\Database\Seeder;

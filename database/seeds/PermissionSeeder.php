@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Constants\Admins;
 use App\Constants\Permissions;
 use Illuminate\Database\Seeder;

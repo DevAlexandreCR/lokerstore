@@ -4,8 +4,8 @@ namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 
 class AuthUserTest extends TestCase

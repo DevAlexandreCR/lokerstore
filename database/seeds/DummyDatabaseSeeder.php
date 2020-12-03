@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Constants\Orders;
 use Illuminate\Database\Seeder;
 

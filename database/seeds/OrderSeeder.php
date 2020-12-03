@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Constants\Payments;
 use App\Models\Order;
 use App\Models\OrderDetail;

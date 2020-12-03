@@ -9,7 +9,7 @@ use App\Models\Size;
 use App\Models\Stock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use TestDatabaseSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
 
 class ApiStocksControllerTest extends TestCase

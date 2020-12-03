@@ -7,8 +7,8 @@ use App\Constants\Permissions;
 use App\Models\Admin\Admin;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 

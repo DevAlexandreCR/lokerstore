@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
-use UserSeeder;
-use StockSeeder;
+use Database\Seeders\TestDatabaseSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\StockSeeder;
 use App\Models\Order;
-use TestDatabaseSeeder;
 use App\Constants\Roles;
 use App\Constants\Admins;
 use App\Constants\Payers;

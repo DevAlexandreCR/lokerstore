@@ -11,12 +11,12 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Stock;
+use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use StockSeeder;
-use TestDatabaseSeeder;
+use Database\Seeders\StockSeeder;
 use Tests\TestCase;
-use UserSeeder;
+use Database\Seeders\UserSeeder;
 
 class OrdersControllerTest extends TestCase
 {

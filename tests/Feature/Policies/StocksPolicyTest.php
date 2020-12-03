@@ -11,7 +11,7 @@ use App\Models\Size;
 use App\Models\Stock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
-use TestDatabaseSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
 
 class StocksPolicyTest extends TestCase

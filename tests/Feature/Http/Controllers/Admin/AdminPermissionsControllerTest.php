@@ -6,8 +6,8 @@ use App\Constants\Permissions;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 
 class AdminPermissionsControllerTest extends TestCase

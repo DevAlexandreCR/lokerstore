@@ -7,8 +7,8 @@ use App\Models\Admin\Admin;
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase

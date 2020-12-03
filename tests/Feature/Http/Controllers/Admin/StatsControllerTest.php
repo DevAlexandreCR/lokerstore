@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers\Admin;
 
-use AdminSeeder;
 use App\Constants\Admins;
 use App\Constants\Roles;
 use App\Exports\MonthlyReportsExport;
@@ -10,13 +9,14 @@ use App\Exports\ReportsExport;
 use App\Models\Admin\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Maatwebsite\Excel\Facades\Excel;
-use StockSeeder;
-use TestDatabaseSeeder;
+use Database\Seeders\StockSeeder;
 use Tests\TestCase;
-use UserSeeder;
+use Database\Seeders\UserSeeder;
 
 class StatsControllerTest extends TestCase
 {

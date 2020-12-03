@@ -5,8 +5,8 @@ namespace Tests\Feature\Http\Controllers\Admin;
 use App\Constants\Roles;
 use App\Models\Admin\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 

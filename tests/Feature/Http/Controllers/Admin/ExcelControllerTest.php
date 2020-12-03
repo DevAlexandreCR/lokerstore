@@ -7,12 +7,12 @@ use App\Constants\Roles;
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use App\Models\Admin\Admin;
+use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Maatwebsite\Excel\Facades\Excel;
-use TestDatabaseSeeder;
 use Tests\TestCase;
 
 class ExcelControllerTest extends TestCase
