@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Constants\Logs;
 use App\Constants\Metrics;
 use App\Decorators\AdminDecorator;
 use Illuminate\Pagination\Paginator;
@@ -42,6 +43,7 @@ use App\Repositories\Stocks;
 use App\Repositories\Users;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
@@ -91,7 +93,11 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         Queue::failing(function (JobFailed $event) {
-           dd($event);
+            logger()->error('Job failed ', [
+                'name'      => $event->job->resolveName(),
+                'exception' => $event->exception
+            ]);
+            Artisan::call('queue:flush');
         });
     }
 }

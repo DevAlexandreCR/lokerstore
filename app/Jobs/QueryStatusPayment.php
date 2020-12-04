@@ -10,6 +10,7 @@ use App\Repositories\Payments as Pay;
 use App\Traits\HttpClient;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -43,7 +44,7 @@ class QueryStatusPayment implements ShouldQueue
      */
     public function handle(Pay $pay): void
     {
-        logger()->channel(Logs::CHANNEL_PAYMENTS)->info('querying payment: ' .
+        logger()->channel(Logs::CHANNEL_DAILY)->info('querying payment: ' .
             $this->order->payment->id . ' with status: ' . $this->order->payment->status);
 
         $response = $this->sendRequest(PlaceToPay::GET_REQUEST_INFORMATION, $this->order);
@@ -58,7 +59,7 @@ class QueryStatusPayment implements ShouldQueue
     public function responseHandler($response, Pay $payments): void
     {
         $status = $response->status->status;
-        logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payment ' . $this->order->payment->id .
+        logger()->channel(Logs::CHANNEL_DAILY)->info('Payment ' . $this->order->payment->id .
                     ' is ' . $status . ' in P2P');
         switch ($status) {
             case PlaceToPay::APPROVED:

@@ -60,6 +60,7 @@ return [
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
             'level' => 'info',
+            'ignore_exceptions' => false,
         ],
 
         'papertrail' => [
