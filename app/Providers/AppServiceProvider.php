@@ -97,7 +97,6 @@ class AppServiceProvider extends ServiceProvider
                 'name'      => $event->job->resolveName(),
                 'exception' => $event->exception
             ]);
-            Artisan::call('queue:flush');
         });
     }
 }
