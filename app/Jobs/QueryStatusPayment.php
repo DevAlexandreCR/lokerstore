@@ -44,7 +44,6 @@ class QueryStatusPayment implements ShouldQueue
      */
     public function handle(Pay $pay): void
     {
-        $this->fail(new ModelNotFoundException());
         logger()->channel(Logs::CHANNEL_DAILY)->info('querying payment: ' .
             $this->order->payment->id . ' with status: ' . $this->order->payment->status);
 

@@ -8,8 +8,8 @@ use App\Http\Requests\Admin\Reports\ReportRequest;
 use App\Interfaces\MetricsInterface;
 use App\Models\Metric;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class HomeController extends Controller
 {

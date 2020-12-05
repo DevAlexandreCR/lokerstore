@@ -22,7 +22,7 @@ class QueryPayments extends Command
      *
      * @var string
      */
-    protected $description = 'Query pendings payments';
+    protected $description = 'Query pending payments';
 
     /**
      * Execute the console command.
@@ -32,9 +32,9 @@ class QueryPayments extends Command
      */
     public function handle(Order $orderModel): void
     {
-        $pendingsOrders = $orderModel->where('status', Orders::STATUS_PENDING_PAY)->get();
-        logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payments pendings: ' . $pendingsOrders->count());
-        $pendingsOrders->each(function ($order) {
+        $pendingOrders = $orderModel->where('status', Orders::STATUS_PENDING_PAY)->get();
+        logger()->channel(Logs::CHANNEL_PAYMENTS)->info('Payments pending: ' . $pendingOrders->count());
+        $pendingOrders->each(function ($order) {
             if ($order->user) {
                 dispatch(new QueryStatusPayment($order));
             }
