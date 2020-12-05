@@ -13,7 +13,7 @@ git:
     depth: 3
 before_install:
     - cp .env.travis .env
-    - mysql -e 'create database testing;'
+    - mysql -e 'CREATE DATABASE testing CHARACTER SET utf8 COLLATE utf8_unicode_ci;'
 before_script:
     - composer install --no-interaction
     - php artisan migrate:refresh --seed --force
