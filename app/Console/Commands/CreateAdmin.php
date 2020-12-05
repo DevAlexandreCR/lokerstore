@@ -53,8 +53,9 @@ class CreateAdmin extends Command
             } else {
                 $this->error(trans('users.create_admin.pass_failed'));
             }
+        } else {
+            $this->error(trans('users.create_admin.email_invalid'));
         }
-        $this->error(trans('users.create_admin.email_invalid'));
     }
 
     public function checkEmail(string $email): bool
