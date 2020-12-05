@@ -13,6 +13,7 @@ public/imports
 .env
 .env.testing
 .env.backup
+.editorconfig
 .phpunit.result.cache
 .php_cs.cache
 Homestead.json
