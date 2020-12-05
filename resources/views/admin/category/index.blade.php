@@ -11,25 +11,6 @@
         </div>
       </div>
 </div>
-@error('name')
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-        <strong>{{trans('Error')}}</strong> {{$message}}
-    </div>
-@enderror
-
-@if (session('success'))
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-        <strong>{{trans('actions.success')}}</strong> {{session('success')}}
-    </div>
-@endif
 <div class="row justify-content-around pb-4">
     @foreach ($categories as $key => $category)
 

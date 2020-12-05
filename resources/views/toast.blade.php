@@ -5,7 +5,28 @@
 	"closeButton" : true,
 	"progressBar" : true
 	}
-	toastr.success("{{ session('message') }}");
+	toastr.success("{{ session('success') }}");
+@endif
+
+@if(Session::has('message'))
+	toastr.options =
+	{
+	"closeButton" : true,
+	"progressBar" : true
+	}
+	toastr.info("{{ session('message') }}");
+@endif
+
+@if ( $errors->any() )
+	toastr.options =
+	{
+	"closeButton" : true,
+	"progressBar" : false
+	}
+@foreach ($errors->all() as $error)
+	toastr.error("{{ $error }}");
+@endforeach
+
 @endif
 
 @if(Session::has('error'))

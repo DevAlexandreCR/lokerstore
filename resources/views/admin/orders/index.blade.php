@@ -1,27 +1,6 @@
 @extends('admin.home')
 
 @section('main')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    @if (session('success'))
-        <div class="container py-2">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <strong>{{__('actions.success')}}</strong> {{ session('success') }}
-            </div>
-        </div>
-    @endif
     <div class="row m-2 p-4 shadow-sm bg-secondary">
         <div class="col-md-2 col-sm-6 d-inline">
             <div class="form-inline">

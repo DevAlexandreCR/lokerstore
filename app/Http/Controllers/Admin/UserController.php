@@ -84,7 +84,7 @@ class UserController extends Controller
             'users.show',
             ['user' => $user]
         ))
-            ->with('user-updated', trans('messages.crud', [
+            ->with('success', trans('messages.crud', [
                 'resource' => trans_choice('users.user', 1, ['user_count' => '']),
                 'status' => trans('fields.updated')
             ]));
@@ -99,7 +99,7 @@ class UserController extends Controller
     {
         $this->users->destroy($user);
 
-        return redirect('admin/users')->with('user-deleted', trans('messages.crud', [
+        return redirect('admin/users')->with('success', trans('messages.crud', [
             'resource' => trans_choice('users.user', 1, ['user_count' => '']),
             'status' => trans('fields.deleted')
         ]));

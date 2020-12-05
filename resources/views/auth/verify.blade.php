@@ -6,14 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ trans('passwords.email_confirm') }}</div>
-
                 <div class="card-body">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ trans('passwords.email_sent') }}
                         </div>
                     @endif
-
                     {{ trans('passwords.link_verify') }}
                     {{ trans('passwords.not_receive') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
