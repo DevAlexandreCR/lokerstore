@@ -21,6 +21,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body>
 <div id="app">
@@ -136,6 +140,7 @@
     </nav>
 
     <main class="py-0 min-vh-100">
+        @include('toast')
         @yield('content')
     </main>
 </div>
