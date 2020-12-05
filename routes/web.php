@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
-
-// add route to run command to links heroku
-Route::get('/artisan/storage', function() {
-    $command = 'storage:link';
-    Artisan::call($command);
-    return Artisan::output();
-});
 
 // los usuarios inhabilitados no pueden acceder al index
 Route::get('/', 'HomeController@index')
@@ -54,4 +46,3 @@ Route::middleware(['auth', 'verified', 'user-can'])
         Route::post('orders/resend', 'OrderController@resend')->name('user.order.resend');
         Route::post('orders/reverse', 'OrderController@reverse')->name('user.order.reverse');
     });
-

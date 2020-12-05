@@ -1,30 +1,31 @@
 @extends('web.users.main')
 
 @section('sidebar')
-    <div class="nav flex-column shadow" aria-orientation="vertical"
-         style="position: fixed;
-    width: 16%;
-    background: rgb(250, 247, 237);
-    height: 100vh;">
-        <nav id="sidebar" class="nav flex-column">
-            <div class="modal-header">
-                <a class="flex-sm-fill text-sm-center navbar-brand"
-                   style="color: black"
-                >{{__('My Account')}}</a>
+    <aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1">
+        <nav class="navbar navbar-expand navbar-light bg-light flex-md-column flex-row align-items-center py-2">
+            <div class="collapse navbar-collapse w-100 p-0">
+                <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+                    <li class="nav-item">
+                        <a class="nav-link pl-0 py-md-4"
+                        ><ion-icon class="mr-2" name="home-outline"></ion-icon><span class="font-weight-bold">{{trans('users.account')}}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-0 {{ ! Route::is('user.profile') ?: 'font-weight-bolder'}}"
+                           href="{{ route('user.profile', auth()->id()) }}"
+                        ><ion-icon class="mr-2" name="person-circle-outline"></ion-icon><span class="d-none d-md-inline">{{trans('users.profile')}}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-0 {{ ! Route::is('cart.show') ?: 'font-weight-bolder'}}"
+                           href="{{ route('cart.show', auth()->id()) }}"
+                        ><ion-icon  class="mr-2" name="cart-outline"></ion-icon><span class="d-none d-md-inline">{{trans('users.cart')}}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-0 {{ ! Route::is('user.orders.index') ?: 'font-weight-bolder'}}"
+                           href="{{ route('user.orders.index', auth()->id()) }}"
+                        ><ion-icon class="mr-2" name="pricetags-outline"></ion-icon><span class="d-none d-md-inline">{{trans_choice('orders.orders', 2, ['orders_count' => ''])}}</span></a>
+                    </li>
+                </ul>
             </div>
-            <br>
-            <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('user.profile') ?: 'font-weight-bolder'}}"
-               href="{{ route('user.profile', auth()->id()) }}"
-               style="color: black"
-            >{{__('Profile')}}</a>
-            <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('cart.show') ?: 'font-weight-bolder'}}"
-               href="{{ route('cart.show', auth()->id()) }}"
-               style="color: black"
-            >{{__('Cart')}}</a>
-            <a class="flex-sm-fill text-sm-center nav-link {{ ! Route::is('user.orders.index') ?: 'font-weight-bolder'}}"
-               href="{{ route('user.orders.index', auth()->id()) }}"
-               style="color: black"
-            >{{__('Orders')}}</a>
         </nav>
-    </div>
+    </aside>
 @endSection

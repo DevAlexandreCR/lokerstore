@@ -4,6 +4,10 @@ namespace App\Traits;
 
 trait Authentication
 {
+    /**
+     * @param bool $decode
+     * @return int|string
+     */
     public function getNonce($decode = true)
     {
         if (function_exists('random_bytes')) {
@@ -14,16 +18,26 @@ trait Authentication
             $nonce = mt_rand();
         }
 
-        if ($decode) return base64_encode($nonce);
+        if ($decode) {
+            return base64_encode($nonce);
+        }
 
         return $nonce;
     }
 
+    /**
+     * @return string
+     */
     public function getSeed(): string
     {
         return date('c');
     }
 
+    /**
+     * @param $nonce
+     * @param $seed
+     * @return string
+     */
     public function tranKey($nonce, $seed): string
     {
         $secretKey = config('placetopay.secretKey');
@@ -33,15 +47,19 @@ trait Authentication
         return base64_encode($tanKey);
     }
 
+    /**
+     * @return array
+     */
     public function getAuth(): array
     {
         $seed = $this->getSeed();
         $nonce = $this->getNonce(false);
+
         return [
             'login'     => config('placetopay.authId'),
             'tranKey'   => $this->tranKey($nonce, $seed),
             'nonce'     => base64_encode($nonce),
-            'seed'      => $seed
+            'seed'      => $seed,
         ];
     }
 }

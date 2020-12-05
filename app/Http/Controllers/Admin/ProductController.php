@@ -3,45 +3,43 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\ActiveRequest;
-use App\Http\Requests\Products\IndexRequest;
-use App\Http\Requests\Products\StoreRequest;
-use App\Http\Requests\Products\UpdateRequest;
+use App\Http\Requests\Admin\Products\ActiveRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\StoreRequest;
+use App\Http\Requests\Admin\Products\UpdateRequest;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ColorsInterface;
 use App\Interfaces\ProductsInterface;
 use App\Interfaces\SizesInterface;
 use App\Interfaces\TagsInterface;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use Exception;
-use Illuminate\Http\Request;
-use App\Models\Color;
-use App\Models\Size;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    protected $products;
+    protected ProductsInterface $products;
 
     public function __construct(ProductsInterface $products)
     {
+        $this->authorizeResource(Product::class, 'product');
         $this->products = $products;
     }
 
     /**
-     * Display a listing of Products
-     *
      * @param IndexRequest $request
      * @param CategoryInterface $categories
+     * @param TagsInterface $tags
      * @return View
      */
-    public function index(IndexRequest $request, CategoryInterface $categories): View
+    public function index(IndexRequest $request, CategoryInterface $categories, TagsInterface $tags): View
     {
         $category = $request->validationData()['category'];
-        $tags = $request->validationData()['tags'];
+        $tagsFilter = $request->validationData()['tags'];
         $search = $request->validationData()['search'];
         $orderBy = $request->validationData()['orderBy'];
 
@@ -50,14 +48,15 @@ class ProductController extends Controller
         $products = $this->products->query($request);
 
         return view('admin.products.index', [
-            'products' => $products,
+            'products'  => $products,
+            'categories' => $categories,
+            'tags'      => $tags->index(),
             'filters' => [
                 'category'  => $category,
-                'tags'      => $tags,
+                'tags'      => $tagsFilter,
                 'search'    => $search,
-                'orderBy'   => $orderBy
+                'orderBy'   => $orderBy,
             ],
-            'categories' => $categories
         ]);
     }
 
@@ -70,17 +69,21 @@ class ProductController extends Controller
      * @param SizesInterface $sizes
      * @return View
      */
-    public function create(TagsInterface $tags, CategoryInterface $categories, ColorsInterface $colors,
-                            SizesInterface $sizes): View
-    {
-        $categories = $categories->all();
+    public function create(
+        TagsInterface $tags,
+        CategoryInterface $categories,
+        ColorsInterface $colors,
+        SizesInterface $sizes
+    ): View {
+        $categories = $categories->index();
         $tags = $tags->index();
         $colors = $colors->index();
         $sizes = $sizes->index();
 
-        return view('admin.products.create',
-                    compact('categories', 'tags', 'sizes', 'colors')
-                );
+        return view(
+            'admin.products.create',
+            compact('categories', 'tags', 'sizes', 'colors')
+        );
     }
 
     /**
@@ -94,7 +97,10 @@ class ProductController extends Controller
         $product = $this->products->store($request);
 
         return redirect(route('stocks.create', $product))
-            ->with('success', __('Your product has been save successfully'));
+            ->with('success', trans('messages.crud', [
+                'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                'status' => trans('fields.created')
+            ]));
     }
 
     /**
@@ -102,13 +108,16 @@ class ProductController extends Controller
      *
      * @param Request $request
      * @param Product $product
+     * @throws AuthorizationException
      * @return View
      */
     public function active(Request $request, Product $product): View
     {
+        $this->authorize('view', $product);
+
         return view('admin.products.active', [
             'product'   => $product,
-            'input_name'=> $request->get('input_name')
+            'input_name' => $request->get('input_name'),
         ]);
     }
 
@@ -123,8 +132,11 @@ class ProductController extends Controller
     {
         $categories = $categories->index();
         $tags = Tag::all();
-        return view('admin.products.edit', [
-            'product'   => $product
+
+        return view(
+            'admin.products.edit',
+            [
+            'product'   => $product,
             ],
             compact('categories', 'tags')
         );
@@ -141,8 +153,11 @@ class ProductController extends Controller
     {
         $product = $this->products->update($request, $product);
 
-        return redirect( route('products.edit', ['product' => $product]))
-            ->with('product-updated', 'Product has been updated success');
+        return redirect(route('products.edit', ['product' => $product]))
+            ->with('success', trans('messages.crud', [
+                'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                'status' => trans('fields.updated')
+            ]));
     }
 
     /**
@@ -156,20 +171,26 @@ class ProductController extends Controller
     {
         $this->products->setActive($request, $product);
 
-        return redirect( route('products.index'))
-                ->with('product-updated', __('Your product has been update successfully'));
+        return redirect(route('products.index'))
+                ->with('seccess', trans('messages.crud', [
+                    'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                    'status' => trans('fields.updated')
+                ]));
     }
 
     /**
      * @param Product $product
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(Product $product): RedirectResponse
     {
         $this->products->destroy($product);
 
-        return redirect( route('products.index'))
-                ->with('product-deleted', "Product has been deleted success");
+        return redirect(route('products.index'))
+                ->with('success', trans('messages.crud', [
+                    'resource' => trans_choice('products.product', 1, ['product_count' => '']),
+                    'status' => trans('fields.deleted')
+                ]));
     }
 }

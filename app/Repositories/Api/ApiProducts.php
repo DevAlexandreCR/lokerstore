@@ -2,23 +2,26 @@
 
 namespace App\Repositories\Api;
 
-use App\Http\Requests\Products\ActiveRequest;
-use App\Http\Requests\Products\IndexRequest;
+use App\Http\Requests\Admin\Products\IndexRequest;
 use App\Interfaces\Api\ApiProductsInterface;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ApiProducts implements ApiProductsInterface
 {
-
-    protected $product;
+    protected Product $product;
 
     public function __construct(Product $product)
     {
         $this->product = $product;
     }
 
+    /**
+     * @param IndexRequest $request
+     * @return mixed
+     */
     public function query(IndexRequest $request)
     {
         $category = $request->validationData()['category'];
@@ -28,14 +31,16 @@ class ApiProducts implements ApiProductsInterface
         $price = $request->validationData()['price'];
         $search = $request->validationData()['search'];
 
-        return $this->product->active()
-                    ->byCategory($category)
-                    ->price($price)
-                    ->colors($colors)
-                    ->sizes($sizes)
-                    ->withTags($tags)
-                    ->search($search)
-                    ->get();
+        return $this->product
+            ->active()
+            ->byCategory($category)
+            ->price($price)
+            ->colors($colors)
+            ->sizes($sizes)
+            ->withTags($tags)
+            ->search($search)
+            ->with('category', 'photos', 'stocks')
+            ->get();
     }
 
     public function index()
@@ -45,16 +50,25 @@ class ApiProducts implements ApiProductsInterface
 
     public function store(Request $request)
     {
-        // TODO: Implement store() method.
+        return $this->product->create($request->all());
     }
 
-    public function update(Request $request, Model $model)
+    public function update(Request $request, Model $product)
     {
-        // TODO: Implement update() method.
+        $product->update($request->all());
     }
 
     public function destroy(Model $model)
     {
-        // TODO: Implement destroy() method.
+        $this->product::destroy($model->id);
+    }
+
+    /**
+     * @param Product $product
+     * @return Collection
+     */
+    public function show(Product $product): Collection
+    {
+        return $this->product::with('stocks', 'category', 'photos')->where('id', $product->id)->get();
     }
 }

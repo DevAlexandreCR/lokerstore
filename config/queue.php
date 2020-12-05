@@ -38,6 +38,7 @@ return [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
+            'tries' => 1,
             'retry_after' => 90,
         ],
 
@@ -64,7 +65,8 @@ return [
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
-            'block_for' => null
+            'tries' => 1,
+            'block_for' => null,
         ],
 
     ],

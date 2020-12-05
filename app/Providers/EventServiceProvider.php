@@ -5,14 +5,15 @@ namespace App\Providers;
 use App\Events\OnProductUpdateEvent;
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Listeners\DisableProductIfStockIsEmpty;
-use App\Listeners\EnableOrDisableProductIfStockEmpty;
 use App\Listeners\SetStockProduct;
+use App\Models\Admin\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\User;
+use App\Observers\AdminObserver;
 use App\Observers\OrderDetailObserver;
 use App\Observers\OrderObserver;
 use App\Observers\PaymentObserver;
@@ -35,11 +36,11 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         OnStockCreatedOrUpdatedEvent::class => [
-            SetStockProduct::class
+            SetStockProduct::class,
         ],
         OnProductUpdateEvent::class => [
-            DisableProductIfStockIsEmpty::class
-        ]
+            DisableProductIfStockIsEmpty::class,
+        ],
     ];
 
     /**
@@ -47,7 +48,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -57,5 +58,6 @@ class EventServiceProvider extends ServiceProvider
         Payment::observe(PaymentObserver::class);
         Order::observe(OrderObserver::class);
         OrderDetail::observe(OrderDetailObserver::class);
+        Admin::observe(AdminObserver::class);
     }
 }

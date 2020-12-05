@@ -3,9 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class CheckBeforeLoginAdmin
@@ -13,17 +11,16 @@ class CheckBeforeLoginAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  Request  $request
-     * @param  Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if (auth()->user()) {
-            return Redirect::back()->withErrors(['logout-web' => __('You must log out of the user before logging in as administrator')]);
-        } else {
-            return $next($request);
+            return Redirect::back()->withErrors(['logout-web' => trans('users.logout_before')]);
         }
 
+        return $next($request);
     }
 }

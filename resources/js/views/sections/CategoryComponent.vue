@@ -15,7 +15,7 @@
             <div v-bind:class="[ 'col-md-6', (category.id%2 === 0) ? '' : 'order-12']"
                  v-on:click="goToShowcase(category.name)">
                 <img v-if="selectedRandomProducts[4]" class="img-fluid img-category"
-                     :src="'/storage/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
+                     :src="'/photos/' + selectedRandomProducts[4].photos[0].name" alt="">
                 <div class="ofert-title">Hasta 50% Off</div>
             </div>
             <div class="col-md-6" v-if="products.length > 0">
@@ -32,62 +32,56 @@
 
 <script>
 
-    import CardCategoryComponent from '../../components/CardCategoryComponent'
+import CardCategoryComponent from '../../components/CardCategoryComponent'
 
-    export default {
+export default {
 
-        name: 'category',
+  name: 'category',
 
-        components: {
-            CardCategoryComponent
-        },
+  components: {
+    CardCategoryComponent
+  },
 
-        data() {
-            return {
-            }
-        },
-
-        props: {
-            category: {},
-            products: {
-                    type: Array,
-                    default: () => []
-                }
-        },
-
-        methods: {
-            goToShowcase(filter) {
-                this.$router.push({name: 'showcase', query: { category: filter}})
-            }
-        },
-
-        computed: {
-            selectedRandomProducts: function()  {
-                var selectedRandomProducts = [] // selected random products
-                var max_selected = 0 // count max selected 4 products
-                var count = 0 // count iterations
-                while (max_selected < 5 && this.products.length > 0 && count < this.products.length) {
-                    count++
-                    var random = Math.floor(Math.random() * this.products.length);
-                    var product = this.products[random]
-                    if (product.category.id_parent === this.category.id) {
-                        if (! selectedRandomProducts.includes(product)) {
-                            selectedRandomProducts.push(product)
-                            max_selected++
-                        }
-                    }
-                }
-
-                return selectedRandomProducts
-            }
-        },
-
-        created() {
-
-        },
-
-        mounted() {
-
-        }
+  data () {
+    return {
     }
+  },
+
+  props: {
+    category: {
+      required: true
+    },
+    products: {
+      type: Array,
+      default: () => []
+    }
+  },
+
+  methods: {
+    goToShowcase (filter) {
+      this.$router.push({ name: 'showcase', query: { category: filter } })
+    }
+  },
+
+  computed: {
+    selectedRandomProducts: function () {
+      const selectedRandomProducts = [] // selected random products
+      let maxSelected = 0 // count max selected 4 products
+      let count = 0 // count iterations
+      while (maxSelected < 5 && this.products.length > 0 && count < this.products.length) {
+        count++
+        const random = Math.floor(Math.random() * this.products.length)
+        const product = this.products[random]
+        if (product.category.id_parent === this.category.id) {
+          if (!selectedRandomProducts.includes(product)) {
+            selectedRandomProducts.push(product)
+            maxSelected++
+          }
+        }
+      }
+
+      return selectedRandomProducts
+    }
+  }
+}
 </script>

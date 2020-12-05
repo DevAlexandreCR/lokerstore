@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 
 class Sizes implements SizesInterface
 {
-
-    protected $size;
+    protected Size $size;
 
     public function __construct(Size $size)
     {
@@ -19,14 +18,23 @@ class Sizes implements SizesInterface
 
     public function index()
     {
-        return $this->size::all();
+        return $this->size::all(['id', 'name', 'type_sizes_id']);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function store(Request $request)
     {
         return $this->size->create($request->all());
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return Model|mixed
+     */
     public function update(Request $request, Model $model)
     {
         $model->update($request->all());
@@ -34,8 +42,12 @@ class Sizes implements SizesInterface
         return $model;
     }
 
+    /**
+     * @param Model $model
+     * @return mixed|void
+     */
     public function destroy(Model $model)
     {
-        $model->delete();
+        $this->size::destroy($model->id);
     }
 }

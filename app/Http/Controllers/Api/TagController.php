@@ -5,19 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    protected $tags;
+    protected Tag $tags;
 
     public function __construct(Tag $tags)
     {
         $this->tags = $tags;
     }
 
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
-        return response()->json($this->tags->all()->toArray());
+        return response()->json($this->tags::all()->toArray());
     }
 }

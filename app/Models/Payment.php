@@ -8,15 +8,30 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
-    protected $fillable = ['order_id', 'request_id', 'process_url', 'status', 'reference', 'method', 'last_digit'];
+    protected $fillable = [
+        'order_id',
+        'request_id',
+        'process_url',
+        'status',
+        'reference',
+        'method',
+        'last_digit',
+        'payer_id'
+    ];
 
+    /**
+     * @return BelongsTo
+     */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function payer(): HasOne
+    /**
+     * @return BelongsTo
+     */
+    public function payer(): BelongsTo
     {
-        return $this->hasOne(Payer::class);
+        return $this->belongsTo(Payer::class);
     }
 }

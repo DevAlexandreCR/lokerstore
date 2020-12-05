@@ -3,19 +3,10 @@
 namespace Tests\Feature\Http\Controllers\Web;
 
 use App\Models\Cart;
-use App\Models\Category;
-use App\Models\Color;
-use App\Models\Photo;
-use App\Models\Product;
-use App\Models\Size;
 use App\Models\Stock;
-use App\Models\Tag;
-use App\Models\TypeSize;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PermissionSeeder;
-use RoleSeeder;
-use TestDatabaseSeeder;
+use Database\Seeders\TestDatabaseSeeder;
 use Tests\TestCase;
 
 class CartControllerTest extends TestCase
@@ -28,21 +19,21 @@ class CartControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->seed([
-            TestDatabaseSeeder::class
+            TestDatabaseSeeder::class,
         ]);
     }
 
     private $categories = [
-        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
+        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest',
     ];
 
     public function testShow(): void
     {
         $user = factory(User::class)->create([
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
         factory(Cart::class)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $response = $this->actingAs($user)->get(route('cart.show', $user));
@@ -55,7 +46,7 @@ class CartControllerTest extends TestCase
     public function testAnUserUnVerifiedCannotViewCart(): void
     {
         $user = factory(User::class)->create([
-            'email_verified_at' => null
+            'email_verified_at' => null,
         ]);
 
         $response = $this->actingAs($user)->get(route('cart.show', $user));
@@ -67,60 +58,68 @@ class CartControllerTest extends TestCase
     public function testAnuserCanAddItemToCart(): void
     {
         $user = factory(User::class)->create([
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         factory(Cart::class)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $stock = factory(Stock::class)->create([
-            'quantity' => 5
+            'quantity' => 5,
         ]);
 
-        $response = $this->actingAs($user)->post(route('cart.add', $user),
+        $response = $this->actingAs($user)->post(
+            route('cart.add', $user),
             [
                 'product_id' => $stock->product_id,
                 'size_id' => $stock->size->id,
                 'color_id' => $stock->color->id,
-                'quantity' => 2
-            ]);
+                'quantity' => 2,
+            ]
+        );
 
         $response->assertStatus(302);
 
-        $this->assertDatabaseHas('cart_stock',
-        [
+        $this->assertDatabaseHas(
+            'cart_stock',
+            [
             'cart_id' => $user->cart->id,
             'stock_id' => $stock->id,
-            'quantity' => 2
-        ]);
+            'quantity' => 2,
+            ]
+        );
     }
     public function testAnuserCanRemoveitemToCart(): void
     {
         $user = factory(User::class)->create([
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         factory(Cart::class)->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $stock = factory(Stock::class)->create([
-            'quantity' => 5
+            'quantity' => 5,
         ]);
 
         $user->cart->stocks()->attach($stock->id, ['quantity' => 2]);
 
-        $response = $this->actingAs($user)->delete(route('cart.remove',
-            [ $user, $stock ]));
+        $response = $this->actingAs($user)->delete(route(
+            'cart.remove',
+            [$user, $stock]
+        ));
 
         $response->assertStatus(302);
 
-        $this->assertDatabaseMissing('cart_stock',
+        $this->assertDatabaseMissing(
+            'cart_stock',
             [
                 'cart_id' => $user->cart->id,
                 'stock_id' => $stock->id,
-                'quantity' => 2
-            ]);
+                'quantity' => 2,
+            ]
+        );
     }
 }

@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{__('Error!')}}</strong> {{ __(session('error')) }}
+                    <strong>{{trans('actions.error')}}</strong> {{ trans(session('error')) }}
                 </div>
             </div>
         @endif
@@ -20,29 +20,29 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>{{__('Success!')}}</strong> {{ __(session('message')) }}
+                    <strong>{{trans('actions.success')}}</strong> {{ trans(session('message')) }}
                 </div>
             </div>
         @endif
     </div>
-    <div class="container py-4">
+    <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-lg-8">
                 <div class="card card">
                     <div class="modal-header">
-                        <h3>{{__('Order summary')}}</h3>
+                        <h3>{{trans('orders.summary')}}</h3>
                         <small class="text-muted">{{$order->created_at}}</small>
                     </div>
                     <div class="card-body">
-                        <table class="table table-borderless">
+                        <table class="table table-borderless table-responsive-lg">
                             <thead>
                             <tr class="text-center">
-                                <th scope="col">{{__('Photo')}}</th>
-                                <th scope="col">{{__('Product')}}</th>
-                                <th scope="col">{{__('Stock')}}</th>
-                                <th scope="col">{{__('Color')}}</th>
-                                <th scope="col">{{__('Size')}}</th>
-                                <th scope="col">{{__('Price')}}</th>
+                                <th scope="col">{{trans('users.phone')}}</th>
+                                <th scope="col">{{trans_choice('products.product', 2, ['product_count' => ''])}}</th>
+                                <th scope="col">{{trans('products.stock')}}</th>
+                                <th scope="col">{{trans('products.color')}}</th>
+                                <th scope="col">{{trans('products.size')}}</th>
+                                <th scope="col">{{trans('products.price')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -53,7 +53,7 @@
                                 <th class="align-middle">{{$detail->quantity}}</th>
                                 <th class="align-middle"><span class="badge badge-color-{{strtolower($detail->stock->color->name)}}">.</span></th>
                                 <th class="align-middle">{{$detail->stock->size->name}}</th>
-                                <th class="align-middle">{{$detail->total_price}}</th>
+                                <th class="align-middle">$ {{number_format($detail->total_price, 2, ',', '.')}}</th>
                             </tr>
                             @endforeach
                             </tbody>
@@ -62,25 +62,25 @@
                     <div class="card-footer">
                         <div class="row text-right">
                             <div class="col-sm-9">
-                                {{__('Order amount')}}:
+                                {{trans('orders.amount')}}:
                             </div>
                             <div class="col-sm-3 font-weight-bold">
-                                {{$order->amount}}
+                                $ {{number_format($order->amount, 2, ',', '.')}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="card">
+            <div class="col-lg-4">
+                <div class="card my-2 my-lg-0">
                     <div class="card-header">
-                        {{$order->getStatus()}}
+                        {{\App\Constants\Orders::getTranslatedStatus($order->status)}}
                     </div>
                     <div class="card-body">
-                        <x-statusPayment :order="$order"></x-statusPayment>
+                        <x-status-payment :order="$order"/>
                     </div>
                     <div class="card-footer">
-                        <a href="{{route('user.orders.index', [$order->user_id])}}" class="btn btn-block btn-sm btn-outline-dark my-2">{{__('Back')}}</a>
+                        <a href="{{route('home')}}" class="btn btn-block btn-sm btn-success my-2">{{trans('users.keep_buying')}}</a>
                     </div>
                 </div>
             </div>

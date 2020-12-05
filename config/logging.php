@@ -59,7 +59,8 @@ return [
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            'level' => 'error'
+            'level' => 'info',
+            'ignore_exceptions' => false,
         ],
 
         'papertrail' => [
@@ -101,17 +102,19 @@ return [
         ],
 
         'payments' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/payments/laravel.log'),
-            'level' => 'debug',
-            'days' => 14,
+            'driver' => env('LOG_CHANNEL', 'daily'),
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => config('app.name') . ' Payments',
+            'level' => 'info',
+            'emoji' => ':chart_with_upwards_trend:',
         ],
 
         'users' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/users/laravel.log'),
+            'driver' => env('LOG_CHANNEL', 'daily'),
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => config('app.name') . ' Users',
             'level' => 'info',
-            'days' => 14,
+            'emoji' => ':couple:',
         ],
     ],
 

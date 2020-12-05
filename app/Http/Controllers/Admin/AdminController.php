@@ -3,73 +3,108 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Admins\StoreRequest;
+use App\Http\Requests\Admin\Admins\UpdateRequest;
+use App\Interfaces\AdminInterface;
 use App\Models\Admin\Admin;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
-    public $admin;
+    public AdminInterface $admins;
 
-    public function __construct(Admin $admin)
+    public function __construct(AdminInterface $admins)
     {
-        $this->admin = $admin;
+        $this->admins = $admins;
+        $this->authorizeResource(Admin::class, 'admin');
     }
 
-    public function index(Request $request): Collection
+    public function index(): View
     {
-        return $this->admin->all();
+        return view('admin.admins.index', [
+            'admins' => $this->admins->index(),
+            'roles' => Role::pluck('name', 'id'),
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show current admin
      *
-     * @param  Request  $request
+     * @param Admin $admin
+     * @return View
+     */
+    public function show(Admin $admin): View
+    {
+        $permissions = Permission::pluck('name', 'id');
+        $roles = Role::all(['name', 'id']);
+
+        return view('admin.admins.show', compact(['admin', 'permissions', 'roles']));
+    }
+
+    /**
+     *
+     * @param StoreRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $this->admin->create($request->all());
+        $this->admins->store($request);
 
-        return redirect()->back()->with('success', __('Admin has been created success'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Admin  $admin
-     * @return Admin
-     */
-    public function show(Admin $admin): Admin
-    {
-        return $admin;
+        return redirect()->route('admins.index')->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.created')
+        ]));
     }
 
     /**
      * Update current admin
      *
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param Admin $admin
      * @return RedirectResponse
      */
-    public function update(Request $request, Admin $admin): RedirectResponse
+    public function update(UpdateRequest $request, Admin $admin): RedirectResponse
     {
-        $admin->update($request->all());
+        $this->admins->update($request, $admin);
 
-        return redirect()->back()->with('success', __('Admin has been updated success'));
+        return redirect()->route('admins.show', $admin->id)->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update current admin
+     *
+     * @param Admin $admin
+     * @return RedirectResponse
+     */
+    public function updateToken(Admin $admin): RedirectResponse
+    {
+        $this->admins->updateToken($admin);
+
+        return redirect()->route('admins.show', $admin->id)
+            ->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.updated')
+        ]));
+    }
+
+    /**
      *
      * @param Admin $admin
      * @return RedirectResponse
      */
     public function destroy(Admin $admin): RedirectResponse
     {
-        $admin->delete();
+        $this->admins->destroy($admin);
 
-        return redirect()->back()->with('success', __('Admin has been remove success'));
+        return redirect()->route('admins.index')->with('success', trans('messages.crud', [
+            'resource' => trans('users.admin'),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

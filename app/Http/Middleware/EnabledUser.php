@@ -3,27 +3,27 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class EnabledUser
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
+     * @param null|string $guard
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
-        
         /**
          * si el usuario esta inhabilitado lo redirecciona a la vista correspondiente
          */
-        if ($request->user() && ! $request->user()->is_active) {
+        if ($request->user($guard) && ! $request->user($guard)->is_active) {
             return  redirect('/disabled-user');
         }
-        
+
         return $next($request);
     }
 }

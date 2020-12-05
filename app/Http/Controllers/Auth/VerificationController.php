@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Constants\Roles;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
@@ -21,7 +20,6 @@ class VerificationController extends Controller
     | be re-sent if the user didn't receive the original email message.
     |
     */
-
     use VerifiesEmails;
 
     /**
@@ -47,9 +45,9 @@ class VerificationController extends Controller
     {
         $cart = Cart::where('user_id', auth()->id())->first();
 
-        if (!$cart){
+        if (!$cart) {
             Cart::create([
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
             ]);
         }
     }

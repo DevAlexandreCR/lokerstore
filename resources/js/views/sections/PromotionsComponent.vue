@@ -7,15 +7,15 @@
 </template>
 
 <script>
-    export default {
-        name: 'promotions',
-        data() {
-            return {
-                
-            }
-        },
-        mounted() {           
+export default {
+  name: 'promotions',
+  data () {
+    return {
 
-        }
     }
+  },
+  mounted () {
+
+  }
+}
 </script>

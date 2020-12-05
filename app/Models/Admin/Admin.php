@@ -3,28 +3,25 @@
 namespace App\Models\Admin;
 
 use App\Constants\Admins;
+use App\Constants\Roles;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
     use Notifiable;
-
-    use SoftDeletes;
-
     use HasRoles;
 
-    protected $guard_name = Admins::GUARDED;
+    protected string $guard_name = Admins::GUARDED;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'is_active', 'api_token'
     ];
 
     /**
@@ -33,7 +30,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'api_token',
     ];
 
     /**
@@ -48,13 +45,13 @@ class Admin extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $passwordSend = new ResetPassword($token);
-        $passwordSend->createUrlUsing(function ($notifiable, $token) {
+        $passwordSend::createUrlUsing(function ($notifiable, $token) {
             return url(route('admin.password.reset', [
                 'token' => $token,
                 'email' => $notifiable->getEmailForPasswordReset(),
@@ -62,5 +59,13 @@ class Admin extends Authenticatable
         });
 
         $this->notify($passwordSend);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(Roles::ADMIN);
     }
 }

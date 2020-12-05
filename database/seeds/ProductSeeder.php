@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Tag;
@@ -10,22 +12,20 @@ class ProductSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
      * @throws Exception
+     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        factory(Product::class, 20)->create();
-        $tags = Tag::all();
+        factory(Product::class, 100)->create();
 
-        Product::inRandomOrder()->each(function ($product) use ($tags) {
-
+        Product::inRandomOrder()->each(function ($product) {
             $product->tags()->attach(
-                $tags->random(random_int(1, 3))->pluck('id')->toArray()
+                Tag::all()->random()->id
             );
 
-            factory(Photo::class, random_int(1, 2))->create([
-                'product_id' => $product->id
+            factory(Photo::class)->create([
+                'product_id' => $product->id,
             ]);
         });
     }

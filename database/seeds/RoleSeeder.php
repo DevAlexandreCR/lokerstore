@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Constants\Admins;
 use App\Constants\Permissions;
 use App\Constants\Roles;
@@ -17,22 +19,15 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             'name' => Roles::ADMIN,
-            'guard_name' => Admins::GUARDED
+            'guard_name' => Admins::GUARDED,
             ]);
         $roleEmployee = Role::create([
             'name' => Roles::EMPLOYEE,
-            'guard_name' => Admins::GUARDED
-            ]);
-        $roleClient = Role::create([
-            'name' => Roles::CLIENT
+            'guard_name' => Admins::GUARDED,
             ]);
 
-        $roleEmployee->syncPermissions([
-            Permissions::getEmployePermissions()
-        ]);
-
-        $roleClient->syncPermissions([
-            Permissions::getClientPermissions()
-        ]);
+        foreach (Permissions::getEmployePermissions() as $permission) {
+            $roleEmployee->givePermissionTo($permission);
+        }
     }
 }

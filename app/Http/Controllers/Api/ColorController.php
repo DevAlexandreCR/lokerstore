@@ -8,14 +8,14 @@ use Illuminate\Http\JsonResponse;
 
 class ColorController extends Controller
 {
-    protected $colors;
+    protected ColorsInterface $colors;
 
     public function __construct(ColorsInterface $colors)
     {
         $this->colors = $colors;
     }
 
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json($this->colors->index());
     }

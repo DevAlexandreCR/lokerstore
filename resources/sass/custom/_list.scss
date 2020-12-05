@@ -1,0 +1,11 @@
+.list-group-scroll {
+    max-height: 400px;
+    margin: 10px;
+    padding: 10px;
+    overflow-y:auto;
+}
+
+.active-autocomplete {
+    background-color: $primary-end;
+    font-weight: bold;
+}

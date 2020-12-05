@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheColors implements ColorsInterface
 {
-    protected $colors;
+    protected Colors $colors;
 
     public function __construct(Colors $colors)
     {
@@ -33,11 +33,9 @@ class CacheColors implements ColorsInterface
      */
     public function store($request)
     {
-        $color = $this->colors->store($request);
-
         Cache::tags(['colors'])->flush();
 
-        return $color;
+        return $this->colors->store($request);
     }
 
     /**
@@ -47,11 +45,9 @@ class CacheColors implements ColorsInterface
      */
     public function update(Request $request, Model $model)
     {
-        $model->update($request->all());
-
         Cache::tags(['colors'])->flush();
 
-        return $model;
+        return $model->update($request->all());
     }
 
     /**
@@ -59,6 +55,6 @@ class CacheColors implements ColorsInterface
      */
     public function destroy(Model $model)
     {
-        $model->delete();
+        $this->colors->destroy($model);
     }
 }

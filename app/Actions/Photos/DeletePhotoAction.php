@@ -4,17 +4,16 @@ namespace App\Actions\Photos;
 
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
-use Image;
 
 class DeletePhotoAction
 {
-
     public function execute(?array $idsPhotos): void
     {
-        if (empty($idsPhotos)) return;
+        if (empty($idsPhotos)) {
+            return;
+        }
 
         foreach ($idsPhotos as $id) {
-
             $name = $this->deletePhoto($id);
 
             $this->deleteImage($name);

@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers\Api;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TypeSizeControllerTest extends TestCase
@@ -13,9 +11,8 @@ class TypeSizeControllerTest extends TestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testIndex(): void
     {
-        $this->withoutExceptionHandling();
         $response = $this->get(route('api.type_sizes.index'));
 
         $response->assertStatus(200);

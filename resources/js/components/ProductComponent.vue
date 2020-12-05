@@ -3,14 +3,14 @@
         <img :src="'/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-5 text-name">{{product.name}}</div>
-                <div class="col-sm-7"><p class="text-price">
-                    <span class="text-old-price">${{ product.price | oldPrice }}</span>
-                    <strong>${{ product.price | price }}</strong></p>
+                <div class="col-lg-6 text-name text-sm-center">{{product.name}}</div>
+                <div class="col-lg-6"><p class="text-price">
+                    <span class="text-old-price">{{ product.price | oldPrice }}</span>
+                    <strong>{{ product.price | price }}</strong></p>
                 </div>
             </div>
             <div class="row container">
-                <div class="text-left">{{ product.description | truncate }}</div>
+                <p class="text-left d-none d-md-block">{{ product.description | truncate }}</p>
             </div>
         </div>
     </div>
@@ -18,43 +18,39 @@
 
 <script>
 
+import NumberFormat from '../constants/NumberFormat'
+
 export default {
-    name: 'product-component',
+  name: 'product-component',
 
-    data() {
-        return {
-
-        }
-    },
-
-    props: {
-        product: {
-            type: Object,
-            default: {}
-        }
-    },
-
-    methods: {
-        showProduct(id) {
-            window.location.assign(`/products/${id}`)
-        },
-    },
-
-    filters: {
-        price: function (value) {
-            return Math.round(value)
-        },
-
-        truncate: function (value) {
-            return value.substring(0,50) + '...'
-        },
-
-        oldPrice: function (value) {
-            value = parseFloat(value)
-            let oldPrice = value + value * 0.1
-            return Math.ceil(oldPrice)
-        }
+  props: {
+    product: {
+      type: Object,
+      default: () => []
     }
+  },
+
+  methods: {
+    showProduct (id) {
+      window.location.assign(`/products/${id}`)
+    }
+  },
+
+  filters: {
+    price: function (value) {
+      return NumberFormat.format(value)
+    },
+
+    truncate: function (value) {
+      return value.substring(0, 50) + '...'
+    },
+
+    oldPrice: function (value) {
+      value = parseFloat(value)
+      const oldPrice = value + value * 0.1
+      return NumberFormat.format(oldPrice)
+    }
+  }
 }
 
 </script>

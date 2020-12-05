@@ -4,10 +4,8 @@ namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
-use PermissionSeeder;
-use RoleSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 
 class AuthUserTest extends TestCase
@@ -20,7 +18,7 @@ class AuthUserTest extends TestCase
 
         $this->seed([
             PermissionSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
         ]);
     }
 
@@ -30,16 +28,16 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testLoginNoActiveUser()
+    public function testLoginNoActiveUser(): void
     {
         $user = factory(User::class)->create([
             'password' => bcrypt($password = 'secret'),
-            'is_active' => false
+            'is_active' => false,
         ]);
 
         $response = $this->post('/login', [
             'email' => $user->email,
-            'password' => $password
+            'password' => $password,
         ]);
 
         $response->assertSessionHasErrors('email');
@@ -52,7 +50,7 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testResgister()
+    public function testRegister(): void
     {
         $this->withoutExceptionHandling();
         $user = [
@@ -64,7 +62,7 @@ class AuthUserTest extends TestCase
             'is_active' => true,
             'password' => '12345678',
             'password_confirmation' => '12345678',
-            "remember_token" => null,
+            'remember_token' => null,
           ];
 
         $response = $this->post('register', $user);
@@ -72,7 +70,7 @@ class AuthUserTest extends TestCase
         $response->assertRedirect('email/verify');
 
         //quitamos password y password_confirmation del array
-        array_splice($user,4, 2);
+        array_splice($user, 4, 2);
 
         $this->assertDatabaseHas('users', ['email' => $user['email']]);
     }
@@ -82,13 +80,13 @@ class AuthUserTest extends TestCase
      *
      * @return void
      */
-    public function testUserDisabledIndex()
+    public function testUserDisabledIndex(): void
     {
         $user = factory(User::class)->create([
-            'is_active' => false
+            'is_active' => false,
         ]);
 
-        $response = $this->actingAs($user)->get( route('index'));
+        $response = $this->actingAs($user)->get(route('index'));
 
         $response->assertRedirect('/disabled-user');
     }

@@ -4,10 +4,11 @@ namespace App\Observers;
 
 use App\Events\OnStockCreatedOrUpdatedEvent;
 use App\Models\Stock;
+use Exception;
 
 class StockObserver
 {
-    public function creating(Stock $stock)
+    public function creating(Stock $stock): bool
     {
         $stockExist = Stock::where('product_id', $stock->product_id)
                 ->where('color_id', $stock->color_id)
@@ -16,6 +17,7 @@ class StockObserver
         if ($stockExist !== null) {
             $stockExist->quantity += $stock->quantity;
             $stockExist->save();
+
             return false;
         }
 
@@ -33,6 +35,7 @@ class StockObserver
     /**
      * Handle the stock "updated" event.
      * @param Stock $stock
+     * @throws Exception
      */
     public function updated(Stock $stock): void
     {

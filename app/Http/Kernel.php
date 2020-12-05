@@ -53,7 +53,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        ]
+        ],
     ];
 
     /**
@@ -77,6 +77,6 @@ class Kernel extends HttpKernel
         'enabled' => \App\Http\Middleware\EnabledUser::class,
         'before-login-admin' => \App\Http\Middleware\CheckBeforeLoginAdmin::class,
         'email-verified' => EmailVerify::class,
-        'user-can' => VerifyUserCan::class
+        'user-can' => VerifyUserCan::class,
     ];
 }

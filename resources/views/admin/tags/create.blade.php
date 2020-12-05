@@ -4,7 +4,7 @@
         <form action="{{route('tags.store')}}" method="post">
             @csrf
             <div class="modal-header">
-            <h5 class="modal-title" id="labelmodalCreateTag">{{__('Add tag')}}</h5>
+            <h5 class="modal-title" id="labelmodalCreateTag">{{trans('products.messages.add_tags')}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -13,16 +13,16 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="inputNameCreate">{{__('Name tag')}}</label>
+                            <label for="inputNameCreate">{{trans('fields.name')}}</label>
                             <input type="text" class="form-control" id="inputNameCreate" name="name" aria-describedby="namelHelp" value="{{ old('name')}}">
-                            <small id="nameHelp" class="form-text text-muted">{{__('The name must be unique')}}</small>
+                            <small id="nameHelp" class="form-text text-muted text-danger">{{trans('messages.unique', ['field' => trans('fields.name')])}}</small>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Discard')}}</button>
-            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('actions.cancel')}}</button>
+            <button type="submit" class="btn btn-primary">{{trans('actions.save')}}</button>
             </div>
         </form>
       </div>

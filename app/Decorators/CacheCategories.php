@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheCategories implements CategoryInterface
 {
-
-    protected $categories;
+    protected Categories $categories;
 
     public function __construct(Categories $categories)
     {
@@ -42,12 +41,13 @@ class CacheCategories implements CategoryInterface
         $this->categories->destroy($model);
 
         Cache::tags(['categories'])->flush();
+        Cache::tags(['products', 'api.products'])->flush();
     }
 
     public function all()
     {
         return Cache::tags(['categories'])->rememberForever('all', function () {
-           return $this->categories->all();
+            return $this->categories->all();
         });
     }
 }

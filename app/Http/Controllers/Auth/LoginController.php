@@ -23,7 +23,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
 
     /**
@@ -43,11 +42,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function credentials(Request $request)
+    protected function credentials(Request $request): array
     {
         $credenctials = $request->only($this->username(), 'password');
 
-        $credenctials['is_active'] = true;  // aqui solicitamos que el usuario este activo para poder iniciar sesion
+        $credenctials['is_active'] = true;  // required the user is active to can login
 
         return $credenctials;
     }
@@ -76,7 +75,7 @@ class LoginController extends Controller
     /**
      * @return Guard
      */
-    protected function guard()
+    protected function guard(): Guard
     {
         return Auth::guard();
     }
@@ -99,5 +98,4 @@ class LoginController extends Controller
                     ? new Response('', 204)
                     : redirect(RouteServiceProvider::HOME);
     }
-
 }

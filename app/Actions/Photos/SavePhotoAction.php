@@ -5,20 +5,34 @@ namespace App\Actions\Photos;
 use App\Models\Photo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class SavePhotoAction
 {
-
-    public function execute(int $id_product, ?array $images): void
+    /**
+     * @param int $id_product
+     * @param array|UploadedFile|null $images
+     */
+    public static function execute(int $id_product, $images): void
     {
-        if (empty($images)) return;
+        if (empty($images)) {
+            return;
+        }
 
-        foreach ($images as $image) {
+        if (is_object($images)) {
+            $name = self::saveImage($images);
 
-            $name = $this->saveImage($image);
+            self::savePhoto($id_product, $name);
 
-            $this->savePhoto($id_product, $name);
+            return;
+        }
+
+        if (is_array($images)) {
+            foreach ($images as $image) {
+                $name = self::saveImage($image);
+
+                self::savePhoto($id_product, $name);
+            }
         }
     }
 
@@ -28,9 +42,9 @@ class SavePhotoAction
      * @param UploadedFile $image
      * @return string
      */
-    private function saveImage(UploadedFile $image): string
+    private static function saveImage(UploadedFile $image): string
     {
-        $name = time() . '_' . $image->getClientOriginalName();
+        $name = $image->getClientOriginalName();
         $img = Image::make($image)->fit(540, 480)->encode('jpg', 75);
         Storage::disk('public_photos')->put($name, $img);
 
@@ -44,9 +58,9 @@ class SavePhotoAction
      * @param string $name
      * @return void
      */
-    private function savePhoto(int $id_product, string $name): void
+    public static function savePhoto(int $id_product, string $name): void
     {
-        $photo = new Photo;
+        $photo = new Photo();
         $photo->product_id = $id_product;
         $photo->name = $name;
 

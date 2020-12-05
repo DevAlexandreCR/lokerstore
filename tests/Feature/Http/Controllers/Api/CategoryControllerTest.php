@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\Api;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -13,21 +12,19 @@ class CategoryControllerTest extends TestCase
     use RefreshDatabase;
 
     private $categories = [
-        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest'
+        'RopaTest','ZapatosTest','DeportesTest','AccesoriosTest',
     ];
     /**
      * test get all categories api
      *
      * @return void
      */
-    public function testIndex() : void
+    public function testIndex(): void
     {
-        $this->withoutExceptionHandling();
-
         foreach ($this->categories as $cat) {
             factory(Category::class)->create([
                 'name' => $cat,
-                'id_parent' => null
+                'id_parent' => null,
             ]);
         }
 
@@ -44,19 +41,18 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testShow() : void
+    public function testShow(): void
     {
         $category = factory(Category::class)->create([
             'name' => 'category',
-            'id_parent' => null
+            'id_parent' => null,
         ]);
 
-        $response = $this->json('GET', route('categories.show',['category' => $category->id]));
+        $response = $this->json('GET', route('categories.show', ['category' => $category->id]));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            'data' => ['id', 'name', 'id_parent']
+            'data' => ['id', 'name', 'id_parent'],
         ]);
     }
-
 }

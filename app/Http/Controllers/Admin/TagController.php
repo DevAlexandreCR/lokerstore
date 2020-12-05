@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tags\IndexRequest;
-use App\Http\Requests\Tags\StoreAndUpdateRequest;
+use App\Http\Requests\Admin\Tags\IndexRequest;
+use App\Http\Requests\Admin\Tags\StoreAndUpdateRequest;
+use App\Interfaces\TagsInterface;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class TagController extends Controller
 {
-    protected $tag;
+    protected TagsInterface $tags;
 
-    public function __construct(Tag $tag)
+    public function __construct(TagsInterface $tags)
     {
-        $this->tag = $tag;
+        $this->authorizeResource(Tag::class, 'tag');
+        $this->tags = $tags;
     }
 
     /**
@@ -23,11 +25,10 @@ class TagController extends Controller
      * @param IndexRequest $request
      * @return View
      */
-    public function index(IndexRequest $request) : View
+    public function index(IndexRequest $request): View
     {
-        $search = $request->get('search', null);
         return view('admin.tags.index', [
-            'tags' => $this->tag->search($search)->paginate(10)
+            'tags' => $this->tags->search($request),
         ]);
     }
 
@@ -36,13 +37,14 @@ class TagController extends Controller
      * @param StoreAndUpdateRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreAndUpdateRequest $request) : RedirectResponse
+    public function store(StoreAndUpdateRequest $request): RedirectResponse
     {
-        $this->tag->create($request->all());
+        $this->tags->store($request);
 
-        return redirect()
-                    ->back()
-                    ->with('success', __('Tag has been created success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('fields.tags'),
+                        'status' => trans('fields.created')
+                    ]));
     }
 
     /**
@@ -51,27 +53,29 @@ class TagController extends Controller
      * @param Tag $tag
      * @return RedirectResponse
      */
-    public function update(StoreAndUpdateRequest $request, Tag $tag) : RedirectResponse
+    public function update(StoreAndUpdateRequest $request, Tag $tag): RedirectResponse
     {
-        $tag->update($request->all());
+        $this->tags->update($request, $tag);
 
-        return redirect()
-                    ->back()
-                    ->with('success', __('Tag has been updated success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+            'resource' => trans('fields.tags'),
+            'status' => trans('fields.updated')
+        ]));
     }
 
     /**
      * Remove the specified resource from storage.
      * @param Tag $tag
-     * @return RedirectResponse
      * @throws \Exception
+     * @return RedirectResponse
      */
-    public function destroy(Tag $tag) : RedirectResponse
+    public function destroy(Tag $tag): RedirectResponse
     {
-        $tag->delete();
+        $this->tags->destroy($tag);
 
-        return redirect()
-                ->back()
-                ->with('success', __('Tag has been remove success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+            'resource' => trans('fields.tags'),
+            'status' => trans('fields.deleted')
+        ]));
     }
 }

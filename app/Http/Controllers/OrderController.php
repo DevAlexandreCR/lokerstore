@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Constants\Orders;
-use App\Http\Requests\Orders\StoreRequest;
-use App\Http\Requests\Orders\UpdateRequest;
+use App\Http\Requests\Web\Orders\StoreRequest;
+use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use App\Models\User;
@@ -13,13 +13,18 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    protected $orders;
+    protected OrderInterface $orders;
 
     public function __construct(OrderInterface $orders)
     {
         $this->orders = $orders;
     }
 
+    /**
+     * @param StoreRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function store(StoreRequest $request, User $user): RedirectResponse
     {
         return $this->orders->store($request);
@@ -39,7 +44,7 @@ class OrderController extends Controller
     public function index(User $user): View
     {
         return view('web.users.orders.index', [
-            'orders' => $user->orders
+            'orders' => $user->orders,
         ]);
     }
 
@@ -51,18 +56,30 @@ class OrderController extends Controller
      */
     public function statusPayment(UpdateRequest $request, User $user): RedirectResponse
     {
-        return $this->orders->getRequestInformation( $request->get('order_id', null));
+        return $this->orders->getRequestInformation($request->get('order_id', null));
     }
 
     public function show(User $user, Order $order): View
     {
-        header("Cache-Control: no-cache, must-revalidate");
-
         if ($order->status === Orders::STATUS_PENDING_PAY && $order->payment) {
             $this->orders->getRequestInformation($order->id);
         }
 
-        return view('web.users.orders.show', ['order' => $order]);
+        return view(
+            'web.users.orders.show',
+            [
+                'order' => $order->load(
+                    'orderDetails',
+                    'payment',
+                    'payment.payer',
+                    'orderDetails.stock',
+                    'orderDetails.stock.product',
+                    'orderDetails.stock.product.photos',
+                    'orderDetails.stock.color',
+                    'orderDetails.stock.size'
+                ),
+            ]
+        );
     }
 
     /**

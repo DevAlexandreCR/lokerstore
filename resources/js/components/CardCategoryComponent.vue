@@ -9,16 +9,16 @@
 
 <script>
 export default {
-    name: 'card-category',
+  name: 'card-category',
 
-    props: {
-        product :{
-            type: Object,
-            default: {}
-        }
-    },
+  props: {
+    product: {
+      type: Object,
+      default: () => []
+    }
+  },
 
-    mounted() {
-    },
+  mounted () {
+  }
 }
 </script>

@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -29,10 +35,10 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param Throwable $exception
+     * @throws Exception|Throwable
      * @return void
      *
-     * @throws \Exception
      */
     public function report(Throwable $exception)
     {
@@ -42,14 +48,48 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  Request  $request
+     * @param Throwable $exception
+     * @throws Throwable
+     * @return Response
      *
-     * @throws \Throwable
      */
     public function render($request, Throwable $exception)
     {
+        if ($request->expectsJson() && strpos($request->path(), 'api') !== false) {
+            if ($exception instanceof ModelNotFoundException) {
+                return response()->json([
+                    'status' => [
+                        'status' => 'failed',
+                        'message' => trans('messages.not_found', [
+                            'resource' => trans_choice('products.product', 1, ['product_count' => ''])
+                        ]),
+                        'code'    => 404,
+                    ],
+                ], 404);
+            }
+
+            if ($exception instanceof NotFoundHttpException) {
+                return response()->json([
+                    'status' => [
+                        'status' => 'failed',
+                        'message' => trans('fields.route'),
+                        'code'    => 404,
+                    ],
+                ], 404);
+            }
+
+            if ($exception instanceof UnauthorizedException) {
+                return response()->json([
+                    'status' => [
+                        'status' => 'failed',
+                        'message' => trans('http_errors.unauthenticated'),
+                        'code'    => 401,
+                    ],
+                ], 401);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }

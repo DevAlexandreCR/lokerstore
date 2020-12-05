@@ -76,7 +76,7 @@ return [
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin\Admin::class, //modificamos la ruta ya que agregamos Admin a Models
+            'model' => App\Models\Admin\Admin::class, //modificamos la ruta ya que agregamos Admins a Models
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -106,7 +106,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'admins' => [  
+        'admins' => [
             'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,

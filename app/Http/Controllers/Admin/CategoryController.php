@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Admin\Category\StoreRequest;
 use App\Interfaces\CategoryInterface;
 use App\Models\Category;
 use Exception;
@@ -13,10 +13,11 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    protected $categories;
+    protected CategoryInterface $categories;
 
     public function __construct(CategoryInterface $categories)
     {
+        $this->authorizeResource(Category::class, 'category');
         $this->categories = $categories;
     }
     /**
@@ -27,7 +28,7 @@ class CategoryController extends Controller
     public function index(): View
     {
         return view('admin.category.index', [
-            'categories' => $this->categories->index()
+            'categories' => $this->categories->index(),
         ]);
     }
 
@@ -41,8 +42,10 @@ class CategoryController extends Controller
         $this->categories->store($request);
 
         return redirect()
-                    ->back()
-                    ->with('success', __('Category has been created success'));
+                    ->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('products.category'),
+                        'status' => trans('fields.created')
+                    ]));
     }
 
     /**
@@ -55,23 +58,26 @@ class CategoryController extends Controller
     {
         $this->categories->update($request, $category);
 
-        return redirect()
-                    ->back()
-                    ->with('success', __('Category has been updated success'));
+        return redirect()->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('products.category'),
+                        'status' => trans('fields.updated')
+                    ]));
     }
 
     /**
      * Remove the specified resource from storage.
      * @param Category $category
-     * @return RedirectResponse
      * @throws Exception
+     * @return RedirectResponse
      */
     public function destroy(Category $category): RedirectResponse
     {
         $this->categories->destroy($category);
 
         return redirect()
-                    ->back()
-                    ->with('success', __('Category has been deleted success'));
+                    ->back()->with('success', trans('messages.crud', [
+                        'resource' => trans('products.category'),
+                        'status' => trans('fields.deleted')
+                    ]));
     }
 }

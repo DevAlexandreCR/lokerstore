@@ -6,7 +6,7 @@
                                   path="assets/lottie/empty-cart.json"
                 />
                 <div class="card-footer">
-                    <button class="btn btn-block" @click="back()">Aún no tienes compras... <strong>empezar ahora</strong></button>
+                    <button class="btn btn-block" @click="back()">{{ __('orders.empty') }} <strong>{{ __('users.go_shopping') }}</strong></button>
                 </div>
             </div>
         </div>
@@ -17,15 +17,20 @@
 import LottieAnimation from 'lottie-vuejs/src/LottieAnimation.vue'
 
 export default {
-    name: 'empty-orders-component',
-    components: {
-        LottieAnimation
-    },
-
-    methods: {
-        back() {
-            window.history.back()
-        }
+  name: 'empty-orders-component',
+  data () {
+    return {
+      url: process.env.MIX_APP_URL + '/home/show?'
     }
+  },
+  components: {
+    LottieAnimation
+  },
+
+  methods: {
+    back () {
+      window.location.href = this.url
+    }
+  }
 }
 </script>

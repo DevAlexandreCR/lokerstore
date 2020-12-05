@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class TestDatabaseSeeder extends Seeder
@@ -9,7 +11,7 @@ class TestDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->call(
             [
@@ -20,7 +22,8 @@ class TestDatabaseSeeder extends Seeder
                 TypeSizeSeeder::class,
                 SizeSeeder::class,
                 ColorSeeder::class,
-                TestProductSeeder::class
-            ]);
+                TestProductSeeder::class,
+            ]
+        );
     }
 }

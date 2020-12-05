@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheSizes implements SizesInterface
 {
-
-    protected $sizes;
+    protected Sizes $sizes;
 
     public function __construct(Sizes $sizes)
     {

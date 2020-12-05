@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Color;
+namespace Database\Seeders;
+
 use App\Models\Product;
-use App\Models\Size;
 use App\Models\Stock;
 use Illuminate\Database\Seeder;
 
@@ -11,15 +11,16 @@ class StockSeeder extends Seeder
     /**
      * Run the database seeds.
      *
+     * @throws Exception
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $products = Product::all();
 
         foreach ($products as $key => $product) {
-            factory(Stock::class, rand(1,5))->create([
-                'product_id' => $product->id
+            factory(Stock::class, random_int(1, 5))->create([
+                'product_id' => $product->id,
             ]);
         }
     }

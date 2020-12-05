@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Cart extends Model
 {
     protected $fillable = [
-        'user_id'
+        'user_id',
     ];
 
     public function stocks(): BelongsToMany
@@ -20,18 +20,24 @@ class Cart extends Model
 
     public function countProducts(): int
     {
-        return $this->stocks()->get()->count();
+        return $this->stocks()->count();
     }
 
-    public function cartPrice()
+    public function scopeCart($query, int $id)
+    {
+        return $query
+            ->where('user_id', $id);
+    }
+
+    public function cartPrice(): string
     {
         $price = 0;
         $stocks = $this->stocks()->get(['product_id']);
         foreach ($stocks as $stock) {
-            $price += $stock->product->price*$stock->pivot->quantity;
+            $price += $stock->product->price * $stock->pivot->quantity;
         }
 
-        return round($price, 0,  PHP_ROUND_HALF_UP) . 'COP';
+        return number_format($price, 2, ',', '.') . 'COP';
     }
 
     public function emptyCart(): void
@@ -39,9 +45,10 @@ class Cart extends Model
         $this->stocks()->detach(null);
     }
 
-    public function getSubTotalFromProduct(Stock $stock)
+    public function getSubTotalFromProduct(Stock $stock): string
     {
         $price = $stock->product->price * $stock->pivot->quantity;
-        return round($price, 0,  PHP_ROUND_HALF_UP) . 'COP';
+
+        return number_format($price, 2, ',', '.') . 'COP';
     }
 }

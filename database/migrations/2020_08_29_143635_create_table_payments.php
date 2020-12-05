@@ -13,17 +13,18 @@ class CreateTablePayments extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('request_id')->nullable();
             $table->string('process_url')->nullable();
-            $table->string('status')->default(PlaceToPay::PENDING);
+            $table->enum('status', Payments::getAllStatus())->default(PlaceToPay::PENDING);
             $table->string('reference')->nullable();
             $table->string('method')->nullable();
             $table->string('last_digit')->nullable();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('payer_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -33,7 +34,7 @@ class CreateTablePayments extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('payments');
     }

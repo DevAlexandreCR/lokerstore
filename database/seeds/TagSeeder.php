@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -10,14 +12,13 @@ class TagSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         factory(Tag::class)->create([
-            'name' => 'Hombre'
+            'name' => 'Hombre',
         ]);
         factory(Tag::class)->create([
-            'name' => 'Mujer'
+            'name' => 'Mujer',
         ]);
-        factory(Tag::class, 10)->create();
     }
 }

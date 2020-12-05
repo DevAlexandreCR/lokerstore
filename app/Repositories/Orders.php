@@ -3,33 +3,63 @@
 namespace App\Repositories;
 
 use App\Constants\Orders as OrderConstants;
+use App\Constants\Payments;
 use App\Constants\PlaceToPay;
-use App\Http\Requests\Orders\UpdateRequest;
+use App\Http\Requests\Admin\Orders\indexRequest;
+use App\Http\Requests\Web\Orders\UpdateRequest;
 use App\Interfaces\OrderInterface;
 use App\Models\Order;
-use App\Constants\Payments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class Orders implements OrderInterface
 {
-    protected $order;
+    protected Order $order;
 
     public function __construct(Order $order)
     {
         $this->order = $order;
     }
 
-    public function index()
+    /**
+     * @param indexRequest $request
+     * @return mixed
+     */
+    public function query(indexRequest $request)
     {
-        return $this->order::all();
+        $email = $request->get('email');
+        $from = $request->get('from');
+        $until = $request->get('until');
+        $status = $request->get('status');
+
+        return $this->order::with(['user'])
+            ->status($status)
+            ->userEmail($email)
+            ->date($from, $until)
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
     }
 
+    public function index()
+    {
+        return $this->order::with('user')
+            ->get();
+    }
+
+    /**
+     * @param Request $request
+     * @return Order
+     */
     public function store(Request $request): Order
     {
         return $this->order->create($request->all());
     }
 
+    /**
+     * @param Request $request
+     * @param Model $model
+     * @return Model|mixed
+     */
     public function update(Request $request, Model $model)
     {
         $model->update($request->all());
@@ -37,28 +67,42 @@ class Orders implements OrderInterface
         return $model;
     }
 
+    /**
+     * @param Model $model
+     */
     public function destroy(Model $model): void
     {
-        $model->delete();
+        $this->order::destroy($model->id);
     }
 
+    /**
+     * @param int $order_id
+     * @return mixed
+     */
     public function find(int $order_id)
     {
         return $this->order->load('payment')->findOrFail($order_id);
     }
 
-    public function setStatus(int $order_id, string $status)
+    /**
+     * @param int $order_id
+     * @param string $status
+     */
+    public function setStatus(int $order_id, string $status): void
     {
         $order = $this->find($order_id);
         $order->update([
-            'status' => $status
+            'status' => $status,
         ]);
     }
 
+    /**
+     * @param string $status
+     * @return string
+     */
     public function getStatusFromStatusPayment(string $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case PlaceToPay::FAILED:
                 return OrderConstants::STATUS_FAILED;
             case PlaceToPay::REJECTED:
@@ -87,7 +131,10 @@ class Orders implements OrderInterface
         // TODO: Implement reverse() method.
     }
 
-    public function cancel(UpdateRequest $request)
+    /**
+     * @param UpdateRequest $request
+     */
+    public function cancel(UpdateRequest $request): void
     {
         $order_id = $request->get('order_id', null);
         $order = $this->find($order_id);

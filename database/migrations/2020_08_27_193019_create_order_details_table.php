@@ -19,7 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreignId('stock_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('quantity');
             $table->unsignedDecimal('unit_price');
-            $table->unsignedDecimal('total_price');
+            $table->unsignedDecimal('total_price', 10);
             $table->timestamps();
         });
     }

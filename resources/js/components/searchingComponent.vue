@@ -2,7 +2,7 @@
     <div class="container">
         <div class="container w-75">
             <span class="spinner-border spinner-border-sm" ></span>
-            Cargando...
+            {{ __('actions.loading') }}
             <lottie-animation class="container"
                               path="assets/lottie/loading.json"
             />
@@ -14,11 +14,11 @@
 import LottieAnimation from 'lottie-vuejs/src/LottieAnimation.vue'
 
 export default {
-    components: {
-        LottieAnimation
-    },
-    data: () => ({
+  components: {
+    LottieAnimation
+  },
+  data: () => ({
 
-    })
-};
+  })
+}
 </script>

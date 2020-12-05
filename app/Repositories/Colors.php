@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Colors implements ColorsInterface
 {
-
-    protected $color;
+    protected Color $color;
 
     public function __construct(Color $color)
     {
@@ -21,7 +20,7 @@ class Colors implements ColorsInterface
      */
     public function index()
     {
-        return $this->color::all();
+        return $this->color::all(['id', 'name', 'code']);
     }
 
     /**
@@ -47,10 +46,10 @@ class Colors implements ColorsInterface
 
     /**
      * @param Model $model
-     * @return mixed
+     * @return void
      */
-    public function destroy(Model $model)
+    public function destroy(Model $model): void
     {
-        $model->delete();
+        $this->color::destroy($model->id);
     }
 }

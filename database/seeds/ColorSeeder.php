@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Color;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +14,7 @@ class ColorSeeder extends Seeder
      */
     public function run()
     {
-        $namecolors = 
+        $namecolors =
         [
             'WHITE'    => '#FFFFFF',
             'SILVER'   => '#C0C0C0',
@@ -33,7 +35,7 @@ class ColorSeeder extends Seeder
         foreach ($namecolors as $name => $code) {
             factory(Color::class)->create([
                 'name' => $name,
-                'code' => $code
+                'code' => $code,
             ]);
         }
     }

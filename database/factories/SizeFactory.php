@@ -10,6 +10,6 @@ use Illuminate\Support\Str;
 $factory->define(Size::class, function (Faker $faker) {
     return [
         'name' => Str::random(1),
-        'type_sizes_id' => TypeSize::all()->random()->id
+        'type_sizes_id' => TypeSize::all()->random()->id,
     ];
 });

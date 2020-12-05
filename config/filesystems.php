@@ -62,6 +62,27 @@ return [
             'visibility' => 'public',
         ],
 
+        'exports' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/exports'),
+            'url' => env('APP_URL').'/storage/app/public/exports',
+            'visibility' => 'public',
+        ],
+
+        'imports' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/imports'),
+            'url' => env('APP_URL').'/storage/app/public/imports',
+            'visibility' => 'public',
+        ],
+
+        'test' => [
+            'driver' => 'local',
+            'root' => base_path(),
+            'url' => env('APP_URL').'tests/stubs/photos',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -90,6 +111,8 @@ return [
         public_path('photos') => storage_path('app/public/photos'),
         public_path('images') => storage_path('app/public/images'),
         public_path('assets') => storage_path('app/public/assets'),
+        public_path('exports') => storage_path('app/public/exports'),
+        public_path('imports') => storage_path('app/public/imports'),
     ],
 
 ];

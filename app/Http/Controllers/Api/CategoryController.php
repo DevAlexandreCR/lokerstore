@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
-    protected $categories;
+    protected CategoryInterface $categories;
 
     public function __construct(CategoryInterface $categories)
     {
@@ -22,7 +22,7 @@ class CategoryController extends Controller
      *
      * @return JsonResponse
      */
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(CategoryResource::collection($this->categories->index()));
     }
@@ -32,7 +32,7 @@ class CategoryController extends Controller
      * @param Category $category
      * @return CategoryResource
      */
-    public function show(Category $category)
+    public function show(Category $category): CategoryResource
     {
         return new CategoryResource($category);
     }

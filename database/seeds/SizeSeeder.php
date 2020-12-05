@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Size;
 use App\Models\TypeSize;
 use Illuminate\Database\Seeder;
@@ -20,27 +22,27 @@ class SizeSeeder extends Seeder
 
         factory(Size::class)->create([
             'name' => 'Unique',
-            'type_sizes_id' => TypeSize::where('name', 'Especial')->first()->id
+            'type_sizes_id' => TypeSize::where('name', 'Especial')->first()->id,
         ]);
 
         foreach ($sizesZapatos as $size) {
             factory(Size::class)->create([
                 'name' => $size,
-                'type_sizes_id' => TypeSize::where('name', 'Zapatos')->first()->id
+                'type_sizes_id' => TypeSize::where('name', 'Zapatos')->first()->id,
             ]);
         }
 
         foreach ($sizesSuperir as $size) {
             factory(Size::class)->create([
                 'name' => $size,
-                'type_sizes_id' => TypeSize::where('name', 'Prendas-Superiores')->first()->id
+                'type_sizes_id' => TypeSize::where('name', 'Prendas-Superiores')->first()->id,
             ]);
         }
 
         foreach ($sizesInferior as $size) {
             factory(Size::class)->create([
                 'name' => $size,
-                'type_sizes_id' => TypeSize::where('name', 'Prendas-Inferiores')->first()->id
+                'type_sizes_id' => TypeSize::where('name', 'Prendas-Inferiores')->first()->id,
             ]);
         }
     }

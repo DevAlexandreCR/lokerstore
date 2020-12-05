@@ -1,0 +1,13 @@
+pre {outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+    color: yellowgreen;
+    background-color: #2b2a2a;
+    max-height: 100%;
+    font-family: "Source Code Pro", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.string { color: lightgreen; }
+.number { color: #738AF3; }
+.boolean { color: magenta; }
+.null { color: red; }
+.key { color: ghostwhite; }

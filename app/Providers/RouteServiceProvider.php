@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\OrderDetail;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,10 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+
+    protected $namespaceApi = 'App\Http\Controllers\Api';
+
+    protected $namespaceAdmin = 'App\Http\Controllers\Admin';
 
     /**
      * The path to the "home" route for your application.
@@ -35,9 +40,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        Route::model('order_detail', OrderDetail::class);
 
         parent::boot();
     }
@@ -47,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map(): void
     {
         $this->mapApiRoutes();
 
@@ -63,7 +68,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
         Route::middleware('web')
             ->namespace($this->namespace)
@@ -77,11 +82,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->namespace . '\Api')
+            ->namespace($this->namespaceApi)
             ->group(base_path('routes/api.php'));
     }
 
@@ -92,12 +97,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapAdminRoutes()
+    protected function mapAdminRoutes(): void
     {
         Route::middleware('auth:admin')
             ->middleware('admin')
             ->prefix('admin')
-            ->namespace($this->namespace . '\Admin')
-            ->group(base_path('routes/Admin/admin.php'));
+            ->namespace($this->namespaceAdmin)
+            ->group(base_path('routes/admin.php'));
     }
 }

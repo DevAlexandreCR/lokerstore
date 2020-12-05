@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Size extends Model
 {
@@ -13,17 +12,25 @@ class Size extends Model
 
     protected $table = 'sizes';
 
-    public function stocks() : BelongsToMany
+    /**
+     * @return BelongsToMany
+     */
+    public function stocks(): BelongsToMany
     {
         return $this->belongsToMany(Stock::class);
     }
 
-    public function products() : BelongsToMany
+    /**
+     * @return BelongsToMany
+     */
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
     }
 
-
+    /**
+     * @return BelongsToMany
+     */
     public function colors(): BelongsToMany
     {
         return $this
@@ -31,8 +38,10 @@ class Size extends Model
             ->withPivot('quantity');
     }
 
-
-    public function type() : BelongsTo
+    /**
+     * @return BelongsTo
+     */
+    public function type(): BelongsTo
     {
         return $this->belongsTo(TypeSize::class, 'type_sizes_id');
     }

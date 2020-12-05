@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
@@ -21,35 +23,35 @@ class CategorySeeder extends Seeder
         foreach ($primaries_categories as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => null
+                'id_parent' => null,
             ]);
         }
 
         foreach ($sub_categories_ropa as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => Category::where('name', 'Ropa')->first()->id
+                'id_parent' => Category::where('name', 'Ropa')->first()->id,
             ]);
         }
 
         foreach ($sub_categories_zapatos as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => Category::where('name', 'Zapatos')->first()->id
+                'id_parent' => Category::where('name', 'Zapatos')->first()->id,
             ]);
         }
 
         foreach ($sub_categories_deportes as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => Category::where('name', 'Deportes')->first()->id
+                'id_parent' => Category::where('name', 'Deportes')->first()->id,
             ]);
         }
 
         foreach ($sub_categories_accesorios as $category) {
             factory(Category::class)->create([
                 'name' => $category,
-                'id_parent' => Category::where('name', 'Accesorios')->first()->id
+                'id_parent' => Category::where('name', 'Accesorios')->first()->id,
             ]);
         }
     }
