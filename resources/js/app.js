@@ -13,6 +13,7 @@ import SalesPercentComponent from './admin-components/SalesPercentComponent'
 import TestApiComponent from './admin-components/TestApiComponent'
 import CreateOrder from './views/admin-views/CreateOrder'
 import AddPaymentComponent from './admin-components/AddPaymentComponent'
+import ToastComponent from './admin-components/ToastComponent'
 import { Lang } from 'laravel-vue-lang'
 window.Vue = Vue
 
@@ -27,6 +28,7 @@ Vue.component('sales-percent-component', SalesPercentComponent)
 Vue.component('test-api-component', TestApiComponent)
 Vue.component('create-order', CreateOrder)
 Vue.component('add-payment-component', AddPaymentComponent)
+Vue.component('toast-component', ToastComponent)
 
 Vue.use(VuePaginate)
 

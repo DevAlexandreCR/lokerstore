@@ -1,5 +1,4 @@
 import * as $ from 'jquery'
-
 window._ = require('lodash')
 
 /**
@@ -11,7 +10,6 @@ window._ = require('lodash')
 try {
   window.Popper = require('popper.js').default
   window.$ = window.jQuery = require('jquery')
-
   require('bootstrap')
 } catch (e) {}
 
@@ -22,6 +20,12 @@ try {
  */
 
 window.axios = require('axios')
+
+/**
+ * We'll load the toastr library which alert notificacions
+ *
+ */
+window.toastr = require('toastr')
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 

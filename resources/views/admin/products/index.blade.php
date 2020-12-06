@@ -37,34 +37,6 @@
             </div>
         </form>
     </div>
-    @if ( session('success'))
-
-        <div class="container py-2">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
-            </div>
-        </div>
-
-    @endif
-    @if ( $errors->any() )
-
-        @foreach ($errors->all() as $error)
-            <div class="container align-self-start col-4 py-2">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <strong>{{trans('actions.error')}}</strong> {{ $error }}
-                </div>
-            </div>
-        @endforeach
-
-    @endif
     <div class="container-fluid bg-secondary shadow-sm my-2">
         <div class="row">
             <table class="table table-sm table-striped table-condensed table-hover table-secondary table-responsive-xl">

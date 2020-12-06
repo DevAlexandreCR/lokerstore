@@ -1,20 +1,6 @@
 @extends('web.users.main')
 
 @section('user-main')
-    @if ( session('user-updated'))
-
-        <div class="container py-2">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <strong>{{trans('actions.success!')}}</strong> {{ session('user-updated') }}
-            </div>
-        </div>
-
-    @endif
-
     <div class="container py-3">
         <div class="modal-header">
             <h5 class="modal-title font-weight-bold">{{ trans('users.data') }}</h5>

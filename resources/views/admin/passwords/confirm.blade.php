@@ -6,10 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ trans('passwords.confirm') }}</div>
-
                 <div class="card-body">
                     {{ trans('passwords.request_confirm') }}
-
                     <form method="POST" action="{{ route('admin.password.confirm') }}">
                         @csrf
 

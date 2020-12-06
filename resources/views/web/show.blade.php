@@ -2,18 +2,6 @@
 
 @section('content')
     <div class="container py-4">
-        @if ( session('success'))
-            <div class="container py-2">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <strong>{{trans('actions.success')}}</strong> {{ session('success') }}
-                    <a href="{{route('cart.show', auth()->id())}}">{{trans('users.show_cart')}}</a>
-                </div>
-            </div>
-        @endif
         <div class="row">
             <div class="col-sm-6 col-md-2">
                 <div class="list-group-scroll">
