@@ -10,3 +10,13 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
+.background-home{
+    background-image: url("/storage/images/fondo70.jpg");
+    border-image-repeat: repeat;
+    background-repeat: repeat-y;
+    background-size: 100% 50%;
+}
+.background-admin{
+    background-color: $gray-800;
+}

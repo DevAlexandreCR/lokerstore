@@ -24,7 +24,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-<div id="app">
+<div id="app" class="background-home">
     <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow" id="nav-app">
         <div class="container">
             @if (Auth::guard('admin')->check())
