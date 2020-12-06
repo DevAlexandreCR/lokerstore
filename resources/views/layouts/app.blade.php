@@ -137,10 +137,10 @@
     </nav>
 
     <main class="py-0 min-vh-100">
+        @include('toast')
         @yield('content')
     </main>
 </div>
-@include('toast')
 </body>
 <footer style="z-index: 100">
     @yield('footer', View::make('footer'))

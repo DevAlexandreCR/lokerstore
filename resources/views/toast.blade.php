@@ -1,58 +1,21 @@
-<script>
+<div class="container">
 @if(Session::has('success'))
-	toastr.options =
-	{
-	"closeButton" : true,
-	"progressBar" : true
-	}
-	toastr.success("{{ session('success') }}");
+	<toast-component type="success" message="{{ session('success') }}"></toast-component>
 @endif
 
 @if(Session::has('message'))
-	toastr.options =
-	{
-	"closeButton" : true,
-	"progressBar" : true
-	}
-	toastr.info("{{ session('message') }}");
+	<toast-component type="success" message="{{ session('message') }}"></toast-component>
 @endif
 
 @if ( $errors->any() )
-	toastr.options =
-	{
-	"closeButton" : true,
-	"progressBar" : false
-	}
+
 @foreach ($errors->all() as $error)
-	toastr.error("{{ $error }}");
+	<toast-component type="error" message="{{ $error }}"></toast-component>
 @endforeach
 
 @endif
 
 @if(Session::has('error'))
-	toastr.options =
-	{
-	"closeButton" : true,
-	"progressBar" : true
-	}
-	toastr.error("{{ session('error') }}");
+	<toast-component type="error" message="{{ session('error') }}"></toast-component>
 @endif
-
-@if(Session::has('info'))
-	toastr.options =
-	{
-	"closeButton" : true,
-	"progressBar" : true
-	}
-	toastr.info("{{ session('info') }}");
-@endif
-
-@if(Session::has('warning'))
-	toastr.options =
-	{
-	"closeButton" : true,
-	"progressBar" : true
-	}
-	toastr.warning("{{ session('warning') }}");
-@endif
-</script>
+</div>

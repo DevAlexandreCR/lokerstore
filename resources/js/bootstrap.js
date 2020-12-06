@@ -1,5 +1,4 @@
 import * as $ from 'jquery'
-import toastr from 'toastr'
 window._ = require('lodash')
 
 /**
@@ -26,7 +25,7 @@ window.axios = require('axios')
  * We'll load the toastr library which alert notificacions
  *
  */
-window.toastr = toastr;
+window.toastr = require('toastr');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
