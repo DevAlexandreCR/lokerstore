@@ -13,7 +13,7 @@ import SalesPercentComponent from './admin-components/SalesPercentComponent'
 import TestApiComponent from './admin-components/TestApiComponent'
 import CreateOrder from './views/admin-views/CreateOrder'
 import AddPaymentComponent from './admin-components/AddPaymentComponent'
-import ToastComponent from "./admin-components/ToastComponent"
+import ToastComponent from './admin-components/ToastComponent'
 import { Lang } from 'laravel-vue-lang'
 window.Vue = Vue
 
