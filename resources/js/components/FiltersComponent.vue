@@ -1,6 +1,6 @@
 <template>
     <div class="" id="accordion">
-        <div class="card border-primary my-2" v-show="hasFiltersActive">
+        <div class="card border-primary my-2 card-product" v-show="hasFiltersActive">
             <div class="card-header">
                 <h6>{{ __('fields.filters') }}</h6>
             </div>
@@ -56,7 +56,7 @@
                 <button type="button" class="btn btn-primary btn-sm" @click="resetFilters()">{{ __('actions.clean_filters') }}</button>
             </div>
         </div>
-        <div class="card border-primary my-2">
+        <div class="card border-primary my-2 card-product">
           <div class="card-header">
               <h6>{{ __('fields.categories') }}</h6>
           </div>
@@ -73,7 +73,7 @@
             </ul>
           </div>
         </div>
-        <div class="card border-primary my-2">
+        <div class="card border-primary my-2 card-product">
           <div class="card-header">
               <h6>{{ __('products.price') }}</h6>
           </div>
@@ -97,7 +97,7 @@
               <button type="button" class="btn btn-primary btn-sm" @click="sendQuery()">{{ __('actions.apply') }}</button>
           </div>
         </div>
-        <div class="card border-primary my-2">
+        <div class="card border-primary my-2 card-product">
           <div class="card-header">
               <h6>{{ __('products.color') }}</h6>
           </div>
@@ -124,7 +124,7 @@
               <button type="button" class="btn btn-primary btn-sm" v-on:click="sendQuery()">{{ __('actions.apply') }}</button>
           </div>
         </div>
-        <div class="card border-primary my-2">
+        <div class="card border-primary my-2 card-product">
           <div class="card-header">
               <h6>{{ __('products.size') }}</h6>
           </div>

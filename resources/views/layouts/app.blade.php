@@ -9,21 +9,22 @@
 
     <title>{{ config('app.name') }}</title>
 
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
         window.App = {}
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div id="app" class="background-home">
     <nav class="navbar sticky-top navbar-expand-md navbar-dark shadow" id="nav-app">
         <div class="container">
             @if (Auth::guard('admin')->check())
@@ -136,6 +137,7 @@
     </nav>
 
     <main class="py-0 min-vh-100">
+        @include('toast')
         @yield('content')
     </main>
 </div>

@@ -10,3 +10,14 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
+.background-home{
+    background-image: url("/images/fondo50.jpg");
+    border-image-repeat: repeat;
+    background-repeat: repeat-y;
+    background-size: 100% 60vh;
+}
+.background-admin{
+    background-image: url("/images/admin_back.png");
+    background-repeat: repeat;
+}

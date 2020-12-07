@@ -1,8 +1,8 @@
 @extends('admin.home')
 
 @section('sidebar')
-    <aside class="col-12 col-md-2 p-0 bg-light flex-shrink-1">
-        <nav class="navbar navbar-expand navbar-light bg-light flex-md-column flex-row align-items-center py-2">
+    <aside class="col-12 col-md-2 p-0 bg-light card-product flex-shrink-1">
+        <nav class="navbar navbar-expand navbar-light  card-product flex-md-column flex-row align-items-center py-2">
             <div class="collapse navbar-collapse w-100 p-0">
                 <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between ml-md-4 mt-md-4">
                     <li class="nav-item">
