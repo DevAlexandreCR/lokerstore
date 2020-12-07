@@ -19,7 +19,7 @@
                      src="/photos/{{$product->photos[0]->name}}">
             </div>
             <div class="col-sm-6 col-md-4">
-                <div class="card">
+                <div class="card card-product">
                     <div class="card-header">
                         <h3 class="card-title">{{$product->name}}</h3>
                     </div>

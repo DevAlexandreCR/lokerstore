@@ -140,7 +140,7 @@ Copy file `.env.example` in `.env` file and customize your environment to databa
 - php artisan key:generate
 - php artisan migrate --seed
 - npm run prod 
-- php artisan storage:link
+- php artisan storage:link --relative
 ```
 - To test app  
 Make sure to create testing database en set vars inside `.env.testing`

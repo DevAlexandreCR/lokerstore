@@ -37,11 +37,11 @@
 }
 
 .bg-gender-m {
-    background-image: url('/storage/images/man.jpg');
+    background-image: url('/images/man.jpg');
 }
 
 .bg-gender-w {
-    background-image: url('/storage/images/woman.jpg');
+    background-image: url('/images/woman.jpg');
 }
 
 .traslate-up {
@@ -54,4 +54,9 @@
         box-shadow: 0 0 21px rgba(33,33,33,.2);
         transform: translate(0px, -10px);
     } 
+}
+
+.card-product {
+    border-color: #0f0f0f;
+    background-image: url('/images/roughcloth.png');
 }

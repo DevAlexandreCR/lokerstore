@@ -12,11 +12,12 @@
 }
 
 .background-home{
-    background-image: url("/storage/images/fondo70.jpg");
+    background-image: url("/images/fondo50.jpg");
     border-image-repeat: repeat;
     background-repeat: repeat-y;
-    background-size: 100% 50%;
+    background-size: 100% 60vh;
 }
 .background-admin{
-    background-color: $gray-800;
+    background-image: url("/images/admin_back.png");
+    background-repeat: repeat;
 }

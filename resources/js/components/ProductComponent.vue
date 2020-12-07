@@ -1,5 +1,5 @@
 <template>
-    <div class="card card-hover img-hover-zoom" @click="showProduct(product.id)" v-if="product">
+    <div class="card card-hover img-hover-zoom shadow-sm card-product" @click="showProduct(product.id)" v-if="product">
         <img :src="'/photos/' + product.photos[0].name" class="card-img-top" :alt="product.name">
         <div class="card-body">
             <div class="row">

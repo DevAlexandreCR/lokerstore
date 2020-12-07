@@ -15,7 +15,7 @@
         @enderror
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card card-product">
                     <div class="card-header">{{ trans('fields.only_support') }}</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.login') }}">
