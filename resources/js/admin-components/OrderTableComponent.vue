@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header">{{ __('orders.details') }}</div>
             <div class="card-body">
-                <table class="table table-condensed table-sm" id="selectedProducts">
+                <table class="table table-condensed table-sm table-responsive" id="selectedProducts">
                     <thead>
                     <tr>
                         <th>{{ __('fields.products') }}</th>
