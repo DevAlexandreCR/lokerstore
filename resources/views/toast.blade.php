@@ -7,7 +7,7 @@
 	<toast-component type="success" message="{{ session('message') }}"></toast-component>
 @endif
 
-@if ( $errors->any() )
+@if ( session('errors') && $errors->any() )
 
 @foreach ($errors->all() as $error)
 	<toast-component type="error" message="{{ $error }}"></toast-component>

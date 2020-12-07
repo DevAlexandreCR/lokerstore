@@ -96,7 +96,7 @@ class UserControllerTest extends TestCase
 
         $response
             ->assertRedirect(route('users.show', $user))
-            ->assertSessionHas('user-updated')
+            ->assertSessionHas('success')
             ->assertStatus(302);
         $this->assertDatabaseHas('users', ['email' => 'elnuevoemail@nada.com']);
     }
@@ -113,7 +113,7 @@ class UserControllerTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->delete(route('users.destroy', $user));
 
         $response->assertRedirect('admin/users')
-            ->assertSessionHas('user-deleted')
+            ->assertSessionHas('success')
             ->assertStatus(302);
     }
 
