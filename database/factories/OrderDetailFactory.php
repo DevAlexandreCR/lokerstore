@@ -13,7 +13,7 @@ $factory->define(OrderDetail::class, function (Faker $faker) {
 
     return [
         'stock_id' => $stock->id,
-        'order_id' => Order::all()->random()->id,
+        'order_id' => factory(Order::class)->create()->id,
         'quantity' => $quantity = random_int(1, 2),
         'unit_price' => $price = $stock->product->price,
         'total_price' => $price * $quantity,
